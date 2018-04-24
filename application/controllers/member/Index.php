@@ -8,7 +8,7 @@ class Index extends CI_Controller
 		$this->load->helper(array('form','url'));
 		$this->load->library(array('session', 'form_validation', 'email'));
 		$this->load->database();
-//		 $this->load->model('Students_model');
+                $this->load->model('Members_model');
                 
 	}
 	
@@ -65,7 +65,7 @@ class Index extends CI_Controller
         }
         else  
         {
-            $memmer_email = $this->input->post('member_email');
+            $member_email = $this->input->post('member_email');
             $member_password = $this->input->post('member_password');
             $where=array('member_email'=>$member_email,
                          'member_password'=>$member_password);
