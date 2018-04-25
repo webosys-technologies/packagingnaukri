@@ -9,19 +9,24 @@
     <link href="<?php echo base_url(); ?>assets/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <script src="<?php echo base_url(); ?>assets/js/jQuery-2.1.4.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    
+    <style>
+         #login{
+                margin-top:130px;
+            }
+        
+    </style>
   </head>
  <script src="<?php echo base_url("assets/js/validation1.js"); ?>">
 </script>
   
   <body class="login-page">
-    <div class="login-box">
-      <div class="login-logo">
-      <!--  <a href="#"><b>CodeInsect</b><br>Admin System</a>  -->
-      <a href="#"><b>Member Login</b><br></a>
-      </div><!-- /.login-logo -->
-      <div class="login-box-body">
-        <p class="login-box-msg">Sign In</p>
+    <div class="col-md-4 col-md-offset-4" id="login">
+                   <div class="panel panel-default">
+			<div class="panel-heading" style="">
+      <h3>Member Login</h3>
+     </div>
+     <div class="panel-body">
+        
         <?php $this->load->helper('form'); ?>
         <div class="row">
             <div class="col-md-12">
@@ -78,6 +83,8 @@
         
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
+    </div>
+   
 
     
    </body>

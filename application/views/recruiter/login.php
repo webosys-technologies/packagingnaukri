@@ -107,7 +107,7 @@
                    <div class="panel panel-default">
 			<div class="panel-heading" style="">
                             <h3>Recruiter Login</h3>
-                            
+                            </div>
                             <div class="panel-body">
                               
    
@@ -197,7 +197,7 @@
       </div>
     </div>  
                        </div>
-                   </div>
+                   
 
 
 

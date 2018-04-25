@@ -14,6 +14,8 @@
         <script src="<?php echo base_url("assets/js/validation1.js"); ?>"></script>
         <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js"></script>
 </head>
+<script src="<?php echo base_url("assets/js/validation1.js"); ?>">
+</script>
 <body>
 
 
@@ -22,6 +24,11 @@
             #header{
                 margin:25px;
             }
+           
+            #header_link{
+                color:white;
+            }
+                                    
             #footer{
                 padding:12px;
             }
@@ -111,19 +118,20 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
-          <li><a href="<?php echo base_url();?>Home/index">Home</a></li>
-        <li><a href="<?php echo base_url();?>Home/about_us">About Us</a></li>
+          <li><a id="header_link" href="<?php echo base_url();?>Home/index">Home</a></li>
+        <li><a id="header_link" href="<?php echo base_url();?>Home/about_us">About Us</a></li>
        <li class="dropdown">
-          <a href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
+          <a id="header_link" href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
           <ul class="dropdown-menu">
               <li><a href="<?php echo base_url();?>Home/recruitment">Recruitment</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="<?php echo base_url();?>Home/resource_outsourcing">Resource Outsourcing</a></li>
           </ul>
         </li>
-        <li><a href="<?php echo base_url();?>Home/post_resume">Post Your Resume</a></li>
-         <li><a href="<?php echo base_url();?>Home/post_requirement">Post Your Requirement</a></li>
-          <li><a href="<?php echo base_url();?>Home/contact_us">Contact Us</a></li>   
+        <li><a id="header_link" href="<?php echo base_url();?>Home/job_openings">Job Openings</a></li>
+        <li><a id="header_link" href="<?php echo base_url();?>Home/post_resume">Post Your Resume</a></li>
+         <li><a id="header_link" href="<?php echo base_url();?>Home/post_requirement">Post Your Requirement</a></li>
+          <li><a id="header_link" href="<?php echo base_url();?>Home/contact_us">Contact Us</a></li>   
         
       </ul>
 <!--      <form class="navbar-form navbar-left">

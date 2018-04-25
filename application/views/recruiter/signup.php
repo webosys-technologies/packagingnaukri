@@ -151,7 +151,8 @@ Home | Packaging Naukri</title>
 		<div class="panel panel-default">
 			<div class="panel-heading" style="">
                             <h3>Recruiter Registration</h3>
-			<hr style="border-top: 1px solid #ccc;">
+                            </div>
+			<!--<hr style="border-top: 1px solid #ccc;">-->
 			<div class="panel-body">
 				<?php $attributes = array("name" => "registrationform");
 				echo form_open("recruiter/Index/register", $attributes);?>
@@ -254,7 +255,13 @@ Home | Packaging Naukri</title>
                                 <label for="text">State</label><span style="color:red">*</span>
                                 <select name="recruiter_state" id="state" class="form-control" required>
                                     <option value="">-- Select State --</option>
-                                  <option value="Maharashtra">Maharashtra</option>
+                                    <?php if(isset($states)){
+                                        foreach($states as $state)
+                                        {
+                                           echo '<option value="">'.$state->city_state.'</option>';
+                                        }
+                                    }?>
+                                  <!--<option value="Maharashtra">Maharashtra</option>-->
                                 </select>
                                 </div>
                                 </div>
@@ -308,7 +315,7 @@ Home | Packaging Naukri</title>
 </div>
     
 			</div>
-                   </div>
+                  
               
 
   

@@ -7,7 +7,7 @@
         <div class="row" id="label" style="background:#bcd0e0">
         <div class="container">        
 		<div class="col-md-9 col-md-offset-1">
-		<h3 style="color:#0BA1DC;">Services</h3>
+		<h3>Services</h3>
 			</div> 
                
 		
