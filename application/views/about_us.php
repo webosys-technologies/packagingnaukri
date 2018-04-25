@@ -7,7 +7,7 @@
         <div class="row" id="about_label" style="background:#bcd0e0">
         <div class="container">        
 		<div class="col-md-9 col-md-offset-1">
-		<h3 style="color:#0BA1DC;">About Us</h3>
+		<h3>About Us</h3>
 			</div> 
                
 		
