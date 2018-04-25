@@ -9,6 +9,7 @@ class Index extends CI_Controller
 		$this->load->database();
 		
                $this->load->model('Recruiters_model');
+               $this->load->model('Cities_model');
                  
 	}
        
@@ -40,8 +41,8 @@ class Index extends CI_Controller
 		if ($this->form_validation->run() == false)
         {
 			
-//		$maha_cities['cities']=$this->Cities_model->getall_cities("Maharashtra");	
-                $this->load->view('recruiter/signup');     
+		$state['states']=$this->Cities_model->getall_state();	
+                $this->load->view('recruiter/signup',$state);     
                 
                     
         }
