@@ -38,7 +38,7 @@
             }
                                     
             #footer{
-                padding:12px;
+                padding:0px;
             }
 /*            #nav_header{
                 padding:12px;
