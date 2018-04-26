@@ -110,7 +110,7 @@
  <header class="header" id="header">
   <div class="container">
   <nav class="navbar navbar-default navbar-fixed-top" id="nav_header">
-  <div class="container-fluid"  style="background:#002863">
+  <!--<div class="container-fluid"  style="background:#002863">-->
      <!--Brand and toggle get grouped for better mobile display--> 
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -162,9 +162,10 @@
         </li>
       </ul>
     </div>  
+     </nav>
   </div> 
-      </div>
-</nav>
+      <!--</div>-->
+
  
    
 </header> 
