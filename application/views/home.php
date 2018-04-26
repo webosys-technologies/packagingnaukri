@@ -100,7 +100,7 @@
 <!--<body style="background:#d2d6de">--> 
     <body>
  <header class="header" id="header">
-  <div class="container">
+  <!--<div class="container">-->
   <nav class="navbar navbar-default navbar-fixed-top" id="nav_header">
   <div class="container-fluid"  style="background:#002863">
      <!--Brand and toggle get grouped for better mobile display--> 
@@ -156,7 +156,7 @@
     </div>  
   </div> 
 </nav>
-  </div>
+  <!--</div>-->
    
 </header>     
 
