@@ -21,6 +21,15 @@
 
         
         <style>
+            
+            .navbar-fixed-top,
+.navbar-fixed-bottom {
+  position: fixed; /* <-- Look here */
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+            
             #header{
                 margin:25px;
             }
@@ -160,11 +169,6 @@
    
 </header>     
 
-<style>
-         #content_body{
-             padding:15px;
-         }
-     </style>
 <!--    <div class="banner-container"> 
   	<div id="carousel" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
