@@ -111,7 +111,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a id="logo" class="navbar-brand" href="#"><img src="<?php echo  base_url();?>profile_pic/naukri_logo.png" width="200px" height="50px"></a>
+        <a id="logo" class="navbar-brand" href="#"><img src="<?php echo  base_url();?>assets/images/logo.png" width="200px" height="50px"></a>
     </div>
 
      <!--Collect the nav links, forms, and other content for toggling--> 

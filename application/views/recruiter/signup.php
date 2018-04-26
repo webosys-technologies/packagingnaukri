@@ -261,7 +261,9 @@ Home | Packaging Naukri</title>
                                            echo '<option value="">'.$state->city_state.'</option>';
                                         }
                                     }?>
-                                  <!--<option value="Maharashtra">Maharashtra</option>-->
+                                 
+                                    
+                                    <!--<option value="Maharashtra">Maharashtra</option>-->
                                 </select>
                                 </div>
                                 </div>

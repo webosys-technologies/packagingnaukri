@@ -80,19 +80,20 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini">DLT</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>DELTO</b></span>
+      <!--<span class="logo-lg"><i><b>Packaging</b></i><i style="color:#0F5397;"><b>naukri.com</b></i></span>-->
+      <img src="<?php echo base_url();?>profile_pic/naukri_logo.png" width="210px"> 
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
+       
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-      
-   
+       
 
       <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav">          
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -372,39 +373,7 @@
           </a>
         </li>
 
-      
-         <li>
-          <a href="<?php echo base_url(); ?>admin/Coupon">
-            <i class="fa fa-book"></i> <span>Coupons</span>
-            
-          </a>
-        </li>
-        <li>
-          <a href="<?php echo base_url(); ?>admin/Topics">
-            <i class="fa fa-th"></i> <span>Topics</span>
-           
-          </a>
-        </li>
-         <li>
-          <a href="<?php echo base_url(); ?>admin/Play_time">
-            <i class="glyphicon glyphicon-play-circle"></i> <span>Play Time</span>
-           
-          </a>
-        </li>
-         <li>
-              <a href="<?php echo base_url(); ?>admin/Video">
-                <i class="glyphicon glyphicon-facetime-video"></i>
-                <span>Video</span>
-              </a>
-            </li>
-       
-        <li>
-          <a href="<?php echo base_url(); ?>admin/Question">
-            <i class="fa fa-question-circle"></i> <span>Questions</span>
-           
-          </a>
-        </li>
-        
+              
         <li class=" treeview">
           <a href="<?php echo base_url(); ?>admin/Students">
             <i class="fa fa-folder"></i> <span>Students</span>
@@ -419,12 +388,7 @@
             <li><a href="<?php echo base_url(); ?>admin/Results"><i class="fa fa-circle-o"></i> Results</a></li>
              </ul>
         </li>
-        <li><a href="<?php echo base_url(); ?>admin/Users"><i class="fa fa-users"></i> <span>Users</span></a></li>
-
-           
-        <li><a href="<?php echo base_url(); ?>admin/Payment"><i class="fa fa-money"></i> 
-        <span>Payment </span></a></li>
-
+       
 
 <!--        <li><a href="#"><i class="fa fa-book"></i> 
         <span>Exams</span></a></li>-->
