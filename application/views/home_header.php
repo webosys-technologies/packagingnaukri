@@ -28,7 +28,7 @@
 
 
         
-        <style>
+<!--        <style>
 /*            #header{
                 margin:25px;
             }*/
@@ -53,7 +53,7 @@
                 padding-top:0px;
                
             }
-            </style>
+            </style>-->
 </head>
 
 </script>
