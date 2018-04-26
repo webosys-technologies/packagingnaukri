@@ -28,10 +28,10 @@
 
 
         
-<!--        <style>
-/*            #header{
+        <style>
+            #header{
                 margin:25px;
-            }*/
+            }
            
             #header_link{
                 color:white;
@@ -53,7 +53,7 @@
                 padding-top:0px;
                
             }
-            </style>-->
+            </style>
 </head>
 
 </script>
@@ -106,10 +106,10 @@
     
     
 <!--<body style="background:#d2d6de">--> 
-    <body>
+   
  <header class="header" id="header">
   <div class="container">
-  <nav class="navbar navbar-default navbar-fixed-top" id="nav_header">
+  <nav class="navbar navbar-fixed-top" id="nav_header">
   <div class="container-fluid"  style="background:#002863">
      <!--Brand and toggle get grouped for better mobile display--> 
     <div class="navbar-header">
