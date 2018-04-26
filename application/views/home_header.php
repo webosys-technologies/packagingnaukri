@@ -29,9 +29,9 @@
 
         
         <style>
-            #header{
+/*            #header{
                 margin:25px;
-            }
+            }*/
            
             #header_link{
                 color:white;
