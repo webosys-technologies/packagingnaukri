@@ -1,7 +1,7 @@
  <div class="row" style="background:#F2F3F4">
         <div class="container">        
 		<div class="col-md-9 col-md-offset-1">
-		<h5 style="color:#0BA1DC;">RECENT JOB OPENING </h5>
+		<h5 style="color:#0BA1DC;">RECENT JOB OPENINGS</h5>
 			  
 		</div>  <br>
               

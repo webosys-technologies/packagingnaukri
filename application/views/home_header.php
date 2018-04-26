@@ -109,7 +109,7 @@
    
  <header class="header" id="header">
   <div class="container">
-  <nav class="navbar navbar-fixed-top" id="nav_header">
+  <nav class="navbar navbar-default navbar-fixed-top navbar-expand-lg" id="nav_header">
   <div class="container-fluid"  style="background:#002863">
      <!--Brand and toggle get grouped for better mobile display--> 
     <div class="navbar-header">
@@ -148,7 +148,7 @@
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>-->
-      <ul class="nav navbar-nav navbar-right">
+<!--      <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -160,7 +160,7 @@
             <li><a href="#">Separated link</a></li>
           </ul>
         </li>
-      </ul>
+      </ul>-->
     </div>  
   </div> 
 </nav>
