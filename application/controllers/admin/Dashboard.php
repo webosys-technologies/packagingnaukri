@@ -52,47 +52,6 @@ class Dashboard extends CI_Controller
     }
     
   
-    /**
-     * This function is used to change the password of the user
-     */
-    function changePassword()
-    {
-        $this->load->library('form_validation');
-        
-        $this->form_validation->set_rules('oldPassword','Old password','required|max_length[20]');
-        $this->form_validation->set_rules('newPassword','New password','required|max_length[20]');
-        $this->form_validation->set_rules('cNewPassword','Confirm new password','required|matches[newPassword]|max_length[20]');
-        
-        if($this->form_validation->run() == FALSE)
-        {
-            $this->loadChangePass();
-        }
-        else
-        {
-            $oldPassword = $this->input->post('oldPassword');
-            $newPassword = $this->input->post('newPassword');
-            
-            $resultPas = $this->user_model->matchOldPassword($this->vendorId, $oldPassword);
-            
-            if(empty($resultPas))
-            {
-                $this->session->set_flashdata('nomatch', 'Your old password not correct');
-                redirect('loadChangePass');
-            }
-            else
-            {
-                $usersData = array('password'=>getHashedPassword($newPassword), 'updatedBy'=>$this->vendorId,
-                                'updatedDtm'=>date('Y-m-d H:i:s'));
-                
-                $result = $this->user_model->changePassword($this->vendorId, $usersData);
-                
-                if($result > 0) { $this->session->set_flashdata('success', 'Password updation successful'); }
-                else { $this->session->set_flashdata('error', 'Password updation failed'); }
-                
-                redirect('loadChangePass');
-            }
-        }
-    }
 
     function pageNotFound()
     {
