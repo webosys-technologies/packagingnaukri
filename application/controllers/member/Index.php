@@ -40,31 +40,7 @@ class Index extends CI_Controller
     
     public function loginMe()
     {
-        
-        $this->load->library('form_validation');
-        
-      //  $this->form_validation->set_rules('email', 'Username', 'callback_username_check');
-//        $this->form_validation->set_rules('member_email', 'Email', 'required|valid_email|max_length[128]|trim');
-        $this->form_validation->set_rules('member_password', 'Password', 'required|max_length[32]');
-        
-        if($this->form_validation->run() == FALSE)
-        {
-            $this->login();
-        }
-        else  
-        {
-        $this->load->library('form_validation');
-        
-      //  $this->form_validation->set_rules('email', 'Username', 'callback_username_check');
-        $this->form_validation->set_rules('member_email', 'Email', 'required|valid_email|max_length[128]|trim');
-        $this->form_validation->set_rules('member_password', 'Password', 'required|max_length[32]');
-        
-        if($this->form_validation->run() == FALSE)
-        {
-            $this->login();
-        }
-        else  
-        {
+    
             $member_email = $this->input->post('member_email');
             $member_password = $this->input->post('member_password');
             $where=array('member_email'=>$member_email,
@@ -75,7 +51,7 @@ class Index extends CI_Controller
        if($valid_email>0)
        {
            
-         
+          
                 
             if($result > 0 && $result->member_status==1)
             {          
@@ -90,7 +66,8 @@ class Index extends CI_Controller
                                     
                     $this->session->set_userdata($sessionArray);  
                     
-                    redirect('member/Dashboard');                 
+                    echo json_encode(array('status'=> 'success'));
+       
                
               }
            
@@ -100,27 +77,26 @@ class Index extends CI_Controller
                 if($result > 0 && $result->member_status==0)
                 {
                    
-                 $this->session->set_flashdata('log_error', 'Account is not activeted yet.');
-                 $this->session->set_flashdata('member_email', $member_email);
+                 echo json_encode(array('account_error'=> 'Account is not activeted yet.'));
+
                 }
                 else
                 {
-                    $this->session->set_flashdata('error', 'Email or password mismatch');
-                }
-                
-                redirect('member/index/login');  
+                     echo json_encode(array('val_error'=> 'Email or Password Mismatch.'));
+                }                
+                 
             } 
             }
             else
             {
-                 $this->session->set_flashdata('error', 'This email id is not registered with us.');
-                 redirect('member/index/login'); 
+                                    echo json_encode(array('email_error'=> 'This Email Id is not registered with us'));
+
+                
             }
         
+                    
         }
-            
-        }
-    }
+    
     
     
      public function signout()
