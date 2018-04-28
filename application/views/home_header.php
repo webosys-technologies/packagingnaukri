@@ -199,7 +199,7 @@ $("#myModal").on("hidden.bs.modal", function () {
           <div class="row">
               <div class="col-md-8 col-md-offset-2">
                   <span id="validation_error" class="text-danger"></span>
-                  <form action="" id="login_form" method="">
+                  <form action="" id="login_form" method="post">
           <div class="form-group has-feedback">
             <input type="text" class="form-control" id="member_email" placeholder="Username or Email" name="member_email" required /><span class="text-danger" id="email_err"></span>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

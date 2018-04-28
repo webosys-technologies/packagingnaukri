@@ -47,13 +47,11 @@ class Index extends CI_Controller
                          'member_password'=>$member_password);
             
       list($result,$valid_email)=$this->Members_model->loginMe($where);
-            
+              
        if($valid_email>0)
-       {
-           
-          
-                
-            if($result > 0 && $result->member_status==1)
+       {       
+                      
+            if(isset($result) && $result->member_status==1)
             {          
                     $sessionArray = array(                        
                          'member_id' => $result->member_id,
@@ -105,7 +103,7 @@ class Index extends CI_Controller
         $this->session->sess_destroy();
 //   /*     redirect('controller_class/login');
 //        $this->session->unset_userdata('member_LoggedIn'); 
-           redirect('member/Index/login');  
+           redirect('Home');  
     }
     
     public function check_center_password()
