@@ -107,6 +107,7 @@ class Index extends CI_Controller
          $this->session->unset_userdata('user_LoggedIn'); 
         redirect('admin/Index/login');  
     }
+
    
     
         
