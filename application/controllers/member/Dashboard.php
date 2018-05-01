@@ -30,11 +30,11 @@ class Dashboard extends CI_Controller
              $id=$this->session->userdata('member_id');            
                       
              $result['data']=$this->Members_model->get_member_by_id($id);
-//             $this->load->view('member/header',$result);
-//             $this->load->view('member/dashboard');
-//             $this->load->view('member/footer');
+             $this->load->view('member/header',$result);
+             $this->load->view('member/dashboard');
+             $this->load->view('member/footer');
              
-                    echo "success";
+                   
         }
         else
         {

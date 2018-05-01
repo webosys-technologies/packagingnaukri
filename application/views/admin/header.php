@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Dashboard</title>
+  <title>Admin | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -375,18 +375,16 @@
 
               
         <li class=" treeview">
-          <a href="<?php echo base_url(); ?>admin/Students">
-            <i class="fa fa-folder"></i> <span>Students</span>
+          <a href="#">
+            <i class="fa fa-folder"></i> <span>Jobs</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>admin/Students"><i class="fa fa-circle-o"></i>Manage Students</a></li>
-            <li><a href="<?php echo base_url(); ?>admin/Admission"><i class="fa fa-circle-o"></i> Admissions</a></li>
-            <li><a href="<?php echo base_url(); ?>admin/Admission/old_admission"><i class="fa fa-circle-o"></i> Old Admissions</a></li>
-            <li><a href="<?php echo base_url(); ?>admin/Results"><i class="fa fa-circle-o"></i> Results</a></li>
-             </ul>
+            <li><a href="<?php echo base_url(); ?>admin/Jobs"><i class="fa fa-circle-o"></i>Add jobs</a></li>
+            <li><a href="<?php echo base_url(); ?>admin/Jobs/view_jobs"><i class="fa fa-circle-o"></i>View All Jobs</a></li>
+          </ul>
         </li>
        
 

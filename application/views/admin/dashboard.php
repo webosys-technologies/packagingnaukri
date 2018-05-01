@@ -6,213 +6,29 @@
 <!--next here sunil-->
 <!DOCTYPE html>
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="background-color:white;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1><i class="fa fa-dashboard"></i><strong> Dashboard</strong>
+      <h1><i class="fa fa-dashboard"></i><strong> Welcome To Packaging Naukri</strong>
         
-        <small>Control panel</small>
+       
       </h1>
-      <ol class="breadcrumb">
+<!--      <ol class="breadcrumb">
         <li><a href="<?php echo base_url(); ?>admin/Dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Dashboard</li>
-      </ol>
+      </ol>-->
     </section>
-
+<hr style="border-top: 1px solid #ccc;">
     <!-- Main content -->
     <section class="content">
-      <!-- Small boxes (Stat box) -->
-      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3><?php if(isset($orders)){echo $orders;}else{echo "0";}?></h3>
+    <!--<div class="row">-->
+       <h3> Objective</h3>
+To provide the right opportunity to the every qualified packaging professional, to achieve his/her career objective. At the same time to provide the suitable candidate as per employer’s business need and develop a win-win relationship.<br><br>
 
-              <p>Orders</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            <a href="<?php echo base_url(); ?>admin/Orders" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3><?php if(isset($centers)){echo $centers;}else{echo "0";}?><sup style="font-size: 20px"></sup></h3>
+Packaging and related businesses has seen a phenomenal growth trajectory in the last decade and the momentum is increasing on a daily basis and so is the need for qualified and experienced professionals on this front. Being a vast and diversified field it is difficult to find talent suited to a particular requirement with the required expertise. This is were we step in.
 
-              <p>Centers</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-institution"></i>
-            </div>
-            <a href="<?php echo base_url(); ?>admin/Centers" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3><?php if(isset($students)){echo $students;}else{echo "0";}?></h3>
-
-              <p>Students</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="<?php echo base_url(); ?>admin/Students" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3><?php if(isset($total_payment)){echo $total_payment;}else{echo "0";}?></h3>
-
-              <p>Payment Collection</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="<?php echo base_url(); ?>admin/Payment" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-      </div>
-      
-      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box" style="background:#FF99CC;">
-            <div class="inner">
-              <h3 id="num"><?php if(isset($courses)){echo $courses;}else{echo "0";}?></h3>
-
-              <p id="num">Courses</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-mortar-board"></i>
-            </div>
-            <a href="<?php echo base_url(); ?>admin/Courses" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box" style="background:#FFCC33;">
-            <div class="inner">
-              <h3 id="num"><?php if(isset($topics)){echo $topics;}else{echo "0";}?><sup style="font-size: 20px"></sup></h3>
-
-              <p id="num">Topics</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-book"></i>
-            </div>
-            <a href="<?php echo base_url(); ?>admin/Topics" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box" style="background:#7FB3D5">
-            <div class="inner">
-              <h3 id="num"><?php if(isset($questions)){echo $questions;}else{echo "0";}?></h3>
-
-              <p id="num">Questions</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-question-circle"></i>
-            </div>
-            <a href="<?php echo base_url(); ?>admin/Question" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box" style="background:#008080">
-            <div class="inner">
-              <h3 id="num"><?php if(isset($books)){echo $books;}else{echo "0";}?></h3>
-
-              <p id="num">Books</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-book"></i>
-            </div>
-            <a href="<?php echo base_url(); ?>admin/Books" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-      </div>
-      <!-- /.row -->
-      
-      
-      
-            <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box" style="background:#90EE90;">
-            <div class="inner">
-              <h3 id="num"><?php if(isset($sub_centers)){echo $sub_centers;}else{echo "0";}?></h3>
-
-              <p id="num">Sub Centers</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-mortar-board"></i>
-            </div>
-            <a href="<?php echo base_url(); ?>admin/Sub_center" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box" style="background:#FA8072;">
-            <div class="inner">
-              <h3 id="num"><?php if(isset($batches)){echo $batches;}else{echo "0";}?><sup style="font-size: 20px"></sup></h3>
-
-              <p id="num">Batches</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-book"></i>
-            </div>
-            <a href="<?php echo base_url(); ?>admin/Batches" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box" style="background:#FFB6C1;">
-            <div class="inner">
-              <h3 id="num"><?php if(isset($coupons)){echo $coupons;}else{echo "0";}?></h3>
-
-              <p id="num">Coupons</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-question-circle"></i>
-            </div>
-            <a href="<?php echo base_url(); ?>admin/Coupon" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-<!--        <div class="col-lg-3 col-xs-6">
-           small box 
-          <div class="small-box" style="background:#008080">
-            <div class="inner">
-              <h3 id="num"><?php if(isset($books)){echo $books;}else{echo "0";}?></h3>
-
-              <p id="num">Books</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-book"></i>
-            </div>
-            <a href="<?php echo base_url(); ?>admin/Books" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>-->
-        <!-- ./col -->
-      </div>
+We intend and aim to place the candidate as per the precise need of the position in terms of experience, expertise, and budget resulting in a symbiotic business relationship between the employee and the employer
+    <!--</div>-->
       
       
       <!-- Main row -->
@@ -569,82 +385,7 @@
           </div>
           <!-- /.box -->
 
-          <!-- Calendar -->
-          <div class="box box-solid bg-green-gradient">
-            <div class="box-header">
-              <i class="fa fa-calendar"></i>
 
-              <h3 class="box-title">Calendar</h3>
-              <!-- tools box -->
-              <div class="pull-right box-tools">
-                <!-- button with a dropdown -->
-                <div class="btn-group">
-<!--                  <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-bars"></i></button>-->
-                  <ul class="dropdown-menu pull-right" role="menu">
-                    <li><a href="#">Add new event</a></li>
-                    <li><a href="#">Clear events</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">View calendar</a></li>
-                  </ul>
-                </div>
-                <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-                </button>
-              </div>
-              <!-- /. tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <!--The calendar -->
-              <div id="calendar" style="width: 100%"></div>
-            </div>
-            <!-- /.box-body -->
-<!--            <div class="box-footer text-black">
-              <div class="row">
-                <div class="col-sm-6">
-                   Progress bars 
-                  <div class="clearfix">
-                    <span class="pull-left">Task #1</span>
-                    <small class="pull-right">90%</small>
-                  </div>
-                  <div class="progress xs">
-                    <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
-                  </div>
-
-                  <div class="clearfix">
-                    <span class="pull-left">Task #2</span>
-                    <small class="pull-right">70%</small>
-                  </div>
-                  <div class="progress xs">
-                    <div class="progress-bar progress-bar-green" style="width: 70%;"></div>
-                  </div>
-                </div>
-                 /.col 
-                <div class="col-sm-6">
-                  <div class="clearfix">
-                    <span class="pull-left">Task #3</span>
-                    <small class="pull-right">60%</small>
-                  </div>
-                  <div class="progress xs">
-                    <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
-                  </div>
-
-                  <div class="clearfix">
-                    <span class="pull-left">Task #4</span>
-                    <small class="pull-right">40%</small>
-                  </div>
-                  <div class="progress xs">
-                    <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
-                  </div>
-                </div>
-                 /.col 
-              </div>
-               /.row 
-            </div>-->
-          </div>
-          <!-- /.box -->
 
         </section>
         <!-- right col -->

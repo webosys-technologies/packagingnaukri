@@ -43,25 +43,9 @@ class Members_model extends CI_Model
         return $query->num_rows();
        
     }
-     public function get_all_stud($id)
-    {
-        $this->db->from($this->table); 
-        $this->db->where('center_id',$id);
-        $query=$this->db->get();
-        return $query->num_rows();
-       
-    }
     
-    public function get_members_count($id)
-    {
-        $this->db->from($this->table);
-        $this->db->where('center_id',$id);
-        $this->db->where('member_status',"1");
-        $query=$this->db->get();
-        return $query->num_rows();
-
-       
-    }
+    
+   
 
    
         
