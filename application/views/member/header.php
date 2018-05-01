@@ -137,6 +137,12 @@
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
               </a>
             </li>
+            
+             <li class="treeview">
+              <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Post Resume</span></i>
+              </a>
+            </li>
                  
                       
           

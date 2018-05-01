@@ -63,6 +63,19 @@ class User_model extends CI_Model
         $this->db->where('user_id', $id);
         $this->db->delete($this->table);
     }
+    
+    
+    public function insert($query)
+    {
+        $res=$this->db->query($query);
+        if($res)
+        {
+            return array(true,'success');
+        }else
+        {
+            return array(false,mysqli_error());
+        }
+    }
 }
 
   

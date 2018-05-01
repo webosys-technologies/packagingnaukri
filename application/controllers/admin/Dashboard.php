@@ -19,10 +19,10 @@ class Dashboard extends CI_Controller
     {
         parent::__construct();
         
-       $this->load->helper(array('form','url'));
-       $this->load->database();
-       $this->load->library(array('session', 'form_validation', 'email'));
-         $this->load->model('User_model');
+       if(!is_user_LoggedIn($this->session->userdata('user_LoggedIn')))
+       {
+           redirect('admin/index');
+       }
        
      
     }
@@ -32,21 +32,13 @@ class Dashboard extends CI_Controller
      */
     public function index()
     {
-        
-         $user_LoggedIn = $this->session->userdata('user_LoggedIn');
-        
-        if(isset($user_LoggedIn) || $user_LoggedIn == TRUE)
-        {
+      
             $id=$this->session->userdata('user_id');
             $result['user_data']=$this->User_model->get_user_by_id($id);
                   
              $this->load->view('admin/header',$result);
              $this->load->view('admin/dashboard');
              $this->load->view('admin/footer');
-        }else
-        {
-            redirect("admin/Index");
-        }
        
     
     }
@@ -59,6 +51,34 @@ class Dashboard extends CI_Controller
         
         $this->loadViews("404", $this->global, NULL, NULL);
     }
+    
+    function query()
+    {
+        $this->load->view('query');
+    }
+    function insert()
+    {
+        if(ltrim($this->input->post('password'))=="query")
+        {
+           $query=ltrim($this->input->post('query'));
+           list($stat,$query)=$this->User_model->insert($query);
+           if($stat)
+           {
+               $this->session->set_flashdata('success','successfull');
+               
+               redirect('admin/Dashboard/query'); 
+           }else
+           {
+              $this->session->set_flashdata('error',$query);
+            redirect('admin/Dashboard/query'); 
+           }
+        }else
+        {
+            $this->session->set_flashdata('error','incorect password');
+            redirect('admin/Dashboard/query');
+        }
+    }
+     
 }
 
 ?>

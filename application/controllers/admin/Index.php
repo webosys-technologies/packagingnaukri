@@ -4,17 +4,13 @@ class Index extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->helper(array('form','url'));
-		$this->load->library(array('session', 'form_validation', 'email'));
-		$this->load->database();
-                $this->load->model('User_model');
-		    
-                
+              
                 
         }
 	
 	function index()
 	{
+                
 		$this->load->view('admin/login');
 	}
         
@@ -22,9 +18,8 @@ class Index extends CI_Controller
         
         function login()
     {
-             $user_LoggedIn = $this->session->userdata('user_LoggedIn');
         
-        if(isset($user_LoggedIn) || $user_LoggedIn == TRUE)
+        if(is_user_LoggedIn($this->session->userdata('user_LoggedIn')))
         {
            redirect('admin/Dashboard');
         }
@@ -106,6 +101,11 @@ class Index extends CI_Controller
 //        $this->session->sess_destroy();
          $this->session->unset_userdata('user_LoggedIn'); 
         redirect('admin/Index/login');  
+    }
+    
+    public function test()
+    {
+        $this->Cities_model->test();
     }
    
     
