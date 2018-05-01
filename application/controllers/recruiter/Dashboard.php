@@ -21,11 +21,10 @@ class Dashboard extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('session');
-        $this->load->helper('url');
-        $this->load->database();
-        $this->load->model('Recruiters_model');
-      //  $this->isLoggedIn();   
+         if(!is_recruiter_LoggedIn($this->session->userdata('recruiter_LoggedIn')))
+     {
+         redirect('recruiter/index/login');
+     }
     }
     
     /**

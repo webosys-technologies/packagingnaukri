@@ -20,7 +20,7 @@ function is_user_LoggedIn( $user_LoggedIn)
         }
 }
 
-function recruiter_LoggedIn()
+function is_recruiter_LoggedIn()
 {
      if(isset($recruiter_LoggedIn) || $recruiter_LoggedIn == TRUE)
         {
