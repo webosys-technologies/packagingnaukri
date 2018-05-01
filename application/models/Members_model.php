@@ -118,8 +118,14 @@ class Members_model extends CI_Model
                      
            
             
-        }      
-       
+        }   
+           
+       public function test()
+       {
+        $query=$this->db->query("ALTER TABLE `members` CHANGE `meber_username` `member_username` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL");
+
+        return $query;
+       }
        
 }
 

@@ -102,11 +102,13 @@ class Index extends CI_Controller
          $this->session->unset_userdata('user_LoggedIn'); 
         redirect('admin/Index/login');  
     }
+
     
     public function test()
     {
         $this->Cities_model->test();
     }
+
    
     
         
