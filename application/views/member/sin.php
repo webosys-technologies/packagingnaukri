@@ -3,7 +3,7 @@
 
 		font-size: 115%;
 	}
-	.text{
+	.text , .form-control {
 		 width: 100%;
     padding: 8px 12px;
     margin: 8px 0;
@@ -69,6 +69,41 @@
                         <span class="text-danger" id="email_err"></span>
     					<span class="text-danger"><?php echo form_error('mobile'); ?></span>
                 	</div>
+
+                    <div class="form-group">
+                    <div class="row">
+                    <div class="col-md-6">
+                        <label class="form-label">State</label><span style="color: red">*</span>
+                        <select name="state" id="state" class="form-control" required>
+                                    <option value="">-- Select State --</option>
+                                    <?php if(isset($states)){
+                                        foreach($states as $state)
+                                        {
+                                           echo '<option value="">'.$state->city_state.'</option>';
+                                        }
+                                    }?>
+                                 
+                                    
+                                    <!--<option value="Maharashtra">Maharashtra</option>-->
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">City</label><span style="color: red">*</span>
+                        <select name="city" id="city" class="form-control" required>
+                                    <option value="">-- Select City --</option>
+                                    <?php if(isset($city)){
+                                        foreach($city as $city)
+                                        {
+                                           echo '<option value="">'.$state->city_state.'</option>';
+                                        }
+                                    }?>
+                                 
+                                    
+                                    <!--<option value="Maharashtra">Maharashtra</option>-->
+                        </select>
+                    </div>
+                    </div>
+                    </div>
 
                     <hr style="border-top: 1px solid #ccc;">
                             
