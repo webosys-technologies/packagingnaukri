@@ -95,7 +95,7 @@
           { 
               foreach($data as $res)
               {
-                echo $res->recruiter_name;
+//                echo $res->recruiter_fname;
               }
           
           }
@@ -115,7 +115,7 @@
                         'recruiter_email'=>$res->recruiter_email,
                         'recruiter_mobile'=>$res->recruiter_mobile,
                         'recruiter_gender'=>$res->recruiter_gender,
-                        'recruiter_dob'=>$res->recruiter_dob,
+//                        'recruiter_dob'=>$res->recruiter_dob,
                         'recruiter_address'=>$res->recruiter_address,
                         'recruiter_city'=>$res->recruiter_city,
                         'recruiter_state'=>$res->recruiter_state,

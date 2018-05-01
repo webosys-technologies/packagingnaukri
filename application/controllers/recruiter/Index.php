@@ -6,12 +6,7 @@ class Index extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->helper(array('form','url','date'));
-		$this->load->library(array('session', 'form_validation', 'email'));
-		$this->load->database();
 		
-               $this->load->model('Recruiters_model');
-               $this->load->model('Cities_model');
                  
 	}
        

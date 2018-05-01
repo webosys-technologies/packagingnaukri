@@ -1,3 +1,4 @@
+
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Cities_model extends CI_Model
@@ -6,11 +7,15 @@ class Cities_model extends CI_Model
     
      public function getall_state()
      {
-        $this->db->from($this->table);
-        $query=$this->db->get();
-
-        return $query->result();
+       $res=$this->db->Query('SELECT DISTINCT city_state FROM cities');
+        return $res->result();
      }
+     
+     public function test()
+     {
+        
+         
+                 }
 
    
 }
