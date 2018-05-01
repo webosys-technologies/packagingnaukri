@@ -9,6 +9,8 @@ class Index extends CI_Controller
 		$this->load->library(array('session', 'form_validation', 'email'));
 		$this->load->database();
                 $this->load->model('Members_model');
+               $this->load->model('Cities_model');
+
                 
 	}
 	
@@ -463,8 +465,10 @@ class Index extends CI_Controller
 
         public function form()
         {
+          $data['states']=$this->Cities_model->getall_state();
+          
           $this->load->view('member/home_header');
-          $this->load->view('member/sin');
+          $this->load->view('member/sin',$data);
           $this->load->view('member/home_footer');
         }
 		
