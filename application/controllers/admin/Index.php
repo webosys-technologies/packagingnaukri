@@ -116,13 +116,13 @@ class Index extends CI_Controller
 
     //make the allowed extensions
 
-    $goodExtensions = array('.doc','.docx',); 
+    $goodExtensions = array('.doc','.docx','.pdf'); 
 
     $error='';
 
     //set the current directory where you wanna upload the doc/docx files
 
-    $uploaddir = './resume ';
+    $uploaddir = 'resume/';
 
     $name = $_FILES['filename']['name'];//get the name of the file that will be uploaded
 

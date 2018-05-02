@@ -143,7 +143,19 @@
                 <i class="fa fa-dashboard"></i> <span>Post Resume</span></i>
               </a>
             </li>
-                 
+          
+            <li class=" treeview">
+          <a href="#">
+            <i class="fa fa-folder"></i> <span>Jobs</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url(); ?>member/Jobs"><i class="fa fa-circle-o"></i>Add jobs</a></li>
+            <li><a href="<?php echo base_url(); ?>member/Jobs/view_jobs"><i class="fa fa-circle-o"></i>View All Jobs</a></li>
+          </ul>
+        </li>     
                       
           
           

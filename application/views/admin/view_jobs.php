@@ -79,18 +79,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-				
+                                <?php if(isset($jobs))
+                                    {
+                                    foreach($jobs as $job){
+                                        $stat=$job->job_status;
+                                        if($stat==1)
+                                        {
+                                        ?>
+                                      
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-				            <td></td>
+                                            <td><?php echo $job->job_id?></td>
+                                            <td><?php echo $job->job_title?></td>
+                                            <td><?php echo $job->company_name?></td>
+                                            <td><?php echo $job->job_education?></td>
+                                            <td><?php echo $job->job_experience?></td>
+                                            <td><?php echo $job->job_city?></td>
+				            <td><?php echo $job->job_created_at?></td>
                                             <td><a href="javascript:void(0);" id="editjobinfo"><button class="btn btn-primary btn-circle" type="button"><i class="fa fa-list"></i></button></a><a href="javascript:void(0);" id=""><button class="btn btn-warning btn-circle" type="button"><i class="fa fa-times"></i></button></a></td>
                                         </tr>
-										
+                             
+                                   <?php
+                                        }
+                                    }
+                                    }
+                                    ?>				
                                     </tbody>
                                 </table>
                             </div>

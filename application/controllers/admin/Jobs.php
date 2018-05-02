@@ -32,6 +32,7 @@ class Jobs extends CI_Controller
         
             $id=$this->session->userdata('user_id');
             $result['user_data']=$this->User_model->get_user_by_id($id);
+                     
                   
              $this->load->view('admin/header',$result);
              $this->load->view('admin/add_jobs');
@@ -44,9 +45,10 @@ class Jobs extends CI_Controller
         
             $id=$this->session->userdata('user_id');
             $result['user_data']=$this->User_model->get_user_by_id($id);
+             $result['jobs']=$this->Jobs_model->getall_jobs();
                   
              $this->load->view('admin/header',$result);
-             $this->load->view('admin/view_jobs');
+             $this->load->view('admin/view_jobs',$result);
              $this->load->view('admin/footer');
        
     }
