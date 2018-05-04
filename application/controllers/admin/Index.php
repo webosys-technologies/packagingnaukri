@@ -98,8 +98,8 @@ class Index extends CI_Controller
     
      public function signout()
     {        
-//        $this->session->sess_destroy();
-         $this->session->unset_userdata('user_LoggedIn'); 
+        $this->session->sess_destroy();
+//         $this->session->unset_userdata('user_LoggedIn'); 
         redirect('admin/Index/login');  
     }
 
