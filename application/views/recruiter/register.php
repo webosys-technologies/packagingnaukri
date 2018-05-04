@@ -27,6 +27,7 @@
     					<label for="email" class="form-label">Name</label><span style="color:red">*</span>
     					<div class="row">
                                             
+                                            
     					<div class="col-md-6">
     					<input class="text" name="fname" id="fname" required="" class='form-control' placeholder="First Name" type="text" value="" />  
                                         <span class="text-danger" id="fname_err"></span>
