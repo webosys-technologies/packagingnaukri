@@ -34,6 +34,38 @@ class Members_model extends CI_Model
    
     }
 
+    function register()
+    {
+        
+
+        $data=array(
+            'member_fname'          => strtoupper($this->input->post('fname')),
+            'member_lname'          =>strtoupper($this->input->post('lname')),
+            'member_email'          => $this->input->post('email'),
+            'member_mobile'         => $this->input->post('mobile'),
+            'member_password'       => $this->input->post('password'),
+            'member_city'           => $this->input->post('city'),
+            'member_state'          => $this->input->post('state'),
+            'member_created_at' => date("Y-m-d "),
+                        'member_status'        => '1'
+
+
+        );
+
+        $this->db->insert('members',$data);
+        $insert=$this->db->insert_id();
+                 //return $insert;
+                return array($insert,$data);
+    }
+
+    public function getall_members()
+    {
+        $this->db->from($this->table);        
+       // $this->db->where('member_status','1');
+        $query=$this->db->get();
+        return $query->num_rows();
+       
+    }
     
     public function getall_members_no()
     {
@@ -119,6 +151,21 @@ class Members_model extends CI_Model
            
             
         }   
+
+        function check_if_email_exist($member_email)
+        {
+        $this->db->where('member_email',$member_email);
+        $result=$this->db->get('members');
+
+        if($result->num_rows()>0)
+        {
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
+        }
            
        public function test()
        {

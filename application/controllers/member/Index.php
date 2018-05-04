@@ -9,7 +9,7 @@ class Index extends CI_Controller
 		$this->load->library(array('session', 'form_validation', 'email'));
 		$this->load->database();
                 $this->load->model('Members_model');
-               $this->load->model('Cities_model');
+             //  $this->load->model('Cities_model');
 
                 
 	}
@@ -24,26 +24,26 @@ class Index extends CI_Controller
     {
     $this->load->library('form_validation');
 
-    $this->form_validation->set_rules('recruiter_fname','Name','trim|required');
-    $this->form_validation->set_rules('recruiter_lname','Last_name','trim|required');
-    $this->form_validation->set_rules('recruiter_name','recruiter_name','trim|required');
-    $this->form_validation->set_rules('recruiter_email','Email','trim|required|valid_email|callback_check_if_email_exist');
-    $this->form_validation->set_rules('recruiter_mobile','Mobile','trim|required|numeric');
-    $this->form_validation->set_rules('recruiter_gender','Gender','required');
-    $this->form_validation->set_rules('recruiter_password','Password','trim|required|min_length[8]');
-    $this->form_validation->set_rules('recruiter_cpassword','Confirm Password','trim|required|matches[recruiter_password]');  
-    $this->form_validation->set_rules('recruiter_address','Address','trim|required');
-    $this->form_validation->set_rules('recruiter_city','City','trim|required');
-    $this->form_validation->set_rules('recruiter_pincode','Pincode','trim|required|numeric');
-    $this->form_validation->set_rules('recruiter_state','State','trim|required');   
+    $this->form_validation->set_rules('fname','Name','trim|required');
+    $this->form_validation->set_rules('lname','Last_name','trim|required');
+    $this->form_validation->set_rules('email','Email','trim|required|valid_email|callback_check_if_email_exist');
+    $this->form_validation->set_rules('mobile','Mobile','trim|required|numeric');
+    $this->form_validation->set_rules('password','Password','trim|required|min_length[8]');
+   // $this->form_validation->set_rules('recruiter_cpassword','Confirm Password','trim|required|matches[recruiter_password]');  
+   // $this->form_validation->set_rules('recruiter_address','Address','trim|required');
+    $this->form_validation->set_rules('city','City','trim|required');
+   // $this->form_validation->set_rules('recruiter_pincode','Pincode','trim|required|numeric');
+    $this->form_validation->set_rules('state','State','trim|required');   
                 
     //validate form input
     if ($this->form_validation->run() == false)
         {
+
+          // echo  "validate error";
       
-   // $state['states']=$this->Cities_model->getall_state(); 
+   $state['states']=$this->Cities_model->getall_state(); 
                                 $this->load->view('member/home_header');
-                $this->load->view('member/signup');                     
+                $this->load->view('member/sin',$state);                     
                                 $this->load->view('member/home_footer');
                     
         }
@@ -51,39 +51,30 @@ class Index extends CI_Controller
     {
                    
             
-      list($get_insert,$get_data)=$this->Centers_model->register();
+      list($get_insert,$get_data)=$this->Members_model->register();
       if($get_insert)
       {
-                            $default_sub_recruiter=array('recruiter_id'=>$get_insert,
-                                            'sub_recruiter_fullname'=>'Owner Name',
-                                            'sub_recruiter_name'=>'Main Sub-Center',
-                                            'sub_recruiter_created_at'=>date('Y-m-d'),
-                                            'sub_recruiter_status'=>'1');                    
-                              $this->Sub_recruiters_model->sub_recruiter_add($default_sub_recruiter); 
+                            // $default_sub_recruiter=array('recruiter_id'=>$get_insert,
+                            //                 'sub_recruiter_fullname'=>'Owner Name',
+                            //                 'sub_recruiter_name'=>'Main Sub-Center',
+                            //                 'sub_recruiter_created_at'=>date('Y-m-d'),
+                            //                 'sub_recruiter_status'=>'1');                    
+                            //   $this->Sub_recruiters_model->sub_recruiter_add($default_sub_recruiter); 
                 
-                                    $default_batch= array(
-                                    'recruiter_id' =>$get_insert,
-                                    'batch_name' => 'Default Batch',
-                                    'batch_time' => 'Not Set',
-                                    'batch_created_at' => date('Y-m-d'),
-                                    'batch_status'  =>'1' ,
-                                    );               
-                              
-                              $this->Batches_model->batch_add($default_batch);
                             
         $msg=array(
                                     'title'=>'Delto Center Registration...!',
-                                    'data'=>'Your Center Registration Successfully with delto',
-                                    'email'=>$get_data['recruiter_email']
+                                    'data'=>'Your Member Registration Successfully with Packaging Naukari',
+                                    'email'=>$get_data['member_email']
                                 );
         
-                               $result=$this->signup_email($get_data,$msg);
-                               $this->verification_email($get_data,$msg);
-                               if($result==true)
+                               //$result=$this->signup_email($get_data,$msg);
+                              // $this->verification_email($get_data,$msg);
+                               if(true==true)
                                 {
                                   $this->session->set_flashdata('signup_success','Registration Successfull,please check email & verify your Account!');
                                 //$this->load->view('member/signup');
-                                  redirect('recruiter/index/login');
+                                  redirect('member/index/login');
                                 }
                                 else
                                 {                                  
@@ -102,7 +93,7 @@ class Index extends CI_Controller
                            
                           //  $cities['cities']=$this->Cities_model->getall_cities("Maharashtra");
                                 $this->load->view('member/home_header');
-        $this->load->view('member/signup');
+        $this->load->view('member/sin');
                                 $this->load->view('member/home_footer');
         
       }
@@ -122,8 +113,9 @@ class Index extends CI_Controller
              redirect('member/Dashboard');
         }
         else
-        {
-            $this->load->view('member/login');
+        {   
+
+            redirect('Home');
         }
     }
     
@@ -190,6 +182,61 @@ class Index extends CI_Controller
                     
         }
     
+    function signup_email($getdata,$msg)
+    {    
+               
+                 $hash= md5( rand(0,1000) );
+                 $this->center_encrypt($getdata['center_email'],$hash);
+                
+                    $headers = "From: support@Packagingnaukari.in";
+                    $headers .= ". PackagingNaukari-Team" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $to = $msg['email'];
+                    $subject = "Welcome To Packaging Naukari";
+
+                    $txt = '<html>
+                        <head>
+                                            <style>
+                                            
+
+                                             .div1 {
+                                           
+                                                   width: 100%;
+                                                   border-radius: 5px;
+                                                   background-color: #3c8dbc;
+                                                   padding: 20px;
+                                               }
+                                                .div2 {
+
+                                                   width: 100%;
+                                                   border-radius: 5px;
+                                                   background-color: #d2d6de;
+                                                   padding: 20px;
+                                               }
+                                               #color{
+                                               color:blue;
+                                               }
+                                            </style>
+                                        </head>
+                                             <body><div class="div1"><h2>'.$msg['title'].'<h2></div><div class="div2">Dear'.$getdata['fname'].' '.$getdata['lname'].',<br>Thank You for sign in with delto.<br><br>You can now login with following login details<br><br>
+                                            
+                                            <b>center Owner Name :</b>'.$getdata['fname']." "
+                                             .$getdata['lname'].
+                                             '<br><b>Member Login URL:</b> <a href="http://delto.in/center/index/login">http://delto.in/center/index/login</a>
+                                             <br><b>Email Id:</b>'.$getdata['center_email'].
+                                              "<br><b>Password :</b>".$getdata['center_password'].
+                                              '<br>Best Regards,<br>Delto Team<br><a href="http://delto.in">http://delto.in</a><br></div></body></html>';
+                              
+                                              
+                                            
+                 
+                       $success=  mail($to,$subject,$txt,$headers); 
+                       if($success)
+                       {
+                          return true;
+                       }
+//                   
+    }
     
     
      public function signout()
@@ -278,8 +325,7 @@ class Index extends CI_Controller
         
         function check_if_email_exist($requested_email)
 	{
-		$this->load->model('Students_model');
-		$email_available=$this->Centers_model->check_if_email_exist($requested_email);
+		$email_available=$this->Members_model->check_if_email_exist($requested_email);
 
 		if($email_available){
 //                    $this->form_validation->set_message('check_if_email_exist', 'You must select a business');
@@ -453,6 +499,15 @@ class Index extends CI_Controller
                       
         }
 
+        public function show_cities($state)
+        {
+          //echo $state;
+
+          $city =$this->Cities_model->getall_cities($state);
+
+          echo json_encode($city);
+        }
+
 
         public function test()
         {
@@ -474,6 +529,4 @@ class Index extends CI_Controller
 		
     
 }
-
-
 
