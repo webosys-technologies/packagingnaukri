@@ -8,7 +8,10 @@ class Recruiter extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-
+                if(!is_user_LoggedIn($this->session->userdata('user_LoggedIn')))
+     {
+         redirect('admin/index');
+     }
           
 	}
 
@@ -17,9 +20,10 @@ class Recruiter extends CI_Controller
        
             $id=$this->session->userdata('recruiter_id');
             $result['user_data']=$this->User_model->get_user_by_id($id);
+            $result['recruiters']=$this->Recruiters_model->getall();
        
             $this->load->view('admin/header',$result);
-            $this->load->view('admin/recruiter_view');
+            $this->load->view('admin/recruiter_view',$result);
             $this->load->view('admin/footer');
 
         

@@ -32,6 +32,7 @@ class Jobs extends CI_Controller
         
             $id=$this->session->userdata('user_id');
             $result['user_data']=$this->User_model->get_user_by_id($id);
+                     
                   
              $this->load->view('admin/header',$result);
              $this->load->view('admin/add_jobs');
@@ -44,11 +45,35 @@ class Jobs extends CI_Controller
         
             $id=$this->session->userdata('user_id');
             $result['user_data']=$this->User_model->get_user_by_id($id);
+             $result['jobs']=$this->Jobs_model->getall_jobs();
                   
              $this->load->view('admin/header',$result);
-             $this->load->view('admin/view_jobs');
+             $this->load->view('admin/view_jobs',$result);
              $this->load->view('admin/footer');
        
+    }
+    
+    public function update_job()
+    {
+//        echo $id;
+        $form=$this->input->post();
+       
+        $data=array('job_title'=>$form['jobtitle'],
+//                    ''=>$form['company'],
+                    'job_education'=>$form['qualification'],
+                    'job_experience'=>$form['experience'],
+                    'job_description'=>$form['jobdesc'],
+                    'job_city'=>$form['joblocation'],
+                    'job_id'=>$form['id'],
+                    
+            
+        );
+         $result=$this->Jobs_model->update_job($data,$form['id']);
+         if($result>0)
+         {
+       $this->session->set_flashdata('success','Data Updated Successfully');
+       redirect('admin/Jobs/view_jobs');
+         }
     }
     
   

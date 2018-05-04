@@ -15,6 +15,7 @@ class Recruiters_model extends CI_Model
     {
         $this->db->from($this->table);        
         $query=$this->db->get();
+        
         return $query->result();
 
     }

@@ -137,8 +137,8 @@ class Index extends CI_Controller
               
        if($valid_email>0)
        {       
-                      
-            if(isset($result) && $result->member_status==1)
+
+            if(!empty($result) && $result->member_status==1)
             {          
                     $sessionArray = array(                        
                          'member_id' => $result->member_id,
@@ -174,7 +174,7 @@ class Index extends CI_Controller
             }
             else
             {
-                                    echo json_encode(array('email_error'=> 'This Email Id is not registered with us'));
+                                    echo json_encode(array('email_error'=> 'This Username is not registered with us'));
 
                 
             }
