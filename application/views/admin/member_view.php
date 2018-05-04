@@ -72,6 +72,7 @@
         <tr bgcolor="#338cbf" style="color:#fff">
           <th>ID</th>
           <th>NAME</th>
+          <th>EMAIL</th>
           <th>MOBILE</th>
           <th>CITY</th>
           <th>CREATED AT</th>
@@ -86,10 +87,12 @@
           if (isset($members)) {
             
           
-         foreach($members as $res){?>
+         foreach($members as $res){
+             if($res->member_status=='1'){?>
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->center_id; ?>" class="" ></td> --> 
                                         <td><?php echo $res->member_id;?></td>
                                         <td><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
+                                        <td><?php echo $res->member_email;?></td>
                                        <td><?php echo $res->member_mobile;?></td>
                                        <td><?php echo $res->member_city;?></td>
                                        <td><?php echo $res->member_created_at;?></td>
@@ -111,7 +114,7 @@
 
                 </td>
               </tr>
-             <?php }}?>
+          <?php }}}?>
 
 
 

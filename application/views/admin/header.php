@@ -367,7 +367,7 @@
      
         <li>
           <a href="<?php echo base_url(); ?>admin/Recruiter">
-            <i class="fa fa-institution"></i> <span>Add Recruiter</span>
+            <i class="fa fa-institution"></i> <span>Recruiters</span>
             <span class="pull-right-container">
             </span>
           </a>

@@ -61,9 +61,9 @@ class Members_model extends CI_Model
     public function getall_members()
     {
         $this->db->from($this->table);        
-       // $this->db->where('member_status','1');
+        $this->db->where('member_status','1');
         $query=$this->db->get();
-        return $query->num_rows();
+        return $query->result();
        
     }
     

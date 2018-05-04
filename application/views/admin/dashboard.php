@@ -21,15 +21,122 @@
 <hr style="border-top: 1px solid #ccc;">
     <!-- Main content -->
     <section class="content">
-    <!--<div class="row">-->
-       <h3> Objective</h3>
-To provide the right opportunity to the every qualified packaging professional, to achieve his/her career objective. At the same time to provide the suitable candidate as per employer’s business need and develop a win-win relationship.<br><br>
+    
+<!--    <div class="row">
+     <div class="col-lg-3 col-xs-6">
+           small box 
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3> <?php if(isset($students))
+              {
+                                          
+                  echo $students;
+              }
+                  ?></h3>
 
-Packaging and related businesses has seen a phenomenal growth trajectory in the last decade and the momentum is increasing on a daily basis and so is the need for qualified and experienced professionals on this front. Being a vast and diversified field it is difficult to find talent suited to a particular requirement with the required expertise. This is were we step in.
+              <p>Admission</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>center/Login_detail" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>-->
+         <!--./col--> 
+<!--        <div class="col-lg-3 col-xs-6">
+           small box 
+          <div class="small-box bg-red">
+            <div class="inner">
+                <h3>
+                     <?php if(isset($payments))
+              {
+                      $amt=array();
+                      foreach($payments as $pay)
+                      {
+                          if($pay->payment_status=='success')
+                          {
+                             $amt[]=$pay->amount;
+                          }
+                      }
+                      $total_payment=array_sum($amt);
+                      
+                  echo $total_payment;
+              }
+                  ?>
+                </h3>
 
-We intend and aim to place the candidate as per the precise need of the position in terms of experience, expertise, and budget resulting in a symbiotic business relationship between the employee and the employer
-    <!--</div>-->
+              <p>Payment History</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>center/Payment" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>-->
+         
+      <!--</div>-->
       
+            <div class="row">
+        <div class="col-lg-3 col-xs-6">
+           <!--small box--> 
+          <div class="small-box bg-red-gradient">
+            <div class="inner">
+              <h3 id="num"><?php if(isset($manage_stud)){echo $manage_stud;}else{echo "0";}?></h3>
+
+              <p id="num">Recruiters</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>center/Student" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+         <!--./col--> 
+        <div class="col-lg-3 col-xs-6">
+           <!--small box--> 
+          <div class="small-box" style="background:#FFCC33;">
+            <div class="inner">
+              <h3 id="num"><?php if(isset($sub_centers)){echo $sub_centers;}else{echo "0";}?><sup style="font-size: 20px"></sup></h3>
+
+              <p id="num">Members</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-institution"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>center/Sub_center" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+         <!--./col--> 
+        <div class="col-lg-3 col-xs-6">
+           <!--small box--> 
+          <div class="small-box" style="background:#7FB3D5">
+            <div class="inner">
+              <h3 id="num"><?php if(isset($batches)){echo $batches;}else{echo "0";}?></h3>
+
+              <p id="num">Job Posted</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-book"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>center/Batches" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+         <!--./col--> 
+        <div class="col-lg-3 col-xs-6">
+           <!--small box--> 
+          <div class="small-box" style="background:#008080">
+            <div class="inner">
+              <h3 id="num"><?php if(isset($books)){echo $books;}else{echo "0";}?></h3>
+
+              <p id="num">Job Applied</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-book"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>admin/Books" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
       
       <!-- Main row -->
       <div class="row">

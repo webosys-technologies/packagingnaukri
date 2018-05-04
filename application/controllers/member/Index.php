@@ -46,12 +46,9 @@ class Index extends CI_Controller
       
    $state['states']=$this->Cities_model->getall_state(); 
                                 $this->load->view('member/home_header');
-<<<<<<< HEAD
-                                $this->load->view('member/signup');                     
-=======
+              
                 $this->load->view('member/sin',$state);                     
->>>>>>> 6aa3342d676fd1e9f8b09076dc75c71d37e95189
-                                $this->load->view('member/home_footer');
+                   $this->load->view('member/home_footer');
                     
         }
         else
