@@ -53,6 +53,29 @@ class Jobs extends CI_Controller
        
     }
     
+    public function update_job()
+    {
+//        echo $id;
+        $form=$this->input->post();
+       
+        $data=array('job_title'=>$form['jobtitle'],
+//                    ''=>$form['company'],
+                    'job_education'=>$form['qualification'],
+                    'job_experience'=>$form['experience'],
+                    'job_description'=>$form['jobdesc'],
+                    'job_city'=>$form['joblocation'],
+                    'job_id'=>$form['id'],
+                    
+            
+        );
+         $result=$this->Jobs_model->update_job($data,$form['id']);
+         if($result>0)
+         {
+       $this->session->set_flashdata('success','Data Updated Successfully');
+       redirect('admin/Jobs/view_jobs');
+         }
+    }
+    
   
 }
 

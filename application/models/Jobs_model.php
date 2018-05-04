@@ -13,6 +13,13 @@ class Jobs_model extends CI_Model
         return $res->result();
      }
      
+     public function update_job($data,$id)
+     {
+         $where=array('job_id'=>$id);
+         $res=$this->db->update($this->table,$data,$where);
+         return $this->db->affected_rows();
+     }
+     
      
 
    
