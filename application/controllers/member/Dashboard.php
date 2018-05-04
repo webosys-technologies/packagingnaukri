@@ -38,7 +38,7 @@ class Dashboard extends CI_Controller
         }
         else
         {
-            redirect('member/index/login');
+            redirect('Home');
         }
     }
     

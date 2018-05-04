@@ -31,22 +31,25 @@
     				
     			</div>
     			<div class="panel-body">
-    				<form method="post" action="">
+    				<form method="post" action="<?php echo base_url('member/Index/register'); ?>">
     				<div class="form-group">
     					<label for="email" class="form-label">Name</label><span style="color:red">*</span>
     					<div class="row">
     					<div class="col-md-6">
     					<input class="text" name="fname" id="fname" required="" placeholder="First Name" type="text" value="" />  
                         <span class="text-danger" id="fname_err"></span>
+                        <span class="text-danger"><?php echo form_error('fname'); ?></span>
+
                         </div>
 
     					<div class="col-md-6">			
     					<input class="text" name="lname" id="lname" required="" placeholder="Last Name" type="text" value="" />
                         <span class="text-danger" id="lname_err"></span>
+                        <span class="text-danger"><?php echo form_error('lname'); ?></span>
+
 
     					</div>
     					</div>
-    					<span class="text-danger"><?php echo form_error('recruiter_email'); ?></span>
                 	</div>
 
 
@@ -54,7 +57,7 @@
     					<label for="email" class="form-label" >Email ID</label><span style="color:red">*</span>
     					<input class="text" name="email" id="email" required="" placeholder="Email-ID" type="email" value="<?php echo set_value('email'); ?>" />
                         <span class="text-danger" id="email_err"></span>
-    					<span class="text-danger"><?php echo form_error('recruiter_email'); ?></span>
+    					<span class="text-danger"><?php echo form_error('email'); ?></span>
                 	</div>
 
                     <div class="form-group">
@@ -78,14 +81,16 @@
                                     <option value="">-- Select State --</option>
                                     <?php if(isset($states)){
                                         foreach($states as $state)
-                                        {
-                                           echo '<option value="">'.$state->city_state.'</option>';
-                                        }
+                                        { ?>
+                                           <option value="<?php echo $state->city_state; ?>"><?php echo $state->city_state; ?></option>
+                                       <?php }
                                     }?>
                                  
                                     
                                     <!--<option value="Maharashtra">Maharashtra</option>-->
                         </select>
+                        <span class="text-danger"><?php echo form_error('state'); ?></span>
+
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">City</label><span style="color: red">*</span>
@@ -101,6 +106,8 @@
                                     
                                     <!--<option value="Maharashtra">Maharashtra</option>-->
                         </select>
+                        <span class="text-danger"><?php echo form_error('city'); ?></span>
+
                     </div>
                     </div>
                     </div>
@@ -117,7 +124,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-8">
-                            <a href="<?php echo base_url();?>recruiter/index/login">I already have an account? Sign in here.</a>    
+                            <a href="<?php echo base_url();?>Home">I already have an account? Login here.</a>    
                         </div>
                     </div>
     				</form>
@@ -130,3 +137,42 @@
     </div>
 	
 </div>
+<script>
+    $(document).ready(function() {
+
+ $("#state").change(function() {
+
+   var el = $(this) ;
+
+   //if(el.val() === "Maharashtra" ) {
+var state= $('#state option:selected').val();
+alert(state);
+          
+      $.ajax({
+       url : "<?php echo site_url('index.php/member/Index/show_cities')?>/" + state,        
+       type: "GET",
+        
+       dataType: "JSON",
+       success: function(data)
+       {
+        
+          $.each(data,function(i,row)
+          {
+            //alert(row.city_name);
+           
+              $("#city").append('<option value="'+ row.city_name +'">' + row.city_name + '</option>');
+          }
+          );
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+         alert('Error...!');
+       }
+     });
+  // }
+    
+ });
+
+});
+ 
+</script>

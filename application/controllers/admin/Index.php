@@ -62,7 +62,7 @@ class Index extends CI_Controller
             {
                
                     $sessionArray = array(                        
-                         'user_id' => 1,
+                         'user_id' => $result->user_id,
                     'user_fname' => $result->user_fname,
                     'user_lname' => $result->user_lname,
                     'user_email' => $result->user_email,
@@ -97,7 +97,9 @@ class Index extends CI_Controller
     
     
      public function signout()
-    {        
+    {       
+       $this->session->sess_destroy();
+       //  $this->session->unset_userdata('user_LoggedIn'); 
         $this->session->sess_destroy();
 //         $this->session->unset_userdata('user_LoggedIn'); 
         redirect('admin/Index/login');  

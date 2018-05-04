@@ -372,6 +372,13 @@
             </span>
           </a>
         </li>
+        <li>
+          <a href="<?php echo base_url(); ?>admin/Members">
+            <i class="fa fa-users"></i> <span>Members</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
 
               
         <li class=" treeview">

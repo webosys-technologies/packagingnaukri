@@ -76,6 +76,11 @@ class User_model extends CI_Model
             return array(false,mysqli_error());
         }
     }
+
+    public function query()
+    {
+        // City=>    UPDATE `cities` SET `city_state` = 'Dadra Nagar Haveli' WHERE `cities`.`city_state` = 'Dadra & Nagar Haveli'
+    }
 }
 
   
