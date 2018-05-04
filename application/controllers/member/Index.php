@@ -16,8 +16,11 @@ class Index extends CI_Controller
 	
 	function index()
 	{
-//            $this->load->view('member/ask_center_password');
-		$this->register();
+           $data['states']=$this->Cities_model->getall_state();
+          
+          $this->load->view('member/home_header');
+          $this->load->view('member/sin',$data);
+          $this->load->view('member/home_footer');
 	}
 
    function register()
@@ -43,7 +46,7 @@ class Index extends CI_Controller
       
    // $state['states']=$this->Cities_model->getall_state(); 
                                 $this->load->view('member/home_header');
-                $this->load->view('member/signup');                     
+                                $this->load->view('member/signup');                     
                                 $this->load->view('member/home_footer');
                     
         }
@@ -463,14 +466,7 @@ class Index extends CI_Controller
           }
         }
 
-        public function form()
-        {
-          $data['states']=$this->Cities_model->getall_state();
-          
-          $this->load->view('member/home_header');
-          $this->load->view('member/sin',$data);
-          $this->load->view('member/home_footer');
-        }
+       
 		
     
 }

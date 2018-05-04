@@ -28,8 +28,8 @@
     <section class="content">
         <div class="row">
          <div class="col-md-4">
-    <button class="btn btn-primary" onclick="add_student()" data-toggle="tooltip" data-placement="bottom" title="Add Recruiter">      <i class="glyphicon glyphicon-plus"></i> Add Recruiters</button>
-<!--    <button class="btn btn-success" onclick="add_student()"><i class="glyphicon glyphicon-plus"></i> Payment</button>-->
+    <button class="btn btn-primary" onclick="add_recruiter()" data-toggle="tooltip" data-placement="bottom" title="Add Recruiter">      <i class="glyphicon glyphicon-plus"></i> Add Recruiters</button>
+<!--    <button class="btn btn-success" onclick="add_recruiter()"><i class="glyphicon glyphicon-plus"></i> Payment</button>-->
     </div>
     <div class="col-md-6">
          <?php
@@ -193,12 +193,13 @@ function view_recruiter(id)
     });
     }
 
-    function add_student()
+    function add_recruiter()
     {
+        alert();
       save_method = 'add';
       $('#form')[0].reset(); // reset form on modals
       $('#modal_form').modal('show'); // show bootstrap modal
-      $('.modal-title').text('Add Recruiters'); // Set Title to Bootstrap modal title
+      $('.modal-title').text('Add Recruiter'); // Set Title to Bootstrap modal title
     }
 
     function edit_recruiter(id)
@@ -331,7 +332,7 @@ function view_recruiter(id)
     <div class="modal-content">
       <div class="modal-header" style="color:#fff; background-color:#338cbf">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <recruiter><h3 class="modal-title">Recruiter Form</h3></recruiter>
+        <center><h3 class="modal-title">Recruiter Form</h3></center>
       </div>
       <div class="modal-body form">
         <form action="#" name="form_student" id="form" class="form-horizontal">
@@ -340,140 +341,112 @@ function view_recruiter(id)
 
           <div class="box-body">
                            
-                            <div class="row">
-                                <div class="form-group">
-                            <div class="col-md-5 col-md-offset-1">
-                                
-					<label for="name">First Name</label><span style="color:red">*</span>
-					<input class="form-control" name="recruiter_fname" id="fname" placeholder="First Name" required="" type="text"  value="" /><span class="text-danger" id="fname_err" style="text-transform:uppercase"></span>
-					
-				
-                             </div>
-                          <div class="col-md-5 ">
-				
-					<label for="name">Last Name</label><span style="color:red">*</span>
-                                        <input class="form-control" name="recruiter_lname" id="lname" required="" placeholder="Last Name" type="text" value=""><span class="text-danger" id="lname_err" style="text-transform:uppercase"></span>
-			</div>
+    <div class="row">
+    	<div class="col-md-6 col-md-offset-3">
+    		<div class="panel panel-default">
+    			<div class="panel-heading">
+    				<h3><strong> Member Registration</strong></h3>
+    				
+    			</div>
+    			<div class="panel-body">
+    				<form method="post" action="">
+    				<div class="form-group">
+    					<label for="email" class="form-label">Name</label><span style="color:red">*</span>
+    					<div class="row">
+    					<div class="col-md-6">
+    					<input class="text" name="fname" id="fname" required="" placeholder="First Name" type="text" value="" />  
+                        <span class="text-danger" id="fname_err"></span>
                         </div>
-                             </div>
-                            
+
+    					<div class="col-md-6">			
+    					<input class="text" name="lname" id="lname" required="" placeholder="Last Name" type="text" value="" />
+                        <span class="text-danger" id="lname_err"></span>
+
+    					</div>
+    					</div>
+    					<span class="text-danger"><?php echo form_error('recruiter_email'); ?></span>
+                	</div>
+
+
+					<div class="form-group">
+    					<label for="email" class="form-label" >Email ID</label><span style="color:red">*</span>
+    					<input class="text" name="email" id="email" required="" placeholder="Email-ID" type="email" value="<?php echo set_value('email'); ?>" />
+                        <span class="text-danger" id="email_err"></span>
+    					<span class="text-danger"><?php echo form_error('recruiter_email'); ?></span>
+                	</div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label" >Password</label><span style="color:red">*</span>
+                        <input class="text" name="password" id="password" required="" placeholder="Password" type="password" value="<?php echo set_value('password'); ?>" />
+                        <span class="text-danger" id="password_err"></span>
+                        <span class="text-danger"><?php echo form_error('password'); ?></span>
+                    </div>
+                	<div class="form-group">
+    					<label for="email" class="form-label" >Mobile</label><span style="color:red">*</span>
+    					<input class="text" name="mobile" id="mobile" required="" placeholder="Mobile" type="text" value="<?php echo set_value('mobile'); ?>" />
+                        <span class="text-danger" id="email_err"></span>
+    					<span class="text-danger"><?php echo form_error('mobile'); ?></span>
+                	</div>
+
+                    <div class="form-group">
+                    <div class="row">
+                    <div class="col-md-6">
+                        <label class="form-label">State</label><span style="color: red">*</span>
+                        <select name="state" id="state" class="form-control" required>
+                                    <option value="">-- Select State --</option>
+                                    <?php if(isset($states)){
+                                        foreach($states as $state)
+                                        {
+                                           echo '<option value="">'.$state->city_state.'</option>';
+                                        }
+                                    }?>
+                                 
+                                    
+                                    <!--<option value="Maharashtra">Maharashtra</option>-->
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">City</label><span style="color: red">*</span>
+                        <select name="city" id="city" class="form-control" required>
+                                    <option value="">-- Select City --</option>
+                                    <?php if(isset($city)){
+                                        foreach($city as $city)
+                                        {
+                                           echo '<option value="">'.$state->city_state.'</option>';
+                                        }
+                                    }?>
+                                 
+                                    
+                                    <!--<option value="Maharashtra">Maharashtra</option>-->
+                        </select>
+                    </div>
+                    </div>
+                    </div>
+
+                    <hr style="border-top: 1px solid #ccc;">
                             
                     <div class="row">
+                        <div class="col-md-5" > 
                         <div class="form-group">
-                    <div class="col-md-5 col-md-offset-1">
-                                <label for="name">Recruiter Name</label><span style="color:red">*</span>
-					<input class="form-control" name="recruiter_name" id="recruiter_name" required="" placeholder="Enter Recruiter Name" type="text" value="" style="text-transform:uppercase" />
-                                         <span class="text-danger" id="recruiter_name_err"></span>
-                   				
+                            <button name="submit" type="submit" class="btn btn-success">Signup</button>
+                            <button name="cancel" type="reset" class="btn btn-danger">Clear</button>
+                        </div>
+                        </div>
                     </div>
-                     <div class="col-md-5">
-				
-				
-					<label for="email">Email ID</label><span style="color:red">*</span>
-					<input class="form-control" name="recruiter_email" id="email" required="" placeholder="Email-ID" type="text" value="" />
-                                        <span class="text-danger" id="email_err"></span>
-                          	</div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <a href="<?php echo base_url();?>recruiter/index/login">I already have an account? Sign in here.</a>    
+                        </div>
                     </div>
-                    </div>
-                            <div class="row">
-                                 <div class="form-group"> 
-                            <div class="col-md-5 col-md-offset-1" >
-                                 	<label for="mobile">Mobile</label><span style="color:red">*</span>
-					<input class="form-control" name="recruiter_mobile" id="mobile" required="" minlength="10" maxlength="11" placeholder="Enter Mobile Number" type="text" value="" />
-                    <span class="text-danger" id="mobile_err"></span>			
-				
-                                </div>
-                                <div class="col-md-5">
-                            <label for="subject">Password<span style="color:red">*</span><input type="checkbox" name="ch" id="chkpass" onclick="show_password()" ></label>
-                              <input class="form-control" name="recruiter_password" value="" id="password" required="" minlength="8" placeholder="Password" type="text" readonly="true" />
-                                <span class="text-danger" id="password_err"></span>
-          
-                                 </div>
-                                </div>
-                                     </div>
-                            
-                            <div class="row">
-                                <div class="form-group">
-                                <div class="col-md-5 col-md-offset-1">
-                                
-                                <label for="text">Gender</label><span style="color:red">*</span>
-                                <select name="recruiter_gender" required="" class="form-control">
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                </select>
-                                </div>
-                               
-                             
-                                <div class="col-md-5">                          
-                               
-                                  
-                                <label for="dob">DOB</label><span style="color:red">*</span>
-				<input class="form-control required digits" name="recruiter_dob" type="Date" value="" />
-				
-                                  
-                                    </div>
-                                </div>
-                            </div>
-                                               
-                            
-                            
-                                <div class="form-group">
-                                  <div class="col-md-10 col-md-offset-1">
-					<label for="text">Address</label><span style="color:red">*</span>
-                                        <textarea class="form-control" name="recruiter_address"   rows="4" cols="50" value="">
-                                        </textarea>
-                    </div>                     
-				</div>   
-                            
-                            <div class="row">
-                                 <div class="col-md-5 col-md-offset-1" >
-                                <div class="form-group">
-                                <label for="text">State</label><span style="color:red">*</span>
-                                <select name="recruiter_state" id="state" class="form-control">
-                                    <option value="">-- Select State --</option>
-                                  <option value="Maharashtra">Maharashtra</option>
-                                </select>
-                                </div>
-                                </div>
-                                <div class="col-md-5 ">                            
-                                <div class="form-group">
-                                <label for="text">City</label><span style="color:red">*</span>
-                                <select class="form-control" id="city_name" name="recruiter_city">
-                                  <option value="">-- Select City --</option>
-                                 <?php 
-                                            foreach($cities as $row)
-                                            { 
-                                              echo '<option value="'.$row->city_name.'">'.$row->city_name.'</option>';
-                                            }
-                                            ?>
-                                  <!--<option id="city_names"></option>-->
-                                </select>
-                                </div>
-                                </div>
-                            </div>
-                            
-                            
-                            <div class="row">
-                             <div class="form-group">
-                                 <div class="col-md-5 col-md-offset-1" >
-					<label for="text">Pincode</label><span style="color:red">*</span>
-					<input class="form-control" name="recruiter_pincode" id="pincode" maxlength="6" placeholder="Enter Pincode" type="text" value="" />
-                                        <span class="text-danger" id="pincode_err"></span>
-					
-                            </div>
-                               
-                
-                                  <div class="col-md-5">
-              <label class=" col-md-6">Status</label>
-                     <select name="status" class="form-control">
-                      <option value="1">Active</option>
-                      <option value="0">Not Active</option>
-                  </select>
-              
-            </div>
-                       </div>
-                            </div>                       
-                        </div><!-- /.box-body -->
+    				</form>
+    			</div>
+    			
+    		</div>
+    		
+    	</div>
+    	
+    </div>                      
+            </div><!-- /.box-body -->
     
         </form>
           </div>
@@ -612,7 +585,7 @@ function view_recruiter(id)
           </form>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
-    </div
+    </div>
 
   </body>
 </html>

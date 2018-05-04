@@ -226,89 +226,19 @@
               <a href="<?php echo base_url(); ?>recruiter/Dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
               </a>
-            </li>
-            <li class="treeview">
-              <a href="<?php echo base_url(); ?>recruiter/Student" >
-                <i class="fa fa-users"></i>
-                <span>Manage Students</span>
-              </a>
-            </li>
+            </li>  
              <li class="treeview">
-              <a href="<?php echo base_url(); ?>recruiter/Sub_recruiter" >
+              <a href="<?php echo base_url(); ?>recruiter/Job" >
                 <i class="fa fa-child"></i>
-                <span>Sub Recruiters</span>
+                <span>Members</span>
               </a>
             </li>
-
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>recruiter/Courses">
-                <i class="fa fa-book"></i>
-                <span>Courses</span>
-              </a>
-            </li>
-              <li class="treeview">
-              <a href="<?php echo base_url(); ?>recruiter/Batches">
-                <i class="fa fa-book"></i>
-                <span>Batches</span>
-              </a>
-            </li>
-            
-
-            <li class="treeview">
-              <a href="<?php echo base_url(); ?>recruiter/Orders" >
-                <i class="fa fa-upload"></i>
-                <span>Orders</span>
-              </a>
-            </li>
-
-            <li class="treeview">
-              <a href="<?php echo base_url(); ?>recruiter/Payment" >
-                <i class="fa fa-credit-card"></i>
-                <span>Payment History</span>
-              </a>
-            </li>
-           
-            
-                        
-             <li class="treeview">
-              <a href="<?php echo base_url(); ?>recruiter/Login_detail" >
-                <i class="glyphicon glyphicon-user"></i>
-                <span>Admission</span>
-              </a>
-            </li>
-           
-           <li class="treeview">
-              <a href="<?php echo base_url(); ?>recruiter/Login_detail/old_admission" >
-                <i class="glyphicon glyphicon-user"></i>
-                <span>Old Admission</span>
-              </a>
-            </li>
-
-            <li class="treeview">
-              <a href="<?php echo base_url(); ?>recruiter/Results" >
-                <i class="fa fa-files-o"></i>
-                <span>Results</span>
-              </a>
-            </li>
-
-            <li class="treeview">
-              <a href="<?php echo base_url(); ?>recruiter/Reports" >
-                <i class="fa fa-files-o"></i>
-                <span>Reports</span>
-              </a>
-            </li>
-             <li class="treeview">
-              <a href="<?php echo base_url(); ?>recruiter/Setting" >
+              <a href="<?php echo base_url(); ?>recruiter/Job" >
                 <i class="fa fa-child"></i>
-                <span>Setting</span>
+                <span>Post Job</span>
               </a>
-            </li>
-            <li class="treeview">
-              <a href="<?php echo base_url(); ?>recruiter/Profile" >
-                <i class="fa fa-child"></i>
-                <span>Manage profile</span>
-              </a>
-            </li>
+            </li>           
           
           </ul>
         </section>

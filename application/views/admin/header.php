@@ -78,7 +78,7 @@
     <!-- Logo -->
     <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">DLT</span>
+      <span class="logo-mini">PKG</span>
       <!-- logo for regular state and mobile devices -->
       <!--<span class="logo-lg"><i><b>Packaging</b></i><i style="color:#0F5397;"><b>naukri.com</b></i></span>-->
       <img src="<?php echo base_url();?>profile_pic/naukri_logo.png" width="210px"> 

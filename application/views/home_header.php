@@ -175,6 +175,14 @@ $("#myModal").on("hidden.bs.modal", function () {
         <li><a id="header_link" href="<?php echo base_url();?>Home/job_openings">Job Openings</a></li>
         <li><a id="header_link" href="<?php echo base_url();?>member/index">Register</a></li>
         <li><a id="header_link" href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
+        <li class="dropdown">
+          <a id="header_link" href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Recruiter<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><a href="<?php echo base_url();?>recruiter/index/login">Login</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="<?php echo base_url();?>recruiter/index">Register</a></li>
+          </ul>
+        </li>
          <li><a id="header_link" href="<?php echo base_url();?>Home/post_requirement">Post Your Requirement</a></li>
           <li><a id="header_link" href="<?php echo base_url();?>Home/contact_us">Contact Us</a></li>   
         

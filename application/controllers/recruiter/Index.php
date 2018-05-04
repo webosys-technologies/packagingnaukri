@@ -39,7 +39,9 @@ class Index extends CI_Controller
         {
 			
 		$state['states']=$this->Cities_model->getall_state();	
-                $this->load->view('recruiter/signup',$state);     
+                $this->load->view('home_header');  
+                $this->load->view('recruiter/register',$state); 
+                 $this->load->view('home_footer');  
                 
                     
         }
@@ -47,7 +49,7 @@ class Index extends CI_Controller
 		{
                    
             
-			list($get_insert,$get_data)=$this->Centers_model->register();
+			list($get_insert,$get_data)=$this->Recruiters_model->register();
 			if($get_insert)
 			{
                             $default_sub_recruiter=array('recruiter_id'=>$get_insert,
@@ -104,16 +106,20 @@ class Index extends CI_Controller
               
    function login()
     {
-             $recruiter_LoggedIn = $this->session->userdata('recruiter_LoggedIn');
+       
+             echo $recruiter_LoggedIn = $this->session->userdata('recruiter_LoggedIn');
         
         if(isset($recruiter_LoggedIn) || $recruiter_LoggedIn == TRUE)
         {
+          
            redirect('recruiter/Dashboard');
         }
         else
         {
-        
+             $this->load->view('home_header');  
              $this->load->view('recruiter/login');
+             $this->load->view('home_footer');  
+
             
         }
     }
@@ -121,11 +127,11 @@ class Index extends CI_Controller
     {
         $data=array('recruiter_verification'=>$hash);
         $recruiter_email=array('recruiter_email'=>$email);
-        $this->Centers_model->recruiter_update($recruiter_email,$data);
+        $this->Recruiters_model->recruiter_update($recruiter_email,$data);
     }
     function resend_email($recruiter_email)
     {
-        $get_data=$this->Centers_model->get_data_by_email($recruiter_email);
+        $get_data=$this->Recruiters_model->get_data_by_email($recruiter_email);
         $msg=array(
                                     'title'=>'Delto Center Verification...!',
                                     'data'=>'Your Center Registration Successfully with delto',
@@ -492,7 +498,7 @@ class Index extends CI_Controller
         {
              
             $recruiter_email= $this->input->post('recruiter_email');
-            list($get_result,$get_data)=$this->Centers_model->checkEmailExist($recruiter_email);
+            list($get_result,$get_data)=$this->Recruiters_model->checkEmailExist($recruiter_email);
          
             if($get_result>0)
             {  
@@ -515,7 +521,7 @@ class Index extends CI_Controller
 //                              'client_ip' => $this->input->ip_address()
                      );
 
-                $save = $this->Centers_model->resetPasswordUser($data); 
+                $save = $this->Recruiters_model->resetPasswordUser($data); 
                 
            
                 echo json_encode(array('status'=>true));
@@ -550,7 +556,7 @@ class Index extends CI_Controller
        
         $form_otp=$this->input->post('otp');
         $recruiter_email=$this->input->post('email');
-         list($get_otp,$recruiter_data)=$this->Centers_model->otp_verify($recruiter_email);
+         list($get_otp,$recruiter_data)=$this->Recruiters_model->otp_verify($recruiter_email);
         $password=$this->input->post('recruiter_password');
         
         if($form_otp==$get_otp['otp'])
@@ -561,7 +567,7 @@ class Index extends CI_Controller
                         'password'=>$password
                        
             );
-             $result=$this->Centers_model->reset_password($data);
+             $result=$this->Recruiters_model->reset_password($data);
              if($result)
              {
                  $msg=array(
@@ -607,8 +613,8 @@ class Index extends CI_Controller
         
   function check_if_email_exist($requested_email)
 	{
-		$this->load->model('Centers_model');
-		$email_available=$this->Centers_model->check_if_email_exist($requested_email);
+		$this->load->model('Recruiters_model');
+		$email_available=$this->Recruiters_model->check_if_email_exist($requested_email);
 
 		if($email_available){
                     $this->form_validation->set_message('check_if_email_exist', 'You must select a business');
@@ -622,7 +628,7 @@ class Index extends CI_Controller
   public function ajax_edit($id)
   {
 
-            $data = $this->Centers_model->get_id($id);
+            $data = $this->Recruiters_model->get_id($id);
          
             echo json_encode($data);
   }
@@ -653,7 +659,7 @@ class Index extends CI_Controller
                 $res=$this->pic_upload($data);
                 
                      
-                  $this->Centers_model->recruiter_update(array('recruiter_id' => $this->input->post('recruiter_id')), $data);
+                  $this->Recruiters_model->recruiter_update(array('recruiter_id' => $this->input->post('recruiter_id')), $data);
                    echo json_encode(array("status" => TRUE));
               
                      
@@ -708,7 +714,7 @@ class Index extends CI_Controller
                        else
                        {
                         
-                            $res=$this->Centers_model->get_id($this->input->post('recruiter_id'));
+                            $res=$this->Recruiters_model->get_id($this->input->post('recruiter_id'));
                             if(file_exists($res->recruiter_profile_pic))
                             {
                             unlink($res->recruiter_profile_pic);
@@ -724,7 +730,7 @@ class Index extends CI_Controller
             
                                   
                                     
-                   $insert =  $this->Centers_model->recruiter_update(array('recruiter_id' =>$id), $pic);
+                   $insert =  $this->Recruiters_model->recruiter_update(array('recruiter_id' =>$id), $pic);
                           
                          return true; 
                                                
@@ -736,7 +742,7 @@ class Index extends CI_Controller
     }
         function recruiter_verification($email,$hash)
         {
-           $verify=$this->Centers_model->email_verification($email,$hash);
+           $verify=$this->Recruiters_model->email_verification($email,$hash);
            if($verify)
            {
                $this->session->set_flashdata('email_verify','Account Verification Successfull,Please Login...!');

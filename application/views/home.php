@@ -30,7 +30,7 @@
 			<p>To provide the right opportunity to the every qualified packaging professional.</p>   
 		</div>  <br>
                 <div class="col-md-2">
-            <a href="" class="btn btn-info">GO!</a>
+            <a href=""  data-toggle="modal" data-target="#myModal" class="btn btn-info">GO!</a>
             </div>
 		
         </div>
