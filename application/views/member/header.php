@@ -50,6 +50,8 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 
      <script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
+     <link href="<?php echo base_url("assets/bootstrap/css/bootstrap.css"); ?>" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="<?php echo base_url("assets/js/jQuery-2.1.4.min.js"); ?>"></script>
      
       
    

@@ -21,6 +21,7 @@ class Recruiter extends CI_Controller
             $id=$this->session->userdata('user_id');
             $result['user_data']=$this->User_model->get_user_by_id($id);
             $result['recruiters']=$this->Recruiters_model->getall();
+            $result['states']=$this->Cities_model->getall_state();
        
             $this->load->view('admin/header',$result);
             $this->load->view('admin/recruiter_view',$result);
@@ -30,6 +31,45 @@ class Recruiter extends CI_Controller
     
     }
     
+    function recruiter_delete($id)
+    {
+           $result=$this->Recruiters_model->delete_by_id($id);
+              if($result)
+                {
+                   echo json_encode(array("status" => true));
+                $this->session->set_flashdata('success', 'Recruiter Deleted Successfully');
+                }
+             
+    }
+    
+    
+     function recruiter_add()
+    {
+        
+
+        $data=array(
+            'recruiter_fname'          =>$this->input->post('fname'),
+            'recruiter_lname'          => $this->input->post('lname'),
+            'recruiter_email'          => $this->input->post('email'),
+            'recruiter_mobile'         => $this->input->post('mobile'),
+            'recruiter_password'       => $this->input->post('password'),
+            'recruiter_city'           => $this->input->post('city'),
+            'recruiter_state'          => $this->input->post('state'),
+            'recruiter_created_at' => date("Y-m-d "),
+            'recruiter_status'        => '1'
+
+
+        );
+
+      $res=$this->Recruiters_model->recruiter_add($data);
+      if($res)
+      {
+          $this->session->set_flashdata('success','recruiter added successfully');
+          echo json_encode(array('status'=>'success'));
+          
+      }
+      
+    }
    
         
          function ajax_edit($id)

@@ -4,7 +4,47 @@
                 margin:120px;
             }
             </style>
-<div class="container">
+            
+            <script>
+              $(document).ready( function () {
+                        $("#state").change(function() {
+                           
+        
+   var el = $(this) ;
+              $("#city").html("");
+
+
+var state=el.val();
+
+        if(state)
+        {
+            
+      $.ajax({
+       url : "<?php echo site_url('index.php/recruiter/index/show_cities')?>/" + state,        
+       type: "GET",
+              
+       dataType: "JSON",
+       success: function(data)
+       {
+        
+          $.each(data,function(i,row)
+          {
+          
+              $("#city").append('<option value="'+ row.city_name +'">' + row.city_name+'</option>');
+          }
+          );
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+         alert('Error...!');
+       }
+     });
+     }
+    
+ });  
+ });
+            </script>
+        <div class="container">
 	<div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<?php echo $this->session->flashdata('verify_msg'); ?>
@@ -22,48 +62,82 @@
     				
     			</div>
     			<div class="panel-body">
-    				<form method="post" action="">
-    				        <div class="form-group">
-    					<label for="email" class="form-label">Name</label><span style="color:red">*</span>
-    					<div class="row">
-                                            
-                                            
-    					<div class="col-md-6">
-    					<input class="text" name="fname" id="fname" required="" class='form-control' placeholder="First Name" type="text" value="" />  
+                            <form method="post" action="<?php echo base_url();?>recruiter/index/register">
+    	                				 <div class="row">
+                                <div class="col-md-6  ">                                
+                                    <div class="form-group">
+                                        <label for="fname">First Name<span style="color:red">*</span></label>
+                                        <input type="text" placeholder="First Name" class="form-control required" id="fname" name="fname" maxlength="128" required>
                                         <span class="text-danger" id="fname_err"></span>
+                                        
+                                    </div>
+                                    <span style="color:red" id="text_field1_error"></span>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="lname">Last Name<span style="color:red">*</span></label>
+                                        <input type="text" placeholder="Last Name" class="form-control" id="lname"  name="lname" maxlength="128" required>
+                                      <span class="text-danger" id="lname_err"></span>
+                                    </div>
+                                    <span style="color:red" id="text_field2_error"></span>
+                                </div>
+                            </div>
+                                    
+                                    <div class="row">
+                                <div class="col-md-12  ">                                
+                                    <div class="form-group">
+                                        <label for="fname">Email Id<span style="color:red">*</span></label>
+                                        <input type="text" placeholder="Email Id" class="form-control required" id="email" name="email" maxlength="128" required>
+                                        <span class="text-danger" id="email_err"></span>
+                                        
+                                    </div>
+                                    <span style="color:red" id="text_field1_error"></span>
+                                    
+                                </div>
+                               </div>
+                                    
+                                    <div class="row">
+                                <div class="col-md-12">                                
+                                    <div class="form-group">
+                                        <label for="fname">Mobile No<span style="color:red">*</span></label>
+                                        <input type="text" placeholder="Mobile No" class="form-control required" id="mobile" name="mobile" maxlength="128" required>
+                                        <span class="text-danger" id="mobile_err"></span>
+                                        
+                                    </div>
+                                    <span style="color:red" id="text_field1_error"></span>
+                                    
+                                </div>
                                         </div>
-
-    					<div class="col-md-6">			
-    					<input class="text" name="lname" id="lname" required="" class="form-control" placeholder="Last Name" type="text" value="" />
-                                        <span class="text-danger" id="lname_err"></span>
-
-    					</div>
-                                                </div>
-    					</div>
-    					<span class="text-danger"><?php echo form_error('recruiter_email'); ?></span>
-                	         
-
-
-					<div class="form-group">
-    					<label for="email" class="form-label" >Email ID</label><span style="color:red">*</span>
-    					<input class="text" name="email" id="email" required="" placeholder="Email-ID" type="email" value="<?php echo set_value('email'); ?>" />
-                        <span class="text-danger" id="email_err"></span>
-    					<span class="text-danger"><?php echo form_error('recruiter_email'); ?></span>
-                	</div>
-
-                    <div class="form-group">
-                        <label for="email" class="form-label" >Password</label><span style="color:red">*</span>
-                        <input class="text" name="password" id="password" required="" placeholder="Password" type="password" value="<?php echo set_value('password'); ?>" />
-                        <span class="text-danger" id="password_err"></span>
-                        <span class="text-danger"><?php echo form_error('password'); ?></span>
-                    </div>
-                	<div class="form-group">
-    					<label for="email" class="form-label" >Mobile</label><span style="color:red">*</span>
-    					<input class="text" name="mobile" id="mobile" required="" placeholder="Mobile" type="text" value="<?php echo set_value('mobile'); ?>" />
-                        <span class="text-danger" id="email_err"></span>
-    					<span class="text-danger"><?php echo form_error('mobile'); ?></span>
-                	</div>
-
+                                    
+                                    <div class="row">
+                                <div class="col-md-12">                                
+                                    <div class="form-group">
+                                        <label for="fname">Password<span style="color:red">*</span></label>
+                                        <input type="text" placeholder="Password" class="form-control required" id="password" name="password" maxlength="128" required>
+                                        <span class="text-danger" id="password_err"></span>
+                                        
+                                    </div>
+                                    <span style="color:red" id="text_field1_error"></span>
+                                    
+                                </div>
+                                
+                            </div>
+                                    
+                                    <div class="row">
+                                <div class="col-md-12">                                
+                                    <div class="form-group">
+                                        <label for="fname">Confirm  Password<span style="color:red">*</span></label>
+                                        <input type="text" placeholder="Confirm Password" class="form-control required" id="cpassword" name="cpassword" maxlength="128" required>
+                                        <span class="text-danger" id="password_err"></span>
+                                        
+                                    </div>
+                                    <span style="color:red" id="text_field1_error"></span>
+                                    
+                                </div>
+                                        </div>
+                                    
+                                    
                     <div class="form-group">
                     <div class="row">
                     <div class="col-md-6">
@@ -73,7 +147,7 @@
                                     <?php if(isset($states)){
                                         foreach($states as $state)
                                         {
-                                           echo '<option value="">'.$state->city_state.'</option>';
+                                           echo '<option value="'.$state->city_state.'">'.$state->city_state.'</option>';
                                         }
                                     }?>
                                  
@@ -85,13 +159,7 @@
                         <label class="form-label">City</label><span style="color: red">*</span>
                         <select name="city" id="city" class="form-control" required>
                                     <option value="">-- Select City --</option>
-                                    <?php if(isset($city)){
-                                        foreach($city as $city)
-                                        {
-                                           echo '<option value="">'.$state->city_state.'</option>';
-                                        }
-                                    }?>
-                                 
+                                   
                                     
                                     <!--<option value="Maharashtra">Maharashtra</option>-->
                         </select>
@@ -104,8 +172,8 @@
                     <div class="row">
                         <div class="col-md-5" > 
                         <div class="form-group">
-                            <button name="submit" type="submit" class="btn btn-success">Signup</button>
-                            <button name="cancel" type="reset" class="btn btn-danger">Clear</button>
+                            <button name="submit" value="submit" type="submit" class="btn btn-success">Signup</button>
+                            <button name="cancel" value="reset" type="reset" class="btn btn-danger">Clear</button>
                         </div>
                         </div>
                     </div>

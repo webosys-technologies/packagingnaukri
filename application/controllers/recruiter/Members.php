@@ -8,6 +8,11 @@ class Members extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+                
+                if(!is_recruiter_LoggedIn($this->session->userdata('recruiter_id')))
+                {
+                    redirect('recruiter/index/login');
+                }
 
           
 	}
@@ -15,9 +20,9 @@ class Members extends CI_Controller
 	public function index()
     {
                  
-            $id=$this->session->userdata('user_id');
-            $result['user_data']=$this->User_model->get_user_by_id($id);
-            $result['members']=$this->Members_model->getall_members();
+            $id=$this->session->userdata('recruiter_id');
+            $result['data']=$this->Recruiters_model->get_by_id($id);
+            $result['members']=$this->Members_model->get_members_by_recruiter_id($id);
             $result['states']=$this->Cities_model->getall_state();
        
             $this->load->view('admin/header',$result);

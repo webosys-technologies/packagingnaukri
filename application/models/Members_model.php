@@ -39,8 +39,8 @@ class Members_model extends CI_Model
         
 
         $data=array(
-            'member_fname'          => strtoupper($this->input->post('fname')),
-            'member_lname'          =>strtoupper($this->input->post('lname')),
+            'member_fname'          =>$this->input->post('fname'),
+            'member_lname'          => $this->input->post('lname'),
             'member_email'          => $this->input->post('email'),
             'member_mobile'         => $this->input->post('mobile'),
             'member_password'       => $this->input->post('password'),
@@ -89,7 +89,15 @@ class Members_model extends CI_Model
          $this->db->where('member_id',$id);
          $query = $this->db->get();
        	return $query->row();
-	}             
+	} 
+        
+        public function get_members_by_recruiter_id($id)
+	{
+         $this->db->from($this->table);        
+         $this->db->where('recruiter_id',$id);
+         $query = $this->db->get();
+       	return $query->result();
+	} 
 
     public function member_add($data)
 	{

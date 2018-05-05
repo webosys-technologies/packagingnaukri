@@ -24,21 +24,15 @@ class Recruiters_model extends CI_Model
 		
 
 		$data=array(
-			'recruiter_fname'			=> strtoupper($this->input->post('recruiter_fname')),
-			'recruiter_lname'		 	=>strtoupper($this->input->post('recruiter_lname')),
-			'recruiter_name'           => strtoupper($this->input->post('recruiter_name')),
-			'recruiter_email' 		    => $this->input->post('recruiter_email'),
-			'recruiter_mobile' 		=> $this->input->post('recruiter_mobile'),
-			'recruiter_gender' 		=> $this->input->post('recruiter_gender'),
-                        'recruiter_dob' 		        => $this->input->post('recruiter_dob'),
-			'recruiter_password' 		=> $this->input->post('recruiter_password'),
-			'recruiter_address'		=> $this->input->post('recruiter_address'),
-			'recruiter_city'			=> $this->input->post('recruiter_city'),
-			'recruiter_pincode'		=> $this->input->post('recruiter_pincode'),
-			'recruiter_state'			=> $this->input->post('recruiter_state'),
-                        'recruiter_askfor_password'       =>'disable',
-			'recruiter_created_at'	=> date("Y-m-d H:i:s"),
-                        'recruiter_status'        => '0'
+			'recruiter_fname'			=>$this->input->post('fname'),
+			'recruiter_lname'		 	=>$this->input->post('lname'),
+			'recruiter_email' 		    => $this->input->post('email'),
+			'recruiter_mobile' 		=> $this->input->post('mobile'),
+			'recruiter_password' 		=> $this->input->post('password'),
+			'recruiter_city'			=> $this->input->post('city'),
+			'recruiter_state'			=> $this->input->post('state'),
+                        'recruiter_created_at'	=> date("Y-m-d H:i:s"),
+                        'recruiter_status'        => '1'
 
 
 		);

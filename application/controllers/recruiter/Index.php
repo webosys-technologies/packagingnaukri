@@ -21,21 +21,8 @@ class Index extends CI_Controller
     {
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('recruiter_fname','Name','trim|required');
-		$this->form_validation->set_rules('recruiter_lname','Last_name','trim|required');
-		$this->form_validation->set_rules('recruiter_name','recruiter_name','trim|required');
-		$this->form_validation->set_rules('recruiter_email','Email','trim|required|valid_email|callback_check_if_email_exist');
-		$this->form_validation->set_rules('recruiter_mobile','Mobile','trim|required|numeric');
-		$this->form_validation->set_rules('recruiter_gender','Gender','required');
-		$this->form_validation->set_rules('recruiter_password','Password','trim|required|min_length[8]');
-		$this->form_validation->set_rules('recruiter_cpassword','Confirm Password','trim|required|matches[recruiter_password]');  
-		$this->form_validation->set_rules('recruiter_address','Address','trim|required');
-		$this->form_validation->set_rules('recruiter_city','City','trim|required');
-		$this->form_validation->set_rules('recruiter_pincode','Pincode','trim|required|numeric');
-		$this->form_validation->set_rules('recruiter_state','State','trim|required');   
-                
-		//validate form input
-		if ($this->form_validation->run() == false)
+		$submit=$this->input->post('submit');
+		if (!$submit)
         {
 			
 		$state['states']=$this->Cities_model->getall_state();	
@@ -51,57 +38,25 @@ class Index extends CI_Controller
             
 			list($get_insert,$get_data)=$this->Recruiters_model->register();
 			if($get_insert)
-			{
-                            $default_sub_recruiter=array('recruiter_id'=>$get_insert,
-                                            'sub_recruiter_fullname'=>'Owner Name',
-                                            'sub_recruiter_name'=>'Main Sub-Center',
-                                            'sub_recruiter_created_at'=>date('Y-m-d'),
-                                            'sub_recruiter_status'=>'1');                    
-                              $this->Sub_recruiters_model->sub_recruiter_add($default_sub_recruiter); 
-                
-                                    $default_batch= array(
-                                    'recruiter_id' =>$get_insert,
-                                    'batch_name' => 'Default Batch',
-                                    'batch_time' => 'Not Set',
-                                    'batch_created_at' => date('Y-m-d'),
-                                    'batch_status'  =>'1' ,
-                                    );               
-                              
-                              $this->Batches_model->batch_add($default_batch);
+			{                   
                             
-				$msg=array(
-                                    'title'=>'Delto Center Registration...!',
-                                    'data'=>'Your Center Registration Successfully with delto',
-                                    'email'=>$get_data['recruiter_email']
-                                );
-				
-                               $result=$this->signup_email($get_data,$msg);
-                               $this->verification_email($get_data,$msg);
-                               if($result==true)
-                                {
-                                  $this->session->set_flashdata('signup_success','Registration Successfull,please check email & verify your Account!');
-                                //$this->load->view('recruiter/signup');
+                                  $this->session->set_flashdata('signup_success','Registration Successfull!');
+                                
                                   redirect('recruiter/index/login');
-                                }
-                                else
-                                {                                  
-                                     $this->session->set_flashdata('signup_error','please Enter Valid Email...!');
-                                     $cities['cities']=$this->Cities_model->getall_cities("Maharashtra");
-                                $this->load->view('recruiter/signup',$cities);
-                                }
-
-			}
+                              
+                        }
 			else
-                            {
-                           
-                            $cities['cities']=$this->Cities_model->getall_cities("Maharashtra");
-				$this->load->view('recruiter/signup',$cities);
+                            {     
+                            
+				redirect('recruiter/index');
 			}
 
 		
                 
              }    
         }
+        
+      
         
               
    function login()

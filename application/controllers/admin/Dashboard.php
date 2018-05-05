@@ -39,6 +39,7 @@ class Dashboard extends CI_Controller
              $this->load->view('admin/header',$result);
              $this->load->view('admin/dashboard');
              $this->load->view('admin/footer');
+
        
     
     }
