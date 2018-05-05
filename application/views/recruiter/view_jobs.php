@@ -140,7 +140,7 @@
                             </form>                                                    
                     		
                         </div>	
-                            <div class="clearfix">&nbsp;</div><hr style="border-top: 1px solid #ccc;">
+                            <div class="clearfix">&nbsp;</div>
                     </div>
                     
                      <?php
@@ -166,7 +166,6 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Job Title</th>
-                                            <th>Company Name</th>
                                             <th>Qualification</th>
                                             <th>Experience</th>
                                             <th>Location</th>
@@ -186,7 +185,6 @@
                                         <tr>
                                             <td><?php echo $job->job_id?></td>
                                             <td><?php echo $job->job_title?></td>
-                                            <td><?php echo $job->company_name?></td>
                                             <td><?php echo $job->job_education?></td>
                                             <td><?php echo $job->job_experience?></td>
                                             <td><?php echo $job->job_city?></td>

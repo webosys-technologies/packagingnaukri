@@ -228,13 +228,13 @@
               </a>
             </li>  
              <li class="treeview">
-              <a href="<?php echo base_url(); ?>recruiter/Job" >
+              <a href="<?php echo base_url(); ?>recruiter/Members" >
                 <i class="fa fa-child"></i>
                 <span>Members</span>
               </a>
             </li>
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>recruiter/Job" >
+              <a href="<?php echo base_url(); ?>recruiter/Jobs" >
                 <i class="fa fa-child"></i>
                 <span>Post Job</span>
               </a>

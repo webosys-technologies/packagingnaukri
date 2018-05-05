@@ -22,12 +22,12 @@ class Members extends CI_Controller
                  
             $id=$this->session->userdata('recruiter_id');
             $result['data']=$this->Recruiters_model->get_by_id($id);
-            $result['members']=$this->Members_model->get_members_by_recruiter_id($id);
+            $result['members']=$this->Applied_jobs_model->get_member_job($id);
             $result['states']=$this->Cities_model->getall_state();
        
-            $this->load->view('admin/header',$result);
-            $this->load->view('admin/member_view',$result);
-            $this->load->view('admin/footer');
+            $this->load->view('recruiter/header',$result);
+            $this->load->view('recruiter/member_view',$result);
+            $this->load->view('recruiter/footer');
 
         
     

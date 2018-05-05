@@ -20,6 +20,13 @@ class Jobs_model extends CI_Model
          return $this->db->affected_rows();
      }
      
+      public function get_job_by_id($id)
+     {
+         $where=array('recruiter_id'=>$id);
+         $res=$this->db->get($this->table,$where);
+         return $res->result();
+     }
+     
      
 
    

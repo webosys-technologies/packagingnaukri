@@ -33,7 +33,7 @@
 
          <div class="col-md-4">
     <!--<button class="btn btn-primary"  onclick="add_member()" data-toggle="tooltip" data-placement="bottom" title="Add Member">      <i class="glyphicon glyphicon-plus"></i> Add Member</button>-->
-<button type="button"  id="bt" class="btn btn-primary" onclick="add_member()"><i></i>Add Member</button>
+<!--<button type="button"  id="bt" class="btn btn-primary" onclick="add_member()"><i></i>Add Member</button>-->
     </div>
     <div class="col-md-6">
          <?php
@@ -76,11 +76,9 @@
           <th>EMAIL</th>
           <th>MOBILE</th>
           <th>CITY</th>
-          <th>CREATED AT</th>
+          <th>APPLY AT</th>
           <th>STATUS</th>
-
-          <th style="width:125px;">ACTION
-          </p></th>
+<th>ACTION</th>
         </tr>
       </thead>
       <tbody id="myTable">
@@ -93,10 +91,11 @@
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->member_id; ?>" class="" ></td> --> 
                                         <td><?php echo $res->member_id;?></td>
                                         <td><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
-                                        <td><?php echo $res->member_email;?></td>
+                                         <td><?php echo $res->member_email;?></td>
+                                        <!--<td><?php echo $res->member_email;?></td>-->
                                        <td><?php echo $res->member_mobile;?></td>
                                        <td><?php echo $res->member_city;?></td>
-                                       <td><?php echo $res->member_created_at;?></td>
+                                       <td><?php echo $res->apply_at;?></td>
                                        <td>
                                            <?php 
                                        if($res->member_status==1)
@@ -109,7 +108,7 @@
                                        }
                                        ?></td>
                                        <td>
-                  <button class="btn btn-success" onclick="edit_member(<?php echo $res->member_id; ?>)" data-toggle="tooltip" data-placement="bottom" title="Edit Member"><i class="glyphicon glyphicon-pencil"></i></button>
+                 
                   <button class="btn btn-danger" onclick="delete_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Member"><i class="glyphicon glyphicon-trash"></i></button>
                  
 
