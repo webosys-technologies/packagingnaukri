@@ -4,33 +4,35 @@
     display: block !important;
 }
 .modal-dialog{
-     width: 700px;
+     width: 50%;
       overflow-y: initial !important
 }
 .modal-body{
-  height: 420px;
+  height:480px;
   overflow-y: auto;
 }
 
 </style>
 <div class="content-wrapper" style="background:white;">
     <!-- Content Header (Page header) -->
-    <section class="content-header" >
+    <section class="content-header">
       <h1>
-        <i class="fa fa-users"></i><strong> Recruiters Management </strong>
+        <i class="fa fa-users"></i><strong> Members Management </strong>
         <small>Add, Edit, Delete <?php  ?></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Manage Recruiters</li>
+        <li class="active">Manage Members</li>
       </ol>
     </section>
     <hr style="border-top: 1px solid #ccc;">
     <section class="content">
         <div class="row">
+
+  
+
          <div class="col-md-4">
-    <button class="btn btn-primary" id="bt" onclick="add_recruiter()" data-toggle="tooltip" data-placement="bottom" title="Add Recruiter"><i class="glyphicon glyphicon-plus"></i> Add Recruiters</button>
-<!--    <button class="btn btn-success" onclick="add_recruiter()"><i class="glyphicon glyphicon-plus"></i> Payment</button>-->
+   
     </div>
     <div class="col-md-6">
          <?php
@@ -62,44 +64,40 @@
        
         </div>
         </div>
-    <br><br>
-<!--    <div class="form-group" style="width:350px" >
-            <label for="name">SEARCH</label>
-        <input id="myName" class="form-control" type="text" placeholder="Search..." >
-        </div>-->
+  
+   
 <div class="table-responsive">
     <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
       <thead>
         <tr bgcolor="#338cbf" style="color:#fff">
           <th>ID</th>
-          <th>RECRUITER NAME</th>
-          <th>EMAIL </th>
+          <th>NAME</th>
+          <th>EMAIL</th>
           <th>MOBILE</th>
-          <th>PASSWORD</th>
-          <th>CREATED AT</th>
-          <th>STATUS</th
-          <!--class=" badge bg-yellow"-->
-
-          <th style="width:125px;">ACTION
-          </p></th>
+          <th>CITY</th>
+          <th>APPLY AT</th>
+          <th>STATUS</th>
+<th>ACTION</th>
         </tr>
       </thead>
       <tbody id="myTable">
         <?php
-          if (isset($recruiters)) {
+          if (isset($members)) {
             
           
-         foreach($recruiters as $res){?>
-             <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->recruiter_id; ?>" class="" ></td> -->
-                                        <td><?php echo $res->recruiter_id;?></td>
-                                        <td><?php echo $res->recruiter_fname.' '. $res->recruiter_lname; ?></td>
-                                        <td><?php echo $res->recruiter_email;?></td>
-                                       <td><?php echo $res->recruiter_mobile;?></td>
-                                       <td><span class="badge badge-secondary"><?php echo $res->recruiter_password;?></span></td>
-                                       <td><?php echo $res->recruiter_created_at;?></td>
+         foreach($members as $res){
+             if($res->member_status=='1'){?>
+             <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->member_id; ?>" class="" ></td> --> 
+                                        <td><?php echo $res->member_id;?></td>
+                                        <td><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
+                                         <td><?php echo $res->member_email;?></td>
+                                        <!--<td><?php echo $res->member_email;?></td>-->
+                                       <td><?php echo $res->member_mobile;?></td>
+                                       <td><?php echo $res->member_city;?></td>
+                                       <td><?php echo $res->apply_at;?></td>
                                        <td>
                                            <?php 
-                                       if($res->recruiter_status==1)
+                                       if($res->member_status==1)
                                        {
                                            echo "Active";
                                        }
@@ -109,13 +107,13 @@
                                        }
                                        ?></td>
                                        <td>
-                  <button class="btn btn-success" onclick="edit_recruiter(<?php echo $res->recruiter_id; ?>)" data-toggle="tooltip" data-placement="bottom" title="Edit Recruiter"><i class="glyphicon glyphicon-pencil"></i></button>
-                  <button class="btn btn-danger" onclick="delete_recruiter(<?php echo $res->recruiter_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Recruiter"><i class="glyphicon glyphicon-trash"></i></button>
+                 
+                  <button class="btn btn-danger" onclick="delete_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Member"><i class="glyphicon glyphicon-trash"></i></button>
                  
 
                 </td>
               </tr>
-             <?php }}?>
+          <?php }}}?>
 
 
 
@@ -127,10 +125,10 @@
   </div>
 
   <script type="text/javascript">
-  $(document).ready( function () {
-      
-      
-        $("#state").change(function() {
+  $(document).ready( function () {   
+ 
+ 
+  $("#state").change(function() {
         
    var el = $(this) ;
               $("#city").html("");
@@ -142,7 +140,7 @@ var state=el.val();
         {
             
       $.ajax({
-       url : "<?php echo site_url('index.php/admin/Recruiter/show_cities')?>/" + state,        
+       url : "<?php echo site_url('index.php/admin/Members/show_cities')?>/" + state,        
        type: "GET",
               
        dataType: "JSON",
@@ -164,9 +162,16 @@ var state=el.val();
      }
     
  });  
-      
-      
-      
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
       $('#table_id').DataTable();
   } );
@@ -182,45 +187,45 @@ var state=el.val();
     var table;
 
 
-function view_recruiter(id)
+function view_member(id)
     {
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/recruiter/Student/ajax_edit/')?>/" + id,        
+        url : "<?php echo site_url('index.php/member/Student/ajax_edit/')?>/" + id,        
         type: "GET",
                
         dataType: "JSON",
         success: function(data)
         {          
-            $('#sfname').html(data.student_fname);
-            $('#slname').html(data.student_lname); 
+            $('#sfname').html(data.member_fname);
+            $('#slname').html(data.member_lname); 
             $('#scourse_name').html(data.course_name);
-            $('#semail').html(data.student_email);
-            $('#smobile').html(data.student_mobile);
-            $('#sgender').html(data.student_gender);
-            $('#saddmission_month').html(data.student_payment_date);
-            $('#scourse_end_date').html(data.student_course_end_date);
-            $('#slast_education').html(data.student_last_education);
-            if(data.student_profile_pic)
+            $('#semail').html(data.member_email);
+            $('#smobile').html(data.member_mobile);
+            $('#sgender').html(data.member_gender);
+            $('#saddmission_month').html(data.member_payment_date);
+            $('#scourse_end_date').html(data.member_course_end_date);
+            $('#slast_education').html(data.member_last_education);
+            if(data.member_profile_pic)
             {
-            $('#sprofile_pic').attr("src", "<?php  echo base_url();?>"+data.student_profile_pic);
+            $('#sprofile_pic').attr("src", "<?php  echo base_url();?>"+data.member_profile_pic);
              }
              else
              {
                $('#sprofile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
              }
-            $('#remove_pic').attr("onclick","remove_profile_pic("+data.student_id+")");
-            $('#sdob').html(data.student_dob);
-            $('#susername').html(data.student_username);
-            $('#spassword').html(data.student_password);
-            $('#sstudent_last_education').html(data.student_last_education);
-            $('#saddress').html(data.student_address);  
-            $('#scity').html(data.student_city);
-            $('#sstate').html(data.student_state);
-            $('#spincode').html(data.student_pincode);
+            $('#remove_pic').attr("onclick","remove_profile_pic("+data.member_id+")");
+            $('#sdob').html(data.member_dob);
+            $('#susername').html(data.member_username);
+            $('#spassword').html(data.member_password);
+            $('#smember_last_education').html(data.member_last_education);
+            $('#saddress').html(data.member_address);  
+            $('#scity').html(data.member_city);
+            $('#sstate').html(data.member_state);
+            $('#spincode').html(data.member_pincode);
             
             $('#modal_form2').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Student Data'); // Set title to Bootstrap modal title
@@ -233,60 +238,71 @@ function view_recruiter(id)
     });
     }
 
-    function add_recruiter()
-    {
-        save_method="add";     
-        $('#form')[0].reset();
-        $("#title").text("Edit Member");
-        $('#myModal').modal('show');
+    function add_member()
+    {  
+        save_method="add";
+       
+       $('#form')[0].reset();
+        $("#title").text("Add Member");
+        $("#bt").attr("data-toggle","modal");
+        $("#bt").attr("data-target","#myModal");
     }
-    function edit_recruiter(id)
-    {
-      save_method = 'update';
-     $('#form')[0].reset(); // reset form on modals
-           //Ajax Load data from ajax
-      $.ajax({
-        url : "<?php echo site_url('index.php/admin/Recruiter/ajax_edit/')?>/" + id,
-        type: "GET",
-        dataType: "JSON",
-        success: function(data)
-        {
 
-            $('[name="recruiter_id"]').val(data.recruiter_id);
-            $('[name="fname"]').val(data.recruiter_fname);
-            $('[name="lname"]').val(data.recruiter_lname);
-            $('[name="email"]').val(data.recruiter_email);
-            $('[name="mobile"]').val(data.recruiter_mobile);
-            $('[name="password"]').val(data.recruiter_password);
-            $('[name="city"]').val(data.recruiter_city);
-//             $("#recruiter_city").append('<option value="'+ data.recruiter_city +'" id="append_city">' + data.recruiter_city + '</option>');
-            $('[name="state"]').val(data.recruiter_state);
-          
-            
-            $("#title").text("Edit Member");
-           $('#myModal').modal('show');
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-            alert('Error get data from ajax 1');
-        }
-    });
-    }
+//    function edit_member(id)
+//    {
+//      save_method = 'update';
+//     $('#form')[0].reset(); // reset form on modals
+//
+//      //Ajax Load data from ajax
+//      $.ajax({
+//        url : "<?php echo site_url('index.php/admin/Members/ajax_edit/')?>/" + id,
+//        type: "GET",
+//        dataType: "JSON",
+//        success: function(data)
+//        {
+////            $("#append_city").remove();     
+//            $('[name="member_id"]').val(data.member_id);
+//            $('[name="member_fname"]').val(data.member_fname);
+//            $('[name="member_name"]').val(data.member_name);
+//            $('[name="member_lname"]').val(data.member_lname);
+//            $('[name="member_email"]').val(data.member_email);
+//            $('[name="member_mobile"]').val(data.member_mobile);
+//            $('[name="member_gender"]').val(data.member_gender);
+//            $('[name="member_dob"]').val(data.member_dob);
+//            $('[name="member_address"]').val(data.member_address);  
+//            $('[name="member_password"]').val(data.member_password);
+//             $('[name="status"]').val(data.member_status);
+//            $('[name="member_cpassword"]').val(data.member_password);
+//            $('[name="member_city"]').val(data.member_city);
+////             $("#member_city").append('<option value="'+ data.member_city +'" id="append_city">' + data.member_city + '</option>');
+//            $('[name="member_state"]').val(data.member_state);
+//            $('[name="member_pincode"]').val(data.member_pincode);
+//            
+//            $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
+//            $('.modal-title').text('Edit Members'); // Set title to Bootstrap modal title
+//
+//        },
+//        error: function (jqXHR, textStatus, errorThrown)
+//        {
+//            alert('Error get data from ajax 1');
+//        }
+//    });
+//    }
 
 
 
     function save()
     {
-      
-      var data=new FormData(document.getElementById("form"));
+        
+        var data = new FormData(document.getElementById("form"));
       var url;
       if(save_method == 'add')
-      {
-        url = "<?php echo site_url('index.php/admin/Recruiter/recruiter_add')?>";
+      {         
+        url = "<?php echo site_url('index.php/admin/Members/member_add')?>";
       }
       else
       {
-        url = "<?php echo site_url('index.php/admin/Recruiter/recruiter_update')?>";
+        url = "<?php echo site_url('index.php/admin/Members/member_update')?>";
       }
 
        // ajax adding data to database
@@ -295,15 +311,14 @@ function view_recruiter(id)
             type: "POST",
             async: false,
             processData: false,
-            contentType: false,  
+            contentType: false,   
             data: data,
             dataType: "JSON",
             success: function(json)
             {
-               if(json.status)
-               {                   
+               
+              
               location.reload();// for reload a page
-               }
                 
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -313,14 +328,14 @@ function view_recruiter(id)
         });
     }
 
-    function delete_recruiter(id)
+    function delete_member(id)
     {
       if(confirm('Are you sure delete this data?'))
       {
         // ajax delete data from database
           $.ajax({
-            url : "<?php echo base_url()?>admin/Recruiter/recruiter_delete/"+id,
-            type: "GET",
+            url : "<?php echo site_url('index.php/admin/Members/member_delete')?>/"+id,
+            type: "POST",
             dataType: "JSON",
             success: function(data)
             {
@@ -338,22 +353,9 @@ function view_recruiter(id)
     }
 
 
-   function show_password() {
-  
-    var x =$("#password").prop('readonly');
-    if(x == true)
-     {
-         
-        $("#password").prop('readonly',false);
-    }
-    else
-    {
-        
-        $("#password").prop('readonly',true);
-   }
-   }
 
   </script>
+
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
@@ -371,7 +373,6 @@ function view_recruiter(id)
     			
     			<div class="panel-body">
     				<form method="post" action="" id="form">
-                                    <input type="hidden" name="recruiter_id" value="">
     				 <div class="row">
                                 <div class="col-md-6  ">                                
                                     <div class="form-group">
@@ -433,7 +434,19 @@ function view_recruiter(id)
                                 
                             </div>
                                     
-                                  
+                                    <div class="row">
+                                <div class="col-md-12">                                
+                                    <div class="form-group">
+                                        <label for="fname">Confirm  Password<span style="color:red">*</span></label>
+                                        <input type="text" placeholder="Confirm Password" class="form-control required" id="cpassword" name="cpassword" maxlength="128" required>
+                                        <span class="text-danger" id="password_err"></span>
+                                        
+                                    </div>
+                                    <span style="color:red" id="text_field1_error"></span>
+                                    
+                                </div>
+                                        </div>
+                                    
                                     
                      <div class="row">
                     <div class="col-md-6">
@@ -457,17 +470,23 @@ function view_recruiter(id)
                         <label class="form-label">City</label><span style="color: red">*</span>
                         <select name="city" id="city" class="form-control" required>
                                     <option value="">-- Select City --</option>
-   
+                                    <?php if(isset($city)){
+                                        foreach($city as $city)
+                                        {
+                                           echo '<option value="">'.$state->city_state.'</option>';
+                                        }
+                                    }?>
+                                 
                                     
                              </select>
                         <span class="text-danger"><?php echo form_error('city'); ?></span>
 
                     </div>
                     </div>
-                          </form>    
+                             
     				
     			</div>
-                   
+                    </form>
                             </div>
     			
     		</div>         

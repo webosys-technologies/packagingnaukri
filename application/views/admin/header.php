@@ -140,7 +140,7 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree" id="search_area">
-        <li class="header">MAIN NAVIGATION</li>
+        <!--<li class="header">MAIN NAVIGATION</li>-->
         <li >
           <a href="<?php echo base_url(); ?>admin/Dashboard">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>          
@@ -161,13 +161,32 @@
             </span>
           </a>
         </li>
-
-              
+        <li>
+          <a href="<?php echo base_url(); ?>admin/Applicants">
+            <i class="fa fa-users"></i> <span>Applicant Members</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li> 
+         <li>
+          <a href="<?php echo base_url(); ?>admin/Users">
+            <i class="fa fa-users"></i> <span>Users</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li> 
         <li>
           <a href="<?php echo base_url(); ?>admin/Jobs/view_jobs">
             <i class="fa fa-folder"></i> <span>Jobs</span>            
           </a>
          </li>
+         <li>
+          <a href="<?php echo base_url(); ?>admin/Profile">
+            <i class="fa fa-users"></i> <span>Profile</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
        
 
 

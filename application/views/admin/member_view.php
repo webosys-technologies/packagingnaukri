@@ -65,7 +65,7 @@
        
         </div>
         </div>
-    <br><br>
+    <br>
    
 <div class="table-responsive">
     <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -263,7 +263,7 @@ function view_member(id)
         dataType: "JSON",
         success: function(data)
         {
-          alert(data.member_state);
+       
             $("#append_city").remove();     
             $('[name="member_id"]').val(data.member_id);
             $('[name="fname"]').val(data.member_fname);
@@ -273,7 +273,7 @@ function view_member(id)
             $('[name="password"]').val(data.member_password);
             $('[name="status"]').val(data.member_status);
 //            $('[name="city"]').val(data.member_city);
-//            $('[name="state"]').append('<option value="'+data.member_state+'">'+data.member_state+'</option>');
+            $('[name="state"]').val(data.member_state);
                         
            $("#title").text("Edit Member");
            $('#myModal').modal('show');

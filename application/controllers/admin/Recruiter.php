@@ -71,27 +71,34 @@ class Recruiter extends CI_Controller
       
     }
    
+    function recruiter_update()
+    {
+        $data=array(
+                         'recruiter_fname'          =>$this->input->post('fname'),
+                        'recruiter_lname'          => $this->input->post('lname'),
+                        'recruiter_email'          => $this->input->post('email'),
+                        'recruiter_mobile'         => $this->input->post('mobile'),
+                        'recruiter_password'       => $this->input->post('password'),
+                        'recruiter_city'           => $this->input->post('city'),
+                        'recruiter_state'          => $this->input->post('state'),
+                    );
+       
+        $res = $this->Recruiters_model->recruiter_update(array('recruiter_id'=>$this->input->post('recruiter_id')),$data);
+        if($res)
+        {
+           $this->session->set_flashdata('success','Recruiter Updated Successfully');
+           echo json_encode(array('status'=>true));
+        }
+    }
         
          function ajax_edit($id)
     {
-            $data = $this->Recruiter_model->get_id($id);
+            $data = $this->Recruiters_model->get_id($id);
          
             echo json_encode($data);
     }
         
-         function center_delete($id)
-    {
-
-        $result=$this->Recruiter_model->delete_by_id($id);
-              if($result)
-                {
-                $this->session->set_flashdata('success', 'Center Deleted Successfully');
-                }
-        echo json_encode(array("status" => true));
-           // return ['status' => FALSE];
-
-    }
-    
+        
      function show_cities($state)
         {
            

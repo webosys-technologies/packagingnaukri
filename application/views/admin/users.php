@@ -15,22 +15,25 @@
 </style>
 <div class="content-wrapper" style="background:white;">
     <!-- Content Header (Page header) -->
-    <section class="content-header" >
+    <section class="content-header">
       <h1>
-        <i class="fa fa-users"></i><strong> Recruiters Management </strong>
+        <i class="fa fa-users"></i><strong> User Management </strong>
         <small>Add, Edit, Delete <?php  ?></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Manage Recruiters</li>
+        <li class="active">Manage Users</li>
       </ol>
     </section>
     <hr style="border-top: 1px solid #ccc;">
     <section class="content">
         <div class="row">
+
+  <!--<button type="button" class="btn btn-primary">Open Modal</button>-->
+
          <div class="col-md-4">
-    <button class="btn btn-primary" id="bt" onclick="add_recruiter()" data-toggle="tooltip" data-placement="bottom" title="Add Recruiter"><i class="glyphicon glyphicon-plus"></i> Add Recruiters</button>
-<!--    <button class="btn btn-success" onclick="add_recruiter()"><i class="glyphicon glyphicon-plus"></i> Payment</button>-->
+    <!--<button class="btn btn-primary"  onclick="add_user()" data-toggle="tooltip" data-placement="bottom" title="Add User">      <i class="glyphicon glyphicon-plus"></i> Add User</button>-->
+<button type="button"  id="bt" class="btn btn-primary" onclick="add_user()"><i></i>Add User</button>
     </div>
     <div class="col-md-6">
          <?php
@@ -62,23 +65,19 @@
        
         </div>
         </div>
-    <br><br>
-<!--    <div class="form-group" style="width:350px" >
-            <label for="name">SEARCH</label>
-        <input id="myName" class="form-control" type="text" placeholder="Search..." >
-        </div>-->
+    <br>
+   
 <div class="table-responsive">
     <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
       <thead>
         <tr bgcolor="#338cbf" style="color:#fff">
           <th>ID</th>
-          <th>RECRUITER NAME</th>
-          <th>EMAIL </th>
+          <th>NAME</th>
+          <th>EMAIL</th>
           <th>MOBILE</th>
-          <th>PASSWORD</th>
+          <th>TYPE</th>
           <th>CREATED AT</th>
-          <th>STATUS</th
-          <!--class=" badge bg-yellow"-->
+          <th>STATUS</th>
 
           <th style="width:125px;">ACTION
           </p></th>
@@ -86,20 +85,21 @@
       </thead>
       <tbody id="myTable">
         <?php
-          if (isset($recruiters)) {
+          if (isset($users)) {
             
           
-         foreach($recruiters as $res){?>
-             <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->recruiter_id; ?>" class="" ></td> -->
-                                        <td><?php echo $res->recruiter_id;?></td>
-                                        <td><?php echo $res->recruiter_fname.' '. $res->recruiter_lname; ?></td>
-                                        <td><?php echo $res->recruiter_email;?></td>
-                                       <td><?php echo $res->recruiter_mobile;?></td>
-                                       <td><span class="badge badge-secondary"><?php echo $res->recruiter_password;?></span></td>
-                                       <td><?php echo $res->recruiter_created_at;?></td>
+         foreach($users as $res){
+             if($res->user_status=='1'){?>
+             <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->user_id; ?>" class="" ></td> --> 
+                                        <td><?php echo $res->user_id;?></td>
+                                        <td><?php echo $res->user_fname.' '. $res->user_lname; ?></td>
+                                        <td><?php echo $res->user_email;?></td>
+                                       <td><?php echo $res->user_mobile;?></td>
+                                       <td><?php echo $res->user_type;?></td>
+                                       <td><?php echo $res->user_created_at;?></td>
                                        <td>
                                            <?php 
-                                       if($res->recruiter_status==1)
+                                       if($res->user_status==1)
                                        {
                                            echo "Active";
                                        }
@@ -109,13 +109,13 @@
                                        }
                                        ?></td>
                                        <td>
-                  <button class="btn btn-success" onclick="edit_recruiter(<?php echo $res->recruiter_id; ?>)" data-toggle="tooltip" data-placement="bottom" title="Edit Recruiter"><i class="glyphicon glyphicon-pencil"></i></button>
-                  <button class="btn btn-danger" onclick="delete_recruiter(<?php echo $res->recruiter_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Recruiter"><i class="glyphicon glyphicon-trash"></i></button>
+                  <button class="btn btn-success" onclick="edit_user(<?php echo $res->user_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit User"><i class="glyphicon glyphicon-pencil"></i></button>
+                  <button class="btn btn-danger" onclick="delete_user(<?php echo $res->user_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete User"><i class="glyphicon glyphicon-trash"></i></button>
                  
 
                 </td>
               </tr>
-             <?php }}?>
+          <?php }}}?>
 
 
 
@@ -127,10 +127,10 @@
   </div>
 
   <script type="text/javascript">
-  $(document).ready( function () {
-      
-      
-        $("#state").change(function() {
+  $(document).ready( function () {   
+ 
+ 
+  $("#state").change(function() {
         
    var el = $(this) ;
               $("#city").html("");
@@ -142,7 +142,7 @@ var state=el.val();
         {
             
       $.ajax({
-       url : "<?php echo site_url('index.php/admin/Recruiter/show_cities')?>/" + state,        
+       url : "<?php echo site_url('index.php/admin/Users/show_cities')?>/" + state,        
        type: "GET",
               
        dataType: "JSON",
@@ -164,9 +164,16 @@ var state=el.val();
      }
     
  });  
-      
-      
-      
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
       $('#table_id').DataTable();
   } );
@@ -180,47 +187,48 @@ var state=el.val();
   
     var save_method; //for save method string
     var table;
+    var id;
 
 
-function view_recruiter(id)
+function view_user(id)
     {
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/recruiter/Student/ajax_edit/')?>/" + id,        
+        url : "<?php echo site_url('index.php/user/Student/ajax_edit/')?>/" + id,        
         type: "GET",
                
         dataType: "JSON",
         success: function(data)
         {          
-            $('#sfname').html(data.student_fname);
-            $('#slname').html(data.student_lname); 
+            $('#sfname').html(data.user_fname);
+            $('#slname').html(data.user_lname); 
             $('#scourse_name').html(data.course_name);
-            $('#semail').html(data.student_email);
-            $('#smobile').html(data.student_mobile);
-            $('#sgender').html(data.student_gender);
-            $('#saddmission_month').html(data.student_payment_date);
-            $('#scourse_end_date').html(data.student_course_end_date);
-            $('#slast_education').html(data.student_last_education);
-            if(data.student_profile_pic)
+            $('#semail').html(data.user_email);
+            $('#smobile').html(data.user_mobile);
+            $('#sgender').html(data.user_gender);
+            $('#saddmission_month').html(data.user_payment_date);
+            $('#scourse_end_date').html(data.user_course_end_date);
+            $('#slast_education').html(data.user_last_education);
+            if(data.user_profile_pic)
             {
-            $('#sprofile_pic').attr("src", "<?php  echo base_url();?>"+data.student_profile_pic);
+            $('#sprofile_pic').attr("src", "<?php  echo base_url();?>"+data.user_profile_pic);
              }
              else
              {
                $('#sprofile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
              }
-            $('#remove_pic').attr("onclick","remove_profile_pic("+data.student_id+")");
-            $('#sdob').html(data.student_dob);
-            $('#susername').html(data.student_username);
-            $('#spassword').html(data.student_password);
-            $('#sstudent_last_education').html(data.student_last_education);
-            $('#saddress').html(data.student_address);  
-            $('#scity').html(data.student_city);
-            $('#sstate').html(data.student_state);
-            $('#spincode').html(data.student_pincode);
+            $('#remove_pic').attr("onclick","remove_profile_pic("+data.user_id+")");
+            $('#sdob').html(data.user_dob);
+            $('#susername').html(data.user_username);
+            $('#spassword').html(data.user_password);
+            $('#suser_last_education').html(data.user_last_education);
+            $('#saddress').html(data.user_address);  
+            $('#scity').html(data.user_city);
+            $('#sstate').html(data.user_state);
+            $('#spincode').html(data.user_pincode);
             
             $('#modal_form2').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Student Data'); // Set title to Bootstrap modal title
@@ -233,38 +241,44 @@ function view_recruiter(id)
     });
     }
 
-    function add_recruiter()
-    {
-        save_method="add";     
-        $('#form')[0].reset();
-        $("#title").text("Edit Member");
+    function add_user()
+    {  
+        save_method="add";        
+       $('#form')[0].reset();
+        $("#title").text("Add User");
         $('#myModal').modal('show');
+//        $("#bt").attr("data-toggle","modal");
+//        $("#bt").attr("data-target","#myModal");
     }
-    function edit_recruiter(id)
-    {
+
+    function edit_user(id)
+    {     
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
-           //Ajax Load data from ajax
+
+      //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/admin/Recruiter/ajax_edit/')?>/" + id,
+        url : "<?php echo site_url('index.php/admin/Users/ajax_edit/')?>/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
         {
-
-            $('[name="recruiter_id"]').val(data.recruiter_id);
-            $('[name="fname"]').val(data.recruiter_fname);
-            $('[name="lname"]').val(data.recruiter_lname);
-            $('[name="email"]').val(data.recruiter_email);
-            $('[name="mobile"]').val(data.recruiter_mobile);
-            $('[name="password"]').val(data.recruiter_password);
-            $('[name="city"]').val(data.recruiter_city);
-//             $("#recruiter_city").append('<option value="'+ data.recruiter_city +'" id="append_city">' + data.recruiter_city + '</option>');
-            $('[name="state"]').val(data.recruiter_state);
-          
-            
-            $("#title").text("Edit Member");
+       
+            $("#append_city").remove();     
+            $('[name="user_id"]').val(data.user_id);
+            $('[name="fname"]').val(data.user_fname);
+            $('[name="lname"]').val(data.user_lname);
+            $('[name="email"]').val(data.user_email);
+            $('[name="mobile"]').val(data.user_mobile);
+            $('[name="password"]').val(data.user_password);
+            $('[name="status"]').val(data.user_status);
+//            $('[name="city"]').val(data.user_city);
+            $('[name="state"]').val(data.user_state);
+                        
+           $("#title").text("Edit User");
            $('#myModal').modal('show');
+            
+
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
@@ -277,16 +291,16 @@ function view_recruiter(id)
 
     function save()
     {
-      
-      var data=new FormData(document.getElementById("form"));
+        
+        var data = new FormData(document.getElementById("form"));
       var url;
       if(save_method == 'add')
-      {
-        url = "<?php echo site_url('index.php/admin/Recruiter/recruiter_add')?>";
+      {         
+        url = "<?php echo site_url('index.php/admin/Users/user_add')?>";
       }
       else
       {
-        url = "<?php echo site_url('index.php/admin/Recruiter/recruiter_update')?>";
+        url = "<?php echo site_url('index.php/admin/Users/user_update')?>";
       }
 
        // ajax adding data to database
@@ -295,15 +309,14 @@ function view_recruiter(id)
             type: "POST",
             async: false,
             processData: false,
-            contentType: false,  
+            contentType: false,   
             data: data,
             dataType: "JSON",
             success: function(json)
             {
-               if(json.status)
-               {                   
+               
+              
               location.reload();// for reload a page
-               }
                 
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -313,14 +326,14 @@ function view_recruiter(id)
         });
     }
 
-    function delete_recruiter(id)
+    function delete_user(id)
     {
       if(confirm('Are you sure delete this data?'))
       {
         // ajax delete data from database
           $.ajax({
-            url : "<?php echo base_url()?>admin/Recruiter/recruiter_delete/"+id,
-            type: "GET",
+            url : "<?php echo site_url('index.php/admin/Users/user_delete')?>/"+id,
+            type: "POST",
             dataType: "JSON",
             success: function(data)
             {
@@ -338,22 +351,9 @@ function view_recruiter(id)
     }
 
 
-   function show_password() {
-  
-    var x =$("#password").prop('readonly');
-    if(x == true)
-     {
-         
-        $("#password").prop('readonly',false);
-    }
-    else
-    {
-        
-        $("#password").prop('readonly',true);
-   }
-   }
 
   </script>
+
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
@@ -371,7 +371,7 @@ function view_recruiter(id)
     			
     			<div class="panel-body">
     				<form method="post" action="" id="form">
-                                    <input type="hidden" name="recruiter_id" value="">
+                                    <input type="hidden" value="" name="user_id">
     				 <div class="row">
                                 <div class="col-md-6  ">                                
                                     <div class="form-group">
@@ -433,7 +433,8 @@ function view_recruiter(id)
                                 
                             </div>
                                     
-                                  
+                                   
+                                    
                                     
                      <div class="row">
                     <div class="col-md-6">
@@ -457,17 +458,23 @@ function view_recruiter(id)
                         <label class="form-label">City</label><span style="color: red">*</span>
                         <select name="city" id="city" class="form-control" required>
                                     <option value="">-- Select City --</option>
-   
+                                    <?php if(isset($city)){
+                                        foreach($city as $city)
+                                        {
+                                           echo '<option value="">'.$state->city_state.'</option>';
+                                        }
+                                    }?>
+                                 
                                     
                              </select>
                         <span class="text-danger"><?php echo form_error('city'); ?></span>
 
                     </div>
                     </div>
-                          </form>    
+                             
     				
     			</div>
-                   
+                    </form>
                             </div>
     			
     		</div>         

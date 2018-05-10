@@ -43,14 +43,7 @@ class Recruiters_model extends CI_Model
                 return array($insert,$data);
 	}
         
-        public function recruiter_askfor_password($ask_value,$id)
-        {
-            $data=array('recruiter_askfor_password'=>$ask_value);
-            $where=array('recruiter_id'=>$id);
-            $this->db->update($this->table,$data,$where);
-            return $this->db->affected_rows();
-            
-        }
+      
         
         function loginMe($where)
     {
@@ -152,46 +145,7 @@ class Recruiters_model extends CI_Model
     }
     
     
-    function otp_verify($recruiter_email)
-    {
-        $this->db->where('email',$recruiter_email);
-        $query=$this->db->get('tbl_reset_password');
-        $info=$query->result();
-        if($query->num_rows()>0)
-        {
-            foreach($info as $i)
-            {
-             $data=array('email'=>$i->email,
-                         'otp'=>$i->activation_id
-             );   
-            } 
-            
-            $this->db->where('recruiter_email',$recruiter_email);
-            $query=$this->db->get('recruiters');
-            $info1=$query->result();
-            foreach($info1 as $i1)
-            {
-             $data1=array('recruiter_fname'=>$i1->recruiter_fname,
-                         'recruiter_lname'=>$i1->recruiter_lname,
-                         'recruiter_email'=>$i1->recruiter_email,
-                         'recruiter_mobile'=>$i1->recruiter_mobile,
-                         'recruiter_name'=>$i1->recruiter_name
-             );   
-            } 
-            
-            return array($data,$data1);
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
-    
-
-	
-
-	function check_if_email_exist($recruiter_email)
+   function check_if_email_exist($recruiter_email)
 	{
 		$this->db->where('recruiter_email',$recruiter_email);
 		$result=$this->db->get('recruiters');

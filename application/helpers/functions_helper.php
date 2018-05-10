@@ -30,5 +30,20 @@ function is_recruiter_LoggedIn($recruiter_LoggedIn)
         }
 }
 
+function get_user_info($id)
+{
+   $ci =& get_instance();
+   return $ci->User_model->get_user_by_id($id); 
+}
+
+function get_member_info()
+{
+    
+}
+function get_recruiter_info()
+{
+    
+}
+
 ?>
 

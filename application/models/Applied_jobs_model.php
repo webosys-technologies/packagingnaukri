@@ -16,11 +16,13 @@ class Applied_jobs_model extends CI_Model
             	return $query->result();
      }
      
-     public function test()
-     {
-        
-         
-                 }
+     public function applied_members()
+     {       
+         $this->db->from('applied_job as app');
+        $this->db->join('members as mem','mem.member_id=app.member_id');
+     	$query=$this->db->get();
+        return $query->result();
+     }
 
    
 }

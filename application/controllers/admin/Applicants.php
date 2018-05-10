@@ -2,7 +2,7 @@
 
 //require APPPATH . '/libraries/BaseController.php';
 
-class Members extends CI_Controller
+class Applicants extends CI_Controller
 {
 
 	public function __construct()
@@ -12,6 +12,7 @@ class Members extends CI_Controller
                 {
                     redirect('admin/index');
                 }
+
           
 	}
 
@@ -20,11 +21,11 @@ class Members extends CI_Controller
                  
             $id=$this->session->userdata('user_id');
             $result['user_data']=get_user_info($id);
-            $result['members']=$this->Members_model->getall_members();
-            $result['states']=$this->Cities_model->getall_state();
+            $result['members']=$this->Applied_jobs_model->applied_members();
+           
        
             $this->load->view('admin/header',$result);
-            $this->load->view('admin/member_view',$result);
+            $this->load->view('admin/applicants',$result);
             $this->load->view('admin/footer');
 
         
