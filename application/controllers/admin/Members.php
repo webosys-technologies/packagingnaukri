@@ -40,8 +40,32 @@ class Members extends CI_Controller
            
         }
         
+        function member_update()
+        {
+            $data=array(
+                        'member_fname'          =>$this->input->post('fname'),
+                        'member_lname'          => $this->input->post('lname'),
+                        'member_email'          => $this->input->post('email'),
+                        'member_mobile'         => $this->input->post('mobile'),
+                        'member_password'       => $this->input->post('password'),
+                        'member_city'           => $this->input->post('city'),
+                        'member_state'          => $this->input->post('state'),
+                        'member_created_at' => date("Y-m-d "),
+                        'member_status'        => '1'
+                       );
+            
+                       
+            $res=$this->Members_model->member_update(array('member_id'=>$this->input->post('member_id')),$data);
+            if($res)
+            {
+                $this->session->set_flashdata('success','Member Updated Successfully');
+                echo json_encode(array('status'=>true));
+            }
+        }
+        
          function ajax_edit($id)
     {
+             
             $data = $this->Members_model->get_id($id);
          
             echo json_encode($data);

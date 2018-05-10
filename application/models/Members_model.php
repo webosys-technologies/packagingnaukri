@@ -76,7 +76,12 @@ class Members_model extends CI_Model
        
     }
     
-    
+    public function get_id($id)
+    {
+        $this->db->where('member_id',$id);
+        $query=$this->db->get($this->table);
+        return $query->row();
+    }
    
 
    

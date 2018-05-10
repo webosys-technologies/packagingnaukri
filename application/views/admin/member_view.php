@@ -4,11 +4,11 @@
     display: block !important;
 }
 .modal-dialog{
-     width: 50%;
+     width: 700px;
       overflow-y: initial !important
 }
 .modal-body{
-  height:480px;
+  height: 420px;
   overflow-y: auto;
 }
 
@@ -109,7 +109,7 @@
                                        }
                                        ?></td>
                                        <td>
-                  <button class="btn btn-success" onclick="edit_member(<?php echo $res->member_id; ?>)" data-toggle="tooltip" data-placement="bottom" title="Edit Member"><i class="glyphicon glyphicon-pencil"></i></button>
+                  <button class="btn btn-success" onclick="edit_member(<?php echo $res->member_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Member"><i class="glyphicon glyphicon-pencil"></i></button>
                   <button class="btn btn-danger" onclick="delete_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Member"><i class="glyphicon glyphicon-trash"></i></button>
                  
 
@@ -187,6 +187,7 @@ var state=el.val();
   
     var save_method; //for save method string
     var table;
+    var id;
 
 
 function view_member(id)
@@ -242,54 +243,49 @@ function view_member(id)
 
     function add_member()
     {  
-        save_method="add";
-       
+        save_method="add";        
        $('#form')[0].reset();
         $("#title").text("Add Member");
-        $("#bt").attr("data-toggle","modal");
-        $("#bt").attr("data-target","#myModal");
+        $('#myModal').modal('show');
+//        $("#bt").attr("data-toggle","modal");
+//        $("#bt").attr("data-target","#myModal");
     }
 
-//    function edit_member(id)
-//    {
-//      save_method = 'update';
-//     $('#form')[0].reset(); // reset form on modals
-//
-//      //Ajax Load data from ajax
-//      $.ajax({
-//        url : "<?php echo site_url('index.php/admin/Members/ajax_edit/')?>/" + id,
-//        type: "GET",
-//        dataType: "JSON",
-//        success: function(data)
-//        {
-////            $("#append_city").remove();     
-//            $('[name="member_id"]').val(data.member_id);
-//            $('[name="member_fname"]').val(data.member_fname);
-//            $('[name="member_name"]').val(data.member_name);
-//            $('[name="member_lname"]').val(data.member_lname);
-//            $('[name="member_email"]').val(data.member_email);
-//            $('[name="member_mobile"]').val(data.member_mobile);
-//            $('[name="member_gender"]').val(data.member_gender);
-//            $('[name="member_dob"]').val(data.member_dob);
-//            $('[name="member_address"]').val(data.member_address);  
-//            $('[name="member_password"]').val(data.member_password);
-//             $('[name="status"]').val(data.member_status);
-//            $('[name="member_cpassword"]').val(data.member_password);
-//            $('[name="member_city"]').val(data.member_city);
-////             $("#member_city").append('<option value="'+ data.member_city +'" id="append_city">' + data.member_city + '</option>');
-//            $('[name="member_state"]').val(data.member_state);
-//            $('[name="member_pincode"]').val(data.member_pincode);
-//            
-//            $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-//            $('.modal-title').text('Edit Members'); // Set title to Bootstrap modal title
-//
-//        },
-//        error: function (jqXHR, textStatus, errorThrown)
-//        {
-//            alert('Error get data from ajax 1');
-//        }
-//    });
-//    }
+    function edit_member(id)
+    {     
+      save_method = 'update';
+     $('#form')[0].reset(); // reset form on modals
+
+      //Ajax Load data from ajax
+      $.ajax({
+        url : "<?php echo site_url('index.php/admin/Members/ajax_edit/')?>/" + id,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data)
+        {
+          alert(data.member_state);
+            $("#append_city").remove();     
+            $('[name="member_id"]').val(data.member_id);
+            $('[name="fname"]').val(data.member_fname);
+            $('[name="lname"]').val(data.member_lname);
+            $('[name="email"]').val(data.member_email);
+            $('[name="mobile"]').val(data.member_mobile);
+            $('[name="password"]').val(data.member_password);
+            $('[name="status"]').val(data.member_status);
+//            $('[name="city"]').val(data.member_city);
+//            $('[name="state"]').append('<option value="'+data.member_state+'">'+data.member_state+'</option>');
+                        
+           $("#title").text("Edit Member");
+           $('#myModal').modal('show');
+            
+
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error get data from ajax 1');
+        }
+    });
+    }
 
 
 
@@ -375,6 +371,7 @@ function view_member(id)
     			
     			<div class="panel-body">
     				<form method="post" action="" id="form">
+                                    <input type="hidden" value="" name="member_id">
     				 <div class="row">
                                 <div class="col-md-6  ">                                
                                     <div class="form-group">
@@ -436,18 +433,7 @@ function view_member(id)
                                 
                             </div>
                                     
-                                    <div class="row">
-                                <div class="col-md-12">                                
-                                    <div class="form-group">
-                                        <label for="fname">Confirm  Password<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Confirm Password" class="form-control required" id="cpassword" name="cpassword" maxlength="128" required>
-                                        <span class="text-danger" id="password_err"></span>
-                                        
-                                    </div>
-                                    <span style="color:red" id="text_field1_error"></span>
-                                    
-                                </div>
-                                        </div>
+                                   
                                     
                                     
                      <div class="row">

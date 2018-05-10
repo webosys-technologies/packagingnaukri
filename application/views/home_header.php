@@ -33,7 +33,7 @@
         <style>
             #header{
                 margin:25px;
-                
+               
             }
             
             #myModal{
@@ -155,10 +155,11 @@ $("#show_pass_box").click(function(){
     
     
 <!--<body style="background:#d2d6de">--> 
-   
+   <!--<br>-->
  <header class="header" id="header">
-  <div class="container">
-  <nav class="navbar navbar-default navbar-fixed-top navbar-expand-lg" id="nav_header">
+  <!--<div class="container">-->
+  <!--<nav class="navbar navbar-default navbar-fixed-top navbar-expand-lg" id="nav_header">-->
+  <nav class="navbar navbar-default navbar-static-top" id="nav_header">
   <div class="container-fluid"  style="background:#002863">
      <!--Brand and toggle get grouped for better mobile display--> 
     <div class="navbar-header">
@@ -168,7 +169,7 @@ $("#show_pass_box").click(function(){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a id="logo" class="navbar-brand" href="#"><img src="<?php echo  base_url();?>assets/images/logo.png" width="200px" height="50px"></a>
+        <a id="logo" class="navbar-brand" href="#"><img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="200px" height="50px"></a>
     </div>
 
      <!--Collect the nav links, forms, and other content for toggling--> 
@@ -214,7 +215,7 @@ $("#show_pass_box").click(function(){
     </div>  
   </div> 
 </nav>
-  </div>
+  <!--</div>-->
    
 </header> 
 

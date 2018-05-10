@@ -237,7 +237,7 @@ function view_recruiter(id)
     {
         save_method="add";     
         $('#form')[0].reset();
-        $("#title").text("Add Member");
+        $("#title").text("Add Recruiter");
         $("#bt").attr("data-toggle","modal");
         $("#bt").attr("data-target","#myModal");
     }
