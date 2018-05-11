@@ -1,2 +1,7 @@
 1) picode to pincode
 ALTER TABLE `companies` CHANGE `company_picode` `company_pincode` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
+
+2)set date data type in users table
+ALTER TABLE `users` CHANGE `user_created_at` `user_created_at` DATE NOT NULL
+
+3)

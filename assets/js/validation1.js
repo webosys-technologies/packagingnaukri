@@ -306,7 +306,7 @@
                   else
                   {
                       $('#mobile_err').hide();
-                    // return true;
+                   
                   }
                   
                   

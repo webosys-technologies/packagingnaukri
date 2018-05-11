@@ -249,13 +249,14 @@ function view_member(id)
         $('#myModal').modal('show');
 //        $("#bt").attr("data-toggle","modal");
 //        $("#bt").attr("data-target","#myModal");
+         
     }
 
     function edit_member(id)
     {     
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
-
+      $('#city').html("");
       //Ajax Load data from ajax
       $.ajax({
         url : "<?php echo site_url('index.php/admin/Members/ajax_edit/')?>/" + id,
@@ -272,7 +273,7 @@ function view_member(id)
             $('[name="mobile"]').val(data.member_mobile);
             $('[name="password"]').val(data.member_password);
             $('[name="status"]').val(data.member_status);
-//            $('[name="city"]').val(data.member_city);
+            $('#city').append('<option value="'+data.member_city+'">'+data.member_city+'</option>');
             $('[name="state"]').val(data.member_state);
                         
            $("#title").text("Edit Member");

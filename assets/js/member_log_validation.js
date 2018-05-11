@@ -27,6 +27,29 @@
 
 
                              });
+                             
+                             
+            $('#otp').focusout(function(){
+               
+
+                             if($('#otp').val()==""){
+                                 $("#otp_err").html("OTP is required");
+                             } 
+                             else
+                                 if(isNaN($('#otp').val()))
+                             {
+                                 $("#otp_err").html("Invalid OTP");
+                             }else
+                             if($('#otp').val().length!=6){
+                                 $("#otp_err").html("OTP is 6 digit");
+                             }else
+                                {
+                                $("#otp_err").html("");
+                                }
+
+
+
+                             });
              });
              
              
@@ -51,12 +74,51 @@ function member_log_validation()
                              }
                              
                              
-      if(email=="true" && pass=="true")      {
+                             
+                             if($('#otp').val()==""){
+                                 $("#otp_err").html("OTP is required");
+                             } 
+                             else
+                                 if(isNaN($('#otp').val()))
+                             {
+                                 $("#otp_err").html("Invalid OTP");
+                             }else
+                             if($('#otp').val().length!=6){
+                                 $("#otp_err").html("OTP is 6 digit");
+                             }else
+                                {
+                                $("#otp_err").html("");
+                                var otp="true";
+                                }
+                             
+                             
+                             
+                             
+                             
+                             
+      if(email=="true" && pass=="true" || otp=="true")      {
           return true;
       }else{
           return false;
       }
     
+}
+
+function email_validation()
+{
+     if($('#member_email').val()=="") {
+                     $("#email_err").html("Email is required");
+                 } 
+                 else{
+                     $("#email_err").html("");
+                     var email="true";
+                 }
+                 if(email=="true")
+                 {
+                     return true;
+                 }else{
+                     return false;
+                 }
 }
             
           

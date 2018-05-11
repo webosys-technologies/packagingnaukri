@@ -185,6 +185,45 @@ class Index extends CI_Controller
         
                     
         }
+        
+        
+        function send_otp()
+        {          
+            $email=$this->input->post('member_email');
+            $res=$this->Members_model->check_if_email_exist($email);
+            if($res)
+            {
+                echo json_encode(array('email_error'=>'This email is not registered'));
+            }else{
+                
+                $send=$this->email_otp($email);
+                if($send)
+                {
+                echo json_encode(array('send'=>'OTP is Send Successfully '));
+                }
+            }           
+        }
+        
+        function email_otp($email)
+        {
+                $rand= mt_rand(000000,999999) ;
+                
+                
+                    $headers = "From: support@Packagingnaukari.in";
+                    $headers .= ". PackagingNaukari-Team" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $to = $email;
+                    $subject = "Welcome To Packaging Naukari";
+
+                    $txt = $rand;  
+                                            
+                 
+                       $success=  mail($to,$subject,$txt,$headers); 
+                       if($success)
+                       {
+                          return true;
+                       }
+        }
     
     function signup_email($getdata,$msg)
     {    

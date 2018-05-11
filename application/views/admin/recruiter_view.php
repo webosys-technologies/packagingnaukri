@@ -245,6 +245,7 @@ function view_recruiter(id)
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
            //Ajax Load data from ajax
+            $("#city").html("");
       $.ajax({
         url : "<?php echo site_url('index.php/admin/Recruiter/ajax_edit/')?>/" + id,
         type: "GET",
@@ -258,8 +259,8 @@ function view_recruiter(id)
             $('[name="email"]').val(data.recruiter_email);
             $('[name="mobile"]').val(data.recruiter_mobile);
             $('[name="password"]').val(data.recruiter_password);
-            $('[name="city"]').val(data.recruiter_city);
-//             $("#recruiter_city").append('<option value="'+ data.recruiter_city +'" id="append_city">' + data.recruiter_city + '</option>');
+//            $("#city").val(data.recruiter_city);
+            $("#city").append('<option value="'+ data.recruiter_city +'">' + data.recruiter_city+'</option>');
             $('[name="state"]').val(data.recruiter_state);
           
             
@@ -456,9 +457,7 @@ function view_recruiter(id)
                     <div class="col-md-6">
                         <label class="form-label">City</label><span style="color: red">*</span>
                         <select name="city" id="city" class="form-control" required>
-                                    <option value="">-- Select City --</option>
-   
-                                    
+                                    <option value="">-- Select City --</option>                                   
                              </select>
                         <span class="text-danger"><?php echo form_error('city'); ?></span>
 

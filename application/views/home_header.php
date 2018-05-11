@@ -32,12 +32,12 @@
         
         <style>
             #header{
-                margin:25px;
+                margin:15px;
                
             }
             
             #myModal{
-                margin:35px;
+                margin:75px;
                
             }
             .modal-backdrop {background: none;}
@@ -71,20 +71,85 @@
     $(document).ready(function() {
         
   
-$("#myModal").on("hidden.bs.modal", function () {
-  
-          $('#login_form')[0].reset(); 
+//$("#myModal").on("hidden.bs.modal", function () {
+//    alert();
+//  
+//          $('#login_form')[0].reset(); 
+//       $("#validation_error").html("");
+//       $("#email_err").html("");
+//       $("#password_err").html("");
+//});
+
+        $("#log").click(function(){
+       $('#login_form')[0].reset(); 
        $("#validation_error").html("");
        $("#email_err").html("");
        $("#password_err").html("");
+       $("#otp_err").html("");
+       
+       
+    $("#show_pass_box").hide();
+    $("#otp_box").hide();
+    $("#show_otp_box").show();
+    $("#pass_field").show();
+        });
+       
+       
+       
+       $("#myModal").on("hidden.bs.modal", function () {
+  alert();
 });
         
 
 $("#show_otp_box").click(function(){
-    $("#show_otp_box").hide();
-    $("#otp_box").show();
-    $("#pass_field").hide();
-    $("#show_pass_box").show();
+    
+        var otp_val;
+        otp_val=email_validation();
+        if(otp_val)
+        { 
+       var data = new FormData(document.getElementById("login_form"));
+       var url = "<?php echo site_url('index.php/member/Index/send_otp')?>";
+           
+       $.ajax({               
+            url : url,
+            type: "POST",
+            async: false,
+            processData: false,
+            contentType: false,            
+            data: data,
+            dataType: "JSON",
+        success: function(data)
+        {  var success;
+            var email_error;
+            var pass_error;
+            var val_error;
+           
+           if(data.email_error)
+            {
+                $("#validation_error").html(data.email_error);
+            }
+            if(data.otp_error)
+            {
+                $("#otp_err").html(data.otp_error);
+            }
+            if(data.send)
+            {
+                $("#otp_success").html("OTP is send Successfully");
+                
+                 $("#validation_error").html("");
+                $("#show_otp_box").hide();
+                $("#otp_box").show();
+                $("#pass_field").hide();
+                $("#show_pass_box").show();
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {            
+          alert('Error...!');
+        }
+      });
+  }
+    
 });
 
 $("#show_pass_box").click(function(){
@@ -94,12 +159,10 @@ $("#show_pass_box").click(function(){
     $("#pass_field").show();
 });
 
-     
+
   });
 
-  function member_login() {
-      
-     
+  function member_login() {  
       
         var val= member_log_validation();
         if(val)
@@ -194,7 +257,7 @@ $("#show_pass_box").click(function(){
           <li class="dropdown">
           <a id="header_link" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Member<span class="caret"></span></a>
           <ul class="dropdown-menu">
-              <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
+              <li><a href="#" data-toggle="modal" id="log" data-target="#myModal">Login</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="<?php echo base_url();?>member/index">Register</a></li>
           </ul>
@@ -244,7 +307,7 @@ $("#show_pass_box").click(function(){
           </div>
                       
              <div class="form-group has-feedback" id="otp_box" style="display:none;">
-            <input type="text" class="form-control" placeholder="Enter OTP" id="password" name="member_otp" required /><span class="text-danger" id="password_err"></span>
+            <input type="text" class="form-control" placeholder="Enter OTP" id="otp" name="member_otp" required /><span class="text-danger" id="otp_err"></span><span class="text-success" id="otp_success"></span>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             <center><h4><a class="label label-warning" id="show_pass_box">Login With Password</a></h4></center>
           </div>

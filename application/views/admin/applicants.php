@@ -108,7 +108,7 @@
                                        ?></td>
                                        <td>
                  
-                  <button class="btn btn-danger" onclick="delete_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Member"><i class="glyphicon glyphicon-trash"></i></button>
+                  <button class="btn btn-info" onclick="view_applicant(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Applicant Member"><i class="fa fa-eye"></i></button>
                  
 
                 </td>
@@ -328,13 +328,13 @@ function view_member(id)
         });
     }
 
-    function delete_member(id)
+    function view_applicant(id)
     {
       if(confirm('Are you sure delete this data?'))
       {
         // ajax delete data from database
           $.ajax({
-            url : "<?php echo site_url('index.php/admin/Members/member_delete')?>/"+id,
+            url : "<?php echo site_url('index.php/admin/Members/applicant')?>/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data)
@@ -369,7 +369,7 @@ function view_member(id)
          
             
           	
-    		<div class="panel panel-default">
+    		<!--<div class="panel panel-default">-->
     			
     			<div class="panel-body">
     				<form method="post" action="" id="form">
@@ -487,7 +487,7 @@ function view_member(id)
     				
     			</div>
                     </form>
-                            </div>
+                            <!--</div>-->
     			
     		</div>         
     	 <div class="modal-footer">

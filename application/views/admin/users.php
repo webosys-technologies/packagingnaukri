@@ -130,19 +130,19 @@
   $(document).ready( function () {   
  
  
-  $("#state").change(function() {
+  $("#user_type").change(function() {
         
    var el = $(this) ;
               $("#city").html("");
 
 
-var state=el.val();
+var user_type=el.val();
 
-        if(state)
+        if(user_type)
         {
             
       $.ajax({
-       url : "<?php echo site_url('index.php/admin/Users/show_cities')?>/" + state,        
+       url : "<?php echo site_url('index.php/admin/Users/show_cities')?>/" + user_type,        
        type: "GET",
               
        dataType: "JSON",
@@ -164,14 +164,7 @@ var state=el.val();
      }
     
  });  
- 
- 
- 
- 
- 
- 
- 
- 
+  
  
  
  
@@ -227,7 +220,7 @@ function view_user(id)
             $('#suser_last_education').html(data.user_last_education);
             $('#saddress').html(data.user_address);  
             $('#scity').html(data.user_city);
-            $('#sstate').html(data.user_state);
+            $('#suser_type').html(data.user_user_type);
             $('#spincode').html(data.user_pincode);
             
             $('#modal_form2').modal('show'); // show bootstrap modal when complete loaded
@@ -272,8 +265,8 @@ function view_user(id)
             $('[name="mobile"]').val(data.user_mobile);
             $('[name="password"]').val(data.user_password);
             $('[name="status"]').val(data.user_status);
-//            $('[name="city"]').val(data.user_city);
-            $('[name="state"]').val(data.user_state);
+            $('[name="user_type"]').val(data.user_type);
+            $('#gender').val(data.user_gender);
                         
            $("#title").text("Edit User");
            $('#myModal').modal('show');
@@ -367,7 +360,7 @@ function view_user(id)
          
             
           	
-    		<div class="panel panel-default">
+    		<!--<div class="panel panel-default">-->
     			
     			<div class="panel-body">
     				<form method="post" action="" id="form">
@@ -437,45 +430,31 @@ function view_user(id)
                                     
                                     
                      <div class="row">
-                    <div class="col-md-6">
-                        <label class="form-label">State</label><span style="color: red">*</span>
-                        <select name="state" id="state" class="form-control" required>
-                                    <option value="">-- Select State --</option>
-                                    <?php if(isset($states)){
-                                        foreach($states as $state)
-                                        { ?>
-                                           <option value="<?php echo $state->city_state; ?>"><?php echo $state->city_state; ?></option>
-                                       <?php }
-                                    }?>
-                                 
-                                    
-                                    <!--<option value="Maharashtra">Maharashtra</option>-->
+                          <div class="col-md-6">
+                        <label class="form-label">Gender</label><span style="color: red">*</span>
+                        <select name="gender" id="gender" class="form-control" required>
+                                    <option value="">-- Select Gender --</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>                                                                   
                         </select>
-                        <span class="text-danger"><?php echo form_error('state'); ?></span>
+                        <span class="text-danger" id="gen_err"></span>
 
                     </div>
+                         
+                         
                     <div class="col-md-6">
-                        <label class="form-label">City</label><span style="color: red">*</span>
-                        <select name="city" id="city" class="form-control" required>
-                                    <option value="">-- Select City --</option>
-                                    <?php if(isset($city)){
-                                        foreach($city as $city)
-                                        {
-                                           echo '<option value="">'.$state->city_state.'</option>';
-                                        }
-                                    }?>
-                                 
-                                    
-                             </select>
-                        <span class="text-danger"><?php echo form_error('city'); ?></span>
+                        <label class="form-label">Type</label><span style="color: red">*</span>
+                        <input type="text" value="" placeholder="Admin/Staff" name="user_type" class="form-control">
+                        <span class="text-danger"><?php echo form_error('user_type'); ?></span>
 
                     </div>
+                   
                     </div>
                              
     				
     			</div>
                     </form>
-                            </div>
+                            <!--</div>-->
     			
     		</div>         
     	 <div class="modal-footer">

@@ -20,7 +20,7 @@ class Users extends CI_Controller
             $id=$this->session->userdata('user_id');
             $result['user_data']=get_user_info($id);
             $result['users']=$this->User_model->getall_user();
-           
+                      
        
             $this->load->view('admin/header',$result);
             $this->load->view('admin/users',$result);
@@ -32,9 +32,22 @@ class Users extends CI_Controller
     
    function user_add()
    {
+       
+       
+        $data=array(
+                        'user_fname'          =>$this->input->post('fname'),
+                        'user_lname'          => $this->input->post('lname'),
+                        'user_email'          => $this->input->post('email'),
+                        'user_mobile'         => $this->input->post('mobile'),
+                        'user_password'       => $this->input->post('password'),
+                        'user_gender'         => $this->input->post('gender'),
+                        'user_type'           => $this->input->post('user_type'),
+                        'user_created_at'     => date('Y-m-d'),
+                        'user_status'         =>'1'
+                          );
       
-        list($get_insert,$get_data)=$this->User_model->register();
-        if($get_insert)
+        $res=$this->User_model->user_add($data);
+        if($res)
         {
             $this->session->set_flashdata('success',"User added Successfully");
              echo json_encode(array('success','User added successfully'));
@@ -50,6 +63,7 @@ class Users extends CI_Controller
                         'user_email'          => $this->input->post('email'),
                         'user_mobile'         => $this->input->post('mobile'),
                         'user_password'       => $this->input->post('password'),
+                        'user_gender'         => $this->input->post('gender'),
                         'user_type'           => $this->input->post('user_type')
                           );
             
@@ -65,7 +79,7 @@ class Users extends CI_Controller
          function ajax_edit($id)
     {
              
-            $data = $this->User_model->get_id($id);
+            $data = $this->User_model->get_user_by_id($id);
          
             echo json_encode($data);
     }
@@ -76,8 +90,10 @@ class Users extends CI_Controller
         $result=$this->User_model->delete_by_id($id);
               if($result)
                 {
+                  
+                   $this->session->set_flashdata('success', 'User Deleted Successfully');
                    echo json_encode(array("status" => true));
-                $this->session->set_flashdata('success', 'User Deleted Successfully');
+               
                 }
        
     }

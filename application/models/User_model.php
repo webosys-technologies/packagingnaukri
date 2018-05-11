@@ -62,6 +62,7 @@ class User_model extends CI_Model
     {
         $this->db->where('user_id', $id);
         $this->db->delete($this->table);
+        return $this->db->affected_rows();
     }
     
     
