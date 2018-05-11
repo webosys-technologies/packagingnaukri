@@ -141,11 +141,11 @@ class Index extends CI_Controller
             if($res)
             {          
                     $sessionArray = array(                        
-                         'member_id' => $result->member_id,
-                    'member_fname' => $result->member_fname,
-                    'member_lname' => $result->member_lname,
-                    'member_email' => $result->member_email,
-                     'member_mobile' => $result->member_mobile,
+                    'member_id' => $res->member_id,
+                    'member_fname' => $res->member_fname,
+                    'member_lname' => $res->member_lname,
+                    'member_email' => $res->member_email,
+                     'member_mobile' => $res->member_mobile,
                     'member_LoggedIn' => true
                                     );
                                     
