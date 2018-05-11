@@ -127,11 +127,47 @@ class Index extends CI_Controller
     {
         $this->load->view('member/ask_center_password');
     }
+    
+    public function login_with_otp()
+    {
+            $member_email = $this->input->post('member_email');
+            $member_otp = $this->input->post('member_otp');
+            $where=array('member_email'=>$member_email,
+                         'member_otp'=>$member_password);
+            
+         $res=$this->Members_model->login_with_otp($where);
+         
+
+            if($res)
+            {          
+                    $sessionArray = array(                        
+                         'member_id' => $result->member_id,
+                    'member_fname' => $result->member_fname,
+                    'member_lname' => $result->member_lname,
+                    'member_email' => $result->member_email,
+                     'member_mobile' => $result->member_mobile,
+                    'member_LoggedIn' => true
+                                    );
+                                    
+                    $this->session->set_userdata($sessionArray);                      
+                    echo json_encode(array('status'=> 'success'));               
+              }           
+            else
+            {                   
+                 echo json_encode(array('otp_error'=> 'Wrong OTP'));
+            } 
+            }
+          
+   
           
     
     public function loginMe()
     {
-    
+        
+             if(!empty($this->input->post('member_otp')))
+             {
+                 $this->login_with_otp();
+             }else{
             $member_email = $this->input->post('member_email');
             $member_password = $this->input->post('member_password');
             $where=array('member_email'=>$member_email,
@@ -185,7 +221,7 @@ class Index extends CI_Controller
         
                     
         }
-        
+    } 
         
         function send_otp()
         {          
@@ -206,8 +242,12 @@ class Index extends CI_Controller
         
         function email_otp($email)
         {
-                $rand= mt_rand(000000,999999) ;
+                $rand= mt_rand(000000,999999);
                 
+                $where=array('member_email'=>$email);
+                $data=array('member_otp'=>$rand);
+                $this->Members_model->member_update($where,$data);
+                              
                 
                     $headers = "From: support@Packagingnaukari.in";
                     $headers .= ". PackagingNaukari-Team" . "\r\n";

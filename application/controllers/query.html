@@ -4,4 +4,5 @@ ALTER TABLE `companies` CHANGE `company_picode` `company_pincode` VARCHAR(255) C
 2)set date data type in users table
 ALTER TABLE `users` CHANGE `user_created_at` `user_created_at` DATE NOT NULL
 
-3)
+3)member_otp column in member table
+ALTER TABLE `members` ADD `member_otp` VARCHAR(255) NOT NULL AFTER `member_resume`

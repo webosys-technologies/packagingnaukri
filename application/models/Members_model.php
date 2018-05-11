@@ -33,6 +33,21 @@ class Members_model extends CI_Model
         }
    
     }
+    
+    function login_with_otp($where)
+    {
+        $this->db->from($this->table);
+        $this->db->where($where);
+        $query=$this->db->get();
+    
+        $res=$query->row();
+        if($res)
+        {
+            return $res;
+        }else{
+            return false;
+        }
+    }
 
     function register()
     {
@@ -177,7 +192,8 @@ class Members_model extends CI_Model
             return TRUE;
         }
         }
-           
+        
+                 
        public function test()
        {
         $query=$this->db->query("ALTER TABLE `members` CHANGE `meber_username` `member_username` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL");
