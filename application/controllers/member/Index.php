@@ -133,7 +133,7 @@ class Index extends CI_Controller
             $member_email = $this->input->post('member_email');
             $member_otp = $this->input->post('member_otp');
             $where=array('member_email'=>$member_email,
-                         'member_otp'=>$member_password);
+                         'member_otp'=>$member_otp);
             
          $res=$this->Members_model->login_with_otp($where);
          
