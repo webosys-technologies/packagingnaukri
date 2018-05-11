@@ -11,10 +11,10 @@ class Dashboard extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('session');
-        $this->load->helper('url');
-        $this->load->database();
-        $this->load->model('Members_model');
+        if(!is_member_LoggedIn($this->session->userdata('member_id')))
+        {
+            redirect('Home');
+        }
       
     }
     
@@ -23,23 +23,14 @@ class Dashboard extends CI_Controller
      */
     public function index()
     {
-       $member_LoggedIn= $this->session->userdata('member_LoggedIn');
-        $member_LoggedIn;
-        if(isset($member_LoggedIn) || $member_LoggedIn == TRUE)
-        {
+       
              $id=$this->session->userdata('member_id');            
                       
-             $result['data']=$this->Members_model->get_member_by_id($id);
+             $result['member_data']=get_member_info($id);
              $this->load->view('member/header',$result);
              $this->load->view('member/dashboard');
              $this->load->view('member/footer');
-             
-                   
-        }
-        else
-        {
-            redirect('Home');
-        }
+           
     }
     
     

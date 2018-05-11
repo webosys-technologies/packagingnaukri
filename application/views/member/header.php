@@ -95,13 +95,13 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs">Suraj Shinde</span>
+                  <span class="hidden-xs"><?php if(isset($member_data)){echo $member_data->member_fname." ".$member_data->member_lname;}?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     <img src="" class="img-circle" alt="User Image" />
-                    <p>Suraj Shinde
+                    <p><?php if(isset($member_data)){echo $member_data->member_fname." ".$member_data->member_lname;}?>
                      
                       <small> <?php echo 'Member'; ?></small>
                     </p>

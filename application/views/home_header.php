@@ -197,7 +197,11 @@ $("#show_pass_box").click(function(){
             if(data.email_error)
             {
                 $("#validation_error").html(data.email_error);
-            }            
+            }   
+            if(data.otp_error)
+            {
+                $("#otp_error").html(data.otp_error);
+            }
                    
             
             if(data.status)
