@@ -273,7 +273,7 @@ class Index extends CI_Controller
                 $this->Members_model->member_update($where,$data);
      //Your authentication key
 
-$authKey = "215028AJLvfixOH5af6761a";
+$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
 
 //Multiple mobiles numbers separated by comma
 
