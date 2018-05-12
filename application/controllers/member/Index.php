@@ -121,7 +121,7 @@ class Index extends CI_Controller
 
             redirect('Home');
         }
-    }
+   }
     
     public function ask_center_password()
     {
@@ -135,6 +135,36 @@ class Index extends CI_Controller
             $where=array('member_email'=>$member_email,
                          'member_otp'=>$member_otp);
             
+          $val=is_numeric($member_email);
+          if($val)
+          {
+                       $member_email = $this->input->post('member_email');
+                       $member_otp = $this->input->post('member_otp');
+                       $where=array('member_mobile'=>$member_email,
+                         'member_otp'=>$member_otp); 
+                       $res=$this->Members_model->login_with_otp($where);     
+
+            if($res)
+            {          
+                    $sessionArray = array(                        
+                    'member_id' => $res->member_id,
+                    'member_fname' => $res->member_fname,
+                    'member_lname' => $res->member_lname,
+                    'member_email' => $res->member_email,
+                     'member_mobile' => $res->member_mobile,
+                    'member_LoggedIn' => true
+                                    );
+                                    
+                    $this->session->set_userdata($sessionArray);                      
+                    echo json_encode(array('status'=> 'success'));               
+              }           
+            else
+            {                   
+                 echo json_encode(array('otp_error'=> 'Wrong OTP'));
+            } 
+              
+              
+          }else{
          $res=$this->Members_model->login_with_otp($where);
          
 
@@ -156,6 +186,7 @@ class Index extends CI_Controller
             {                   
                  echo json_encode(array('otp_error'=> 'Wrong OTP'));
             } 
+          }
             }
           
    
@@ -226,6 +257,51 @@ class Index extends CI_Controller
         function send_otp()
         {          
             $email=$this->input->post('member_email');
+            $val=is_numeric($email);
+            
+            if($val)
+            {
+                $res=$this->Members_model->check_mobile_exist($email);
+                if($res)
+                {
+                     echo json_encode(array('email_error'=>'This Mobile is not registered'));
+                }else{
+                    
+                     $rand=mt_rand(000000,999999);
+                      $where=array('member_mobile'=>$email);
+                $data=array('member_otp'=>$rand);
+                $this->Members_model->member_update($where,$data);
+                $this->load->view("ViaNettSMS");              
+              
+// Declare variables.
+$Username = "pawan@webosys.com";
+$Password = "eh7xm";
+$MsgSender = "+918286362625";
+$DestinationAddress = "+91".$email;
+$Message = "Packaging Naukri Verification Code is ".$rand;
+
+// Create ViaNettSMS object with params $Username and $Password
+$ViaNettSMS = new ViaNettSMS($Username, $Password);
+try
+{
+	// Send SMS through the HTTP API
+	$Result = $ViaNettSMS->SendSMS($MsgSender, $DestinationAddress, $Message);
+	// Check result object returned and give response to end user according to success or not.
+	if ($Result->Success == true)
+		echo json_encode(array('send'=>"Message successfully sent!"));
+	else
+		$Message = "Error occured while sending SMS<br />Errorcode: " . $Result->ErrorCode . "<br />Errormessage: " . $Result->ErrorMessage;
+}
+catch (Exception $e)
+{
+	//Error occured while connecting to server.
+	$Message = $e->getMessage();
+}
+            
+            }
+
+
+}else{
             $res=$this->Members_model->check_if_email_exist($email);
             if($res)
             {
@@ -237,8 +313,9 @@ class Index extends CI_Controller
                 {
                 echo json_encode(array('send'=>'OTP is Send Successfully '));
                 }
-            }           
-        }
+            }   
+            }
+ }
         
         function email_otp($email)
         {

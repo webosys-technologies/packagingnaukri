@@ -32,8 +32,8 @@
   <!--<button type="button" class="btn btn-primary">Open Modal</button>-->
 
          <div class="col-md-4">
-    <!--<button class="btn btn-primary"  onclick="add_job()" data-toggle="tooltip" data-placement="bottom" title="Add User">      <i class="glyphicon glyphicon-plus"></i> Add User</button>-->
-<button type="button"  id="bt" class="btn btn-primary" onclick="add_job()"><i></i>Add User</button>
+    <!--<button class="btn btn-primary"  onclick="add_job()" data-toggle="tooltip" data-placement="bottom" title="Add Job">      <i class="glyphicon glyphicon-plus"></i> Add Job</button>-->
+<button type="button"  id="bt" class="btn btn-primary" onclick="add_job()"><i></i>Add Job</button>
     </div>
     <div class="col-md-6">
          <?php
@@ -129,7 +129,7 @@ var user_type=el.val();
         {
             
       $.ajax({
-       url : "<?php echo site_url('index.php/admin/Users/show_cities')?>/" + user_type,        
+       url : "<?php echo site_url('index.php/admin/Jobs/show_cities')?>/" + user_type,        
        type: "GET",
               
        dataType: "JSON",
@@ -183,7 +183,7 @@ function view_job(id)
         dataType: "JSON",
         success: function(data)
         {          
-            $('#sfname').html(data.user_fname);
+            $('#sfname').html(data.job_title);
             $('#slname').html(data.user_lname); 
             $('#scourse_name').html(data.course_name);
             $('#semail').html(data.user_email);
@@ -225,7 +225,7 @@ function view_job(id)
     {  
         save_method="add";        
        $('#form')[0].reset();
-        $("#title").text("Add User");
+        $("#title").text("Add Job");
         $('#myModal').modal('show');
 
     }
@@ -237,24 +237,25 @@ function view_job(id)
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/admin/Users/ajax_edit/')?>/" + id,
+        url : "<?php echo site_url('index.php/admin/Jobs/ajax_edit/')?>/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
         {
        
-            $("#append_city").remove();     
-            $('[name="user_id"]').val(data.user_id);
-            $('[name="fname"]').val(data.user_fname);
-            $('[name="lname"]').val(data.user_lname);
-            $('[name="email"]').val(data.user_email);
-            $('[name="mobile"]').val(data.user_mobile);
-            $('[name="password"]').val(data.user_password);
-            $('[name="status"]').val(data.user_status);
-            $('[name="user_type"]').val(data.user_type);
-            $('#gender').val(data.user_gender);
+           
+            $('[name="job_id"]').val(data.job_id);
+            $('[name="jobtitle"]').val(data.job_title);
+            $('[name="jobdesc"]').val(data.job_description);
+            $('[name="joblocation"]').val(data.job_city);
+            $('[name="jobtype"]').val(data.job_type);
+            $('[name="jobsalary"]').val(data.job_salary);
+            $('[name="company"]').val(data.company_id);
+            $('[name="qualification"]').val(data.job_education);
+            $('[name="experience"]').val(data.job_experience);
+           
                         
-           $("#title").text("Edit User");
+           $("#title").text("Edit Job");
            $('#myModal').modal('show');
             
 
@@ -275,11 +276,11 @@ function view_job(id)
       var url;
       if(save_method == 'add')
       {         
-        url = "<?php echo site_url('index.php/admin/Users/user_add')?>";
+        url = "<?php echo site_url('index.php/admin/Jobs/job_add')?>";
       }
       else
       {
-        url = "<?php echo site_url('index.php/admin/Users/user_update')?>";
+        url = "<?php echo site_url('index.php/admin/Jobss/job_update')?>";
       }
 
        // ajax adding data to database
@@ -311,7 +312,7 @@ function view_job(id)
       {
         // ajax delete data from database
           $.ajax({
-            url : "<?php echo site_url('index.php/admin/Users/user_delete')?>/"+id,
+            url : "<?php echo site_url('index.php/admin/Jobs/job_delete')?>/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data)
@@ -350,63 +351,74 @@ function view_job(id)
     			
     			<div class="panel-body">
     				<form method="post" action="" id="form">
-                                    <input type="hidden" value="" name="user_id">
+                                    <input type="hidden" value="" name="job_id">
     				 <div class="row">
-                                <div class="col-md-6  ">                                
+                                <div class="col-md-12">                                
                                     <div class="form-group">
-                                        <label for="fname">First Name<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="First Name" class="form-control required" id="fname" name="fname" maxlength="128" required>
+                                        <label>Job Title: (*)</label>
+                                    <input name="jobtitle" class="form-control" placeholder="Job Title" value="">
                                         <span class="text-danger" id="fname_err"></span>
                                         
                                     </div>
-                                    <span style="color:red" id="text_field1_error"></span>
-                                    
+                                                                       
                                 </div>
-                                <div class="col-md-6">
+                                     </div>
+                                    <div class="row">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="lname">Last Name<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Last Name" class="form-control" id="lname"  name="lname" maxlength="128" required>
+                                        <label>Company Name: (*)</label>
+                                        <select name="company" class="form-control">
+                                            <option>-- Select Company --</option>
+                                            <?php
+                                            if(isset($companies))
+                                            {
+                                                foreach($companies as $comp)
+                                            
+                                            {
+                                                echo '<option value="'.$comp->company_id.'">'.$comp->company_name.'</option>';
+                                            }
+                                            }
+                                            ?>
+                                    </select>
                                       <span class="text-danger" id="lname_err"></span>
                                     </div>
-                                    <span style="color:red" id="text_field2_error"></span>
+                                   
                                 </div>
                             </div>
                                     
                                     <div class="row">
                                 <div class="col-md-12  ">                                
                                     <div class="form-group">
-                                        <label for="fname">Email Id<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Email Id" class="form-control required" id="email" name="email" maxlength="128" required>
+                                        <label>Qualification: (*)</label>
+                                    <input name="qualification" placeholder="Qualification" class="form-control" value="">
                                         <span class="text-danger" id="email_err"></span>
                                         
                                     </div>
-                                    <span style="color:red" id="text_field1_error"></span>
-                                    
+                                                                       
                                 </div>
                                </div>
                                     
                                     <div class="row">
                                 <div class="col-md-12">                                
                                     <div class="form-group">
-                                        <label for="fname">Mobile No<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Mobile No" class="form-control required" id="mobile" name="mobile" maxlength="128" required>
+                                       <label>Experience: (*)</label>
+                                       <input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">
                                         <span class="text-danger" id="mobile_err"></span>
                                         
                                     </div>
-                                    <span style="color:red" id="text_field1_error"></span>
-                                    
+                                                                      
                                 </div>
                                         </div>
                                     
                                     <div class="row">
                                 <div class="col-md-12">                                
                                     <div class="form-group">
-                                        <label for="fname">Password<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Password" class="form-control required" id="password" name="password" maxlength="128" required>
+                                       <label>Job Description: (*)</label>
+                                    <textarea cols="80" id="editor" class="form-control" name="jobdesc" rows="10"></textarea>
                                         <span class="text-danger" id="password_err"></span>
                                         
                                     </div>
-                                    <span style="color:red" id="text_field1_error"></span>
+                                   
                                     
                                 </div>
                                 
@@ -416,25 +428,27 @@ function view_job(id)
                                     
                                     
                      <div class="row">
-                          <div class="col-md-6">
-                        <label class="form-label">Gender</label><span style="color: red">*</span>
-                        <select name="gender" id="gender" class="form-control" required>
-                                    <option value="">-- Select Gender --</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>                                                                   
-                        </select>
+                          <div class="col-md-12">
+                       <label>Job Location: (*)</label>
+                                    <input name="joblocation" placeholder="Job Location" class="form-control" value="">
                         <span class="text-danger" id="gen_err"></span>
 
+                    </div>         
                     </div>
-                         
-                         
-                    <div class="col-md-6">
-                        <label class="form-label">Type</label><span style="color: red">*</span>
-                        <input type="text" value="" placeholder="Admin/Staff" name="user_type" class="form-control">
-                        <span class="text-danger"><?php echo form_error('user_type'); ?></span>
+                                    
+                     <div class="row">
+                          <div class="col-md-6">
+                       <label>Job Type: (*)</label>
+                                    <input name="jobtype" placeholder="Full Time/Part Time" class="form-control" value="">
+                        <span class="text-danger" id="gen_err"></span>
 
-                    </div>
-                   
+                    </div>  
+                         <div class="col-md-6">
+                       <label>Job Salary: (*)</label>
+                                    <input name="jobsalary" placeholder="Job Salary" class="form-control" value="">
+                        <span class="text-danger" id="gen_err"></span>
+
+                    </div>  
                     </div>
                              
     				

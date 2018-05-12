@@ -36,13 +36,14 @@ class Jobs extends CI_Controller
             $id=$this->session->userdata('user_id');
             $result['user_data']=get_user_info($id);
             $result['jobs']=$this->Jobs_model->getall_jobs();
-                  
+            $result['companies']=$this->Companies_model->getall_companies();
+           
              $this->load->view('admin/header',$result);
              $this->load->view('admin/view_jobs',$result);
              $this->load->view('admin/footer');       
     }
     
-    public function update_job()
+    public function job_update()
     {
 //        echo $id;
         $form=$this->input->post();
@@ -63,6 +64,15 @@ class Jobs extends CI_Controller
        $this->session->set_flashdata('success','Data Updated Successfully');
        redirect('admin/Jobs/view_jobs');
          }
+    }
+    
+    public function ajax_edit($id)
+    {
+        $res=$this->Jobs_model->job_by_id($id);
+        if($res)
+        {
+            echo json_encode($res);
+        }
     }
     
   

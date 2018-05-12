@@ -193,6 +193,19 @@ class Members_model extends CI_Model
         }
         }
         
+         function check_mobile_exist($member_mobile)
+        {
+        $this->db->where('member_mobile',$member_mobile);
+        $result=$this->db->get($this->table);
+
+        if($result->num_rows()>0)
+        {
+            return FALSE;
+        }else{
+            return TRUE;
+        }
+        }
+        
                  
        public function test()
        {

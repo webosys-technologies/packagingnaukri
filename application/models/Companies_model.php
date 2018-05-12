@@ -7,14 +7,16 @@ class Companies_model extends CI_Model
     
      public function getall_companies()
      {
-       
+       $query=$this->db->get($this->table);
+       return $query->result();
      }
      
-     public function test()
+     public function companies_by_recruiter($id)
      {
-        
-         
-                 }
+        $this->db->where('recruiter_id',$id);
+        $this->db->get($this->table);
+        return $query->result();         
+     }
 
    
 }

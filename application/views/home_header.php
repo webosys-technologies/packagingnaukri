@@ -102,6 +102,7 @@
         
 
 $("#show_otp_box").click(function(){
+    $("#otp").val("");
     
         var otp_val;
         otp_val=email_validation();
@@ -200,7 +201,7 @@ $("#show_pass_box").click(function(){
             }   
             if(data.otp_error)
             {
-                $("#otp_error").html(data.otp_error);
+                $("#otp_err").html(data.otp_error);
             }
                    
             
@@ -301,7 +302,7 @@ $("#show_pass_box").click(function(){
                   <form action="" id="login_form" method="post">
                       
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" id="member_email" placeholder="Username or Email" name="member_email" required /><span class="text-danger" id="email_err"></span>
+            <input type="text" class="form-control" id="member_email" placeholder="Email or Mobile No" name="member_email" required /><span class="text-danger" id="email_err"></span>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
            
