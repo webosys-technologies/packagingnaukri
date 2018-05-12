@@ -43,21 +43,53 @@ class Jobs extends CI_Controller
              $this->load->view('admin/footer');       
     }
     
+    public function job_add()
+    {
+        $form=$this->input->post();
+        
+        $id=$this->Companies_model->get_recruiter_by_company($form['company']);
+        $data=array(
+                   'recruiter_id'=>$id,
+                   'company_id'=>$form['company'],
+                   'job_title'=>$form['jobtitle'],
+                   'job_type'=>$form['jobtype'],
+                   'job_education'=>$form['qualification'],
+                   'job_description'=>$form['jobdesc'],
+                   'job_city'=>$form['joblocation'],
+                   'job_experience'=>$form['experience'],
+                   'job_salary'=>$form['jobsalary'],
+                   'job_created_at'=>date('Y-m-d'),
+                   'job_status'=>'1'
+        );
+        
+          $res=$this->Jobs_model->job_add($data);
+          if($res)
+          {
+               $this->session->set_flashdata('success','job added successfully');
+              echo json_encode(array('success'=>'job added successfully'));
+          }
+    }
+    
     public function job_update()
     {
 //        echo $id;
         $form=$this->input->post();
+        $id=$this->Companies_model->get_recruiter_by_company($form['company']);
        
-        $data=array('job_title'=>$form['jobtitle'],
-//                    ''=>$form['company'],
-                    'job_education'=>$form['qualification'],
-                    'job_experience'=>$form['experience'],
-                    'job_description'=>$form['jobdesc'],
-                    'job_city'=>$form['joblocation'],
-                    'job_id'=>$form['id'],
-                    
-            
+        $data=array(
+                   'recruiter_id'=>$id,
+                   'company_id'=>$form['company'],
+                   'job_title'=>$form['jobtitle'],
+                   'job_type'=>$form['jobtype'],
+                   'job_education'=>$form['qualification'],
+                   'job_description'=>$form['jobdesc'],
+                   'job_city'=>$form['joblocation'],
+                   'job_experience'=>$form['experience'],
+                   'job_salary'=>$form['jobsalary'],
+                   'job_created_at'=>date('Y-m-d'),
+                   'job_status'=>'1'
         );
+        
          $result=$this->Jobs_model->update_job($data,$form['id']);
          if($result>0)
          {
@@ -72,6 +104,16 @@ class Jobs extends CI_Controller
         if($res)
         {
             echo json_encode($res);
+        }
+    }
+    
+    public function job_delete($id)
+    {
+        $res=$this->Jobs_model->delete_job($id);
+        if($res)
+        {
+            $this->session->set_flashdata('success','job deleted successfully');
+            echo json_encode(array('success'=>'job deleted successfully'));
         }
     }
     

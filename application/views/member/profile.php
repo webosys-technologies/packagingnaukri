@@ -30,7 +30,8 @@ a:hover {
         <li><a href="<?php echo base_url(); ?>student/Dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Profile</li>
       </ol>
-      
+             </section>
+
       <section class="content" >
 
          <script>
@@ -168,8 +169,9 @@ function myFunction1() {
          </li>
              
       </ul><br>
-      </div>
-     </div>
+      </div>                      
+     </div>                
+                
              </section>
          <!--</div>-->
       <div  id="video">
@@ -226,5 +228,5 @@ function myFunction1() {
        </div>  
              
    </section>
-       </section>
+      
   </div> 

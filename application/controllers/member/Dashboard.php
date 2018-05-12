@@ -27,9 +27,13 @@ class Dashboard extends CI_Controller
              $id=$this->session->userdata('member_id');            
                       
              $result['member_data']=get_member_info($id);
-             $this->load->view('member/header',$result);
+//             $this->load->view('member/header',$result);
+             $this->load->view('member/member_header',$result);
              $this->load->view('member/dashboard');
-             $this->load->view('member/footer');
+//               $this->load->view('member/home');
+//             $this->load->view('member/footer');
+             $this->load->view('member/member_footer');
+
            
     }
     

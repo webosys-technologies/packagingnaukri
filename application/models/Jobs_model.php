@@ -34,6 +34,20 @@ class Jobs_model extends CI_Model
          return $res->row();
      }
      
+     public function job_add($data)
+     {
+         $this->db->insert($this->table,$data);
+         return $this->db->affected_rows();
+     }
+     
+     public function delete_job($id)
+     {
+         $this->db->from($this->table);
+         $this->db->where('job_id',$id);
+         $this->db->delete();
+         return $this->db->affected_rows();
+     }
+     
      
 
    

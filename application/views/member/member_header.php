@@ -31,6 +31,17 @@
 
         
         <style>
+            .affix {
+      top: 0;
+      width: 100%;
+      z-index: 9999 !important;
+  }
+
+  .affix + .container-fluid {
+      padding-top: 70px;
+  }
+            
+            
             #header{
                 margin:25px;
                 
@@ -70,9 +81,13 @@
 <script>
     $(document).ready(function() {
         
+        
+        $("#search").click(function(){
+        $('#myModal').modal('show');
+          });
   
 $("#myModal").on("hidden.bs.modal", function () {
-  
+       
           $('#login_form')[0].reset(); 
        $("#validation_error").html("");
        $("#email_err").html("");
@@ -168,55 +183,75 @@ $("#show_pass_box").click(function(){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a id="logo" class="navbar-brand" href="#"><img src="<?php echo  base_url();?>assets/images/logo.png" width="200px" height="50px"></a>
+        <a id="logo" class="navbar-brand" href="#"><img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="200px" height="50px"></a>
     </div>
 
      <!--Collect the nav links, forms, and other content for toggling--> 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
-          <li><a id="header_link" href="<?php echo base_url();?>Home/index">Home</a></li>
-        <li><a id="header_link" href="<?php echo base_url();?>Home/about_us">About Us</a></li>
+           <li class="dropdown">
+          <a id="header_link" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Jobs Search By<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><a href="<?php echo base_url();?>recruiter/index/login">Jobs by City</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="<?php echo base_url();?>recruiter/index">Jobs by Qualification</a></li>
+          </ul>
+        </li>
+        <li><a id="header_link" href="">Jobs</a></li>
+        <li><a id="header_link" href="">Profile</a></li>
+
        <li class="dropdown">
-          <a id="header_link" href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
+          <a id="header_link" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More<span class="caret"></span></a>
           <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url();?>Home/recruitment">Recruitment</a></li>
+              <li><a href="">Recruiter Action</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="<?php echo base_url();?>Home/resource_outsourcing">Resource Outsourcing</a></li>
+            <li><a href="">Applied Job</a></li>
           </ul>
-        </li>
-        
-        
-        <li><a id="header_link" href="<?php echo base_url();?>Home/job_openings">Job Openings</a></li>
-        
-       
-          <li class="dropdown">
-          <a id="header_link" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Member<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-              <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="<?php echo base_url();?>member/index">Register</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a id="header_link" href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Recruiter<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url();?>recruiter/index/login">Login</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="<?php echo base_url();?>recruiter/index">Register</a></li>
-          </ul>
-        </li>
-         <!--<li><a id="header_link" href="<?php echo base_url();?>Home/post_requirement">Post Your Requirement</a></li>-->
-          <li><a id="header_link" href="<?php echo base_url();?>Home/contact_us">Contact Us</a></li>   
+        </li>     
         
       </ul>
+       
+         <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">        
+      <a id="header_link" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#"><span class="glyphicon glyphicon-user"></span> Hi <?php if(isset($member_data)){echo $member_data->member_fname." ".$member_data->member_lname;}?><span class="caret"></span></a>
+        <ul class="dropdown-menu">
+              <li><a href="">Setting</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="">Sign Out</a></li>
+          </ul>        
+            </li>
+             </ul>
 
     </div>  
   </div> 
 </nav>
-  </div>
-   
+  </div>   
 </header> 
+
+
+<div class="row" style="background:#F2F3F4">
+        <div class="container"> <br>       
+		<div class="col-md-9 col-md-offset-1">
+		 <div class="input-group">
+  <input type="text" class="form-control" data-toggle="modal" id="log" data-target="#myModal" placeholder="Search Keyword..." aria-describedby="basic-addon2">
+  <span class="input-group-addon" id="basic-addon2"><a class="glyphicon glyphicon-search"></a></span>
+    </div>   
+                </div> <br><br><br>
+        </div>
+          
+            </div>
+
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+  <ul class="nav navbar-nav">
+    <li class="active"><a href="#">Basic Topnav</a></li>
+    <li><a href="#">Page 1</a></li>
+    <li><a href="#">Page 2</a></li>
+    <li><a href="#">Page 3</a></li>
+  </ul>
+</nav>
+
+
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -224,53 +259,20 @@ $("#show_pass_box").click(function(){
       <div style="background:#002863" class="modal-header">
           
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Member Sign In</strong></h4></center>
+        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Search</strong></h4></center>
       </div>
       <div id="calendar" style="background:#F2F3F4" class="modal-body">
           <div class="row">
               <div class="col-md-8 col-md-offset-2">
                   <span id="validation_error" class="text-danger"></span>
-                  <form action="" id="login_form" method="post">
+                  <form action="" method="post">
                       
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" id="member_email" placeholder="Username or Email" name="member_email" required /><span class="text-danger" id="email_err"></span>
+            <input type="text" class="form-control" id="member_email" placeholder="Email or Mobile No" name="member_email" required /><span class="text-danger" id="email_err"></span>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
-           
-          <div class="form-group has-feedback" id="pass_field">
-            <input type="password" class="form-control" placeholder="Password" id="password" name="member_password" required /><span class="text-danger" id="password_err"></span>
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-          </div>
-                      
-             <div class="form-group has-feedback" id="otp_box" style="display:none;">
-            <input type="text" class="form-control" placeholder="Enter OTP" id="password" name="member_otp" required /><span class="text-danger" id="password_err"></span>
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            <center><h4><a class="label label-warning" id="show_pass_box">Login With Password</a></h4></center>
-          </div>
-                      
-             
-             <center><h4><a class="label label-warning" id="show_otp_box">Login With OTP</a></h4></center>
-           
-          <div class="row">
-            <div class="col-xs-8">    
-              <!-- <div class="checkbox icheck">
-                <label>
-                  <input type="checkbox"> Remember Me
-                </label>
-              </div>  -->                       
-            </div><!-- /.col -->
-            <center>
-              <button type="button" onclick="member_login()"class="btn btn-primary btn-block btn-flat"  />Sign In</button>
-            
-             <p>or</p>
-              <a class="btn btn-info">
-                  <span class="fa fa-google"></span> <span style="color:white">Sign in with Google</span>
-  </a>
-              <a class="btn" style="background-color:3b5998">
-    <span class="fa fa-facebook"></span><span style="color:white"> Sign in with Facebook</span>
-  </a>
-           
-          </div>
+      
+          
         </form>
                   </div>     
                  
@@ -280,3 +282,7 @@ $("#show_pass_box").click(function(){
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+
+
+
