@@ -271,33 +271,77 @@ class Index extends CI_Controller
                       $where=array('member_mobile'=>$email);
                 $data=array('member_otp'=>$rand);
                 $this->Members_model->member_update($where,$data);
-                $this->load->view("ViaNettSMS");              
-              
-// Declare variables.
-$Username = "pawan@webosys.com";
-$Password = "eh7xm";
-$MsgSender = "+918286362625";
-$DestinationAddress = "+91".$email;
-$Message = "Packaging Naukri Verification Code is ".$rand;
+     //Your authentication key
 
-// Create ViaNettSMS object with params $Username and $Password
-$ViaNettSMS = new ViaNettSMS($Username, $Password);
-try
+$authKey = "215028AJLvfixOH5af6761a";
+
+//Multiple mobiles numbers separated by comma
+
+$mobileNumber = $email;
+//Sender ID,While using route4 sender id should be 6 characters long.
+
+$senderId = "pkgnau";
+//Your message to send, Add URL encoding here.
+
+$message = 'your Packaging Naukri verification code is '.$rand;
+
+
+//Define route 
+
+$route = "default";
+//Prepare you post parameters
+
+$postData = array(
+
+    'authkey' => $authKey,
+
+    'mobiles' => $mobileNumber,
+
+    'message' => $message,
+
+    'sender' => $senderId,
+
+    'route' => $route
+
+);
+
+
+//API URL
+
+$url="http://api.msg91.com/api/sendhttp.php";
+
+
+// init the resource
+
+$ch = curl_init();
+curl_setopt_array($ch, array(
+
+    CURLOPT_URL => $url,
+
+    CURLOPT_RETURNTRANSFER => true,
+
+    CURLOPT_POST => true,
+
+    CURLOPT_POSTFIELDS => $postData
+
+    //,CURLOPT_FOLLOWLOCATION => true
+
+));
+//Ignore SSL certificate verification
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+//get response
+
+$output = curl_exec($ch);
+//Print error if any
+if(curl_errno($ch))
 {
-	// Send SMS through the HTTP API
-	$Result = $ViaNettSMS->SendSMS($MsgSender, $DestinationAddress, $Message);
-	// Check result object returned and give response to end user according to success or not.
-	if ($Result->Success == true)
-		echo json_encode(array('send'=>"Message successfully sent!"));
-	else
-		$Message = "Error occured while sending SMS<br />Errorcode: " . $Result->ErrorCode . "<br />Errormessage: " . $Result->ErrorMessage;
+    echo json_encode(array('error'=> curl_error($ch)));
 }
-catch (Exception $e)
-{
-	//Error occured while connecting to server.
-	$Message = $e->getMessage();
-}
-            
+curl_close($ch);
+echo json_encode(array('send'=>'OTP is sent Successfully'));       
+//echo $output;
             }
 
 
