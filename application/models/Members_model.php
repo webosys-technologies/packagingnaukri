@@ -105,8 +105,10 @@ class Members_model extends CI_Model
         
         public function get_member_by_id($id)
 	{
-         $this->db->from($this->table);        
-         $this->db->where('member_id',$id);
+         $this->db->from('members as mem');  
+         $this->db->join('educations as edu','edu.member_id=mem.member_id','LEFT');
+         $this->db->join('employments as emp','emp.member_id=mem.member_id','LEFT');
+         $this->db->where('mem.member_id',$id);
          $query = $this->db->get();
        	return $query->row();
 	} 

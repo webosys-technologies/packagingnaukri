@@ -81,7 +81,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!--<img src="<?php echo base_url(); ?>assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">-->
-               <img src='#' class="user-image" alt="User Image"/>
+               <img src='<?php if(isset($user_data)){echo base_url(); echo $user_data->user_profile_pic;}else{ echo base_url()."profile_pic/boss.png"; }?>' class="user-image" alt="User Image"/>
                 <span class="hidden-xs"><?php if(isset($user_data)){echo $user_data->user_fname." ".$user_data->user_lname;}else{echo "NO NAME";}?></span>
             </a>
             <ul class="dropdown-menu">
@@ -175,6 +175,11 @@
             </span>
           </a>
         </li> 
+        <li>
+          <a href="<?php echo base_url(); ?>admin/Companies">
+            <i class="fa fa-folder"></i> <span>Companies</span>            
+          </a>
+         </li>
         <li>
           <a href="<?php echo base_url(); ?>admin/Jobs/view_jobs">
             <i class="fa fa-folder"></i> <span>Jobs</span>            

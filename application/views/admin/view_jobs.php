@@ -110,6 +110,9 @@
 
     </table>
     </div>
+    
+    
+    
 </section>
   </div>
 
@@ -232,6 +235,7 @@ function view_job(id)
 
     function edit_job(id)
     {     
+      
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
 
@@ -241,9 +245,8 @@ function view_job(id)
         type: "GET",
         dataType: "JSON",
         success: function(data)
-        {
-       
-           
+        {     
+          
             $('[name="job_id"]').val(data.job_id);
             $('[name="jobtitle"]').val(data.job_title);
             $('[name="jobdesc"]').val(data.job_description);
@@ -280,7 +283,7 @@ function view_job(id)
       }
       else
       {
-        url = "<?php echo site_url('index.php/admin/Jobss/job_update')?>";
+        url = "<?php echo site_url('index.php/admin/Jobs/job_update')?>";
       }
 
        // ajax adding data to database
@@ -339,7 +342,7 @@ function view_job(id)
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" style="background:#3c8dbc">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <center><h4 id="title" class="modal-title"></h4></center>
         </div>

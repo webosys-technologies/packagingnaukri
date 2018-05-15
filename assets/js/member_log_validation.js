@@ -83,20 +83,16 @@ function member_log_validation()
                              {
                                  $("#otp_err").html("Invalid OTP");
                              }else
-                             if($('#otp').val().length!=6){
-                                 $("#otp_err").html("OTP is 6 digit");
-                             }else
-                                {
+                               {
                                 $("#otp_err").html("");
                                 var otp="true";
                                 }
                              
                              
                              
+                                                      
                              
-                             
-                             
-      if(email=="true" && pass=="true" || otp=="true")      {
+      if(email=="true" && pass=="true")      {
           return true;
       }else{
           return false;

@@ -18,9 +18,9 @@ class Index extends CI_Controller
 	{
            $data['states']=$this->Cities_model->getall_state();
           
-          $this->load->view('member/home_header');
+          $this->load->view('home_header');
           $this->load->view('member/sin',$data);
-          $this->load->view('member/home_footer');
+          $this->load->view('home_footer');
 	}
 
    function register()
@@ -283,12 +283,12 @@ $mobileNumber = $email;
 $senderId = "pkgnau";
 //Your message to send, Add URL encoding here.
 
-$message = 'your Packaging Naukri verification code is '.$rand;
+$message =$rand.' is your OTP for verifying mobile number on packagingnaukri.com.';
 
 
 //Define route 
 
-$route = "default";
+$route = "4";
 //Prepare you post parameters
 
 $postData = array(

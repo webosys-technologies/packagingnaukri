@@ -17,12 +17,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-users"></i><strong> User Management </strong>
+        <i class="fa fa-users"></i><strong> Companies Management </strong>
         <small>Add, Edit, Delete <?php  ?></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Manage Users</li>
+        <li class="active">Manage Companies</li>
       </ol>
     </section>
     <hr style="border-top: 1px solid #ccc;">
@@ -32,8 +32,8 @@
   <!--<button type="button" class="btn btn-primary">Open Modal</button>-->
 
          <div class="col-md-4">
-    <!--<button class="btn btn-primary"  onclick="add_user()" data-toggle="tooltip" data-placement="bottom" title="Add User">      <i class="glyphicon glyphicon-plus"></i> Add User</button>-->
-<button type="button"  id="bt" class="btn btn-primary" onclick="add_user()"><i></i>Add User</button>
+    <!--<button class="btn btn-primary"  onclick="add_company()" data-toggle="tooltip" data-placement="bottom" title="Add Company">      <i class="glyphicon glyphicon-plus"></i> Add Company</button>-->
+<button type="button"  id="bt" class="btn btn-primary" onclick="add_company()"><i></i>Add Company</button>
     </div>
     <div class="col-md-6">
          <?php
@@ -71,49 +71,36 @@
     <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
       <thead>
         <tr bgcolor="#338cbf" style="color:#fff">
-          <th>ID</th>
-          <th>NAME</th>
-          <th>EMAIL</th>
-          <th>MOBILE</th>
-          <th>TYPE</th>
-          <th>CREATED AT</th>
-          <th>STATUS</th>
-
-          <th style="width:125px;">ACTION
-          </p></th>
+           <th>ID</th>
+                                            <th>Company Name</th>
+                                            <th>Logo</th>
+                                            <th>Email</th>
+                                            <th>Contact</th>
+                                            <th>Location</th>
+                                            <th>Established</th>
+                                            <th>Action</th>
+         
         </tr>
       </thead>
       <tbody id="myTable">
         <?php
-          if (isset($users)) {
+          if (isset($companies)) {
             
           
-         foreach($users as $res){
-             if($res->user_status=='1'){?>
+         foreach($companies as $comp){
+             if($comp->company_status=='1'){?>
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->user_id; ?>" class="" ></td> --> 
-                                        <td><?php echo $res->user_id;?></td>
-                                        <td><?php echo $res->user_fname.' '. $res->user_lname; ?></td>
-                                        <td><?php echo $res->user_email;?></td>
-                                       <td><?php echo $res->user_mobile;?></td>
-                                       <td><?php echo $res->user_type;?></td>
-                                       <td><?php echo $res->user_created_at;?></td>
-                                       <td>
-                                           <?php 
-                                       if($res->user_status==1)
-                                       {
-                                           echo "Active";
-                                       }
-                                       else 
-                                       {
-                                           echo "Not Active";
-                                       }
-                                       ?></td>
-                                       <td>
-                  <button class="btn btn-success" onclick="edit_user(<?php echo $res->user_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit User"><i class="glyphicon glyphicon-pencil"></i></button>
-                  <button class="btn btn-danger" onclick="delete_user(<?php echo $res->user_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete User"><i class="glyphicon glyphicon-trash"></i></button>
-                 
-
-                </td>
+                                        <td><?php echo $comp->company_id?></td>
+                                            <td><?php echo $comp->company_name?></td>
+                                            <td><img src="<?php echo base_url().$comp->company_logo;?>" width="80px" height="30px"></td>
+                                            <td><?php echo $comp->company_email?></td>
+                                            <td><?php echo $comp->company_contact?></td>
+                                            <td><?php echo $comp->company_city?></td>
+				            <td><?php echo $comp->company_created_at?></td>
+                                           
+                <td>  <button class="btn btn-success" onclick="edit_company(<?php echo $comp->company_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
+                  <button class="btn btn-danger" onclick="delete_company(<?php echo $comp->company_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
+                             </td>
               </tr>
           <?php }}}?>
 
@@ -123,6 +110,9 @@
 
     </table>
     </div>
+    
+    
+    
 </section>
   </div>
 
@@ -142,7 +132,7 @@ var user_type=el.val();
         {
             
       $.ajax({
-       url : "<?php echo site_url('index.php/admin/Users/show_cities')?>/" + user_type,        
+       url : "<?php echo site_url('index.php/admin/Companies/show_cities')?>/" + user_type,        
        type: "GET",
               
        dataType: "JSON",
@@ -183,7 +173,7 @@ var user_type=el.val();
     var id;
 
 
-function view_user(id)
+function view_company(id)
     {
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
@@ -196,7 +186,7 @@ function view_user(id)
         dataType: "JSON",
         success: function(data)
         {          
-            $('#sfname').html(data.user_fname);
+            $('#sfname').html(data.company_title);
             $('#slname').html(data.user_lname); 
             $('#scourse_name').html(data.course_name);
             $('#semail').html(data.user_email);
@@ -234,41 +224,41 @@ function view_user(id)
     });
     }
 
-    function add_user()
+    function add_company()
     {  
         save_method="add";        
        $('#form')[0].reset();
-        $("#title").text("Add User");
+        $("#title").text("Add Company");
         $('#myModal').modal('show');
-//        $("#bt").attr("data-toggle","modal");
-//        $("#bt").attr("data-target","#myModal");
+
     }
 
-    function edit_user(id)
+    function edit_company(id)
     {     
+      
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/admin/Users/ajax_edit/')?>/" + id,
+        url : "<?php echo site_url('index.php/admin/Companies/ajax_edit/')?>/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
-        {
-       
-            $("#append_city").remove();     
-            $('[name="user_id"]').val(data.user_id);
-            $('[name="fname"]').val(data.user_fname);
-            $('[name="lname"]').val(data.user_lname);
-            $('[name="email"]').val(data.user_email);
-            $('[name="mobile"]').val(data.user_mobile);
-            $('[name="password"]').val(data.user_password);
-            $('[name="status"]').val(data.user_status);
-            $('[name="user_type"]').val(data.user_type);
-            $('#gender').val(data.user_gender);
+        {     
+          
+            $('[name="company_id"]').val(data.company_id);
+            $('[name="companytitle"]').val(data.company_title);
+            $('[name="companydesc"]').val(data.company_description);
+            $('[name="companylocation"]').val(data.company_city);
+            $('[name="companytype"]').val(data.company_type);
+            $('[name="companysalary"]').val(data.company_salary);
+            $('[name="company"]').val(data.company_id);
+            $('[name="qualification"]').val(data.company_education);
+            $('[name="experience"]').val(data.company_experience);
+           
                         
-           $("#title").text("Edit User");
+           $("#title").text("Edit Job");
            $('#myModal').modal('show');
             
 
@@ -289,11 +279,11 @@ function view_user(id)
       var url;
       if(save_method == 'add')
       {         
-        url = "<?php echo site_url('index.php/admin/Users/user_add')?>";
+        url = "<?php echo site_url('index.php/admin/Companies/company_add')?>";
       }
       else
       {
-        url = "<?php echo site_url('index.php/admin/Users/user_update')?>";
+        url = "<?php echo site_url('index.php/admin/Companies/company_update')?>";
       }
 
        // ajax adding data to database
@@ -319,13 +309,13 @@ function view_user(id)
         });
     }
 
-    function delete_user(id)
+    function delete_company(id)
     {
       if(confirm('Are you sure delete this data?'))
       {
         // ajax delete data from database
           $.ajax({
-            url : "<?php echo site_url('index.php/admin/Users/user_delete')?>/"+id,
+            url : "<?php echo site_url('index.php/admin/Companies/company_delete')?>/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data)
@@ -364,63 +354,74 @@ function view_user(id)
     			
     			<div class="panel-body">
     				<form method="post" action="" id="form">
-                                    <input type="hidden" value="" name="user_id">
+                                    <input type="hidden" value="" name="company_id">
     				 <div class="row">
-                                <div class="col-md-6  ">                                
+                                <div class="col-md-12">                                
                                     <div class="form-group">
-                                        <label for="fname">First Name<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="First Name" class="form-control required" id="fname" name="fname" maxlength="128" required>
+                                        <label>Job Title: (*)</label>
+                                    <input name="companytitle" class="form-control" placeholder="Job Title" value="">
                                         <span class="text-danger" id="fname_err"></span>
                                         
                                     </div>
-                                    <span style="color:red" id="text_field1_error"></span>
-                                    
+                                                                       
                                 </div>
-                                <div class="col-md-6">
+                                     </div>
+                                    <div class="row">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="lname">Last Name<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Last Name" class="form-control" id="lname"  name="lname" maxlength="128" required>
+                                        <label>Company Name: (*)</label>
+                                        <select name="company" class="form-control">
+                                            <option>-- Select Company --</option>
+                                            <?php
+                                            if(isset($companies))
+                                            {
+                                                foreach($companies as $comp)
+                                            
+                                            {
+                                                echo '<option value="'.$comp->company_id.'">'.$comp->company_name.'</option>';
+                                            }
+                                            }
+                                            ?>
+                                    </select>
                                       <span class="text-danger" id="lname_err"></span>
                                     </div>
-                                    <span style="color:red" id="text_field2_error"></span>
+                                   
                                 </div>
                             </div>
                                     
                                     <div class="row">
                                 <div class="col-md-12  ">                                
                                     <div class="form-group">
-                                        <label for="fname">Email Id<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Email Id" class="form-control required" id="email" name="email" maxlength="128" required>
+                                        <label>Qualification: (*)</label>
+                                    <input name="qualification" placeholder="Qualification" class="form-control" value="">
                                         <span class="text-danger" id="email_err"></span>
                                         
                                     </div>
-                                    <span style="color:red" id="text_field1_error"></span>
-                                    
+                                                                       
                                 </div>
                                </div>
                                     
                                     <div class="row">
                                 <div class="col-md-12">                                
                                     <div class="form-group">
-                                        <label for="fname">Mobile No<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Mobile No" class="form-control required" id="mobile" name="mobile" maxlength="128" required>
+                                       <label>Experience: (*)</label>
+                                       <input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">
                                         <span class="text-danger" id="mobile_err"></span>
                                         
                                     </div>
-                                    <span style="color:red" id="text_field1_error"></span>
-                                    
+                                                                      
                                 </div>
                                         </div>
                                     
                                     <div class="row">
                                 <div class="col-md-12">                                
                                     <div class="form-group">
-                                        <label for="fname">Password<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Password" class="form-control required" id="password" name="password" maxlength="128" required>
+                                       <label>Job Description: (*)</label>
+                                    <textarea cols="80" id="editor" class="form-control" name="companydesc" rows="10"></textarea>
                                         <span class="text-danger" id="password_err"></span>
                                         
                                     </div>
-                                    <span style="color:red" id="text_field1_error"></span>
+                                   
                                     
                                 </div>
                                 
@@ -430,25 +431,27 @@ function view_user(id)
                                     
                                     
                      <div class="row">
-                          <div class="col-md-6">
-                        <label class="form-label">Gender</label><span style="color: red">*</span>
-                        <select name="gender" id="gender" class="form-control" required>
-                                    <option value="">-- Select Gender --</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>                                                                   
-                        </select>
+                          <div class="col-md-12">
+                       <label>Job Location: (*)</label>
+                                    <input name="companylocation" placeholder="Job Location" class="form-control" value="">
                         <span class="text-danger" id="gen_err"></span>
 
+                    </div>         
                     </div>
-                         
-                         
-                    <div class="col-md-6">
-                        <label class="form-label">Type</label><span style="color: red">*</span>
-                        <input type="text" value="" placeholder="Admin/Staff" name="user_type" class="form-control">
-                        <span class="text-danger"><?php echo form_error('user_type'); ?></span>
+                                    
+                     <div class="row">
+                          <div class="col-md-6">
+                       <label>Job Type: (*)</label>
+                                    <input name="companytype" placeholder="Full Time/Part Time" class="form-control" value="">
+                        <span class="text-danger" id="gen_err"></span>
 
-                    </div>
-                   
+                    </div>  
+                         <div class="col-md-6">
+                       <label>Job Salary: (*)</label>
+                                    <input name="companysalary" placeholder="Job Salary" class="form-control" value="">
+                        <span class="text-danger" id="gen_err"></span>
+
+                    </div>  
                     </div>
                              
     				

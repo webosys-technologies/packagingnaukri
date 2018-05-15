@@ -1,7 +1,7 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Jobs extends CI_Controller
+class Companies extends CI_Controller
 {
     /**
      * This is default constructor of the class
@@ -20,28 +20,16 @@ class Jobs extends CI_Controller
      */
     public function index()
     {       
-        
-//            $id=$this->session->userdata('user_id');
-//            $result['user_data']=$this->User_model->get_user_by_id($id);
-//                     
-//                  
-//             $this->load->view('admin/header',$result);
-//             $this->load->view('admin/add_jobs');
-//             $this->load->view('admin/footer');
-       
-    }
-    
-    public function view_jobs()
-    {        
-            $id=$this->session->userdata('user_id');
+             $id=$this->session->userdata('user_id');
             $result['user_data']=get_user_info($id);
-            $result['jobs']=$this->Jobs_model->getall_jobs();
             $result['companies']=$this->Companies_model->getall_companies();
            
              $this->load->view('admin/header',$result);
-             $this->load->view('admin/view_jobs',$result);
-             $this->load->view('admin/footer');       
+             $this->load->view('admin/companies',$result);
+             $this->load->view('admin/footer');
     }
+    
+  
     
     public function job_add()
     {
@@ -62,7 +50,7 @@ class Jobs extends CI_Controller
                    'job_status'=>'1'
         );
         
-          $res=$this->Jobs_model->job_add($data);
+          $res=$this->Companies_model->job_add($data);
           if($res)
           {
                $this->session->set_flashdata('success','job added successfully');
@@ -90,7 +78,7 @@ class Jobs extends CI_Controller
                    'job_status'=>'1'
         );
         
-         $result=$this->Jobs_model->update_job($data,$job_id);
+         $result=$this->Companies_model->update_job($data,$job_id);
          if($result)
          {
        $this->session->set_flashdata('success','Data Updated Successfully');
@@ -100,7 +88,7 @@ class Jobs extends CI_Controller
     
     public function ajax_edit($id)
     {
-        $res=$this->Jobs_model->job_by_id($id);
+        $res=$this->Companies_model->job_by_id($id);
         if($res)
         {
             echo json_encode($res);
@@ -109,7 +97,7 @@ class Jobs extends CI_Controller
     
     public function job_delete($id)
     {
-        $res=$this->Jobs_model->delete_job($id);
+        $res=$this->Companies_model->delete_job($id);
         if($res)
         {
             $this->session->set_flashdata('success','job deleted successfully');

@@ -29,8 +29,9 @@ class Jobs_model extends CI_Model
      
      public function job_by_id($id)
      {
-         $where=array('recruiter_id'=>$id);
-         $res=$this->db->get($this->table,$where);
+         $where=array('job_id'=>$id);
+         $this->db->where($where);
+         $res=$this->db->get($this->table);
          return $res->row();
      }
      

@@ -10,6 +10,12 @@ class Cities_model extends CI_Model
        $res=$this->db->Query('SELECT DISTINCT city_state FROM cities');
         return $res->result();
      }
+     
+     public function get_all_cities()
+     {
+       $res=$this->db->Query('SELECT DISTINCT city_name FROM cities');
+        return $res->result();
+     }
 
      public function getall_cities($state)
      {

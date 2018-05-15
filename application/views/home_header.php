@@ -97,7 +97,7 @@
        
        
        $("#myModal").on("hidden.bs.modal", function () {
-  alert();
+   
 });
         
 
@@ -166,6 +166,7 @@ $("#show_pass_box").click(function(){
   function member_login() {  
       
         var val= member_log_validation();
+       
         if(val)
         {
        var data = new FormData(document.getElementById("login_form"));
@@ -277,9 +278,10 @@ $("#show_pass_box").click(function(){
         </li>
          <!--<li><a id="header_link" href="<?php echo base_url();?>Home/post_requirement">Post Your Requirement</a></li>-->
           <li><a id="header_link" href="<?php echo base_url();?>Home/contact_us">Contact Us</a></li>   
-        
+              
       </ul>
-
+        
+        
     </div>  
   </div> 
 </nav>

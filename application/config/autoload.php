@@ -138,4 +138,8 @@ $autoload['model'] = array('User_model',
                             'Cities_model',
                             'Jobs_model',
                             'Companies_model',
-                            'Applied_jobs_model');
+                            'Applied_jobs_model',
+                            'Employments_model',
+                            'Educations_model',
+                            'Projects_model',
+                            'Skills_model');
