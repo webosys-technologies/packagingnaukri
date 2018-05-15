@@ -60,7 +60,7 @@ class Jobs extends CI_Controller
                    'job_salary'=>$form['jobsalary'],
                    'job_created_at'=>date('Y-m-d'),
                    'job_status'=>'1'
-        );
+                   );
         
           $res=$this->Jobs_model->job_add($data);
           if($res)

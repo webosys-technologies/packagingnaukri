@@ -260,14 +260,14 @@ $("#show_pass_box").click(function(){
         <li><a id="header_link" href="<?php echo base_url();?>Home/job_openings">Job Openings</a></li>
         
        
-          <li class="dropdown">
+<!--          <li class="dropdown">
           <a id="header_link" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Member<span class="caret"></span></a>
           <ul class="dropdown-menu">
               <li><a href="#" data-toggle="modal" id="log" data-target="#myModal">Login</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="<?php echo base_url();?>member/index">Register</a></li>
           </ul>
-        </li>
+        </li>-->
         <li class="dropdown">
           <a id="header_link" href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Recruiter<span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -278,8 +278,14 @@ $("#show_pass_box").click(function(){
         </li>
          <!--<li><a id="header_link" href="<?php echo base_url();?>Home/post_requirement">Post Your Requirement</a></li>-->
           <li><a id="header_link" href="<?php echo base_url();?>Home/contact_us">Contact Us</a></li>   
-              
-      </ul>
+            
+          
+          
+          
+      </ul> <ul class="nav navbar-nav navbar-right">
+              <li><a id="header_link" href="#" data-toggle="modal" id="log" data-target="#myModal">Login</a></li>
+              <li><a id="header_link" href="<?php echo base_url();?>member/index">Register</a></li>
+           </ul>
         
         
     </div>  
