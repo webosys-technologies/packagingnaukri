@@ -85,11 +85,11 @@
             val= recruiter_log_validation();
         }
       
-  alert(val);
+ 
         if(val)
         {
        var data = new FormData(document.getElementById("recruiter_form"));
-       var url = "<?php echo site_url('index.php/Recruiter/Index/loginMe')?>";
+       var url = "<?php echo site_url('index.php/recruiter/Index/loginMe')?>";
            
        $.ajax({               
             url : url,
