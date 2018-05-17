@@ -103,7 +103,7 @@ function member_log_validation()
 function email_validation()
 {
      if($('#member_email').val()=="") {
-                     $("#email_err").html("Email is required");
+                     $("#email_err").html("Email or Mobile is required");
                  } 
                  else{
                      $("#email_err").html("");
@@ -116,7 +116,81 @@ function email_validation()
                      return false;
                  }
 }
-            
+    function rec_email_validation()
+{
+     if($('#email').val()=="") {
+                     $("#log_err").html("Email or Mobile is required");
+                 } 
+                 else{
+                     $("#log_err").html("");
+                     var email="true";
+                 }
+                 if(email=="true")
+                 {
+                     return true;
+                 }else{
+                     return false;
+                 }
+}
+    
+
+function otp_validation()
+{
+    
+    
+                    if($('#rec_otp').val()==""){
+                                 $("#otp_error").html("OTP is required");
+                             } 
+                             else
+                                 if(isNaN($('#rec_otp').val()))
+                             {
+                                 $("#otp_error").html("Invalid OTP");
+                             }else
+                               {
+                                $("#otp_error").html("");
+                                var otp="true";
+                                }
+                                
+                                if(otp=="true")
+                                {
+                                    return true;
+                                }else{
+                                    return false;
+                                }
+}
+
+function recruiter_log_validation()
+{
+    if($('#email').val()=="") {
+                     $("#log_err").html("Email or Mobile is required");
+                 } 
+                 else{
+                     $("#log_err").html("");
+                     var email="true";
+                 }
+    
+    
+    
+                            if($('#rec_password').val()==""){
+                                 $("#pass_err").html("Password is required");
+                             } 
+                             else{
+                                 $("#pass_err").html("");
+                                 var pass="true";
+                             }
+                             
+                             
+                        
+                            
+                                                      
+                             
+      if(email=="true" && pass=="true")      {
+          return true;
+      }else{
+          return false;
+      }
+    
+}
           
           
 

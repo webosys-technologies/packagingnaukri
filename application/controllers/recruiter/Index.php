@@ -96,74 +96,74 @@ class Index extends CI_Controller
                       $where=array('recruiter_mobile'=>$email);
                 $data=array('recruiter_otp'=>$rand);
                 $this->Recruiters_model->recruiter_update($where,$data);
-     //Your authentication key
-//
-//$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
-//
-////Multiple mobiles numbers separated by comma
-//
-//$mobileNumber = $email;
-////Sender ID,While using route4 sender id should be 6 characters long.
-//
-//$senderId = "pkgnau";
-////Your message to send, Add URL encoding here.
-//
-//$message =$rand.' is your OTP for verifying mobile number on packagingnaukri.com.';
-//
-//
-////Define route 
-//
-//$route = "4";
-////Prepare you post parameters
-//
-//$postData = array(
-//
-//    'authkey' => $authKey,
-//
-//    'mobiles' => $mobileNumber,
-//
-//    'message' => $message,
-//
-//    'sender' => $senderId,
-//
-//    'route' => $route
-//
-//);
-//
-//
-////API URL
-//
-//$url="http://api.msg91.com/api/sendhttp.php";
-//
-//
-//// init the resource
-//
-//$ch = curl_init();
-//curl_setopt_array($ch, array(
-//
-//    CURLOPT_URL => $url,
-//
-//    CURLOPT_RETURNTRANSFER => true,
-//
-//    CURLOPT_POST => true,
-//
-//    CURLOPT_POSTFIELDS => $postData
-//
-//    //,CURLOPT_FOLLOWLOCATION => true
-//
-//));
-////Ignore SSL certificate verification
-//curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-//
-////get response
-//
-//$output = curl_exec($ch);
-////Print error if any
-//if(curl_errno($ch))
-//{
-//    echo json_encode(array('error'=> curl_error($ch)));
-//}
+//     Your authentication key
+
+$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
+
+//Multiple mobiles numbers separated by comma
+
+$mobileNumber = $email;
+//Sender ID,While using route4 sender id should be 6 characters long.
+
+$senderId = "pkgnau";
+//Your message to send, Add URL encoding here.
+
+$message =$rand.' is your OTP for verifying mobile number on packagingnaukri.com.';
+
+
+//Define route 
+
+$route = "4";
+//Prepare you post parameters
+
+$postData = array(
+
+    'authkey' => $authKey,
+
+    'mobiles' => $mobileNumber,
+
+    'message' => $message,
+
+    'sender' => $senderId,
+
+    'route' => $route
+
+);
+
+
+//API URL
+
+$url="http://api.msg91.com/api/sendhttp.php";
+
+
+// init the resource
+
+$ch = curl_init();
+curl_setopt_array($ch, array(
+
+    CURLOPT_URL => $url,
+
+    CURLOPT_RETURNTRANSFER => true,
+
+    CURLOPT_POST => true,
+
+    CURLOPT_POSTFIELDS => $postData
+
+    //,CURLOPT_FOLLOWLOCATION => true
+
+));
+//Ignore SSL certificate verification
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+//get response
+
+$output = curl_exec($ch);
+//Print error if any
+if(curl_errno($ch))
+{
+    echo json_encode(array('error'=> curl_error($ch)));
+}
 //curl_close($ch);
 echo json_encode(array('send'=>'OTP is sent Successfully'));       
 //echo $output;
@@ -223,71 +223,56 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
     }
 
     
-    function verification_email($getdata,$msg)
-    {
-         $hash= md5( rand(0,1000) );
-                 $this->recruiter_encrypt($getdata['recruiter_email'],$hash);
-                
-                    $headers = "From: no-reply@delto.in";
-                    $headers .= ". DELTO-Team" . "\r\n";
-                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    $to = $msg['email'];
-                    $subject = "Delto.in - Account verification";
-
-                    $txt = '<html>
-                        <head>
-                                            <style>
-                                            .button {
-                                                background-color: #4CAF50; 
-                                                border: none;
-                                                color: white;
-                                                padding: 20px;
-                                                text-align: recruiter;
-                                                text-decoration: none;
-                                                display: inline-block;
-                                                font-size: 16px;
-                                                margin: 4px 2px;
-                                                cursor: pointer;
-                                            }
-                                            .button3 {border-radius: 8px;}
-
-
-                                             .div1 {
-                                           
-                                                   width: 100%;
-                                                   border-radius: 5px;
-                                                   background-color: #3c8dbc;
-                                                   padding: 20px;
-                                               }
-                                                .div2 {
-
-                                                   width: 100%;
-                                                   border-radius: 5px;
-                                                   background-color: #d2d6de;
-                                                   padding: 20px;
-                                               }
-                                               #color{
-                                               color:blue;
-                                               }
-                                            </style>
-                                        </head>
-                                             <body><div class="div1"><h2>Delto Center Verification...!<h2></div><div class="div2">Dear'." ".$getdata['recruiter_fname']." ".$getdata['recruiter_lname'].',<br><br> We are ready to activate your account.Simply Please Verify your email Address.<br><br><br>
-                                            
-                                              <recruiter><a  href="'.base_url().'recruiter/index/recruiter_verification/'.$getdata['recruiter_email'].'/'.$hash.'">Click here to verify your account </a></recruiter>'
-                            . '          <br>Best Regards,<br>Delto Team<br><a href="http://delto.in">http://delto.in</a><br> </div></body></html>';
-                              
-                                              
-                                            
-                 
-                       $success=  mail($to,$subject,$txt,$headers); 
-                       if($success)
-                       {
-                          return true;
-                       }
-    }
-    
-    
-    
+   public function login_with_otp()
+           
+   {
+       $username=$this->input->post('recruiter_email');
+       $otp=$this->input->post('rec_otp');
+       $val=is_numeric($username);
+       if($val)
+       {
+           $where=array('recruiter_mobile'=>$username,
+                        'recruiter_otp'=>$otp);
+                   $result= $this->Recruiters_model->login_with_otp($where);
+                    if($result)
+                    {
+                        $sessionArray = array(                        
+                         'recruiter_id' => $result->recruiter_id,
+                    'recruiter_fname' => $result->recruiter_fname,
+                    'recruiter_lname' => $result->recruiter_lname,
+                    'recruiter_email' => $result->recruiter_email,
+                    'recruiter_mobile' => $result->recruiter_mobile,
+                    'recruiter_LoggedIn' => true
+                                    );
+                                    
+                    $this->session->set_userdata($sessionArray);  
+                    
+                    echo json_encode(array('status'=>true));  
+                    }else{
+                         echo json_encode(array('otp_error'=>"Wrong OTP")); 
+                    }
+       }else{
+           $where=array('recruiter_email'=>$username,
+                        'recruiter_otp'=>$otp);
+                    $result=$this->Recruiters_model->login_with_otp($where);
+                    if($result)
+                    {
+                        $sessionArray = array(                        
+                         'recruiter_id' => $result->recruiter_id,
+                    'recruiter_fname' => $result->recruiter_fname,
+                    'recruiter_lname' => $result->recruiter_lname,
+                    'recruiter_email' => $result->recruiter_email,
+                    'recruiter_mobile' => $result->recruiter_mobile,
+                    'recruiter_LoggedIn' => true
+                                    );
+                                    
+                    $this->session->set_userdata($sessionArray);  
+                    echo json_encode(array('status'=>true)); 
+                    }else{
+                         echo json_encode(array('otp_error'=>"Wrong OTP")); 
+                    }
+       }
+   }
     
     
      public function loginMe()
@@ -295,18 +280,15 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
         
         $this->load->library('form_validation');
         
-      //  $this->form_validation->set_rules('email', 'Username', 'callback_username_check');
-        $this->form_validation->set_rules('recruiter_email', 'Email', 'required|valid_email|max_length[128]|trim');
-        $this->form_validation->set_rules('recruiter_password', 'Password', 'required|max_length[32]');
-        
-        if($this->form_validation->run() == FALSE)
-        {
-            $this->login();
-        }
-        else  
-        {
+    
             $recruiter_email = $this->input->post('recruiter_email');
             $recruiter_password = $this->input->post('recruiter_password');
+            
+            if(!empty($this->input->post('rec_otp')))
+            {
+              $this->login_with_otp();  
+            }else
+            {
             $where=array('recruiter_email'=>$recruiter_email,
                          'recruiter_password'=>$recruiter_password);
             
@@ -317,21 +299,20 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
            
          
                 
-            if($result > 0 && $result->recruiter_status==1)
+            if(!empty($result) && $result->recruiter_status==1)
             {          
                     $sessionArray = array(                        
                          'recruiter_id' => $result->recruiter_id,
                     'recruiter_fname' => $result->recruiter_fname,
                     'recruiter_lname' => $result->recruiter_lname,
                     'recruiter_email' => $result->recruiter_email,
-                     'recruiter_name'=> $result->recruiter_name,
-                     'recruiter_mobile' => $result->recruiter_mobile,
+                    'recruiter_mobile' => $result->recruiter_mobile,
                     'recruiter_LoggedIn' => true
                                     );
                                     
                     $this->session->set_userdata($sessionArray);  
                     
-                    redirect('recruiter/Dashboard');                 
+                    echo json_encode(array('status'=>'success'));              
                
               }
            
@@ -341,24 +322,24 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                 if($result > 0 && $result->recruiter_status==0)
                 {
                    
-                 $this->session->set_flashdata('log_error', 'Account is not activeted yet.');
-                 $this->session->set_flashdata('recruiter_email', $recruiter_email);
+                 echo json_encode(array('log_error', 'Account is not activeted yet.'));                 
+                
                 }
                 else
                 {
-                    $this->session->set_flashdata('error', 'Email or password mismatch');
-                }
-                
-                redirect('recruiter/index/login');  
+                 echo json_encode(array('log_error'=>'Email or password mismatch'));
+                }          
+              
             } 
             }
             else
             {
-                 $this->session->set_flashdata('error', 'This email id is not registered with us.');
-                 redirect('recruiter/index/login'); 
+                 echo json_encode(array('log_error'=>'This email id is not registered with us.'));
+                 
             }
         
-        }
+        
+    }
     }
     
     

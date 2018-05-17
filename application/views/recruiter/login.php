@@ -28,13 +28,12 @@
      $(document).ready(function(){
          
          $("#otp_btn").click(function(){
-             
-             $("#rec_otp").val("");
+           
     
-//        var otp_val;
-//        otp_val=email_validation();
-//        if(otp_val)
-//        { 
+        var otp_val;
+        otp_val=rec_email_validation();
+        if(otp_val)
+        { 
        var data = new FormData(document.getElementById("recruiter_form"));
        var url = "<?php echo site_url('index.php/recruiter/Index/send_otp')?>";
            
@@ -63,7 +62,7 @@
           alert('Error...!');
         }
       });
-//  }              
+  }              
          });
          
          $("#pass_btn").click(function(){
@@ -74,6 +73,61 @@
               $("#otp_btn").show();
          });
      });
+     
+     var val;
+     
+       function recruiter_login() {  
+       if(!($('#otp_field').css('display') == 'none'))
+        {
+            val=otp_validation();
+        
+        }else{
+            val= recruiter_log_validation();
+        }
+      
+  alert(val);
+        if(val)
+        {
+       var data = new FormData(document.getElementById("recruiter_form"));
+       var url = "<?php echo site_url('index.php/Recruiter/Index/loginMe')?>";
+           
+       $.ajax({               
+            url : url,
+            type: "POST",
+            async: false,
+            processData: false,
+            contentType: false,            
+            data: data,
+            dataType: "JSON",
+        success: function(data)
+        {  var success;
+            var email_error;
+            var pass_error;
+            var log_error;
+             
+            if(data.log_error)
+            {
+                $("#log_err").html(data.log_error);
+            }
+            if(data.otp_error)
+            {
+                $("#otp_error").html(data.otp_error);
+            }
+                   
+            
+            if(data.status)
+            {
+             window.location="<?php echo site_url('index.php/recruiter/Dashboard')?>";
+            }
+            
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {            
+          alert('Error...!');
+        }
+      });
+      }
+    }
  </script>
 
 
@@ -138,19 +192,20 @@
         }
         ?>
         
-        <form id="recruiter_form" action="<?php echo base_url(); ?>recruiter/Index/loginMe" method="post">
+        <form id="recruiter_form" action="" method="post">
+            <span id="log_err" style="color:red"></span>
           <div class="form-group has-feedback">
             <input type="text" class="form-control" id="email" placeholder="Email or Mobile No" name="recruiter_email" required/><span class="text-danger" id="email_err"></span>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
             <span class="text-danger"><?php echo form_error('recruiter_email'); ?></span>
-          <div class="form-group has-feedback" id="password_field">
-            <input type="password" class="form-control" placeholder="Password" id="password" name="recruiter_password"/><span class="text-danger" id="password_err"></span>
+          <div class="form-group has-feedback" id="password_field" >
+            <input type="password" class="form-control" placeholder="Password" id="rec_password" name="recruiter_password"/><span style="color:red" id="pass_err"></span>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
-            <span class="text-danger" id="otp_error"></span>
-             <div class="form-group has-feedback" id="otp_field" style="display:none;">
-            <input type="text" class="form-control" placeholder="OTP" id="rec_otp" name="rec_otp" /><span class="text-danger" id="otp_stat"></span>
+           
+             <div class="form-group has-feedback" id="otp_field" style="display:none">
+            <input type="text" class="form-control" placeholder="OTP" id="rec_otp" name="rec_otp" /><span style="color:green" id="otp_stat"></span><span style="color:red" id="otp_error"></span>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
           <div class="row">
@@ -159,7 +214,7 @@
                 <a id="pass_btn" type="button" class="btn btn-warning btn-xs" style="display:none;">Login with Password</a>
             </div>  
             <div class="col-xs-4">
-              <input type="submit" class="btn btn-primary btn-block btn-flat" value="Sign In" />
+              <input type="button" onclick="recruiter_login()" class="btn btn-primary btn-block btn-flat" value="Sign In" />
             </div> 
           </div>
             <br>

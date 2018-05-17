@@ -65,7 +65,17 @@ class Recruiters_model extends CI_Model
             return array(false,$valid);
         }
     }
-        public function recruiter_name($cid)
+    
+    public function login_with_otp($where)
+    {
+        $this->db->from($this->table);
+        $this->db->where($where);
+        $query=$this->db->get();
+        return $query->row();
+    }
+
+
+    public function recruiter_name($cid)
         {
             $this->db->from($this->table);
             $this->db->where('recruiter_id',$cid);
