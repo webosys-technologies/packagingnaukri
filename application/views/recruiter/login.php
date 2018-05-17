@@ -36,7 +36,7 @@
 //        if(otp_val)
 //        { 
        var data = new FormData(document.getElementById("recruiter_form"));
-       var url = "<?php echo site_url('index.php/Recruiter/Index/send_otp')?>";
+       var url = "<?php echo site_url('index.php/recruiter/Index/send_otp')?>";
            
        $.ajax({               
             url : url,
