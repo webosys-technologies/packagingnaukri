@@ -279,11 +279,11 @@ function view_company(id)
       var url;
       if(save_method == 'add')
       {         
-        url = "<?php echo site_url('index.php/admin/Companies/company_add')?>";
+        url = "<?php echo site_url('index.php/recruiter/Companies/company_add')?>";
       }
       else
       {
-        url = "<?php echo site_url('index.php/admin/Companies/company_update')?>";
+        url = "<?php echo site_url('index.php/recruiter/Companies/company_update')?>";
       }
 
        // ajax adding data to database
@@ -315,7 +315,7 @@ function view_company(id)
       {
         // ajax delete data from database
           $.ajax({
-            url : "<?php echo site_url('index.php/admin/Companies/company_delete')?>/"+id,
+            url : "<?php echo site_url('index.php/recruiter/Companies/company_delete')?>/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data)
@@ -349,17 +349,14 @@ function view_company(id)
         <div class="modal-body">
          
             
-          	
-    		<!--<div class="panel panel-default">-->
-    			
-    			<div class="panel-body">
+        <div class="panel-body">
     				<form method="post" action="" id="form">
                                     <input type="hidden" value="" name="company_id">
     				 <div class="row">
                                 <div class="col-md-12">                                
                                     <div class="form-group">
                                         <label>Company Name: (*)</label>
-                                    <input name="company" class="form-control" placeholder="Job Title" value="">
+                                    <input name="company" class="form-control" placeholder="Company Name" value="">
                                         <span class="text-danger" id="fname_err"></span>
                                         
                                     </div>
@@ -369,8 +366,7 @@ function view_company(id)
                                     <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Company Type: (*)</label>
-                                       
+                                        <label>Company Type: (*)</label>                                       
                                     <input name="type" class="form-control" placeholder="MNC or Small Scale" value="">
                                         <span class="text-danger" id="type_err"></span>
                                       
@@ -390,24 +386,13 @@ function view_company(id)
                                                                        
                                 </div>
                                </div>
-                                    
-                                    <div class="row">
-                                <div class="col-md-12">                                
-                                    <div class="form-group">
-                                       <label>Conatact: (*)</label>
-                                       <input name="contact" placeholder="Company Contact" class="form-control" value="">
-                                        <span class="text-danger" id="contact_err"></span>
-                                        
-                                    </div>
-                                                                      
-                                </div>
-                                        </div>
+                                                                       
                                     
                                     <div class="row">
                                 <div class="col-md-12">                                
                                     <div class="form-group">
                                        <label>Company Address: (*)</label>
-                                    <textarea cols="80" id="address" class="form-control" name="address" rows="5"></textarea>
+                                    <textarea cols="80" id="address" class="form-control" name="address" rows="10"></textarea>
                                         <span class="text-danger" id="password_err"></span>
                                         
                                     </div>
@@ -415,6 +400,29 @@ function view_company(id)
                                     
                                 </div>                                
                                      </div> 
+                                    
+                                    
+                                    <div class="row">
+                                <div class="col-md-6">                                
+                                    <div class="form-group">
+                                       <label>Conatact: (*)</label>
+                                       <input name="contact" placeholder="Company Contact" class="form-control" value="">
+                                        <span class="text-danger" id="mobile_err"></span>
+                                        
+                                    </div>                                                                     
+                                </div>
+                                        
+                                         <div class="col-md-6">                                
+                                    <div class="form-group">
+                                       <label>Pincode: (*)</label>
+                                       <input name="pincode" placeholder="Pincode" class="form-control" value="">
+                                        <span class="text-danger" id="mobile_err"></span>                                        
+                                    </div>                                                                      
+                                </div>
+                                        </div>
+                                    
+                                    
+                                    
                                      <div class="row">
                     <div class="col-md-6">
                         <label class="form-label">State</label><span style="color: red">*</span>
@@ -457,22 +465,22 @@ function view_company(id)
                      <div class="row">
                           <div class="col-md-6">
                        <label>Company Established: (*)</label>
-                                    <input name="type" placeholder="Established Year" class="form-control" value="">
+                                    <input name="established" placeholder="Established Year" class="form-control" value="">
                         <span class="text-danger" id="gen_err"></span>
 
                     </div>  
                          <div class="col-md-6">
                        <label>Company Multinational: (*)</label>
-                                    <input name="mnc" placeholder="Job Salary" class="form-control" value="">
+                                    <input name="mnc" placeholder="" class="form-control" value="">
                         <span class="text-danger" id="gen_err"></span>
 
                     </div>  
                     </div>
-                             
-    			 </form>	
+                     </form>         
+    			
     			</div>
-                   
                             <!--</div>-->
+                            	
     			
     		</div>         
     	 <div class="modal-footer">

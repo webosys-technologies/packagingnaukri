@@ -33,8 +33,7 @@ class Index extends CI_Controller
                     
         }
         else
-		{
-                   
+		{         
             
 			list($get_insert,$get_data)=$this->Recruiters_model->register();
 			if($get_insert)
@@ -49,10 +48,7 @@ class Index extends CI_Controller
                             {     
                             
 				redirect('recruiter/index');
-			}
-
-		
-                
+			}               
              }    
         }
         
@@ -85,97 +81,98 @@ class Index extends CI_Controller
     
             function send_otp()
         {          
-            $email=$this->input->post('member_email');
+           $email=$this->input->post('recruiter_email');
             $val=is_numeric($email);
             
             if($val)
             {
-                $res=$this->Members_model->check_mobile_exist($email);
+                $res=$this->Recruiters_model->check_mobile_exist($email);
                 if($res)
                 {
                      echo json_encode(array('email_error'=>'This Mobile is not registered'));
                 }else{
                     
                      $rand=mt_rand(000000,999999);
-                      $where=array('member_mobile'=>$email);
-                $data=array('member_otp'=>$rand);
-                $this->Members_model->member_update($where,$data);
+                      $where=array('recruiter_mobile'=>$email);
+                $data=array('recruiter_otp'=>$rand);
+                $this->Recruiters_model->recruiter_update($where,$data);
      //Your authentication key
-
-$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
-
-//Multiple mobiles numbers separated by comma
-
-$mobileNumber = $email;
-//Sender ID,While using route4 sender id should be 6 characters long.
-
-$senderId = "pkgnau";
-//Your message to send, Add URL encoding here.
-
-$message =$rand.' is your OTP for verifying mobile number on packagingnaukri.com.';
-
-
-//Define route 
-
-$route = "4";
-//Prepare you post parameters
-
-$postData = array(
-
-    'authkey' => $authKey,
-
-    'mobiles' => $mobileNumber,
-
-    'message' => $message,
-
-    'sender' => $senderId,
-
-    'route' => $route
-
-);
-
-
-//API URL
-
-$url="http://api.msg91.com/api/sendhttp.php";
-
-
-// init the resource
-
-$ch = curl_init();
-curl_setopt_array($ch, array(
-
-    CURLOPT_URL => $url,
-
-    CURLOPT_RETURNTRANSFER => true,
-
-    CURLOPT_POST => true,
-
-    CURLOPT_POSTFIELDS => $postData
-
-    //,CURLOPT_FOLLOWLOCATION => true
-
-));
-//Ignore SSL certificate verification
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-
-//get response
-
-$output = curl_exec($ch);
-//Print error if any
-if(curl_errno($ch))
-{
-    echo json_encode(array('error'=> curl_error($ch)));
-}
-curl_close($ch);
+//
+//$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
+//
+////Multiple mobiles numbers separated by comma
+//
+//$mobileNumber = $email;
+////Sender ID,While using route4 sender id should be 6 characters long.
+//
+//$senderId = "pkgnau";
+////Your message to send, Add URL encoding here.
+//
+//$message =$rand.' is your OTP for verifying mobile number on packagingnaukri.com.';
+//
+//
+////Define route 
+//
+//$route = "4";
+////Prepare you post parameters
+//
+//$postData = array(
+//
+//    'authkey' => $authKey,
+//
+//    'mobiles' => $mobileNumber,
+//
+//    'message' => $message,
+//
+//    'sender' => $senderId,
+//
+//    'route' => $route
+//
+//);
+//
+//
+////API URL
+//
+//$url="http://api.msg91.com/api/sendhttp.php";
+//
+//
+//// init the resource
+//
+//$ch = curl_init();
+//curl_setopt_array($ch, array(
+//
+//    CURLOPT_URL => $url,
+//
+//    CURLOPT_RETURNTRANSFER => true,
+//
+//    CURLOPT_POST => true,
+//
+//    CURLOPT_POSTFIELDS => $postData
+//
+//    //,CURLOPT_FOLLOWLOCATION => true
+//
+//));
+////Ignore SSL certificate verification
+//curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+//
+////get response
+//
+//$output = curl_exec($ch);
+////Print error if any
+//if(curl_errno($ch))
+//{
+//    echo json_encode(array('error'=> curl_error($ch)));
+//}
+//curl_close($ch);
 echo json_encode(array('send'=>'OTP is sent Successfully'));       
 //echo $output;
             }
 
 
 }else{
-            $res=$this->Members_model->check_if_email_exist($email);
+    
+            $res=$this->Recruiters_model->check_if_email_exist($email);
             if($res)
             {
                 echo json_encode(array('email_error'=>'This email is not registered'));
@@ -190,7 +187,30 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
             }
  }
     
-    
+  function email_otp($email)
+        {
+                $rand= mt_rand(000000,999999);
+                
+                $where=array('recruiter_email'=>$email);
+                $data=array('recruiter_otp'=>$rand);
+                $this->Recruiters_model->recruiter_update($where,$data);
+                              
+                
+                    $headers = "From: support@Packagingnaukari.in";
+                    $headers .= ". PackagingNaukari-Team" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $to = $email;
+                    $subject = "Welcome To Packaging Naukari";
+
+                    $txt = $rand;  
+                                            
+                 
+                       $success=  mail($to,$subject,$txt,$headers); 
+                       if($success)
+                       {
+                          return true;
+                       }
+        }  
     
     
     
@@ -201,35 +221,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
         $recruiter_email=array('recruiter_email'=>$email);
         $this->Recruiters_model->recruiter_update($recruiter_email,$data);
     }
-    function resend_email($recruiter_email)
-    {
-        $get_data=$this->Recruiters_model->get_data_by_email($recruiter_email);
-        $msg=array(
-                                    'title'=>'Delto Center Verification...!',
-                                    'data'=>'Your Center Registration Successfully with delto',
-                                    'email'=>$recruiter_email
-                                );
-         
-         $recruiter_data=array('recruiter_fname'=>$get_data->recruiter_fname,
-             'recruiter_lname'=>$get_data->recruiter_lname,
-             'recruiter_mobile'=>$get_data->recruiter_mobile,
-             'recruiter_password'=>$get_data->recruiter_password,
-             'recruiter_name'=>$get_data->recruiter_name,
-             'recruiter_email'=>$recruiter_email);
-         
-       
-        $result=$this->verification_email($recruiter_data,$msg);
-        if($result==true)
-        {
-           $this->session->set_flashdata('signup_success','Verification code send successfully,please check & verify your email!');
-                                
-             redirect('recruiter/index/login'); 
-        }
-        else
-        {
-            redirect('recruiter/index/login');
-        }
-    }
+
     
     function verification_email($getdata,$msg)
     {
@@ -293,178 +285,6 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                           return true;
                        }
     }
-    
-    function signup_email($getdata,$msg)
-    {    
-               
-                 $hash= md5( rand(0,1000) );
-                 $this->recruiter_encrypt($getdata['recruiter_email'],$hash);
-                
-                    $headers = "From: support@delto.in";
-                    $headers .= ". DELTO-Team" . "\r\n";
-                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    $to = $msg['email'];
-                    $subject = "Welcome To Delto.in";
-
-                    $txt = '<html>
-                        <head>
-                                            <style>
-                                            
-
-                                             .div1 {
-                                           
-                                                   width: 100%;
-                                                   border-radius: 5px;
-                                                   background-color: #3c8dbc;
-                                                   padding: 20px;
-                                               }
-                                                .div2 {
-
-                                                   width: 100%;
-                                                   border-radius: 5px;
-                                                   background-color: #d2d6de;
-                                                   padding: 20px;
-                                               }
-                                               #color{
-                                               color:blue;
-                                               }
-                                            </style>
-                                        </head>
-                                             <body><div class="div1"><h2>'.$msg['title'].'<h2></div><div class="div2">Dear'.$getdata['recruiter_fname'].' '.$getdata['recruiter_lname'].'('.$getdata['recruiter_name'].'),<br>Thank You for sign in with delto.<br><br>You can now login with following login details<br><br>
-                                            
-                                            <b>recruiter Owner Name :</b>'.$getdata['recruiter_fname']." "
-                                             .$getdata['recruiter_lname'].
-                                             "<br><b>Center Name :</b>".$getdata['recruiter_name'].
-                                             '<br><b>Center Login URL:</b> <a href="http://delto.in/recruiter/index/login">http://delto.in/recruiter/index/login</a>
-                                             <br><b>Email Id:</b>'.$getdata['recruiter_email'].
-                                              "<br><b>Password :</b>".$getdata['recruiter_password'].
-                                              '<br>Best Regards,<br>Delto Team<br><a href="http://delto.in">http://delto.in</a><br></div></body></html>';
-                              
-                                              
-                                            
-                 
-                       $success=  mail($to,$subject,$txt,$headers); 
-                       if($success)
-                       {
-                          return true;
-                       }
-//                   
-    }
-    
-    
-    
-    function otp_email($getdata,$msg)
-    {
-                 
-                    $headers = "From: admin@webosys.com";
-                    $headers .= "MIME-Version: 1.0" . "\r\n";
-                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    $to = $msg['email'];
-                    $subject = "Delto";
-                    $txt='<html>
-                        <head>
-                                            <style>
-                                            
-
-                                             .div1 {
-                                           
-                                                   width: 100%;
-                                                   border-radius: 5px;
-                                                   background-color: #3c8dbc;
-                                                   padding: 20px;
-                                               }
-                                                .div2 {
-
-                                                   width: 100%;
-                                                   border-radius: 5px;
-                                                   background-color: #d2d6de;
-                                                   padding: 20px;
-                                               }
-                                               #color{
-                                               color:blue;
-                                               }
-                                            </style>
-                                        </head>
-                                             <body><div class="div1"><h2>'.$msg['title'].'</h2></div>
-                                                                                       
-                                             
-                            <div class="div2">Dear Customer,<br><b>Center Name :</b>'.$getdata['recruiter_name'].'<br><br>'.$msg['data'].'<b id="color"> '.$getdata['otp'].'</b><br><br>
-                                              Best Regards,<br>Delto Team<br><a href="http://delto.in">http://delto.in</a><br>
-                                               <a href="'.base_url().'recruiter/index/login">Sign In</a> </div></body></html>';                               
-                                      
-                                                                                                     
-                     $success=  mail($to,$subject,$txt,$headers); 
-                       if($success)
-                       {
-                           
-                           redirect('recruiter/index/login');
-                       }
-                       else
-                       {
-                            redirect('recruiter/index/login');
-                       }
-                  
-             
-    }
-    
-    
-    
-     function password_email($getdata,$msg)
-    {
-       
-                
-                    $headers = "From: admin@webosys.com";
-                    $headers .= "MIME-Version: 1.0" . "\r\n";
-                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    $to = $msg['email'];
-                    $subject = "Delto";
-                    $txt='<html>
-                        <head>
-                                            <style>
-                                            
-
-                                             .div1 {
-                                           
-                                                   width: 100%;
-                                                   border-radius: 5px;
-                                                   background-color: #3c8dbc;
-                                                   padding: 20px;
-                                               }
-                                                .div2 {
-
-                                                   width: 100%;
-                                                   border-radius: 5px;
-                                                   background-color: #d2d6de;
-                                                   padding: 20px;
-                                               }
-                                               #color{
-                                               color:blue;
-                                               }
-                                            </style>
-                                        </head>
-                                             <body><div class="div1"><h2>'.$msg['title'].'</h2></div>
-                                                                                       
-                                             
-                            <div class="div2">Dear Customer,<br>'.$get_data['recruiter_name'].'<br>'.$msg['data'].'<br>
-                            <br><b>Username :</b>'.$msg['email'].
-                                              "<br><b>New Password :</b>".$msg['password'].'
-                                               <br>Thank You,<br>
-                                               Webosys Team,<br>
-                                               <a href=http:"'.base_url().'recruiter/index/login">Sign In</a> </div></body></html>';
-                                                
-                                      
-                                            
-                                                         
-                    $success=  mail($to,$subject,$txt,$headers); 
-                      
-                     if($success)
-                   {
-                          $this->session->set_flashdata('signup_success','Password changed successfully...!');
-                       redirect('recruiter/index/login');
-                   }
-             
-    }
-    
     
     
     

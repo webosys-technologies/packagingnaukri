@@ -147,6 +147,7 @@ class Recruiters_model extends CI_Model
     
    function check_if_email_exist($recruiter_email)
 	{
+       
 		$this->db->where('recruiter_email',$recruiter_email);
 		$result=$this->db->get('recruiters');
 
@@ -208,6 +209,17 @@ class Recruiters_model extends CI_Model
             }
             $query=$this->db->get();
             return $query->result();
+    }
+    public function check_mobile_exist($mob)
+    { $this->db->where('recruiter_mobile',$mob  );
+        $result=$this->db->get($this->table);
+
+        if($result->num_rows()>0)
+        {
+            return FALSE;
+        }else{
+            return TRUE;
+        }
     }
 
 

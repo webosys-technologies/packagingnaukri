@@ -234,6 +234,12 @@
               </a>
             </li>
             <li class="treeview">
+              <a href="<?php echo base_url(); ?>recruiter/Companies" >
+                <i class="fa fa-child"></i>
+                <span>Companies</span>
+              </a>
+            </li>
+            <li class="treeview">
               <a href="<?php echo base_url(); ?>recruiter/Jobs" >
                 <i class="fa fa-child"></i>
                 <span>Post Job</span>

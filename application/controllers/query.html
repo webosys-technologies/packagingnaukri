@@ -1,4 +1,4 @@
-1) picode to pincode
+1) pincode to pincode
 ALTER TABLE `companies` CHANGE `company_picode` `company_pincode` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
 
 2)set date data type in users table
@@ -6,3 +6,12 @@ ALTER TABLE `users` CHANGE `user_created_at` `user_created_at` DATE NOT NULL
 
 3)member_otp column in member table
 ALTER TABLE `members` ADD `member_otp` VARCHAR(255) NOT NULL AFTER `member_resume`
+
+4)recruiter_otp column in recruiter table
+ALTER TABLE `recruiters` ADD `recruiter_otp` VARCHAR(255) NOT NULL AFTER `recruiter_password`
+
+5)drop column company_id in companies
+ALTER TABLE companies DROP COLUMN company_id
+
+6)add again company id in  compmanies
+ALTER TABLE `companies` ADD `company_id` INT(11) NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`company_id`)
