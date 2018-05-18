@@ -219,7 +219,10 @@ document.getElementById("to").innerHTML = options;
        
        
        
-       
+       $("#personal_box").click(function(){
+               $("#personal").prop("hidden",false);
+             }
+       );
         $("#education_box").click(function(){
                $("#education").prop("hidden",false);
              }
@@ -331,7 +334,7 @@ document.getElementById("to").innerHTML = options;
       <ul class="nav nav-pills nav-stacked" >
          
          <li id="topic_font">         
-           <a href="#">Personal Details</a> 
+           <a href="#" id="personal_box">Personal Details</a> 
            <a href="#" id="education_box">Education Details</a> 
            <a href="#" id="resume_box">Upload Resume</a> 
            <a href="#" id="employment_box">Employment Details</a>
@@ -417,7 +420,7 @@ document.getElementById("to").innerHTML = options;
       <div class="box-footer text-black data" >
         <table style="font-size:13px; " width="100%" id="table_data">  
             <?php if(isset($member_data)){?>
-            <tr><td class="space"><a href="#"><span><?php if (isset($member_data->member_resume)){ $resume=explode('/',$member_data->member_resume);echo $resume[1];}?></span></a></td>
+            <tr><td class="space"><a href="#"><span><?php if (!empty($member_data->member_resume)){ $resume=explode('/',$member_data->member_resume);echo $resume[1];}?></span></a></td>
                                            <td> 
                          <label class="btn-bs-file btn btn-sm btn-info">
                             Update Resume
