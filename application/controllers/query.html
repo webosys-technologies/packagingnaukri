@@ -15,3 +15,6 @@ ALTER TABLE companies DROP COLUMN company_id
 
 6)add again company id in  compmanies
 ALTER TABLE `companies` ADD `company_id` INT(11) NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`company_id`)
+
+7)rename column picode to pincode
+ALTER TABLE `companies` CHANGE `company_picode` `company_pincode` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;

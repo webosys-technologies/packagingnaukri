@@ -36,6 +36,20 @@ a:hover {
     width: 100%;
     /*overflow-y: scroll;*/ 
   }
+  
+  .btn-bs-file{
+    position:relative;
+}
+.btn-bs-file input[type="file"]{
+    position: absolute;
+    top: -9999999;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    width:0;
+    height:0;
+    outline: none;
+    cursor: inherit;
+}
 }
 
 </style>
@@ -56,6 +70,23 @@ a:hover {
 
          <script>
               $(document).ready(function(){
+                  
+                  
+                 $('#resume').change(function(e){
+            var fileName = e.target.files[0].name;
+            
+            var ext=fileName.split('.').pop();
+            if(ext=="pdf" || ext=="doc" || ext=="docx" || ext=="rtf")
+            {
+               $("#resume_name").html(fileName);
+            $("#resume_btn").prop('hidden',false); 
+            }else{
+                 $("#resume_btn").prop('hidden',true); 
+                 $("#resume_name").html("This file is not allowed");              
+            }
+        });
+                  
+                  
                   
                   
                   var start = 1975;
@@ -81,7 +112,14 @@ document.getElementById("to").innerHTML = options;
                 $("#personal_btn").prop("hidden",false);
                $(".show_field").prop("hidden",false);
        }
-       );       
+       );
+       
+        $("#close_personal").click(function(){               
+             
+                $("#personal").prop("hidden",true);
+              
+       }
+       );
         $("#cancel_personal").click(function(){
                
                $(".edit_field").prop("hidden",false);
@@ -98,6 +136,13 @@ document.getElementById("to").innerHTML = options;
                $(".show_education_field").prop("hidden",false);
        }
        ); 
+       
+        $("#close_education").click(function(){              
+              
+                $("#education").prop("hidden",true);
+               
+       }
+       );
        $("#cancel_education").click(function(){
                
                $(".edit_education_field").prop("hidden",false);
@@ -113,6 +158,11 @@ document.getElementById("to").innerHTML = options;
                $(".show_employment_field").prop("hidden",false);
        }
        ); 
+        $("#close_employment").click(function(){               
+               $("#employment").prop("hidden",true);
+              }
+       );
+       
        $("#cancel_employment").click(function(){
                
                $(".edit_employment_field").prop("hidden",false);
@@ -128,12 +178,43 @@ document.getElementById("to").innerHTML = options;
                $(".show_project_field").prop("hidden",false);
        }
        ); 
+       
+        $("#close_project").click(function(){               
+               $("#project").prop("hidden",true);
+                 }
+       );
+       
        $("#cancel_project").click(function(){
                
                $(".edit_project_field").prop("hidden",false);
                 $("#project_btn").prop("hidden",true);
                $(".show_project_field").prop("hidden",true);
        }
+       );
+       
+       
+       $("#close_resume").click(function(){               
+               $("#resume").prop("hidden",true);
+                 }
+       );
+       
+       $("#cancel_resume").click(function(){
+               
+               $("#resume_name").html("");
+               $("#resume_btn").prop("hidden",true);
+              
+       }
+       );
+       
+       
+       
+       $("#add_skill").click(function(){               
+               $("#add_skill_field").append("hidden",true);
+                 }
+       );
+        $("#close_skill").click(function(){               
+               $("#skill").prop("hidden",true);
+                 }
        );
        
        
@@ -174,17 +255,24 @@ document.getElementById("to").innerHTML = options;
                save_method=$("#save_education").val();
                data=new FormData(document.getElementById("education_form"));
                 save(data,save_method);
-             }
+             });
                      
         $("#save_employment").click(function(){
                save_method=$("#save_employment").val();
                data=new FormData(document.getElementById("employment_form"));
                 save(data,save_method);
              }
+         );
+                     
+                      $("#save_resume").click(function(){
+               save_method=$("#save_resume").val();
+               data=new FormData(document.getElementById("resume_form"));
+                save(data,save_method);
+             }
        );
 });
      var save_method;
-     var data;YZZ
+     var data;
     
    
         function save(data,save_method)
@@ -205,10 +293,12 @@ document.getElementById("to").innerHTML = options;
             dataType: "JSON",
             success: function(json)
             {
+                alert(json.success);
                if(json.success)
                {                   
               location.reload();// for reload a page
                }
+                             
                 
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -321,18 +411,24 @@ document.getElementById("to").innerHTML = options;
            <div class="shadow" hidden id="resume"> 
               
          <div class="box-header" >           
-             <h3 class="box-title"><b><u>Resume</u></b></h3><div class="pull-right"><a href="#" id="edit_resume"><span class="fa fa-pencil"> edit </span></a> &nbsp;&nbsp;<button type="button" id="close_resume" class="btn btn-danger btn-xs" value="cancel"><i class="fa fa-times"></i></button></div>
+             <h3 class="box-title"><b><u>Resume</u></b></h3><div class="pull-right"><button type="button" id="close_resume" class="btn btn-danger btn-xs" value="cancel"><i class="fa fa-times"></i></button></div>
              </div>
-      <form action="" id="resume_form">
+      <form action="" id="resume_form" enctype="multipart/form-data">
       <div class="box-footer text-black data" >
         <table style="font-size:13px; " width="100%" id="table_data">  
             <?php if(isset($member_data)){?>
-            <tr ><td class="space"><a href="#"><span><?php echo $member_data->member_resume?></span></a></td><td ><span class="edit_education_field"><?php echo $member_data->education_degree?></span><span class="show_education_field" hidden><input type="text" name="degree" id="degree" style="border: none; text-decoration: underline;" value="<?php echo $member_data->education_degree;?>" placeholder="Qualification" autofocus="autofocus"></span></td><tr>
+            <tr><td class="space"><a href="#"><span><?php $resume=explode('/',$member_data->member_resume);echo $resume[1]?></span></a></td>
+                                           <td> 
+                         <label class="btn-bs-file btn btn-sm btn-info">
+                            Update Resume
+                            <input type="file" name="resume" id="resume" value=""/>
+                        </label><span id="resume_name" style="color:black"></span><br><br>
+                        <div id="resume_btn" hidden><button type="button" class="btn btn-success btn-xs" value="resume_update" id="save_resume" name="save">save</button> <input type="button" id="cancel_resume" class="btn btn-danger btn-xs" value="cancel"></div>  
+                                           </td></tr>
            
   <?php }?>                   
         </table>
-
-                       <div class="pull-right" id="education_btn" hidden><input type="button" class="btn btn-success btn-xs" value="save" id="save_education" name="save"> <input type="button" id="cancel_education" class="btn btn-danger btn-xs" value="cancel"></div>  
+          
              
            </div>
           </form>
@@ -390,17 +486,19 @@ document.getElementById("to").innerHTML = options;
           
           <div hidden class="shadow" id="skill">               
          <div class="box-header" >           
-             <h3 class="box-title"><b><u>Skills</u></b></h3><div class="pull-right"><a href="#" id="edit_skill"><span class="fa fa-pencil"> edit </span></a> &nbsp;&nbsp;<button type="button" id="close_skill" class="btn btn-danger btn-xs" value="cancel"><i class="fa fa-times"></i></button></div>
+             <h3 class="box-title"><b><u>Skills</u></b></h3><div class="pull-right"><a href="#" id="add_skill"> Add Skill </a> &nbsp;&nbsp;<button type="button" id="close_skill" class="btn btn-danger btn-xs" value="cancel"><i class="fa fa-times"></i></button></div>
              </div>
               
       <div class="box-footer text-black data" >
           <form action="" id="skills">
         <table style="font-size:13px; " width="100%" id="table_data"> 
-            <h5><b><u>Computer Languages & Skills</u></5></h5>
-            <?php if(isset($skill_data)){?>
-            <tr ><th class="space">PHP</th><td ><span class="edit_education_field"><?php echo $member_data->education_degree?></span><span class="show_education_field" hidden><input type="text" name="degree" id="degree" style="border: none; text-decoration: underline;" value="<?php echo $member_data->education_degree;?>" placeholder="Qualification" autofocus="autofocus"></span></td><tr>
+            <h5><b><u>Computer Languages & Skills</u></b></h5>
+            <?php if(isset($skill_data)){ foreach($skill_data as $skill){?>
+            <tr ><th class="space"><span class="edit_skill_field">PHP</span><span class="show_skill_field" hidden><input type="text" name="skill" id="skill" style="border: none; text-decoration: underline;" value="<?php ?>" placeholder="Qualification" autofocus="autofocus"></span><br><div class="skill_btn" hidden><input type="button" class="btn btn-success btn-xs" value="save" id="save_skill" name="save"> <input type="button" id="cancel_skill" class="btn btn-danger btn-xs" value="cancel"></div></th>
+                <td><div class="pull-right"><a href=""><i class="fa fa-pencil"> </i></a>&nbsp; &nbsp;&nbsp;<a href=""><i class="fa fa-times"></i></a></div></td><tr>
+                   
             
-  <?php }?>                   
+            <?php }}?>                   
         </table>
 
                        <div class="pull-right" id="education_btn" hidden><input type="button" class="btn btn-success btn-xs" value="save" id="save_education" name="save"> <input type="button" id="cancel_education" class="btn btn-danger btn-xs" value="cancel"></div>  

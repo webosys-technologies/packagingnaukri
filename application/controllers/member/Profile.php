@@ -103,7 +103,7 @@ class Profile extends CI_Controller
         $res=$this->Employments_model->update_employment($where,$data);
         if($res)
         {
-          echo json_encode('success','Employment updated sucessfully');
+          echo json_encode(array('success'=>'Employment updated sucessfully'));
         }
         
     }
@@ -117,7 +117,7 @@ class Profile extends CI_Controller
         $res=$this->Projects_model->update_project($where,$data);
         if($res)
         {
-          echo json_encode('success','Project Detail updated sucessfully');
+          echo json_encode(array('success'=>'Project Detail updated sucessfully'));
         }
     }
     
@@ -130,12 +130,63 @@ class Profile extends CI_Controller
         $res=$this->Skills_model->update_skills($where,$data);
         if($res)
         {
-          echo json_encode('success','Skills updated sucessfully');
+           echo json_encode(array('success'=>'Skills updated sucessfully'));
         }
     }
     
-   
+    public function resume_update()
+    {
+     $info=get_member_info($this->session->userdata('member_id'));
+     
+if (isset($_FILES['resume']['name'])) {
+    if (0 < $_FILES['resume']['error']) {
+        echo 'Error during file upload' . $_FILES['resume']['error'];
+    } else {
+//        if (file_exists('resume/' . $_FILES['resume']['name'])) {
+//            echo 'File already exists : resume/' . $_FILES['resume']['name'];
+//        } else {
+        $rand=  mt_rand(1111,9999);
+        $name = $_FILES["resume"]["name"];
+        $ext = end((explode(".", $name)));
+        $filename='suraj_resume_'.date('Y-m-d_H.i.s').".".$ext;
+        move_uploaded_file($_FILES['resume']['tmp_name'], 'resume/' . $filename);
+       
+        if(file_exists('resume/'.$filename))
+        {
+            if(file_exists($info->member_resume))
+            {
+            unlink($info->member_resume);
+         $where=array('member_id'=>$this->session->userdata('member_id'));
+        $data=array('member_resume'=>'resume/'.$filename);
+         $res=$this->Members_model->member_update($where,$data);
+         
+        
+        if($res)
+        
+            echo json_encode(array('success'=>"Resume Updated Successfully"));
+        
+            }else{
+                $where=array('member_id'=>$this->session->userdata('member_id'));
+               $data=array('member_resume'=>'resume/'.$filename);
+               $res=$this->Members_model->member_update($where,$data);
+               
+                    echo json_encode(array('success'=>"Resume Updated Successfully"));               
+            }
+        }   else{
+            echo json_encode(array('error'=>"Something Wrong"));
+        }   
+       
+       
+            
+//        }
+    }
+} else {
+    echo 'Please choose a file';
+}
     
+    
+   
+    }  
   
 }
 
