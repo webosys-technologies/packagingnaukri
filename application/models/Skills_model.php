@@ -3,7 +3,7 @@
 
 class Skills_model extends CI_Model
 {
-     var $table='Skills';
+     var $table='skills';
     
      public function getall_employments()
      {
