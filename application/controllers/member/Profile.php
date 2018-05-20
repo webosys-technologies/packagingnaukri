@@ -25,6 +25,10 @@ class Profile extends CI_Controller
             $id=$this->session->userdata('member_id');
             $result['member_data']=get_member_info($id);
             $result['cities']=$this->Cities_model->get_all_cities();
+            $result['project_data']=$this->Projects_model->project_by_member($id);
+            $result['employments']=$this->Employments_model->get_employment_member($id);
+            $result['skills']=$this->Skills_model->get_members_skill($id);
+            
               
                   
              $this->load->view('member/header',$result);
@@ -98,26 +102,97 @@ class Profile extends CI_Controller
     {
         $id=$this->session->userdata('member_id');
         $form=$this->input->post();
-        $data=array();
-        $where=array('member_id'=>$id);
-        $res=$this->Employments_model->update_employment($where,$data);
-        if($res)
-        {
-          echo json_encode(array('success'=>'Employment updated sucessfully'));
-        }
         
+       
+        $data=array(
+            'member_id'=>$id,
+            'employment_organization'=>  $form['organization'],
+            'employment_city'=>  $form['city'],
+            'employment_designation'=>  $form['designation'],
+            'employment_profile'=>  $form['profile'],
+            'employment_notice_period'=>  $form['period'],
+            'employment_from'=>  $form['from'],
+            'employment_to'=>  $form['to'],
+            'employment_status'=>1
+           
+        );   
+        $where=array('member_id'=>$id);
+        
+        $data=$this->Employments_model->get_employ_by_member($id);
+        $this->Employments_model->update_employment($where,$data);
+             
+        if(empty($data))
+        {
+            $this->Employments_model->insert_employment($where,$data);
+            echo json_encode(array('success'=>'Employment Added sucessfully'));    
+        }else{        
+            $res=$this->Employments_model->update_employment($where,$data);
+            echo json_encode(array('success'=>'Employment updated successfully'));
+        }
+               
     }
     
     public function project_update()
     {
         $id=$this->session->userdata('member_id');
         $form=$this->input->post();
-        $data=array();
+       
+        
+        $data=array('member_id'=>$id,
+//                     'employment_id'=>$form['emp_id'],
+                     'project_name'=>$form['project_name'],
+                     'project_status'=>1);
         $where=array('member_id'=>$id);
-        $res=$this->Projects_model->update_project($where,$data);
+
+        $check=$this->Projects_model->check_project_name($form['project_name']);
+        if($check>0)
+        {
+             $res=$this->Projects_model->update_project($data,$where);
+             echo json_encode(array('success'=>'Project updated sucessfully'));
+        }else{
+                       $this->Projects_model->insert_project($data);
+        }
+        
+      
+    }
+    
+    
+    public function new_project_add()
+    {
+        $id=$this->session->userdata('member_id');
+        $form=$this->input->post();
+        
+        $data=array('member_id'=>$id,
+                     'employment_id'=>$form['emp_id'],
+                     'project_name'=>$form['project_name'],
+                     'project_description'=>$form['desc'],
+                     'project_client_name'=>$form['client'],
+                     'project_start'=>$form['from'],
+                     'project_to'=>$form['to'],
+                     'project_status'=>1);
+       
+
+        $check=$this->Projects_model->check_project_name($form['project_name']);
+        if($check>0)
+        {
+            echo json_encode(array('error'=>'Project Name Already Exists'));
+        }else{
+                      $this->Projects_model->insert_project($data);
+                     echo json_encode(array('error'=>'Project Added Successfully'));
+
+ 
+        }
+        
+      
+    }
+    
+    public function project_delete($id)
+    {
+        $where=array('project_id'=>$id);
+        $res=$this->Projects_model->delete_project($where);
         if($res)
         {
-          echo json_encode(array('success'=>'Project Detail updated sucessfully'));
+            echo json_encode(array('success'=>'Project Deleted Successfully'));
         }
     }
     
@@ -131,6 +206,17 @@ class Profile extends CI_Controller
         if($res)
         {
            echo json_encode(array('success'=>'Skills updated sucessfully'));
+        }
+    }
+    
+    
+     public function skill_delete($id)
+    {        
+        $where=array('skill_id'=>$id);
+         $res=$this->Skills_model->skill_delete($where);
+        if($res)
+        {
+           echo json_encode(array('success'=>'Skills Deleted sucessfully'));
         }
     }
     
@@ -186,7 +272,24 @@ if (isset($_FILES['resume']['name'])) {
     
     
    
-    }  
+    }
+    
+    function add_new_skill()
+    {
+        $id=$this->session->userdata('member_id');
+       $form=$this->input->post();
+       $data=array(
+                   'member_id'=>$id,
+                    'skill_name'=>$form['skill_name'],
+                   'skill_description'=>$form['desc'],
+                    'skill_created_at'=>date('Y-m-d'),
+                    'skill_status'=>1);
+       $res=$this->Skills_model->add_new_skill($data);
+       if($res)
+       {
+           echo json_encode(array('success'=>'Skill Added successfully'));
+       }
+    }
   
 }
 
