@@ -49,6 +49,14 @@ class Jobs_model extends CI_Model
          return $this->db->affected_rows();
      }
      
+     public function search_job($form)
+     {
+         $this->db->from('jobs as job');
+         $this->db->join('companies as comp','comp.company_id=job.company_id','LEFT');
+         $query=$this->db->get();
+         return $query->result();
+     }
+     
      
 
    

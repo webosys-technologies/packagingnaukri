@@ -78,7 +78,7 @@ a:hover {
         <li class="active">Profile</li>
       </ol>
              </section>
-
+<!--<hr style="border-top: 1px solid #ccc;">-->
       <section class="content" >
 
          <script>
@@ -553,10 +553,10 @@ $("#emp_to").innerHTML = options;
       <div class="box-footer text-black data" >
         <table style="font-size:13px; " width="100%" id="table_data">  
             <?php if(isset($member_data)){?>
-            <tr ><th class="space">Organization</th><td ><span class="edit_employment_field"><?php echo $member_data->employment_organization;?></span><span class="show_employment_field" hidden><input type="text" name="organization" size="40 id="organization" style="border: none; text-decoration: underline;" value="<?php echo $member_data->employment_organization;?>" placeholder="Company Name" autofocus="autofocus"></span></td><tr>
-              <tr><th class="space">Company Location</th><td><span class="edit_employment_field"><?php echo $member_data->employment_city;?></span><span class="show_employment_field"hidden><input type="text" name="city" size="40 id="city" style="border: none; text-decoration: underline;" placeholder="Company Location" value="<?php echo $member_data->employment_city;?>"></span></td></tr>
-               <tr><th class="space">Designation  </th><td> <span class="edit_employment_field"><?php echo $member_data->employment_designation;?></span><span class="show_employment_field"hidden><input type="text" name="designation" size="40 id="designation" style="border: none; text-decoration: underline;" placeholder="Job Post" value="<?php echo $member_data->employment_designation;?>"></span> </td></tr>
-              <tr ><th class="space">Work Profile </th><td ><span class="edit_employment_field"><?php echo $member_data->employment_profile?></span><span class="show_employment_field" hidden><input type="text" name="profile" id="profile" size="40 style="border: none; text-decoration: underline;" value="<?php echo $member_data->employment_profile;?>" placeholder="Profile"></span></td><tr>
+            <tr ><th class="space">Organization</th><td ><span class="edit_employment_field"><?php echo $member_data->employment_organization;?></span><span class="show_employment_field" hidden><input type="text" name="organization" size="40" id="organization" style="border: none; text-decoration: underline;" value="<?php echo $member_data->employment_organization;?>" placeholder="Company Name" autofocus="autofocus"></span></td><tr>
+              <tr><th class="space">Company Location</th><td><span class="edit_employment_field"><?php echo $member_data->employment_city;?></span><span class="show_employment_field"hidden><input type="text" name="city" size="40" id="city" style="border: none; text-decoration: underline;" placeholder="Company Location" value="<?php echo $member_data->employment_city;?>"></span></td></tr>
+               <tr><th class="space">Designation  </th><td> <span class="edit_employment_field"><?php echo $member_data->employment_designation;?></span><span class="show_employment_field"hidden><input type="text" name="designation" size="40" id="designation" style="border: none; text-decoration: underline;" placeholder="Job Post" value="<?php echo $member_data->employment_designation;?>"></span> </td></tr>
+              <tr ><th class="space">Work Profile </th><td ><span class="edit_employment_field"><?php echo $member_data->employment_profile?></span><span class="show_employment_field" hidden><input type="text" name="profile" id="profile" size="40" style="border: none; text-decoration: underline;" value="<?php echo $member_data->employment_profile;?>" placeholder="Profile"></span></td><tr>
               <tr><th class="space">Work From  </th><td><span class="edit_employment_field"><div class="row"><div class="col-md-6"><label>From</label><br><?php echo $member_data->employment_from;?></div><div class="col-md-6"><label>To</label><br><?php echo $member_data->employment_to;?></div></div></span><span class="show_employment_field"hidden><div class="row"><div class="col-md-6"><label>From</label><br><select id="from" name="from" style="border:none;"></select></div><div class="col-md-6"><label>To</label><br><select id="to" name="to" style="border:none;"></select></div></div></span></td></tr>
                <tr ><th class="space">Notice Period </th><td ><span class="edit_employment_field"><?php echo $member_data->employment_notice_period?></span><span class="show_employment_field" hidden><input type="text" name="period" id="period" style="border: none; text-decoration: underline;" value="<?php echo $member_data->employment_notice_period;?>" placeholder="2 Month"></span></td><tr>
                

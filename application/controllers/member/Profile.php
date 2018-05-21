@@ -98,12 +98,13 @@ class Profile extends CI_Controller
         
     }
     
-    public function employment_update()
+    public function update_employment()
     {
         $id=$this->session->userdata('member_id');
         $form=$this->input->post();
         
-       
+       echo "hello";
+       die;
         $data=array(
             'member_id'=>$id,
             'employment_organization'=>  $form['organization'],

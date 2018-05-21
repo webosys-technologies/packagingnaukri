@@ -18,7 +18,7 @@ class Employments_model extends CI_Model
      
      public function update_employment($where,$data)
      {
-         print_r($data);
+        
          $this->db->update($this->table,$data,$where);
          return $this->db->affected_rows();
      }

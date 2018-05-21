@@ -3,15 +3,21 @@
   .modal fade{
     display: block !important;
 }
-.modal-dialog{
+#modal_dialog{
      width: 700px;
       overflow-y: initial !important
 }
-.modal-body{
+#modal_body{
   height: 420px;
   overflow-y: auto;
 }
+.modal-backdrop {background: none;}
 
+#delete_modal{
+            background: none;
+                margin:150px;
+               
+            }
 </style>
 <div class="content-wrapper" style="background:white;">
     <!-- Content Header (Page header) -->
@@ -110,7 +116,7 @@
                                        ?></td>
                                        <td>
                   <button class="btn btn-success" onclick="edit_recruiter(<?php echo $res->recruiter_id; ?>)" data-toggle="tooltip" data-placement="bottom" title="Edit Recruiter"><i class="glyphicon glyphicon-pencil"></i></button>
-                  <button class="btn btn-danger" onclick="delete_recruiter(<?php echo $res->recruiter_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Recruiter"><i class="glyphicon glyphicon-trash"></i></button>
+                  <button class="btn btn-danger" onclick="delete_menu(<?php echo $res->recruiter_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Recruiter"><i class="glyphicon glyphicon-trash"></i></button>
                  
 
                 </td>
@@ -313,13 +319,10 @@ function view_recruiter(id)
             }
         });
     }
-
+    
     function delete_recruiter(id)
     {
-      if(confirm('Are you sure delete this data?'))
-      {
-        // ajax delete data from database
-          $.ajax({
+         $.ajax({
             url : "<?php echo base_url()?>admin/Recruiter/recruiter_delete/"+id,
             type: "GET",
             dataType: "JSON",
@@ -334,8 +337,13 @@ function view_recruiter(id)
                 alert('Error deleting data');
             }
         });
+    }
 
-      }
+    function delete_menu(id)
+    {
+        $("#delete_modal").modal('show');
+        $("#delete_recruiter").attr('onclick','delete_recruiter('+id+')');  
+             
     }
 
 
@@ -356,7 +364,7 @@ function view_recruiter(id)
 
   </script>
 <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="modal_dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
@@ -364,7 +372,7 @@ function view_recruiter(id)
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <center><h4 id="title" class="modal-title"></h4></center>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="modal_body">
          
             
           	
@@ -482,4 +490,25 @@ function view_recruiter(id)
 
 
 
-
+<div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div style="background:#ABB2B9" class="modal-header">
+          
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Recruiter</strong></h4></center>
+      </div>
+      <div id="calendar" style="background:#F2F3F4" class="modal-body">
+          <div class="row">
+              <div class="col-md-10 col-md-offset-2">
+                  <label style="color:black">Are you sure want to delete this recruiter ?</label> <br>
+                  <button class="btn btn-default" id="delete_recruiter">Yes</button>
+                  <button class="btn btn-default" data-dismiss="modal">No</button>
+          
+                  </div>              
+                 </div>
+      </div>
+     
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
