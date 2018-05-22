@@ -1,16 +1,23 @@
 
 <style type="text/css">
-  .modal fade{
+ .modal fade{
     display: block !important;
 }
-.modal-dialog{
+#modal_dialog{
      width: 700px;
       overflow-y: initial !important
 }
-.modal-body{
+#modal_body{
   height: 420px;
   overflow-y: auto;
 }
+.modal-backdrop {background: none;}
+
+#delete_modal{
+            background: none;
+                margin:150px;
+               
+            }
 
 </style>
 <div class="content-wrapper" style="background:white;">
@@ -110,7 +117,7 @@
                                        ?></td>
                                        <td>
                   <button class="btn btn-success" onclick="edit_user(<?php echo $res->user_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit User"><i class="glyphicon glyphicon-pencil"></i></button>
-                  <button class="btn btn-danger" onclick="delete_user(<?php echo $res->user_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete User"><i class="glyphicon glyphicon-trash"></i></button>
+                  <button class="btn btn-danger" onclick="delete_menu(<?php echo $res->user_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete User"><i class="glyphicon glyphicon-trash"></i></button>
                  
 
                 </td>
@@ -321,9 +328,7 @@ function view_user(id)
 
     function delete_user(id)
     {
-      if(confirm('Are you sure delete this data?'))
-      {
-        // ajax delete data from database
+      
           $.ajax({
             url : "<?php echo site_url('index.php/admin/Users/user_delete')?>/"+id,
             type: "POST",
@@ -340,10 +345,15 @@ function view_user(id)
             }
         });
 
-      }
+      
     }
 
-
+ function delete_menu(id)
+    {
+        $("#delete_modal").modal('show');
+        $("#delete_user").attr('onclick','delete_user('+id+')');  
+             
+    }
 
   </script>
 
@@ -467,6 +477,27 @@ function view_user(id)
       </div>
    
 
-
+<div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div style="background:#ABB2B9" class="modal-header">
+          
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>User</strong></h4></center>
+      </div>
+      <div id="calendar" style="background:#F2F3F4" class="modal-body">
+          <div class="row">
+              <div class="col-md-10 col-md-offset-2">
+                  <label style="color:black">Are you sure want to delete this User ?</label> <br>
+                  <button class="btn btn-default" id="delete_user">Yes</button>
+                  <button class="btn btn-default" data-dismiss="modal">No</button>
+          
+                  </div>              
+                 </div>
+      </div>
+     
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
