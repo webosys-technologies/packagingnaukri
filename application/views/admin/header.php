@@ -61,7 +61,7 @@
       <span class="logo-mini">PKG</span>
       <!-- logo for regular state and mobile devices -->
       <!--<span class="logo-lg"><i><b>Packaging</b></i><i style="color:#0F5397;"><b>naukri.com</b></i></span>-->
-      <img src="<?php echo base_url();?>profile_pic/naukri_logo.png" width="210px"> 
+      <img src="<?php echo base_url();?>assets/images/packagelogo.png" width="210px" height='55px'> 
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">

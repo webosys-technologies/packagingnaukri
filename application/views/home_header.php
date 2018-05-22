@@ -37,7 +37,7 @@
             }
             
             #myModal{
-                margin:75px;
+                margin:100px;
                
             }
             .modal-backdrop {background: none;}
@@ -214,7 +214,7 @@ $("#show_pass_box").click(function(){
         },
         error: function (jqXHR, textStatus, errorThrown)
         {            
-          alert('Error...!');
+//          alert('Error...!');
         }
       });
       }
@@ -230,8 +230,8 @@ $("#show_pass_box").click(function(){
   <nav class="">
   <!--<nav class="navbar navbar-default navbar-fixed-top navbar-expand-lg" id="nav_header">-->
   <!--<nav class="navbar navbar-default navbar-static-top" id="nav_header">-->
-  
-  <div class="container-fluid"  style="background:#02B645">
+  <!--#0461A8-->
+  <div class="container-fluid"  style="background:#0461A8">
      <!--Brand and toggle get grouped for better mobile display--> 
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -292,7 +292,7 @@ $("#show_pass_box").click(function(){
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div style="background:#002863" class="modal-header">
+      <div style="background:#0461A8" class="modal-header">
           
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Member Sign In</strong></h4></center>

@@ -7,6 +7,7 @@ class Companies_model extends CI_Model
     
      public function getall_companies()
      {
+         $this->db->where('company_status','1');
        $query=$this->db->get($this->table);
        return $query->result();
      }

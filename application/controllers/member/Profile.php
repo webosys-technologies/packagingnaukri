@@ -49,14 +49,18 @@ class Profile extends CI_Controller
                   'member_lname'=>  $form['lname'],
                   'member_dob'=>  $form['dob'],
                   'member_city'=>  $form['city'],
-                  'member_gender'=> $form['gen'],                   
+                  'member_gender'=> $form['gen'],
+                  'member_email'=>$form['email'],
+                  'member_mobile'=>$form['mobile']
         );
         $where=array('member_id'=>$id);
         $res=$this->Members_model->member_update($where,$data);
         if($res)
         {
-//            $this->session->set_flashdata('success','Personal Details Updated successfully');
+            $this->session->set_flashdata('success','Personal Details Updated successfully');
             echo json_encode(array('success'=>"Pesonal Detail Updated Successfully"));
+        }else{
+            echo json_encode(array('success'=>"No Change"));
         }
         
     }
@@ -67,7 +71,7 @@ class Profile extends CI_Controller
          $where=array('member_id'=>$id);
          $check_member=$this->Educations_model->get_id($id);                      
          $form=$this->input->post();
-        
+       
         $data=array(
             'member_id'=>$id,
             'education_degree'=>  $form['degree'],
@@ -83,28 +87,26 @@ class Profile extends CI_Controller
         if($check_member)
         {            
         $res=$this->Educations_model->update_education($where,$data);
-        if($res)
-        {
+             
           echo json_encode(array('success'=>'Education updated sucessfully'));
-        }
+        
         }else
         {            
          $res1=$this->Educations_model->add_education($data);
-        if($res1)
-        {
+       
           echo json_encode(array('success'=>'Education Added sucessfully'));
-        }   
+          
         }
         
     }
     
-    public function update_employment()
+    public function employment_update()
     {
         $id=$this->session->userdata('member_id');
         $form=$this->input->post();
         
-       echo "hello";
-       die;
+     if(!empty($form['organization']))
+     {
         $data=array(
             'member_id'=>$id,
             'employment_organization'=>  $form['organization'],
@@ -119,10 +121,9 @@ class Profile extends CI_Controller
         );   
         $where=array('member_id'=>$id);
         
-        $data=$this->Employments_model->get_employ_by_member($id);
-        $this->Employments_model->update_employment($where,$data);
-             
-        if(empty($data))
+        $check=$this->Employments_model->get_employ_by_member($id);
+                    
+        if(empty($check))
         {
             $this->Employments_model->insert_employment($where,$data);
             echo json_encode(array('success'=>'Employment Added sucessfully'));    
@@ -131,6 +132,7 @@ class Profile extends CI_Controller
             echo json_encode(array('success'=>'Employment updated successfully'));
         }
                
+    }
     }
     
     public function project_update()
@@ -152,6 +154,7 @@ class Profile extends CI_Controller
              echo json_encode(array('success'=>'Project updated sucessfully'));
         }else{
                        $this->Projects_model->insert_project($data);
+                       echo json_encode(array('success'=>'Project Inserted sucessfully'));
         }
         
       
@@ -162,7 +165,8 @@ class Profile extends CI_Controller
     {
         $id=$this->session->userdata('member_id');
         $form=$this->input->post();
-        
+        if(!empty($form['project_name']))
+        {
         $data=array('member_id'=>$id,
                      'employment_id'=>$form['emp_id'],
                      'project_name'=>$form['project_name'],
@@ -179,13 +183,35 @@ class Profile extends CI_Controller
             echo json_encode(array('error'=>'Project Name Already Exists'));
         }else{
                       $this->Projects_model->insert_project($data);
-                     echo json_encode(array('error'=>'Project Added Successfully'));
+                     echo json_encode(array('success'=>'Project Added Successfully'));
 
  
         }
-        
+        }else{
+            echo json_encode(array('error'=>'Project Name Required'));
+        }
       
     }
+    
+     public function resume_delete($id)
+    {
+         $file=get_member_info($id);
+         $filename=$file->member_resume;
+         if(file_exists($file->member_resume))
+         {
+             unlink($filename);
+        $where=array('member_id'=>$id);
+        $data=array('member_resume'=>"");
+        $res=$this->Members_model->member_update($where,$data);
+        if($res)
+        {
+            echo json_encode(array('success'=>'Resume Deleted Successfully'));
+        }
+         }  else {
+             
+         }
+    }
+    
     
     public function project_delete($id)
     {
@@ -204,10 +230,9 @@ class Profile extends CI_Controller
         $data=array();
         $where=array('member_id'=>$id);
         $res=$this->Skills_model->update_skills($where,$data);
-        if($res)
-        {
+       
            echo json_encode(array('success'=>'Skills updated sucessfully'));
-        }
+        
     }
     
     
@@ -215,10 +240,9 @@ class Profile extends CI_Controller
     {        
         $where=array('skill_id'=>$id);
          $res=$this->Skills_model->skill_delete($where);
-        if($res)
-        {
+        
            echo json_encode(array('success'=>'Skills Deleted sucessfully'));
-        }
+        
     }
     
     public function resume_update()
@@ -247,8 +271,6 @@ if (isset($_FILES['resume']['name'])) {
         $data=array('member_resume'=>'resume/'.$filename);
          $res=$this->Members_model->member_update($where,$data);
          
-        
-        if($res)
         
             echo json_encode(array('success'=>"Resume Updated Successfully"));
         
@@ -279,6 +301,8 @@ if (isset($_FILES['resume']['name'])) {
     {
         $id=$this->session->userdata('member_id');
        $form=$this->input->post();
+       if(!empty($form['skill_name']))
+       {
        $data=array(
                    'member_id'=>$id,
                     'skill_name'=>$form['skill_name'],
@@ -286,9 +310,10 @@ if (isset($_FILES['resume']['name'])) {
                     'skill_created_at'=>date('Y-m-d'),
                     'skill_status'=>1);
        $res=$this->Skills_model->add_new_skill($data);
-       if($res)
-       {
+      
            echo json_encode(array('success'=>'Skill Added successfully'));
+       }else{
+           echo json_encode(array('error'=>'Skill Name Required'));
        }
     }
   

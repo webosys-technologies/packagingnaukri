@@ -59,14 +59,14 @@
         },
         error: function (jqXHR, textStatus, errorThrown)
         {            
-          alert('Error...!');
+//          alert('Error...!');
         }
       });
   }              
          });
          
          $("#pass_btn").click(function(){
-             alert();
+//             alert();
              $("#otp_field").hide();
              $("#password_field").show();
              $("#pass_btn").hide();
@@ -123,7 +123,7 @@
         },
         error: function (jqXHR, textStatus, errorThrown)
         {            
-          alert('Error...!');
+//          alert('Error...!');
         }
       });
       }
