@@ -60,12 +60,11 @@
     </section>
    <hr style="border-top: 1px solid #ccc;">
    <section class="content">
-  <div id="search_result">
-         
+    
       <div class="shadow">
-           <div class="row content">  
+           <!--<div class="row content">-->  
                <div class="box-header">
-          <h4 style="color:#5DADE2">Walk in for PHP Developer</h4>
+          <h3 style="color:#5DADE2">Walk in for PHP Developer</h3>
           <h5>Webosys Technologies</h5>
           <label>Eligibility :</label><span> BE</span><br>
           <label>Experience :</label><span> 1-2 year</span><br>
@@ -75,7 +74,7 @@
                <label>Company Profile :</label>
                <p> Softebizz technologies is global services in Web Application Development, E-commerce Development, Content Management Systems, Cloud Solution, Software Testing with its global headquarter at Pune, India.<p>
               </div>
-           </div>
+           <!--</div>-->
               </div>
       
      

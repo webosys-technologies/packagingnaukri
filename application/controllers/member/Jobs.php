@@ -68,6 +68,9 @@ class Jobs extends CI_Controller
               <h5>Posted On</h5>
                   <h5>'.$res->job_created_at.'</h5>
              </div>
+             <div class="row">
+              <div class="pull-right"><button onclick="" class="btn btn-info btn-sm" type="button">Apply</button></div>
+             </div>
          </div>
            </div>';
         }

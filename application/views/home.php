@@ -3,6 +3,9 @@
              padding:15px;
          }
      </style>
+     
+    
+         
     <div class="banner-container"> 
   	<div id="carousel" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
@@ -22,6 +25,8 @@
   <a class="carousel-control right" href="#carousel" data-slide="next">&rsaquo;</a>
 </div>	
   </div>
+       
+         
         
         <div class="row" style="background:#F2F3F4">
         <div class="container">        
