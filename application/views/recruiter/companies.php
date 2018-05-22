@@ -241,21 +241,25 @@ function view_company(id)
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/admin/Companies/ajax_edit/')?>/" + id,
+        url : "<?php echo site_url('index.php/recruiter/Companies/ajax_edit/')?>/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
         {     
           
             $('[name="company_id"]').val(data.company_id);
-            $('[name="companytitle"]').val(data.company_title);
-            $('[name="companydesc"]').val(data.company_description);
-            $('[name="companylocation"]').val(data.company_city);
-            $('[name="companytype"]').val(data.company_type);
-            $('[name="companysalary"]').val(data.company_salary);
-            $('[name="company"]').val(data.company_id);
-            $('[name="qualification"]').val(data.company_education);
-            $('[name="experience"]').val(data.company_experience);
+            $('[name="company"]').val(data.company_name);
+            $('[name="type"]').val(data.company_type);
+            $('[name="email"]').val(data.company_email);
+            $('[name="address"]').val(data.company_address);
+            $('[name="contact"]').val(data.company_contact);
+            $('[name="pincode"]').val(data.company_pincode);
+            $('[name="state"]').val(data.company_state);
+            $('[name="city"]').val(data.company_city);
+            $('[name="website"]').val(data.company_website);
+            $('[name="established"]').val(data.company_establish_in);
+            $('[name="multinational"]').val(data.company_multinational);
+
            
                         
            $("#title").text("Edit Job");
@@ -355,8 +359,8 @@ function view_company(id)
     				 <div class="row">
                                 <div class="col-md-12">                                
                                     <div class="form-group">
-                                        <label>Company Name: (*)</label>
-                                    <input name="company" class="form-control" placeholder="Company Name" value="">
+                                        <label>Company Name</label><span style="color: red">*</span>
+                                    <input name="company" class="form-control" placeholder="Compay Name" value="">
                                         <span class="text-danger" id="fname_err"></span>
                                         
                                     </div>
@@ -366,7 +370,8 @@ function view_company(id)
                                     <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Company Type: (*)</label>                                       
+                                        <label>Company Type</label><span style="color: red">*</span>
+                                       
                                     <input name="type" class="form-control" placeholder="MNC or Small Scale" value="">
                                         <span class="text-danger" id="type_err"></span>
                                       
@@ -378,7 +383,7 @@ function view_company(id)
                                     <div class="row">
                                 <div class="col-md-12  ">                                
                                     <div class="form-group">
-                                        <label>Company Email: (*)</label>
+                                        <label>Company Email</label><span style="color: red">*</span>
                                     <input name="email" placeholder="Company Email" class="form-control" value="">
                                         <span class="text-danger" id="email_err"></span>
                                         
@@ -386,13 +391,33 @@ function view_company(id)
                                                                        
                                 </div>
                                </div>
+                                    
+                                <div class="row">
+                                  <div class="col-md-12">                                
+                                      <div class="form-group">
+                                         <label>Contact</label><span style="color: red">*</span>
+                                         <input name="contact" placeholder="Company Contact" class="form-control" value="">
+                                          <span class="text-danger" id="contact_err"></span>
+                                          
+                                      </div>
+                                                                        
+                                  </div>
+                                </div>
                                                                        
+                          <div class="row">
+                                  <div class="col-md-12">
+                                     <label>Website</label><span style="color: red">*</span>
+                                     <input name="website" placeholder="Company Website" class="form-control" value="">
+                                      <span class="text-danger" id="website_err"></span>
+
+                                  </div>         
+                                </div><br>
                                     
                                     <div class="row">
                                 <div class="col-md-12">                                
                                     <div class="form-group">
-                                       <label>Company Address: (*)</label>
-                                    <textarea cols="80" id="address" class="form-control" name="address" rows="10"></textarea>
+                                       <label>Company Address</label><span style="color: red">*</span>
+                                    <textarea cols="80" id="address" class="form-control" name="address" rows="5"></textarea>
                                         <span class="text-danger" id="password_err"></span>
                                         
                                     </div>
@@ -400,81 +425,72 @@ function view_company(id)
                                     
                                 </div>                                
                                      </div> 
-                                    
-                                    
-                                    <div class="row">
-                                <div class="col-md-6">                                
-                                    <div class="form-group">
-                                       <label>Conatact: (*)</label>
-                                       <input name="contact" placeholder="Company Contact" class="form-control" value="">
-                                        <span class="text-danger" id="mobile_err"></span>
-                                        
-                                    </div>                                                                     
-                                </div>
-                                        
-                                         <div class="col-md-6">                                
-                                    <div class="form-group">
-                                       <label>Pincode: (*)</label>
-                                       <input name="pincode" placeholder="Pincode" class="form-control" value="">
-                                        <span class="text-danger" id="mobile_err"></span>                                        
-                                    </div>                                                                      
-                                </div>
-                                        </div>
-                                    
-                                    
-                                    
-                                     <div class="row">
-                    <div class="col-md-6">
-                        <label class="form-label">State</label><span style="color: red">*</span>
-                        <select name="state" id="state" class="form-control" required>
-                                    <option value="">-- Select State --</option>
-                                    <?php if(isset($states)){
-                                        foreach($states as $state)
-                                        { ?>
-                                           <option value="<?php echo $state->city_state; ?>"><?php echo $state->city_state; ?></option>
-                                       <?php }
-                                    }?>
-                                 
-                                    
-                                    <!--<option value="Maharashtra">Maharashtra</option>-->
-                        </select>
-                        <span class="text-danger"><?php echo form_error('state'); ?></span>
 
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">City</label><span style="color: red">*</span>
-                        <select name="city" id="city" class="form-control" required>
-                                    <option value="">-- Select City --</option>                                   
-                             </select>
-                        <span class="text-danger"><?php echo form_error('city'); ?></span>
 
-                    </div>
-                    </div>
-                                   
-                                    
-                                    
-                     <div class="row">
-                          <div class="col-md-12">
-                       <label>Website: (*)</label>
-                         <input name="website" placeholder="Company Website" class="form-control" value="">
-                          <span class="text-danger" id="website_err"></span>
+                                <div class="row">
+                                  <div class="col-md-6">
+                                        <label class="form-label">Country</label><span style="color: red">*</span>
+                                        <select name="country" id="country" class="form-control" required>
+                                                    <option value="">-- Select Country --</option>                              
+                                                    <option value="India"> India </option>                                   
+                                             </select>
+                                        <span class="text-danger"><?php echo form_error('city'); ?></span>
 
-                    </div>         
-                    </div>
+                                    </div>
+                                  <div class="col-md-6">
+                                      <label class="form-label">State</label><span style="color: red">*</span>
+                                      <select name="state" id="state" class="form-control" required>
+                                                  <option value="">-- Select State --</option>
+                                                  <?php if(isset($states)){
+                                                      foreach($states as $state)
+                                                      { ?>
+                                                         <option value="<?php echo $state->city_state; ?>"><?php echo $state->city_state; ?></option>
+                                                     <?php }
+                                                  }?>
+                                               
+                                                  
+                                                  <!--<option value="Maharashtra">Maharashtra</option>-->
+                                      </select>
+                                      <span class="text-danger"><?php echo form_error('state'); ?></span>
+
+                                  </div>
+                    
+                                </div><br>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">City</label><span style="color: red">*</span>
+                                        <select name="city" id="city" class="form-control" required>
+                                                    <option value="">-- Select City --</option>                                   
+                                             </select>
+                                        <span class="text-danger"><?php echo form_error('city'); ?></span>
+
+                                    </div>
+                                    
+                                     <div class="col-md-6">                                
+                                      <div class="form-group">
+                                         <label>Pincode</label><span style="color: red">*</span>
+                                         <input name="pincode" placeholder="Pincode" class="form-control" value="">
+                                          <span class="text-danger" id="mobile_err"></span>                                        
+                                      </div>                                                                      
+                                     </div>
+                               </div>
+                
                                     
                      <div class="row">
                           <div class="col-md-6">
-                       <label>Company Established: (*)</label>
-                                    <input name="established" placeholder="Established Year" class="form-control" value="">
-                        <span class="text-danger" id="gen_err"></span>
+                           <label>Company Established</label><span style="color: red">*</span>
+                                        <input name="established" placeholder="Established Year" class="form-control" value="">
+                            <span class="text-danger" id="gen_err"></span>
 
-                    </div>  
-                         <div class="col-md-6">
-                       <label>Company Multinational: (*)</label>
-                                    <input name="mnc" placeholder="" class="form-control" value="">
-                        <span class="text-danger" id="gen_err"></span>
+                        </div>  
+                        <div class="col-md-6">
+                           <label>Company Multinational</label><span style="color: red">*</span>
+                                        <input name="mnc" placeholder="Job Salary" class="form-control" value="">
+                            <span class="text-danger" id="gen_err"></span>
 
-                    </div>  
+                        </div>  
                     </div>
                      </form>         
     			

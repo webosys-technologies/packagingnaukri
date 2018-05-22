@@ -35,17 +35,23 @@ class Companies extends CI_Controller
     {
         $form=$this->input->post();
         $id=$this->session->userdata('recruiter_id');
-        $this->input->post('company');
+        // print_r($form);
+        // die();
         $data=array(
-                   'recruiter_id'=>$id,
+                  'recruiter_id'=>$id,
                    'company_name'=>$form['company'],
+                   'company_type'=>$form['type'],
                    'company_email'=>$form['email'],
                    'company_contact'=>$form['contact'],
-                   'company_address'=>$form['address'],
-                   'company_pincode'=>$form['pincode'],
-                   'company_city'=>$form['city'],
-                   'company_state'=>$form['state'],
                    'company_website'=>$form['website'],
+                   'company_address'=>$form['address'],
+                   'company_country'=>$form['country'],
+                   'company_country'=>$form['country'],
+                   'company_state'=>$form['state'],
+                   'company_city'=>$form['city'],
+                   'company_pincode'=>$form['pincode'],
+                   'company_establish_in'=>$form['established'],
+                   'company_multinational'=>$form['mnc'],
                    'company_created_at'=>date('Y-m-d'),
                    'company_status'=>'1'
         );
@@ -54,31 +60,35 @@ class Companies extends CI_Controller
           if($res)
           {
                $this->session->set_flashdata('success','company added successfully');
-              echo json_encode(array('success'=>'company added successfully'));
+              echo json_encode(array('success'=>'Company added successfully'));
           }
     }
     
     public function company_update()
     {
-//        echo $id;
+//         echo $id;
          $form=$this->input->post();
         $company_id=$form['company_id'];       
-        $id=$this->Companies_model->get_recruiter_by_company($form['company']);
+        // $id=$this->Companies_model->get_recruiter_by_company($form['company']);
        
-        $data=array(
-                   'recruiter_id'=>$id,
+         $data=array(// 'recruiter_id'=>$id,
                    'company_name'=>$form['company'],
-                   'company_title'=>$form['companytitle'],
-                   'company_type'=>$form['companytype'],
-                   'company_education'=>$form['qualification'],
-                   'company_description'=>$form['companydesc'],
-                   'company_city'=>$form['companylocation'],
-                   'company_experience'=>$form['experience'],
-                   'company_salary'=>$form['companysalary'],
+                   'company_type'=>$form['type'],
+                   'company_email'=>$form['email'],
+                   'company_contact'=>$form['contact'],
+                   'company_website'=>$form['website'],
+                   'company_address'=>$form['address'],
+                   'company_country'=>$form['country'],
+                   'company_country'=>$form['country'],
+                   'company_state'=>$form['state'],
+                   'company_city'=>$form['city'],
+                   'company_pincode'=>$form['pincode'],
+                   'company_establish_in'=>$form['established'],
+                   'company_multinational'=>$form['mnc'],
+                   'company_created_at'=>date('Y-m-d'),
                    'company_status'=>'1'
         );
-        
-         $result=$this->Companies_model->update_company($data,$company_id);
+         $result=$this->Companies_model->company_update(array('company_id' => $company_id),$data);
          if($result)
          {
        $this->session->set_flashdata('success','Data Updated Successfully');
@@ -97,11 +107,11 @@ class Companies extends CI_Controller
     
     public function company_delete($id)
     {
-        $res=$this->Companies_model->delete_company($id);
+        $res=$this->Companies_model->company_delete($id);
         if($res)
         {
             $this->session->set_flashdata('success','company deleted successfully');
-            echo json_encode(array('success'=>'company deleted successfully'));
+            echo json_encode(array('success'=>'Company deleted successfully'));
         }
     }
     

@@ -31,54 +31,63 @@ class Companies extends CI_Controller
     
   
     
-    public function job_add()
+    public function company_add()
     {
         $form=$this->input->post();
-        
-        $id=$this->Companies_model->get_recruiter_by_company($form['company']);
+        // print_r($form);
+        // die();
         $data=array(
-                   'recruiter_id'=>$id,
-                   'company_id'=>$form['company'],
-                   'job_title'=>$form['jobtitle'],
-                   'job_type'=>$form['jobtype'],
-                   'job_education'=>$form['qualification'],
-                   'job_description'=>$form['jobdesc'],
-                   'job_city'=>$form['joblocation'],
-                   'job_experience'=>$form['experience'],
-                   'job_salary'=>$form['jobsalary'],
-                   'job_created_at'=>date('Y-m-d'),
-                   'job_status'=>'1'
+                  // 'recruiter_id'=>$id,
+                   'company_name'=>$form['company'],
+                   'company_type'=>$form['type'],
+                   'company_email'=>$form['email'],
+                   'company_contact'=>$form['contact'],
+                   'company_website'=>$form['website'],
+                   'company_address'=>$form['address'],
+                   'company_country'=>$form['country'],
+                   'company_country'=>$form['country'],
+                   'company_state'=>$form['state'],
+                   'company_city'=>$form['city'],
+                   'company_pincode'=>$form['pincode'],
+                   'company_establish_in'=>$form['established'],
+                   'company_multinational'=>$form['mnc'],
+                   'company_created_at'=>date('Y-m-d'),
+                   'company_status'=>'1'
         );
         
-          $res=$this->Companies_model->job_add($data);
+          $res=$this->Companies_model->company_add($data);
           if($res)
           {
-               $this->session->set_flashdata('success','job added successfully');
-              echo json_encode(array('success'=>'job added successfully'));
+               $this->session->set_flashdata('success','company added successfully');
+              echo json_encode(array('success'=>'Company added successfully'));
           }
     }
     
-    public function job_update()
+    public function company_update()
     {
 //        echo $id;
          $form=$this->input->post();
-        $job_id=$form['job_id'];       
-        $id=$this->Companies_model->get_recruiter_by_company($form['company']);
+        $company_id=$form['company_id'];       
+        // $id=$this->Companies_model->get_recruiter_by_company($form['company']);
        
-        $data=array(
-                   'recruiter_id'=>$id,
-                   'company_id'=>$form['company'],
-                   'job_title'=>$form['jobtitle'],
-                   'job_type'=>$form['jobtype'],
-                   'job_education'=>$form['qualification'],
-                   'job_description'=>$form['jobdesc'],
-                   'job_city'=>$form['joblocation'],
-                   'job_experience'=>$form['experience'],
-                   'job_salary'=>$form['jobsalary'],
-                   'job_status'=>'1'
+         $data=array(// 'recruiter_id'=>$id,
+                   'company_name'=>$form['company'],
+                   'company_type'=>$form['type'],
+                   'company_email'=>$form['email'],
+                   'company_contact'=>$form['contact'],
+                   'company_website'=>$form['website'],
+                   'company_address'=>$form['address'],
+                   'company_country'=>$form['country'],
+                   'company_country'=>$form['country'],
+                   'company_state'=>$form['state'],
+                   'company_city'=>$form['city'],
+                   'company_pincode'=>$form['pincode'],
+                   'company_establish_in'=>$form['established'],
+                   'company_multinational'=>$form['mnc'],
+                   'company_created_at'=>date('Y-m-d'),
+                   'company_status'=>'1'
         );
-        
-         $result=$this->Companies_model->update_job($data,$job_id);
+         $result=$this->Companies_model->company_update(array('company_id' => $company_id),$data);
          if($result)
          {
        $this->session->set_flashdata('success','Data Updated Successfully');
@@ -88,20 +97,20 @@ class Companies extends CI_Controller
     
     public function ajax_edit($id)
     {
-        $res=$this->Companies_model->job_by_id($id);
+        $res=$this->Companies_model->company_by_id($id);
         if($res)
         {
             echo json_encode($res);
         }
     }
     
-    public function job_delete($id)
+    public function company_delete($id)
     {
-        $res=$this->Companies_model->delete_job($id);
+        $res=$this->Companies_model->company_delete($id);
         if($res)
         {
             $this->session->set_flashdata('success','job deleted successfully');
-            echo json_encode(array('success'=>'job deleted successfully'));
+            echo json_encode(array('success'=>'Company deleted successfully'));
         }
     }
     

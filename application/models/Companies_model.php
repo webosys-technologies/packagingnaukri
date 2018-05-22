@@ -1,4 +1,4 @@
-
+    
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Companies_model extends CI_Model
@@ -11,6 +11,14 @@ class Companies_model extends CI_Model
        $query=$this->db->get($this->table);
        return $query->result();
      }
+
+     public function company_by_id($id)
+     {
+        $this->db->from($this->table);
+        $this->db->where('company_id',$id);
+        $query=$this->db->get();
+        return $query->row();
+     }
      
      public function companies_by_recruiter($id)
      {
@@ -21,11 +29,18 @@ class Companies_model extends CI_Model
      
      public function company_add($data)
      {
-         $this->db->insert($this->table,$data);
+         $res=$this->db->insert($this->table,$data);
+         return $this->db->insert_id();
+     }
+
+     public function company_update($where,$data)
+     {
+        $this->db->update($this->table,$data,$where);
          return $this->db->affected_rows();
      }
+
      
-     public function delete_company($id)
+     public function company_delete($id)
      {
          $this->db->where('company_id',$id);
          $this->db->delete($this->table);
