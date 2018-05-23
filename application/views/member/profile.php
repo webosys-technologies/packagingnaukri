@@ -276,7 +276,7 @@ document.getElementById("to").innerHTML = options;
        
               
         $("#save_skill").click(function(){
-            alert($("#save_skill").val());
+//            alert($("#save_skill").val());
                save_method=$("#save_skill").val();
                data=new FormData(document.getElementById("skill_form"));
                 save(data,save_method);
@@ -486,7 +486,7 @@ var state=el.val();
                     $("#to").val(data.employment_to);
                      $("#period").val(data.employment_notice_period);
                      $("#employment_id").val(data.employment_id);
-                     alert(data.employment_id);
+//                     alert(data.employment_id);
                      
                                         
                 
