@@ -16,6 +16,13 @@ class Employments_model extends CI_Model
          return $this->db->affected_rows();
      }
      
+     public function get_employ_by_id($where)
+     {
+         $this->db->where($where);
+         $query=$this->db->get($this->table);
+         return $query->row();
+     }
+     
      public function update_employment($where,$data)
      {
         
@@ -37,6 +44,20 @@ class Employments_model extends CI_Model
          return $query->result();
      }
      
+     function check_employment($where)
+     {
+         $this->db->from($this->table);
+         $this->db->where($where);
+         $query=$this->db->get();
+         return $query->num_rows();
+     }
+     function employment_delete($where)
+     {
+         $this->db->from($this->table);
+         $this->db->where($where);
+         $query=$this->db->delete();
+         return $this->db->affected_rows();
+     }
     
 }
 

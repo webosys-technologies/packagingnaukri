@@ -17,11 +17,25 @@ class Skills_model extends CI_Model
          return $query->result();
      }
      
+     public function get_skill_by_id($where)
+     {
+          $this->db->where($where);
+         $query=$this->db->get($this->table);
+         return $query->row();
+     }
+     
      public function add_new_skill($data)
      {
          $this->db->insert($this->table,$data);
          return $this->db->affected_rows();
      }
+     
+     public function skill_update($data,$where)
+     {
+         $this->db->update($this->table,$data,$where);
+         return $this->db->affected_rows();
+     }
+     
      
      public function skill_delete($where)
      {
@@ -30,6 +44,13 @@ class Skills_model extends CI_Model
          return $this->db->affected_rows();
      }
      
+     public function check_skill($where)
+     {
+         $this->db->from($this->table);
+         $this->db->where($where);
+         $query=$this->db->get();
+         return $query->num_rows();
+     }
     
 }
 

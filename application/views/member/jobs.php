@@ -39,7 +39,7 @@
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                alert('Error adding / update data');
+//                alert('Error adding / update data');
             }
         });
     }

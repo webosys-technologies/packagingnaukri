@@ -18,6 +18,13 @@ class Projects_model extends CI_Model
          return $query->result();
      }
      
+     public function get_project_by_id($where)
+     {
+          $this->db->where($where);
+         $query=$this->db->get($this->table);
+         return $query->row();
+     }
+     
      public function update_project($data,$where)
      {
        $this->db->update($this->table,$data,$where); 
