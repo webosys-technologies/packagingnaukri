@@ -68,6 +68,78 @@
 </script>
 
 <script>
+
+  function open_login()
+  {
+     $('#login_form')[0].reset(); 
+       $("#validation_error").html("");
+       $("#email_err").html("");
+       $("#password_err").html("");
+       $("#otp_err").html("");
+       
+       $('#send_otp').hide();
+   $("#show_pass_box").hide();
+    $("#otp_box").hide();
+    $("#show_otp_box").show();
+    $("#pass_field").show();
+  }
+
+  function member_login() {  
+      
+        //var val= member_log_validation();
+       
+        if(true)
+        {
+       var data = new FormData(document.getElementById("login_form"));
+       var url = "<?php echo site_url('index.php/member/Index/loginMe')?>";
+           
+       $.ajax({               
+            url : url,
+            type: "POST",
+            async: false,
+            processData: false,
+            contentType: false,            
+            data: data,
+            dataType: "JSON",
+        success: function(data)
+        {  var success;
+            var email_error;
+            var pass_error;
+            var val_error;
+           
+            if(data.account_error)
+            {
+                $("#validation_error").html(data.account_error);
+            }
+            
+            if(data.val_error)
+            {
+                $("#validation_error").html(data.val_error);
+            }
+            
+            if(data.email_error)
+            {
+                $("#validation_error").html(data.email_error);
+            }   
+            if(data.otp_error)
+            {
+                $("#otp_err").html(data.otp_error);
+            }
+                   
+            
+            if(data.status)
+            {
+             window.location="<?php echo site_url('index.php/member/Dashboard')?>";
+            }
+            
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {            
+          alert('Error...!');
+        }
+      });
+      }
+    }
     $(document).ready(function() {
         
   
@@ -79,29 +151,20 @@
 //       $("#email_err").html("");
 //       $("#password_err").html("");
 //});
+    
 
-        $("#log").click(function(){
-       $('#login_form')[0].reset(); 
-       $("#validation_error").html("");
-       $("#email_err").html("");
-       $("#password_err").html("");
-       $("#otp_err").html("");
-       
-       
-    $("#show_pass_box").hide();
-    $("#otp_box").hide();
-    $("#show_otp_box").show();
-    $("#pass_field").show();
-        });
+        // $("#log").click(function(){
+      
+        // });
        
        
        
-       $("#myModal").on("hidden.bs.modal", function () {
+//        $("#myModal").on("hidden.bs.modal", function () {
    
-});
+// });
         
 
-$("#show_otp_box").click(function(){
+$("#send_otp").click(function(){
     $("#otp").val("");
     
         var otp_val;
@@ -158,67 +221,22 @@ $("#show_pass_box").click(function(){
     $("#otp_box").hide();
     $("#show_otp_box").show();
     $("#pass_field").show();
+    $('#send_otp').hide();
+
+});
+
+$("#show_otp_box").click(function(){
+    $("#show_pass_box").show();
+    $("#otp_box").show();
+    $("#show_otp_box").hide();
+    $("#pass_field").hide();
+    $('#send_otp').show();
 });
 
 
   });
 
-  function member_login() {  
-      
-        var val= member_log_validation();
-       
-        if(val)
-        {
-       var data = new FormData(document.getElementById("login_form"));
-       var url = "<?php echo site_url('index.php/member/Index/loginMe')?>";
-           
-       $.ajax({               
-            url : url,
-            type: "POST",
-            async: false,
-            processData: false,
-            contentType: false,            
-            data: data,
-            dataType: "JSON",
-        success: function(data)
-        {  var success;
-            var email_error;
-            var pass_error;
-            var val_error;
-           
-            if(data.account_error)
-            {
-                $("#validation_error").html(data.account_error);
-            }
-            
-            if(data.val_error)
-            {
-                $("#validation_error").html(data.val_error);
-            }
-            
-            if(data.email_error)
-            {
-                $("#validation_error").html(data.email_error);
-            }   
-            if(data.otp_error)
-            {
-                $("#otp_err").html(data.otp_error);
-            }
-                   
-            
-            if(data.status)
-            {
-             window.location="<?php echo site_url('index.php/member/Dashboard')?>";
-            }
-            
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {            
-          alert('Error...!');
-        }
-      });
-      }
-    }
+  
  
 </script>
     
@@ -283,7 +301,7 @@ $("#show_pass_box").click(function(){
           
           
       </ul> <ul class="nav navbar-nav navbar-right">
-              <li><a id="header_link" href="#" data-toggle="modal" id="log" data-target="#myModal">Login</a></li>
+              <li><a id="header_link" href="#" data-toggle="modal" onclick="open_login()" data-target="#myModal">Login</a></li>
               <li><a id="header_link" href="<?php echo base_url();?>member/index">Register</a></li>
            </ul>
         
@@ -313,6 +331,9 @@ $("#show_pass_box").click(function(){
             <input type="text" class="form-control" id="member_email" placeholder="Email or Mobile No" name="member_email" required /><span class="text-danger" id="email_err"></span>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
+          <div class="form-group">
+            <center>  <a type="button" id="send_otp" class="label label-success "  />Send Otp</a></center>
+            </div>
            
           <div class="form-group has-feedback" id="pass_field">
             <input type="password" class="form-control" placeholder="Password" id="password" name="member_password" required /><span class="text-danger" id="password_err"></span>
@@ -321,12 +342,10 @@ $("#show_pass_box").click(function(){
                       
              <div class="form-group has-feedback" id="otp_box" style="display:none;">
             <input type="text" class="form-control" placeholder="Enter OTP" id="otp" name="member_otp" required /><span class="text-danger" id="otp_err"></span><span class="text-success" id="otp_success"></span>
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            <center><h4><a class="label label-warning" id="show_pass_box">Login With Password</a></h4></center>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span><br>
           </div>
                       
              
-             <center><h4><a class="label label-warning" id="show_otp_box">Login With OTP</a></h4></center>
            
           <div class="row">
             <div class="col-xs-8">    
@@ -340,6 +359,9 @@ $("#show_pass_box").click(function(){
               <button type="button" onclick="member_login()"class="btn btn-primary btn-block btn-flat"  />Sign In</button>
             
              <p>or</p>
+             <center><h4><a class="label label-warning" id="show_otp_box">Login With OTP</a></h4></center>
+            <center><h4><a class="label label-warning" id="show_pass_box">Login With Password</a></h4></center>
+
               <a class="btn btn-info">
                   <span class="fa fa-google"></span> <span style="color:white">Sign in with Google</span>
   </a>

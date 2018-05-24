@@ -20,7 +20,7 @@ class Cities_model extends CI_Model
      public function getall_cities($state)
      {
      	$this->db->from($this->table);
-     	$this->db->where('city_state',$state);
+     	$this->db->or_like('city_state',$state);
      	$query=$this->db->get();
 
      	return $query->result();

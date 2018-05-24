@@ -32,8 +32,8 @@ class Index extends CI_Controller
     $this->form_validation->set_rules('email','Email','trim|required|valid_email|callback_check_if_email_exist');
     $this->form_validation->set_rules('mobile','Mobile','trim|required|numeric');
     $this->form_validation->set_rules('password','Password','trim|required|min_length[8]');
-   // $this->form_validation->set_rules('recruiter_cpassword','Confirm Password','trim|required|matches[recruiter_password]');  
-   // $this->form_validation->set_rules('recruiter_address','Address','trim|required');
+    $this->form_validation->set_rules('confirm_password','Confirm Password','trim|required|matches[password]');  
+   $this->form_validation->set_rules('otp','OTP','trim|required|callback_check_otp_verification');
     $this->form_validation->set_rules('city','City','trim|required');
    // $this->form_validation->set_rules('recruiter_pincode','Pincode','trim|required|numeric');
     $this->form_validation->set_rules('state','State','trim|required');   
@@ -42,13 +42,13 @@ class Index extends CI_Controller
     if ($this->form_validation->run() == false)
         {
 
-          // echo  "validate error";
+         //  echo  "validate error";
       
    $state['states']=$this->Cities_model->getall_state(); 
-                                $this->load->view('member/home_header');
+                                $this->load->view('home_header');
               
                 $this->load->view('member/sin',$state);                     
-                   $this->load->view('member/home_footer');
+                   $this->load->view('home_footer');
                     
         }
         else
@@ -258,7 +258,7 @@ class Index extends CI_Controller
         {          
             $email=$this->input->post('member_email');
             $val=is_numeric($email);
-            
+
             if($val)
             {
                 $res=$this->Members_model->check_mobile_exist($email);
@@ -539,6 +539,21 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
 			return FALSE;
 		}
 	}
+
+  function check_otp_verification($requested_otp)
+  {
+    $ses_mobile=$this->session->userdata('mobile');
+    $ses_otp=$this->session->userdata('otp');
+    // print_r($ses_mobile);
+    // echo $ses_otp;
+    $mob=$this->input->post('mobile');
+    if ($ses_mobile == $mob && $ses_otp == $requested_otp) {
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+
+  }
         
         function check_member_email($requested_email)
 	{

@@ -41,6 +41,7 @@ class Members_model extends CI_Model
         $query=$this->db->get();
     
         $res=$query->row();
+        
         if($res)
         {
             return $res;
@@ -198,14 +199,15 @@ class Members_model extends CI_Model
          function check_mobile_exist($member_mobile)
         {
         $this->db->where('member_mobile',$member_mobile);
-        $result=$this->db->get($this->table);
-
-        if($result->num_rows()>0)
+        $query=$this->db->get($this->table);
+        $result=$query->num_rows();
+        if($result > 0)
         {
             return FALSE;
         }else{
             return TRUE;
         }
+        die();
         }
         
                  

@@ -222,9 +222,9 @@ class Recruiters_model extends CI_Model
     }
     public function check_mobile_exist($mob)
     { $this->db->where('recruiter_mobile',$mob  );
-        $result=$this->db->get($this->table);
-
-        if($result->num_rows()>0)
+        $query=$this->db->get($this->table);
+        $result=$query->num_rows();
+        if($result > 0)
         {
             return FALSE;
         }else{
