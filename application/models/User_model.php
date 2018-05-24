@@ -4,9 +4,24 @@ class User_model extends CI_Model
 {
      var $table='users';
     
-     public function getall_user()
+     public function getall_user($name)
      {
+       
         $this->db->from($this->table);
+        if($name=="Staff")
+        {
+            $this->db->where('user_status','1');
+            $this->db->where('user_type','Staff');
+        }
+        if($name=="Admin")
+        {
+             $this->db->where('user_status','1');
+            $this->db->where('user_type','Admin');
+        }
+        if($name=="")
+        {
+             $this->db->where('user_status','1');
+        }
         $query=$this->db->get();
 
         return $query->result();

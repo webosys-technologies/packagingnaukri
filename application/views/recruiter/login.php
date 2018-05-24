@@ -64,8 +64,9 @@
              //alert('Error...!');
              $("#ajax").html("Error While Registration");
            }
-         });
-            }
+         
+      });
+  }          
             else
             {
               $("#no_err").html("Not a valid Phone Number");
@@ -92,7 +93,6 @@
 
          
          $("#pass_btn").click(function(){
-             //alert();
              $("#otp_field").hide();
              $("#password_field").show();
              $("#otp_div").hide();
@@ -165,7 +165,6 @@
     //   }
     // }
 
-    
  </script>
 
 

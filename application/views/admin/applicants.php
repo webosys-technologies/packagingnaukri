@@ -156,7 +156,7 @@ var state=el.val();
        },
        error: function (jqXHR, textStatus, errorThrown)
        {
-         alert('Error...!');
+//         alert('Error...!');
        }
      });
      }
@@ -233,7 +233,7 @@ function view_member(id)
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
-            alert('Error get data from ajax 1');
+//            alert('Error get data from ajax 1');
         }
     });
     }
@@ -323,7 +323,7 @@ function view_member(id)
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                alert('Error adding / update data');
+//                alert('Error adding / update data');
             }
         });
     }
@@ -345,7 +345,7 @@ function view_member(id)
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                alert('Error deleting data');
+//                alert('Error deleting data');
             }
         });
 

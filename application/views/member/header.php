@@ -67,7 +67,8 @@
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>Pack</b></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>Packagingnaukri</b></span>
+          <!--<span class="logo-lg"><b>Packagingnaukri</b></span>-->
+          <img src="<?php echo base_url();?>assets/images/packagelogo.png" width="210px" height='55px'> 
         </a>
         
         
@@ -134,11 +135,11 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview">
+<!--            <li class="treeview">
               <a href="<?php echo base_url(); ?>member/Dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
               </a>
-            </li>
+            </li>-->
             
 <!--             <li class="treeview">
               <a href="#">

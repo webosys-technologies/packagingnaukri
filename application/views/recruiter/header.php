@@ -80,7 +80,8 @@
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">DLT</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>DELTO</b></span>
+          <!--<span class="logo-lg"><b>DELTO</b></span>-->
+          <img src="<?php echo base_url();?>assets/images/packagelogo.png" width="210px" height='55px'> 
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -230,7 +231,7 @@
              <li class="treeview">
               <a href="<?php echo base_url(); ?>recruiter/Members" >
                 <i class="fa fa-child"></i>
-                <span>Members</span>
+                <span>Applicant Members</span>
               </a>
             </li>
             <li class="treeview">
@@ -242,7 +243,7 @@
             <li class="treeview">
               <a href="<?php echo base_url(); ?>recruiter/Jobs" >
                 <i class="fa fa-child"></i>
-                <span>Post Job</span>
+                <span>Jobs</span>
               </a>
             </li>           
           

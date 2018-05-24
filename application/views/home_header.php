@@ -32,12 +32,12 @@
         
         <style>
             #header{
-                margin:15px;
+                margin:0px;
                
             }
             
             #myModal{
-                margin:75px;
+                margin:100px;
                
             }
             .modal-backdrop {background: none;}
@@ -236,18 +236,20 @@ $("#show_otp_box").click(function(){
 
   });
 
-  
+
  
 </script>
     
-    
+    <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="350px" height="80px">
 <!--<body style="background:#d2d6de">--> 
-   <!--<br>-->
- <header class="header" id="header">
+ 
+ <!--<header class="header" id="header">-->
   <!--<div class="container">-->
+  <nav class="">
   <!--<nav class="navbar navbar-default navbar-fixed-top navbar-expand-lg" id="nav_header">-->
-  <nav class="navbar navbar-default navbar-static-top" id="nav_header">
-  <div class="container-fluid"  style="background:#002863">
+  <!--<nav class="navbar navbar-default navbar-static-top" id="nav_header">-->
+  <!--#0461A8-->
+  <div class="container-fluid"  style="background:#0461A8">
      <!--Brand and toggle get grouped for better mobile display--> 
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -256,7 +258,7 @@ $("#show_otp_box").click(function(){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a id="logo" class="navbar-brand" href="#"><img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="200px" height="50px"></a>
+        <!--<a id="logo" class="navbar-brand" href="#"><img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="200px" height="50px"></a>-->
     </div>
 
      <!--Collect the nav links, forms, and other content for toggling--> 
@@ -278,15 +280,7 @@ $("#show_otp_box").click(function(){
         <li><a id="header_link" href="<?php echo base_url();?>Home/job_openings">Job Openings</a></li>
         
        
-<!--          <li class="dropdown">
-          <a id="header_link" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Member<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-              <li><a href="#" data-toggle="modal" id="log" data-target="#myModal">Login</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="<?php echo base_url();?>member/index">Register</a></li>
-          </ul>
-        </li>-->
-        <li class="dropdown">
+       <li class="dropdown">
           <a id="header_link" href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Recruiter<span class="caret"></span></a>
           <ul class="dropdown-menu">
               <li><a href="<?php echo base_url();?>recruiter/index/login">Login</a></li>
@@ -311,12 +305,12 @@ $("#show_otp_box").click(function(){
 </nav>
   <!--</div>-->
    
-</header> 
+<!--</header>--> 
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div style="background:#002863" class="modal-header">
+      <div style="background:#0461A8" class="modal-header">
           
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Member Sign In</strong></h4></center>

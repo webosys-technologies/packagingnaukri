@@ -25,6 +25,7 @@ class Profile extends CI_Controller
             $id=$this->session->userdata('member_id');
             $result['member_data']=get_member_info($id);
             $result['cities']=$this->Cities_model->get_all_cities();
+            $result['states']=$this->Cities_model->getall_state();
             $result['project_data']=$this->Projects_model->project_by_member($id);
             $result['employments']=$this->Employments_model->get_employment_member($id);
             $result['skills']=$this->Skills_model->get_members_skill($id);
@@ -42,23 +43,74 @@ class Profile extends CI_Controller
         $id=$this->session->userdata('member_id');
         $form=$this->input->post();
        
-        
-            
+       
         $data=array(
                   'member_fname'=>  $form['fname'],
                   'member_lname'=>  $form['lname'],
                   'member_dob'=>  $form['dob'],
                   'member_city'=>  $form['city'],
-                  'member_gender'=> $form['gen'],                   
+                  'member_gender'=> $form['gen'],
+                  'member_email'=>$form['email'],
+                  'member_mobile'=>$form['mobile']
         );
         $where=array('member_id'=>$id);
         $res=$this->Members_model->member_update($where,$data);
         if($res)
         {
-//            $this->session->set_flashdata('success','Personal Details Updated successfully');
+            $this->session->set_flashdata('success','Personal Details Updated successfully');
             echo json_encode(array('success'=>"Pesonal Detail Updated Successfully"));
+        }else{
+            echo json_encode(array('success'=>"No Change"));
         }
         
+    }
+    
+    function edit_member($id)
+    {
+        $data=get_member_info($id);
+        $data1=(array('model'=>'personal_modal'));
+        $result=((object)array_merge((array)$data,(array)$data1));
+      
+        echo json_encode($result);
+    }
+    
+    function edit_education($id)
+    {
+        $data=get_member_info($id);
+        $data1=(array('model'=>'education_modal'));
+        $result=((object)array_merge((array)$data,(array)$data1));
+      
+        echo json_encode($result);
+    }
+    
+    function edit_employment($id)
+    {
+        $where=array('employment_id'=>$id);
+        $data=$this->Employments_model->get_employ_by_id($where);
+        $data1=(array('model'=>'employment_modal'));
+        $result=((object)array_merge((array)$data,(array)$data1));
+      
+        echo json_encode($result);
+    }
+    
+    function edit_skill($id)
+    {
+        $where=array('skill_id'=>$id);
+        $data=$this->Skills_model->get_skill_by_id($where);
+        $data1=(array('model'=>'skill_modal'));
+        $result=((object)array_merge((array)$data,(array)$data1));
+      
+        echo json_encode($result);
+    }
+    
+    function edit_project($id)
+    {
+        $where=array('project_id'=>$id);
+        $data=$this->Projects_model->get_project_by_id($where);
+        $data1=(array('model'=>'project_modal'));
+        $result=((object)array_merge((array)$data,(array)$data1));
+      
+        echo json_encode($result);
     }
     
     public function education_update()
@@ -67,13 +119,13 @@ class Profile extends CI_Controller
          $where=array('member_id'=>$id);
          $check_member=$this->Educations_model->get_id($id);                      
          $form=$this->input->post();
-        
+       
         $data=array(
             'member_id'=>$id,
             'education_degree'=>  $form['degree'],
             'education_name'=>  $form['education_name'],
             'education_type'=>  $form['type'],
-            'education_specialization'=>  $form['specialization'],
+//            'education_specialization'=>  $form['specialization'],
             'education_university'=>  $form['university'],
             'education_passing_in'=>  $form['passin'],
             'education_passing_out'=>  $form['passout'], 
@@ -83,28 +135,27 @@ class Profile extends CI_Controller
         if($check_member)
         {            
         $res=$this->Educations_model->update_education($where,$data);
-        if($res)
-        {
+             
           echo json_encode(array('success'=>'Education updated sucessfully'));
-        }
+        
         }else
         {            
          $res1=$this->Educations_model->add_education($data);
-        if($res1)
-        {
+       
           echo json_encode(array('success'=>'Education Added sucessfully'));
-        }   
+          
         }
         
     }
     
-    public function update_employment()
+    public function employment_update()
     {
         $id=$this->session->userdata('member_id');
         $form=$this->input->post();
+      
         
-       echo "hello";
-       die;
+     if(!empty($form['organization']))
+     {
         $data=array(
             'member_id'=>$id,
             'employment_organization'=>  $form['organization'],
@@ -117,52 +168,34 @@ class Profile extends CI_Controller
             'employment_status'=>1
            
         );   
-        $where=array('member_id'=>$id);
+        $where=array('employment_id'=>$form['employment_id']);
+        $where2=array('employment_organization'=>$form['organization']);
         
-        $data=$this->Employments_model->get_employ_by_member($id);
-        $this->Employments_model->update_employment($where,$data);
-             
-        if(empty($data))
+         
+        if(empty($form['employment_id']))
         {
-            $this->Employments_model->insert_employment($where,$data);
+            $this->Employments_model->insert_employment($data);
             echo json_encode(array('success'=>'Employment Added sucessfully'));    
-        }else{        
+        }else{    
+            
             $res=$this->Employments_model->update_employment($where,$data);
             echo json_encode(array('success'=>'Employment updated successfully'));
         }
                
     }
+    }
+    
+   
+    
     
     public function project_update()
     {
         $id=$this->session->userdata('member_id');
         $form=$this->input->post();
+        
        
-        
-        $data=array('member_id'=>$id,
-//                     'employment_id'=>$form['emp_id'],
-                     'project_name'=>$form['project_name'],
-                     'project_status'=>1);
-        $where=array('member_id'=>$id);
-
-        $check=$this->Projects_model->check_project_name($form['project_name']);
-        if($check>0)
+        if(!empty($form['project_name']))
         {
-             $res=$this->Projects_model->update_project($data,$where);
-             echo json_encode(array('success'=>'Project updated sucessfully'));
-        }else{
-                       $this->Projects_model->insert_project($data);
-        }
-        
-      
-    }
-    
-    
-    public function new_project_add()
-    {
-        $id=$this->session->userdata('member_id');
-        $form=$this->input->post();
-        
         $data=array('member_id'=>$id,
                      'employment_id'=>$form['emp_id'],
                      'project_name'=>$form['project_name'],
@@ -172,20 +205,43 @@ class Profile extends CI_Controller
                      'project_to'=>$form['to'],
                      'project_status'=>1);
        
+        $where=array('project_id'=>$form['project_id']);
 
-        $check=$this->Projects_model->check_project_name($form['project_name']);
-        if($check>0)
+       
+        if(!empty($form['project_id']))
         {
-            echo json_encode(array('error'=>'Project Name Already Exists'));
+             $this->Projects_model->update_project($data,$where);
+             echo json_encode(array('success'=>'Project updated sucessfully'));
+           
         }else{
                       $this->Projects_model->insert_project($data);
-                     echo json_encode(array('error'=>'Project Added Successfully'));
-
- 
+                     echo json_encode(array('success'=>'Project Added Successfully')); 
         }
-        
+        }else{
+            echo json_encode(array('error'=>'Project Name Required'));
+        }
       
     }
+    
+     public function resume_delete($id)
+    {
+         $file=get_member_info($id);
+         $filename=$file->member_resume;
+         if(file_exists($file->member_resume))
+         {
+             unlink($filename);
+        $where=array('member_id'=>$id);
+        $data=array('member_resume'=>"");
+        $res=$this->Members_model->member_update($where,$data);
+        if($res)
+        {
+            echo json_encode(array('success'=>'Resume Deleted Successfully'));
+        }
+         }  else {
+             
+         }
+    }
+    
     
     public function project_delete($id)
     {
@@ -197,28 +253,25 @@ class Profile extends CI_Controller
         }
     }
     
-    public function skill_update()
+    public function employment_delete($id)
     {
-        $id=$this->session->userdata('member_id');
-        $form=$this->input->post();
-        $data=array();
-        $where=array('member_id'=>$id);
-        $res=$this->Skills_model->update_skills($where,$data);
+        $where=array('employment_id'=>$id);
+        $res=$this->Employments_model->employment_delete($where);
         if($res)
         {
-           echo json_encode(array('success'=>'Skills updated sucessfully'));
+            echo json_encode(array('success'=>'Employment Deleted Successfully'));
         }
     }
     
+     
     
      public function skill_delete($id)
     {        
         $where=array('skill_id'=>$id);
          $res=$this->Skills_model->skill_delete($where);
-        if($res)
-        {
+        
            echo json_encode(array('success'=>'Skills Deleted sucessfully'));
-        }
+        
     }
     
     public function resume_update()
@@ -248,8 +301,6 @@ if (isset($_FILES['resume']['name'])) {
          $res=$this->Members_model->member_update($where,$data);
          
         
-        if($res)
-        
             echo json_encode(array('success'=>"Resume Updated Successfully"));
         
             }else{
@@ -275,22 +326,42 @@ if (isset($_FILES['resume']['name'])) {
    
     }
     
-    function add_new_skill()
+    function skill_update()
     {
         $id=$this->session->userdata('member_id');
        $form=$this->input->post();
+       if(!empty($form['skill_name']))
+       {
        $data=array(
                    'member_id'=>$id,
                     'skill_name'=>$form['skill_name'],
                    'skill_description'=>$form['desc'],
                     'skill_created_at'=>date('Y-m-d'),
                     'skill_status'=>1);
-       $res=$this->Skills_model->add_new_skill($data);
-       if($res)
-       {
+       
+       
+         $where=array('skill_id'=>$form['skill_id']);
+         if(empty($form['skill_id']))
+         {
+           $this->Skills_model->add_new_skill($data);      
            echo json_encode(array('success'=>'Skill Added successfully'));
+           
+         }else{
+              $this->Skills_model->skill_update($data,$where); 
+              echo json_encode(array('success'=>'Skill Added successfully'));
+         }
+       }else{
+           echo json_encode(array('error'=>'Skill Name Required'));
        }
     }
+    
+     function show_cities($state)
+        {           
+            $cities=$this->Cities_model->getall_cities(ltrim($state));
+          
+            echo json_encode($cities);
+        }
+
   
 }
 

@@ -148,7 +148,7 @@ var user_type=el.val();
        },
        error: function (jqXHR, textStatus, errorThrown)
        {
-         alert('Error...!');
+//         alert('Error...!');
        }
      });
      }
@@ -216,6 +216,7 @@ var user_type=el.val();
 //             $('#modal_form2').modal('show'); // show bootstrap modal when complete loaded
 //             $('.modal-title').text('Student Data'); // Set title to Bootstrap modal title
 
+
 //         },
 //         error: function (jqXHR, textStatus, errorThrown)
 //         {
@@ -223,6 +224,7 @@ var user_type=el.val();
 //         }
 //     });
 //     }
+    
 
     function add_company()
     {  
@@ -269,7 +271,7 @@ var user_type=el.val();
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
-            alert('Error get data from ajax 1');
+//            alert('Error get data from ajax 1');
         }
     });
     }
@@ -308,7 +310,7 @@ var user_type=el.val();
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                alert('Error adding / update data');
+//                alert('Error adding / update data');
             }
         });
     }
@@ -330,7 +332,7 @@ var user_type=el.val();
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                alert('Error deleting data');
+//                alert('Error deleting data');
             }
         });
 
