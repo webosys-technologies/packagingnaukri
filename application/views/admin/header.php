@@ -192,6 +192,14 @@
             </span>
           </a>
         </li>
+
+         <li>
+          <a href="<?php echo base_url(); ?>admin/System">
+            <i class="fa fa-users"></i> <span>System</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
        
 
 
