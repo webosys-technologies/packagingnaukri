@@ -27,8 +27,8 @@
   overflow-y: auto;
 }
 #personal_body{
-  height: 350px;
-  /*overflow-y: auto;*/
+  height: 450px;
+  overflow-y: auto;
 }
     
 .shadow {
@@ -913,14 +913,14 @@ var state=el.val();
                                         <input type="text" placeholder="Last Name" value="" class="form-control" id="lname"  name="lname" maxlength="128" required>
                                       <span class="text-danger" id="lname_err"></span>                                   
                                          </div>
-                            </div>
+                            </div><br>
                                     <div class="row">
                                     <div class="col-md-12  ">                             
                                         <label for="fname">Email</label>
                                         <input type="Email" placeholder="Email" value="" class="form-control required" id="email" name="email" maxlength="128" required>
                                         <span class="text-danger" id="email_err"></span>                                                          
                                 </div>
-                                        </div>
+                                        </div><br>
                                     
                                      <div class="row">
                                     <div class="col-md-12  ">                             
@@ -928,7 +928,7 @@ var state=el.val();
                                         <input type="text" placeholder="Mobile" value='' class="form-control required" id="mobile" name="mobile" maxlength="11" required>
                                         <span class="text-danger" id="mobile_err"></span>                                                          
                                 </div>
-                                        </div>
+                                        </div><br>
                                     
                                     	<div class="row">
                              
@@ -945,7 +945,7 @@ var state=el.val();
                                         </select>
                                       <span class="text-danger" id="lname_err"></span>                                   
                                          </div>
-                            </div>
+                            </div><br>
                                     
                                      <div class="row">
                     <div class="col-md-6">
@@ -1017,14 +1017,14 @@ var state=el.val();
                                         <input type="text" placeholder="Education Name" value="" class="form-control" id="education_name"  name="education_name" maxlength="128" required>
                                       <span class="text-danger" id="lname_err"></span>                                   
                                          </div>
-                            </div>
+                            </div><br>
                                     <div class="row">
                                     <div class="col-md-12  ">                             
                                         <label for="fname">University</label>
                                         <input type="text" placeholder="University" value="" class="form-control required" id="university" name="university" maxlength="128" required>
                                         <span class="text-danger" id="email_err"></span>                                                          
                                 </div>
-                                        </div>
+                                        </div><br>
                                     
                                      <div class="row">
                                     <div class="col-md-6  ">                             
@@ -1037,7 +1037,7 @@ var state=el.val();
                                         </select>
                                         <span class="text-danger" id="type_err"></span>                                                          
                                 </div>
-                                        </div>
+                                        </div><br>
                                     
                                     	<div class="row">
                              
@@ -1053,7 +1053,7 @@ var state=el.val();
                                         </select>
                                       <span class="text-danger" id="lname_err"></span>                                   
                                          </div>
-                            </div>
+                            </div><br>
                                      
                                      <div class="row">
                              
@@ -1109,14 +1109,14 @@ var state=el.val();
                                         </select>
                                       <span class="text-danger" id="city_err"></span>                                   
                                          </div>
-                            </div>
+                            </div><br>
                                     <div class="row">
                                     <div class="col-md-12  ">                             
                                         <label for="fname">Designation</label>
                                         <input type="text" placeholder="Designation" value="" class="form-control required" id="designation" name="designation" maxlength="128" required>
                                         <span class="text-danger" id="designation_err"></span>                                                          
                                 </div>
-                                        </div>
+                                        </div><br>
                                     
                                      <div class="row">
                                     <div class="col-md-12  ">                             
@@ -1124,7 +1124,7 @@ var state=el.val();
                                         <input type="text" placeholder="Work Profile" value='' class="form-control required" id="profile" name="profile" maxlength="11" required>
                                         <span class="text-danger" id="profile_err"></span>                                                          
                                 </div>
-                                        </div>
+                                        </div><br>
                                     
                                     	<div class="row">
                              
@@ -1139,7 +1139,7 @@ var state=el.val();
                                         </select>
                                       <span class="text-danger" id="to_err"></span>                                   
                                          </div>
-                            </div>
+                            </div><br>
                                     
                                      <div class="row">
                     <div class="col-md-6">
@@ -1186,7 +1186,7 @@ var state=el.val();
                                         <span class="text-danger" id="org_err"></span>                                                          
                                 </div>
                                
-                            </div>
+                            </div><br>
                                     <div class="row">
                                     <div class="col-md-6  ">                             
                                         <label for="fname">Client Name</label>
@@ -1203,7 +1203,7 @@ var state=el.val();
                                         </select>
                                         <span class="text-danger" id="emp_err"></span>                                                          
                                 </div>
-                                        </div>
+                                        </div><br>
                                     
                                      <div class="row">
                                     <div class="col-md-6  ">                             
@@ -1216,13 +1216,13 @@ var state=el.val();
                                         <input type="date" placeholder="Project To" value='' class="form-control required" id="project_to" name="to" maxlength="11" required>
                                         <span class="text-danger" id="profile_err"></span>                                                          
                                         </div>
-                                        </div>
+                                        </div><br>
                                     
                                     	<div class="row">
                              
                                 <div class="col-md-12  ">                             
                                         <label for="fname">Project Description</label>
-                                        <textarea class="form-control" rows="8" name="desc" id="project_desc"></textarea>
+                                        <textarea class="form-control" rows="6" name="desc" id="project_desc"></textarea>
                                         <span class="text-danger" id="from_err"></span>                                                          
                                 </div>
                                
@@ -1264,13 +1264,13 @@ var state=el.val();
                                         <span class="text-danger" id="fname_err"></span>                                                          
                                 </div>
                              
-                            </div>
+                            </div><br>
                                     
                                     <div class="row">
                              
                                 <div class="col-md-12  ">                             
                                         <label for="fname">Description</label>
-                                        <textarea placeholder="Skill Description" value="" rows="8" cols="" class="form-control required" id="desc" name="desc" maxlength="60" required></textarea>
+                                        <textarea placeholder="Skill Description" value="" rows="6" cols="" class="form-control required" id="desc" name="desc" maxlength="60" required></textarea>
                                         <span class="text-danger" id="fname_err"></span>                                                          
                                 </div>
                              
