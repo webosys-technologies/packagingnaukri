@@ -106,13 +106,43 @@ class Members_model extends CI_Model
         
         public function get_member_by_id($id)
 	{
+         $emp=$this->check_id_in_employments($id);
+         $edu=$this->check_id_in_education($id);
          $this->db->from('members as mem');  
+         if($emp==true){
+         $this->db->join('employments as emp','mem.member_id=emp.member_id','LEFT');         
+         }
+         if($edu==true){
          $this->db->join('educations as edu','edu.member_id=mem.member_id','LEFT');
-         $this->db->join('employments as emp','emp.member_id=mem.member_id','LEFT');
+         }
          $this->db->where('mem.member_id',$id);
          $query = $this->db->get();
        	return $query->row();
 	} 
+        public function check_id_in_employments($id)
+        {
+           
+            $this->db->where('member_id',$id);
+            $query=$this->db->get('employments');
+           if($query->num_rows()>0)
+            {
+                return true;
+            }else{
+                return false;
+            }
+            
+        }
+        public function check_id_in_education($id)
+        {
+            $this->db->where('member_id',$id);
+            $query=$this->db->get('educations');
+           if($query->num_rows()>0)
+            {
+                return true;
+            }else{
+                return false;
+            }
+        }
         
         public function get_members_by_recruiter_id($id)
 	{

@@ -149,7 +149,7 @@
           
             <li class=" treeview">
                 <a href="<?php echo base_url();?>member/Jobs">
-            <i class="fa fa-folder"></i> <span>Jobs</span>
+            <i class="fa fa-folder"></i> <span>Search Jobs</span>
 <!--            <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>-->
@@ -162,7 +162,18 @@
                       
           
           
-           
+           <li class="treeview">
+                 <a href="<?php echo base_url();?>member/Jobs/saved_jobs" >
+                <i class="fa fa-child"></i>
+                <span>Saved Jobs</span>
+              </a>
+            </li>
+            <li class="treeview">
+                 <a href="<?php echo base_url();?>member/Jobs/applied_jobs" >
+                <i class="fa fa-child"></i>
+                <span>Applied Jobs</span>
+              </a>
+            </li>
 
            
             
@@ -173,6 +184,7 @@
                 <span>Manage profile</span>
               </a>
             </li>
+            
           
           </ul>
         </section>

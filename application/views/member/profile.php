@@ -122,7 +122,7 @@ a:hover {
         <li class="active">Profile</li>
       </ol>
              </section>
-<!--<hr style="border-top: 1px solid #ccc;">-->
+
       <section class="content" >
 
          <script>
@@ -145,22 +145,7 @@ a:hover {
                  
             }
         });
-        
-        
-//         <?php
-        $this->load->helper('form');
-        $success = $this->session->flashdata('success');
-        if($success)
-        {
-            ?>//
-//                    alert(<?php $success; ?>);
-//        $("#success_msg").html(<?php $success; ?>);
-//        $('#success_Modal').modal('show');      
-//        setTimeout(function() {$('#success_Modal').modal('hide');}, 3000);
-//                  
-//        <?php }?>            
-                  
-                  var start = 1975;
+                        var start = 1975;
 var end = new Date().getFullYear();
 var options = "";
 for(var year = start ; year <=end; year++){
@@ -172,23 +157,33 @@ document.getElementById("passin").innerHTML = options;
 document.getElementById("passout").innerHTML = options;
 document.getElementById("from").innerHTML = options;
 document.getElementById("to").innerHTML = options;
-//$("#emp_from").innerHTML = options;
-//$("#emp_to").innerHTML = options;
-//
-//
-//
-//                  
-//                  $("#city").val('<?php if(isset($member_data)){echo $member_data->member_city;}?>');
-//                  $("#passin").val('<?php if(isset($member_data)){echo $member_data->education_passing_in;}?>');
-//                  $("#passout").val('<?php if(isset($member_data)){echo $member_data->education_passing_out;}?>');  
-//                  $("#emp_from").val('<?php if(isset($member_data)){echo $member_data->employment_from;}?>');                  
-//                  $("#emp_to").val('<?php if(isset($member_data)){echo $member_data->employment_to;}?>');                  
-//                  var gen='<?php if($member_data){echo $member_data->member_gender;}?>' 
-//                   if(gen=="Male"){$("#Male").prop('checked',true);}
-//                   if(gen=="Female"){$("#Female").prop('checked',true);}
 
 
-       $("#edit_personal").click(function(){               
+
+
+         $("#add_skill").click(function(){      
+                 $('#skill_form')[0].reset();
+              $("#skill_modal").modal('show');
+                 }
+       );
+       
+       
+         $("#add_employment").click(function(){ 
+             $('#employment_form')[0].reset();
+              $("#employment_modal").modal('show');
+       }
+       ); 
+            
+       
+       $("#add_project").click(function(){ 
+           $('#project_form')[0].reset();
+          $("#project_modal").modal('show');
+      });    
+        
+        
+        
+        $("#edit_personal").click(function(){ 
+           
             id=$("#member_id").val();
             method="edit_member";
             edit_form(id,method);
@@ -209,17 +204,7 @@ document.getElementById("to").innerHTML = options;
          
        
        
-       $("#add_employment").click(function(){ 
-             $('#employment_form')[0].reset();
-              $("#employment_modal").modal('show');
-       }
-       ); 
-            
-       
-       $("#add_project").click(function(){ 
-           $('#project_form')[0].reset();
-          $("#project_modal").modal('show');
-      });
+     
       
             
      
@@ -234,11 +219,7 @@ document.getElementById("to").innerHTML = options;
        );
        
            
-       $("#add_skill").click(function(){      
-                 $('#skill_form')[0].reset();
-              $("#skill_modal").modal('show');
-                 }
-       );
+       
        
        
        $("#save_personal").click(function(){
@@ -614,37 +595,37 @@ var state=el.val();
          <div class="row">
                 <div class="col-md-6">
                     <Span class="form_label">Education Name</span><br>
-                    <span><?php echo $member_data->education_degree;?></span>
+                    <span><?php if(isset($member_data->education_degree)){echo $member_data->education_degree;}?></span>
             </div>   
                   <div class="col-md-6">
                  <Span class="form_label">Specialization</span><br>
-                 <span><?php echo $member_data->education_name;?></span>
+                 <span><?php if(isset($member_data->education_name)){echo $member_data->education_name;}?></span>
             </div>   
            </div>
           <div class="row">
                 <div class="col-md-6">
                     <Span class="form_label">University</span><br>
-                    <span><?php echo $member_data->education_university;?></span>
+                    <span><?php if(isset($member_data->education_university)){ echo $member_data->education_university;}?></span>
             </div>   
                   <div class="col-md-6">
                  <Span class="form_label">Type</span><br>
-                 <span><?php echo $member_data->education_type;?></span>
+                 <span><?php if(isset($member_data->education_type)){echo $member_data->education_type;}?></span>
             </div>   
            </div>
            <div class="row">
                 <div class="col-md-6">
                     <Span class="form_label">Admission</span><br>
-                    <span><?php echo $member_data->education_passing_in;?></span>
+                    <span><?php if(isset($member_data->education_passing_in)){ echo $member_data->education_passing_in;}?></span>
             </div>   
                   <div class="col-md-6">
                  <Span class="form_label">Pass Out</span><br>
-                 <span><?php echo $member_data->education_passing_out;?></span>
+                 <span><?php if(isset($member_data->education_passing_out)){echo $member_data->education_passing_out;}?></span>
             </div>   
            </div>
            <div class="row">
                 <div class="col-md-6">
                     <Span class="form_label">Percentage</span><br>
-                    <span><?php echo $member_data->education_percentage."%";?></span>
+                    <span><?php if(isset($member_data->education_percentage)){echo $member_data->education_percentage."%";}?></span>
             </div>   
                  
            </div> 
@@ -704,7 +685,7 @@ var state=el.val();
           
                   <div class="row"> 
                 <div class="col-md-6">
-                    <input type="hidden" name="member_id" id="member_id" value="<?php echo $emp->member_id;?>">
+                    <!--<input type="hidden" name="member_id" id="member_id" value="<?php echo $emp->member_id;?>">-->
                     <Span class="form_label">Organization</span><br>
                     <span><?php echo $emp->employment_organization;?></span>
             </div>   
@@ -777,7 +758,7 @@ var state=el.val();
           </div>
                   <div class="row"> 
                 <div class="col-md-6">
-                    <input type="hidden" name="member_id" id="member_id" value="<?php echo $emp->member_id;?>">
+                    <!--<input type="hidden" name="member_id" id="member_id" value="<?php echo $pro->member_id;?>">-->
                     <Span class="form_label">Project Name</span><br>
                     <span><?php echo $pro->project_name;?></span>
             </div>   
@@ -885,8 +866,7 @@ var state=el.val();
               </div>
           </div>
                   <div class="row"> 
-                <div class="col-md-6">
-                    <input type="hidden" name="member_id" id="member_id" value="">
+                <div class="col-md-6">                    
                     <Span class="form_label">Skill Name</span><br>
                     <span><?php echo $skill->skill_name;?></span>
             </div>   
@@ -1049,12 +1029,11 @@ var state=el.val();
                                      <div class="row">
                                     <div class="col-md-6  ">                             
                                         <label for="fname">Type</label>
-                                       <select class="form-control" name='type'id='type'>
+                                       <select class="form-control" name='type' id='type'>
                                             <option value="0">Select Job Type</option>
                                              <option value="Full Time">Full Time</option>
                                              <option value="Part Time">Part Time</option>
-                                             <option value="Internship">Internship</option>
-                                             
+                                             <option value="Internship">Internship</option>                                             
                                         </select>
                                         <span class="text-danger" id="type_err"></span>                                                          
                                 </div>
@@ -1306,7 +1285,7 @@ var state=el.val();
     </div>             
         </div>        
       </div>
-             
+          </div>   
              
           </section>
          

@@ -450,7 +450,12 @@ function view_job(id)
                      <div class="row">
                           <div class="col-md-6">
                        <label>Job Type: (*)</label>
-                                    <input name="jobtype" placeholder="Full Time/Part Time" class="form-control" value="">
+                                    <select name="jobtype" id="job_type" class="form-control" value="">
+                                        <option value="Full Time">Full Time</option>
+                                        <option value="Part Time">Part Time</option>
+                                        <option value="Internship">Internship</option>
+                                        <option value="Temporary">Temporary</option>                                       
+                                    </select>
                         <span class="text-danger" id="gen_err"></span>
 
                     </div>  

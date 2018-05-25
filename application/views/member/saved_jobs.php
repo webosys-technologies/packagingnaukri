@@ -1,13 +1,4 @@
 <style>
-      #modal_dialog{
-     width: 700px;
-      overflow-y: initial !important
-}
-#job_body{
-  height: 500px;
-  overflow-y: auto;
-}
-    
     .star {
         /*padding:10px;*/
     visibility:hidden;
@@ -114,57 +105,23 @@ a:link, a:visited{
             }
         });
     }
-    
-    function job_info()
-    {
-        $("#job_modal").modal('show');
-    }
     </script>
   <div class="content-wrapper" style="background: white">
     <!-- Content Header (Page header) -->
-    <section class="content-header" style="background:#F2F4F4">
+    <section class="content-header" >
       <h1>
-        Jobs
+        Saved Jobs
         <small></small>
       </h1>
       <ol class="breadcrumb">
           <li><a href="<?php echo base_url();?>student/Dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Jobs</li>
+        <li class="active">Saved Jobs</li>
       </ol>
         
-        <form action="<?php echo base_url();?>member/Jobs/search_jobs" method="post" id="">
-    <div class="form-group form-group-md">
-   
-    <div class="row">
-        <div class="col-md-offset-1">
-        <input class="text_design" value="<?php echo set_value('title');?>" type="text" placeholder="Title,Skills,Companies" name="title"><input  type="text" placeholder="Location" name="location" value="<?php echo set_value('location');?>" class="text_design"><input  type="text" placeholder="Experience" name="exp" value="<?php echo set_value('exp');?>" class="text_design"><input  type="text" placeholder="Salary" name="salary" value="<?php echo set_value('salary');?>" class="text_design"><button type="submit" class="btn btn-info btn-md">Search Job <span class="fa fa-search"></span></button>
-     </div>
-        </div>
-    <br>
-   
-    <div class="row">
-        <div class="col-md-offset-1">
-    <label>Full Time</label>
-    <input type="checkbox" name="full" value="Full Time">&nbsp; &nbsp; &nbsp;
-     <label>Part Time</label>
-    <input type="checkbox" name="part" value="Part Time">&nbsp; &nbsp; &nbsp;
-    <label>Internship</label>
-    <input type="checkbox" name="intern" value="Intrernship">&nbsp; &nbsp; &nbsp;
-    <label>Temporary</label>
-    <input type="checkbox" name="temp" value="Temporary">&nbsp; &nbsp; &nbsp;
-        </div></div>
-</div>
-           
-</form>
+      
     </section>
    <!--<hr style="border-top: 1px solid #ccc;">-->
    <section class="content">
-  <div id="search_result">
-      <div id="no" hidden>
-          <center><h1 style="color:#CCD1D1">Search Jobs</h1></center>
-      </div>
-      
-      
       
 <!--      <div class="shadow">
            <div class="row content">  
@@ -191,7 +148,7 @@ a:link, a:visited{
                        <div class="shadow">
                            <div class="row">
                            <div class="col-md-10">
-                          <a href="#" onclick="job_info()"> <span class="job_name"><a href="#" onclick="job_info()">PHP Web Developer</a></span></a><br>
+                          <a href="#" onclick="job_info()"> <span class="job_name">PHP Web Developer</span></a><br>
                           <span class="comp_name">Webosys Technologies</span>
                            </div>
                                <div class="col-md-2"><button type="button" onclick="apply()" class="btn btn-warning btn-sm">Apply</button></div>
@@ -237,31 +194,7 @@ a:link, a:visited{
       </div>
      
 
-    <div class="modal fade" id="job_modal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog">   
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header"style="background:#3c8dbc">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <center><h4 style="color:white" id="title" class="modal-title">Job Description</h4></center>
-        </div>
-        <div class="modal-body" id="job_body">         	
-    				
-    			<div class="panel-body">
-    			  <form action="" id="desc_form">  
-                              
-                                
-                          </form>
-    			</div>                              			
-    		</div>         
-    	 <div class="modal-footer">
-             <button type="button" class="btn btn-warning" value="" id="apply_job"><span id="stat">Apply</span></button>
-          <button type="button" class="btn btn-danger btn-md"  data-dismiss="modal">Close</button>
-        </div>
-    </div>             
-        </div>        
-      </div>
-          </div>   
+    
 
 
   </section>

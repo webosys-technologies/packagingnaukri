@@ -74,6 +74,7 @@
            <th>ID</th>
                                             <th>Company Name</th>
                                             <th>Logo</th>
+                                            <th>Recruiter</th>
                                             <th>Email</th>
                                             <th>Contact</th>
                                             <th>Location</th>
@@ -92,7 +93,9 @@
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->user_id; ?>" class="" ></td> --> 
                                         <td><?php echo $comp->company_id?></td>
                                             <td><?php echo $comp->company_name?></td>
+                                             
                                             <td><img src="<?php echo base_url().$comp->company_logo;?>" width="80px" height="30px"></td>
+                                           <td><?php echo $comp->recruiter_fname." ".$comp->recruiter_lname;?></td>
                                             <td><?php echo $comp->company_email?></td>
                                             <td><?php echo $comp->company_contact?></td>
                                             <td><?php echo $comp->company_city?></td>
@@ -120,7 +123,7 @@
   $(document).ready( function () {   
  
  
-  $("#user_type").change(function() {
+  $("#state").change(function() {
         
    var el = $(this) ;
               $("#city").html("");
@@ -362,7 +365,7 @@ var user_type=el.val();
     				<form method="post" action="" id="form">
                                     <input type="hidden" value="" name="company_id">
     				 <div class="row">
-                                <div class="col-md-12">                                
+                                <div class="col-md-6">                                
                                     <div class="form-group">
                                         <label>Company Name</label><span style="color: red">*</span>
                                     <input name="company" class="form-control" placeholder="Compay Name" value="">
@@ -371,9 +374,8 @@ var user_type=el.val();
                                     </div>
                                                                        
                                 </div>
-                                     </div>
-                                    <div class="row">
-                                <div class="col-md-12">
+                                    
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Company Type</label><span style="color: red">*</span>
                                        
@@ -398,7 +400,7 @@ var user_type=el.val();
                                </div>
                                     
                                 <div class="row">
-                                  <div class="col-md-12">                                
+                                  <div class="col-md-6">                                
                                       <div class="form-group">
                                          <label>Contact</label><span style="color: red">*</span>
                                          <input name="contact" placeholder="Company Contact" class="form-control" value="">
@@ -407,10 +409,8 @@ var user_type=el.val();
                                       </div>
                                                                         
                                   </div>
-                                </div>
-                                        
-                                <div class="row">
-                                  <div class="col-md-12">
+                                
+                                  <div class="col-md-6">
                                      <label>Website</label><span style="color: red">*</span>
                                      <input name="website" placeholder="Company Website" class="form-control" value="">
                                       <span class="text-danger" id="website_err"></span>
