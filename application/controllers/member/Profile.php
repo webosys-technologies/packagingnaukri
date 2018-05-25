@@ -67,6 +67,7 @@ class Profile extends CI_Controller
     
     function edit_member($id)
     {
+       
         $data=get_member_info($id);
         $data1=(array('model'=>'personal_modal'));
         $result=((object)array_merge((array)$data,(array)$data1));

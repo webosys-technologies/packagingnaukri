@@ -16,6 +16,15 @@ class Applied_jobs_model extends CI_Model
             	return $query->result();
      }
      
+     public function get_job_by_member($id)
+     {
+     	$this->db->from('members as mem');
+        $this->db->join('applied_job as app','app.member_id=mem.member_id','left');
+     	$this->db->where('mem.member_id',$id);
+     	$query=$this->db->get();
+            	return $query->result();
+     }
+     
      public function applied_members()
      {       
          $this->db->from('applied_job as app');

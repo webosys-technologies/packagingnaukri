@@ -28,8 +28,7 @@ class Jobs extends CI_Controller
      * This function used to load the first screen of the user
      */
     public function index()
-    {       
-        
+    {      
             $id=$this->session->userdata('member_id');
             $result['member_data']=  get_member_info($id);
                      
@@ -39,42 +38,60 @@ class Jobs extends CI_Controller
              $this->load->view('member/footer',$result);
        
     }
-    function search_job()
+    function saved_jobs()
     {
+        $id=$this->session->userdata('member_id');
+        $result['member_data']=  get_member_info($id);
+        
+        
+        $this->load->view('member/header',$result);
+        $this->load->view('member/saved_jobs',$result);
+        $this->load->view('member/footer',$result);    
+
+    }
+    function applied_jobs()
+    {
+        
+         $id=$this->session->userdata('member_id');
+        $result['member_data']=  get_member_info($id);
+        
+        $result['jobs']=$this->Applied_jobs_model->get_job_by_member($id);
+       
+         $this->load->view('member/header',$result);
+        $this->load->view('member/applied_jobs',$result);
+        $this->load->view('member/footer',$result);    
+    }
+    function search_jobs()
+    {
+         $id=$this->session->userdata('member_id');
+            $result['member_data']=  get_member_info($id);
         $form=$this->input->post();
         
-        $result=$this->Jobs_model->search_job($form);
-        foreach($result as $res)
+        $title=$form['title'];
+        $exp=$form['exp'];
+        $salary=$form['salary'];
+        $location=$form['location'];
+        if(!empty($form['full']))
         {
-            $result[]=' <div class="shadow">
-           
-               <div class="box-header">
-         <div class="row">
-             <div class="col-md-2">
-                 Logo
-             </div>
-             <div class="col-md-5">
-                 <a href="'.base_url()."member/Jobs/get_job_info/".$res->job_id.'"><h4 style="color:#5DADE2">'.$res->job_title.
-                 '</h4></a><h5>'.$res->company_name.
-                    '</h5>
-             </div>
-              <div class="col-md-2">
-                  <h5>'.$res->job_experience.'</h5>
-             </div>
-              <div class="col-md-1">
-                  <h5>'.$res->job_city.'</h5>
-             </div>
-              <div class="col-md-2">
-              <h5>Posted On</h5>
-                  <h5>'.$res->job_created_at.'</h5>
-             </div>
-             <div class="row">
-              <div class="pull-right"><button onclick="" class="btn btn-info btn-sm" type="button">Apply</button></div>
-             </div>
-         </div>
-           </div>';
+        $full=$form['full'];
         }
-        echo json_encode(array('result'=>$result));
+         if(!empty($form['part']))
+        {
+        $part=$form['part'];
+        }
+         if(!empty($form['intern']))
+        {
+        $intern=$form['intern'];
+        }
+         if(!empty($form['temp']))
+        {
+        $part=$form['temp'];
+        }
+        
+        $result=$this->Jobs_model->search_job($form);
+        $this->load->view('member/header');
+        $this->load->view('member/jobs');
+        $this->load->view('member/footer');      
         
     }
     
