@@ -95,13 +95,13 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="" class="user-image" alt="User Image"/>
+                    <img src="<?php echo base_url()?>profile_pic/avatar.png" class="user-image" alt="User Image"/>
                   <span class="hidden-xs"><?php if(isset($member_data)){echo $member_data->member_fname." ".$member_data->member_lname;}?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="" class="img-circle" alt="User Image" />
+                    <img src="<?php echo base_url()?>profile_pic/avatar.png" class="img-circle" alt="User Image" />
                     <p><?php if(isset($member_data)){echo $member_data->member_fname." ".$member_data->member_lname;}?>
                      
                       <small> <?php echo 'Member'; ?></small>

@@ -222,7 +222,7 @@ a:link, a:visited{
                                   <span class="fa fa-inr"></span> 200000
                               </div>
                               <div class="col-md-5" style="padding-top: 10px;">
-                                  <span class="skill">Post By</span><a href="#"><img src="" width="20px" height="20px"> suraj shinde</a>
+                                  <span class="skill">Post By</span> <a href="#"><img src="<?php echo base_url()?>profile_pic/avatar.png" width="20px" height="20px"> suraj shinde</a>
                               </div>
                                <div class="col-md-2" style="padding-top: 10px;">
                                   <span class="skill">Few hours ago</span>
