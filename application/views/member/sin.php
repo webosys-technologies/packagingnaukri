@@ -189,7 +189,7 @@ var state= $('#state option:selected').val();
        },
        error: function (jqXHR, textStatus, errorThrown)
        {
-         alert('Error...!');
+       //  alert('Error...!');
        }
      });
   // }

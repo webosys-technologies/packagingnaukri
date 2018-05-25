@@ -36,7 +36,7 @@ var state=el.val();
        },
        error: function (jqXHR, textStatus, errorThrown)
        {
-         alert('Error...!');
+        // alert('Error...!');
        }
      });
      }
@@ -46,9 +46,9 @@ var state=el.val();
               function send_otp()
     {
     var mobile= $('[name="mobile"]').val();
-    alert(mobile);
+   // alert(mobile);
     var x=mobile.toString().length;
-    alert(x);
+    //alert(x);
         if(x == 10 || x == 11)
         {
            $.ajax({
