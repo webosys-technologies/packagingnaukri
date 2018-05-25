@@ -75,6 +75,10 @@
 a:link, a:visited{    
     text-decoration: none;
 }
+
+#cont{
+    padding-left: 60px;
+}
 </style>
 
 <script>
@@ -184,9 +188,9 @@ a:link, a:visited{
 
  
            
-               <div class="container">
+<div class="container" id="cont">
                    <div class="row">
-                       <div class="col-md-offset-2 col-md-8">
+                       <div class="col-md-offset col-md-8">
                        <div class="panel-body">
                        <div class="shadow">
                            <div class="row">
