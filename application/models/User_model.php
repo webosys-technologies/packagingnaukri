@@ -3,7 +3,7 @@
 class User_model extends CI_Model
 {
      var $table='users';
-    
+
      public function getall_user($name)
      {
        
