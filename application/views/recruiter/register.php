@@ -43,6 +43,46 @@ var state=el.val();
     
  });  
  });
+              function send_otp()
+    {
+    var mobile= $('[name="mobile"]').val();
+    alert(mobile);
+    var x=mobile.toString().length;
+    alert(x);
+        if(x == 10 || x == 11)
+        {
+           $.ajax({
+       url : "<?php echo site_url('index.php/Otp/send_otp_recruiter')?>/" ,        
+       type: "post",
+        data:{member_email : mobile},
+       dataType: "JSON",
+       success: function(data)
+       {            
+          // alert(data.mobile_error);
+          if (data.send) {
+          $('#mobile_success').html(data.send);
+          $('#mobile_err').html("");
+        }
+        else{
+          $('#mobile_success').html("");
+          $('#mobile_err').html(data.mobile_error);            
+        }
+
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+         // alert('Error...!');
+         $("#ajax").html("Error While Registration");
+       }
+     });
+        }
+        else
+        {
+         $("#mobile_err").html("Not a valid Phone Number");
+         return false;
+        }
+        
+    }
             </script>
         <div class="container">
 	<div class="row">
@@ -67,7 +107,7 @@ var state=el.val();
                                 <div class="col-md-6  ">                                
                                     <div class="form-group">
                                         <label for="fname">First Name<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="First Name" class="form-control required" id="fname" name="fname" maxlength="128" required>
+                                        <input type="text" placeholder="First Name" class="form-control required" id="fname" name="fname" value="<?php echo set_value('fname'); ?>" required>
                                         <span class="text-danger" id="fname_err"></span>
                                         
                                     </div>
@@ -77,7 +117,7 @@ var state=el.val();
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="lname">Last Name<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Last Name" class="form-control" id="lname"  name="lname" maxlength="128" required>
+                                        <input type="text" placeholder="Last Name" class="form-control" id="lname"  name="lname" value="<?php echo set_value('lname'); ?>" required>
                                       <span class="text-danger" id="lname_err"></span>
                                     </div>
                                     <span style="color:red" id="text_field2_error"></span>
@@ -88,8 +128,9 @@ var state=el.val();
                                 <div class="col-md-12  ">                                
                                     <div class="form-group">
                                         <label for="fname">Email Id<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Email Id" class="form-control required" id="email" name="email" maxlength="128" required>
+                                        <input type="text" placeholder="Enter Your Email Id" class="form-control required" id="email" name="email" value="<?php echo set_value('email'); ?>" required>
                                         <span class="text-danger" id="email_err"></span>
+                                        <span class="text-danger"><?php echo form_error('email'); ?></span>
                                         
                                     </div>
                                     <span style="color:red" id="text_field1_error"></span>
@@ -97,25 +138,15 @@ var state=el.val();
                                 </div>
                                </div>
                                     
-                                    <div class="row">
-                                <div class="col-md-12">                                
-                                    <div class="form-group">
-                                        <label for="fname">Mobile No<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Mobile No" class="form-control required" id="mobile" name="mobile" maxlength="128" required>
-                                        <span class="text-danger" id="mobile_err"></span>
-                                        
-                                    </div>
-                                    <span style="color:red" id="text_field1_error"></span>
-                                    
-                                </div>
-                                        </div>
+                                   
                                     
                                     <div class="row">
                                 <div class="col-md-12">                                
                                     <div class="form-group">
                                         <label for="fname">Password<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Password" class="form-control required" id="password" name="password" maxlength="128" required>
+                                        <input type="password" placeholder="Enter Your Password" class="form-control required" id="password" name="password" minlength="8" value="<?php echo set_value('password'); ?>" required>
                                         <span class="text-danger" id="password_err"></span>
+                                        <span class="text-danger"><?php echo form_error('password'); ?></span>
                                         
                                     </div>
                                     <span style="color:red" id="text_field1_error"></span>
@@ -128,8 +159,44 @@ var state=el.val();
                                 <div class="col-md-12">                                
                                     <div class="form-group">
                                         <label for="fname">Confirm  Password<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Confirm Password" class="form-control required" id="cpassword" name="cpassword" maxlength="128" required>
+                                        <input type="password" placeholder="Confirm Your Password" class="form-control required" id="cpassword" name="confirm_password" value="<?php echo set_value('confirm_password'); ?>" required>
                                         <span class="text-danger" id="password_err"></span>
+                                        <span class="text-danger"><?php echo form_error('confirm_password'); ?></span>
+                                                
+                                    </div>
+                                    <span style="color:red" id="text_field1_error"></span>
+                                    
+                                </div>
+                                        </div>
+
+                                         <div class="row">
+                                <div class="col-md-8">                                
+                                    <div class="form-group">
+                                        <label for="fname">Mobile No<span style="color:red">*</span></label>
+                                        <input type="number" placeholder="Enter Mobile No" class="form-control required" id="mobile" name="mobile" minlength="10" maxlength="11" value="<?php echo set_value('mobile'); ?>" required>
+                                        <span class="text-success" id="mobile_success"></span>
+                                        <span class="text-danger" id="mobile_err"></span>
+                        <span class="text-danger"><?php echo form_error('mobile'); ?></span>
+
+                                        
+                                    </div>
+                                    <span style="color:red" id="text_field1_error"></span>
+                                    
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group"><br>
+                                        <button class="btn btn-warning" onclick="send_otp()">Send Otp</button>
+                                    </div>
+                                    
+                                </div>
+                                        </div>
+                                         <div class="row">
+                                <div class="col-md-12">                                
+                                    <div class="form-group">
+                                        <label for="fname">Enter Otp<span style="color:red">*</span></label>
+                                        <input type="text" placeholder="Enter OTP" class="form-control required" id="otp" name="otp" maxlength="6" value="<?php echo set_value('otp'); ?>" required>
+                                        <span class="text-danger" id="otp_err"></span>
+                        <span class="text-danger"><?php echo form_error('otp'); ?></span>
                                         
                                     </div>
                                     <span style="color:red" id="text_field1_error"></span>
@@ -154,6 +221,8 @@ var state=el.val();
                                     
                                     <!--<option value="Maharashtra">Maharashtra</option>-->
                         </select>
+                        <span class="text-danger"><?php echo form_error('state'); ?></span>
+
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">City</label><span style="color: red">*</span>
@@ -163,6 +232,8 @@ var state=el.val();
                                     
                                     <!--<option value="Maharashtra">Maharashtra</option>-->
                         </select>
+                        <span class="text-danger"><?php echo form_error('city'); ?></span>
+
                     </div>
                     </div>
                     </div>

@@ -21,8 +21,19 @@ class Index extends CI_Controller
     {
 		$this->load->library('form_validation');
 
-		$submit=$this->input->post('submit');
-		if (!$submit)
+    $this->form_validation->set_rules('fname','Name','trim|required');
+    $this->form_validation->set_rules('lname','Last_name','trim|required');
+    $this->form_validation->set_rules('email','Email','trim|required|valid_email|callback_check_if_email_exist');
+    $this->form_validation->set_rules('mobile','Mobile','trim|required|numeric');
+    $this->form_validation->set_rules('password','Password','trim|required|min_length[8]');
+    $this->form_validation->set_rules('confirm_password','Confirm Password','trim|required|matches[password]');  
+   $this->form_validation->set_rules('otp','OTP','trim|required|callback_check_otp_verification');
+    $this->form_validation->set_rules('city','City','trim|required');
+   // $this->form_validation->set_rules('recruiter_pincode','Pincode','trim|required|numeric');
+    $this->form_validation->set_rules('state','State','trim|required');   
+                
+		// $submit=$this->input->post('submit');
+		if ($this->form_validation->run() == false)
         {
 			
 		$state['states']=$this->Cities_model->getall_state();	
@@ -84,12 +95,12 @@ class Index extends CI_Controller
            $email=$this->input->post('recruiter_email');
             $val=is_numeric($email);
             
-            if($val)
+            if(!is_numeric($email))
             {
                 $res=$this->Recruiters_model->check_mobile_exist($email);
-                if($res)
+                if($res = false)
                 {
-                     echo json_encode(array('email_error'=>'This Mobile is not registered'));
+                     echo json_encode(array('no_error'=>'This Mobile is not registered'));
                 }else{
                     
                      $rand=mt_rand(000000,999999);
@@ -247,9 +258,12 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                                     
                     $this->session->set_userdata($sessionArray);  
                     
-                    echo json_encode(array('status'=>true));  
+                    // echo json_encode(array('status'=>true));  
+                    redirect('recruiter/Index/login');
                     }else{
-                         echo json_encode(array('otp_error'=>"Wrong OTP")); 
+                         // echo json_encode(array('otp_error'=>"Wrong OTP")); 
+                         $this->session->set_flashdata('error','Wrong OTP');
+                         redirect('recruiter/Index/login');
                     }
        }else{
            $where=array('recruiter_email'=>$username,
@@ -269,7 +283,9 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                     $this->session->set_userdata($sessionArray);  
                     echo json_encode(array('status'=>true)); 
                     }else{
-                         echo json_encode(array('otp_error'=>"Wrong OTP")); 
+                          $this->session->set_flashdata('error','Wrong OTP');
+                         redirect('recruiter/Index/login');
+
                     }
        }
    }
@@ -312,7 +328,8 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                                     
                     $this->session->set_userdata($sessionArray);  
                     
-                    echo json_encode(array('status'=>'success'));              
+                    // echo json_encode(array('status'=>'success'));       
+                    redirect('recruiter/Index/Login');       
                
               }
            
@@ -322,20 +339,31 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                 if($result > 0 && $result->recruiter_status==0)
                 {
                    
-                 echo json_encode(array('log_error', 'Account is not activeted yet.'));                 
+                 // echo json_encode(array('log_error', 'Account is not activeted yet.'));     
+                 $this->session->set_flashdata('log_error','Account is not activeted yet.');
+                 redirect('recruiter/Index/login');
+
                 
                 }
                 else
                 {
-                 echo json_encode(array('log_error'=>'Email or password mismatch'));
+                 // echo json_encode(array('log_error'=>'Email or password mismatch'));
+                 $this->session->set_flashdata('log_error','Email or password mismatch');
+                 // $this->load->view('home_header');
+                 // $this->load->view('recruiter/login');
+                 // $this->load->view('home_footer');
+                 redirect('recruiter/Index/login');
                 }          
               
             } 
             }
             else
             {
-                 echo json_encode(array('log_error'=>'This email id is not registered with us.'));
+                 // echo json_encode(array('log_error'=>'This email id is not registered with us.'));
+                 $this->session->set_flashdata('log_error','This email id is not registered with us.');         
                  
+                 redirect('recruiter/Index/login');
+
             }
         
         

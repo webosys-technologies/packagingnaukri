@@ -67,3 +67,5 @@ $lang['form_validation_greater_than_equal_to']	= 'The {field} field must contain
 $lang['form_validation_error_message_not_set']	= 'Unable to access an error message corresponding to your field name {field}.';
 $lang['form_validation_in_list']		= 'The {field} field must be one of: {param}.';
 $lang['form_validation_check_if_email_exist']		= 'Email is already exist.';
+$lang['form_validation_check_otp_verification']		= 'OTP Does not match';
+
