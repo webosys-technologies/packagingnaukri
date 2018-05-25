@@ -5,11 +5,10 @@
     <title>Member|Dashboard</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
-    <link href="http://vjs.zencdn.net/6.6.3/video-js.css" rel="stylesheet">
+    
 
   <!-- If you'd like to support IE8 -->
-  <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
-  <script src="http://vjs.zencdn.net/6.6.3/video.js"></script>
+ 
     <!-- FontAwesome 4.3.0 -->
     <link href="<?php echo base_url(); ?>assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons 2.0.0 -->
@@ -149,7 +148,7 @@
           
             <li class=" treeview">
                 <a href="<?php echo base_url();?>member/Jobs">
-            <i class="fa fa-folder"></i> <span>Search Jobs</span>
+            <i class="fa fa-search"></i> <span>Search Jobs</span>
 <!--            <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>-->
@@ -164,13 +163,13 @@
           
            <li class="treeview">
                  <a href="<?php echo base_url();?>member/Jobs/saved_jobs" >
-                <i class="fa fa-child"></i>
+                <i class="fa fa-star"></i>
                 <span>Saved Jobs</span>
               </a>
             </li>
             <li class="treeview">
                  <a href="<?php echo base_url();?>member/Jobs/applied_jobs" >
-                <i class="fa fa-child"></i>
+                <i class="fa fa-suitcase"></i>
                 <span>Applied Jobs</span>
               </a>
             </li>

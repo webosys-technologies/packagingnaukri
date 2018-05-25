@@ -32,6 +32,28 @@ class Applied_jobs_model extends CI_Model
      	$query=$this->db->get();
         return $query->result();
      }
+     
+     public function get_by_job_id($id)
+     {
+         $where=array('job_id'=>$id,
+                      'apply_status'=>1);
+         $this->db->where($where);
+         $query=$this->db->get($this->table);
+         return $query->result();
+     }
+     
+      public function members_by_jobid($id)
+     {
+        
+         $this->db->from('applied_job as job');
+         $this->db->join('members as mem','mem.member_id=job.member_id','LEFT');
+         $this->db->join('employments as emp','job.member_id=emp.member_id','LEFT');         
+         $this->db->join('educations as edu','edu.member_id=job.member_id','LEFT');
+         
+         $this->db->where('job.job_id',$id);
+         $query=$this->db->get();
+         return $query->result();
+     }
 
    
 }

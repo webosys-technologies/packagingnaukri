@@ -41,9 +41,10 @@ function get_member_info($id)
      $ci =& get_instance();
    return $ci->Members_model->get_member_by_id($id); 
 }
-function get_recruiter_info()
+function get_recruiter_info($id)
 {
-    
+    $ci =& get_instance();
+   return $ci->Recruiters_model->get_by_id($id);
 }
 
 ?>

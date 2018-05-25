@@ -181,8 +181,8 @@
           </a>
          </li>
         <li>
-          <a href="<?php echo base_url(); ?>admin/Jobs/view_jobs">
-            <i class="fa fa-folder"></i> <span>Jobs</span>            
+          <a href="<?php echo base_url(); ?>admin/Jobs">
+            <i class="fa fa-folder"></i> <span>Manage Jobs</span>            
           </a>
          </li>
          <li>

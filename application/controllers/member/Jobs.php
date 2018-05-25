@@ -61,12 +61,25 @@ class Jobs extends CI_Controller
         $this->load->view('member/applied_jobs',$result);
         $this->load->view('member/footer',$result);    
     }
+    
+    function search_title($title)
+    {
+      
+              
+        $result=$this->Members_model->search_query();
+        
+        echo json_encode($result);
+    }
+    
     function search_jobs()
     {
          $id=$this->session->userdata('member_id');
             $result['member_data']=  get_member_info($id);
+                    
         $form=$this->input->post();
-        
+        echo $form['title'];
+        if($form)
+        {
         $title=$form['title'];
         $exp=$form['exp'];
         $salary=$form['salary'];
@@ -88,11 +101,13 @@ class Jobs extends CI_Controller
         $part=$form['temp'];
         }
         
-        $result=$this->Jobs_model->search_job($form);
-        $this->load->view('member/header');
-        $this->load->view('member/jobs');
-        $this->load->view('member/footer');      
-        
+        $this->Jobs_model->search_job($form);
+        $this->load->view('member/header',$result);
+        $this->load->view('member/jobs',$result);
+        $this->load->view('member/footer',$result);      
+        }else{
+            redirect('member/Jobs');
+        }   
     }
     
     public function get_job_info($id)

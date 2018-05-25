@@ -118,6 +118,36 @@ class Jobs extends CI_Controller
         }
     }
     
+    public function applicants($id)
+    {
+         if($id)
+        {       
+               $result['members']=$this->Applied_jobs_model->members_by_jobid($id);
+
+        if($result)
+        {
+            $id=$this->session->userdata('recruiter_id');
+            $result['data']=  get_recruiter_info($id);
+            
+        $this->load->view('recruiter/header',$result);
+        $this->load->view('recruiter/applicants',$result);
+        $this->load->view('recruiter/footer',$result);
+        }else{
+             redirect('recruiter/Jobs');
+        }
+        }else{
+            redirect('recruiter/Jobs');
+        }
+        
+    }
+    
+    public function member_info($id)
+    {
+        $result=$this->Members_model->member_info($id);
+        echo json_encode($result);
+        
+    }
+    
   
 }
 

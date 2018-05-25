@@ -15,7 +15,7 @@
     cursor:pointer;
 }
 
-.star:before {
+/*.star:before {
   content: "\2606";
    visibility:visible;
 }
@@ -24,7 +24,7 @@
      color: green;
    
    
-}
+}*/
     
     .shadow {
    
@@ -84,6 +84,9 @@ a:link, a:visited{
 <script>
     $(document).ready(function(){
         
+        $("#save").click(function(){
+            alert($get("#save").checked);
+        });
        
     });
     var url;
@@ -123,6 +126,47 @@ a:link, a:visited{
     {
         $("#job_modal").modal('show');
     }
+    
+    function search_title()
+    {
+        var title=$("#title").val();
+        $("#data_list").html("");
+        
+           $.ajax({
+       url : "<?php echo site_url('index.php/member/Jobs/search_title')?>/" + title,        
+       type: "GET",
+              
+       dataType: "JSON",
+       success: function(data)
+       {
+//        alert(data.nam);
+       
+//        $("#data_list").append('<option>'+title+'</option>');
+          $.each(data,function(i,row)
+          { 
+              if(row.member_fname)
+              {
+              $("#data_list").append('<option>' + row.member_fname +'</option>');
+               }
+               if(row.member_lname)
+              {
+              $("#data_list").append('<option>' + row.member_lname +'</option>');
+               }
+               if(row.member_email)
+              {
+              $("#data_list").append('<option>' + row.member_email +'</option>');
+               }
+          }
+          );
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+        
+        
+    }
     </script>
   <div class="content-wrapper" style="background: white">
     <!-- Content Header (Page header) -->
@@ -141,7 +185,11 @@ a:link, a:visited{
    
     <div class="row">
         <div class="col-md-offset-1">
-        <input class="text_design" value="<?php echo set_value('title');?>" type="text" placeholder="Title,Skills,Companies" name="title"><input  type="text" placeholder="Location" name="location" value="<?php echo set_value('location');?>" class="text_design"><input  type="text" placeholder="Experience" name="exp" value="<?php echo set_value('exp');?>" class="text_design"><input  type="text" placeholder="Salary" name="salary" value="<?php echo set_value('salary');?>" class="text_design"><button type="submit" class="btn btn-info btn-md">Search Job <span class="fa fa-search"></span></button>
+ <datalist id="data_list">  
+    <option>PHP</option><option>JAVA</option><option>DOT NET</option>  
+     </datalist>
+            <input list="data_list" value="<?php echo set_value('title');?>" id="title" onkeyup="search_title()" type="text" placeholder="Title,Skills,Companies" class="text_design" name="title"><input  type="text" placeholder="Location" name="location" value="<?php echo set_value('location');?>" class="text_design"><input  type="text" placeholder="Experience" name="exp" value="<?php echo set_value('exp');?>" class="text_design"><input  type="text" placeholder="Salary" name="salary" value="<?php echo set_value('salary');?>" class="text_design"><button type="submit" class="btn btn-info btn-md">Search Job <span class="fa fa-search"></span></button>
+       
      </div>
         </div>
     <br>
@@ -220,7 +268,7 @@ a:link, a:visited{
                        </div> 
                           <div class="row experience" >
                             <div class="col-md-1">
-                                <input class="star" type="checkbox" title="save job" name="save">
+                                <input type="checkbox" title="save job" id="save" name="save">
                               </div>  
                               <div class="col-md-4" style="padding-top: 10px;">
                                   <span class="fa fa-inr"></span> 200000
@@ -239,7 +287,6 @@ a:link, a:visited{
      </div>
                     
       </div>
-     
 
     <div class="modal fade" id="job_modal" role="dialog">
     <div class="modal-dialog" id="modal_dialog">   
@@ -247,7 +294,7 @@ a:link, a:visited{
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <center><h4 style="color:white" id="title" class="modal-title">Job Description</h4></center>
+          <center><h4 style="color:white" class="modal-title">Job Description</h4></center>
         </div>
         <div class="modal-body" id="job_body">         	
     				
