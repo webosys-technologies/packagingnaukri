@@ -23,7 +23,7 @@ class Saved_jobs_model extends CI_Model
          $this->db->from('saved_job as save');
          $this->db->join('jobs as job','save.job_id=job.job_id','LEFT');
          $this->db->join('recruiters as rec','rec.recruiter_id=save.recruiter_id','LEFT');
-         $this->db->join('companies as comp','save.recruiter_id=comp.recruiter_id','LEFT');
+         $this->db->join('companies as comp','save.company_id=comp.company_id','LEFT');
          $this->db->where('save.member_id',$id);
          $query=$this->db->get();
          return $query->result();

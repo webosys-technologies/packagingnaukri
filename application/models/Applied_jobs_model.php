@@ -22,7 +22,7 @@ class Applied_jobs_model extends CI_Model
          $this->db->order_by("app.job_id desc");
         $this->db->join('jobs as job','job.job_id=app.job_id','LEFT');
         $this->db->join('recruiters as rec','rec.recruiter_id=app.recruiter_id','LEFT');
-        $this->db->join('companies as comp','job.company_id=comp.company_id','LEFT');
+        $this->db->join('companies as comp','app.company_id=comp.company_id','LEFT');
      	$this->db->where('app.member_id',$id);       
      	$query=$this->db->get();
         return $query->result();

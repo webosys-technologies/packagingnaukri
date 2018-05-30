@@ -136,6 +136,7 @@ class Jobs extends CI_Controller
         $data=array('job_id'=>$id,
                     'recruiter_id'=>$rec_data->recruiter_id,
                     'member_id'=>$mem_id,
+                    'company_id'=>$rec_data->company_id,
                     'saved_at'=>date('Y-m-d'));
         
         $this->Saved_jobs_model->save_job($data);
@@ -156,6 +157,7 @@ class Jobs extends CI_Controller
         $data=array('job_id'=>$id,
                     'member_id'=>$this->session->userdata('member_id'),
                     'recruiter_id'=>$rec_data->recruiter_id,
+                    'company_id'=>$rec_data->company_id,
                     'apply_at'=>date('Y-m-d'),
                     'apply_status'=>'1');
          $this->Applied_jobs_model->apply_job($data);
