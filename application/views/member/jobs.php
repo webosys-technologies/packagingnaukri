@@ -15,7 +15,7 @@
     cursor:pointer;
 }
 
-/*.star:before {
+.star:before {
   content: "\2606";
    visibility:visible;
 }
@@ -24,7 +24,7 @@
      color: green;
    
    
-}*/
+}
     
     .shadow {
    
@@ -84,90 +84,131 @@ a:link, a:visited{
 <script>
     $(document).ready(function(){
         
-        $("#save").click(function(){
-            alert($get("#save").checked);
-        });
-       
+        $(".description").text(function(index, currentText) {
+    return currentText.substr(0, 200);
+//    $(".description").html("....");
+});
+
+  
+        <?php
+        if(isset($jobs))
+        { foreach($jobs as $job)
+        {
+        ?>
+        $('#save<?php echo $job->job_id;?>').click(function(){
+            check=$('#save<?php echo $job->job_id;?>').prop('checked');
+            id=$('#save<?php echo $job->job_id;?>').val();  
+             job_status(check,id);            
+         });
+        <?php } 
+        }?>
     });
+    
+    
+    
+    
     var url;
     var data;
-    function search_job()
-    {
-        
-//      data=new FormData($("#search_form"));
-      data=new FormData(document.getElementById("search_form"));
+    var id;
+    var check;
     
-        url = '<?php echo base_url() ?>member/Jobs/search_job';
-      
-       // ajax adding data to database
-          $.ajax({
+    
+    function job_status(check,id)
+    {
+       
+             if(check)
+            {             
+                
+                url="<?php echo base_url();?>member/Jobs/save_job/"+id;
+            }else{
+                url="<?php echo base_url();?>member/Jobs/unsave_job/"+id;
+            }
+            
+            $.ajax({
             url : url,
-            type: "POST",
-            async: false,
-            processData: false,
-            contentType: false,  
-            data: data,
+            type: "GET",
             dataType: "JSON",
-            success: function(json)
+            success: function(data)
             {
-
-                $("#search_result").html(json.result);
-
-                          
+               
+//               location.reload();
+              
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-//                alert('Error adding / update data');
+               // alert('Error deleting data');
             }
+            
         });
-    }
+   }
+   
     
-    function job_info()
-    {
-        $("#job_modal").modal('show');
-    }
     
-    function search_title()
+   
+    function job_info(id)
     {
-        var title=$("#title").val();
-        $("#data_list").html("");
-        
+        alert(id);
+       
            $.ajax({
-       url : "<?php echo site_url('index.php/member/Jobs/search_title')?>/" + title,        
+       url : "<?php echo site_url('index.php/member/Jobs/job_info')?>/" + id,        
        type: "GET",
               
        dataType: "JSON",
        success: function(data)
        {
-//        alert(data.nam);
-       
-//        $("#data_list").append('<option>'+title+'</option>');
-          $.each(data,function(i,row)
-          { 
-              if(row.member_fname)
-              {
-              $("#data_list").append('<option>' + row.member_fname +'</option>');
-               }
-               if(row.member_lname)
-              {
-              $("#data_list").append('<option>' + row.member_lname +'</option>');
-               }
-               if(row.member_email)
-              {
-              $("#data_list").append('<option>' + row.member_email +'</option>');
-               }
-          }
-          );
+          $("#job_modal").modal('show');
        },
        error: function (jqXHR, textStatus, errorThrown)
        {
 //         alert('Error...!');
        }
      });
-        
-        
+       
     }
+    
+     function recruiter_info(id)
+    {
+        
+       
+           $.ajax({
+       url : "<?php echo site_url('index.php/member/Jobs/recruiter_info')?>/" + id,        
+       type: "GET",
+              
+       dataType: "JSON",
+       success: function(data)
+       {
+          $("#recruiter_modal").modal('show');
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+       
+    }
+    
+    function apply(id)
+    {
+          $.ajax({
+       url : "<?php echo site_url('index.php/member/Jobs/apply_job')?>/" + id,        
+       type: "GET",
+              
+       dataType: "JSON",
+       success: function(data)
+       {
+         location.reload();
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+    }
+    
     </script>
+    
+    
+    
   <div class="content-wrapper" style="background: white">
     <!-- Content Header (Page header) -->
     <section class="content-header" style="background:#F2F4F4">
@@ -209,6 +250,9 @@ a:link, a:visited{
            
 </form>
     </section>
+    
+    
+    
    <!--<hr style="border-top: 1px solid #ccc;">-->
    <section class="content">
   <div id="search_result">
@@ -235,7 +279,11 @@ a:link, a:visited{
               </div>-->
 
  
-           
+           <?php if(isset($jobs)){
+              
+             foreach($jobs as $job)
+           {
+?>
 <div class="container" id="cont">
                    <div class="row">
                        <div class="col-md-offset col-md-8">
@@ -243,15 +291,15 @@ a:link, a:visited{
                        <div class="shadow">
                            <div class="row">
                            <div class="col-md-10">
-                          <a href="#" onclick="job_info()"> <span class="job_name"><a href="#" onclick="job_info()">PHP Web Developer</a></span></a><br>
-                          <span class="comp_name">Webosys Technologies</span>
+                           <span class="job_name"><a href="#" onclick="job_info(<?php echo $job->job_id;?>)"><?php echo $job->job_title;?></a></span><br>
+                          <span class="comp_name"><?php echo $job->company_name;?></span>
                            </div>
-                               <div class="col-md-2"><button type="button" onclick="apply()" class="btn btn-warning btn-sm">Apply</button></div>
+                               <div class="col-md-2" id='apply_btn<?php echo $job->job_id;?>'><button type="button" id='apply<?php echo $job->job_id;?>' onclick="apply(<?php echo $job->job_id;?>)" class="btn btn-warning btn-sm"><span id='apply_stat<?php echo $job->job_id;?>'>Apply</span></button></div>
                            </div>
                           <div class="row" class="">
-                              <div class="col-md-2 experience"><i class="fa fa-suitcase" aria-hidden="true"></i> 2 yrs
+                              <div class="col-md-2 experience"><i class="fa fa-suitcase" aria-hidden="true"></i> <?php echo $job->job_experience;?>
                               </div>
-                              <div class="col-md-8 experience"><i class="fa fa-map-marker" aria-hidden="true"></i> kolkata
+                              <div class="col-md-8 experience"><i class="fa fa-map-marker" aria-hidden="true"></i> <?php echo $job->job_city;?>
                           </div>
                        </div>
                           <div class="row" class="">
@@ -263,18 +311,18 @@ a:link, a:visited{
                            <div class="row" class="">
                               <div class="col-md-2 description">Job Description:
                               </div>
-                              <div class="col-md-8 description">this is web development job for php kjdhfh skjfhskh sdfkjhkhdfsd sdfhgjgfhgf iigyug s sdfdsf sdf sdfsdfsdf sdfsdf sdfsdf
+                               <div class="col-md-8 description"><?php echo $job->job_description;?>
                           </div>
                        </div> 
                           <div class="row experience" >
                             <div class="col-md-1">
-                                <input type="checkbox" title="save job" id="save" name="save">
+                                <input type="checkbox" class="star" id='save<?php echo $job->job_id;?>' value="<?php echo $job->job_id;?>" title="save job" name="save">
                               </div>  
                               <div class="col-md-4" style="padding-top: 10px;">
-                                  <span class="fa fa-inr"></span> 200000
+                                  <span class="fa fa-inr"></span> <?php echo $job->job_salary;?> /-
                               </div>
                               <div class="col-md-5" style="padding-top: 10px;">
-                                  <span class="skill">Post By</span> <a href="#"><img src="<?php echo base_url()?>profile_pic/avatar.png" width="20px" height="20px"> suraj shinde</a>
+                                  <span class="skill">Post By</span> <a href="#"><img src='<?php if(file_exists($job->recruiter_profile_pic)){echo base_url().$job->recruiter_profile_pic;}else{ echo base_url()."profile_pic/avatar.png";}?>' width="20px" height="20px"> <?php echo $job->recruiter_fname." ".$job->recruiter_lname;?></a>
                               </div>
                                <div class="col-md-2" style="padding-top: 10px;">
                                   <span class="skill">Few hours ago</span>
@@ -287,6 +335,7 @@ a:link, a:visited{
      </div>
                     
       </div>
+           <?php } }?>
 
     <div class="modal fade" id="job_modal" role="dialog">
     <div class="modal-dialog" id="modal_dialog">   
@@ -312,6 +361,32 @@ a:link, a:visited{
     </div>             
         </div>        
       </div>
+
+<div class="modal fade" id="recruiter_modal" role="dialog">
+    <div class="modal-dialog" id="modal_dialog">   
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header"style="background:#3c8dbc">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <center><h4 style="color:white" class="modal-title">Recruiter Description</h4></center>
+        </div>
+        <div class="modal-body" id="job_body">         	
+    				
+    			<div class="panel-body">
+    			  <form action="" id="desc_form">  
+                              
+                                
+                          </form>
+    			</div>                              			
+    		</div>         
+    	 <div class="modal-footer">
+             <button type="button" class="btn btn-warning" value="" id="apply_job"><span id="stat">Apply</span></button>
+          <button type="button" class="btn btn-danger btn-md"  data-dismiss="modal">Close</button>
+        </div>
+    </div>             
+        </div>        
+      </div>
+
           </div>   
 
 
@@ -320,3 +395,38 @@ a:link, a:visited{
 
   </div>
  
+<?php
+    $saved=$this->Saved_jobs_model->get_jobs_by_member($this->session->userdata('member_id'));
+    if(isset($saved))
+    {
+        foreach($saved as $save)
+        {
+            ?>
+    <script>
+        
+        $("#save<?php echo $save->job_id;?>").attr('checked',true);
+ </script>
+       <?php
+        }
+    }
+    ?>
+
+ <?php
+    $applied=$this->Applied_jobs_model->members_applied_job($this->session->userdata('member_id'));
+    if(isset($applied))
+    {
+        foreach($applied as $app)
+        {
+            ?>
+    <script>
+        
+        $("#apply<?php echo $app->job_id;?>").hide();
+        $("#apply_btn<?php echo $app->job_id;?>").html('<span class="text-success">Applied</span>');
+//        $("#apply<?php echo $app->job_id;?>").attr('onclick','btn btn-success btn-sm');
+//        $("#apply_stat<?php echo $app->job_id;?>").html('Applied');
+        
+ </script>
+       <?php
+        }
+    }
+    ?>

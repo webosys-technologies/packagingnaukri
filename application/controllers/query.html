@@ -18,3 +18,6 @@ ALTER TABLE `companies` ADD `company_id` INT(11) NOT NULL AUTO_INCREMENT FIRST, 
 
 7)rename column picode to pincode
 ALTER TABLE `companies` CHANGE `company_picode` `company_pincode` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
+
+8)saved table
+CREATE TABLE `saved_job` ( `save_id` INT(11) NOT NULL AUTO_INCREMENT , `job_id` INT(11) NOT NULL , `member_id` INT(11) NOT NULL , `recruiter_id` INT(11) NOT NULL , `saved_at` DATE NOT NULL , PRIMARY KEY (`save_id`)) ENGINE = InnoDB;

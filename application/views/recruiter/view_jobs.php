@@ -166,6 +166,17 @@ var user_type=el.val();
     
  });  
   
+  
+   var start_exp = 0;
+var end = 15;
+var options = "";
+for(var exp = start_exp ; exp <=end; exp++){
+  options += '<option value="'+exp+'">'+ exp + " yrs" +'</option>'; 
+}
+document.getElementById("experience").innerHTML = options;
+
+
+
  
  
  
@@ -413,10 +424,22 @@ function view_job(id)
                                </div>
                                     
                                     <div class="row">
-                                <div class="col-md-12">                                
+                                <div class="col-md-6">                                
                                     <div class="form-group">
                                        <label>Experience: (*)</label>
-                                       <input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">
+                                       <!--<input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">-->
+                                       <select name="experience" id="experience" class="form-control"></select>
+                                       <!--<select name="exp_month" id="exp_month" class="form-control"></select>-->
+                                        <span class="text-danger" id="mobile_err"></span>
+                                        
+                                    </div>
+                                                                      
+                                </div>
+                                          <div class="col-md-6">                                
+                                    <div class="form-group">
+                                        <!--<label></label>--><br>
+                                       <!--<input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">-->
+                                       <select name="experience" id="experience" class="form-control"></select>
                                         <span class="text-danger" id="mobile_err"></span>
                                         
                                     </div>

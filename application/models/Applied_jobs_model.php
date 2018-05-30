@@ -18,11 +18,14 @@ class Applied_jobs_model extends CI_Model
      
      public function get_job_by_member($id)
      {
-     	$this->db->from('members as mem');
-        $this->db->join('applied_job as app','app.member_id=mem.member_id','left');
-     	$this->db->where('mem.member_id',$id);
+     	$this->db->from('applied_job as app');
+         $this->db->order_by("app.job_id desc");
+        $this->db->join('jobs as job','job.job_id=app.job_id','LEFT');
+        $this->db->join('recruiters as rec','rec.recruiter_id=app.recruiter_id','LEFT');
+        $this->db->join('companies as comp','job.company_id=comp.company_id','LEFT');
+     	$this->db->where('app.member_id',$id);       
      	$query=$this->db->get();
-            	return $query->result();
+        return $query->result();
      }
      
      public function applied_members()
@@ -54,7 +57,28 @@ class Applied_jobs_model extends CI_Model
          $query=$this->db->get();
          return $query->result();
      }
+     
+     function members_applied_job($id)
+     {
+         $this->db->where('member_id',$id);
+         $this->db->from($this->table);
+         $query=$this->db->get();
+         return $query->result();
+     }
 
+     
+      public function apply_job($data)
+     {
+        $this->db->insert($this->table,$data);
+        return $this->db->affected_rows();
+     }
+     
+     function remove_job($data)
+     {
+          $this->db->where($data);
+        $this->db->delete($this->table);
+        return $this->db->affected_rows();
+     }
    
 }
 

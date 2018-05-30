@@ -42,6 +42,7 @@ class Jobs extends CI_Controller
     {
         $id=$this->session->userdata('member_id');
         $result['member_data']=  get_member_info($id);
+        $result['saved']=$this->Saved_jobs_model->get_jobs_by_member($id);
         
         
         $this->load->view('member/header',$result);
@@ -72,12 +73,13 @@ class Jobs extends CI_Controller
     }
     
     function search_jobs()
-    {
+    { $this->load->library('encryption');
          $id=$this->session->userdata('member_id');
             $result['member_data']=  get_member_info($id);
-                    
+            
+                                
         $form=$this->input->post();
-        echo $form['title'];
+        
         if($form)
         {
         $title=$form['title'];
@@ -101,7 +103,7 @@ class Jobs extends CI_Controller
         $part=$form['temp'];
         }
         
-        $this->Jobs_model->search_job($form);
+        $result['jobs']=$this->Jobs_model->search_job($form);
         $this->load->view('member/header',$result);
         $this->load->view('member/jobs',$result);
         $this->load->view('member/footer',$result);      
@@ -119,6 +121,55 @@ class Jobs extends CI_Controller
              $this->load->view('member/footer',$result);
     }
     
+    function job_info($id)
+    {
+        $where=array('job_id'=>$id);
+        $result=$this->Jobs_model->job_info($where);
+        echo json_encode($result);
+    }
+    
+    function save_job($id)
+    {
+        $mem_id=$this->session->userdata('member_id');
+        $rec_data=$this->Jobs_model->job_by_id($id);
+       
+        $data=array('job_id'=>$id,
+                    'recruiter_id'=>$rec_data->recruiter_id,
+                    'member_id'=>$mem_id,
+                    'saved_at'=>date('Y-m-d'));
+        
+        $this->Saved_jobs_model->save_job($data);
+        echo json_encode(array('status'=>'success'));
+    }
+    
+    function unsave_job($id)
+    {
+        $where=array('job_id'=>$id,
+                     'member_id'=>$this->session->userdata('member_id'));
+        $this->Saved_jobs_model->unsave_job($where);
+        echo json_encode(array('status'=>'success'));
+    }
+    
+    function apply_job($id)
+    {
+        $rec_data=$this->Jobs_model->job_by_id($id);
+        $data=array('job_id'=>$id,
+                    'member_id'=>$this->session->userdata('member_id'),
+                    'recruiter_id'=>$rec_data->recruiter_id,
+                    'apply_at'=>date('Y-m-d'),
+                    'apply_status'=>'1');
+         $this->Applied_jobs_model->apply_job($data);
+        echo json_encode(array('status'=>'success'));
+        
+    }
+    
+    function remove_job($id)
+    {
+         $where=array('job_id'=>$id,
+                     'member_id'=>$this->session->userdata('member_id'));
+        $this->Applied_jobs_model->remove_job($where);
+        echo json_encode(array('status'=>'success'));
+    }
    
    
     

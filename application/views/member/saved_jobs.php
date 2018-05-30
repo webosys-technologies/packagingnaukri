@@ -71,40 +71,54 @@ a:link, a:visited{
 <script>
     $(document).ready(function(){
         
+        
+        
+                
        
     });
     var url;
     var data;
-    function search_job()
+ function apply(id)
     {
-        
-//      data=new FormData($("#search_form"));
-      data=new FormData(document.getElementById("search_form"));
-    
-        url = '<?php echo base_url() ?>member/Jobs/search_job';
-      
-       // ajax adding data to database
           $.ajax({
+       url : "<?php echo site_url('index.php/member/Jobs/apply_job')?>/" + id,        
+       type: "GET",
+              
+       dataType: "JSON",
+       success: function(data)
+       {
+         location.reload();
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+    }
+    
+       function job_status(id)
+    {    
+             
+                url="<?php echo base_url();?>member/Jobs/unsave_job/"+id;
+            
+            
+            $.ajax({
             url : url,
-            type: "POST",
-            async: false,
-            processData: false,
-            contentType: false,  
-            data: data,
+            type: "GET",
             dataType: "JSON",
-            success: function(json)
+            success: function(data)
             {
-
-                $("#search_result").html(json.result);
-
-                          
+               
+               location.reload();
+              
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-//                alert('Error adding / update data');
+               // alert('Error deleting data');
             }
+            
         });
-    }
+   }
     </script>
   <div class="content-wrapper" style="background: white">
     <!-- Content Header (Page header) -->
@@ -142,21 +156,23 @@ a:link, a:visited{
  
            
                <div class="container">
+                   <?php if(isset($saved)){
+                       foreach($saved as $save){?>
                    <div class="row">
                        <div class="col-md-offset-2 col-md-8">
                        <div class="panel-body">
                        <div class="shadow">
                            <div class="row">
                            <div class="col-md-10">
-                          <a href="#" onclick="job_info()"> <span class="job_name">PHP Web Developer</span></a><br>
-                          <span class="comp_name">Webosys Technologies</span>
+                          <a href="#" onclick="job_info()"> <span class="job_name"><?php echo $save->job_title;?></span></a><br>
+                          <span class="comp_name"><?php echo $save->company_name;?></span>
                            </div>
-                               <div class="col-md-2"><button type="button" onclick="apply()" class="btn btn-warning btn-sm">Apply</button></div>
+                               <div class="col-md-2" id='apply_btn<?php echo $save->job_id;?>'><button type="button" onclick="apply(<?php echo $save->job_id;?>)" class="btn btn-warning btn-sm">Apply</button></div>
                            </div>
                           <div class="row" class="">
-                              <div class="col-md-2 experience"><i class="fa fa-suitcase" aria-hidden="true"></i> 2 yrs
+                              <div class="col-md-2 experience"><i class="fa fa-suitcase" aria-hidden="true"></i> <?php echo $save->job_experience;?>
                               </div>
-                              <div class="col-md-8 experience"><i class="fa fa-map-marker" aria-hidden="true"></i> kolkata
+                              <div class="col-md-8 experience"><i class="fa fa-map-marker" aria-hidden="true"></i> <?php echo $save->job_city;?>
                           </div>
                        </div>
                           <div class="row" class="">
@@ -168,18 +184,18 @@ a:link, a:visited{
                            <div class="row" class="">
                               <div class="col-md-2 description">Job Description:
                               </div>
-                              <div class="col-md-8 description">this is web development job for php kjdhfh skjfhskh sdfkjhkhdfsd sdfhgjgfhgf iigyug s sdfdsf sdf sdfsdfsdf sdfsdf sdfsdf
+                              <div class="col-md-8 description"><?php echo $save->job_description;?>
                           </div>
                        </div> 
                           <div class="row experience" >
                             <div class="col-md-1">
-                                <input class="star" type="checkbox" title="save job" name="save">
+                                <input class="star" id='save<?php echo $save->job_id;?>' onclick='job_status("<?php echo $save->job_id;?>")' type="checkbox" title="Unsave job" name="save">
                               </div>  
                               <div class="col-md-4" style="padding-top: 10px;">
-                                  <span class="fa fa-inr"></span> 200000
+                                  <span class="fa fa-inr"></span> <?php echo $save->job_salary;?>
                               </div>
                               <div class="col-md-5" style="padding-top: 10px;">
-                                  <span class="skill">Post By</span><a href="#"><img src="<?php echo base_url()?>profile_pic/avatar.png" width="20px" height="20px"> suraj shinde</a>
+                                  <span class="skill">Post By </span><a href="#"><img src='<?php if(file_exists($save->recruiter_profile_pic)){echo base_url().$save->recruiter_profile_pic;}else{ echo base_url()."profile_pic/avatar.png";}?>' width="20px" height="20px"> <?php echo ucfirst(strtolower($save->recruiter_fname))." ".ucfirst(strtolower($save->recruiter_lname));?></a>
                               </div>
                                <div class="col-md-2" style="padding-top: 10px;">
                                   <span class="skill">Few hours ago</span>
@@ -190,6 +206,7 @@ a:link, a:visited{
                    </div>
               </div>
      </div>
+                   <?php } }?>
                     
       </div>
      
@@ -202,3 +219,39 @@ a:link, a:visited{
 
   </div>
  
+<?php
+    $saved=$this->Saved_jobs_model->get_jobs_by_member($this->session->userdata('member_id'));
+    if(isset($saved))
+    {
+        foreach($saved as $save)
+        {
+            ?>
+    <script>
+        
+        $("#save<?php echo $save->job_id;?>").attr('checked',true);
+ </script>
+       <?php
+        }
+    }
+    ?>
+
+ 
+ <?php
+    $applied=$this->Applied_jobs_model->members_applied_job($this->session->userdata('member_id'));
+    if(isset($applied))
+    {
+        foreach($applied as $app)
+        {
+            ?>
+    <script>
+        
+//        $("#apply_btn<?php echo $app->job_id;?>").hide();
+        $("#apply_btn<?php echo $app->job_id;?>").html('<span class="text-success">Applied</span>');
+//        $("#apply<?php echo $app->job_id;?>").attr('onclick','btn btn-success btn-sm');
+//        $("#apply_stat<?php echo $app->job_id;?>").html('Applied');
+        
+ </script>
+       <?php
+        }
+    }
+    ?>
