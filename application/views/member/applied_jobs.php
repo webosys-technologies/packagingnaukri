@@ -204,7 +204,7 @@ a:link, a:visited{
       <div id="calendar" style="background:#F2F3F4" class="modal-body">
           <div class="row">
               <div class="col-md-10 col-md-offset-2">
-                  <label style="color:black">Are you sure want to delete this Job <span class='delete_name'></span> ?</label> <br>
+                  <label style="color:black">Are you sure want to remove this Job <span class='delete_name'></span> ?</label> <br>
                   <button class="btn btn-default" id="delete_job">Yes</button>
                   <button class="btn btn-default" data-dismiss="modal">No</button>
           
