@@ -9,9 +9,9 @@ class Profile extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		if(!is_admin_LoggedIn($this->session->userdata('admin_LoggedIn')))
+		if(!is_user_LoggedIn($this->session->userdata('user_LoggedIn')))
                 {
-                    redirect('admin/index');
+                    redirect('user/index');
                 }
 	}
 
@@ -23,9 +23,9 @@ class Profile extends CI_Controller
             // $data['user']=$this->User_model->get_user_b();
 
        
-            $this->load->view('admin/header',$result);
-            $this->load->view('admin/profile',$result);
-            $this->load->view('admin/footer');
+            $this->load->view('user/header',$result);
+            $this->load->view('user/profile',$result);
+            $this->load->view('user/footer');
 	}
 
 	function ajax_edit($id)

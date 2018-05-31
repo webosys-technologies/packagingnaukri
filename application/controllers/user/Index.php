@@ -11,7 +11,7 @@ class Index extends CI_Controller
 	function index()
 	{
                 
-		$this->load->view('admin/login');
+		$this->load->view('user/login');
 	}
         
        
@@ -19,13 +19,13 @@ class Index extends CI_Controller
         function login()
     {
         
-        if(is_admin_LoggedIn($this->session->userdata('admin_LoggedIn')))
+        if(is_user_LoggedIn($this->session->userdata('user_LoggedIn')))
         {
-           redirect('admin/Dashboard');
+           redirect('user/Dashboard');
         }
         else
         {
-             $this->load->view('admin/login');
+             $this->load->view('user/login');
             
         }
     }
@@ -58,7 +58,7 @@ class Index extends CI_Controller
        if($valid_email)  //valid email >0
        {          
             
-            if($result > 0 && $result->user_status==1 && $result->user_type == 'admin')
+            if($result > 0 && $result->user_status==1 && $result->user_type=='user')
             {
                
                     $sessionArray = array(                        
@@ -66,12 +66,12 @@ class Index extends CI_Controller
                     'user_fname' => $result->user_fname,
                     'user_lname' => $result->user_lname,
                     'user_email' => $result->user_email,
-                    'admin_LoggedIn' => true
+                    'user_LoggedIn' => true
                                     );
                                     
                     $this->session->set_userdata($sessionArray);  
                     
-                    redirect('admin/Dashboard');
+                    redirect('user/Dashboard');
                   
                
               }
@@ -84,13 +84,13 @@ class Index extends CI_Controller
                  $this->session->set_flashdata('error', 'This email is not active');
                 }
                 
-                redirect('admin/Index/Login');  
+                redirect('user/Index/Login');  
             }  
         }
         else
         {
              $this->session->set_flashdata('error', 'This email id is not registered with us.');
-                 redirect('admin/Index/Login'); 
+                 redirect('user/Index/Login'); 
         }
         }
     }
@@ -102,13 +102,13 @@ class Index extends CI_Controller
        //  $this->session->unset_userdata('user_LoggedIn'); 
         $this->session->sess_destroy();
 //         $this->session->unset_userdata('user_LoggedIn'); 
-        redirect('admin/Index/login');  
+        redirect('user/Index/login');  
     }
 
     
     public function test()
     {
-        $this->load->view('admin/upload');
+        $this->load->view('user/upload');
     }
     function result()
     {

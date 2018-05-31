@@ -2,17 +2,16 @@
 
 //require APPPATH . '/libraries/BaseController.php';
 
-class Applicants extends CI_Controller
+class Members extends CI_Controller
 {
 
 	public function __construct()
 	{
 		parent::__construct();
-                if(!is_admin_LoggedIn($this->session->userdata('admin_LoggedIn')))
+                if(!is_user_LoggedIn($this->session->userdata('user_LoggedIn')))
                 {
-                    redirect('admin/index');
+                    redirect('user/index');
                 }
-
           
 	}
 
@@ -21,12 +20,12 @@ class Applicants extends CI_Controller
                  
             $id=$this->session->userdata('user_id');
             $result['user_data']=get_user_info($id);
-            $result['members']=$this->Applied_jobs_model->applied_members();
-           
+            $result['members']=$this->Members_model->getall_members();
+            $result['states']=$this->Cities_model->getall_state();
        
-            $this->load->view('admin/header',$result);
-            $this->load->view('admin/applicants',$result);
-            $this->load->view('admin/footer');
+            $this->load->view('user/header',$result);
+            $this->load->view('user/member_view',$result);
+            $this->load->view('user/footer');
 
         
     

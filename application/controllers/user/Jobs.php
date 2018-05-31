@@ -9,9 +9,9 @@ class Jobs extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-     if(!is_admin_LoggedIn($this->session->userdata('admin_LoggedIn')))
+     if(!is_user_LoggedIn($this->session->userdata('user_LoggedIn')))
      {
-         redirect('admin/index');
+         redirect('user/index');
      }
     }
     
@@ -38,9 +38,9 @@ class Jobs extends CI_Controller
             $result['jobs']=$this->Jobs_model->getall_jobs();
             $result['companies']=$this->Companies_model->getall_companies();
            
-             $this->load->view('admin/header',$result);
-             $this->load->view('admin/view_jobs',$result);
-             $this->load->view('admin/footer');       
+             $this->load->view('user/header',$result);
+             $this->load->view('user/view_jobs',$result);
+             $this->load->view('user/footer');       
     }
     
     public function job_add()

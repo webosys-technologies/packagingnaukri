@@ -49,7 +49,7 @@ h3{
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>admin/Dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="<?php echo base_url(); ?>user/Dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Profile</li>
       </ol>
              </section>
@@ -176,7 +176,7 @@ $("#img").change(function (e) {
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/admin/Profile/ajax_edit/')?>/" + id,
+        url : "<?php echo site_url('index.php/user/Profile/ajax_edit/')?>/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
@@ -211,7 +211,7 @@ $("#img").change(function (e) {
 
       var url;
       
-        url = "<?php echo site_url('index.php/admin/Profile/update_profile')?>";
+        url = "<?php echo site_url('index.php/user/Profile/update_profile')?>";
       
 
        // ajax adding data to database

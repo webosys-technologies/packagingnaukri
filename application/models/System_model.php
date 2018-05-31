@@ -14,6 +14,12 @@ class System_model extends CI_Model
 		$query=$this->db->get();
 		return $query->row();
 	}
+
+	function system_update($where,$data)
+	{
+		$this->db->update($this->table,$data,$where);
+		return $this->db->affected_rows();
+	}
 }
 
 

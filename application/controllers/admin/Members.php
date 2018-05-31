@@ -8,7 +8,7 @@ class Members extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-                if(!is_user_LoggedIn($this->session->userdata('user_LoggedIn')))
+                if(!is_admin_LoggedIn($this->session->userdata('admin_LoggedIn')))
                 {
                     redirect('admin/index');
                 }

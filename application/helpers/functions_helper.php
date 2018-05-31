@@ -9,6 +9,18 @@ function is_member_LoggedIn($member_Logged_in)
              return false;            
         }
 }
+
+function is_admin_LoggedIn( $admin_LoggedIn)
+{ 
+             
+        if(isset($admin_LoggedIn) || $admin_LoggedIn == TRUE)
+        {
+           return true;
+        }else{
+             return false;            
+        }
+}
+
 function is_user_LoggedIn( $user_LoggedIn)
 { 
              
