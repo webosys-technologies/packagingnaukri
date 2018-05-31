@@ -254,7 +254,7 @@ class Members_model extends CI_Model
         }else{
             return TRUE;
         }
-        die();
+        // die();
         }
         
         function search_query()

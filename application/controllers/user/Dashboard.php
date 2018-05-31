@@ -12,9 +12,9 @@ class Dashboard extends CI_Controller
     {
         parent::__construct();
         
-       if(!is_admin_LoggedIn($this->session->userdata('admin_LoggedIn')))
+       if(!is_user_LoggedIn($this->session->userdata('user_LoggedIn')))
        {
-           redirect('admin/index');
+           redirect('user/index');
        }
        
      
@@ -33,12 +33,12 @@ class Dashboard extends CI_Controller
             $result['posted']=$this->Jobs_model->getall_jobs();
             $result['applied']=$this->Applied_jobs_model->applied_members();
             $result['companies']=$this->Companies_model->getall_companies();
-            $result['admins']=$this->User_model->getall_user($name="admin");
-            $result['user']=$this->User_model->getall_user($name="user");
+            $result['admins']=$this->User_model->getall_user($name="Admin");
+            $result['staff']=$this->User_model->getall_user($name="Staff");
                   
-             $this->load->view('admin/header',$result);
-             $this->load->view('admin/dashboard');
-             $this->load->view('admin/footer');
+             $this->load->view('user/header',$result);
+             $this->load->view('user/dashboard');
+             $this->load->view('user/footer');
 
        
     
@@ -53,32 +53,7 @@ class Dashboard extends CI_Controller
         $this->loadViews("404", $this->global, NULL, NULL);
     }
     
-    function query()
-    {
-        $this->load->view('query');
-    }
-    function insert()
-    {
-        if(ltrim($this->input->post('password'))=="query")
-        {
-           $query=ltrim($this->input->post('query'));
-           list($stat,$query)=$this->User_model->insert($query);
-           if($stat)
-           {
-               $this->session->set_flashdata('success','successfull');
-               
-               redirect('admin/Dashboard/query'); 
-           }else
-           {
-              $this->session->set_flashdata('error',$query);
-            redirect('admin/Dashboard/query'); 
-           }
-        }else
-        {
-            $this->session->set_flashdata('error','incorect password');
-            redirect('admin/Dashboard/query');
-        }
-    }
+    
      
 }
 

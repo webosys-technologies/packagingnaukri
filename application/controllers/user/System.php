@@ -10,9 +10,9 @@ class System extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		if(!is_admin_LoggedIn($this->session->userdata('admin_LoggedIn')))
+		if(!is_user_LoggedIn($this->session->userdata('user_LoggedIn')))
                 {
-                    redirect('admin/index');
+                    redirect('user/index');
                 }
                 $this->load->model('System_model');
 
@@ -25,9 +25,9 @@ class System extends CI_Controller
             $result['user_data']=get_user_info($id);
             $data['system']=$this->System_model->get_info();
            
-            $this->load->view('admin/header',$result);
-            $this->load->view('admin/system',$data);
-            $this->load->view('admin/footer');
+            $this->load->view('user/header',$result);
+            $this->load->view('user/system',$data);
+            $this->load->view('user/footer');
 	}
 
 	function ajax_edit($id)
