@@ -1,3 +1,5 @@
+
+
 <?php 
 if(!defined('BASEPATH')) exit('No direct script access allowed');
 
@@ -20,7 +22,6 @@ class Otp extends CI_Controller
             if($val)
             {
                 $res=$this->Members_model->check_mobile_exist($email);
-
                 if($res == False)
                 {
 
@@ -41,11 +42,10 @@ class Otp extends CI_Controller
 $authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
 
 //Multiple mobiles numbers separated by comma
-
-$mobileNumber = $email;
+mobileNumber = $email;
 //Sender ID,While using route4 sender id should be 6 characters long.
 
-$senderId = "pkgnau";
+senderId = "pkgnau";
 //Your message to send, Add URL encoding here.
 
 $message =$rand.' is your OTP for verifying mobile number on packagingnaukri.com.';
@@ -59,15 +59,11 @@ $route = "4";
 $postData = array(
 
     'authkey' => $authKey,
-
     'mobiles' => $mobileNumber,
-
     'message' => $message,
 
     'sender' => $senderId,
-
     'route' => $route
-
 );
 
 
@@ -136,7 +132,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                 $res=$this->Recruiters_model->check_mobile_exist($email);
 
                 if($res == False)
-                {
+               {
 
                      echo json_encode(array('mobile_error'=>'This Mobile is already registered'));
                 }else{  
@@ -149,7 +145,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                 $this->session->set_userdata($otp_mobile);
                 // print_r($otp_mobile);
                 // die();
-                // $this->Members_model->member_update($where,$data);
+               // $this->Members_model->member_update($where,$data);
      //Your authentication key
 
 $authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
@@ -229,7 +225,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
             if($res)
             {
                 echo json_encode(array('email_error'=>'This email is not registered'));
-            }else{
+           }else{
                 
                 $send=$this->email_otp($email);
                 if($send)
