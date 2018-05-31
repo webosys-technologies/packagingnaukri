@@ -147,8 +147,7 @@ a:link, a:visited{
    
     function job_info(id)
     {
-        alert(id);
-       
+              
            $.ajax({
        url : "<?php echo site_url('index.php/member/Jobs/job_info')?>/" + id,        
        type: "GET",

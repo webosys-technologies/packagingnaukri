@@ -109,7 +109,7 @@
                                        ?></td>
                                        <td>
                  
-                  <button class="btn btn-danger" onclick="delete_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Member"><i class="glyphicon glyphicon-trash"></i></button>
+                  <!--<button class="btn btn-danger" onclick="delete_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Member"><i class="glyphicon glyphicon-trash"></i></button>-->
                  
 
                 </td>

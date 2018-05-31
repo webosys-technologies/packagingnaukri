@@ -1,4 +1,13 @@
 <style>
+     #modal_dialog{
+     width: 700px;
+      overflow-y: initial !important
+}
+#job_body{
+  height: 500px;
+  overflow-y: auto;
+}
+    
     .star {
         /*padding:10px;*/
     visibility:hidden;
@@ -119,6 +128,27 @@ a:link, a:visited{
             
         });
    }
+   
+     function job_info(id)
+    {
+              
+           $.ajax({
+       url : "<?php echo site_url('index.php/member/Jobs/job_info')?>/" + id,        
+       type: "GET",
+              
+       dataType: "JSON",
+       success: function(data)
+       {
+          $("#job_modal").modal('show');
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+       
+    }
+   
     </script>
   <div class="content-wrapper" style="background: white">
     <!-- Content Header (Page header) -->
@@ -255,3 +285,54 @@ a:link, a:visited{
         }
     }
     ?>
+
+ 
+     <div class="modal fade" id="job_modal" role="dialog">
+    <div class="modal-dialog" id="modal_dialog">   
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header"style="background:#3c8dbc">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <center><h4 style="color:white" class="modal-title">Job Description</h4></center>
+        </div>
+        <div class="modal-body" id="job_body">         	
+    				
+    			<div class="panel-body">
+    			  <form action="" id="desc_form">  
+                              
+                                
+                          </form>
+    			</div>                              			
+    		</div>         
+    	 <div class="modal-footer">
+             <button type="button" class="btn btn-warning" value="" id="apply_job"><span id="stat">Apply</span></button>
+          <button type="button" class="btn btn-danger btn-md"  data-dismiss="modal">Close</button>
+        </div>
+    </div>             
+        </div>        
+      </div>
+
+<div class="modal fade" id="recruiter_modal" role="dialog">
+    <div class="modal-dialog" id="modal_dialog">   
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header"style="background:#3c8dbc">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <center><h4 style="color:white" class="modal-title">Recruiter Description</h4></center>
+        </div>
+        <div class="modal-body" id="job_body">         	
+    				
+    			<div class="panel-body">
+    			  <form action="" id="desc_form">  
+                              
+                                
+                          </form>
+    			</div>                              			
+    		</div>         
+    	 <div class="modal-footer">
+             <button type="button" class="btn btn-warning" value="" id="apply_job"><span id="stat">Apply</span></button>
+          <button type="button" class="btn btn-danger btn-md"  data-dismiss="modal">Close</button>
+        </div>
+    </div>             
+        </div>        
+      </div>

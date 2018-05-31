@@ -29,7 +29,7 @@
           <div class="small-box bg-aqua">
             <div class="inner">
               <h3>
-          <?php if(isset($members)){echo $members;}else{echo "0";}?>
+          <?php if(isset($members)){echo count($members);}else{echo "0";}?>
               </h3>
 
               <p>Members</p>
@@ -37,7 +37,7 @@
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            <a href="<?php echo base_url(); ?>recruiter/members" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url(); ?>recruiter/Members" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -46,21 +46,29 @@
           <div class="small-box bg-red-gradient">
             <div class="inner">
               <h3> 
-                  <?php if(isset($posts))
-              {
-                                           
-                  echo $posts;
-              }else{
-                  echo "0";
-              }
-                  ?></h3>
+                <?php if(isset($posts)){echo count($posts);}else{echo "0";}?></h3>
 
               <p>Job Posted</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="<?php echo base_url(); ?>recruiter/job" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url(); ?>recruiter/Jobs" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-xs-6">
+           <!--small box--> 
+          <div class="small-box" style="background:#90EE90;">
+            <div class="inner">
+              <h3 id="num"><?php if(isset($companies)){echo count($companies);}else{echo "0";}?></h3>
+
+              <p id="num">Companies</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>recruiter/Companies" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
