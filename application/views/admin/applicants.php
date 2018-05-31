@@ -330,8 +330,7 @@ function view_member(id)
 
     function view_applicant(id)
     {
-      if(confirm('Are you sure delete this data?'))
-      {
+   
         // ajax delete data from database
           $.ajax({
             url : "<?php echo site_url('index.php/admin/Members/applicant')?>/"+id,
@@ -340,7 +339,7 @@ function view_member(id)
             success: function(data)
             {
                
-               location.reload();
+//               location.reload();
               
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -349,7 +348,7 @@ function view_member(id)
             }
         });
 
-      }
+      
     }
 
 

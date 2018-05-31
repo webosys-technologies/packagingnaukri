@@ -47,7 +47,7 @@ h3{
 		<!-- <p>Pic</p> -->
 		<div class="box box-solid" >
 	<center>	<img src="<?php echo base_url(); ?>/profile_pic/avatar.png" width="100px" height="100px" style="border-radius: 6px"></center><br>
-	<center><h3 ><?php echo $system->system_name; ?></h3></center>
+        <center><h3 ><?php  if(isset($system)){ echo $system->system_name;} ?></h3></center>
 	</div>
 	</div>
 	<div class="col-md-8 col-md-offset-1" id="div1">
@@ -63,31 +63,31 @@ h3{
 	        <div class="row">
 	             <div class="col-md-6">
 	                    <Span class="form_label">Name</span><br>
-	                    <span><?php echo $system->system_name;?></span>
+                            <span><?php if(isset($system)){ echo $system->system_name;}?></span>
 	            </div>   
 	            <div class="col-md-6">
 	                 <Span class="form_label">Email</span><br>
-	                 <span><?php echo $system->system_email;?></span>
+                         <span><?php if(isset($system)){ echo $system->system_email;}?></span>
 	            </div>   
 	        </div><br>
 	        <div class="row">
 	             <div class="col-md-6">
 	                    <Span class="form_label">Phone</span><br>
-	                    <span><?php echo $system->system_phone;?></span>
+                            <span><?php if(isset($system)){ echo $system->system_phone;}?></span>
 	            </div>   
 	            <div class="col-md-6">
 	                 <Span class="form_label">Mobile</span><br>
-	                 <span><?php echo $system->system_mobile;?></span>
+                         <span><?php if(isset($system)){ echo $system->system_mobile;}?></span>
 	            </div>   
 	        </div><br>
 	        <div class="row">
 	             <div class="col-md-6">
 	                    <Span class="form_label">Address</span><br>
-	                    <span><?php echo $system->system_address;?></span>
+                            <span><?php if(isset($system)){ echo $system->system_address;}?></span>
 	            </div>   
 	            <div class="col-md-6">
 	                 <Span class="form_label">City</span><br>
-	                 <span><?php echo $system->system_city;?></span>
+                            <span><?php if(isset($system)){ echo $system->system_city;}?></span>
 	            </div>   
 	        </div>
         </div>

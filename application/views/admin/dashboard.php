@@ -117,9 +117,9 @@
            <!--small box--> 
           <div class="small-box" style="background:#90EE90;">
             <div class="inner">
-              <h3 id="num"><?php if(isset($staff)){echo count($staff);}else{echo "0";}?></h3>
+              <h3 id="num"><?php if(isset($user)){echo count($user);}else{echo "0";}?></h3>
 
-              <p id="num">Staff</p>
+              <p id="num">Users</p>
             </div>
             <div class="icon">
               <i class="fa fa-book"></i>

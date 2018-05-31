@@ -454,7 +454,10 @@ function view_user(id)
                          
                     <div class="col-md-6">
                         <label class="form-label">Type</label><span style="color: red">*</span>
-                        <input type="text" value="" placeholder="Admin/Staff" name="user_type" class="form-control">
+                        <select name="user_type" class="form-control">
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>                            
+                        </select>
                         <span class="text-danger"><?php echo form_error('user_type'); ?></span>
 
                     </div>
