@@ -11,8 +11,16 @@
   height: 420px;
   overflow-y: auto;
 }
-
+td{
+    font-family: times;
+}
 </style>
+<script>
+function applicants(id)
+{
+    window.location='<?php echo base_url()?>recruiter/Jobs/applicants/'+id;
+}
+</script>
 <div class="content-wrapper" style="background:white;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -74,10 +82,11 @@
            <th>ID</th>
                                             <th>Job Title</th>
                                             <th>Company Name</th>
+                                            <th>Applicants</th>
                                             <th>Qualification</th>
                                             <th>Experience</th>
                                             <th>Location</th>
-                        <th>Posted Date</th>
+                                             <th>Posted Date</th>
                                             <th>Action</th>
          
         </tr>
@@ -93,13 +102,15 @@
                                         <td><?php echo $job->job_id?></td>
                                             <td><?php echo $job->job_title?></td>
                                             <td><?php echo $job->company_name?></td>
+                                            <td style="cursor:pointer;" onclick="applicants(<?php echo $job->job_id ?>)">
+                                                <?php echo count($this->Applied_jobs_model->get_by_job_id($job->job_id));?></td>
                                             <td><?php echo $job->job_education?></td>
                                             <td><?php echo $job->job_experience?></td>
                                             <td><?php echo $job->job_city?></td>
                             <td><?php echo $job->job_created_at?></td>
                                            
-                <td>  <button class="btn btn-success" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
-                  <button class="btn btn-danger" onclick="delete_job(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
+                <td>  <button class="btn btn-success btn-sm" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
+                  <button class="btn btn-danger btn-sm" onclick="delete_job(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
                              </td>
               </tr>
           <?php }}}?>
@@ -148,13 +159,24 @@ var user_type=el.val();
        },
        error: function (jqXHR, textStatus, errorThrown)
        {
-         alert('Error...!');
+//         alert('Error...!');
        }
      });
      }
     
  });  
   
+  
+   var start_exp = 0;
+var end = 15;
+var options = "";
+for(var exp = start_exp ; exp <=end; exp++){
+  options += '<option value="'+exp+'">'+ exp + " yrs" +'</option>'; 
+}
+document.getElementById("experience").innerHTML = options;
+
+
+
  
  
  
@@ -219,7 +241,7 @@ function view_job(id)
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
-            alert('Error get data from ajax 1');
+//            alert('Error get data from ajax 1');
         }
     });
     }
@@ -265,7 +287,7 @@ function view_job(id)
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
-            alert('Error get data from ajax 1');
+//            alert('Error get data from ajax 1');
         }
     });
     }
@@ -304,7 +326,7 @@ function view_job(id)
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                alert('Error adding / update data');
+//                alert('Error adding / update data');
             }
         });
     }
@@ -326,7 +348,7 @@ function view_job(id)
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                alert('Error deleting data');
+//                alert('Error deleting data');
             }
         });
 
@@ -402,10 +424,22 @@ function view_job(id)
                                </div>
                                     
                                     <div class="row">
-                                <div class="col-md-12">                                
+                                <div class="col-md-6">                                
                                     <div class="form-group">
                                        <label>Experience: (*)</label>
-                                       <input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">
+                                       <!--<input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">-->
+                                       <select name="experience" id="experience" class="form-control"></select>
+                                       <!--<select name="exp_month" id="exp_month" class="form-control"></select>-->
+                                        <span class="text-danger" id="mobile_err"></span>
+                                        
+                                    </div>
+                                                                      
+                                </div>
+                                          <div class="col-md-6">                                
+                                    <div class="form-group">
+                                        <!--<label></label>--><br>
+                                       <!--<input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">-->
+                                       <select name="experience" id="experience" class="form-control"></select>
                                         <span class="text-danger" id="mobile_err"></span>
                                         
                                     </div>

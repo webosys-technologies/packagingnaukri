@@ -20,19 +20,6 @@ class Jobs extends CI_Controller
      */
     public function index()
     {       
-        
-//            $id=$this->session->userdata('user_id');
-//            $result['user_data']=$this->User_model->get_user_by_id($id);
-//                     
-//                  
-//             $this->load->view('admin/header',$result);
-//             $this->load->view('admin/add_jobs');
-//             $this->load->view('admin/footer');
-       
-    }
-    
-    public function view_jobs()
-    {        
             $id=$this->session->userdata('user_id');
             $result['user_data']=get_user_info($id);
             $result['jobs']=$this->Jobs_model->getall_jobs();
@@ -40,7 +27,13 @@ class Jobs extends CI_Controller
            
              $this->load->view('admin/header',$result);
              $this->load->view('admin/view_jobs',$result);
-             $this->load->view('admin/footer');       
+             $this->load->view('admin/footer');      
+       
+    }
+    
+    public function view_jobs()
+    {        
+            
     }
     
     public function job_add()
@@ -115,6 +108,37 @@ class Jobs extends CI_Controller
             $this->session->set_flashdata('success','job deleted successfully');
             echo json_encode(array('success'=>'job deleted successfully'));
         }
+    }
+    
+    
+    public function applied_members($id)
+    {
+         if($id)
+        {       
+               $result['members']=$this->Applied_jobs_model->members_by_jobid($id);
+
+        if($result)
+        {
+            $id=$this->session->userdata('user_id');
+            $result['user_data']=get_user_info($id);
+            
+        $this->load->view('admin/header',$result);
+        $this->load->view('admin/applied_members',$result);
+        $this->load->view('admin/footer',$result);
+        }else{
+             redirect('admin/Jobs');
+        }
+        }else{
+            redirect('admin/Jobs');
+        }
+        
+    }
+    
+    public function member_info($id)
+    {
+        $result=$this->Members_model->member_info($id);
+        echo json_encode($result);
+        
     }
     
   

@@ -119,6 +119,23 @@ class Members_model extends CI_Model
          $query = $this->db->get();
        	return $query->row();
 	} 
+        
+        public function member_info($id)
+        {
+         $emp=$this->check_id_in_employments($id);
+         $edu=$this->check_id_in_education($id);
+         $this->db->from('members as mem');  
+         if($emp==true){
+         $this->db->join('employments as emp','mem.member_id=emp.member_id','LEFT');         
+         }
+         if($edu==true){
+         $this->db->join('educations as edu','edu.member_id=mem.member_id','LEFT');
+         }
+         $this->db->where('mem.member_id',$id);
+         $query = $this->db->get();
+       	return $query->row();
+        }
+        
         public function check_id_in_employments($id)
         {
            
@@ -240,6 +257,36 @@ class Members_model extends CI_Model
         // die();
         }
         
+        function search_query()
+        {
+//            SELECT Customers.CustomerName, Orders.OrderID
+//INTO CustomersOrderBackup2017
+//FROM Customers
+//LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+//            $result=$this->db->query('SELECT members.member_fname, members.member_mobile
+//                                      FROM members ');
+            $this->db->like(array('member_fname'=>'a'));
+            $this->db->select('member_fname');
+            $this->db->from($this->table);
+            $result=$this->db->get();
+           $result->result();
+            $this->db->or_like(array('member_lname'=>'a'));
+            $this->db->select('member_lname');
+            $this->db->from($this->table);
+            $result1=$this->db->get();
+            $result1->result();
+          
+             $this->db->or_like(array('member_email'=>'a'));
+            $this->db->select('member_email');
+            $this->db->from($this->table);
+            $result2=$this->db->get();
+            $result2->result();
+           
+           return array_merge((array) $result1->result(), (array) $result->result(),(array) $result2->result());
+            
+          
+            
+        }
                  
        public function test()
        {
