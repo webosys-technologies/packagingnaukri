@@ -326,7 +326,7 @@ var state=el.val();
 
     
 var title=el.val();
-           alert(title);
+          
        $.ajax({
         url : "<?php echo site_url('index.php/member/Profile/education_name')?>/" + title,        
         type: "GET",
@@ -334,11 +334,11 @@ var title=el.val();
         dataType: "JSON",
         success: function(data)
         {
-         
+//          $("#edu_name").html("");
            $.each(data,function(i,row)
            {
             
-               $("#edu_name").append('<option value="'+ row.education_name +'">' + row.education_name + '</option>');
+               $("#edu_name").append('<option value="'+ row.medu_education+'">' + row.medu_education + '</option>');
            }
            );
         },
@@ -357,7 +357,7 @@ var title=el.val();
 
     var el = $(this) ;   
 var edu_name=el.val();
-           
+           $("#edu_spl").html("html");
        $.ajax({
         url : "<?php echo site_url('index.php/member/Profile/specialization')?>/" + edu_name,        
         type: "GET",
@@ -369,7 +369,7 @@ var edu_name=el.val();
            $.each(data,function(i,row)
            {
             
-               $("#edu_spl").append('<option value="'+ row.education_specialization +'">' + row.education_specialization + '</option>');
+               $("#edu_spl").append('<option value="'+ row.medu_specialization +'">' + row.medu_specialization + '</option>');
            }
            );
         },
