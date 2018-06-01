@@ -792,7 +792,7 @@ var edu_name=el.val();
            </div>
           
           </form>
-           </div></div><br>
+           </div><br>
           
           
           
@@ -864,7 +864,7 @@ var edu_name=el.val();
           </div><br>
           
           
-          <div  class="shadow" id="project">               
+                    <div  class="shadow" id="project">               
               <div class="box-header" > <div class="row">          
             <div class="col-md-9"> <h3 class="box-title"><b>Project Details</b></h3></div><div class="col-md-3"><a href="#project" id="add_project"><span class="fa fa-plus"> Add </span></a> </div>
              </div>
@@ -928,9 +928,11 @@ var edu_name=el.val();
                  }}?>     
               
          </div>
-              </div>
-          
-          
+              </div><br>
+              
+              
+              
+              
           <div class="shadow" id="skill">               
          <div class="box-header" > <div class="row">
                  <div class="col-md-9">
@@ -967,12 +969,11 @@ var edu_name=el.val();
              
           </div>
               
-              </section>
-          </div>
-          
-          
-          
-          <div class="modal fade" id="success_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      </div>
+         </div>
+      </section>
+      </div>
+                <div class="modal fade" id="success_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div  class="modal-header" style="background:#36AB62;">
