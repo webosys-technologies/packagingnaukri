@@ -42,10 +42,10 @@ class Otp extends CI_Controller
 $authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
 
 //Multiple mobiles numbers separated by comma
-mobileNumber = $email;
+$mobileNumber = $email;
 //Sender ID,While using route4 sender id should be 6 characters long.
 
-senderId = "pkgnau";
+$senderId = "pkgnau";
 //Your message to send, Add URL encoding here.
 
 $message =$rand.' is your OTP for verifying mobile number on packagingnaukri.com.';

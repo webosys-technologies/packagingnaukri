@@ -8,6 +8,7 @@
           <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -62,6 +63,39 @@
                 padding-top:0px;
                
             }
+            
+            .icon {
+  padding: 10px;
+  font-size: 25px;
+  width: 40px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.icon:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-skype {
+  background: #00aff0;
+  color: white;
+}
+
+.fa-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
             </style>
 </head>
 
@@ -239,8 +273,17 @@ $("#show_otp_box").click(function(){
 
  
 </script>
-    
-    <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="350px" height="80px">
+<div class="row" >
+        <div class="col-md-6">
+    <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px">
+    </div>
+         <div class="col-md-3 col-md-offset-3" style="padding-top:6px">
+              <a href="#" class="fa fa-google icon"></a>&nbsp;
+   <a href="#" class="fa fa-facebook icon"></a>  &nbsp;
+   <a href="#" class="fa fa-skype icon"></a>&nbsp;
+   <a href="#" class="fa fa-linkedin icon"></a>
+    </div>
+    </div>
 <!--<body style="background:#d2d6de">--> 
  
  <!--<header class="header" id="header">-->
@@ -294,9 +337,10 @@ $("#show_otp_box").click(function(){
           
           
           
-      </ul> <ul class="nav navbar-nav navbar-right">
+      </ul> <ul style="padding-right:52px" class="nav navbar-nav navbar-right">
               <li><a id="header_link" href="#" data-toggle="modal" onclick="open_login()" data-target="#myModal">Login</a></li>
               <li><a id="header_link" href="<?php echo base_url();?>member/index">Register</a></li>
+                
            </ul>
         
         

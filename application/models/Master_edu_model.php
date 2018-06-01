@@ -49,6 +49,24 @@ class Master_edu_model extends CI_Model
 		$this->db->where('medu_id', $id);
 		$this->db->delete($this->table);
 	}
+        
+        public function get_education_by_title($title)
+        {
+            $this->db->distinct();
+            $this->db->select('medu_education');
+            $this->db->where('medu_title', $title);
+            $query=$this->db->get($this->table);
+            return $query->result();
+        }
+        
+         public function get_specialization_by_name($name)
+        {
+            $this->db->distinct();
+            $this->db->select('medu_specialization');
+            $this->db->where('medu_education', $name);
+            $query=$this->db->get($this->table);
+            return $query->result();
+        }
 
 
 }

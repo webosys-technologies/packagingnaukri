@@ -28,6 +28,27 @@ class Educations_model extends CI_Model
          return $this->db->affected_rows();
      }
      
+     function get_education_by_member($id)
+     {
+         $this->db->where('member_id',$id);
+        $query=$this->db->get($this->table);
+        return $query->result();  
+     }
+     
+     function get_education_by_id($id)
+     {
+         $this->db->where('education_id',$id);
+        $query=$this->db->get($this->table);
+        return $query->row();  
+     }
+     
+      function education_delete($where)
+     {
+         $this->db->where($where);
+         $this->db->delete($this->table);
+        return $this->db->affected_rows();  
+     }
+     
     
 }
 

@@ -101,7 +101,7 @@
                                             <td><?php echo $job->job_title?></td>
                                             <td><?php echo $job->company_name?></td>
                                             <td style="cursor:pointer;" onclick="applicants(<?php echo $job->job_id ?>)">
-                                                <?php echo count($this->Applied_jobs_model->get_by_job_id($job->job_id));?></td>
+                                                <?php echo count($this->Applied_jobs_model->get_by_job_id($job->job_id))." Members";?></td>
                                             <td><?php echo $job->job_education?></td>
                                             <td><?php echo $job->job_experience?></td>
                                             <td><?php echo $job->job_city?></td>
