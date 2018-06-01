@@ -923,7 +923,7 @@ var edu_name=el.val();
                    
            </div>
           
-         <!--<hr>-->
+         <hr>
             <?php  
                  }}?>     
               
@@ -971,8 +971,7 @@ var edu_name=el.val();
               
       </div>
          </div>
-      </section>
-      </div>
+     
                 <div class="modal fade" id="success_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -1442,7 +1441,8 @@ var edu_name=el.val();
       </div>
           </div>   
              
-          
+       </section>
+      </div>    
          
       
          
