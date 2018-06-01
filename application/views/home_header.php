@@ -64,7 +64,7 @@
                
             }
             
-            .fa {
+            .icon {
   padding: 10px;
   font-size: 25px;
   width: 40px;
@@ -73,7 +73,7 @@
   margin: 5px 2px;
 }
 
-.fa:hover {
+.icon:hover {
     opacity: 0.7;
 }
 
@@ -278,10 +278,10 @@ $("#show_otp_box").click(function(){
     <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="350px" height="80px">
     </div>
          <div class="col-md-3 col-md-offset-3" style="padding-top:13px">
-              <a href="#" class="fa fa-google"></a>&nbsp;
-   <a href="#" class="fa fa-facebook"></a>  &nbsp;
-   <a href="#" class="fa fa-skype"></a>&nbsp;
-   <a href="#" class="fa fa-linkedin"></a>
+              <a href="#" class="fa fa-google icon"></a>&nbsp;
+   <a href="#" class="fa fa-facebook icon"></a>  &nbsp;
+   <a href="#" class="fa fa-skype icon"></a>&nbsp;
+   <a href="#" class="fa fa-linkedin icon"></a>
     </div>
     </div>
 <!--<body style="background:#d2d6de">--> 
