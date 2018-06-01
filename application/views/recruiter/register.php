@@ -18,6 +18,7 @@ var state=el.val();
 
         if(state)
         {
+          $('#city').append("");
             
       $.ajax({
        url : "<?php echo site_url('index.php/recruiter/index/show_cities')?>/" + state,        

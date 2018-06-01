@@ -23,7 +23,7 @@ class Companies extends CI_Controller
             $id=$this->session->userdata('recruiter_id');
             $result['data']=$this->Recruiters_model->get_by_id($id);
             $result['companies']=$this->Companies_model->companies_by_recruiter($id);
-           
+           $result['system']=$this->System_model->get_info();
              $this->load->view('recruiter/header',$result);
              $this->load->view('recruiter/companies',$result);
              $this->load->view('recruiter/footer');
