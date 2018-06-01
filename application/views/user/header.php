@@ -148,13 +148,6 @@
         </li>
      
         <li>
-          <a href="<?php echo base_url(); ?>user/Recruiter">
-            <i class="fa fa-institution"></i> <span>Recruiters</span>
-            <span class="pull-right-container">
-            </span>
-          </a>
-        </li>
-        <li>
           <a href="<?php echo base_url(); ?>user/Members">
             <i class="fa fa-users"></i> <span>Members</span>
             <span class="pull-right-container">
@@ -164,13 +157,6 @@
         <li>
           <a href="<?php echo base_url(); ?>user/Applicants">
             <i class="fa fa-users"></i> <span>Applicant Members</span>
-            <span class="pull-right-container">
-            </span>
-          </a>
-        </li> 
-         <li>
-          <a href="<?php echo base_url(); ?>user/Users">
-            <i class="fa fa-users"></i> <span>Users</span>
             <span class="pull-right-container">
             </span>
           </a>
@@ -193,13 +179,6 @@
           </a>
         </li>
 
-         <li>
-          <a href="<?php echo base_url(); ?>user/System">
-            <i class="fa fa-users"></i> <span>System</span>
-            <span class="pull-right-container">
-            </span>
-          </a>
-        </li>
        
 
 

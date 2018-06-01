@@ -25,6 +25,7 @@ class Dashboard extends CI_Controller
     {
        
              $id=$this->session->userdata('member_id');            
+            $result['system']=$this->System_model->get_info();
                       
              $result['member_data']=get_member_info($id);
              $this->load->view('member/header',$result);

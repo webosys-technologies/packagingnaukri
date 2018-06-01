@@ -24,6 +24,7 @@ class Jobs extends CI_Controller
             $result['user_data']=get_user_info($id);
             $result['jobs']=$this->Jobs_model->getall_jobs();
             $result['companies']=$this->Companies_model->getall_companies();
+            $result['system']=$this->System_model->get_info();
            
              $this->load->view('admin/header',$result);
              $this->load->view('admin/view_jobs',$result);

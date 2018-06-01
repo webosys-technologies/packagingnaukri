@@ -27,3 +27,6 @@ ALTER TABLE `saved_job` ADD `company_id` INT(11) NOT NULL AFTER `recruiter_id`;
 
 100company id column in applied_job
 ALTER TABLE `applied_job` ADD `company_id` INT(11) NOT NULL AFTER `recruiter_id`;
+
+11)ADD master education table
+CREATE TABLE `packaging_naukri`.`master_educations` ( `medu_id` INT(20) NOT NULL AUTO_INCREMENT , `medu_title` VARCHAR(60) NOT NULL , `medu_education` VARCHAR(60) NOT NULL , `medu_specialization` VARCHAR(60) NOT NULL , `medu_status` INT(10) NOT NULL , PRIMARY KEY (`medu_id`)) ENGINE = InnoDB;

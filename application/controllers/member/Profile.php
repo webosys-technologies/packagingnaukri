@@ -31,6 +31,7 @@ class Profile extends CI_Controller
             $result['skills']=$this->Skills_model->get_members_skill($id);
             $result['educations']=$this->Educations_model->get_education_by_member($id);
             
+            $result['system']=$this->System_model->get_info();
               
                   
              $this->load->view('member/header',$result);

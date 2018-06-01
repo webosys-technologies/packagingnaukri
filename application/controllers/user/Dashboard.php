@@ -35,6 +35,7 @@ class Dashboard extends CI_Controller
             $result['companies']=$this->Companies_model->getall_companies();
             $result['admins']=$this->User_model->getall_user($name="Admin");
             $result['staff']=$this->User_model->getall_user($name="Staff");
+            $result['system']=$this->System_model->get_info();
                   
              $this->load->view('user/header',$result);
              $this->load->view('user/dashboard');

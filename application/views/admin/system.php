@@ -62,10 +62,10 @@ h3{
 		<!-- <p>Pic</p> -->
 		<?php if (isset($system)){ ?>
 		<div class="box box-solid" >
-	<center>	<img src="<?php echo base_url(); ?>/profile_pic/avatar.png" width="100px" height="100px" style="border-radius: 6px"></center><br>
+	<center>	<img src="<?php echo base_url($system->system_logo); ?>" width="250px" height="100px" style="border-radius: 6px"></center><br>
+
         <center><h3 ><?php  if(isset($system)){ echo $system->system_name;} ?></h3></center>
-	<center>	<img src="<?php echo base_url(); ?>/assets/images/packagelogo.png" width="250px" height="100px" style="border-radius: 6px"></center><br>
-	<center><h3 ><?php echo $system->system_name; ?></h3></center>
+	
 	</div>
 	</div>
 	<div class="col-md-8 col-md-offset-1" id="div1">
