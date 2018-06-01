@@ -23,10 +23,10 @@ class System extends CI_Controller
 		
             $id=$this->session->userdata('user_id');
             $result['user_data']=get_user_info($id);
-            $data['system']=$this->System_model->get_info();
+            $result['system']=$this->System_model->get_info();
            
             $this->load->view('admin/header',$result);
-            $this->load->view('admin/system',$data);
+            $this->load->view('admin/system',$result);
             $this->load->view('admin/footer');
 	}
 

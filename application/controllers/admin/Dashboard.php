@@ -34,6 +34,7 @@ class Dashboard extends CI_Controller
             $result['applied']=$this->Applied_jobs_model->applied_members();
             $result['companies']=$this->Companies_model->getall_companies();
             $result['admins']=$this->User_model->getall_user($name="Admin");
+            $result['system']=$this->System_model->get_info();
             $result['staff']=$this->User_model->getall_user($name="Staff");
                   
              $this->load->view('admin/header',$result);

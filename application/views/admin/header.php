@@ -61,7 +61,7 @@
       <span class="logo-mini">PKG</span>
       <!-- logo for regular state and mobile devices -->
       <!--<span class="logo-lg"><i><b>Packaging</b></i><i style="color:#0F5397;"><b>naukri.com</b></i></span>-->
-      <img src="<?php echo base_url();?>assets/images/packagelogo.png" width="210px" height='55px'> 
+      <img src="<?php if(isset($system)){echo base_url($system->system_logo) ;} ?>" width="210px" height='55px'> 
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -183,6 +183,11 @@
         <li>
           <a href="<?php echo base_url(); ?>admin/Jobs">
             <i class="fa fa-folder"></i> <span>Manage Jobs</span>            
+          </a>
+         </li>
+         <li>
+          <a href="<?php echo base_url(); ?>admin/Education">
+            <i class="fa fa-folder"></i> <span>Manage Education</span>            
           </a>
          </li>
          <li>

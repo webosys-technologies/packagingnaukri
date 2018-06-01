@@ -67,7 +67,7 @@
           <span class="logo-mini"><b>Pack</b></span>
           <!-- logo for regular state and mobile devices -->
           <!--<span class="logo-lg"><b>Packagingnaukri</b></span>-->
-          <img src="<?php echo base_url();?>assets/images/packagelogo.png" width="210px" height='55px'> 
+          <img src="<?php if(isset($system)){ echo base_url($system->system_logo); }?>" width="210px" height='55px'> 
         </a>
         
         

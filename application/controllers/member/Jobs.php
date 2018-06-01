@@ -31,6 +31,7 @@ class Jobs extends CI_Controller
     {      
             $id=$this->session->userdata('member_id');
             $result['member_data']=  get_member_info($id);
+            $result['system']=$this->System_model->get_info();
                      
                   
              $this->load->view('member/header',$result);

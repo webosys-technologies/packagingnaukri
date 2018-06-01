@@ -24,6 +24,8 @@ class Companies extends CI_Controller
             $result['user_data']=get_user_info($id);
             $result['states']=$this->Cities_model->getall_state();
             $result['companies']=$this->Companies_model->getall_companies();
+            $result['system']=$this->System_model->get_info();
+            
            
              $this->load->view('admin/header',$result);
              $this->load->view('admin/companies',$result);

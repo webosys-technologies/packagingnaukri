@@ -62,7 +62,7 @@ h3{
 		<!-- <p>Pic</p> -->
 		<?php if (isset($system)){ ?>
 		<div class="box box-solid" >
-	<center>	<img src="<?php echo base_url(); ?>/assets/images/packagelogo.png" width="250px" height="100px" style="border-radius: 6px"></center><br>
+	<center>	<img src="<?php echo base_url($system->system_logo); ?>" width="250px" height="100px" style="border-radius: 6px"></center><br>
 	<center><h3 ><?php echo $system->system_name; ?></h3></center>
 	</div>
 	</div>

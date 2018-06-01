@@ -22,7 +22,8 @@ class Members extends CI_Controller
             $result['user_data']=get_user_info($id);
             $result['members']=$this->Members_model->getall_members();
             $result['states']=$this->Cities_model->getall_state();
-       
+            $result['system']=$this->System_model->get_info();
+            
             $this->load->view('admin/header',$result);
             $this->load->view('admin/member_view',$result);
             $this->load->view('admin/footer');
