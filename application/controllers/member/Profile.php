@@ -29,6 +29,7 @@ class Profile extends CI_Controller
             $result['project_data']=$this->Projects_model->project_by_member($id);
             $result['employments']=$this->Employments_model->get_employment_member($id);
             $result['skills']=$this->Skills_model->get_members_skill($id);
+            $result['educations']=$this->Educations_model->get_education_by_member($id);
             
               
                   
@@ -77,7 +78,7 @@ class Profile extends CI_Controller
     
     function edit_education($id)
     {
-        $data=get_member_info($id);
+         $data=$this->Educations_model->get_education_by_id($id);
         $data1=(array('model'=>'education_modal'));
         $result=((object)array_merge((array)$data,(array)$data1));
       
@@ -117,14 +118,17 @@ class Profile extends CI_Controller
     public function education_update()
     {
          $id=$this->session->userdata('member_id');
-         $where=array('member_id'=>$id);
+         
          $check_member=$this->Educations_model->get_id($id);                      
          $form=$this->input->post();
-       
+      
+         
         $data=array(
             'member_id'=>$id,
-            'education_degree'=>  $form['degree'],
-            'education_name'=>  $form['education_name'],
+//            'education_degree'=>  $form['degree'],
+            'education_degree'=>  $form['edu_title'],
+            'education_name'=>  $form['edu_name'],     
+            'education_specialization'=>  $form['edu_spl'],
             'education_type'=>  $form['type'],
 //            'education_specialization'=>  $form['specialization'],
             'education_university'=>  $form['university'],
@@ -133,8 +137,10 @@ class Profile extends CI_Controller
             'education_percentage'=>  $form['percentage'], 
         );        
        
-        if($check_member)
-        {            
+        if(!empty($form['education_id']))
+        {      
+            $where=array('education_id'=>$form['education_id'],
+                         'member_id'=>$id);
         $res=$this->Educations_model->update_education($where,$data);
              
           echo json_encode(array('success'=>'Education updated sucessfully'));
@@ -264,6 +270,16 @@ class Profile extends CI_Controller
         }
     }
     
+     public function education_delete($id)
+    {
+        $where=array('education_id'=>$id);
+        $res=$this->Educations_model->education_delete($where);
+        if($res)
+        {
+            echo json_encode(array('success'=>'Employment Deleted Successfully'));
+        }
+    }
+    
      
     
      public function skill_delete($id)
@@ -361,6 +377,20 @@ if (isset($_FILES['resume']['name'])) {
             $cities=$this->Cities_model->getall_cities(ltrim($state));
           
             echo json_encode($cities);
+        }
+        
+        function education_name($title)
+        {
+            $result=$this->Master_edu_model->get_education_by_title($title);
+            echo json_encode($result);
+            
+        }
+        
+         function specialization($name)
+        {
+            $result=$this->Master_edu_model->get_specialization_by_name($name);
+            echo json_encode($result);
+            
         }
 
   

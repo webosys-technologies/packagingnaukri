@@ -1,5 +1,15 @@
 <style>
     
+    #profile_info{
+     padding: 5px;
+     color:white;
+      
+}
+.emp_info{
+    line-height: 50px;
+}
+    
+    
      .modal-backdrop {background: none;}
     .data{
         padding:20px;
@@ -23,6 +33,11 @@
       overflow-y: initial !important
 }
 #modal_body{
+  height: 420px;
+  overflow-y: auto;
+}
+
+#education_body{
   height: 420px;
   overflow-y: auto;
 }
@@ -156,7 +171,7 @@ for(var year = start ; year <=end; year++){
 document.getElementById("passin").innerHTML = options;
 document.getElementById("passout").innerHTML = options;
 document.getElementById("from").innerHTML = options;
-document.getElementById("to").innerHTML = options;
+//document.getElementById("to").innerHTML = options;
 
 
 
@@ -192,10 +207,9 @@ document.getElementById("to").innerHTML = options;
        );
   
        
-        $("#edit_education").click(function(){               
-            id=$("#member_id").val();
-            method="edit_education";
-            edit_form(id,method);
+        $("#add_education").click(function(){               
+            $('#education_form')[0].reset();
+          $("#education_modal").modal('show');
        }
        ); 
        
@@ -301,6 +315,72 @@ var state=el.val();
     
  });  
  
+ 
+ 
+ 
+ 
+ 
+   $("#edu_title").change(function() {
+
+    var el = $(this) ;
+
+    
+var title=el.val();
+           alert(title);
+       $.ajax({
+        url : "<?php echo site_url('index.php/member/Profile/education_name')?>/" + title,        
+        type: "GET",
+               
+        dataType: "JSON",
+        success: function(data)
+        {
+         
+           $.each(data,function(i,row)
+           {
+            
+               $("#edu_name").append('<option value="'+ row.education_name +'">' + row.education_name + '</option>');
+           }
+           );
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+//          alert('Error...!');
+        }
+      });
+    
+     
+  });
+  
+  
+  
+   $("#edu_name").change(function() {
+
+    var el = $(this) ;   
+var edu_name=el.val();
+           
+       $.ajax({
+        url : "<?php echo site_url('index.php/member/Profile/specialization')?>/" + edu_name,        
+        type: "GET",
+               
+        dataType: "JSON",
+        success: function(data)
+        {
+         
+           $.each(data,function(i,row)
+           {
+            
+               $("#edu_spl").append('<option value="'+ row.education_specialization +'">' + row.education_specialization + '</option>');
+           }
+           );
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+//          alert('Error...!');
+        }
+      });
+    
+     
+  });
        
             
 });
@@ -377,6 +457,15 @@ var state=el.val();
          
      }
      
+     function delete_education(id,method)
+     {
+        $('.delete_name').html("Education");
+        save_method=method;
+         $("#myModal").modal('show');
+         $("#project_delete").attr('onclick','delete_menu('+id+')');
+         
+     }
+     
      function delete_resume(id,method)
      {
         $('.delete_name').html("Resume");
@@ -392,9 +481,16 @@ var state=el.val();
             edit_form(id,method);
        }
        
+              
        function edit_project(id){               
           
             method="edit_project";
+            edit_form(id,method);
+       }
+       
+        function edit_education(id){               
+       
+            method="edit_education";
             edit_form(id,method);
        }
        
@@ -426,7 +522,7 @@ var state=el.val();
      }
      function edit_form(id,save_method)
      {
-           
+          
           $.ajax({
             url : "<?php echo base_url();?>member/Profile/"+save_method+"/"+id,
             type: "POST",
@@ -444,6 +540,10 @@ var state=el.val();
                 $("#city").val(data.member_city);
                 
                 $("#degree").val(data.education_degree);
+                 $("#edu_title").val(data.education_degree);
+                  $("#edu_name").val(data.education_name);
+                   $("#edu_spl").val(data.education_specialization);
+                $("#education_id").val(data.education_id);
                 $("#education_name").val(data.education_name);
                 $("#type").val(data.education_type);
                 $("#percentage").val(data.education_percentage);
@@ -489,7 +589,30 @@ var state=el.val();
         
              </script>
              
-             
+             <div class="row" >
+                 <div id="profile_info" class="col-md-8 col-md-offset-2" style="background:#668cff;">
+                     <div class="col-md-1">
+                         <img src='<?php if(file_exists($member_data->member_profile_pic)){}else{echo base_url()."profile_pic/avatar.png";}?>' width="50px" height="50px" class="img-circle" alt="User Image" />
+                     </div>
+                     <div class="col-md-11">
+                     <label style="font-size:20px"><?php if(isset($member_data)){echo $member_data->member_fname." ".$member_data->member_lname;} ?></label><br>
+                     <span><?php if(isset($member_data->employment_designation)){echo $member_data->employment_designation." at ".$member_data->employment_organization;}else{echo "Fresher";} ?></span>
+                    <br><br> <div class="row">
+                         <div class="col-md-6 ">
+                             <span class="fa fa-map-marker"> <?php if(isset($member_data)){echo $member_data->member_city.",".$member_data->member_country;}?></span><br>
+                             <span class="fa fa-suitcase"> <?php if(isset($member_data->member_experience)){echo $member_data->member_experience;}else{echo "0 yrs";} ?>O yrs</span><br>
+                             <!--<span class="fa fa-inr"> <?php if(isset($member_data->employment_designation)){echo $member_data->employment_designation." at ".$member_data->employment_organization;}else{echo "0 yrs";} ?></span><br>-->
+
+                         </div>
+                         <div class="col-md-6 emp_info">
+                             <span class="fa fa-phone">&nbsp; <?php if(isset($member_data->member_mobile)){echo $member_data->member_mobile;} ?></span><br>
+                             <span class="glyphicon glyphicon-envelope">&nbsp;<?php if(isset($member_data->member_email)){echo $member_data->member_email;} ?> </span>
+                         </div>
+                     </div>
+                    </div>
+               
+                 </div>
+                 </div>
          
              <div class="row content">
              <div class="col-md-4" id="sideinfo" >
@@ -517,8 +640,6 @@ var state=el.val();
            <a href="#employment" id="employment_box">Employment Details</a>
             <a href="#project" id="project_box">Project Details</a>
            <a href="#skill" id="skill_box">Skills Details</a> 
-
-
  
          </li>
              
@@ -588,47 +709,54 @@ var state=el.val();
             <div class="shadow" id="education"> 
               
                 <div class="box-header" >   <div class="row">        
-            <div class="col-md-9"> <h3 class="box-title"><b>Education Details</b></h3></div><div class="col-md-3"><a href="#education" id="edit_education"><span class="fa fa-pencil"> edit </span></a> </div>
+            <div class="col-md-9"> <h3 class="box-title"><b>Education Details</b></h3></div><div class="col-md-3"><a href="#education" id="add_education"><span class="fa fa-plus"> Add </span></a> </div>
              </div></div>
       <div class="box-footer text-black data" >
-              
+         <?php if(isset($educations)){
+             foreach($educations as $edu){?>    
+           <div class="row">
+              <div class="col-md-offset-9 col-md-3">
+                  <a href="#education" onclick='edit_education(<?php echo $edu->education_id;?>)'><span class="fa fa-pencil"></span></a> &nbsp; <a href="#education" onclick='delete_education(<?php echo $edu->education_id;?>,"education_delete")'><span class="fa fa-times"></span></a>
+              </div>
+          </div>
+          <div class="row">
+                <div class="col-md-6">
+                    <Span class="form_label">Education Title</span><br>
+                    <span><?php if(isset($edu->education_degree)){echo $edu->education_degree;}?></span>
+            </div>   
+         </div>
          <div class="row">
                 <div class="col-md-6">
                     <Span class="form_label">Education Name</span><br>
-                    <span><?php if(isset($member_data->education_degree)){echo $member_data->education_degree;}?></span>
+                    <span><?php if(isset($edu->education_name)){echo $edu->education_name;}?></span>
             </div>   
                   <div class="col-md-6">
                  <Span class="form_label">Specialization</span><br>
-                 <span><?php if(isset($member_data->education_name)){echo $member_data->education_name;}?></span>
+                 <span><?php if(isset($edu->education_specialization)){echo $edu->education_specialization;}?></span>
             </div>   
            </div>
           <div class="row">
                 <div class="col-md-6">
                     <Span class="form_label">University</span><br>
-                    <span><?php if(isset($member_data->education_university)){ echo $member_data->education_university;}?></span>
+                    <span><?php if(isset($edu->education_university)){ echo $edu->education_university;}?></span>
             </div>   
-                  <div class="col-md-6">
-                 <Span class="form_label">Type</span><br>
-                 <span><?php if(isset($member_data->education_type)){echo $member_data->education_type;}?></span>
+                   <div class="col-md-6">
+                    <Span class="form_label">Percentage</span><br>
+                    <span><?php if(isset($edu->education_percentage)){echo $edu->education_percentage."%";}?></span>
             </div>   
            </div>
            <div class="row">
                 <div class="col-md-6">
                     <Span class="form_label">Admission</span><br>
-                    <span><?php if(isset($member_data->education_passing_in)){ echo $member_data->education_passing_in;}?></span>
+                    <span><?php if(isset($edu->education_passing_in)){ echo $edu->education_passing_in;}?></span>
             </div>   
                   <div class="col-md-6">
                  <Span class="form_label">Pass Out</span><br>
-                 <span><?php if(isset($member_data->education_passing_out)){echo $member_data->education_passing_out;}?></span>
+                 <span><?php if(isset($edu->education_passing_out)){echo $edu->education_passing_out;}?></span>
             </div>   
            </div>
-           <div class="row">
-                <div class="col-md-6">
-                    <Span class="form_label">Percentage</span><br>
-                    <span><?php if(isset($member_data->education_percentage)){echo $member_data->education_percentage."%";}?></span>
-            </div>   
-                 
-           </div> 
+           <hr>
+         <?php }} ?>
                  </div>
           </div><br>
           
@@ -651,7 +779,7 @@ var state=el.val();
                                         
            
   <?php }?>  </div>                 
-        <br>
+       <br>
           <div id="resume_border">
              <label class="btn-bs-file btn-md btn-xs btn-sm btn-info">
                             Upload Resume
@@ -664,7 +792,7 @@ var state=el.val();
            </div>
           
           </form>
-          </div><br>
+           </div></div><br>
           
           
           
@@ -795,14 +923,15 @@ var state=el.val();
                    
            </div>
           
-         <hr>
-                 <?php  
-                 }}?>
+         <!--<hr>-->
+            <?php  
+                 }}?>     
               
          </div>
               
               
-          </div><br>
+          </div>
+          
           
           
           <div class="modal fade" id="success_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -1006,18 +1135,32 @@ var state=el.val();
                             <form action="" id="education_form">
                                  <div class="form-group">
     			<div class="row">
-                             
+                             <input type="hidden" name="education_id" id="education_id" value="">
                                 <div class="col-md-6  ">                             
-                                        <label for="fname">Degree</label>
-                                        <input type="text" placeholder="Degree" value="" class="form-control required" id="degree" name="degree" maxlength="128" required>
-                                        <span class="text-danger" id="fname_err"></span>                                                          
+                                        <label for="fname">Education Title</label>
+                                        <select  id="edu_title" name="edu_title" class="form-control">
+                                            <option>Select Education Title</option>
+                                            <option value="Graduation">Graduation</option>
+                                            <option value="Postgraduation">Post Graduation</option>
+                                            <option value="Doctarate">Doctarate</option>
+
+                                        </select>
                                 </div>
                                 <div class="col-md-6">                                   
-                                        <label for="lname">Specialization</label>
-                                        <input type="text" placeholder="Education Name" value="" class="form-control" id="education_name"  name="education_name" maxlength="128" required>
-                                      <span class="text-danger" id="lname_err"></span>                                   
+                                        <label for="lname">Education</label>
+                                       <select id="edu_name" name="edu_name" class="form-control">
+                                           <option>--- Select Education ---</option>
+                                        </select>
                                          </div>
                             </div><br>
+                             <div class="row">
+                                    <div class="col-md-6">                             
+                                        <label for="fname">Specialization</label>
+                                          <select id="edu_spl" name="edu_spl" class="form-control">
+                                           <option>--- Select Specialization ---</option>
+                                        </select>
+                                    </div></div><br>
+                                    
                                     <div class="row">
                                     <div class="col-md-12  ">                             
                                         <label for="fname">University</label>
@@ -1033,7 +1176,8 @@ var state=el.val();
                                             <option value="0">Select Job Type</option>
                                              <option value="Full Time">Full Time</option>
                                              <option value="Part Time">Part Time</option>
-                                             <option value="Internship">Internship</option>                                             
+                                             <option value="Internship">Internship</option> 
+                                             <option value="Temporary">Temporary</option> 
                                         </select>
                                         <span class="text-danger" id="type_err"></span>                                                          
                                 </div>
@@ -1133,15 +1277,22 @@ var state=el.val();
                                         <select class="form-control" name="from" id="from"></select>
                                         <span class="text-danger" id="from_err"></span>                                                          
                                 </div>
-                                <div class="col-md-6">                                   
-                                        <label for="lname">Work To</label>
-                                        <select class="form-control" name='to'id='to'>                                           
+                                             <div class="col-md-6  ">                             
+                                        <label for="fname">Month</label>
+                                        <select class="form-control" name="month" id="month">
+                                            <option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option>
                                         </select>
-                                      <span class="text-danger" id="to_err"></span>                                   
-                                         </div>
+                                        <span class="text-danger" id="from_err"></span>                                                          
+                                </div>
+                                
                             </div><br>
                                     
                                      <div class="row">
+                                         <div class="col-md-6">                                   
+                                        <label for="lname">Work To</label>
+                                        <input type="text" class="form-control" name="to" readonly value="Present">
+                                      <span class="text-danger" id="to_err"></span>                                   
+                                         </div>
                     <div class="col-md-6">
                         <label class="form-label">Notice Period</label>
                         <input type="text" class="form-control" name="period" value="" placeholder="1 year 2 month" id="period">

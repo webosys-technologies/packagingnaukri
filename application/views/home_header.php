@@ -8,6 +8,7 @@
           <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -62,6 +63,39 @@
                 padding-top:0px;
                
             }
+            
+            .fa {
+  padding: 10px;
+  font-size: 25px;
+  width: 40px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-skype {
+  background: #00aff0;
+  color: white;
+}
+
+.fa-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
             </style>
 </head>
 
@@ -239,8 +273,17 @@ $("#show_otp_box").click(function(){
 
  
 </script>
-    
+<div class="row" >
+        <div class="col-md-6">
     <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="350px" height="80px">
+    </div>
+         <div class="col-md-3 col-md-offset-3" style="padding-top:13px">
+              <a href="#" class="fa fa-google"></a>&nbsp;
+   <a href="#" class="fa fa-facebook"></a>  &nbsp;
+   <a href="#" class="fa fa-skype"></a>&nbsp;
+   <a href="#" class="fa fa-linkedin"></a>
+    </div>
+    </div>
 <!--<body style="background:#d2d6de">--> 
  
  <!--<header class="header" id="header">-->
