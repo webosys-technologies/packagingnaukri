@@ -928,8 +928,46 @@ var edu_name=el.val();
                  }}?>     
               
          </div>
+              </div>
+          
+          
+          <div class="shadow" id="skill">               
+         <div class="box-header" > <div class="row">
+                 <div class="col-md-9">
+             <h3 class="box-title"><b>Skills</b></h3></div><div class="col-md-3"><a href="#skill" id="add_skill"><span class="fa fa-plus"> Add </span> </a></div>
+             </div>
+             </div>
               
+      <div class="box-footer text-black data" >
+                
+            <?php if(isset($skills)){
+              foreach($skills as $skill)
+                  {?>
+           <div class="row">
+              <div class="col-md-offset-9 col-md-3">
+                  <a href="#skill" onclick='edit_skill(<?php echo  $skill->skill_id;?>)'><span class="fa fa-pencil"></span></a> &nbsp; <a href="#skill" onclick='delete_skill(<?php echo $skill->skill_id; ?>,"skill_delete")'><span class="fa fa-times"></span></a>
+              </div>
+          </div>
+                  <div class="row"> 
+                <div class="col-md-6">                    
+                    <Span class="form_label">Skill Name</span><br>
+                    <span><?php echo $skill->skill_name;?></span>
+            </div>   
+                  <div class="col-md-6">
+                 <Span class="form_label">Skill Description</span><br>
+                 <span><?php echo $skill->skill_description;?></span>
+            </div>   
+           </div>
+          
+         
+        
+                 <?php  
+                 }}?>
+           </div>
+             
+          </div>
               
+              </section>
           </div>
           
           
@@ -977,44 +1015,9 @@ var edu_name=el.val();
           
           
           
-          <div class="shadow" id="skill">               
-         <div class="box-header" > <div class="row">
-                 <div class="col-md-9">
-             <h3 class="box-title"><b>Skills</b></h3></div><div class="col-md-3"><a href="#skill" id="add_skill"><span class="fa fa-plus"> Add </span> </a></div>
-             </div>
-             </div>
-              
-      <div class="box-footer text-black data" >
-                
-            <?php if(isset($skills)){
-              foreach($skills as $skill)
-                  {?>
-           <div class="row">
-              <div class="col-md-offset-9 col-md-3">
-                  <a href="#skill" onclick='edit_skill(<?php echo  $skill->skill_id;?>)'><span class="fa fa-pencil"></span></a> &nbsp; <a href="#skill" onclick='delete_skill(<?php echo $skill->skill_id; ?>,"skill_delete")'><span class="fa fa-times"></span></a>
-              </div>
-          </div>
-                  <div class="row"> 
-                <div class="col-md-6">                    
-                    <Span class="form_label">Skill Name</span><br>
-                    <span><?php echo $skill->skill_name;?></span>
-            </div>   
-                  <div class="col-md-6">
-                 <Span class="form_label">Skill Description</span><br>
-                 <span><?php echo $skill->skill_description;?></span>
-            </div>   
-           </div>
           
-         
-        
-                 <?php  
-                 }}?>
-           </div>
-             
-          </div>
           
-        </div>
-                 </div> 
+       
              
              
              <div class="modal fade" id="personal_modal" role="dialog">
@@ -1438,7 +1441,7 @@ var edu_name=el.val();
       </div>
           </div>   
              
-          </section>
+          
          
       
          
@@ -1448,6 +1451,6 @@ var edu_name=el.val();
          
    
         
-       </div>  
+      
              
  
