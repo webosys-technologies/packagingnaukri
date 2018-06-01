@@ -104,7 +104,12 @@ class Jobs extends CI_Controller
         $part=$form['temp'];
         }
         
-        $result['jobs']=$this->Jobs_model->search_job($form);
+        $result=$this->Jobs_model->search_job($form);
+        if($result){
+            $result['jobs']=$result;
+        }else{
+            $result['error']="error";
+        }
         $this->load->view('member/header',$result);
         $this->load->view('member/jobs',$result);
         $this->load->view('member/footer',$result);      
@@ -174,7 +179,10 @@ class Jobs extends CI_Controller
         echo json_encode(array('status'=>'success'));
     }
    
-   
+   function query_test()
+   {
+       $this->Jobs_model->query_test();
+   }
     
   
 }

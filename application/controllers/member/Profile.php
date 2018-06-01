@@ -122,18 +122,32 @@ class Profile extends CI_Controller
          
          $check_member=$this->Educations_model->get_id($id);                      
          $form=$this->input->post();
-      
+         
+         if($form['edu_name']=="spl_field" || $form['edu_name']=="--- Select Education ---")
+         {
+            $edu_name=""; 
+         }else{
+             $edu_name=$form['edu_name'];
+         }
+         
+         if(empty($form['edu_spl']))
+         {
+             $edu_spl="";
+         }else{
+             $edu_spl=$form['edu_spl'];
+         }
+         
          
         $data=array(
             'member_id'=>$id,
 //            'education_degree'=>  $form['degree'],
             'education_degree'=>  $form['edu_title'],
-            'education_name'=>  $form['edu_name'],     
-            'education_specialization'=>  $form['edu_spl'],
-            'education_type'=>  $form['type'],
+            'education_name'=>  $edu_name,     
+            'education_specialization'=> $edu_spl,
+//            'education_type'=>  $form['type'],
 //            'education_specialization'=>  $form['specialization'],
             'education_university'=>  $form['university'],
-            'education_passing_in'=>  $form['passin'],
+//            'education_passing_in'=>  $form['passin'],
             'education_passing_out'=>  $form['passout'], 
             'education_percentage'=>  $form['percentage'], 
         );        
