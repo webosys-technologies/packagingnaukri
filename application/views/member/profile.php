@@ -1014,7 +1014,7 @@ var edu_name=el.val();
           </div>
           
         </div>
-                 </div> 
+                 <!--</div>--> 
              
              
              <div class="modal fade" id="personal_modal" role="dialog">
