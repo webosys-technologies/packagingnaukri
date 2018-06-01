@@ -8,15 +8,15 @@ class User_model extends CI_Model
      {
        
         $this->db->from($this->table);
-        if($name=="Staff")
+        if($name=="user")
         {
             $this->db->where('user_status','1');
-            $this->db->where('user_type','Staff');
+            $this->db->where('user_type','user');
         }
-        if($name=="Admin")
+        if($name=="admin")
         {
              $this->db->where('user_status','1');
-            $this->db->where('user_type','Admin');
+            $this->db->where('user_type','admin');
         }
         if($name=="")
         {
