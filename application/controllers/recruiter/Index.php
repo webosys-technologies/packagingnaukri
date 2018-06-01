@@ -660,8 +660,8 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
         
         function show_cities($state)
         {
-           
-            $cities=$this->Cities_model->getall_cities(ltrim($state));
+            $st=str_replace('%20',' ',$state);
+            $cities=$this->Cities_model->getall_cities(ltrim($st));
             echo json_encode($cities);
         }
         

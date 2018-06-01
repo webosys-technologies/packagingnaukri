@@ -24,7 +24,8 @@ class Members extends CI_Controller
             $result['data']=$this->Recruiters_model->get_by_id($id);
             $result['members']=$this->Applied_jobs_model->get_member_job($id);
             $result['states']=$this->Cities_model->getall_state();
-       
+           $result['system']=$this->System_model->get_info();
+            
             $this->load->view('recruiter/header',$result);
             $this->load->view('recruiter/member_view',$result);
             $this->load->view('recruiter/footer');

@@ -81,7 +81,7 @@
           <span class="logo-mini">DLT</span>
           <!-- logo for regular state and mobile devices -->
           <!--<span class="logo-lg"><b>DELTO</b></span>-->
-          <img src="<?php echo base_url();?>assets/images/packagelogo.png" width="210px" height='55px'> 
+          <img src="<?php if(isset($system)){echo base_url($system->system_logo);}?>" width="210px" height='55px'> 
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -237,13 +237,20 @@
             <li class="treeview">
               <a href="<?php echo base_url(); ?>recruiter/Companies" >
                 <i class="fa fa-child"></i>
-                <span>Companies</span>
+                <span>Manage Companies</span>
               </a>
             </li>
             <li class="treeview">
               <a href="<?php echo base_url(); ?>recruiter/Jobs" >
                 <i class="fa fa-child"></i>
                 <span>Manage Jobs</span>
+              </a>
+            </li>
+
+            <li class="treeview">
+              <a href="<?php echo base_url(); ?>recruiter/Profile" >
+                <i class="fa fa-user"></i>
+                <span>Manage Profile</span>
               </a>
             </li>           
           
