@@ -186,6 +186,11 @@
           </a>
          </li>
          <li>
+          <a href="<?php echo base_url(); ?>admin/Institute">
+            <i class="fa fa-folder"></i> <span>Manage University/Institute</span>            
+          </a>
+         </li>
+         <li>
           <a href="<?php echo base_url(); ?>admin/Education">
             <i class="fa fa-folder"></i> <span>Manage Education</span>            
           </a>

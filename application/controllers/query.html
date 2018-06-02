@@ -37,6 +37,11 @@ INSERT INTO `system` (`system_id`, `user_id`, `system_name`, `system_description
 13)Institute table create
 CREATE TABLE `packaging_naukri`.`institutes` ( `institute_id` INT(20) NOT NULL AUTO_INCREMENT , `institute_name` VARCHAR(60) NOT NULL , `institute_university` VARCHAR(60) NOT NULL , `institute_description` VARCHAR(255) NOT NULL , PRIMARY KEY (`institute_id`)) ENGINE = InnoDB
 
+
 *)institute_name column in education  table
 ALTER TABLE `educations` ADD `institute_name` VARCHAR(255) NOT NULL AFTER `education_university`;
+
+
+14)institute status create
+ALTER TABLE `institutes` ADD `institute_status` INT(10) NOT NULL AFTER `institute_description`
 
