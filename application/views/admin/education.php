@@ -83,7 +83,7 @@
           <th>TITLE</th>
           <th>EDUCATION</th>
           <th>STATUS</th>
-          <th style="width:125px;">ACTION</th>
+          <th style="width:75px;">ACTION</th>
         </tr>
       </thead>
       <tbody id="myTable">
@@ -108,8 +108,8 @@
                                        }
                                        ?></td>
                                        <td>
-                  <button class="btn btn-success" onclick="edit_edu(<?php echo $res->medu_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Member"><i class="glyphicon glyphicon-pencil"></i></button>
-                  <button class="btn btn-danger" onclick="delete_menu(<?php echo $res->medu_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Member"><i class="glyphicon glyphicon-trash"></i></button>
+                  <button class="btn btn-success btn-xs" onclick="edit_edu(<?php echo $res->medu_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Member"><i class="glyphicon glyphicon-pencil"></i></button>
+                  <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $res->medu_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Member"><i class="glyphicon glyphicon-trash"></i></button>
                  
 
                 </td>

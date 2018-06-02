@@ -101,6 +101,14 @@ class Jobs extends CI_Controller
         }
     }
     
+    function job_info($id)
+    {
+        
+        $result=$this->Jobs_model->job_info($id);
+       
+        echo json_encode($result);
+    }
+    
     public function job_delete($id)
     {
         $res=$this->Jobs_model->delete_job($id);

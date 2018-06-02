@@ -85,19 +85,19 @@
                            
                            if('<?php echo $i==1; ?>')
                            {
-                                $("#job1").append('<div class="col-md-6 col-md-offset-3"><a href="#" onclick="modal_show()"><label class="sapce">job name:</label> <?php echo $res->job_title; ?><br> <label class="sapce">Qualification: </label> <?php echo $res->job_education; ?><br><label class="sapce">Experience: </label> <?php echo $res->job_experience; ?><br><label class="sapce">Company:</label> <?php echo $res->company_name; ?><br></a></div> ');
+                                $("#job1").append('<div class="col-md-6 col-md-offset-3"><a href="<?php echo base_url();?>Home/job/<?php echo $res->job_id; ?>" ><label class="sapce">job name:</label> <?php echo $res->job_title; ?><br> <label class="sapce">Qualification: </label> <?php echo $res->job_education; ?><br><label class="sapce">Experience: </label> <?php echo $res->job_experience; ?><br><label class="sapce">Company:</label> <?php echo $res->company_name; ?><br></a></div> ');
                             }
                             if('<?php echo $i==2; ?>')
                            {
-                                $("#job2").append('<div class="col-md-6 col-md-offset-3"><label class="sapce">job name:</label> <?php echo $res->job_title; ?><br> <label class="sapce">Qualification: </label> <?php echo $res->job_education; ?><br><label class="sapce">Experience:</label> <?php $res->job_experience; ?><br><label class="sapce">Company:</label> <?php $res->company_name; ?><br></div> ');
+                                $("#job2").append('<div class="col-md-6 col-md-offset-3"><a href="<?php echo base_url();?>Home/job/<?php echo $res->job_id; ?>" ><label class="sapce">job name:</label> <?php echo $res->job_title; ?><br> <label class="sapce">Qualification: </label> <?php echo $res->job_education; ?><br><label class="sapce">Experience:</label> <?php $res->job_experience; ?><br><label class="sapce">Company:</label> <?php $res->company_name; ?><br></a></div> ');
                             }
                             if('<?php echo $i==3; ?>')
                            {
-                                $("#job3").append('<div class="col-md-6 col-md-offset-3"><label class="sapce">job name:</label> <?php echo $res->job_title; ?><br> <label class="sapce">Qualification: </label> <?php echo $res->job_education; ?><br><label class="sapce">Experience:</label> <?php $res->job_experience; ?><br><label class="sapce">Company:</label> <?php $res->company_name; ?><br></div> ');
+                                $("#job3").append('<div class="col-md-6 col-md-offset-3"><a href="<?php echo base_url();?>Home/job/<?php echo $res->job_id; ?>" ><label class="sapce">job name:</label> <?php echo $res->job_title; ?><br> <label class="sapce">Qualification: </label> <?php echo $res->job_education; ?><br><label class="sapce">Experience:</label> <?php $res->job_experience; ?><br><label class="sapce">Company:</label> <?php $res->company_name; ?><br></a></div> ');
                             }
                             if('<?php echo $i==4; ?>')
                            {
-                                $("#job4").append('<div class="col-md-6 col-md-offset-3"><label class="sapce">job name:</label> <?php echo $res->job_title; ?><br> <label class="sapce">Qualification: </label> <?php echo $res->job_education; ?><br><label class="sapce">Experience:</label> <?php $res->job_experience; ?><br><label class="sapce">Company:</label> <?php $res->company_name; ?><br></div> ');
+                                $("#job4").append('<div class="col-md-6 col-md-offset-3"><a href="<?php echo base_url();?>Home/job/<?php echo $res->job_id; ?>" ><label class="sapce">job name:</label> <?php echo $res->job_title; ?><br> <label class="sapce">Qualification: </label> <?php echo $res->job_education; ?><br><label class="sapce">Experience:</label> <?php $res->job_experience; ?><br><label class="sapce">Company:</label> <?php $res->company_name; ?><br></a></div> ');
                             }
                     </script>
 

@@ -86,7 +86,7 @@
           <th>CREATED AT</th>
           <th>STATUS</th>
 
-          <th style="width:125px;">ACTION
+          <th style="width:75px;">ACTION
           </p></th>
         </tr>
       </thead>
@@ -116,8 +116,8 @@
                                        }
                                        ?></td>
                                        <td>
-                  <button class="btn btn-success" onclick="edit_user(<?php echo $res->user_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit User"><i class="glyphicon glyphicon-pencil"></i></button>
-                  <button class="btn btn-danger" onclick="delete_menu(<?php echo $res->user_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete User"><i class="glyphicon glyphicon-trash"></i></button>
+                  <button class="btn btn-success btn-xs" onclick="edit_user(<?php echo $res->user_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit User"><i class="glyphicon glyphicon-pencil"></i></button>
+                  <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $res->user_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete User"><i class="glyphicon glyphicon-trash"></i></button>
                  
 
                 </td>

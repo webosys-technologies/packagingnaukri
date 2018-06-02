@@ -4,7 +4,7 @@
       overflow-y: initial !important
 }
 #job_body{
-  height: 500px;
+  /*height: 500px;*/
   overflow-y: auto;
 }
     
@@ -70,6 +70,10 @@
      line-height: 1.9;
      color:#707B7C;
   
+}
+
+.job_info{
+    color:#707B7C;
 }
 
 a:link, a:visited{    
@@ -182,6 +186,22 @@ a:link, a:visited{
        dataType: "JSON",
        success: function(data)
        {
+                    $("#company_name").html(data.company_name);
+                     $("#job_title").html(data.job_title);
+////             $("#j_desc").html();
+              $("#job_desc").html(data.job_description);
+               $("#eligibility").html(data.job_education);
+////                $("#skills").html();
+                 $("#salary").html(data.job_salary);
+                 $("#experience").html(data.job_experience);
+                 $("#location").html(data.job_city);
+                 $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
+                 $("#email").html(data.company_email);
+                 $("#contact").html(data.company_contact);
+                 $("#address").html(data.company_address);
+                 
+             
+            
           $("#job_modal").modal('show');
        },
        error: function (jqXHR, textStatus, errorThrown)
@@ -287,38 +307,19 @@ a:link, a:visited{
           <center><h1 style="color:#CCD1D1">Search Jobs</h1></center>
       </div>
       
-      
-      
-<!--      <div class="shadow">
-           <div class="row content">  
-               <div class="box-header">
-          <h4 style="color:#5DADE2">Walk in for PHP Developer</h4>
-          <h5>Webosys Technologies</h5>
-          <label>Eligibility :</label><span> BE</span><br>
-          <label>Experience :</label><span> 1-2 year</span><br>
-          <label>Salary :</label><span> 12000/-</span><br>
-          <label>Job Location :</label><span> Pune</span><br>
-              
-               <label>Company Profile :</label>
-               <p> Softebizz technologies is global services in Web Application Development, E-commerce Development, Content Management Systems, Cloud Solution, Software Testing with its global headquarter at Pune, India.<p>
-              </div>
-           </div>
-              </div>-->
-
- 
-           <?php if(isset($jobs)){
+            <?php if(isset($jobs)){
               
              foreach($jobs as $job)
            {
 ?>
-<div class="container" id="cont">
+<div class="container" id="cont<?php echo $job->job_id;?>">
                    <div class="row">
                        <div class="col-md-offset col-md-8">
                        <div class="panel-body">
                        <div class="shadow">
                            <div class="row">
                            <div class="col-md-10">
-                           <span class="job_name"><a href="#" onclick="job_info(<?php echo $job->job_id;?>)"><?php echo $job->job_title;?></a></span><br>
+                           <span class="job_name"><a href="#cont<?php echo $job->job_id;?>" onclick="job_info(<?php echo $job->job_id;?>)"><?php echo $job->job_title;?></a></span><br>
                           <span class="comp_name"><?php echo $job->company_name;?></span>
                            </div>
                                <div class="col-md-2" id='apply_btn<?php echo $job->job_id;?>'><button type="button" id='apply<?php echo $job->job_id;?>' onclick="apply(<?php echo $job->job_id;?>)" class="btn btn-warning btn-sm"><span id='apply_stat<?php echo $job->job_id;?>'>Apply</span></button></div>
@@ -332,7 +333,7 @@ a:link, a:visited{
                           <div class="row" class="">
                               <div class="col-md-2 skill">key skills:
                               </div>
-                              <div class="col-md-8 skill">PHP,SQL,HTML,CODEIGNITER
+                              <div class="col-md-8 skill">
                           </div>
                        </div> 
                            <div class="row" class="">
@@ -349,7 +350,7 @@ a:link, a:visited{
                                   <span class="fa fa-inr"></span> <?php echo $job->job_salary;?> /-
                               </div>
                               <div class="col-md-5" style="padding-top: 10px;">
-                                  <span class="skill">Post By</span> <a href="#"><img src='<?php if(file_exists($job->recruiter_profile_pic)){echo base_url().$job->recruiter_profile_pic;}else{ echo base_url()."profile_pic/avatar.png";}?>' width="20px" height="20px"> <?php echo $job->recruiter_fname." ".$job->recruiter_lname;?></a>
+                                  <span class="skill">Post By</span> <a href="#"><img src='<?php if(file_exists($job->recruiter_profile_pic)){echo base_url().$job->recruiter_profile_pic;}else{ echo base_url()."profile_pic/avatar.png";}?>' width="20px" height="20px"> <?php echo ucwords(strtolower($job->recruiter_fname))." ".ucwords(strtolower($job->recruiter_lname));?></a>
                               </div>
                                <div class="col-md-2" style="padding-top: 10px;">
                                   <span class="skill">Few hours ago</span>
@@ -367,31 +368,104 @@ a:link, a:visited{
 <div id="error" hidden>
     <center><h2 style="font-family: times; color:">We Could not find jobs matching your Search..</h2></center>    
 </div>
-<?php }?>
-    <div class="modal fade" id="job_modal" role="dialog">
+<?php }?>    
+      
+          </div>  
+      
+      
+     
+              <div class="modal fade" id="job_modal" role="dialog">
     <div class="modal-dialog" id="modal_dialog">   
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <center><h4 style="color:white" class="modal-title">Job Description</h4></center>
+          <center><h4 style="color:white" id="title" class="modal-title">Company Details</h4></center>
         </div>
-        <div class="modal-body" id="job_body">         	
+        <div class="modal-body" id="skill_body">         	
     				
     			<div class="panel-body">
-    			  <form action="" id="desc_form">  
-                              
-                                
+    			  <form action="" id="skill_form">  
+            <!--<img src="" height="50px" weight="150px"><br>-->                                   
+          <h4 style="color:#5DADE2" id="job_title"></h4>
+          <h5 id="company_name" class="job_info"></h5>
+          <div class="row">
+              <div class="col-md-3">
+          <label >Eligibility </label>
+          </div>: <span id="eligibility" class="job_info"> </span><br>
+          </div>
+              <div class="row">
+          <div class="col-md-3">        
+          <label >Job Skills </label>
+          </div>: <span id="skills" class="job_info"> </span><br>
+                    </div>
+
+          <div class="row">
+              <div class="col-md-3">
+          <label >Experience </label>
+          </div>: <span id="experience" class="job_info"> </span><br>
+                    </div>
+
+          <div class="row">
+              <div class="col-md-3">
+          <label >Salary </label>
+          </div>: <span id="salary" class="job_info"> </span><br>
+                    </div>
+
+          <div class="row">
+              <div class="col-md-3">
+          <label>Job Location </label>
+          </div>: <span id="location" class="job_info"></span><br>
+                    </div>
+
+          <div class="row">
+            <div class="col-md-3">
+               <label>Job Profile </label>
+               </div><div class="">
+               : <span id="job_desc" class="job_info"></span>
+                   </div>
+                             </div>
+
+           <br><br>
+           <div class="row">
+               <div class="col-md-3">
+          <label> Website </label>
+          </div>
+               : <span id="website" class="job_info"> </span><br> 
+                    </div>
+
+            <div class="row">
+              <div class="col-md-3">
+          <label> Contact </label>
+          </div>: <span id="contact" class="job_info"> </span><br>     
+                    </div>
+           
+          <div class="row">
+              <div class="col-md-3">
+          <label> Email </label>
+          </div>: <span id="email" class="job_info"> </span><br>     
+                    </div>
+
+          <div class="row">
+              <div class="col-md-3">
+          <label> Address </label>
+          </div>: <span id="address" class="job_info"></span><br> 
+          </div>
+                   
                           </form>
     			</div>                              			
     		</div>         
-    	 <div class="modal-footer">
-             <button type="button" class="btn btn-warning" value="" id="apply_job"><span id="stat">Apply</span></button>
+<!--    	 <div class="modal-footer">
+             <button type="button" class="btn btn-primary" value="skill_update" onclick="apply()" id="job_apply">Apply</button>
           <button type="button" class="btn btn-danger btn-md"  data-dismiss="modal">Close</button>
-        </div>
+        </div>-->
     </div>             
         </div>        
       </div>
+       
+       
+       
+      
 
 <div class="modal fade" id="recruiter_modal" role="dialog">
     <div class="modal-dialog" id="modal_dialog">   
@@ -405,7 +479,8 @@ a:link, a:visited{
     				
     			<div class="panel-body">
     			  <form action="" id="desc_form">  
-                              
+                            
+                           
                                 
                           </form>
     			</div>                              			
@@ -417,14 +492,14 @@ a:link, a:visited{
     </div>             
         </div>        
       </div>
-
+</section>
           </div>   
 
 
-  </section>
+  
 
 
-  </div>
+ 
  
 <?php
     $saved=$this->Saved_jobs_model->get_jobs_by_member($this->session->userdata('member_id'));

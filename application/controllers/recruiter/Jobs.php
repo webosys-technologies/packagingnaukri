@@ -31,7 +31,7 @@ class Jobs extends CI_Controller
     {       
         
             $id=$this->session->userdata('recruiter_id');
-            echo $id;
+           
             $result['data']=$this->Recruiters_model->get_by_id($id);
             $data['companies']=$this->Companies_model->companies_by_recruiter($id);
             $data['jobs']=$this->Jobs_model->get_job_by_recruiterid($id);
@@ -147,6 +147,13 @@ class Jobs extends CI_Controller
         $result=$this->Members_model->member_info($id);
         echo json_encode($result);
         
+    }
+    
+    function job_info($id)
+    {
+        
+        $result=$this->Jobs_model->job_info($id);       
+        echo json_encode($result);
     }
     
   

@@ -48,7 +48,7 @@
           <th>CITY</th>
           <th>APPLY AT</th>
           <!--<th>STATUS</th>-->
-<th width="25px">ACTION</th>
+<th style="width:20px;">ACTION</th>
         </tr>
       </thead>
       <tbody id="myTable">
@@ -81,7 +81,7 @@
                                        ?></td>-->
                                        <td>
                  
-                  <button class="btn btn-info btn-sm" onclick="view_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="view applicants"><i class="glyphicon glyphicon-eye-open"></i></button>
+                  <button class="btn btn-info btn-xs" onclick="view_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="view applicants"><i class="glyphicon glyphicon-eye-open"></i></button>
                  
 
                 </td>
