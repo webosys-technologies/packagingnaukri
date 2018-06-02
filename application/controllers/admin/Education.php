@@ -35,7 +35,6 @@ class Education extends CI_Controller
 
 	   $title = $this->input->post('title');
 	   $education = $this->input->post('education'); 
-	   $specialization = $this->input->post('specialization');
 	   $status = $this->input->post('status'); 
 
 	   for($i=0;$i<sizeof($title);$i++)
@@ -43,7 +42,6 @@ class Education extends CI_Controller
 	     $dataSet[$i] = array (         
 	     				       'medu_title' => $title[$i],
 	     					   'medu_education' => ltrim($education[$i]),
-	     					   'medu_specialization' => ltrim($specialization[$i]),
 	     					   'medu_status' => $status[$i],
 
 	     					);
@@ -66,7 +64,6 @@ class Education extends CI_Controller
 	     				       'medu_id' => $this->input->post('id'),
 	     					   'medu_title' => $this->input->post('title'),
 	     					   'medu_education' =>$this->input->post('education'),
-	     					   'medu_specialization' => $this->input->post('specialization'),
 	     					   'medu_status' =>$this->input->post('status'),
 	     					);
 	   
@@ -98,7 +95,7 @@ class Education extends CI_Controller
               if($result)
                 {
                    echo json_encode(array("status" => true));
-                $this->session->set_flashdata('success', 'Member Deleted Successfully');
+                $this->session->set_flashdata('success', 'Education Deleted Successfully');
                 }
        
              }
