@@ -318,11 +318,7 @@ $("#show_otp_box").click(function(){
             <li><a href="<?php echo base_url();?>Home/resource_outsourcing">Resource Outsourcing</a></li>
           </ul>
         </li>
-        
-        
-        <li><a id="header_link" href="<?php echo base_url();?>Home/job_openings">Job Openings</a></li>
-        
-       
+               
        <li class="dropdown">
           <a id="header_link" href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Recruiter<span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -337,7 +333,7 @@ $("#show_otp_box").click(function(){
           
           
           
-      </ul> <ul style="padding-right:52px" class="nav navbar-nav navbar-right">
+      </ul> <ul style="padding-right:140px" class="nav navbar-nav navbar-right">
               <li><a id="header_link" href="#" data-toggle="modal" onclick="open_login()" data-target="#myModal">Login</a></li>
               <li><a id="header_link" href="<?php echo base_url();?>member/index">Register</a></li>
                 

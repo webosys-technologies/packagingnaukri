@@ -4,7 +4,7 @@
 <!--        <div class="pull-right hidden-xs">
           <b>Webosys Technologies</b> Student System
         </div>-->
-        <strong>Copyright &copy; 2018 <a href="http://webosys.com/">Webosys Technologies</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2018 Packaging Naukri.</strong> All rights reserved. Developed By <a href="http://webosys.com/" target="_blank">Webosys Technologies</a>
     </footer>
     
      <!--Bootstrap 3.3.7--> 

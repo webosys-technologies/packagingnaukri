@@ -47,8 +47,8 @@
         <footer style="background:#0461A8" id="footer">
 <div class="container">
         <div class="row">
-            <div class="col-md-5 col-md-offset-3">
-             <strong style="color:white">Copyright &copy; 2018 <a href="http://webosys.com/">Packaging Naukri</a>. All rights reserved.</strong>	
+            <div class="col-md-8 col-md-offset-3">
+                <strong style="color:white">Copyright &copy; 2018 Packaging Naukri. All rights reserved. </strong><span style="color:#5df95a">Developed by <a style="color:#5df95a" href="http://webosys.com/" target="_blank">Webosys Technologies</a></span>	
             </div> 
             <div  class="col-md-2 col-md-offset-2">
                 <a  style="color:white" href="#">Top</a><i  style="color:white"class="glyphicon glyphicon-arrow-up"></i></div>
