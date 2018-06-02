@@ -122,6 +122,7 @@ class Profile extends CI_Controller
          
          $check_member=$this->Educations_model->get_id($id);                      
          $form=$this->input->post();
+        
          
          if($form['edu_name']=="spl_field" || $form['edu_name']=="--- Select Education ---")
          {
@@ -160,11 +161,13 @@ class Profile extends CI_Controller
             'education_passing_out'=>  $form['passout'], 
             'education_percentage'=>  $form['percentage'], 
         );        
+        
+        $where=array('education_id'=>$form['education_id']);
        
         if(!empty($form['education_id']))
         {       
 
-             
+             $res1=$this->Educations_model->update_education($where,$data); 
           echo json_encode(array('success'=>'Education updated sucessfully'));
         
         }else
@@ -191,6 +194,7 @@ class Profile extends CI_Controller
             'employment_city'=>  $form['city'],
             'employment_designation'=>  $form['designation'],
             'employment_profile'=>  $form['profile'],
+            'employment_salary'=>$form['salary'],
             'employment_notice_period'=>  $form['period'],
             'employment_from'=>  $form['from'],
             'employment_to'=>  $form['to'],
@@ -199,31 +203,53 @@ class Profile extends CI_Controller
         );   
         $where=array('employment_id'=>$form['employment_id']);
         $where2=array('employment_organization'=>$form['organization']);
-        
+     
          
         if(empty($form['employment_id']))
         {
-            if(isset($member_data->member_experience))
+           if(!empty($form['from']))
             {
-//            $datetime1 = new DateTime(date("Y-m-d"));
-//            $datetime2 = new DateTime('2017-06-3');
-//            $interval = $datetime1->diff($datetime2);
-//            $exp=$interval->format('%y yrs %m month');
-//            
-//            $where=array('education_id'=>$form['education_id'],
-//                         'member_id'=>$id);
-//        $res=$this->Educations_model->update_education($where,$data);
-                
-//                $mem_data=array('member_exaperience'=>$exp);
-//                $mem_where=array('member_id'=>$id);
-               $this->Members_model->member_update($mem_where,$mem_data); 
-            }
-            $this->Employments_model->insert_employment($data);
-            echo json_encode(array('success'=>'Employment Added sucessfully'));    
-        }else{    
+              if($form['from']<date("Y-m-d"))
+              {
+            $datetime1 = new DateTime(date("Y-m-d"));
+            $datetime2 = new DateTime($form['from']);
+            $interval = $datetime1->diff($datetime2);
+            $exp=$interval->format('%y yrs %m month');
+          
+                $mem_data=array('member_experience'=>$exp);
+                $mem_where=array('member_id'=>$id);
+               $this->Members_model->member_update($mem_where,$mem_data);
+                $this->Employments_model->insert_employment($data);
+            echo json_encode(array('success'=>'Employment Added sucessfully'));  
+              } else {
+                  echo json_encode(array('error'=>"Working date is greater than todays date"));
+              }
+            }        
             
-            $res=$this->Employments_model->update_employment($where,$data);
+        } else {      
+           $where3=array('member_id'=>$id);
+            $row=$this->Employments_model->get_employment($where3);
+            if($row->employment_id==$form['employment_id'])
+            {
+                       if($form['from']<date("Y-m-d"))
+              {
+            $datetime1 = new DateTime(date("Y-m-d"));
+            $datetime2 = new DateTime($form['from']);
+            $interval = $datetime1->diff($datetime2);
+            $exp=$interval->format('%y yrs %m month');
+          
+                $mem_data=array('member_experience'=>$exp);
+                $mem_where=array('member_id'=>$id);
+               $this->Members_model->member_update($mem_where,$mem_data);
+                 
+              }
+              else {
+                  echo json_encode(array('error'=>"Working date is greater than todays date"));
+              }
+            }
+            $res=$this->Employments_model->update_employment($where,$data);            
             echo json_encode(array('success'=>'Employment updated successfully'));
+           
         }
                
     }

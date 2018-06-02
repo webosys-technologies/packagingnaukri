@@ -443,7 +443,7 @@ alert(edu_name);
             dataType: "JSON",
             success: function(json)
             {
-//                alert(json.success);
+                alert(json.error);
                if(json.success)
                {                   
               location.reload();// for reload a page
@@ -451,7 +451,7 @@ alert(edu_name);
                }
                if(json.error)
                {                   
-              location.reload();// for reload a page
+             $("#from_err").html(json.error);
 
                }
                
@@ -642,6 +642,7 @@ alert(edu_name);
                  $("#designation").val(data.employment_designation);
                   $("#profile").val(data.employment_profile);
                    $("#from").val(data.employment_from);
+                   $("#salary").val(data.employment_salary);
 
                      $("#period").val(data.employment_notice_period);
                      $("#employment_id").val(data.employment_id);
@@ -672,9 +673,13 @@ alert(edu_name);
                      <div class="col-md-2">
                          <img src='<?php if(file_exists($member_data->member_profile_pic)){}else{echo base_url()."profile_pic/avatar.png";}?>' width="90px" height="90px" class="img-circle" alt="User Image" />
                      </div>
+                     <?php
+                     $org=$this->Employments_model->get_employment(array('member_id'=>$this->session->userdata('member_id')))
+                     ?>
+                     
                      <div class="col-md-6">
                      <label style="font-size:20px"><?php if(isset($member_data)){echo $member_data->member_fname." ".$member_data->member_lname;} ?></label><br>
-                     <span><?php if(isset($member_data->employment_designation)){echo $member_data->employment_designation." at ".$member_data->employment_organization;}else{echo "Fresher";} ?></span>
+                     <span><?php if(isset($org)){echo $org->employment_designation." at ".$org->employment_organization;}else{echo "Fresher";} ?></span>
                     </div>
                 </div>
                  <div class="row" style="margin-left:10px">
@@ -683,8 +688,8 @@ alert(edu_name);
                      </div>
                          <div class="col-md-3">
                              <div class="item-details"><i class="fa fa-map-marker"></i><span class="item"> <?php if(isset($member_data)){echo $member_data->member_city.",".$member_data->member_country;}?></span></div>
-                             <div class="item-details"><i class="fa fa-suitcase"></i><span class="item"> <?php if(isset($member_data->employment_from)){echo 'o yrs'; } ?> </span></div>
-                             <div class="item-details"><i class="fa fa-inr"></i><span class="item"> <?php if(isset($member_data->employment_designation)){echo $member_data->employment_designation;} ?></span></div>
+                             <div class="item-details"><i class="fa fa-suitcase"></i><span class="item"> <?php if(isset($member_data->member_experience)){echo $member_data->member_experience; } ?> </span></div>
+                             <div class="item-details"><i class="fa fa-inr"></i><span class="item"> <?php if(isset($org)){echo $org->employment_salary." PA";} ?></span></div>
 
                          </div>
                          <div class="col-md-3">
@@ -943,7 +948,11 @@ alert(edu_name);
                 <div class="col-md-6">
                     <Span class="form_label">Notice Period</span><br>
                     <span><?php echo $emp->employment_notice_period;?></span>
-            </div>   
+            </div> 
+               <div class="col-md-6">
+                    <Span class="form_label">Salary</span><br>
+                    <span><?php echo $emp->employment_salary." PA";?></span>
+            </div> 
                 
            </div><hr>
                  <?php  
@@ -1307,7 +1316,7 @@ alert(edu_name);
                                          </div>
                                     <div class="col-md-6  ">                             
                                         <label for="fname">Percentage</label>
-                                        <input type="text" class="form-control" name="percentage" id="percentage" placeholder="0.1% to 100%" maxlength="3">
+                                        <input type="text" class="form-control" name="percentage" id="percentage" placeholder="0.1% to 100%" maxlength="6">
                                         <span class="text-danger" id="add_err"></span>                                                          
                                 </div>
                             </div><br>
@@ -1374,7 +1383,7 @@ alert(edu_name);
                                      <div class="row">
                                     <div class="col-md-12  ">                             
                                         <label for="fname">Work Profile</label>
-                                        <input type="text" placeholder="Work Profile" value='' class="form-control required" id="profile" name="profile" maxlength="11" required>
+                                        <input type="text" placeholder="Work Profile" value='' class="form-control required" id="profile" name="profile" maxlength="128" required>
                                         <span class="text-danger" id="profile_err"></span>                                                          
                                 </div>
                                         </div><br>
@@ -1407,6 +1416,13 @@ alert(edu_name);
                     <div class="col-md-6">
                         <label class="form-label">Notice Period</label>
                         <input type="text" class="form-control" name="period" value="" placeholder="1 year 2 month" id="period">
+                        <span class="text-danger"><?php echo form_error('state'); ?></span>
+
+                    </div>
+                                         
+                    <div class="col-md-6">
+                        <label class="form-label">Salary</label> <span style="font-size:12px;">(salary per anual)</span>
+                        <input type="text" class="form-control" name="salary" value="" placeholder="Salary per Anual" id="salary">
                         <span class="text-danger"><?php echo form_error('state'); ?></span>
 
                     </div>

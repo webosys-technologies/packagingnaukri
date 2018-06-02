@@ -51,6 +51,17 @@ class Employments_model extends CI_Model
          $query=$this->db->get();
          return $query->num_rows();
      }
+     
+      function get_employment($where)
+     {
+          $this->db->from($this->table);
+          $this->db->order_by('employment_id','desc');
+          $this->db->limit('1');
+          $this->db->where($where);
+          $res=$this->db->get();       
+          return $res->row();
+     }
+     
      function employment_delete($where)
      {
          $this->db->from($this->table);
