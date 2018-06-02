@@ -56,7 +56,7 @@ class Jobs_model extends CI_Model
      {
          if(!empty($form['title']))
          {
-         $this->db->from('Jobs as job');
+         $this->db->from('jobs as job');
          $res=$this->db->like('job.job_title',$form['title']);
         $this->db->join('recruiters as rec','rec.recruiter_id=job.recruiter_id','LEFT');
         $this->db->join('companies as comp','comp.company_id=job.company_id','LEFT');

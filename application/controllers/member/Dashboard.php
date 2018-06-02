@@ -27,6 +27,21 @@ class Dashboard extends CI_Controller
              $id=$this->session->userdata('member_id');            
             $result['system']=$this->System_model->get_info();
                       
+            $where=array('member_id'=>$id);
+            $emp=$this->Employments_model->get_employment($where);
+            if($emp->employment_from)
+            {
+                 $datetime1 = new DateTime(date("Y-m-d"));
+            $datetime2 = new DateTime($emp->employment_from);
+            $interval = $datetime1->diff($datetime2);
+            $exp=$interval->format('%y yrs %m month');
+          
+                $mem_data=array('member_experience'=>$exp);
+                $mem_where=array('member_id'=>$id);
+               $this->Members_model->member_update($where,$mem_data);
+            }
+            
+            
              $result['member_data']=get_member_info($id);
              $this->load->view('member/header',$result);
 //             $this->load->view('member/member_header',$result);
