@@ -99,6 +99,7 @@
 				            <td><?php echo $comp->company_created_at?></td>
                                            
                 <td>  <button class="btn btn-success btn-xs" onclick="edit_company(<?php echo $comp->company_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
+                     <button class="btn btn-info btn-xs" onclick="view_company(<?php echo $comp->company_id; ?>)" id="btn2" data-toggle="tooltip" data-placement="bottom" title="View Company"><i class="fa fa-eye"></i></button>
                   <button class="btn btn-danger btn-xs" onclick="delete_company(<?php echo $comp->company_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
                              </td>
               </tr>
@@ -173,56 +174,7 @@ var user_type=el.val();
     var id;
 
 
-function view_company(id)
-    {
-      save_method = 'update';
-     $('#form')[0].reset(); // reset form on modals
 
-      //Ajax Load data from ajax
-      $.ajax({
-        url : "<?php echo site_url('index.php/user/Student/ajax_edit/')?>/" + id,        
-        type: "GET",
-               
-        dataType: "JSON",
-        success: function(data)
-        {          
-            $('#sfname').html(data.company_title);
-            $('#slname').html(data.user_lname); 
-            $('#scourse_name').html(data.course_name);
-            $('#semail').html(data.user_email);
-            $('#smobile').html(data.user_mobile);
-            $('#sgender').html(data.user_gender);
-            $('#saddmission_month').html(data.user_payment_date);
-            $('#scourse_end_date').html(data.user_course_end_date);
-            $('#slast_education').html(data.user_last_education);
-            if(data.user_profile_pic)
-            {
-            $('#sprofile_pic').attr("src", "<?php  echo base_url();?>"+data.user_profile_pic);
-             }
-             else
-             {
-               $('#sprofile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
-             }
-            $('#remove_pic').attr("onclick","remove_profile_pic("+data.user_id+")");
-            $('#sdob').html(data.user_dob);
-            $('#susername').html(data.user_username);
-            $('#spassword').html(data.user_password);
-            $('#suser_last_education').html(data.user_last_education);
-            $('#saddress').html(data.user_address);  
-            $('#scity').html(data.user_city);
-            $('#suser_type').html(data.user_user_type);
-            $('#spincode').html(data.user_pincode);
-            
-            $('#modal_form2').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Student Data'); // Set title to Bootstrap modal title
-
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-            alert('Error get data from ajax 1');
-        }
-    });
-    }
 
     function add_company()
     {  
@@ -232,6 +184,36 @@ function view_company(id)
         $('#myModal').modal('show');
 
     }
+
+    function view_company(id)
+    {
+              
+           $.ajax({
+       url : "<?php echo site_url('index.php/recruiter/Companies/company_info')?>/" + id,        
+       type: "GET",
+              
+       dataType: "JSON",
+       success: function(data)
+       {
+//                 $("#company_name").html(data.company_name);
+//                    
+//                 $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
+//                 $("#email").html(data.company_email);
+//                 $("#contact").html(data.company_contact);
+//                 $("#address").html(data.company_address);
+                 
+             
+            
+          $("#company_modal").modal('show');
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+       
+    }
+
 
     function edit_company(id)
     {     
@@ -508,6 +490,76 @@ function view_company(id)
         </div>        
       </div>
    
+  
+  
+  
+<div class="modal fade" id="company_modal" role="dialog">
+    <div class="modal-dialog" id="modal_dialog">   
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header"style="background:#3c8dbc">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <center><h4 style="color:white" id="title" class="modal-title">Company Details</h4></center>
+        </div>
+        <div class="modal-body" id="company_body">         	
+    				
+    			<div class="panel-body">
+    			  <form action="" id="skill_form">  
+            <!--<img src="" height="50px" weight="150px"><br>-->                                   
+          <h4 style="color:#5DADE2" id="Company Name:"></h4>
+          
+          <div class="row">
+              <div class="col-md-3">
+          <label >Company Type </label>
+          </div>: <span id="compan_type" class="job_info"> </span><br>
+          </div>
+              <div class="row">
+          <div class="col-md-3">        
+          <label >Email </label>
+          </div>: <span id="email" class="job_info"> </span><br>
+                    </div>
+
+          <div class="row">
+              <div class="col-md-3">
+          <label >Contact </label>
+          </div>: <span id="contact" class="job_info"> </span><br>
+                    </div>
+
+          <div class="row">
+              <div class="col-md-3">
+          <label >Address </label>
+          </div>: <span id="address" class="job_info"> </span><br>
+                    </div>
+
+          <div class="row">
+              <div class="col-md-3">
+          <label>Website </label>
+          </div>: <span id="location" class="job_info"></span><br>
+                    </div>
+
+          <div class="row">
+            <div class="col-md-3">
+               <label>Established </label>
+               </div><div class="">
+               : <span id="job_desc" class="job_info"></span>
+                   </div>
+                             </div>
+
+                   
+                          </form>
+    			</div>                              			
+    		</div>         
+<!--    	 <div class="modal-footer">
+             <button type="button" class="btn btn-primary" value="skill_update" onclick="apply()" id="job_apply">Apply</button>
+          <button type="button" class="btn btn-danger btn-md"  data-dismiss="modal">Close</button>
+        </div>-->
+    </div>             
+        </div>        
+      </div>
+
+
+
+
 
 
 
