@@ -58,6 +58,11 @@ class Employments_model extends CI_Model
          $query=$this->db->delete();
          return $this->db->affected_rows();
      }
+     
+     function get_employment_exp($id)
+     {
+//         $this->db-select('employment_')
+     }
     
 }
 

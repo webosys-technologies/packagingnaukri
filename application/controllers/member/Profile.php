@@ -407,6 +407,21 @@ if (isset($_FILES['resume']['name'])) {
             echo json_encode($result);
             
         }
+        function get_university($university)
+        {
+            $res=$this->Institute_model->get_institute($university);
+            echo json_encode($res);
+        }
+        
+        function date_diff()
+        {
+            echo date("Y-m-d");
+        
+            $datetime1 = new DateTime(date("Y-m-d"));
+    $datetime2 = new DateTime('2017-06-3');
+    $interval = $datetime1->diff($datetime2);
+    echo $interval->format('%y yrs %m month');
+        }
 
   
 }

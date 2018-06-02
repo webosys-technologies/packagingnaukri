@@ -167,11 +167,9 @@ for(var year = start ; year <=end; year++){
   options += '<option value="'+year+'">'+ year +'</option>';
 //  
 }
-//
-//document.getElementById("passin").innerHTML = options;
+
 document.getElementById("passout").innerHTML = options;
-document.getElementById("from").innerHTML = options;
-//document.getElementById("to").innerHTML = options;
+
 
 
 
@@ -353,6 +351,40 @@ var title=el.val();
   });
   
   
+     $("#university").change(function() {
+alert();
+    var el = $(this) ;
+
+    
+var title=el.val();
+          
+       $.ajax({
+        url : "<?php echo site_url('index.php/member/Profile/get_university')?>/" + title,        
+        type: "GET",
+               
+        dataType: "JSON",
+        success: function(data)
+        {
+//y          $("#edu_name").html("");
+           $.each(data,function(i,row)
+           {
+            
+               $("#edu_name").append('<option value="'+ row.medu_education+'">' + row.medu_education + '</option>');
+           }
+           );
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+//          alert('Error...!');
+        }
+      });
+    
+     
+  });
+  
+  
+  
+  
   
    $("#edu_name").change(function() {
 
@@ -415,7 +447,7 @@ alert(edu_name);
 //                alert(json.success);
                if(json.success)
                {                   
-//              location.reload();// for reload a page
+              location.reload();// for reload a page
 
                }
                if(json.error)
@@ -561,10 +593,10 @@ alert(edu_name);
                     }else{$("#spl_field").prop('hidden',true);}
                 $("#education_id").val(data.education_id);
         
-//                $("#type").val(data.education_type);
+
                 $("#percentage").val(data.education_percentage);
                 $("#university").val(data.education_university);
-//                $("#passin").val(data.education_passing_in);
+
                 $("#passout").val(data.education_passing_out);
                 
                 
@@ -580,10 +612,10 @@ alert(edu_name);
                  $("#designation").val(data.employment_designation);
                   $("#profile").val(data.employment_profile);
                    $("#from").val(data.employment_from);
-                    $("#to").val(data.employment_to);
+
                      $("#period").val(data.employment_notice_period);
                      $("#employment_id").val(data.employment_id);
-//                     alert(data.employment_id);
+
                      
                                         
                 
@@ -607,16 +639,19 @@ alert(edu_name);
              
              <div class="row" >
                  <div id="profile_info" class="col-md-10 col-md-offset-1" style="background:#668cff;">
-                     <div class="col-md-1">
-                         <img src='<?php if(file_exists($member_data->member_profile_pic)){}else{echo base_url()."profile_pic/avatar.png";}?>' width="50px" height="50px" class="img-circle" alt="User Image" />
+                     <div class="col-md-2">
+                         <img src='<?php if(file_exists($member_data->member_profile_pic)){}else{echo base_url()."profile_pic/avatar.png";}?>' width="90px" height="90px" class="img-circle" alt="User Image" />
                      </div>
-                     <div class="col-md-11">
+                     <div class="col-md-10">
                      <label style="font-size:20px"><?php if(isset($member_data)){echo $member_data->member_fname." ".$member_data->member_lname;} ?></label><br>
                      <span><?php if(isset($member_data->employment_designation)){echo $member_data->employment_designation." at ".$member_data->employment_organization;}else{echo "Fresher";} ?></span>
                     <br><br> <div class="row">
                          <div class="col-md-6 ">
                              <span class="fa fa-map-marker"> <?php if(isset($member_data)){echo $member_data->member_city.",".$member_data->member_country;}?></span><br>
-                             <span class="fa fa-suitcase"> <?php if(isset($member_data->member_experience)){echo $member_data->member_experience;}else{echo "0 yrs";} ?>O yrs</span><br>
+                            
+                                                          
+                             
+                             <span class="fa fa-suitcase"> <?php if(isset($member_data->employment_from)){echo 'o yrs'; } ?> </span><br>
                              <!--<span class="fa fa-inr"> <?php if(isset($member_data->employment_designation)){echo $member_data->employment_designation." at ".$member_data->employment_organization;}else{echo "0 yrs";} ?></span><br>-->
 
                          </div>
@@ -1308,25 +1343,27 @@ alert(edu_name);
                              
                                 <div class="col-md-6  ">                             
                                         <label for="fname">Work From</label>
-                                        <select class="form-control" name="from" id="from"></select>
+                                        <input type="date" value="" name="from" id="from" class="form-control">
+<!--                                        <select class="form-control" name="from" id="from"></select>
                                         <span class="text-danger" id="from_err"></span>                                                          
                                 </div>
                                              <div class="col-md-6  ">                             
                                         <label for="fname">Month</label>
                                         <select class="form-control" name="month" id="month">
                                             <option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option>
-                                        </select>
+                                        </select>-->
                                         <span class="text-danger" id="from_err"></span>                                                          
                                 </div>
-                                
-                            </div><br>
-                                    
-                                     <div class="row">
-                                         <div class="col-md-6">                                   
+                                             <div class="col-md-6">                                   
                                         <label for="lname">Work To</label>
                                         <input type="text" class="form-control" name="to" readonly value="Present">
                                       <span class="text-danger" id="to_err"></span>                                   
                                          </div>
+                                
+                            </div><br>
+                                    
+                                     <div class="row">
+                                        
                     <div class="col-md-6">
                         <label class="form-label">Notice Period</label>
                         <input type="text" class="form-control" name="period" value="" placeholder="1 year 2 month" id="period">
