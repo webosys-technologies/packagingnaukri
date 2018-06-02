@@ -82,7 +82,6 @@
           <th>ID</th>
           <th>TITLE</th>
           <th>EDUCATION</th>
-          <th>SPECIALIZATION</th>
           <th>STATUS</th>
           <th style="width:125px;">ACTION</th>
         </tr>
@@ -97,7 +96,6 @@
                                         <td><?php echo $res->medu_id;?></td>
                                         <td><?php echo $res->medu_title;?></td>
                                        <td><?php echo $res->medu_education;?></td>
-                                       <td><?php echo $res->medu_specialization;?></td>
                                        <td>
                                            <?php 
                                        if($res->medu_status==1)
@@ -139,7 +137,7 @@
   		  var i = 1;
             $('#add').click(function(){
                 i++;
-                $('#dynamic_field').append('<tr id="row'+i+'"><td class="col-md-11"><div class="form-group"><label class="control-label col-md-3">Title<span class="req">*</span></label><div class="col-md-7"><select name="title[]" class="form-control"><option value="Graduation">Graduation</option><option value="Postgraduation">Post Graduation<span style="color:red">*</span></option><option value="Doctorate">Doctorate</option></select></div></div><br><br><div class="form-group"><label class="control-label col-md-3">Education<span style="color:red">*</span></label><div class="col-md-9"><input type="text" required class="form-control" name="education[]"/></div></div><br><br><div class="form-group"><label class="control-label col-md-3">Specailizaton<span style="color:red">*</span></label><div class="col-md-9"><input type="text"required class="form-control" name="specialization[]"/></div></div><br><br><div class="form-group"><label class="control-label col-md-3">Status<span style="color:red">*</span></label><div class="col-md-9"><select name="status[]" class="form-control"><option value="1">Active</option><option value="0">Not Active</option></select></div></div><br><br></td><td class="col-md-1"><button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+                $('#dynamic_field').append('<tr id="row'+i+'"><td class="col-md-11"><div class="form-group"><label class="control-label col-md-3">Title<span class="req">*</span></label><div class="col-md-7"><select name="title[]" class="form-control"><option value="Graduation">Graduation</option><option value="Postgraduation">Post Graduation</option><option value="Doctorate">Doctorate</option> </select></div></div><br><br><div class="form-group"><label class="control-label col-md-3">Education<span style="color:red">*</span></label><div class="col-md-9"><input type="text" required class="form-control" name="education[]"/></div></div><br><br><div class="form-group"><label class="control-label col-md-3">Status<span style="color:red">*</span></label><div class="col-md-9"><select name="status[]" class="form-control"><option value="1">Active</option><option value="0">Not Active</option></select></div></div><br><br></td><td class="col-md-1"><button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
             });
 
             $(document).on('click','.btn_remove', function(){
@@ -243,7 +241,6 @@
             $('#id').val(data.medu_id);
             $('#title').val(data.medu_title);
             $('#education').val(data.medu_education);
-            $('#specialization').val(data.medu_specialization);
             $('#status').val(data.medu_status);
                         
            $(".modal-title").text("Edit Education");
@@ -366,13 +363,6 @@
                         </div><br><br>
 
                         <div class="form-group">
-                            <label class="control-label col-md-3">Specailizaton<span style="color:red">*</span></label>
-                            <div class="col-md-9">
-                            <input type="text"required class="form-control" name="specialization[]"/>
-                            </div>
-                        </div><br><br>
-
-                        <div class="form-group">
                           <label class="control-label col-md-3">Status<span style="color:red">*</span></label>
                           <div class="col-md-9">
                               <select name="status[]" class="form-control">
@@ -422,7 +412,7 @@
                             <div class="col-md-7">
                             <select name="title" class="form-control" id="title">
                                <option value="Graduation">Graduation</option>
-                               <option value="Postgraduation">Post Graduation<span style="color:red">*</span></option>
+                               <option value="Postgraduation">Post Graduation</option>
                                <option value="Doctorate">Doctorate</option>
                            </select>
                             </div>
@@ -432,13 +422,6 @@
                             <label class="control-label col-md-3">Education<span style="color:red">*</span></label>
                             <div class="col-md-9">
                             <input type="text" required class="form-control" name="education" id="education" />
-                            </div>
-                        </div><br><br>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Specailizaton<span style="color:red">*</span></label>
-                            <div class="col-md-9">
-                            <input type="text"required class="form-control" name="specialization" id="specialization" />
                             </div>
                         </div><br><br>
 
@@ -472,28 +455,6 @@
 
 
 
-<div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div style="background:#ABB2B9" class="modal-header">
-          
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Member</strong></h4></center>
-      </div>
-      <div id="calendar" style="background:#F2F3F4" class="modal-body">
-          <div class="row">
-              <div class="col-md-10 col-md-offset-2">
-                  <label style="color:black">Are you sure want to delete this member ?</label> <br>
-                  <button class="btn btn-default" id="delete_member">Yes</button>
-                  <button class="btn btn-default" data-dismiss="modal">No</button>
-          
-                  </div>              
-                 </div>
-      </div>
-     
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
 
 <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -502,7 +463,7 @@
       <div style="color:#fff; background-color:#338cbf" class="modal-header">
           
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Member</strong></h4></center>
+        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Education</strong></h4></center>
       </div>
       <div id="calendar" style="background:#F2F3F4" class="modal-body">
           <div class="row">

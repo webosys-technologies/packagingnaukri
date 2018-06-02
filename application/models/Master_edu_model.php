@@ -48,6 +48,7 @@ class Master_edu_model extends CI_Model
 	{
 		$this->db->where('medu_id', $id);
 		$this->db->delete($this->table);
+		return true;
 	}
         
         public function get_education_by_title($title)

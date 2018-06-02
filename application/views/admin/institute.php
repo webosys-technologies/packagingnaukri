@@ -80,8 +80,8 @@
       <thead>
         <tr bgcolor="#338cbf" style="color:#fff">
           <th>ID</th>
-          <th>INSTITUTE</th>
-          <th>UNIVERSITY</th>
+          <th>NAME</th>
+          <th>UNIVERSITY/INSTITUTE</th>
           <th>DESCRIPTION</th>
           <th>STATUS</th>
           <th style="width:125px;">ACTION</th>
@@ -139,7 +139,7 @@
   		  var i = 1;
             $('#add').click(function(){
                 i++;
-                $('#dynamic_field').append('<tr id="row'+i+'"><td class="col-md-11"><div class="form-group"><label class="control-label col-md-3">Institute<span class="req">*</span></label><div class="col-md-7"><input type="text" name="name[]" class="form-control" ></div></div><br><br><div class="form-group"><label class="control-label col-md-3">University<span style="color:red">*</span></label><div class="col-md-9"><input type="text" required class="form-control" name="university[]"/></div></div><br><br><div class="form-group"><label class="control-label col-md-3">Description<span style="color:red">*</span></label><div class="col-md-9"><input type="text"required class="form-control" name="desc[]"/></div></div><br><br><div class="form-group"><label class="control-label col-md-3">Status<span style="color:red">*</span></label><div class="col-md-9"><select name="status[]" class="form-control"><option value="1">Active</option><option value="0">Not Active</option></select></div></div><br><br></td><td class="col-md-1"><button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+                $('#dynamic_field').append('<tr id="row'+i+'"><td class="col-md-11"><div class="form-group"><label class="control-label col-md-3">University / Institute<span style="color:red">*</span></label><div class="col-md-9"><select required class="form-control" name="university[]" ><option value="University"> University</option><option value="Institute">Institute</option></select></div></div><br><br> <div class="form-group"><label class="control-label col-md-3">Name<span style="color:red">*</span></label><div class="col-md-7"><input type="text" name="name[]" class="form-control" ></div></div><br><br><div class="form-group"><label class="control-label col-md-3">Description<span style="color:red">*</span></label><div class="col-md-9"><input type="text"required class="form-control" name="desc[]"/></div></div><br><br><div class="form-group"><label class="control-label col-md-3">Status<span style="color:red">*</span></label><div class="col-md-9"><select name="status[]" class="form-control"><option value="1">Active</option><option value="0">Not Active</option></select></div></div><br><br></td><td class="col-md-1"><button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
             });
 
             $(document).on('click','.btn_remove', function(){
@@ -348,16 +348,19 @@
                     <td class="col-md-8">
                         <!--div class="top-row"-->
                         <div class="form-group">
-                            <label class="control-label col-md-3">Institute<span style="color:red">*</span></label>
-                            <div class="col-md-7">
-                              <input type="text" name="name[]" class="form-control" >
+                            <label class="control-label col-md-3">University / Institute<span style="color:red">*</span></label>
+                            <div class="col-md-9">
+                            <select required class="form-control" name="university[]" >
+                              <option value="University">University</option>
+                              <option value="Institute">Institute</option>
+                            </select>
                             </div>
                         </div><br><br>
 
                         <div class="form-group">
-                            <label class="control-label col-md-3">University<span style="color:red">*</span></label>
-                            <div class="col-md-9">
-                            <input type="text" required class="form-control" name="university[]"/>
+                            <label class="control-label col-md-3">Name<span style="color:red">*</span></label>
+                            <div class="col-md-7">
+                              <input type="text" name="name[]" class="form-control" >
                             </div>
                         </div><br><br>
 
@@ -412,18 +415,22 @@
                 <tr >
                     <td class="col-md-8">
                         <!--div class="top-row"-->
-                        <input type="hidden" name="id" value="" id="id">
+
                         <div class="form-group">
-                            <label class="control-label col-md-3">Institute<span class="req">*</span></label>
-                            <div class="col-md-7">
-                            <input type="text" name="name" class="form-control" id="name">
+                            <label class="control-label col-md-3">University/Institute<span style="color:red">*</span></label>
+                            <div class="col-md-9">
+                              <select name="university" class="form-control" id="university">
+                                <option value="University">University</option>
+                                <option value="Institute">Institute</option>
+                              </select>
                             </div>
                         </div><br><br>
 
+                        <input type="hidden" name="id" value="" id="id">
                         <div class="form-group">
-                            <label class="control-label col-md-3">University<span style="color:red">*</span></label>
-                            <div class="col-md-9">
-                            <input type="text" required class="form-control" name="university" id="university" />
+                            <label class="control-label col-md-3">Name<span style="color:red">*</span></label>
+                            <div class="col-md-7">
+                            <input type="text" name="name" class="form-control" id="name">
                             </div>
                         </div><br><br>
 
@@ -464,28 +471,6 @@
 
 
 
-<div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div style="background:#ABB2B9" class="modal-header">
-          
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Member</strong></h4></center>
-      </div>
-      <div id="calendar" style="background:#F2F3F4" class="modal-body">
-          <div class="row">
-              <div class="col-md-10 col-md-offset-2">
-                  <label style="color:black">Are you sure want to delete this member ?</label> <br>
-                  <button class="btn btn-default" id="delete_member">Yes</button>
-                  <button class="btn btn-default" data-dismiss="modal">No</button>
-          
-                  </div>              
-                 </div>
-      </div>
-     
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
 
 <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -494,7 +479,7 @@
       <div style="color:#fff; background-color:#338cbf" class="modal-header">
           
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Member</strong></h4></center>
+        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Institute</strong></h4></center>
       </div>
       <div id="calendar" style="background:#F2F3F4" class="modal-body">
           <div class="row">
