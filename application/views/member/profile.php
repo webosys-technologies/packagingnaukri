@@ -607,8 +607,7 @@ alert(edu_name);
 
                 $("#percentage").val(data.education_percentage);
                 $("#university").val(data.education_university);
-                alert(data.education_institute_name);
-                $("#inst_title").val(data.education_institute_name);
+                $("#inst_name").val(data.education_institute_name);
                 $("#passout").val(data.education_passing_out);
                 
                 
@@ -1244,7 +1243,7 @@ alert(edu_name);
                                         <div class="col-md-6  "> 
                                             <label for="fname">University/Institute Name</label>
                                             <datalist  id="data_list">  
-                                        <option>SPPU</option>
+                                        <!--<option>SPPU</option>-->
                                         </datalist>
                                        <input list="data_list" id="inst_name" type="text" placeholder="University/Institute Name" class="form-control text_design" name="inst_title">
                                         </div>
