@@ -54,14 +54,16 @@ class Jobs_model extends CI_Model
      
      public function search_job($form)
      {
-         
-         $this->db->from('jobs as job');
-         $this->db->join('companies as comp','comp.company_id=job.company_id','LEFT');
-         $this->db->join('recruiters as rec','rec.recruiter_id=job.recruiter_id','LEFT');
-//         $this->db->join('companies as comp','comp.company_id=job.company_id','LEFT');
-//         $this->db->where('');
-         $query=$this->db->get();
-         return $query->result();
+         if(!empty($form['title']))
+         {
+         $this->db->from('Jobs as job');
+         $res=$this->db->like('job.job_title',$form['title']);
+        $this->db->join('recruiters as rec','rec.recruiter_id=job.recruiter_id','LEFT');
+        $this->db->join('companies as comp','comp.company_id=job.company_id','LEFT');
+//        $this->db->where('job.job_title',$form['title']);
+         $result=$this->db->get();
+         return $result->result();
+          }
      }
      
      function job_info($where)
@@ -70,6 +72,25 @@ class Jobs_model extends CI_Model
          $this->db->where($where);
          $query=$this->db->get();
          return $query->row();
+         
+         
+     }
+     
+     
+     function get_recent_job()
+     {
+         $this->db->from('jobs as job');
+          $this->db->order_by('job_id','desc');
+          $this->db->limit('4');
+         $this->db->join('recruiters as rec','rec.recruiter_id=job.recruiter_id','LEFT');
+        $this->db->join('companies as comp','comp.company_id=job.company_id','LEFT');
+        $res=$this->db->get();
+       
+         return $res->result();
+     }
+     
+     function query_test()
+     {
          
          
      }

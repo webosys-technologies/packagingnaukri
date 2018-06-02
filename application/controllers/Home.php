@@ -15,53 +15,61 @@ class Home extends CI_Controller
 	
 	function index()
 	{
-	     
+	     $result['jobs']=$this->Jobs_model->get_recent_job();
+             
             $this->load->view('home_header');
             $this->load->view('home');
-            $this->load->view('home_footer');
+            $this->load->view('home_footer',$result);
             
 	}
         function services()
         {
+             $result['jobs']=$this->Jobs_model->get_recent_job();
             $this->load->view('home_header');
              $this->load->view('services');
-             $this->load->view('home_footer');
+             $this->load->view('home_footer',$result);
         }
         function about_us()
         {
+             $result['jobs']=$this->Jobs_model->get_recent_job();
             $this->load->view('home_header');
              $this->load->view('about_us');
-             $this->load->view('home_footer');
+             $this->load->view('home_footer',$result);
         }
         function contact_us()
         {
+             $result['jobs']=$this->Jobs_model->get_recent_job();
             $this->load->view('home_header');
              $this->load->view('contact_us');
-             $this->load->view('home_footer');
+             $this->load->view('home_footer',$result);
         }
         function post_resume()
         {
+             $result['jobs']=$this->Jobs_model->get_recent_job();
             $this->load->view('home_header');
              $this->load->view('post_resume');
-             $this->load->view('home_footer');
+             $this->load->view('home_footer',$result);
         }
         function post_requirement()
         {
+             $result['jobs']=$this->Jobs_model->get_recent_job();
             $this->load->view('home_header');
              $this->load->view('post_requirement');
-             $this->load->view('home_footer');
+             $this->load->view('home_footer',$result);
         }
         function recruitment()
         {
+             $result['jobs']=$this->Jobs_model->get_recent_job();
             $this->load->view('home_header');
              $this->load->view('recruitment');
-             $this->load->view('home_footer');
+             $this->load->view('home_footer',$result);
         }
         function resource_outsourcing()
         {
+             $result['jobs']=$this->Jobs_model->get_recent_job();
             $this->load->view('home_header');
              $this->load->view('resource_outsourcing');
-             $this->load->view('home_footer');
+             $this->load->view('home_footer',$result);
         }
 
     

@@ -133,7 +133,7 @@ a:hover {
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>student/Dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="<?php echo base_url(); ?>member/Dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Profile</li>
       </ol>
              </section>
@@ -168,7 +168,7 @@ for(var year = start ; year <=end; year++){
 //  
 }
 //
-document.getElementById("passin").innerHTML = options;
+//document.getElementById("passin").innerHTML = options;
 document.getElementById("passout").innerHTML = options;
 document.getElementById("from").innerHTML = options;
 //document.getElementById("to").innerHTML = options;
@@ -207,7 +207,8 @@ document.getElementById("from").innerHTML = options;
        );
   
        
-        $("#add_education").click(function(){               
+        $("#add_education").click(function(){ 
+            $("#spl_field").prop('hidden',true);
             $('#education_form')[0].reset();
           $("#education_modal").modal('show');
        }
@@ -334,7 +335,7 @@ var title=el.val();
         dataType: "JSON",
         success: function(data)
         {
-//          $("#edu_name").html("");
+//y          $("#edu_name").html("");
            $.each(data,function(i,row)
            {
             
@@ -357,27 +358,32 @@ var title=el.val();
 
     var el = $(this) ;   
 var edu_name=el.val();
-           $("#edu_spl").html("html");
-       $.ajax({
-        url : "<?php echo site_url('index.php/member/Profile/specialization')?>/" + edu_name,        
-        type: "GET",
-               
-        dataType: "JSON",
-        success: function(data)
-        {
-         
-           $.each(data,function(i,row)
-           {
-            
-               $("#edu_spl").append('<option value="'+ row.medu_specialization +'">' + row.medu_specialization + '</option>');
-           }
-           );
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-//          alert('Error...!');
-        }
-      });
+alert(edu_name);
+    if(edu_name=="spl_field")
+    {
+        $("#spl_field").prop('hidden',false);
+    }
+//           $("#edu_spl").html("html");
+//       $.ajax({
+//        url : "<?php echo site_url('index.php/member/Profile/specialization')?>/" + edu_name,        
+//        type: "GET",
+//               
+//        dataType: "JSON",
+//        success: function(data)
+//        {
+//         
+//           $.each(data,function(i,row)
+//           {
+//            
+//               $("#edu_spl").append('<option value="'+ row.medu_specialization +'">' + row.medu_specialization + '</option>');
+//           }
+//           );
+//        },
+//        error: function (jqXHR, textStatus, errorThrown)
+//        {
+////          alert('Error...!');
+//        }
+//      });
     
      
   });
@@ -409,7 +415,7 @@ var edu_name=el.val();
 //                alert(json.success);
                if(json.success)
                {                   
-              location.reload();// for reload a page
+//              location.reload();// for reload a page
 
                }
                if(json.error)
@@ -539,16 +545,26 @@ var edu_name=el.val();
                 $("#city").append('<option value="'+data.member_city+'">'+data.member_city+'</option>');
                 $("#city").val(data.member_city);
                 
-                $("#degree").val(data.education_degree);
+//                $("#degree").val(data.education_degree);
                  $("#edu_title").val(data.education_degree);
-                  $("#edu_name").val(data.education_name);
-                   $("#edu_spl").val(data.education_specialization);
+//                  $("#edu_name").val(data.education_name);
+                   if(data.education_name=="")
+                    {
+                        $("#edu_name").val("spl_field");
+                      
+                    }else{$("#edu_name").append('<option value="'+data.education_name+'">'+data.education_name+'</option>')
+                    $("#edu_name").val(data.education_name);}
+                    if(data.education_specialization)
+                    {
+                        $("#edu_spl").val(data.education_specialization);
+                        $("#spl_field").prop('hidden',false);
+                    }else{$("#spl_field").prop('hidden',true);}
                 $("#education_id").val(data.education_id);
-                $("#education_name").val(data.education_name);
-                $("#type").val(data.education_type);
+        
+//                $("#type").val(data.education_type);
                 $("#percentage").val(data.education_percentage);
                 $("#university").val(data.education_university);
-                $("#passin").val(data.education_passing_in);
+//                $("#passin").val(data.education_passing_in);
                 $("#passout").val(data.education_passing_out);
                 
                 
@@ -590,7 +606,7 @@ var edu_name=el.val();
              </script>
              
              <div class="row" >
-                 <div id="profile_info" class="col-md-8 col-md-offset-2" style="background:#668cff;">
+                 <div id="profile_info" class="col-md-10 col-md-offset-1" style="background:#668cff;">
                      <div class="col-md-1">
                          <img src='<?php if(file_exists($member_data->member_profile_pic)){}else{echo base_url()."profile_pic/avatar.png";}?>' width="50px" height="50px" class="img-circle" alt="User Image" />
                      </div>
@@ -737,19 +753,23 @@ var edu_name=el.val();
            </div>
           <div class="row">
                 <div class="col-md-6">
-                    <Span class="form_label">University</span><br>
+                    <Span class="form_label">University/Institute</span><br>
                     <span><?php if(isset($edu->education_university)){ echo $edu->education_university;}?></span>
             </div>   
                    <div class="col-md-6">
-                    <Span class="form_label">Percentage</span><br>
-                    <span><?php if(isset($edu->education_percentage)){echo $edu->education_percentage."%";}?></span>
+                    <Span class="form_label">University/Institute Name</span><br>
+                    <span><?php if(isset($edu->education_uni_name)){echo $edu->education_uni_name;}?></span>
             </div>   
            </div>
            <div class="row">
-                <div class="col-md-6">
+<!--                <div class="col-md-6">
                     <Span class="form_label">Admission</span><br>
                     <span><?php if(isset($edu->education_passing_in)){ echo $edu->education_passing_in;}?></span>
-            </div>   
+            </div>   -->
+            <div class="col-md-6">
+                    <Span class="form_label">Percentage</span><br>
+                    <span><?php if(isset($edu->education_percentage)){echo $edu->education_percentage."%";}?></span>
+            </div>  
                   <div class="col-md-6">
                  <Span class="form_label">Pass Out</span><br>
                  <span><?php if(isset($edu->education_passing_out)){echo $edu->education_passing_out;}?></span>
@@ -1132,7 +1152,7 @@ var edu_name=el.val();
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <center><h4 style="color:white" id="title" class="modal-title">Education</h4></center>
         </div>
-        <div class="modal-body" id="education_body">         	
+        <div class="modal-body" id="educatio_body">         	
     					
     			<div class="panel-body">
                             <form action="" id="education_form">
@@ -1140,40 +1160,50 @@ var edu_name=el.val();
     			<div class="row">
                              <input type="hidden" name="education_id" id="education_id" value="">
                                 <div class="col-md-6  ">                             
-                                        <label for="fname">Education Title</label>
+                                        <label for="fname">Title</label>
                                         <select  id="edu_title" name="edu_title" class="form-control">
-                                            <option>Select Education Title</option>
+                                            <option>Select Title</option>
                                             <option value="Graduation">Graduation</option>
                                             <option value="Postgraduation">Post Graduation</option>
                                             <option value="Doctarate">Doctarate</option>
-
                                         </select>
                                 </div>
                                 <div class="col-md-6">                                   
-                                        <label for="lname">Education</label>
+                                        <label for="lname">Education/Degree</label>
                                        <select id="edu_name" name="edu_name" class="form-control">
                                            <option>--- Select Education ---</option>
+                                           <option value="spl_field">other</option>
                                         </select>
                                          </div>
                             </div><br>
                              <div class="row">
-                                    <div class="col-md-6">                             
+                                    <div class="col-md-6" id="spl_field" hidden>                             
                                         <label for="fname">Specialization</label>
-                                          <select id="edu_spl" name="edu_spl" class="form-control">
+<!--                                          <select id="edu_spl" name="edu_spl" class="form-control">
                                            <option>--- Select Specialization ---</option>
-                                        </select>
+                                        </select>-->
+                                        <input type="text" id="edu_spl" name="edu_spl" class="form-control">
                                     </div></div><br>
                                     
                                     <div class="row">
-                                    <div class="col-md-12  ">                             
-                                        <label for="fname">University</label>
-                                        <input type="text" placeholder="University" value="" class="form-control required" id="university" name="university" maxlength="128" required>
-                                        <span class="text-danger" id="email_err"></span>                                                          
-                                </div>
-                                        </div><br>
-                                    
-                                     <div class="row">
                                     <div class="col-md-6  ">                             
+                                        <label for="fname">University/Institute</label>
+                                        <select class="form-control required" id="university" name="university">
+                                            <option value="University">University</option>
+                                            <option value="Institute">Institute</option>
+                                        </select>
+                                        <span class="text-danger" id="email_err"></span>                                                          
+                                    </div>
+                                        <div class="col-md-6  "> 
+                                            <label for="fname">University/Institute Name</label>
+                                            <datalist  id="data_list">  
+                                        <option>SPPU</option>
+                                        </datalist>
+                                       <input list="data_list" id="inst_name" onkeyup="search_title()" type="text" placeholder="University/Institute Name" class="form-control text_design" name="inst_title">
+                                        </div>
+                                    </div>
+                                     <div class="row">
+<!--                                    <div class="col-md-6  ">                             
                                         <label for="fname">Type</label>
                                        <select class="form-control" name='type' id='type'>
                                             <option value="0">Select Job Type</option>
@@ -1183,16 +1213,16 @@ var edu_name=el.val();
                                              <option value="Temporary">Temporary</option> 
                                         </select>
                                         <span class="text-danger" id="type_err"></span>                                                          
-                                </div>
+                                </div>-->
                                         </div><br>
                                     
                                     	<div class="row">
                              
-                                <div class="col-md-6  ">                             
+<!--                                <div class="col-md-6  ">                             
                                         <label for="fname">Admission</label>
                                         <select class="form-control" name='passin'id='passin'></select>
                                         <span class="text-danger" id="add_err"></span>                                                          
-                                </div>
+                                </div>-->
                                 <div class="col-md-6">                                   
                                         <label for="lname">Pass Out</label>
                                         <select class="form-control" name='passout'id='passout'>
@@ -1200,15 +1230,16 @@ var edu_name=el.val();
                                         </select>
                                       <span class="text-danger" id="lname_err"></span>                                   
                                          </div>
-                            </div><br>
-                                     
-                                     <div class="row">
-                             
-                                <div class="col-md-6  ">                             
+                                    <div class="col-md-6  ">                             
                                         <label for="fname">Percentage</label>
                                         <input type="text" class="form-control" name="percentage" id="percentage" placeholder="0.1% to 100%" maxlength="3">
                                         <span class="text-danger" id="add_err"></span>                                                          
                                 </div>
+                            </div><br>
+                                     
+                                     <div class="row">
+                             
+                               
                                
                             </div>
                                     

@@ -83,7 +83,7 @@ a:link, a:visited{
 
 <script>
     $(document).ready(function(){
-        
+       
         $(".description").text(function(index, currentText) {
     return currentText.substr(0, 200);
 //    $(".description").html("....");
@@ -142,7 +142,34 @@ a:link, a:visited{
         });
    }
    
+   function search_title()
+    {
+        $("#data_list").html("");
+       var title=$("#title").val();
     
+                       url="<?php echo base_url();?>member/Jobs/search_title/"+title;
+        $.ajax({
+            url : url,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data)
+            {
+               
+            $.each(data,function(i,row)
+           {            
+               
+               $("#data_list").append('<option>'+row.member_email+'</option>');
+           }
+           );
+                
+           },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+               // alert('Error deleting data');
+            }
+            
+        });
+    }
     
    
     function job_info(id)
@@ -188,6 +215,7 @@ a:link, a:visited{
     
     function apply(id)
     {
+        
           $.ajax({
        url : "<?php echo site_url('index.php/member/Jobs/apply_job')?>/" + id,        
        type: "GET",
@@ -216,7 +244,7 @@ a:link, a:visited{
         <small></small>
       </h1>
       <ol class="breadcrumb">
-          <li><a href="<?php echo base_url();?>student/Dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li><a href="<?php echo base_url();?>member/Dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Jobs</li>
       </ol>
         
@@ -228,7 +256,7 @@ a:link, a:visited{
  <datalist id="data_list">  
     <option>PHP</option><option>JAVA</option><option>DOT NET</option>  
      </datalist>
-            <input list="data_list" value="<?php echo set_value('title');?>" id="title" onkeyup="search_title()" type="text" placeholder="Title,Skills,Companies" class="text_design" name="title"><input  type="text" placeholder="Location" name="location" value="<?php echo set_value('location');?>" class="text_design"><input  type="text" placeholder="Experience" name="exp" value="<?php echo set_value('exp');?>" class="text_design"><input  type="text" placeholder="Salary" name="salary" value="<?php echo set_value('salary');?>" class="text_design"><button type="submit" class="btn btn-info btn-md">Search Job <span class="fa fa-search"></span></button>
+            <input list="data_list" value="<?php echo set_value('title');?>" id="title" onkeyup="search_title()" type="text" placeholder="Skills,Designation,Companies" class="text_design" name="title"><input  type="text" placeholder="Location" name="location" value="<?php echo set_value('location');?>" class="text_design"><input  type="text" placeholder="Experience" name="exp" value="<?php echo set_value('exp');?>" class="text_design"><input  type="text" placeholder="Salary" name="salary" value="<?php echo set_value('salary');?>" class="text_design"><button type="submit" class="btn btn-info btn-md">Search Job <span class="fa fa-search"></span></button>
        
      </div>
         </div>
@@ -335,7 +363,11 @@ a:link, a:visited{
                     
       </div>
            <?php } }?>
-
+<?php if(isset($error)){?>
+<div id="error" hidden>
+    <center><h2 style="font-family: times; color:">We Could not find jobs matching your Search..</h2></center>    
+</div>
+<?php }?>
     <div class="modal fade" id="job_modal" role="dialog">
     <div class="modal-dialog" id="modal_dialog">   
       <!-- Modal content-->
