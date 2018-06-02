@@ -410,7 +410,7 @@ var title=el.val();
 
     var el = $(this) ;   
 var edu_name=el.val();
-alert(edu_name);
+//alert(edu_name);
     if(edu_name=="spl_field")
     {
         $("#spl_field").prop('hidden',false);
@@ -443,7 +443,7 @@ alert(edu_name);
             dataType: "JSON",
             success: function(json)
             {
-                alert(json.error);
+//                alert(json.error);
                if(json.success)
                {                   
               location.reload();// for reload a page
