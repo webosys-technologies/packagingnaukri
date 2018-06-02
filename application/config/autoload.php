@@ -146,4 +146,5 @@ $autoload['model'] = array('User_model',
                             'Saved_jobs_model',
                             'System_model',
                             'Master_edu_model',
+                            'Institute_model',
                             );
