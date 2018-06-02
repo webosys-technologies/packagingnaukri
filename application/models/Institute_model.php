@@ -68,6 +68,14 @@ class Institute_model extends CI_Model
             $query=$this->db->get($this->table);
             return $query->result();
         }
+        
+        function get_institute($inst)
+        {
+            $this->db->from($this->table);
+            $this->db->where('institute_university',$inst);
+            $query=$this->db->get();
+            return $query->result();
+        }
 
 
 }

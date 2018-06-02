@@ -607,7 +607,8 @@ alert(edu_name);
 
                 $("#percentage").val(data.education_percentage);
                 $("#university").val(data.education_university);
-
+                alert(data.education_institute_name);
+                $("#inst_title").val(data.education_institute_name);
                 $("#passout").val(data.education_passing_out);
                 
                 
@@ -804,7 +805,7 @@ alert(edu_name);
             </div>   
                    <div class="col-md-6">
                     <Span class="form_label">University/Institute Name</span><br>
-                    <span><?php if(isset($edu->education_uni_name)){echo $edu->education_uni_name;}?></span>
+                    <span><?php if(isset($edu->education_institute_name)){echo $edu->education_institute_name;}?></span>
             </div>   
            </div>
            <div class="row">

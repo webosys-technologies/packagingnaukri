@@ -147,7 +147,7 @@ class Profile extends CI_Controller
 //            'education_type'=>  $form['type'],
 //            'education_specialization'=>  $form['specialization'],
             'education_university'=>  $form['university'],
-            'institute_name'=>  $form['inst_title'],
+            'education_institute_name'=>  $form['inst_title'],
             'education_passing_out'=>  $form['passout'], 
             'education_percentage'=>  $form['percentage'], 
         );        
@@ -413,13 +413,7 @@ if (isset($_FILES['resume']['name'])) {
             echo json_encode($res);
         }
         
-        function get_institute($inst)
-        {
-            $this->db->from($this->table);
-            $this->db->where('institute_university',$inst);
-            $query=$this->db->get();
-            return $query->result();
-        }
+        
         
         function date_diff()
         {
