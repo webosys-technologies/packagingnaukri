@@ -1,5 +1,9 @@
 <style>
     
+    .btn_color{
+        color:white;
+    }
+    
     #profile_info{
          padding: 5px;
     color: white;
@@ -750,7 +754,7 @@ var edu_name=el.val();
         <div class="shadow" id="personal"> 
               
          <div class="box-header" > <div class="row">          
-          <div class="col-md-9"><h3 class="box-title"><b>Personal Details</b></h3></div><div class="col-md-3"><a href="#personal" id="edit_personal"><span class="fa fa-pencil"> edit </span></a></div>
+          <div class="col-md-9"><h3 class="box-title"><b>Personal Details</b></h3></div><div class="col-md-3"><a href="#personal" id="edit_personal" class="btn_color"><span class="fa fa-pencil"> edit </span></a></div>
            </div>  </div>
       
       <div class="box-footer text-black data" >
@@ -804,7 +808,7 @@ var edu_name=el.val();
             <div class="shadow" id="education"> 
               
                 <div class="box-header" >   <div class="row">        
-            <div class="col-md-9"> <h3 class="box-title"><b>Education Details</b></h3></div><div class="col-md-3"><a href="#education" id="add_education"><span class="fa fa-plus"> Add </span></a> </div>
+            <div class="col-md-9"> <h3 class="box-title"><b>Education Details</b></h3></div><div class="col-md-3"><a class="btn_color" href="#education" id="add_education"><span class="fa fa-plus"> Add </span></a> </div>
              </div></div>
       <div class="box-footer text-black data" >
          <?php if(isset($educations)){
@@ -897,7 +901,7 @@ var edu_name=el.val();
           
            <div  class="shadow" id="employment">               
          <div class="box-header" >  <div class="row">         
-          <div class="col-md-9"><h3 class="box-title"><b>Employment Details</b></h3></div><div class="col-md-3"><a href="#employment" id="add_employment"><span class="fa fa-plus"> Add </span></a> </div>
+          <div class="col-md-9"><h3 class="box-title"><b>Employment Details</b></h3></div><div class="col-md-3"><a class="btn_color" href="#employment" id="add_employment"><span class="fa fa-plus"> Add </span></a> </div>
              </div></div>
       
       <div class="box-footer text-black data" >
@@ -969,7 +973,7 @@ var edu_name=el.val();
           
                     <div  class="shadow" id="project">               
               <div class="box-header" > <div class="row">          
-            <div class="col-md-9"> <h3 class="box-title"><b>Project Details</b></h3></div><div class="col-md-3"><a href="#project" id="add_project"><span class="fa fa-plus"> Add </span></a> </div>
+            <div class="col-md-9"> <h3 class="box-title"><b>Project Details</b></h3></div><div class="col-md-3"><a href="#project" class="btn_color" id="add_project"><span class="fa fa-plus"> Add </span></a> </div>
              </div>
                   </div>
               
@@ -1039,7 +1043,7 @@ var edu_name=el.val();
           <div class="shadow" id="skill">               
          <div class="box-header" > <div class="row">
                  <div class="col-md-9">
-             <h3 class="box-title"><b>Skills</b></h3></div><div class="col-md-3"><a href="#skill" id="add_skill"><span class="fa fa-plus"> Add </span> </a></div>
+             <h3 class="box-title"><b>Skills</b></h3></div><div class="col-md-3"><a class="btn_color" href="#skill" id="add_skill"><span class="fa fa-plus"> Add </span> </a></div>
              </div>
              </div>
               
