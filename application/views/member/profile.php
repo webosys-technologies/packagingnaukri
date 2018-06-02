@@ -289,9 +289,9 @@ var state=el.val();
 
         if(state)
         {
-            
+           $("#city").html(""); 
       $.ajax({
-       url : "<?php echo site_url('index.php/admin/Members/show_cities')?>/" + state,        
+       url : "<?php echo site_url('index.php/member/Profile/show_cities')?>/" + state,        
        type: "GET",
               
        dataType: "JSON",
@@ -322,8 +322,8 @@ var state=el.val();
    $("#edu_title").change(function() {
 
     var el = $(this) ;
-
-    
+//     $('#edu_name').prop('selectedIndex',0);
+    $("#edu_name").html("");
 var title=el.val();
           
        $.ajax({
@@ -588,7 +588,7 @@ alert(edu_name);
                 $("#city").append('<option value="'+data.member_city+'">'+data.member_city+'</option>');
                 $("#city").val(data.member_city);
                 
-//                $("#degree").val(data.education_degree);
+//                alert(data.education_degree);
                  $("#edu_title").val(data.education_degree);
 //                  $("#edu_name").val(data.education_name);
                    if(data.education_name=="")
@@ -1235,6 +1235,7 @@ alert(edu_name);
                                     <div class="col-md-6  ">                             
                                         <label for="fname">University/Institute</label>
                                         <select class="form-control required" id="university" name="university">
+                                            <option>-- Select University/Institute --</option>
                                             <option value="University">University</option>
                                             <option value="Institute">Institute</option>
                                         </select>
