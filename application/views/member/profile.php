@@ -693,7 +693,7 @@ var edu_name=el.val();
                          <div class="col-md-3">
                              <div class="item-details"><i class="fa fa-map-marker"></i><span class="item"> <?php if(isset($member_data)){echo $member_data->member_city.",".$member_data->member_country;}?></span></div>
                              <div class="item-details"><i class="fa fa-suitcase"></i><span class="item"> <?php if(isset($member_data->member_experience)){echo $member_data->member_experience; } ?> </span></div>
-                             <div class="item-details"><i class="fa fa-inr"></i><span class="item"> <?php if(isset($org)){echo $org->employment_salary." PA";} ?></span></div>
+                             <div class="item-details"><i class="fa fa-inr"></i><span class="item"> <?php if(isset($org->employment_salary)){echo "INR ".$org->employment_salary." PA";} ?></span></div>
 
                          </div>
                          <div class="col-md-3">
