@@ -352,9 +352,10 @@ var title=el.val();
   
   
      $("#university").change(function() {
-alert();
-    var el = $(this) ;
 
+
+    var el = $(this) ;
+$("#data_list").html("");
     
 var title=el.val();
           
@@ -369,7 +370,7 @@ var title=el.val();
            $.each(data,function(i,row)
            {
             
-               $("#edu_name").append('<option value="'+ row.medu_education+'">' + row.medu_education + '</option>');
+               $("#data_list").append('<option value="'+ row.institute_name+'">' + row.institute_name + '</option>');
            }
            );
         },
@@ -395,28 +396,7 @@ alert(edu_name);
     {
         $("#spl_field").prop('hidden',false);
     }
-//           $("#edu_spl").html("html");
-//       $.ajax({
-//        url : "<?php echo site_url('index.php/member/Profile/specialization')?>/" + edu_name,        
-//        type: "GET",
-//               
-//        dataType: "JSON",
-//        success: function(data)
-//        {
-//         
-//           $.each(data,function(i,row)
-//           {
-//            
-//               $("#edu_spl").append('<option value="'+ row.medu_specialization +'">' + row.medu_specialization + '</option>');
-//           }
-//           );
-//        },
-//        error: function (jqXHR, textStatus, errorThrown)
-//        {
-////          alert('Error...!');
-//        }
-//      });
-    
+
      
   });
        
@@ -537,6 +517,37 @@ alert(edu_name);
             method="edit_skill";
             edit_form(id,method);
        }
+       
+//          function search_title()
+//    {
+//        
+//        $("#data_list").html("");
+//       var title=$("#inst_name").val();
+//    
+//                       url="<?php echo base_url();?>member/Jobs/search_title/"+inst_name;
+//        $.ajax({
+//            url : url,
+//            type: "GET",
+//            dataType: "JSON",
+//            success: function(data)
+//            {
+//               
+//            $.each(data,function(i,row)
+//           {            
+//               
+//               $("#data_list").append('<option>'+row.member_email+'</option>');
+//           }
+//           );
+//                
+//           },
+//            error: function (jqXHR, textStatus, errorThrown)
+//            {
+//               // alert('Error deleting data');
+//            }
+//            
+//        });
+//    }
+       
      
      function delete_menu(id,method)
      {
@@ -1234,7 +1245,7 @@ alert(edu_name);
                                             <datalist  id="data_list">  
                                         <option>SPPU</option>
                                         </datalist>
-                                       <input list="data_list" id="inst_name" onkeyup="search_title()" type="text" placeholder="University/Institute Name" class="form-control text_design" name="inst_title">
+                                       <input list="data_list" id="inst_name" type="text" placeholder="University/Institute Name" class="form-control text_design" name="inst_title">
                                         </div>
                                     </div>
                                      <div class="row">
