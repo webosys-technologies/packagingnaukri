@@ -1,10 +1,29 @@
 <style>
     
     #profile_info{
-     padding: 5px;
-     color:white;
+         padding: 5px;
+    color: white;
+    margin-right: 17px;
+    margin-left: 2px;
+    background: #668cff;
+    border-radius: 3px;
+    border: 1px solid #7c92d4;
       
 }
+  .item-details
+  {
+      padding: 5px;
+  }
+  .item
+  {
+      margin-left: 5px;
+  }
+  .box-header
+  {
+      background: #3c8dbc;
+    color: white;
+  }
+  
 .emp_info{
     line-height: 50px;
 }
@@ -648,32 +667,41 @@ alert(edu_name);
         
              </script>
              
-             <div class="row" >
-                 <div id="profile_info" class="col-md-10 col-md-offset-1" style="background:#668cff;">
+             <div class="row" id="profile_info">
+                 <div class="row" style="margin-top:10px; margin-left:10px">
                      <div class="col-md-2">
                          <img src='<?php if(file_exists($member_data->member_profile_pic)){}else{echo base_url()."profile_pic/avatar.png";}?>' width="90px" height="90px" class="img-circle" alt="User Image" />
                      </div>
-                     <div class="col-md-10">
+                     <div class="col-md-6">
                      <label style="font-size:20px"><?php if(isset($member_data)){echo $member_data->member_fname." ".$member_data->member_lname;} ?></label><br>
                      <span><?php if(isset($member_data->employment_designation)){echo $member_data->employment_designation." at ".$member_data->employment_organization;}else{echo "Fresher";} ?></span>
-                    <br><br> <div class="row">
-                         <div class="col-md-6 ">
-                             <span class="fa fa-map-marker"> <?php if(isset($member_data)){echo $member_data->member_city.",".$member_data->member_country;}?></span><br>
-                            
-                                                          
-                             
-                             <span class="fa fa-suitcase"> <?php if(isset($member_data->employment_from)){echo 'o yrs'; } ?> </span><br>
-                             <!--<span class="fa fa-inr"> <?php if(isset($member_data->employment_designation)){echo $member_data->employment_designation." at ".$member_data->employment_organization;}else{echo "0 yrs";} ?></span><br>-->
+                    </div>
+                </div>
+                 <div class="row" style="margin-left:10px">
+                     <div class="col-md-2">
+                         
+                     </div>
+                         <div class="col-md-3">
+                             <div class="item-details"><i class="fa fa-map-marker"></i><span class="item"> <?php if(isset($member_data)){echo $member_data->member_city.",".$member_data->member_country;}?></span></div>
+                             <div class="item-details"><i class="fa fa-suitcase"></i><span class="item"> <?php if(isset($member_data->employment_from)){echo 'o yrs'; } ?> </span></div>
+                             <div class="item-details"><i class="fa fa-inr"></i><span class="item"> <?php if(isset($member_data->employment_designation)){echo $member_data->employment_designation;} ?></span></div>
 
                          </div>
-                         <div class="col-md-6 emp_info">
-                             <span class="fa fa-phone">&nbsp; <?php if(isset($member_data->member_mobile)){echo $member_data->member_mobile;} ?></span><br>
-                             <span class="glyphicon glyphicon-envelope">&nbsp;<?php if(isset($member_data->member_email)){echo $member_data->member_email;} ?> </span>
+                         <div class="col-md-3">
+                             <div class="item-details"><i class="fa fa-phone"></i><span class="item">&nbsp; <?php if(isset($member_data->member_mobile)){echo $member_data->member_mobile;} ?></span><br></div>
+                             <div class="item-details"><i class="glyphicon glyphicon-envelope"></i><span class="item">&nbsp;<?php if(isset($member_data->member_email)){echo $member_data->member_email;} ?> </span></div>
                          </div>
                      </div>
+                  <div class="row" style="margin-top:10px; margin-left:10px">
+                     <div class="col-md-2">
+                         
+                     </div>
+                     <div class="col-md-6">
+                     
                     </div>
+                </div>
                
-                 </div>
+                 
                  </div>
          
              <div class="row content">
