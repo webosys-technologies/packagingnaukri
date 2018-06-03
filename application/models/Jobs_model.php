@@ -89,7 +89,23 @@ class Jobs_model extends CI_Model
        
          return $res->result();
      }
+
+      public function delete_by_recruiter_id($id)
+     {
+         $this->db->from($this->table);
+         $this->db->where('recruiter_id',$id);
+         $this->db->delete();
+         return $this->db->affected_rows();
+     }
      
+     public function delete_by_company_id($id)
+     {
+         $this->db->from($this->table);
+         $this->db->where('company_id',$id);
+         $this->db->delete();
+         return $this->db->affected_rows();
+     }
+
      function query_test()
      {
          

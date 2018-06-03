@@ -58,6 +58,13 @@ class Companies_model extends CI_Model
          return $res->recruiter_id;
      }
 
+     public function delete_by_recruiter_id($id)
+     {
+         $this->db->where('recruiter_id',$id);
+         $this->db->delete($this->table);
+         return $this->db->affected_rows();
+     }
+
    
 }
 

@@ -60,11 +60,10 @@ class Members extends CI_Controller
             
                        
             $res=$this->Members_model->member_update(array('member_id'=>$this->input->post('member_id')),$data);
-            if($res)
-            {
+            
                 $this->session->set_flashdata('success','Member Updated Successfully');
                 echo json_encode(array('status'=>true));
-            }
+            
         }
         
          function ajax_edit($id)
@@ -79,11 +78,10 @@ class Members extends CI_Controller
     {
 
         $result=$this->Members_model->delete_by_id($id);
-              if($result)
-                {
+              
                    echo json_encode(array("status" => true));
                 $this->session->set_flashdata('success', 'Member Deleted Successfully');
-                }
+                
        
              }
     

@@ -31,19 +31,7 @@ class Recruiter extends CI_Controller
         
     
     }
-    
-    function recruiter_delete($id)
-    {
-           $result=$this->Recruiters_model->delete_by_id($id);
-              if($result)
-                {
-                   echo json_encode(array("status" => true));
-                $this->session->set_flashdata('success', 'Recruiter Deleted Successfully');
-                }
-             
-    }
-    
-    
+        
      function recruiter_add()
     {
         
@@ -89,11 +77,10 @@ class Recruiter extends CI_Controller
                     );
        
         $res = $this->Recruiters_model->recruiter_update(array('recruiter_id'=>$this->input->post('recruiter_id')),$data);
-        if($res)
-        {
+        
            $this->session->set_flashdata('success','Recruiter Updated Successfully');
            echo json_encode(array('status'=>true));
-        }
+        
     }
         
          function ajax_edit($id)
@@ -112,6 +99,28 @@ class Recruiter extends CI_Controller
             echo json_encode($cities);
         }
 
+        function recruiter_delete($id)
+    {       
+            $data=$this->Recruiters_model->get_id($id);
+            
+           $result=$this->Recruiters_model->delete_by_id($id);
+             if ($result) {
+
+                if (file_exists($data->recruiter_profile_pic)) {
+
+             unlink($data->recruiter_profile_pic);
+              
+            }
+            
+            $com=$this->Companies_model->delete_by_recruiter_id($id);
+            $job=$this->Jobs_model->delete_by_recruiter_id($id);
+                
+                   echo json_encode(array("status" => true));
+                $this->session->set_flashdata('success', 'Recruiter Deleted Successfully');
+              } 
+                
+             
+    }
 	
         
 }
