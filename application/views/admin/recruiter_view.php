@@ -150,7 +150,7 @@ var state=el.val();
         {
             
       $.ajax({
-       url : "<?php echo site_url('index.php/admin/Recruiter/show_cities')?>/" + state,        
+       url : "<?php echo site_url('index.php/Home/show_cities')?>/" + state,        
        type: "GET",
               
        dataType: "JSON",
