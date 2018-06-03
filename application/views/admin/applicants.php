@@ -77,7 +77,7 @@
           <th>CITY</th>
           <th>APPLY AT</th>
           <th>STATUS</th>
-<th>ACTION</th>
+          <th width='10px'>ACTION</th>
         </tr>
       </thead>
       <tbody id="myTable">
@@ -108,7 +108,7 @@
                                        ?></td>
                                        <td>
                  
-                  <button class="btn btn-info" onclick="view_applicant(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Applicant Member"><i class="fa fa-eye"></i></button>
+                  <button class="btn btn-info btn-xs" onclick="view_applicant(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Applicant Member"><i class="fa fa-eye"></i></button>
                  
 
                 </td>

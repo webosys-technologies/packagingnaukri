@@ -115,6 +115,12 @@ class Companies extends CI_Controller
         }
     }
     
+     function company_info($id)
+    {
+        $result=$this->Companies_model->company_by_id($id);
+        echo json_encode($result);
+    }
+    
   
 }
 

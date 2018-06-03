@@ -71,6 +71,15 @@ class Home extends CI_Controller
              $this->load->view('resource_outsourcing');
              $this->load->view('home_footer',$result);
         }
+        
+        function job($id)
+        {
+             $result['jobs']=$this->Jobs_model->get_recent_job();
+             $result['job_info']=$this->Jobs_model->job_info($id);
+             $this->load->view('home_header');
+             $this->load->view('job_info',$result);
+             $this->load->view('home_footer',$result);
+        }
 
     
 }

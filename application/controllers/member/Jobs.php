@@ -76,7 +76,7 @@ class Jobs extends CI_Controller
     function search_jobs()
     { $this->load->library('encryption');
          $id=$this->session->userdata('member_id');
-            $result['member_data']=  get_member_info($id);
+            $data['member_data']=  get_member_info($id);
             
                                 
         $form=$this->input->post();
@@ -110,9 +110,9 @@ class Jobs extends CI_Controller
         }else{
             $result['error']="error";
         }
-        $this->load->view('member/header',$result);
+        $this->load->view('member/header',$data);
         $this->load->view('member/jobs',$result);
-        $this->load->view('member/footer',$result);      
+        $this->load->view('member/footer',$data);      
         }else{
             redirect('member/Jobs');
         }   
@@ -129,8 +129,9 @@ class Jobs extends CI_Controller
     
     function job_info($id)
     {
-        $where=array('job_id'=>$id);
-        $result=$this->Jobs_model->job_info($where);
+        
+        $result=$this->Jobs_model->job_info($id);
+       
         echo json_encode($result);
     }
     

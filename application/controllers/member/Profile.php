@@ -122,6 +122,7 @@ class Profile extends CI_Controller
          
          $check_member=$this->Educations_model->get_id($id);                      
          $form=$this->input->post();
+        
          
          if($form['edu_name']=="spl_field" || $form['edu_name']=="--- Select Education ---")
          {
@@ -138,6 +139,15 @@ class Profile extends CI_Controller
          }
          
          
+         
+         if(empty($form['university']) || $form['university']=="-- Select University/Institute --")
+         {
+             $uni="";
+         }else{
+             $uni=$form['university'];
+         }
+         
+         
         $data=array(
             'member_id'=>$id,
 //            'education_degree'=>  $form['degree'],
@@ -146,18 +156,18 @@ class Profile extends CI_Controller
             'education_specialization'=> $edu_spl,
 //            'education_type'=>  $form['type'],
 //            'education_specialization'=>  $form['specialization'],
-            'education_university'=>  $form['university'],
-//            'education_passing_in'=>  $form['passin'],
+            'education_university'=>  $uni,
+            'education_institute_name'=>  $form['inst_title'],
             'education_passing_out'=>  $form['passout'], 
             'education_percentage'=>  $form['percentage'], 
         );        
+        
+        $where=array('education_id'=>$form['education_id']);
        
         if(!empty($form['education_id']))
-        {      
-            $where=array('education_id'=>$form['education_id'],
-                         'member_id'=>$id);
-        $res=$this->Educations_model->update_education($where,$data);
-             
+        {       
+
+             $res1=$this->Educations_model->update_education($where,$data); 
           echo json_encode(array('success'=>'Education updated sucessfully'));
         
         }else
@@ -174,7 +184,7 @@ class Profile extends CI_Controller
     {
         $id=$this->session->userdata('member_id');
         $form=$this->input->post();
-      
+        $member_data=  get_member_info($id);
         
      if(!empty($form['organization']))
      {
@@ -184,6 +194,7 @@ class Profile extends CI_Controller
             'employment_city'=>  $form['city'],
             'employment_designation'=>  $form['designation'],
             'employment_profile'=>  $form['profile'],
+            'employment_salary'=>$form['salary'],
             'employment_notice_period'=>  $form['period'],
             'employment_from'=>  $form['from'],
             'employment_to'=>  $form['to'],
@@ -192,16 +203,53 @@ class Profile extends CI_Controller
         );   
         $where=array('employment_id'=>$form['employment_id']);
         $where2=array('employment_organization'=>$form['organization']);
-        
+     
          
         if(empty($form['employment_id']))
         {
-            $this->Employments_model->insert_employment($data);
-            echo json_encode(array('success'=>'Employment Added sucessfully'));    
-        }else{    
+           if(!empty($form['from']))
+            {
+              if($form['from']<date("Y-m-d"))
+              {
+            $datetime1 = new DateTime(date("Y-m-d"));
+            $datetime2 = new DateTime($form['from']);
+            $interval = $datetime1->diff($datetime2);
+            $exp=$interval->format('%y yrs %m month');
+          
+                $mem_data=array('member_experience'=>$exp);
+                $mem_where=array('member_id'=>$id);
+               $this->Members_model->member_update($mem_where,$mem_data);
+                $this->Employments_model->insert_employment($data);
+            echo json_encode(array('success'=>'Employment Added sucessfully'));  
+              } else {
+                  echo json_encode(array('error'=>"Working date is greater than todays date"));
+              }
+            }        
             
-            $res=$this->Employments_model->update_employment($where,$data);
+        } else {      
+           $where3=array('member_id'=>$id);
+            $row=$this->Employments_model->get_employment($where3);
+            if($row->employment_id==$form['employment_id'])
+            {
+                       if($form['from']<date("Y-m-d"))
+              {
+            $datetime1 = new DateTime(date("Y-m-d"));
+            $datetime2 = new DateTime($form['from']);
+            $interval = $datetime1->diff($datetime2);
+            $exp=$interval->format('%y yrs %m month');
+          
+                $mem_data=array('member_experience'=>$exp);
+                $mem_where=array('member_id'=>$id);
+               $this->Members_model->member_update($mem_where,$mem_data);
+                 
+              }
+              else {
+                  echo json_encode(array('error'=>"Working date is greater than todays date"));
+              }
+            }
+            $res=$this->Employments_model->update_employment($where,$data);            
             echo json_encode(array('success'=>'Employment updated successfully'));
+           
         }
                
     }
@@ -388,8 +436,10 @@ if (isset($_FILES['resume']['name'])) {
     }
     
      function show_cities($state)
-        {           
-            $cities=$this->Cities_model->getall_cities(ltrim($state));
+        {    
+             $st=str_replace('%20'," ",$state);
+           
+            $cities=$this->Cities_model->getall_cities(ltrim($st));
           
             echo json_encode($cities);
         }
@@ -406,6 +456,23 @@ if (isset($_FILES['resume']['name'])) {
             $result=$this->Master_edu_model->get_specialization_by_name($name);
             echo json_encode($result);
             
+        }
+        function get_university($university)
+        {
+            $res=$this->Institute_model->get_institute($university);
+            echo json_encode($res);
+        }
+        
+        
+        
+        function date_diff()
+        {
+            echo date("Y-m-d");
+        
+            $datetime1 = new DateTime(date("Y-m-d"));
+    $datetime2 = new DateTime('2017-06-3');
+    $interval = $datetime1->diff($datetime2);
+    echo $interval->format('%y yrs %m month');
         }
 
   
