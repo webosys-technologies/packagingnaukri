@@ -381,6 +381,11 @@ function delete_logo(id)
                  $("#email").html(data.company_email);
                  $("#contact").html(data.company_contact);
                  $("#comp_address").html(data.company_address);
+                  if(data.company_logo)
+            {
+                $("#comp_logo").attr('src',"<?php echo base_url();?>"+data.company_logo);
+               
+            }
                  
              
             
@@ -587,7 +592,7 @@ function delete_logo(id)
     				
     			<div class="panel-body">
     			  <form action="" id="skill_form">  
-            <!--<img src="" height="50px" weight="150px"><br>-->                                   
+           <img src="" width="150px" id="comp_logo" height="50px"><br>                                
           <h4 style="color:#5DADE2" id="company_name"></h4>
           
           <div class="row">

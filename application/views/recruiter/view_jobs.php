@@ -200,56 +200,7 @@ var user_type=el.val();
     var id;
 
 
-function view_job(id)
-    {
-      save_method = 'update';
-     $('#form')[0].reset(); // reset form on modals
 
-      //Ajax Load data from ajax
-      $.ajax({
-        url : "<?php echo site_url('index.php/user/Student/ajax_edit/')?>/" + id,        
-        type: "GET",
-               
-        dataType: "JSON",
-        success: function(data)
-        {          
-            $('#sfname').html(data.job_title);
-            $('#slname').html(data.user_lname); 
-            $('#scourse_name').html(data.course_name);
-            $('#semail').html(data.user_email);
-            $('#smobile').html(data.user_mobile);
-            $('#sgender').html(data.user_gender);
-            $('#saddmission_month').html(data.user_payment_date);
-            $('#scourse_end_date').html(data.user_course_end_date);
-            $('#slast_education').html(data.user_last_education);
-            if(data.user_profile_pic)
-            {
-            $('#sprofile_pic').attr("src", "<?php  echo base_url();?>"+data.user_profile_pic);
-             }
-             else
-             {
-               $('#sprofile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
-             }
-            $('#remove_pic').attr("onclick","remove_profile_pic("+data.user_id+")");
-            $('#sdob').html(data.user_dob);
-            $('#susername').html(data.user_username);
-            $('#spassword').html(data.user_password);
-            $('#suser_last_education').html(data.user_last_education);
-            $('#saddress').html(data.user_address);  
-            $('#scity').html(data.user_city);
-            $('#suser_type').html(data.user_user_type);
-            $('#spincode').html(data.user_pincode);
-            
-            $('#modal_form2').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Student Data'); // Set title to Bootstrap modal title
-
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-//            alert('Error get data from ajax 1');
-        }
-    });
-    }
 
     function add_job()
     {  
@@ -383,7 +334,11 @@ function view_job(id)
                  $("#email").html(data.company_email);
                  $("#contact").html(data.company_contact);
                  $("#address").html(data.company_address);
-                 
+                  if(data.company_logo)
+            {
+                $("#comp_logo").attr('src',"<?php echo base_url();?>"+data.company_logo);
+               
+            }
              
             
           $("#job_modal").modal('show');
@@ -549,7 +504,7 @@ function view_job(id)
     				
     			<div class="panel-body">
     			  <form action="" id="skill_form">  
-            <!--<img src="" height="50px" weight="150px"><br>-->                                   
+           <img src="" width="150px" id="comp_logo" height="50px"><br>                                
           <h4 style="color:#5DADE2" id="job_title"></h4>
           <h5 id="company_name" class="job_info"></h5>
           <div class="row">
