@@ -142,6 +142,19 @@ class Companies extends CI_Controller
         
     }
     
+    function delete_logo($id)
+    {
+         $info=$this->Companies_model->company_by_id($id);
+         if(file_exists($info->company_logo))        
+            {
+            unlink($info->company_logo);
+            }
+        $where=array('company_id'=>$id);
+        $data=array('company_logo'=>"");
+         $res=$this->Companies_model->company_update($where,$data);
+        redirect('admin/Companies');
+    }
+    
     
         function logo_upload($comp_id)
     {

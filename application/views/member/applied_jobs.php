@@ -183,6 +183,7 @@ a:link, a:visited{
                        <div class="shadow">
                            <div class="row">
                            <div class="col-md-10">
+                               <img src="<?php echo base_url().$job->company_logo;?>" width="120px" height="40px"><br>
                           <a href="#" onclick='job_info("<?php echo $job->job_id;?>")'> <span class="job_name"><?php echo $job->job_title;?></span></a><br>
                           <span class="comp_name"><?php echo $job->company_name;?></span>
                            </div>

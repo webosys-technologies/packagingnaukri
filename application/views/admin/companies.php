@@ -206,6 +206,7 @@ var user_type=el.val();
 
   function add_company()
     {  
+       $("#remove_btn").html("");
         $("#company_logo").prop('hidden',true);
         save_method="add";        
        $('#form')[0].reset();
@@ -216,7 +217,7 @@ var user_type=el.val();
 
     function edit_company(id)
     {     
-      
+      $("#remove_btn").html("");
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
 
@@ -240,7 +241,15 @@ var user_type=el.val();
             $('[name="website"]').val(data.company_website);
             $('[name="established"]').val(data.company_establish_in);
             $('[name="multinational"]').val(data.company_multinational);
-
+            
+            
+           
+            if(data.company_logo)
+            {
+                $("#company_logo").attr('src',"<?php echo base_url();?>"+data.company_logo);
+                $("#company_logo").prop('hidden',false);
+            $("#remove_btn").append(' <a href="<?php echo base_url();?>admin/Companies/delete_logo/'+data.company_id+'" id="remove_logo" class="btn btn-danger btn-xs pull-right">Remove Logo</a>');
+            }
            
                         
            $("#title").text("Edit Job");
@@ -256,34 +265,39 @@ var user_type=el.val();
     }
 
 
-function view_company(id)
-    {
-              
-           $.ajax({
-       url : "<?php echo site_url('index.php/admin/Companies/company_info')?>/" + id,        
-       type: "GET",
-              
-       dataType: "JSON",
-       success: function(data)
-       {
-//                 $("#company_name").html(data.company_name);
-//                    
-//                 $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
-//                 $("#email").html(data.company_email);
-//                 $("#contact").html(data.company_contact);
-//                 $("#address").html(data.company_address);
-                 
-             
-            
-          $("#company_modal").modal('show');
-       },
-       error: function (jqXHR, textStatus, errorThrown)
-       {
-//         alert('Error...!');
-       }
-     });
-       
-    }
+function delete_logo(id)
+{
+    
+}
+
+//function view_company(id)
+//    {
+//              
+//           $.ajax({
+//       url : "<?php echo site_url('index.php/admin/Companies/company_info')?>/" + id,        
+//       type: "GET",
+//              
+//       dataType: "JSON",
+//       success: function(data)
+//       {
+////                 $("#company_name").html(data.company_name);
+////                    
+////                 $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
+////                 $("#email").html(data.company_email);
+////                 $("#contact").html(data.company_contact);
+////                 $("#address").html(data.company_address);
+//                 
+//             
+//            
+//          $("#company_modal").modal('show');
+//       },
+//       error: function (jqXHR, textStatus, errorThrown)
+//       {
+////         alert('Error...!');
+//       }
+//     });
+//       
+//    }
 
 
 
@@ -466,7 +480,9 @@ function view_company(id)
                                         <div class="col-md-6">                                
                                     <div class="form-group">
                                        <label>Company Logo</label><span style="color: red">*</span>
+                                       
                                     <input type="file" name="logo" id="logo" value="">
+                                   <div id="remove_btn"></div>
                                         <span class="text-danger" id="comp_err"></span>
                                         
                                     </div> 

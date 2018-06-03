@@ -178,11 +178,36 @@ a:hover {
                   data=new FormData(document.getElementById("resume_form"));
                   save(data,save_method);
             }else{
-//                 $("#resume_btn").prop('hidden',true); 
+
                  $("#resume_name").html("This file is not allowed"); 
                  
             }
         });
+        
+        
+        $('#photo').change(function(e){
+            var fileName = e.target.files[0].name;
+            
+            var ext=fileName.split('.').pop();
+            if(ext=="jpg" || ext=="jpeg" || ext=="png")
+            {
+               $("#photo_name").html(fileName);
+            $("#resume_btn").prop('hidden',false); 
+             save_method="photo_update";
+                  data=new FormData(document.getElementById("photo_form"));
+                  save(data,save_method);
+            }else{
+
+                 $("#photo_name").html("This file is not allowed"); 
+                 
+            }
+        });
+        
+        
+        
+        
+        
+        
                         var start = 1975;
 var end = new Date().getFullYear();
 var options = "";
@@ -592,6 +617,13 @@ var edu_name=el.val();
         });
     
      }
+     
+     function upload_photo()
+     {
+         $("#photo_modal").modal('show');
+     }
+     
+     
      function edit_form(id,save_method)
      {
           
@@ -675,7 +707,9 @@ var edu_name=el.val();
              <div class="row" id="profile_info">
                  <div class="row" style="margin-top:10px; margin-left:10px">
                      <div class="col-md-2">
-                         <img src='<?php if(file_exists($member_data->member_profile_pic)){}else{echo base_url()."profile_pic/avatar.png";}?>' width="90px" height="90px" class="img-circle" alt="User Image" />
+                        
+                         <button type="file" onclick="upload_photo()" class="pull-right"><i style="color:#668cff" class="fa fa-camera"></i></button><br>
+                         <img src='<?php if(isset($member_data->member_profile_pic)){ echo base_url().$member_data->member_profile_pic; }else{echo base_url()."profile_pic/avatar.PNG";}?>' width='90px' height='90px'class='img-circle' alt='user-image'>
                      </div>
                      <?php
                      $org=$this->Employments_model->get_employment(array('member_id'=>$this->session->userdata('member_id')))
@@ -1568,6 +1602,42 @@ var edu_name=el.val();
         </div>        
       </div>
           </div>   
+
+
+
+
+      
+             <div class="modal fade" id="photo_modal" role="dialog">
+    <div class="modal-dialog" id="modal_dialog">   
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header"style="background:#3c8dbc">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <center><h4 style="color:white" id="title" class="modal-title">Upload Photo</h4></center>
+        </div>
+        <div class="modal-body" id="photo_body">      				
+    			<div class="panel-body">
+    			  <form action="" id="photo_form"> 
+                              <center>
+                              <div class="shadow" style="width:120px; height:130px"> 
+                                  <img src='<?php if(isset($member_data->member_profile_pic)){ echo base_url().$member_data->member_profile_pic; }else{echo base_url()."profile_pic/avatar.PNG";}?>' width='120px' height='130px'>
+                              </div><br><br>
+                               <label class="btn-bs-file btn-md btn-xs btn-sm btn-info">
+                            Upload Photo
+                            <input type="file" name="photo" id="photo" value=""/> 
+                        </label> <br>
+                              <span style='color:#B2BABB;'>Format Support: jpg,jpeg,png</span><br>
+                              <span id="photo_name"></span>
+                              </center>
+                          </form>
+    			</div>                              			
+    		</div>         
+    	
+    </div>             
+        </div>        
+      </div>
+          </div> 
+
              
        </section>
       </div>    

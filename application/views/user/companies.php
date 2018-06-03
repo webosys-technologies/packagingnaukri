@@ -79,7 +79,7 @@
                                             <th>Contact</th>
                                             <th>Location</th>
                                             <th>Established</th>
-                                            <th>Action</th>
+                                            <th style="width:75px">Action</th>
          
         </tr>
       </thead>
@@ -101,8 +101,9 @@
                                             <td><?php echo $comp->company_city?></td>
 				            <td><?php echo $comp->company_created_at?></td>
                                            
-                <td>  <button class="btn btn-success" onclick="edit_company(<?php echo $comp->company_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
-                  <button class="btn btn-danger" onclick="delete_company(<?php echo $comp->company_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
+                <td>  <button class="btn btn-success btn-xs" onclick="edit_company(<?php echo $comp->company_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
+                  <button class="btn btn-info btn-xs" onclick="view_company(<?php echo $comp->company_id; ?>)" id="btn2" data-toggle="tooltip" data-placement="bottom" title="View Company"><i class="fa fa-eye"></i></button>
+                    <button class="btn btn-danger btn-xs" onclick="delete_company(<?php echo $comp->company_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
                              </td>
               </tr>
           <?php }}}?>
@@ -341,6 +342,38 @@ var user_type=el.val();
 
       }
     }
+    
+    function view_company(id)
+    {
+              
+           $.ajax({
+       url : "<?php echo site_url('index.php/user/Companies/company_info')?>/" + id,        
+       type: "GET",
+              
+       dataType: "JSON",
+       success: function(data)
+       {
+//           alert(data.company_address);
+                 $("#company_name").html(data.company_name);
+                 $("#company_type").html(data.company_type);
+                  $("#establish").html(data.company_establish_in);
+//                    
+                 $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
+                 $("#email").html(data.company_email);
+                 $("#contact").html(data.company_contact);
+                 $("#comp_address").html(data.company_address);
+                 
+             
+            
+          $("#company_modal").modal('show');
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+       
+    }
 
 
 
@@ -513,6 +546,72 @@ var user_type=el.val();
         </div>        
       </div>
    
+
+
+<div class="modal fade"  id="company_modal" role="dialog">
+    <div class="modal-dialog" style="width:550px;" id="modal_dialog">   
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header"style="background:#3c8dbc">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <center><h4 style="color:white" id="title" class="modal-title">Company Details</h4></center>
+        </div>
+        <div class="modal-body" id="company_body">         	
+    				
+    			<div class="panel-body">
+    			  <form action="" id="skill_form">  
+            <!--<img src="" height="50px" weight="150px"><br>-->                                   
+          <h4 style="color:#5DADE2" id="company_name"></h4>
+          
+          <div class="row">
+              <div class="col-md-3">
+          <label >Company Type </label>
+          </div>: <span id="company_type" class="job_info"> </span><br>
+          </div>
+              <div class="row">
+          <div class="col-md-3">        
+          <label >Email </label>
+          </div>: <span id="email" class="job_info"> </span><br>
+                    </div>
+
+          <div class="row">
+              <div class="col-md-3">
+          <label >Contact </label>
+          </div>: <span id="contact" class="job_info"> </span><br>
+                    </div>
+
+          <div class="row">
+              <div class="col-md-3">
+          <label >Address </label>
+          </div>: <span id="comp_address" class="job_info"> </span><br>
+                    </div>
+
+          <div class="row">
+              <div class="col-md-3">
+          <label>Website </label>
+          </div>: <span id="website" class="job_info"></span><br>
+                    </div>
+
+          <div class="row">
+            <div class="col-md-3">
+               <label>Established In</label>
+               </div><div class="">
+               : <span id="establish" class="job_info"></span>
+                   </div>
+                             </div>
+
+                   
+                          </form>
+    			</div>                              			
+    		</div>         
+<!--    	 <div class="modal-footer">
+             <button type="button" class="btn btn-primary" value="skill_update" onclick="apply()" id="job_apply">Apply</button>
+          <button type="button" class="btn btn-danger btn-md"  data-dismiss="modal">Close</button>
+        </div>-->
+    </div>             
+        </div>        
+      </div>
+
 
 
 

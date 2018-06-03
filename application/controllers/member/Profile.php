@@ -404,6 +404,58 @@ if (isset($_FILES['resume']['name'])) {
    
     }
     
+    
+        public function photo_update()
+    {
+     $info=get_member_info($this->session->userdata('member_id'));
+     
+if (isset($_FILES['photo']['name'])) {
+    if (0 < $_FILES['photo']['error']) {
+        echo 'Error during file upload' . $_FILES['photo']['error'];
+    } else {
+
+        $rand=  mt_rand(1111,9999);
+        $name = $_FILES["photo"]["name"];
+        $ext = end((explode(".", $name)));
+        $filename='photo_'.date('Y-m-d_H.i.s').".".$ext;
+        move_uploaded_file($_FILES['photo']['tmp_name'], 'profile_pic/' . $filename);
+       
+        if(file_exists('profile_pic/'.$filename))
+        {
+            if(file_exists($info->member_profile_pic))
+            {
+            unlink($info->member_profile_pic);
+         $where=array('member_id'=>$this->session->userdata('member_id'));
+        $data=array('member_profile_pic'=>'profile_pic/'.$filename);
+         $res=$this->Members_model->member_update($where,$data);
+         
+        
+            echo json_encode(array('success'=>"Resume Updated Successfully"));
+        
+            }else{
+                $where=array('member_id'=>$this->session->userdata('member_id'));
+               $data=array('member_profile_pic'=>'profile_pic/'.$filename);
+               $res=$this->Members_model->member_update($where,$data);
+               
+                    echo json_encode(array('success'=>"Resume Updated Successfully"));               
+            }
+        }   else{
+            echo json_encode(array('error'=>"Something Wrong"));
+        }   
+       
+       
+            
+//        }
+    }
+} else {
+    echo 'Please choose a file';
+}
+    
+    
+   
+    }
+    
+    
     function skill_update()
     {
         $id=$this->session->userdata('member_id');

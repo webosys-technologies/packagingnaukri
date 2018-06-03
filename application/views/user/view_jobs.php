@@ -104,8 +104,9 @@
                                             <td><?php echo $job->job_city?></td>
 				            <td><?php echo $job->job_created_at?></td>
                                            
-                <td>  <button class="btn btn-success" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
-                  <button class="btn btn-danger" onclick="delete_menu(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
+                <td>  <button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
+                 <button class="btn btn-info btn-xs" onclick="job_info(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="View Job"><i class="fa fa-eye"></i></button>
+                    <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
                              </td>
               </tr>
           <?php }}}?>
@@ -229,6 +230,45 @@ function view_job(id)
         }
     });
     }
+    
+    function job_info(id)
+    {
+              
+           $.ajax({
+       url : "<?php echo site_url('index.php/user/Jobs/job_info')?>/" + id,        
+       type: "GET",
+              
+       dataType: "JSON",
+       success: function(data)
+       {
+                    $("#company_name").html(data.company_name);
+                     $("#job_title").html(data.job_title);
+////             $("#j_desc").html();
+              $("#job_desc").html(data.job_description);
+               $("#eligibility").html(data.job_education);
+////                $("#skills").html();
+                 $("#salary").html(data.job_salary);
+                 $("#experience").html(data.job_experience);
+                 $("#location").html(data.job_city);
+                 $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
+                 $("#email").html(data.company_email);
+                 $("#contact").html(data.company_contact);
+                 $("#address").html(data.company_address);
+                 
+             
+            
+          $("#job_modal").modal('show');
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+       
+    }
+
+    
+    
 
     function add_job()
     {  
@@ -508,3 +548,91 @@ function view_job(id)
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+<div class="modal fade" id="job_modal" role="dialog">
+    <div class="modal-dialog" id="modal_dialog">   
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header"style="background:#3c8dbc">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <center><h4 style="color:white" id="title" class="modal-title">Company Details</h4></center>
+        </div>
+        <div class="modal-body" id="skill_body">         	
+    				
+    			<div class="panel-body">
+    			  <form action="" id="skill_form">  
+            <!--<img src="" height="50px" weight="150px"><br>-->                                   
+          <h4 style="color:#5DADE2" id="job_title"></h4>
+          <h5 id="company_name" class="job_info"></h5>
+          <div class="row">
+              <div class="col-md-3">
+          <label >Eligibility </label>
+          </div>: <span id="eligibility" class="job_info"> </span><br>
+          </div>
+              <div class="row">
+          <div class="col-md-3">        
+          <label >Job Skills </label>
+          </div>: <span id="skills" class="job_info"> </span><br>
+                    </div>
+
+          <div class="row">
+              <div class="col-md-3">
+          <label >Experience </label>
+          </div>: <span id="experience" class="job_info"> </span><br>
+                    </div>
+
+          <div class="row">
+              <div class="col-md-3">
+          <label >Salary </label>
+          </div>: <span id="salary" class="job_info"> </span><br>
+                    </div>
+
+          <div class="row">
+              <div class="col-md-3">
+          <label>Job Location </label>
+          </div>: <span id="location" class="job_info"></span><br>
+                    </div>
+
+          <div class="row">
+            <div class="col-md-3">
+               <label>Job Profile </label>
+               </div><div class="">
+               : <span id="job_desc" class="job_info"></span>
+                   </div>
+                             </div>
+
+           <br><br>
+           <div class="row">
+               <div class="col-md-3">
+          <label> Website </label>
+          </div>
+               : <span id="website" class="job_info"> </span><br> 
+                    </div>
+
+            <div class="row">
+              <div class="col-md-3">
+          <label> Contact </label>
+          </div>: <span id="contact" class="job_info"> </span><br>     
+                    </div>
+           
+          <div class="row">
+              <div class="col-md-3">
+          <label> Email </label>
+          </div>: <span id="email" class="job_info"> </span><br>     
+                    </div>
+
+          <div class="row">
+              <div class="col-md-3">
+          <label> Address </label>
+          </div>: <span id="address" class="job_info"></span><br> 
+          </div>
+                   
+                          </form>
+    			</div>                              			
+    		</div>         
+<!--    	 <div class="modal-footer">
+             <button type="button" class="btn btn-primary" value="skill_update" onclick="apply()" id="job_apply">Apply</button>
+          <button type="button" class="btn btn-danger btn-md"  data-dismiss="modal">Close</button>
+        </div>-->
+    </div>             
+        </div>        
+      </div>
