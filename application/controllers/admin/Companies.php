@@ -59,6 +59,13 @@ class Companies extends CI_Controller
         );
         
           $res=$this->Companies_model->company_add($data);
+          
+           if (isset($_FILES['logo']['name']))
+          {
+             
+              $this->logo_upload($res);
+          }
+          
           if($res)
           {
                $this->session->set_flashdata('success','company added successfully');
@@ -91,11 +98,17 @@ class Companies extends CI_Controller
                    'company_status'=>'1'
         );
          $result=$this->Companies_model->company_update(array('company_id' => $company_id),$data);
-         if($result)
-         {
+        
+         
+          if (isset($_FILES['logo']['name']))
+          {
+             
+              $this->logo_upload($company_id);
+          }
+         
        $this->session->set_flashdata('success','Data Updated Successfully');
        echo json_encode(array('status'=>'Data Updated Successfully'));
-         }
+         
     }
     
     public function ajax_edit($id)
@@ -112,7 +125,12 @@ class Companies extends CI_Controller
         $res=$this->Companies_model->company_delete($id);
         if($res)
         {
-            $this->session->set_flashdata('success','job deleted successfully');
+            $info=$this->Companies_model->company_by_id($id);
+            if(file_exists($info->company_logo))        
+            {
+            unlink($info->company_logo);
+            }
+            $this->session->set_flashdata('success','Company deleted successfully');
             echo json_encode(array('success'=>'Company deleted successfully'));
         }
     }
@@ -121,6 +139,55 @@ class Companies extends CI_Controller
     {
         $result=$this->Companies_model->company_by_id($id);
         echo json_encode($result);
+        
+    }
+    
+    
+        function logo_upload($comp_id)
+    {
+        $info=$this->Companies_model->company_by_id($comp_id);
+             
+if (isset($_FILES['logo']['name'])) {
+    if (0 < $_FILES['logo']['error']) {
+//        echo 'Error during file upload' . $_FILES['logo']['error'];
+        return false;
+    } else {
+
+        $rand=  mt_rand(1111,9999);
+        $name = $_FILES["logo"]["name"];
+        $ext = end((explode(".", $name)));
+        $filename='logo_'.date('Y-m-d_H.i.s').".".$ext;
+        move_uploaded_file($_FILES['logo']['tmp_name'], 'company_logo/' . $filename);
+       
+        if(file_exists('company_logo/'.$filename))
+        {
+            if(file_exists($info->company_logo))
+            {
+            unlink($info->company_logo);
+         $where=array('company_id'=>$comp_id);
+        $data=array('company_logo'=>'company_logo/'.$filename);
+         $res=$this->Companies_model->company_update($where,$data);
+         
+        
+           return true;
+        
+            }else{
+                $where=array('company_id'=>$comp_id);
+        $data=array('company_logo'=>'company_logo/'.$filename);
+         $res=$this->Companies_model->company_update($where,$data);   
+        
+           return true;
+                   
+            }
+        }   else{
+            return false;
+        }  
+//        }
+    }
+} else {
+    return false;
+}
+        
     }
     
   

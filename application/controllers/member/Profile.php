@@ -362,13 +362,11 @@ if (isset($_FILES['resume']['name'])) {
     if (0 < $_FILES['resume']['error']) {
         echo 'Error during file upload' . $_FILES['resume']['error'];
     } else {
-//        if (file_exists('resume/' . $_FILES['resume']['name'])) {
-//            echo 'File already exists : resume/' . $_FILES['resume']['name'];
-//        } else {
+
         $rand=  mt_rand(1111,9999);
         $name = $_FILES["resume"]["name"];
         $ext = end((explode(".", $name)));
-        $filename='suraj_resume_'.date('Y-m-d_H.i.s').".".$ext;
+        $filename='resume_'.date('Y-m-d_H.i.s').".".$ext;
         move_uploaded_file($_FILES['resume']['tmp_name'], 'resume/' . $filename);
        
         if(file_exists('resume/'.$filename))
