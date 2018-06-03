@@ -10,8 +10,8 @@
 #modal_body{
   height: 420px;
   overflow-y: auto;
-}
-.modal-backdrop {background: none;}
+}/*
+.modal-backdrop {background: none;}*/
 
 #delete_modal{
             background: none;
@@ -117,6 +117,8 @@
                                        <td>
                   <button class="btn btn-success" onclick="edit_recruiter(<?php echo $res->recruiter_id; ?>)" data-toggle="tooltip" data-placement="bottom" title="Edit Recruiter"><i class="glyphicon glyphicon-pencil"></i></button>
                   <button class="btn btn-danger" onclick="delete_menu(<?php echo $res->recruiter_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Recruiter"><i class="glyphicon glyphicon-trash"></i></button>
+
+                  <button class="btn btn-warning btn-xs" onclick="view_recruiter(<?php echo $res->recruiter_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Recruiter"><i class="fa fa-eye"></i></button>
                  
 
                 </td>
@@ -136,10 +138,10 @@
   $(document).ready( function () {
       
       
-        $("#state").change(function() {
+        $(".state").change(function() {
         
    var el = $(this) ;
-              $("#city").html("");
+              $(".city").html("");
 
 
 var state=el.val();
@@ -158,7 +160,7 @@ var state=el.val();
           $.each(data,function(i,row)
           {
           
-              $("#city").append('<option value="'+ row.city_name +'">' + row.city_name+'</option>');
+              $(".city").append('<option value="'+ row.city_name +'">' + row.city_name+'</option>');
           }
           );
        },
@@ -190,46 +192,46 @@ var state=el.val();
 
 function view_recruiter(id)
     {
-      save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/recruiter/Student/ajax_edit/')?>/" + id,        
+        url : "<?php echo site_url('index.php/admin/Recruiter/ajax_edit/')?>/" + id,        
         type: "GET",
                
         dataType: "JSON",
         success: function(data)
         {          
-            $('#sfname').html(data.student_fname);
-            $('#slname').html(data.student_lname); 
-            $('#scourse_name').html(data.course_name);
-            $('#semail').html(data.student_email);
-            $('#smobile').html(data.student_mobile);
-            $('#sgender').html(data.student_gender);
-            $('#saddmission_month').html(data.student_payment_date);
-            $('#scourse_end_date').html(data.student_course_end_date);
-            $('#slast_education').html(data.student_last_education);
-            if(data.student_profile_pic)
+            $('#fname').html(data.recruiter_fname);
+            $('#lname').html(data.recruiter_lname); 
+            $('#email').html(data.recruiter_email);
+            $('#mobile').html(data.recruiter_mobile);
+            $('#gender').html(data.recruiter_gender);
+            $('#address').html(data.recruiter_address);
+            $('#city').html(data.recruiter_city);
+            $('#pincode').html(data.recruiter_pincode);
+            $('#state').html(data.recruiter_state);
+
+            if(data.recruiter_profile_pic)
             {
-            $('#sprofile_pic').attr("src", "<?php  echo base_url();?>"+data.student_profile_pic);
+            $('#profile_pic').attr("src", "<?php  echo base_url();?>"+data.recruiter_profile_pic);
              }
              else
              {
-               $('#sprofile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
+               $('#profile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
              }
-            $('#remove_pic').attr("onclick","remove_profile_pic("+data.student_id+")");
-            $('#sdob').html(data.student_dob);
-            $('#susername').html(data.student_username);
-            $('#spassword').html(data.student_password);
-            $('#sstudent_last_education').html(data.student_last_education);
-            $('#saddress').html(data.student_address);  
-            $('#scity').html(data.student_city);
-            $('#sstate').html(data.student_state);
-            $('#spincode').html(data.student_pincode);
+            // $('#remove_pic').attr("onclick","remove_profile_pic("+data.student_id+")");
+            // $('#sdob').html(data.student_dob);
+            // $('#susername').html(data.student_username);
+            // $('#spassword').html(data.student_password);
+            // $('#sstudent_last_education').html(data.student_last_education);
+            // $('#saddress').html(data.student_address);  
+            // $('#scity').html(data.student_city);
+            // $('#sstate').html(data.student_state);
+            // $('#spincode').html(data.student_pincode);
             
-            $('#modal_form2').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Student Data'); // Set title to Bootstrap modal title
+            $('#viewModal').modal('show'); // show bootstrap modal when complete loaded
+            $('#viewtitle').text('Recruiter Details'); // Set title to Bootstrap modal title
 
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -243,7 +245,7 @@ function view_recruiter(id)
     {
         save_method="add";     
         $('#form')[0].reset();
-        $("#title").text("Edit Member");
+        $("#title").text("Edit Recruiter");
         $('#myModal').modal('show');
     }
     function edit_recruiter(id)
@@ -251,7 +253,7 @@ function view_recruiter(id)
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
            //Ajax Load data from ajax
-            $("#city").html("");
+            $(".city").html("");
       $.ajax({
         url : "<?php echo site_url('index.php/admin/Recruiter/ajax_edit/')?>/" + id,
         type: "GET",
@@ -265,12 +267,16 @@ function view_recruiter(id)
             $('[name="email"]').val(data.recruiter_email);
             $('[name="mobile"]').val(data.recruiter_mobile);
             $('[name="password"]').val(data.recruiter_password);
+            $('[name="address"]').val(data.recruiter_address);
+            $('[name="state"]').val(data.recruiter_state);
+            $('[name="city"]').val(data.recruiter_city);
+            $('[name="status"]').val(data.recruiter_status);
 //            $("#city").val(data.recruiter_city);
-            $("#city").append('<option value="'+ data.recruiter_city +'">' + data.recruiter_city+'</option>');
+            $(".city").append('<option value="'+ data.recruiter_city +'">' + data.recruiter_city+'</option>');
             $('[name="state"]').val(data.recruiter_state);
           
             
-            $("#title").text("Edit Member");
+            $("#title").text("Edit Recruiter");
            $('#myModal').modal('show');
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -385,7 +391,7 @@ function view_recruiter(id)
                                 <div class="col-md-6  ">                                
                                     <div class="form-group">
                                         <label for="fname">First Name<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="First Name" class="form-control required" id="fname" name="fname" maxlength="128" required>
+                                        <input type="text" placeholder="First Name" class="form-control required"  name="fname" maxlength="128" required>
                                         <span class="text-danger" id="fname_err"></span>
                                         
                                     </div>
@@ -395,7 +401,7 @@ function view_recruiter(id)
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="lname">Last Name<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Last Name" class="form-control" id="lname"  name="lname" maxlength="128" required>
+                                        <input type="text" placeholder="Last Name" class="form-control"   name="lname" maxlength="128" required>
                                       <span class="text-danger" id="lname_err"></span>
                                     </div>
                                     <span style="color:red" id="text_field2_error"></span>
@@ -403,11 +409,21 @@ function view_recruiter(id)
                             </div>
                                     
                                     <div class="row">
-                                <div class="col-md-12  ">                                
+                                <div class="col-md-6  ">                                
                                     <div class="form-group">
                                         <label for="fname">Email Id<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Email Id" class="form-control required" id="email" name="email" maxlength="128" required>
+                                        <input type="text" placeholder="Email Id" class="form-control required"  name="email" maxlength="128" required>
                                         <span class="text-danger" id="email_err"></span>
+                                        
+                                    </div>
+                                    <span style="color:red" id="text_field1_error"></span>
+                                    
+                                </div>
+                                <div class="col-md-6">                                
+                                    <div class="form-group">
+                                        <label for="fname">Mobile No<span style="color:red">*</span></label>
+                                        <input type="text" placeholder="Mobile No" class="form-control required"  name="mobile" maxlength="128" required>
+                                        <span class="text-danger" id="mobile_err"></span>
                                         
                                     </div>
                                     <span style="color:red" id="text_field1_error"></span>
@@ -416,38 +432,19 @@ function view_recruiter(id)
                                </div>
                                     
                                     <div class="row">
-                                <div class="col-md-12">                                
-                                    <div class="form-group">
-                                        <label for="fname">Mobile No<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Mobile No" class="form-control required" id="mobile" name="mobile" maxlength="128" required>
-                                        <span class="text-danger" id="mobile_err"></span>
-                                        
-                                    </div>
-                                    <span style="color:red" id="text_field1_error"></span>
-                                    
-                                </div>
+                                      <div class="col-md-12">
+                                      <div class="form-group">
+                                        <label>Address<span style="color: red">*</span></label>
+                                        <textarea name="address" class="form-control"  required></textarea>
+                                      </div>
                                         </div>
-                                    
-                                    <div class="row">
-                                <div class="col-md-12">                                
-                                    <div class="form-group">
-                                        <label for="fname">Password<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Password" class="form-control required" id="password" name="password" maxlength="128" required>
-                                        <span class="text-danger" id="password_err"></span>
-                                        
-                                    </div>
-                                    <span style="color:red" id="text_field1_error"></span>
-                                    
-                                </div>
-                                
-                            </div>
-                                    
-                                  
-                                    
-                     <div class="row">
-                    <div class="col-md-6">
-                        <label class="form-label">State</label><span style="color: red">*</span>
-                        <select name="state" id="state" class="form-control" required>
+                                        </div>
+                                          
+                           <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="form-label">State</label><span style="color: red">*</span>
+                              <select name="state"  class="form-control state" required>
                                     <option value="">-- Select State --</option>
                                     <?php if(isset($states)){
                                         foreach($states as $state)
@@ -460,17 +457,44 @@ function view_recruiter(id)
                                     <!--<option value="Maharashtra">Maharashtra</option>-->
                         </select>
                         <span class="text-danger"><?php echo form_error('state'); ?></span>
-
+                        </div>
                     </div>
                     <div class="col-md-6">
+                      <div class="form-group">
                         <label class="form-label">City</label><span style="color: red">*</span>
-                        <select name="city" id="city" class="form-control" required>
+                        <select name="city"  class="form-control city" required>
                                     <option value="">-- Select City --</option>                                   
                              </select>
                         <span class="text-danger"><?php echo form_error('city'); ?></span>
-
+                        </div>
                     </div>
                     </div>
+                      <div class="row">
+                                <div class="col-md-6">                                
+                                    <div class="form-group">
+                                        <label for="fname">Password<span style="color:red">*</span></label>
+                                        <input type="text" placeholder="Password" class="form-control required"  name="password" maxlength="128" required>
+                                        <span class="text-danger" id="password_err"></span>
+                                        
+                                    </div>
+                                    <span style="color:red" id="text_field1_error"></span>
+                                    
+                                </div>
+                                <div class="col-md-6">                                
+                                    <div class="form-group">
+                                        <label for="fname">Status<span style="color:red">*</span></label>
+                                        <select name="status" class="form-control" >
+                                            <option value="1">Active</option>
+                                            <option value="0">Not Active</option>
+                                        </select>
+                                        <span class="text-danger" id="password_err"></span>
+                                        
+                                    </div>
+                                    <span style="color:red" id="text_field1_error"></span>
+                                    
+                                </div>
+                                
+                            </div>
                           </form>    
     				
     			</div>
@@ -488,6 +512,134 @@ function view_recruiter(id)
       </div>
    
 
+<!--                      View model      -->
+
+<div class="modal fade" id="viewModal" role="dialog">
+    <div class="modal-dialog" id="modal_dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header"style="background:#3c8dbc; color: white">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <center><h4 id="viewtitle" class="modal-title"></h4></center>
+        </div>
+        <div class="modal-body" id="modal_body">
+         
+            
+            
+        <div class="">
+          
+          <div class="panel-body">
+            <form method="post" action="" id="form">
+              <div>
+                <img src="" id="profile_pic" width="100px" height="100px">
+              </div>
+              <br>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Name</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>
+                    <div class="col-md-7">
+                      <span id="fname" class="text_color"></span>&nbsp<span class="text_color" id="lname"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Email-Id</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="email" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Mobile</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="mobile" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Gender</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="name" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Address</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="address" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>City</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="city" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Pincode</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="pincode" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>State</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="state" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+            </form>
+            
+          </div>
+                            </div>
+          
+        </div>         
+       <div class="modal-footer">
+             <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
+          <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
+        </div>
+    </div>           
+           
+        </div>        
+      </div>
+   
+
+   <!--                   End View Model            -->
 
 
 <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

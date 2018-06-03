@@ -18,6 +18,10 @@
                 margin:150px;
                
             }
+.text_color{
+  color: #707B7C;
+}
+
 
 </style>
 <div class="content-wrapper" style="background:white;">
@@ -86,17 +90,16 @@
           <th>CREATED AT</th>
           <th>STATUS</th>
 
-          <th style="width:125px;">ACTION
+          <th style="width:80px;">ACTION
           </p></th>
         </tr>
       </thead>
       <tbody id="myTable">
         <?php
           if (isset($members)) {
-            
+          // print_r($members);  
           
-         foreach($members as $res){
-             if($res->member_status=='1'){?>
+         foreach($members as $res){?>
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->member_id; ?>" class="" ></td> --> 
                                         <td><?php echo $res->member_id;?></td>
                                         <td><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
@@ -116,13 +119,15 @@
                                        }
                                        ?></td>
                                        <td>
-                  <button class="btn btn-success" onclick="edit_member(<?php echo $res->member_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Member"><i class="glyphicon glyphicon-pencil"></i></button>
-                  <button class="btn btn-danger" onclick="delete_menu(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Member"><i class="glyphicon glyphicon-trash"></i></button>
+                  <button class="btn btn-success btn-xs" onclick="edit_member(<?php echo $res->member_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Member"><i class="glyphicon glyphicon-pencil"></i></button>
+                  <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Member"><i class="glyphicon glyphicon-trash"></i></button>
+
+                  <button class="btn btn-warning btn-xs" onclick="view_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="View Member"><i class="fa fa-eye"></i></button>
                  
 
                 </td>
               </tr>
-          <?php }}}?>
+          <?php }}?>
 
 
 
@@ -137,16 +142,17 @@
   $(document).ready( function () {   
  
  
-  $("#state").change(function() {
-        
+  $('.state').change(function() {
+        // alert();
    var el = $(this) ;
-              $("#city").html("");
+              $('.city').html("");
 
 
 var state=el.val();
 
         if(state)
         {
+          // alert(state);
             
       $.ajax({
        url : "<?php echo site_url('index.php/admin/Members/show_cities')?>/" + state,        
@@ -159,7 +165,7 @@ var state=el.val();
           $.each(data,function(i,row)
           {
           
-              $("#city").append('<option value="'+ row.city_name +'">' + row.city_name+'</option>');
+              $('.city').append('<option value="'+ row.city_name +'">' + row.city_name+'</option>');
           }
           );
        },
@@ -199,46 +205,51 @@ var state=el.val();
 
 function view_member(id)
     {
-      save_method = 'update';
+      // save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/member/Student/ajax_edit/')?>/" + id,        
+        url : "<?php echo site_url('index.php/admin/Members/ajax_edit/')?>/" + id,        
         type: "GET",
                
         dataType: "JSON",
         success: function(data)
         {          
-            $('#sfname').html(data.member_fname);
-            $('#slname').html(data.member_lname); 
-            $('#scourse_name').html(data.course_name);
-            $('#semail').html(data.member_email);
-            $('#smobile').html(data.member_mobile);
-            $('#sgender').html(data.member_gender);
-            $('#saddmission_month').html(data.member_payment_date);
-            $('#scourse_end_date').html(data.member_course_end_date);
-            $('#slast_education').html(data.member_last_education);
+          // alert();
+            $('#fname').html(data.member_fname);
+            $('#lname').html(data.member_lname); 
+            $('#email').html(data.member_email);
+            $('#mobile').html(data.member_mobile);
+            $('#gender').html(data.member_gender);
+            $('#address').html(data.member_address);
+            $('#city').html(data.member_city);
+            $('#pincode').html(data.member_pincode);
+            $('#state').html(data.member_state);
+            $('#experience').html(data.member_experience);
+            $('#salary').html(data.member_anual_salary);
             if(data.member_profile_pic)
             {
-            $('#sprofile_pic').attr("src", "<?php  echo base_url();?>"+data.member_profile_pic);
+              alert('having');
+            $('#profile_pic').attr("src", "<?php  echo base_url();?>/profile_pic"+data.member_profile_pic);
              }
              else
              {
-               $('#sprofile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
+              alert('blank');
+               $('#profile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
              }
-            $('#remove_pic').attr("onclick","remove_profile_pic("+data.member_id+")");
-            $('#sdob').html(data.member_dob);
-            $('#susername').html(data.member_username);
-            $('#spassword').html(data.member_password);
-            $('#smember_last_education').html(data.member_last_education);
-            $('#saddress').html(data.member_address);  
-            $('#scity').html(data.member_city);
-            $('#sstate').html(data.member_state);
-            $('#spincode').html(data.member_pincode);
+            // $('#remove_pic').attr("onclick","remove_profile_pic("+data.member_id+")");
+            // $('#sdob').html(data.member_dob);
+            // $('#susername').html(data.member_username);
+            // $('#spassword').html(data.member_password);
+            // $('#smember_last_education').html(data.member_last_education);
+            // $('#saddress').html(data.member_address);  
+            // $('#scity').html(data.member_city);
+            // $('#sstate').html(data.member_state);
+            // $('#spincode').html(data.member_pincode);
             
-            $('#modal_form2').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Student Data'); // Set title to Bootstrap modal title
+            $('#viewModal').modal('show'); // show bootstrap modal when complete loaded
+            $('#viewtitle').text('Member Details'); // Set title to Bootstrap modal title
 
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -263,7 +274,7 @@ function view_member(id)
     {     
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
-      $('#city').html("");
+      $('.city').html("");
       //Ajax Load data from ajax
       $.ajax({
         url : "<?php echo site_url('index.php/admin/Members/ajax_edit/')?>/" + id,
@@ -271,17 +282,19 @@ function view_member(id)
         dataType: "JSON",
         success: function(data)
         {
-       
-            $("#append_city").remove();     
+            // $("#append_city").remove();     
             $('[name="member_id"]').val(data.member_id);
             $('[name="fname"]').val(data.member_fname);
             $('[name="lname"]').val(data.member_lname);
             $('[name="email"]').val(data.member_email);
             $('[name="mobile"]').val(data.member_mobile);
             $('[name="password"]').val(data.member_password);
-            $('[name="status"]').val(data.member_status);
-            $('#city').append('<option value="'+data.member_city+'">'+data.member_city+'</option>');
+            $('[name="address"]').val(data.member_address);
+            // $('[name="city"]').val(data.member_city);
             $('[name="state"]').val(data.member_state);
+            $('[name="status"]').val(data.member_status);
+              $('.city').append('<option value="'+ data.member_city +'">' + data.member_city +'</option>');
+
                         
            $("#title").text("Edit Member");
            $('#myModal').modal('show');
@@ -329,7 +342,7 @@ function view_member(id)
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-//                alert('Error adding / update data');
+               alert('Error adding / update data');
             }
         });
     }
@@ -370,7 +383,7 @@ function view_member(id)
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header"style="background:#3c8dbc">
+        <div class="modal-header"style="background:#3c8dbc; color: white">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <center><h4 id="title" class="modal-title"></h4></center>
         </div>
@@ -378,7 +391,7 @@ function view_member(id)
          
             
           	
-    		<div class="panel panel-default">
+    		<div class="">
     			
     			<div class="panel-body">
     				<form method="post" action="" id="form">
@@ -387,7 +400,7 @@ function view_member(id)
                                 <div class="col-md-6  ">                                
                                     <div class="form-group">
                                         <label for="fname">First Name<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="First Name" class="form-control required" id="fname" name="fname" maxlength="128" required>
+                                        <input type="text" placeholder="First Name" class="form-control required"  name="fname" maxlength="128" required>
                                         <span class="text-danger" id="fname_err"></span>
                                         
                                     </div>
@@ -397,7 +410,7 @@ function view_member(id)
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="lname">Last Name<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Last Name" class="form-control" id="lname"  name="lname" maxlength="128" required>
+                                        <input type="text" placeholder="Last Name" class="form-control"   name="lname" maxlength="128" required>
                                       <span class="text-danger" id="lname_err"></span>
                                     </div>
                                     <span style="color:red" id="text_field2_error"></span>
@@ -405,11 +418,21 @@ function view_member(id)
                             </div>
                                     
                                     <div class="row">
-                                <div class="col-md-12  ">                                
+                                <div class="col-md-6  ">                                
                                     <div class="form-group">
                                         <label for="fname">Email Id<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Email Id" class="form-control required" id="email" name="email" maxlength="128" required>
+                                        <input type="text" placeholder="Email Id" class="form-control required"  name="email" maxlength="128" required>
                                         <span class="text-danger" id="email_err"></span>
+                                        
+                                    </div>
+                                    <span style="color:red" id="text_field1_error"></span>
+                                    
+                                </div>
+                                <div class="col-md-6">                                
+                                    <div class="form-group">
+                                        <label for="fname">Mobile No<span style="color:red">*</span></label>
+                                        <input type="text" placeholder="Mobile No" class="form-control required"  name="mobile" maxlength="128" required>
+                                        <span class="text-danger" id="mobile_err"></span>
                                         
                                     </div>
                                     <span style="color:red" id="text_field1_error"></span>
@@ -418,39 +441,21 @@ function view_member(id)
                                </div>
                                     
                                     <div class="row">
-                                <div class="col-md-12">                                
-                                    <div class="form-group">
-                                        <label for="fname">Mobile No<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Mobile No" class="form-control required" id="mobile" name="mobile" maxlength="128" required>
-                                        <span class="text-danger" id="mobile_err"></span>
-                                        
-                                    </div>
-                                    <span style="color:red" id="text_field1_error"></span>
-                                    
-                                </div>
+                                          <div class="col-md-12">
+                                            <div class="form-group">
+                                              <label>Address<span style="color: red">*</span></label>
+                                              <textarea name="address" class="form-control" required></textarea>
+                                            </div>
+                                          </div>
                                         </div>
                                     
-                                    <div class="row">
-                                <div class="col-md-12">                                
-                                    <div class="form-group">
-                                        <label for="fname">Password<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Password" class="form-control required" id="password" name="password" maxlength="128" required>
-                                        <span class="text-danger" id="password_err"></span>
-                                        
-                                    </div>
-                                    <span style="color:red" id="text_field1_error"></span>
-                                    
-                                </div>
-                                
-                            </div>
-                                    
-                                   
-                                    
-                                    
-                     <div class="row">
-                    <div class="col-md-6">
-                        <label class="form-label">State</label><span style="color: red">*</span>
-                        <select name="state" id="state" class="form-control" required>
+                                            
+                             <div class="row">
+                            <div class="col-md-6">
+                      <div class="form-group">
+
+                                <label class="form-label">State</label><span style="color: red">*</span>
+                                <select name="state"  class="form-control state" required>
                                     <option value="">-- Select State --</option>
                                     <?php if(isset($states)){
                                         foreach($states as $state)
@@ -463,29 +468,44 @@ function view_member(id)
                                     <!--<option value="Maharashtra">Maharashtra</option>-->
                         </select>
                         <span class="text-danger"><?php echo form_error('state'); ?></span>
-
+                      </div>
                     </div>
                     <div class="col-md-6">
+                      <div class="form-group">
                         <label class="form-label">City</label><span style="color: red">*</span>
-                        <select name="city" id="city" class="form-control" required>
+                        <select name="city"  class="form-control city" required>
                                     <option value="">-- Select City --</option>
-                                    <?php if(isset($city)){
-                                        foreach($city as $city)
-                                        {
-                                           echo '<option value="">'.$state->city_state.'</option>';
-                                        }
-                                    }?>
-                                 
-                                    
-                             </select>
+                           </select>
                         <span class="text-danger"><?php echo form_error('city'); ?></span>
-
+                      </div>
                     </div>
                     </div>
+                      <div class="row">
+                                <div class="col-md-6">                                
+                                    <div class="form-group">
+                                        <label for="fname">Password<span style="color:red">*</span></label>
+                                        <input type="text" placeholder="Password" class="form-control required"  name="password" maxlength="128" required>
+                                        <span class="text-danger" id="password_err"></span>
+                                        
+                                    </div>
+                                    <span style="color:red" id="text_field1_error"></span>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label>Status<span style="color: red">*</span></label>
+                                     <select name="status" class="form-control" >
+                                            <option value="1">Active</option>
+                                            <option value="0">Not Active</option>
+                                        </select>
+                                  </div>
+                                </div>
+                                
+                            </div>
                              
+                    </form>
     				
     			</div>
-                    </form>
                             </div>
     			
     		</div>         
@@ -498,6 +518,178 @@ function view_member(id)
         </div>        
       </div>
    
+<!--                      View model      -->
+
+<div class="modal fade" id="viewModal" role="dialog">
+    <div class="modal-dialog" id="modal_dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header"style="background:#3c8dbc; color: white">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <center><h4 id="viewtitle" class="modal-title"></h4></center>
+        </div>
+        <div class="modal-body" id="modal_body">
+         
+            
+            
+        <div class="">
+          
+          <div class="panel-body">
+            <form method="post" action="" id="form">
+              <div>
+                <img src="" id="profile_pic" width="100px" height="100px">
+              </div>
+              <br>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Name</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>
+                    <div class="col-md-7">
+                      <span id="fname" class="text_color"></span>&nbsp<span class="text_color" id="lname"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Email-Id</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="email" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Mobile</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="mobile" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>DOB</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>
+                    <div class="col-md-7">
+                      <span id="dob" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Gender</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="name" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Marital Status</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="marital" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Address</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="address" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>City</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="city" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Pincode</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="pincode" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>State</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="state" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Experience</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="experience" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Anual Salary</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="salary" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+            </form>
+            
+          </div>
+                            </div>
+          
+        </div>         
+       <div class="modal-footer">
+             <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
+          <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
+        </div>
+    </div>           
+           
+        </div>        
+      </div>
+   
+
+   <!--                   End View Model            -->
 
 
 <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

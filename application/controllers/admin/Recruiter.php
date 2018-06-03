@@ -53,11 +53,12 @@ class Recruiter extends CI_Controller
             'recruiter_lname'          => $this->input->post('lname'),
             'recruiter_email'          => $this->input->post('email'),
             'recruiter_mobile'         => $this->input->post('mobile'),
+            'recruiter_address'        =>$this->input->post('address'),
             'recruiter_password'       => $this->input->post('password'),
             'recruiter_city'           => $this->input->post('city'),
             'recruiter_state'          => $this->input->post('state'),
             'recruiter_created_at' => date("Y-m-d "),
-            'recruiter_status'        => '1'
+            'recruiter_status'        => $this->input->post('status'),
 
 
         );
@@ -79,9 +80,12 @@ class Recruiter extends CI_Controller
                         'recruiter_lname'          => $this->input->post('lname'),
                         'recruiter_email'          => $this->input->post('email'),
                         'recruiter_mobile'         => $this->input->post('mobile'),
+                        'recruiter_address'        =>$this->input->post('address'),
                         'recruiter_password'       => $this->input->post('password'),
                         'recruiter_city'           => $this->input->post('city'),
                         'recruiter_state'          => $this->input->post('state'),
+                        'recruiter_status'        => $this->input->post('status'),
+
                     );
        
         $res = $this->Recruiters_model->recruiter_update(array('recruiter_id'=>$this->input->post('recruiter_id')),$data);
@@ -102,8 +106,8 @@ class Recruiter extends CI_Controller
         
      function show_cities($state)
         {
-           
-            $cities=$this->Cities_model->getall_cities(ltrim($state));
+            $st=str_replace('%20', " ", $state);  
+            $cities=$this->Cities_model->getall_cities(ltrim($st));
           
             echo json_encode($cities);
         }
