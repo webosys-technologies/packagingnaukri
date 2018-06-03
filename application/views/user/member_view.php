@@ -86,7 +86,7 @@
           <th>CREATED AT</th>
           <th>STATUS</th>
 
-          <th style="width:125px;">ACTION
+          <th style="width:90px;">ACTION
           </p></th>
         </tr>
       </thead>
@@ -116,8 +116,9 @@
                                        }
                                        ?></td>
                                        <td>
-                  <button class="btn btn-success" onclick="edit_member(<?php echo $res->member_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Member"><i class="glyphicon glyphicon-pencil"></i></button>
-                  <button class="btn btn-danger" onclick="delete_menu(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Member"><i class="glyphicon glyphicon-trash"></i></button>
+                  <button class="btn btn-success btn-xs" onclick="edit_member(<?php echo $res->member_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Member"><i class="glyphicon glyphicon-pencil"></i></button>
+                  <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Member"><i class="glyphicon glyphicon-trash"></i></button>
+                  <button class="btn btn-warning btn-xs" onclick="view_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="View Member"><i class="fa fa-eye"></i></button>
                  
 
                 </td>
@@ -149,7 +150,7 @@ var state=el.val();
         {
             
       $.ajax({
-       url : "<?php echo site_url('index.php/user/Members/show_cities')?>/" + state,        
+       url : "<?php echo site_url('index.php/Home/show_cities')?>/" + state,        
        type: "GET",
               
        dataType: "JSON",
@@ -199,12 +200,11 @@ var state=el.val();
 
 function view_member(id)
     {
-      save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/member/Student/ajax_edit/')?>/" + id,        
+        url : "<?php echo site_url('index.php/user/Members/ajax_edit/')?>/" + id,        
         type: "GET",
                
         dataType: "JSON",
@@ -221,16 +221,14 @@ function view_member(id)
             $('#state').html(data.member_state);
             $('#experience').html(data.member_experience);
             $('#salary').html(data.member_anual_salary);
-            if(data.member_profile_pic)
-            {
-              alert('having');
-            $('#profile_pic').attr("src", "<?php  echo base_url();?>/profile_pic"+data.member_profile_pic);
-             }
-             else
-             {
-              alert('blank');
-               $('#profile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
-             }
+            // if(data.member_profile_pic)
+            // {
+            // $('#profile_pic').attr("src", "<?php  echo base_url();?>/profile_pic"+data.member_profile_pic);
+            //  }
+            //  else
+            //  {
+            //    $('#profile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
+            //  }
             // $('#remove_pic').attr("onclick","remove_profile_pic("+data.member_id+")");
             // $('#sdob').html(data.member_dob);
             // $('#susername').html(data.member_username);
@@ -241,8 +239,8 @@ function view_member(id)
             // $('#sstate').html(data.member_state);
             // $('#spincode').html(data.member_pincode);
             
-            $('#modal_form2').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Student Data'); // Set title to Bootstrap modal title
+            $('#viewModal').modal('show'); // show bootstrap modal when complete loaded
+            $('#viewtitle').text('Student Data'); // Set title to Bootstrap modal title
 
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -267,7 +265,7 @@ function view_member(id)
     {     
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
-      $('#city').html("");
+      $('.city').html("");
       //Ajax Load data from ajax
       $.ajax({
         url : "<?php echo site_url('index.php/user/Members/ajax_edit/')?>/" + id,
@@ -376,7 +374,7 @@ function view_member(id)
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header"style="background:#3c8dbc">
+        <div class="modal-header"style="background:#3c8dbc; color: white">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <center><h4 id="title" class="modal-title"></h4></center>
         </div>
@@ -384,7 +382,7 @@ function view_member(id)
          
             
           	
-    		<div class="panel panel-default">
+    		<div class="">
     			
     			<div class="panel-body">
     				<form method="post" action="" id="form">
@@ -497,7 +495,7 @@ function view_member(id)
                             </div>
                     </form>
                             </div>
-    			
+    			</div>
     		</div>         
     	 <div class="modal-footer">
              <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
@@ -524,7 +522,7 @@ function view_member(id)
          
             
             
-        <div class="">
+        <div class=" ">
           
           <div class="panel-body">
             <form method="post" action="" id="form">

@@ -155,7 +155,7 @@ var state=el.val();
           // alert(state);
             
       $.ajax({
-       url : "<?php echo site_url('index.php/admin/Members/show_cities')?>/" + state,        
+       url : "<?php echo site_url('index.php/Home/show_cities')?>/" + state,        
        type: "GET",
               
        dataType: "JSON",
@@ -230,12 +230,10 @@ function view_member(id)
             $('#salary').html(data.member_anual_salary);
             if(data.member_profile_pic)
             {
-              alert('having');
             $('#profile_pic').attr("src", "<?php  echo base_url();?>/profile_pic"+data.member_profile_pic);
              }
              else
              {
-              alert('blank');
                $('#profile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
              }
             // $('#remove_pic').attr("onclick","remove_profile_pic("+data.member_id+")");

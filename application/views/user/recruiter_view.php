@@ -86,7 +86,7 @@
           <th>STATUS</th
           <!--class=" badge bg-yellow"-->
 
-          <th style="width:125px;">ACTION
+          <th style="width:90px;">ACTION
           </p></th>
         </tr>
       </thead>
@@ -115,8 +115,9 @@
                                        }
                                        ?></td>
                                        <td>
-                  <button class="btn btn-success" onclick="edit_recruiter(<?php echo $res->recruiter_id; ?>)" data-toggle="tooltip" data-placement="bottom" title="Edit Recruiter"><i class="glyphicon glyphicon-pencil"></i></button>
-                  <button class="btn btn-danger" onclick="delete_menu(<?php echo $res->recruiter_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Recruiter"><i class="glyphicon glyphicon-trash"></i></button>
+                  <button class="btn btn-success btn-xs" onclick="edit_recruiter(<?php echo $res->recruiter_id; ?>)" data-toggle="tooltip" data-placement="bottom" title="Edit Recruiter"><i class="glyphicon glyphicon-pencil"></i></button>
+                  <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $res->recruiter_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Recruiter"><i class="glyphicon glyphicon-trash"></i></button>
+                  <button class="btn btn-warning btn-xs" onclick="view_recruiter(<?php echo $res->recruiter_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Recruiter"><i class="fa fa-eye"></i></button>
                  
 
                 </td>
@@ -148,7 +149,7 @@ var state=el.val();
         {
             
       $.ajax({
-       url : "<?php echo site_url('index.php/user/Recruiter/show_cities')?>/" + state,        
+       url : "<?php echo site_url('index.php/Home/show_cities')?>/" + state,        
        type: "GET",
               
        dataType: "JSON",
@@ -251,7 +252,7 @@ function view_recruiter(id)
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
            //Ajax Load data from ajax
-            $("#city").html("");
+            $(".city").html("");
       $.ajax({
         url : "<?php echo site_url('index.php/user/Recruiter/ajax_edit/')?>/" + id,
         type: "GET",
@@ -488,6 +489,135 @@ function view_recruiter(id)
       </div>
    
 
+
+<!--                      View model      -->
+
+<div class="modal fade" id="viewModal" role="dialog">
+    <div class="modal-dialog" id="modal_dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header"style="background:#3c8dbc; color: white">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <center><h4 id="viewtitle" class="modal-title"></h4></center>
+        </div>
+        <div class="modal-body" id="modal_body">
+         
+            
+            
+        <div class="">
+          
+          <div class="panel-body">
+            <form method="post" action="" id="form">
+              <div>
+                <img src="" id="profile_pic" width="100px" height="100px">
+              </div>
+              <br>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Name</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>
+                    <div class="col-md-7">
+                      <span id="fname" class="text_color"></span>&nbsp<span class="text_color" id="lname"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Email-Id</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="email" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Mobile</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="mobile" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Gender</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="name" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Address</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="address" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>City</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="city" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Pincode</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="pincode" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>State</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                      <span id="state" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
+            </form>
+            
+          </div>
+                            </div>
+          
+        </div>         
+       <div class="modal-footer">
+             <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
+          <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
+        </div>
+    </div>           
+           
+        </div>        
+      </div>
+   
+
+   <!--                   End View Model            -->
 
 
 <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

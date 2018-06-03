@@ -81,6 +81,14 @@ class Home extends CI_Controller
              $this->load->view('home_footer',$result);
         }
 
+         function show_cities($state)
+        {           
+            $st=str_replace('%20', ' ', $state);
+            $cities=$this->Cities_model->getall_cities(ltrim($st));
+          
+            echo json_encode($cities);
+        }
+
     
 }
 
