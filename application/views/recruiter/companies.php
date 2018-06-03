@@ -177,6 +177,47 @@ var user_type=el.val();
  
  
  
+ 
+  $('.state').change(function() {
+        // alert();
+   var el = $(this) ;
+              $('.city').html("");
+
+
+var state=el.val();
+
+        if(state)
+        {
+          // alert(state);
+            
+      $.ajax({
+       url : "<?php echo site_url('index.php/Home/show_cities')?>/" + state,        
+       type: "GET",
+              
+       dataType: "JSON",
+       success: function(data)
+       {
+        
+          $.each(data,function(i,row)
+          {
+          
+              $('.city').append('<option value="'+ row.city_name +'">' + row.city_name+'</option>');
+          }
+          );
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+     }
+    
+ });  
+ 
+ 
+ 
+ 
+ 
       $('#table_id').DataTable();
   } );
 

@@ -121,9 +121,15 @@ class Companies extends CI_Controller
     
     public function company_delete($id)
     {
+        $info=$this->Companies_model->company_by_id($id);
         $res=$this->Companies_model->company_delete($id);
         if($res)
-        {
+        {         
+            if(file_exists($info->company_logo))        
+            {
+            unlink($info->company_logo);
+            }
+         
             $this->session->set_flashdata('success','company deleted successfully');
             echo json_encode(array('success'=>'Company deleted successfully'));
         }

@@ -180,14 +180,6 @@ var state=el.val();
  
  
  
- 
- 
- 
- 
- 
- 
- 
- 
       $('#table_id').DataTable();
   } );
 

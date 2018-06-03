@@ -122,10 +122,10 @@ class Companies extends CI_Controller
     
     public function company_delete($id)
     {
+         $info=$this->Companies_model->company_by_id($id);
         $res=$this->Companies_model->company_delete($id);
         if($res)
-        {
-            $info=$this->Companies_model->company_by_id($id);
+        {           
             if(file_exists($info->company_logo))        
             {
             unlink($info->company_logo);
