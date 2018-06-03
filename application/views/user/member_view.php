@@ -221,14 +221,14 @@ function view_member(id)
             $('#state').html(data.member_state);
             $('#experience').html(data.member_experience);
             $('#salary').html(data.member_anual_salary);
-            // if(data.member_profile_pic)
-            // {
-            // $('#profile_pic').attr("src", "<?php  echo base_url();?>/profile_pic"+data.member_profile_pic);
-            //  }
-            //  else
-            //  {
-            //    $('#profile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
-            //  }
+            if(data.member_profile_pic)
+            {
+            $('#profile_pic').attr("src", "<?php  echo base_url();?>"+data.member_profile_pic);
+             }
+             else
+             {
+               $('#profile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
+             }
             // $('#remove_pic').attr("onclick","remove_profile_pic("+data.member_id+")");
             // $('#sdob').html(data.member_dob);
             // $('#susername').html(data.member_username);
