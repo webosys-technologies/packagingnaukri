@@ -46,7 +46,7 @@ class Dashboard extends CI_Controller
              $this->load->view('member/header',$result);
 //             $this->load->view('member/member_header',$result);
 //             $this->load->view('member/dashboard');
-               $this->load->view('member/jobs');
+                 $this->load->view('member/jobs');
              $this->load->view('member/footer');
 //             $this->load->view('member/member_footer');
 

@@ -171,6 +171,16 @@
             <i class="fa fa-folder"></i> <span>Jobs</span>            
           </a>
          </li>
+        <li>
+          <a href="<?php echo base_url(); ?>user/Institute">
+            <i class="fa fa-folder"></i> <span>Manage university/Institute</span>            
+          </a>
+         </li>
+        <li>
+          <a href="<?php echo base_url(); ?>user/Education">
+            <i class="fa fa-folder"></i> <span>Manage Education</span>            
+          </a>
+         </li>
          <li>
           <a href="<?php echo base_url(); ?>user/Profile">
             <i class="fa fa-users"></i> <span>Profile</span>

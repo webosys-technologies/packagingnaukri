@@ -62,8 +62,8 @@ class Members_model extends CI_Model
             'member_password'       => $this->input->post('password'),
             'member_city'           => $this->input->post('city'),
             'member_state'          => $this->input->post('state'),
-            'member_created_at' => date("Y-m-d "),
-                        'member_status'        => '1'
+            'member_created_at'     => date("Y-m-d "),
+            'member_status'        => '1'
 
 
         );
@@ -77,7 +77,7 @@ class Members_model extends CI_Model
     public function getall_members()
     {
         $this->db->from($this->table);        
-        $this->db->where('member_status','1');
+        // $this->db->where('member_status','1');   
         $query=$this->db->get();
         return $query->result();
        

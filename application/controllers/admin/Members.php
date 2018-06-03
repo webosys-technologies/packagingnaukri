@@ -54,6 +54,8 @@ class Members extends CI_Controller
                         'member_password'       => $this->input->post('password'),
                         'member_city'           => $this->input->post('city'),
                         'member_state'          => $this->input->post('state'),
+                        'member_address'        =>$this->input->post('address'),
+                        'member_status'         =>$this->input->post('status'),
                           );
             
                        
@@ -87,7 +89,8 @@ class Members extends CI_Controller
     
      function show_cities($state)
         {           
-            $cities=$this->Cities_model->getall_cities(ltrim($state));
+            $st=str_replace('%20', ' ', $state);
+            $cities=$this->Cities_model->getall_cities(ltrim($st));
           
             echo json_encode($cities);
         }
