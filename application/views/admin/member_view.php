@@ -222,7 +222,7 @@ function view_member(id)
             $('#salary').html(data.member_anual_salary);
             if(data.member_profile_pic)
             {
-            $('#profile_pic').attr("src", "<?php  echo base_url();?>/profile_pic"+data.member_profile_pic);
+            $('#profile_pic').attr("src", "<?php  echo base_url();?>"+data.member_profile_pic);
              }
              else
              {
