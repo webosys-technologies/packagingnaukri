@@ -139,7 +139,7 @@ $("#logo").change(function() {
 });
  
  
-  $("#user_type").change(function() {
+  $("#state").change(function() {
         
    var el = $(this) ;
               $("#city").html("");
@@ -151,7 +151,7 @@ var user_type=el.val();
         {
             
       $.ajax({
-       url : "<?php echo site_url('index.php/admin/Companies/show_cities')?>/" + user_type,        
+       url : "<?php echo site_url('index.php/recruiter/Companies/show_cities')?>/" + user_type,        
        type: "GET",
               
        dataType: "JSON",
@@ -174,47 +174,6 @@ var user_type=el.val();
     
  });  
   
- 
- 
- 
- 
-  $('.state').change(function() {
-        // alert();
-   var el = $(this) ;
-              $('.city').html("");
-
-
-var state=el.val();
-
-        if(state)
-        {
-          // alert(state);
-            
-      $.ajax({
-       url : "<?php echo site_url('index.php/Home/show_cities')?>/" + state,        
-       type: "GET",
-              
-       dataType: "JSON",
-       success: function(data)
-       {
-        
-          $.each(data,function(i,row)
-          {
-          
-              $('.city').append('<option value="'+ row.city_name +'">' + row.city_name+'</option>');
-          }
-          );
-       },
-       error: function (jqXHR, textStatus, errorThrown)
-       {
-//         alert('Error...!');
-       }
-     });
-     }
-    
- });  
- 
- 
  
  
  

@@ -190,6 +190,14 @@ if (isset($_FILES['logo']['name'])) {
         
     }
     
+    
+     function show_cities($state)
+        {
+           
+            $cities=$this->Cities_model->getall_cities(ltrim($state));
+          
+            echo json_encode($cities);
+        }
   
 }
 

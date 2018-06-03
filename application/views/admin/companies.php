@@ -126,7 +126,29 @@
   </div>
 
   <script type="text/javascript">
-  $(document).ready( function () {   
+  $(document).ready( function () { 
+      
+      
+      
+      function readURL(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('#company_logo').attr('src', e.target.result);
+      $('#company_logo').attr('hidden',false);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#logo").change(function() {
+  readURL(this);
+});
+      
+      
  
  
   $("#state").change(function() {
@@ -184,6 +206,7 @@ var user_type=el.val();
 
   function add_company()
     {  
+        $("#company_logo").prop('hidden',true);
         save_method="add";        
        $('#form')[0].reset();
         $("#title").text("Add Company");
@@ -432,16 +455,23 @@ function view_company(id)
                                 </div><br>
                                     
                                     <div class="row">
-                                <div class="col-md-12">                                
+                                <div class="col-md-6">                                
                                     <div class="form-group">
                                        <label>Company Address</label><span style="color: red">*</span>
                                     <textarea cols="80" id="address" class="form-control" name="address" rows="5"></textarea>
                                         <span class="text-danger" id="password_err"></span>
                                         
-                                    </div>
-                                   
-                                    
-                                </div>                                
+                                    </div>                                  
+                                </div>
+                                        <div class="col-md-6">                                
+                                    <div class="form-group">
+                                       <label>Company Logo</label><span style="color: red">*</span>
+                                    <input type="file" name="logo" id="logo" value="">
+                                        <span class="text-danger" id="comp_err"></span>
+                                        
+                                    </div> 
+                                    <img src="" id="company_logo" width="120px" height="60px" hidden>
+                                </div> 
                                      </div> 
 
 
