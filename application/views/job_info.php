@@ -80,8 +80,9 @@
           </div>
                    
                           </form>
-                         <div class="pull-right"><button type='button' class='btn btn-primary' onclick='apply("<?php echo $job_info->job_id; ?>")'>Apply</button>
-                    <!--<button type='button' class='btn btn-danger' onclick='close()'>Close</button>-->
+                         <div class="pull-right"><button type='button' data-toggle="modal" data-target="#myModal" class='btn btn-primary' onclick='apply("<?php echo $job_info->job_id; ?>","login_to_apply")'>Login to Apply</button>
+                     <!--<button type='button' class='btn btn-info' onclick='apply("<?php echo $job_info->job_id; ?>"."register_to_apply")'>Register to Apply</button>-->
+                   
                     </div>
                     </div>
                    
@@ -91,4 +92,15 @@
 		
         </div>
         
-        
+     <script>
+         var id;
+         var method;
+         $("#show_otp_box").hide();
+        function apply(id,method)
+         {
+             
+//             alert(method);
+             $("#job_id").val(id);
+
+         }
+         </script>
