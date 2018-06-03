@@ -29,7 +29,7 @@ class Dashboard extends CI_Controller
                       
             $where=array('member_id'=>$id);
             $emp=$this->Employments_model->get_employment($where);
-            if($emp->employment_from)
+            if(!empty($emp->employment_from))
             {
                  $datetime1 = new DateTime(date("Y-m-d"));
             $datetime2 = new DateTime($emp->employment_from);
