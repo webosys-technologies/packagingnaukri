@@ -20,7 +20,7 @@ class Jobs extends CI_Controller
      */
     public function index()
     {       
-            $id=$this->session->userdata('user_id');
+            $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
             $result['jobs']=$this->Jobs_model->getall_jobs();
             $result['companies']=$this->Companies_model->getall_companies();
@@ -128,7 +128,7 @@ class Jobs extends CI_Controller
 
         if($result)
         {
-            $id=$this->session->userdata('user_id');
+            $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
             
         $this->load->view('admin/header',$result);

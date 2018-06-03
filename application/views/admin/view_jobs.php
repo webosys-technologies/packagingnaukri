@@ -450,19 +450,17 @@ function view_job(id)
                             </div>
                                     
                                     <div class="row">
-                                <div class="col-md-12  ">                                
+                                <div class="col-md-6">                                
                                     <div class="form-group">
                                         <label>Qualification: (*)</label>
                                     <input name="qualification" placeholder="Qualification" class="form-control" value="">
                                         <span class="text-danger" id="email_err"></span>
-                                        
+                                                                               
                                     </div>
                                                                        
                                 </div>
-                               </div>
-                                    
-                                    <div class="row">
-                                <div class="col-md-12">                                
+                              
+                                <div class="col-md-6">                                
                                     <div class="form-group">
                                        <label>Experience: (*)</label>
                                        <input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">

@@ -19,7 +19,7 @@ class Applicants extends CI_Controller
 	public function index()
     {
                  
-            $id=$this->session->userdata('user_id');
+            $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
             $result['members']=$this->Applied_jobs_model->applied_members();
             $result['system']=$this->System_model->get_info();

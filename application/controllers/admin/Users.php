@@ -17,7 +17,7 @@ class Users extends CI_Controller
 	public function index()
     {
                  
-            $id=$this->session->userdata('user_id');
+            $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
             $result['users']=$this->User_model->getall_user("");
             $result['system']=$this->System_model->get_info();

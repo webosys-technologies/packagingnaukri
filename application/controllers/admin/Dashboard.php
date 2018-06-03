@@ -26,7 +26,7 @@ class Dashboard extends CI_Controller
     public function index()
     {
       
-            $id=$this->session->userdata('user_id');
+            $id=$this->session->userdata('admin_id');
             $result['user_data']=$this->User_model->get_user_by_id($id);
             $result['recruiters']=$this->Recruiters_model->getall();
             $result['members']=$this->Members_model->getall_members();

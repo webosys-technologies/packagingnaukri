@@ -8,7 +8,7 @@
       overflow-y: initial !important
 }
 .modal-body{
-  height:480px;
+  /*height:480px;*/
   overflow-y: auto;
 }
 
@@ -27,46 +27,8 @@
     </section>
     <hr style="border-top: 1px solid #ccc;">
     <section class="content">
-        <div class="row">
-
-  <!--<button type="button" class="btn btn-primary">Open Modal</button>-->
-
-         <div class="col-md-4">
-    <!--<button class="btn btn-primary"  onclick="add_member()" data-toggle="tooltip" data-placement="bottom" title="Add Member">      <i class="glyphicon glyphicon-plus"></i> Add Member</button>-->
-<!--<button type="button"  id="bt" class="btn btn-primary" onclick="add_member()"><i></i>Add Member</button>-->
-    </div>
-    <div class="col-md-6">
-         <?php
-        $this->load->helper('form');
-        $success = $this->session->flashdata('success');
-        if($success)
-        {
-            ?>
-            
-        <div class="alert alert-success alert-dismissible" data-auto-dismiss="5000">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Success!</strong> <?php echo $success; ?> 
-  </div>
-        <?php }?>
-             
-              <?php
-        $this->load->helper('form');
-        $error = $this->session->flashdata('error');
-        if($error)
-        {
-            ?>           
-        <div class="alert alert-danger alert-dismissible" data-auto-dismiss="2000">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Error!</strong> <?php echo $error; ?> 
-  </div>
-        <?php }?>
-             
-             
-       
-        </div>
-        </div>
-    <br><br>
-   
+        <div class="row content">
+      
 <div class="table-responsive">
     <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
       <thead>
@@ -122,6 +84,7 @@
 
     </table>
     </div>
+            </div>
 </section>
   </div>
 

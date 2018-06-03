@@ -18,7 +18,7 @@ class Members extends CI_Controller
 	public function index()
     {
                  
-            $id=$this->session->userdata('user_id');
+            $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
             $result['members']=$this->Members_model->getall_members();
             $result['states']=$this->Cities_model->getall_state();

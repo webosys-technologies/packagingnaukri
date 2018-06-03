@@ -53,7 +53,7 @@ h3{
         <li class="active">Profile</li>
       </ol>
              </section>
-<!--<hr style="border-top: 1px solid #ccc;">-->
+<hr style="border-top: 1px solid #ccc;">
       <section class="content" >
 
 <div class="row content">

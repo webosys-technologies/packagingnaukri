@@ -17,7 +17,7 @@ class Education extends CI_Controller
 	public function index()
 	{
 
-            $id=$this->session->userdata('user_id');
+            $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
              $result['edu']=$this->Master_edu_model->getall();
             $result['system']=$this->System_model->get_info();

@@ -20,7 +20,7 @@ class Companies extends CI_Controller
      */
     public function index()
     {       
-             $id=$this->session->userdata('user_id');
+             $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
             $result['states']=$this->Cities_model->getall_state();
             $result['companies']=$this->Companies_model->getall_companies();

@@ -172,13 +172,13 @@ var user_type=el.val();
  });  
   
   
-   var start_exp = 0;
-var end = 15;
-var options = "";
-for(var exp = start_exp ; exp <=end; exp++){
-  options += '<option value="'+exp+'">'+ exp + " yrs" +'</option>'; 
-}
-document.getElementById("experience").innerHTML = options;
+//   var start_exp = 0;
+//var end = 15;
+//var options = "";
+//for(var exp = start_exp ; exp <=end; exp++){
+//  options += '<option value="'+exp+'">'+ exp + " yrs" +'</option>'; 
+//}
+//document.getElementById("experience").innerHTML = options;
 
 
 
@@ -451,7 +451,7 @@ function view_job(id)
                             </div>
                                     
                                     <div class="row">
-                                <div class="col-md-12  ">                                
+                                <div class="col-md-6 ">                                
                                     <div class="form-group">
                                         <label>Qualification: (*)</label>
                                     <input name="qualification" placeholder="Qualification" class="form-control" value="">
@@ -460,30 +460,19 @@ function view_job(id)
                                     </div>
                                                                        
                                 </div>
-                               </div>
-                                    
-                                    <div class="row">
+                               
                                 <div class="col-md-6">                                
                                     <div class="form-group">
                                        <label>Experience: (*)</label>
-                                       <!--<input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">-->
-                                       <select name="experience" id="experience" class="form-control"></select>
+                                       <input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">
+                                       <!--<select name="experience" id="experience" class="form-control"></select>-->
                                        <!--<select name="exp_month" id="exp_month" class="form-control"></select>-->
                                         <span class="text-danger" id="mobile_err"></span>
                                         
                                     </div>
                                                                       
                                 </div>
-                                          <div class="col-md-6">                                
-                                    <div class="form-group">
-                                        <!--<label></label>--><br>
-                                       <!--<input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">-->
-                                       <select name="experience" id="experience" class="form-control"></select>
-                                        <span class="text-danger" id="mobile_err"></span>
-                                        
-                                    </div>
-                                                                      
-                                </div>
+                                      
                                         </div>
                                     
                                     <div class="row">
@@ -510,15 +499,20 @@ function view_job(id)
                         <span class="text-danger" id="gen_err"></span>
 
                     </div>         
-                    </div>
+                    </div><br>
                                     
                      <div class="row">
                           <div class="col-md-6">
                        <label>Job Type: (*)</label>
-                                    <input name="jobtype" placeholder="Full Time/Part Time" class="form-control" value="">
+                                    <select name="jobtype" id="job_type" class="form-control" value="">
+                                        <option value="Full Time">Full Time</option>
+                                        <option value="Part Time">Part Time</option>
+                                        <option value="Internship">Internship</option>
+                                        <option value="Temporary">Temporary</option>                                       
+                                    </select>
                         <span class="text-danger" id="gen_err"></span>
 
-                    </div>  
+                    </div>    
                          <div class="col-md-6">
                        <label>Job Salary: (*)</label>
                                     <input name="jobsalary" placeholder="Job Salary" class="form-control" value="">

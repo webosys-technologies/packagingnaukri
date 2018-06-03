@@ -18,7 +18,7 @@ class Profile extends CI_Controller
 	function index()
 	{
 
-            $id=$this->session->userdata('user_id');
+            $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
             // $data['user']=$this->User_model->get_user_b();
             $result['system']=$this->System_model->get_info();
