@@ -8,7 +8,7 @@
       overflow-y: initial !important
 }
 .modal-body{
-  height: 420px;
+  height: 390px;
   overflow-y: auto;
 }
 
@@ -325,7 +325,37 @@ function view_company(id)
       }
     }
 
-
+    function view_company(id)
+    {
+              
+           $.ajax({
+       url : "<?php echo site_url('index.php/admin/Companies/company_info')?>/" + id,        
+       type: "GET",
+              
+       dataType: "JSON",
+       success: function(data)
+       {
+//           alert(data.company_address);
+                 $("#company_name").html(data.company_name);
+                 $("#company_type").html(data.company_type);
+                  $("#establish").html(data.company_establish_in);
+//                    
+                 $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
+                 $("#email").html(data.company_email);
+                 $("#contact").html(data.company_contact);
+                 $("#comp_address").html(data.company_address);
+                 
+             
+            
+          $("#company_modal").modal('show');
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+       
+    }
 
   </script>
 
@@ -499,8 +529,8 @@ function view_company(id)
 
 
 
-<div class="modal fade" id="company_modal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog">   
+<div class="modal fade"  id="company_modal" role="dialog">
+    <div class="modal-dialog" style="width:550px;" id="modal_dialog">   
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">
@@ -512,12 +542,12 @@ function view_company(id)
     			<div class="panel-body">
     			  <form action="" id="skill_form">  
             <!--<img src="" height="50px" weight="150px"><br>-->                                   
-          <h4 style="color:#5DADE2" id="Company Name:"></h4>
+          <h4 style="color:#5DADE2" id="company_name"></h4>
           
           <div class="row">
               <div class="col-md-3">
           <label >Company Type </label>
-          </div>: <span id="compan_type" class="job_info"> </span><br>
+          </div>: <span id="company_type" class="job_info"> </span><br>
           </div>
               <div class="row">
           <div class="col-md-3">        
@@ -534,20 +564,20 @@ function view_company(id)
           <div class="row">
               <div class="col-md-3">
           <label >Address </label>
-          </div>: <span id="address" class="job_info"> </span><br>
+          </div>: <span id="comp_address" class="job_info"> </span><br>
                     </div>
 
           <div class="row">
               <div class="col-md-3">
           <label>Website </label>
-          </div>: <span id="location" class="job_info"></span><br>
+          </div>: <span id="website" class="job_info"></span><br>
                     </div>
 
           <div class="row">
             <div class="col-md-3">
-               <label>Established </label>
+               <label>Established In</label>
                </div><div class="">
-               : <span id="job_desc" class="job_info"></span>
+               : <span id="establish" class="job_info"></span>
                    </div>
                              </div>
 

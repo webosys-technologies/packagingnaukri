@@ -312,7 +312,7 @@ a:link, a:visited{
              foreach($jobs as $job)
            {
 ?>
-<div class="container" id="cont<?php echo $job->job_id;?>">
+      <div class="container" style="padding-left:50px" id="cont<?php echo $job->job_id;?>">
                    <div class="row">
                        <div class="col-md-offset col-md-8">
                        <div class="panel-body">

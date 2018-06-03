@@ -360,7 +360,7 @@ $("#show_otp_box").click(function(){
               <div class="col-md-8 col-md-offset-2">
                   <span id="validation_error" class="text-danger"></span>
                   <form action="" id="login_form" method="post">
-                      
+                  <input type="hidden" id="job_id" name="job_id" value="">    
           <div class="form-group has-feedback">
             <input type="text" class="form-control" id="member_email" placeholder="Email or Mobile No" name="member_email" required /><span class="text-danger" id="email_err"></span>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

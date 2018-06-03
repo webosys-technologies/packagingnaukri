@@ -199,11 +199,11 @@ a:link, a:visited{
 
  
            
-               <div class="container">
+               <div class="container" >
                    <?php if(isset($saved)){
                        foreach($saved as $save){?>
                    <div class="row">
-                       <div class="col-md-offset-2 col-md-8">
+                       <div class="col-md-offset-1 col-md-8">
                        <div class="panel-body">
                        <div class="shadow">
                            <div class="row">

@@ -22,6 +22,8 @@
    .job_info{
     color:#707B7C;
 }
+
+
 </style>
 <div class="content-wrapper" style="background:white;">
     <!-- Content Header (Page header) -->
@@ -78,7 +80,7 @@
     <br>
    
 <div class="table-responsive">
-    <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <table id="table_id" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
       <thead>
         <tr bgcolor="#338cbf" style="color:#fff">
            <th>ID</th>
@@ -104,7 +106,7 @@
                                         <td><?php echo $job->job_id?></td>
                                             <td><?php echo $job->job_title?></td>
                                             <td><?php echo $job->company_name?></td>
-                                            <td style="cursor:pointer;" onclick="applicants(<?php echo $job->job_id ?>)">
+                                            <td style="cursor:pointer; :hover{background-color: red;}"  onclick="applicants(<?php echo $job->job_id ?>)">
                                                 <?php echo count($this->Applied_jobs_model->get_by_job_id($job->job_id))." Members";?></td>
                                             <td><?php echo $job->job_education?></td>
                                             <td><?php echo $job->job_experience?></td>

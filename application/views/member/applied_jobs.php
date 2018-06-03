@@ -178,7 +178,7 @@ a:link, a:visited{
                    <?php if(isset($jobs)){
                        foreach($jobs as $job){?>
                    <div class="row">
-                       <div class="col-md-offset-2 col-md-8">
+                       <div class="col-md-offset-1 col-md-8">
                        <div class="panel-body">
                        <div class="shadow">
                            <div class="row">
