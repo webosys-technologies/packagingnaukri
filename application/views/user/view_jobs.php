@@ -84,6 +84,7 @@
                                             <th>Experience</th>
                                             <th>Location</th>
 					    <th>Posted Date</th>
+                                            <th>Status</th>
                                             <th>Action</th>
          
         </tr>
@@ -94,7 +95,7 @@
             
           
          foreach($jobs as $job){
-             if($job->job_status=='1'){?>
+          ?>
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->user_id; ?>" class="" ></td> --> 
                                         <td><?php echo $job->job_id?></td>
                                             <td><?php echo $job->job_title?></td>
@@ -103,13 +104,25 @@
                                             <td><?php echo $job->job_experience?></td>
                                             <td><?php echo $job->job_city?></td>
 				            <td><?php echo $job->job_created_at?></td>
+                                            <td>
+                              <?php 
+                                       if($job->job_status==1)
+                                       {
+                                           echo "Active";
+                                       }
+                                       else 
+                                       {
+                                           echo "Not Active";
+                                       }
+                                       ?>  
+                            </td>
                                            
                 <td>  <button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
                  <button class="btn btn-info btn-xs" onclick="job_info(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="View Job"><i class="fa fa-eye"></i></button>
                     <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
                              </td>
               </tr>
-          <?php }}}?>
+          <?php }}?>
 
 
 
@@ -180,56 +193,7 @@ var user_type=el.val();
     var id;
 
 
-function view_job(id)
-    {
-      save_method = 'update';
-     $('#form')[0].reset(); // reset form on modals
 
-      //Ajax Load data from ajax
-      $.ajax({
-        url : "<?php echo site_url('index.php/user/Student/ajax_edit/')?>/" + id,        
-        type: "GET",
-               
-        dataType: "JSON",
-        success: function(data)
-        {          
-            $('#sfname').html(data.job_title);
-            $('#slname').html(data.user_lname); 
-            $('#scourse_name').html(data.course_name);
-            $('#semail').html(data.user_email);
-            $('#smobile').html(data.user_mobile);
-            $('#sgender').html(data.user_gender);
-            $('#saddmission_month').html(data.user_payment_date);
-            $('#scourse_end_date').html(data.user_course_end_date);
-            $('#slast_education').html(data.user_last_education);
-            if(data.user_profile_pic)
-            {
-            $('#sprofile_pic').attr("src", "<?php  echo base_url();?>"+data.user_profile_pic);
-             }
-             else
-             {
-               $('#sprofile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
-             }
-            $('#remove_pic').attr("onclick","remove_profile_pic("+data.user_id+")");
-            $('#sdob').html(data.user_dob);
-            $('#susername').html(data.user_username);
-            $('#spassword').html(data.user_password);
-            $('#suser_last_education').html(data.user_last_education);
-            $('#saddress').html(data.user_address);  
-            $('#scity').html(data.user_city);
-            $('#suser_type').html(data.user_user_type);
-            $('#spincode').html(data.user_pincode);
-            
-            $('#modal_form2').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Student Data'); // Set title to Bootstrap modal title
-
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-//            alert('Error get data from ajax 1');
-        }
-    });
-    }
     
     function job_info(id)
     {
@@ -302,6 +266,7 @@ function view_job(id)
             $('[name="company"]').val(data.company_id);
             $('[name="qualification"]').val(data.job_education);
             $('[name="experience"]').val(data.job_experience);
+            $('[name="status"]').val(data.job_status);
            
                         
            $("#title").text("Edit Job");
@@ -477,16 +442,13 @@ function view_job(id)
                                     
                                     
                      <div class="row">
-                          <div class="col-md-12">
+                          <div class="col-md-6">
                        <label>Job Location: (*)</label>
                                     <input name="joblocation" placeholder="Job Location" class="form-control" value="">
                         <span class="text-danger" id="gen_err"></span>
 
-                    </div>         
-                    </div>
-                                    
-                     <div class="row">
-                          <div class="col-md-6">
+                    </div>    
+                         <div class="col-md-6">
                        <label>Job Type: (*)</label>
                                     <select name="jobtype" id="job_type" class="form-control" value="">
                                         <option value="Full Time">Full Time</option>
@@ -497,12 +459,25 @@ function view_job(id)
                         <span class="text-danger" id="gen_err"></span>
 
                     </div>  
+                    </div><br>
+                                    
+                     <div class="row">
+                          
                          <div class="col-md-6">
                        <label>Job Salary: (*)</label>
                                     <input name="jobsalary" placeholder="Job Salary" class="form-control" value="">
                         <span class="text-danger" id="gen_err"></span>
 
                     </div>  
+                         <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label>Status<span style="color: red">*</span></label>
+                                     <select name="status" class="form-control" >
+                                            <option value="1">Active</option>
+                                            <option value="0">Not Active</option>
+                                        </select>
+                                  </div>
+                                </div>
                     </div>
                              
     				

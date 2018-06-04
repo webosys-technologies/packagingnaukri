@@ -79,6 +79,7 @@
                                             <th>Contact</th>
                                             <th>Location</th>
                                             <th>Established</th>
+                                            <th>Status</th>
                                             <th style="width:75px">Action</th>
          
         </tr>
@@ -89,7 +90,7 @@
             
           
          foreach($companies as $comp){
-             if($comp->company_status=='1'){?>
+          ?>
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->user_id; ?>" class="" ></td> --> 
                                         <td><?php echo $comp->company_id?></td>
                                             <td><?php echo $comp->company_name?></td>
@@ -101,12 +102,22 @@
                                             <td><?php echo $comp->company_city?></td>
 				            <td><?php echo $comp->company_created_at?></td>
                                            
+                                          <td> <?php if($comp->company_status==1)
+                                       {
+                                           echo "Active";
+                                       }
+                                       else 
+                                       {
+                                           echo "Not Active";
+                                       }
+                                       ?></td>
+                                           
                 <td>  <button class="btn btn-success btn-xs" onclick="edit_company(<?php echo $comp->company_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
                   <button class="btn btn-info btn-xs" onclick="view_company(<?php echo $comp->company_id; ?>)" id="btn2" data-toggle="tooltip" data-placement="bottom" title="View Company"><i class="fa fa-eye"></i></button>
                     <button class="btn btn-danger btn-xs" onclick="delete_company(<?php echo $comp->company_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
                              </td>
               </tr>
-          <?php }}}?>
+          <?php }}?>
 
 
 
@@ -232,6 +243,7 @@ var user_type=el.val();
 
     function add_company()
     {  
+         $('[name="city"]').html("");
         save_method="add";        
        $('#form')[0].reset();
         $("#title").text("Add Company");
@@ -261,14 +273,17 @@ var user_type=el.val();
             $('[name="contact"]').val(data.company_contact);
             $('[name="pincode"]').val(data.company_pincode);
             $('[name="state"]').val(data.company_state);
+             $('[name="city"]').append('<option value="'+data.company_city+'">'+data.company_city+'</option>');
             $('[name="city"]').val(data.company_city);
+            $('[name="country"]').val(data.company_country);
             $('[name="website"]').val(data.company_website);
             $('[name="established"]').val(data.company_establish_in);
             $('[name="multinational"]').val(data.company_multinational);
+            $('[name="status"]').val(data.company_status);
 
            
                         
-           $("#title").text("Edit Job");
+           $("#title").text("Edit Company");
            $('#myModal').modal('show');
             
 
@@ -530,6 +545,17 @@ var user_type=el.val();
 
                         </div>  
                     </div>
+                                 <div class="row"> 
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label>Status<span style="color: red">*</span></label>
+                                     <select name="status" class="form-control" >
+                                            <option value="1">Active</option>
+                                            <option value="0">Not Active</option>
+                                        </select>
+                                  </div>
+                                </div>
+                                   </div>
                              
     			 </form>	
     			</div>

@@ -311,6 +311,22 @@ a:link, a:visited{
               
              foreach($jobs as $job)
            {
+                 $datetime1 = new DateTime(date("Y-m-d"));
+            $datetime2 = new DateTime($job->job_created_at);
+            $interval = $datetime1->diff($datetime2);
+            if($interval->format('%y')=='0' && $interval->format('%m')=='0' )
+            {
+                $post=$interval->format('%d day'); 
+            }
+             if($interval->format('%y')=='0' && $interval->format('%m')!='0')
+            {
+                $post=$interval->format('%m month %d day'); 
+            }
+             if($interval->format('%y')!='0')
+            {
+                $post=$interval->format('%y yrs %m month %d day'); 
+            }
+           
 ?>
       <div class="container" style="padding-left:50px" id="cont<?php echo $job->job_id;?>">
                    <div class="row">
@@ -347,14 +363,14 @@ a:link, a:visited{
                             <div class="col-md-1">
                                 <input type="checkbox" class="star" id='save<?php echo $job->job_id;?>' value="<?php echo $job->job_id;?>" title="save job" name="save">
                               </div>  
-                              <div class="col-md-4" style="padding-top: 10px;">
+                              <div class="col-md-3" style="padding-top: 10px;">
                                   <span class="fa fa-inr"></span> <?php echo $job->job_salary;?> /-
                               </div>
                               <div class="col-md-5" style="padding-top: 10px;">
                                   <span class="skill">Post By</span> <a href="#"><img src='<?php if(file_exists($job->recruiter_profile_pic)){echo base_url().$job->recruiter_profile_pic;}else{ echo base_url()."profile_pic/avatar.png";}?>' width="20px" height="20px"> <?php echo ucwords(strtolower($job->recruiter_fname))." ".ucwords(strtolower($job->recruiter_lname));?></a>
                               </div>
-                               <div class="col-md-2" style="padding-top: 10px;">
-                                  <span class="skill">Few hours ago</span>
+                               <div class="col-md-3" style="padding-top: 10px;">
+                                   <span class="skill"><?php if(isset($post)){echo  $post;}?> ago</span>
                               </div>
                              
                           </div>

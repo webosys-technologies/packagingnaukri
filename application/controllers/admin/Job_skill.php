@@ -1,16 +1,7 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
-//require APPPATH . '/libraries/BaseController.php';
 
-/**
- * Class : User (UserController)
- * User Class to control all user related operations.
- * @author : Kishor Mali
- * @version : 1.1
- * @since : 15 November 2016
- */
-//BaseController
-class Jobs extends CI_Controller
+class Job_skill extends CI_Controller
 {
     /**
      * This is default constructor of the class
@@ -18,9 +9,9 @@ class Jobs extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-     if(!is_recruiter_LoggedIn($this->session->userdata('recruiter_LoggedIn')))
+     if(!is_admin_LoggedIn($this->session->userdata('admin_LoggedIn')))
      {
-         redirect('recruiter/index/login');
+         redirect('admin/index');
      }
     }
     
@@ -29,21 +20,24 @@ class Jobs extends CI_Controller
      */
     public function index()
     {       
-        
-            $id=$this->session->userdata('recruiter_id');
+            $id=$this->session->userdata('admin_id');
+            $result['user_data']=get_user_info($id);
+            $result['jobs']=$this->Jobs_model->getall_jobs();
+            $result['job_skill']=$this->Job_skill_model->getall_job_skill();
+            $result['companies']=$this->Companies_model->getall_companies();
+            $result['system']=$this->System_model->get_info();
            
-            $result['data']=$this->Recruiters_model->get_by_id($id);
-            $data['companies']=$this->Companies_model->companies_by_recruiter($id);
-            $data['jobs']=$this->Jobs_model->get_job_by_recruiterid($id);
-           $result['system']=$this->System_model->get_info();
-      
-                  
-             $this->load->view('recruiter/header',$result);
-             $this->load->view('recruiter/view_jobs',$data);
-             $this->load->view('recruiter/footer',$result);
+             $this->load->view('admin/header',$result);
+             $this->load->view('admin/job_skill',$result);
+             $this->load->view('admin/footer');      
        
     }
-
+    
+    public function view_jobs()
+    {        
+            
+    }
+    
     public function job_add()
     {
         $form=$this->input->post();
@@ -71,8 +65,6 @@ class Jobs extends CI_Controller
           }
     }
     
-   
-    
     public function job_update()
     {
 //        echo $id;
@@ -94,12 +86,13 @@ class Jobs extends CI_Controller
         );
         
          $result=$this->Jobs_model->update_job($data,$job_id);
-         
+         if($result)
+         {
        $this->session->set_flashdata('success','Data Updated Successfully');
        echo json_encode(array('status'=>'Data Updated Successfully'));
-         
+         }
     }
-
+    
     public function ajax_edit($id)
     {
         $res=$this->Jobs_model->job_by_id($id);
@@ -109,6 +102,8 @@ class Jobs extends CI_Controller
         }
     }
     
+ 
+    
     public function job_delete($id)
     {
         $res=$this->Jobs_model->delete_job($id);
@@ -117,45 +112,7 @@ class Jobs extends CI_Controller
             $this->session->set_flashdata('success','job deleted successfully');
             echo json_encode(array('success'=>'job deleted successfully'));
         }
-    }
-    
-    public function applicants($id)
-    {
-         if($id)
-        {       
-               $result['members']=$this->Applied_jobs_model->members_by_jobid($id);
-
-        if($result)
-        {
-            $id=$this->session->userdata('recruiter_id');
-            $result['data']=  get_recruiter_info($id);
-            
-        $this->load->view('recruiter/header',$result);
-        $this->load->view('recruiter/applicants',$result);
-        $this->load->view('recruiter/footer',$result);
-        }else{
-             redirect('recruiter/Jobs');
-        }
-        }else{
-            redirect('recruiter/Jobs');
-        }
-        
-    }
-    
-    public function member_info($id)
-    {
-        $result=$this->Members_model->member_info($id);
-        echo json_encode($result);
-        
-    }
-    
-    function job_info($id)
-    {
-        
-        $result=$this->Jobs_model->job_info($id);       
-        echo json_encode($result);
-    }
-    
+    }    
   
 }
 

@@ -9,7 +9,7 @@ class Companies_model extends CI_Model
      {
          $this->db->from('companies as comp');
          $this->db->join('recruiters as rec','rec.recruiter_id=comp.recruiter_id','LEFT');
-         $this->db->where('company_status','1');
+//         $this->db->where('company_status','1');
        $query=$this->db->get();
        return $query->result();
      }

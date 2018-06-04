@@ -54,16 +54,24 @@ class Jobs_model extends CI_Model
      
      public function search_job($form)
      {
-         if(!empty($form['title']))
-         {
-         $this->db->from('jobs as job');
-         $res=$this->db->like('job.job_title',$form['title']);
+          
+         if(!empty($form['title']) || !empty($form['location']))
+         {        
+             $this->db->from('jobs as job');
+            $res=$this->db->like('job.job_title',$form['title']);
+         
+          if(!empty($form['location']))
+        {             
+              $this->db->like('job.job_city',$form['location']);
+        }
         $this->db->join('recruiters as rec','rec.recruiter_id=job.recruiter_id','LEFT');
         $this->db->join('companies as comp','comp.company_id=job.company_id','LEFT');
-//        $this->db->where('job.job_title',$form['title']);
+        $this->db->where('job.job_status','1');
+         
          $result=$this->db->get();
          return $result->result();
-          }
+         }
+          
      }
      
      function job_info($id)

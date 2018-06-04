@@ -60,7 +60,7 @@ class Jobs extends CI_Controller
                    'job_experience'=>$form['experience'],
                    'job_salary'=>$form['jobsalary'],
                    'job_created_at'=>date('Y-m-d'),
-                   'job_status'=>'1'
+                   'job_status'=>$form['status']
                    );
         
           $res=$this->Jobs_model->job_add($data);
@@ -88,7 +88,8 @@ class Jobs extends CI_Controller
                    'job_city'=>$form['joblocation'],
                    'job_experience'=>$form['experience'],
                    'job_salary'=>$form['jobsalary'],
-                   'job_status'=>'1'
+                   'job_status'=>$form['status']
+
         );
         
          $result=$this->Jobs_model->update_job($data,$job_id);

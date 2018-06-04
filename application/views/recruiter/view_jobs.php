@@ -91,6 +91,7 @@ function applicants(id)
                                             <th>Experience</th>
                                             <th>Location</th>
                                              <th>Posted Date</th>
+                                             <th>Status</th>
                                             <th style='width:70px;'>Action</th>
          
         </tr>
@@ -101,7 +102,7 @@ function applicants(id)
             
           
          foreach($jobs as $job){
-             if($job->job_status=='1'){?>
+            ?>
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->user_id; ?>" class="" ></td> --> 
                                         <td><?php echo $job->job_id?></td>
                                             <td><?php echo $job->job_title?></td>
@@ -112,13 +113,25 @@ function applicants(id)
                                             <td><?php echo $job->job_experience?></td>
                                             <td><?php echo $job->job_city?></td>
                             <td><?php echo $job->job_created_at?></td>
+                            <td>
+                              <?php 
+                                       if($job->job_status==1)
+                                       {
+                                           echo "Active";
+                                       }
+                                       else 
+                                       {
+                                           echo "Not Active";
+                                       }
+                                       ?>  
+                            </td>
                                            
                 <td>  <button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
                   <button class="btn btn-danger btn-xs" onclick="delete_job(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
                    <button class="btn btn-info btn-xs" onclick="job_info(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="View Job"><i class="fa fa-eye"></i></button>
                              </td>
               </tr>
-          <?php }}}?>
+          <?php }}?>
 
 
 
@@ -234,6 +247,7 @@ var user_type=el.val();
             $('[name="company"]').val(data.company_id);
             $('[name="qualification"]').val(data.job_education);
             $('[name="experience"]').val(data.job_experience);
+            $('[name="status"]').val(data.job_status);
            
                         
            $("#title").text("Edit Job");
@@ -448,15 +462,12 @@ var user_type=el.val();
                                     
                                     
                      <div class="row">
-                          <div class="col-md-12">
+                          <div class="col-md-6">
                        <label>Job Location: (*)</label>
                                     <input name="joblocation" placeholder="Job Location" class="form-control" value="">
                         <span class="text-danger" id="gen_err"></span>
 
-                    </div>         
-                    </div><br>
-                                    
-                     <div class="row">
+                    </div>  
                           <div class="col-md-6">
                        <label>Job Type: (*)</label>
                                     <select name="jobtype" id="job_type" class="form-control" value="">
@@ -467,13 +478,26 @@ var user_type=el.val();
                                     </select>
                         <span class="text-danger" id="gen_err"></span>
 
-                    </div>    
+                    </div> 
+                    </div><br>
+                                    
+                     <div class="row">
+                            
                          <div class="col-md-6">
                        <label>Job Salary: (*)</label>
                                     <input name="jobsalary" placeholder="Job Salary" class="form-control" value="">
                         <span class="text-danger" id="gen_err"></span>
 
                     </div>  
+                          <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label>Status<span style="color: red">*</span></label>
+                                     <select name="status" class="form-control" >
+                                            <option value="1">Active</option>
+                                            <option value="0">Not Active</option>
+                                        </select>
+                                  </div>
+                                </div>
                     </div>
                              
                     

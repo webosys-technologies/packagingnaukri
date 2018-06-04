@@ -55,7 +55,7 @@ class Companies extends CI_Controller
                    'company_establish_in'=>$form['established'],
                    'company_multinational'=>$form['mnc'],
                    'company_created_at'=>date('Y-m-d'),
-                   'company_status'=>'1'
+                   'company_status'=>$status['status']
         );
         
           $res=$this->Companies_model->company_add($data);
@@ -66,11 +66,10 @@ class Companies extends CI_Controller
               $this->logo_upload($res);
           }
                    
-          if($res)
-          {
+         
                $this->session->set_flashdata('success','company added successfully');
               echo json_encode(array('success'=>'Company added successfully'));
-          }
+          
     }
     
     public function company_update()
@@ -88,14 +87,14 @@ class Companies extends CI_Controller
                    'company_website'=>$form['website'],
                    'company_address'=>$form['address'],
                    'company_country'=>$form['country'],
-                   'company_country'=>$form['country'],
+//                   'company_country'=>$form['country'],
                    'company_state'=>$form['state'],
                    'company_city'=>$form['city'],
                    'company_pincode'=>$form['pincode'],
                    'company_establish_in'=>$form['established'],
                    'company_multinational'=>$form['mnc'],
                    'company_created_at'=>date('Y-m-d'),
-                   'company_status'=>'1'
+                   'company_status'=>$status['status']
         );
          $result=$this->Companies_model->company_update(array('company_id' => $company_id),$data);
          
