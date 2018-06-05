@@ -267,6 +267,7 @@ var user_type=el.val();
             $('[name="qualification"]').val(data.job_education);
             $('[name="experience"]').val(data.job_experience);
             $('[name="status"]').val(data.job_status);
+            $('[name="skill"]').val(data.job_skill_name);
            
                         
            $("#title").text("Edit Job");
@@ -478,7 +479,15 @@ var user_type=el.val();
                                         </select>
                                   </div>
                                 </div>
-                    </div>
+                    </div>                    
+                     <div class="row">                         
+                         <div class="col-md-12">
+                       <label>Job Skills: (*)</label>
+                      <input name="skill" placeholder="Skill Name" id="skill" class="form-control" value="">
+                        <span class="text-danger" id="gen_err"></span>
+
+                    </div>  
+                         </div>
                              
     				
     			</div>

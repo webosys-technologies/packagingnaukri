@@ -47,7 +47,8 @@ class Jobs extends CI_Controller
     public function job_add()
     {
         $form=$this->input->post();
-        
+        if($form['company']!='-- Select Company --')
+       {  
         $id=$this->Companies_model->get_recruiter_by_company($form['company']);
         $data=array(
                    'recruiter_id'=>$id,
@@ -64,11 +65,33 @@ class Jobs extends CI_Controller
                    );
         
           $res=$this->Jobs_model->job_add($data);
-          if($res)
+         
+          
+          if(!empty($res))
           {
+              $title = $this->input->post('skill');
+          if(!empty($title))
+          {
+              $dataSet = array (            
+                                                   'job_id'=>$res,
+	     				           'job_skill_name' => $title,
+        					   'job_skill_created_at' => date('Y-m-d'),
+	     					   'job_skill_status' => '1',
+
+	     					);
+              
+               $this->Job_skill_model->add($dataSet);
+          }  
+           }      
+          
+          
+          
                $this->session->set_flashdata('success','job added successfully');
               echo json_encode(array('success'=>'job added successfully'));
-          }
+       }  else
+       {
+           echo json_encode(array('error'=>'Please Select Company Name'));
+       }
     }
     
    
@@ -94,6 +117,27 @@ class Jobs extends CI_Controller
         );
         
          $result=$this->Jobs_model->update_job($data,$job_id);
+         
+         $title = $this->input->post('skill');       
+          if(!empty($title))
+          {              
+              $dataSet = array ('job_skill_name' => $title);              
+              $where=array('job_id'=>$form['job_id']);
+              
+             $check=$this->Jobs_model->check_job_id($form['job_id']);
+             if($check)
+             {
+                 $this->Job_skill_model->skill_update($dataSet,$where);
+                 
+             }else{
+                  $dataSet1=array(                     'job_id'=>$form['job_id'],
+	     				           'job_skill_name' => $title,
+        					   'job_skill_created_at' => date('Y-m-d'),
+	     					   'job_skill_status' => '1',
+                                );
+                  $this->Job_skill_model->add($dataSet1);
+             }               
+          } 
          
        $this->session->set_flashdata('success','Data Updated Successfully');
        echo json_encode(array('status'=>'Data Updated Successfully'));

@@ -5,7 +5,7 @@ class Job_skill_model extends CI_Model
 {
      var $table='job_skills';
     
-     public function getall_jobs()
+     public function getall_job_skill()
      {
         $this->db->from('jobs as job');
         $this->db->join('companies as camp','camp.company_id=job.company_id','LEFT');
@@ -13,17 +13,12 @@ class Job_skill_model extends CI_Model
         return $res->result();
      }
      
-     public function update_job($data,$id)
-     {
-         $where=array('job_id'=>$id);
-         $res=$this->db->update($this->table,$data,$where);
-         return $this->db->affected_rows();
-     }
+  
      
     
      
      
-     public function job_by_id($id)
+     public function skill_by_id($id)
      {
          $where=array('job_id'=>$id);
          $this->db->where($where);
@@ -31,9 +26,15 @@ class Job_skill_model extends CI_Model
          return $res->row();
      }
      
-     public function job_add($data)
+     public function add($data)
      {
          $this->db->insert($this->table,$data);
+         return $this->db->insert_id();
+     }
+      public function skill_update($data,$where)
+     {
+        
+         $this->db->update($this->table,$data,$where);
          return $this->db->affected_rows();
      }
      

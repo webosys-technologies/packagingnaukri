@@ -347,10 +347,11 @@ a:link, a:visited{
                               <div class="col-md-8 experience"><i class="fa fa-map-marker" aria-hidden="true"></i> <?php echo $job->job_city;?>
                           </div>
                        </div>
+                           <?php $skill= $this->Job_skill_model->skill_by_id($job->job_id); ?>
                           <div class="row" class="">
-                              <div class="col-md-2 skill">key skills:
+                              <div class="col-md-2 skill">key skills: 
                               </div>
-                              <div class="col-md-8 skill">
+                              <div class="col-md-8 skill"><?php echo  $skill->job_skill_name;?>
                           </div>
                        </div> 
                            <div class="row" class="">

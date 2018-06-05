@@ -32,16 +32,34 @@ class Jobs_model extends CI_Model
      
      public function job_by_id($id)
      {
-         $where=array('job_id'=>$id);
-         $this->db->where($where);
-         $res=$this->db->get($this->table);
+         $check=$this->check_job_id($id);
+         $this->db->from('jobs as job');
+         if($check)
+         {
+         $this->db->join('job_skills as skill','job.job_id=skill.job_id','LEFT');
+         }
+       
+         $this->db->where('job.job_id',$id);
+         $res=$this->db->get();
          return $res->row();
+     }
+     function check_job_id($id)
+     {
+         $query=$this->db->from('job_skills')
+                    ->where('job_id',$id)
+                    ->get();
+         if($query->result())
+         {
+            return true; 
+         }else{
+             return false;
+         }
      }
      
      public function job_add($data)
      {
          $this->db->insert($this->table,$data);
-         return $this->db->affected_rows();
+         return $this->db->insert_id();
      }
      
      public function delete_job($id)
@@ -54,7 +72,7 @@ class Jobs_model extends CI_Model
      
      public function search_job($form)
      {
-          
+         
          if(!empty($form['title']) || !empty($form['location']))
          {        
              $this->db->from('jobs as job');
@@ -73,6 +91,8 @@ class Jobs_model extends CI_Model
          }
           
      }
+     
+    
      
      function job_info($id)
      {

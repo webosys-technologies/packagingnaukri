@@ -24,7 +24,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-users"></i><strong> Education Details Management </strong>
+        <i class="fa fa-users"></i><strong> Job Skill Management </strong>
         <small>Add, Edit, Delete <?php  ?></small>
       </h1>
       <ol class="breadcrumb">
@@ -80,8 +80,8 @@
       <thead>
         <tr bgcolor="#338cbf" style="color:#fff">
           <th>ID</th>
-          <th>TITLE</th>
-          <th>EDUCATION</th>
+          <th>Skill Name</th>
+          <th>Created At</th>
           <th>STATUS</th>
           <th style="width:75px;">ACTION</th>
         </tr>
@@ -165,56 +165,7 @@
     var id;
 
 
-// function view_member(id)
-//     {
-//       save_method = 'update';
-//      $('#form')[0].reset(); // reset form on modals
 
-//       //Ajax Load data from ajax
-//       $.ajax({
-//         url : "<?php echo site_url('index.php/member/Student/ajax_edit/')?>/" + id,        
-//         type: "GET",
-               
-//         dataType: "JSON",
-//         success: function(data)
-//         {          
-//             $('#sfname').html(data.member_fname);
-//             $('#slname').html(data.member_lname); 
-//             $('#scourse_name').html(data.course_name);
-//             $('#semail').html(data.member_email);
-//             $('#smobile').html(data.member_mobile);
-//             $('#sgender').html(data.member_gender);
-//             $('#saddmission_month').html(data.member_payment_date);
-//             $('#scourse_end_date').html(data.member_course_end_date);
-//             $('#slast_education').html(data.member_last_education);
-//             if(data.member_profile_pic)
-//             {
-//             $('#sprofile_pic').attr("src", "<?php  echo base_url();?>"+data.member_profile_pic);
-//              }
-//              else
-//              {
-//                $('#sprofile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
-//              }
-//             $('#remove_pic').attr("onclick","remove_profile_pic("+data.member_id+")");
-//             $('#sdob').html(data.member_dob);
-//             $('#susername').html(data.member_username);
-//             $('#spassword').html(data.member_password);
-//             $('#smember_last_education').html(data.member_last_education);
-//             $('#saddress').html(data.member_address);  
-//             $('#scity').html(data.member_city);
-//             $('#sstate').html(data.member_state);
-//             $('#spincode').html(data.member_pincode);
-            
-//             $('#modal_form2').modal('show'); // show bootstrap modal when complete loaded
-//             $('.modal-title').text('Student Data'); // Set title to Bootstrap modal title
-
-//         },
-//         error: function (jqXHR, textStatus, errorThrown)
-//         {
-// //            alert('Error get data from ajax 1');
-//         }
-//     });
-//     }
 
     function add_edu()
     {
