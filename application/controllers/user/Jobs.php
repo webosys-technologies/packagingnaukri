@@ -93,6 +93,29 @@ class Jobs extends CI_Controller
           
     }
     
+    public function applied_members($id)
+    {
+         if($id)
+        {       
+               $result['members']=$this->Applied_jobs_model->members_by_jobid($id);
+
+        if($result)
+        {
+            $id=$this->session->userdata('admin_id');
+            $result['user_data']=get_user_info($id);
+            
+        $this->load->view('user/header',$result);
+        $this->load->view('user/applied_members',$result);
+        $this->load->view('user/footer',$result);
+        }else{
+             redirect('user/Jobs');
+        }
+        }else{
+            redirect('user/Jobs');
+        }
+        
+    }
+    
     public function job_update()
     {
 //        echo $id;

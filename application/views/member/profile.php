@@ -483,6 +483,10 @@ var edu_name=el.val();
              $("#from_err").html(json.error);
 
                }
+               if(json.skill_error)
+               {
+                   $("#skill_error").html(json.skill_error);
+               }
                
                
                              
@@ -1577,7 +1581,7 @@ var edu_name=el.val();
                                 <div class="col-md-12  ">                             
                                         <label for="fname">Skill Name</label>
                                         <input type="text" placeholder="Skill Name" value="" class="form-control required" id="skill_name" name="skill_name" maxlength="128" required>
-                                        <span class="text-danger" id="fname_err"></span>                                                          
+                                        <span class="text-danger" id="skill_error"></span>                                                          
                                 </div>
                              
                             </div><br>

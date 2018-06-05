@@ -72,11 +72,13 @@
         <tr bgcolor="#338cbf" style="color:#fff">
           <th>ID</th>
           <th>NAME</th>
+          <th>APPLIED FOR</th>
+           <th>COMPANY</th>
           <th>EMAIL</th>
           <th>MOBILE</th>
-          <th>CITY</th>
+         
           <th>APPLY AT</th>
-          <th>STATUS</th>
+         
 <th>ACTION</th>
         </tr>
       </thead>
@@ -90,24 +92,15 @@
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->member_id; ?>" class="" ></td> --> 
                                         <td><?php echo $res->member_id;?></td>
                                         <td><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
+                                        <td><?php echo $res->job_title;?></td>
+                                         <td><?php echo $res->company_name;?></td>
                                          <td><?php echo $res->member_email;?></td>
-                                        <!--<td><?php echo $res->member_email;?></td>-->
+                                       
                                        <td><?php echo $res->member_mobile;?></td>
-                                       <td><?php echo $res->member_city;?></td>
+                                      
                                        <td><?php echo $res->apply_at;?></td>
-                                       <td>
-                                           <?php 
-                                       if($res->member_status==1)
-                                       {
-                                           echo "Active";
-                                       }
-                                       else 
-                                       {
-                                           echo "Not Active";
-                                       }
-                                       ?></td>
-                                       <td>
-                 
+                                      
+                 <td>
                   <button class="btn btn-info btn-xs" onclick="view_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Applicant Member"><i class="fa fa-eye"></i></button>
                  
 

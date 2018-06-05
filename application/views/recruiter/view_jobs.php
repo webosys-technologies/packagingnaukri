@@ -103,7 +103,7 @@ function applicants(id)
           
          foreach($jobs as $job){
             ?>
-             <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->user_id; ?>" class="" ></td> --> 
+             <tr <?php if($job->job_status==0) {?> style="color:#99A3A4; "<?php }?>>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->user_id; ?>" class="" ></td> --> 
                                         <td><?php echo $job->job_id?></td>
                                             <td><?php echo $job->job_title?></td>
                                             <td><?php echo $job->company_name?></td>
@@ -117,17 +117,18 @@ function applicants(id)
                               <?php 
                                        if($job->job_status==1)
                                        {
-                                           echo "Active";
+                                            echo "Open";
                                        }
                                        else 
                                        {
-                                           echo "Not Active";
+                                           echo '<b style="color:red;">Closed</b>';
                                        }
                                        ?>  
                             </td>
                                            
-                <td>  <button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
-                  <button class="btn btn-danger btn-xs" onclick="delete_job(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
+                            <td><?php if($job->job_status==0){?><button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job" disabled><i class="glyphicon glyphicon-pencil"></i></button><?php }else{?>
+                  <button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>  <?php }?>
+                                <button class="btn btn-danger btn-xs" onclick="delete_job(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
                    <button class="btn btn-info btn-xs" onclick="job_info(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="View Job"><i class="fa fa-eye"></i></button>
                              </td>
               </tr>

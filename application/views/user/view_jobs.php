@@ -80,6 +80,7 @@
            <th>ID</th>
                                             <th>Job Title</th>
                                             <th>Company Name</th>
+                                            <th>Applicants</th>
                                             <th>Qualification</th>
                                             <th>Experience</th>
                                             <th>Location</th>
@@ -96,9 +97,11 @@
           
          foreach($jobs as $job){
           ?>
-             <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->user_id; ?>" class="" ></td> --> 
+             <tr <?php if($job->job_status==0) {?> style="color:#99A3A4; "<?php }?>>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->user_id; ?>" class="" ></td> --> 
                                         <td><?php echo $job->job_id?></td>
                                             <td><?php echo $job->job_title?></td>
+                                            <td style="cursor:pointer; :hover{background-color: red;}"  onclick="applicants(<?php echo $job->job_id ?>)">
+                                                <?php echo count($this->Applied_jobs_model->get_by_job_id($job->job_id))." Members";?></td>
                                             <td><?php echo $job->company_name?></td>
                                             <td><?php echo $job->job_education?></td>
                                             <td><?php echo $job->job_experience?></td>
@@ -108,16 +111,17 @@
                               <?php 
                                        if($job->job_status==1)
                                        {
-                                           echo "Active";
+                                           echo "Open";
                                        }
                                        else 
                                        {
-                                           echo "Not Active";
+                                          echo '<b style="color:red;">Closed</b>';
                                        }
                                        ?>  
                             </td>
                                            
-                <td>  <button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
+                <td><?php if($job->job_status==0){?><button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job" disabled ><i class="glyphicon glyphicon-pencil"></i></button> <?php }else{?>
+                <button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button><?php }?>
                  <button class="btn btn-info btn-xs" onclick="job_info(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="View Job"><i class="fa fa-eye"></i></button>
                     <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
                              </td>
@@ -231,7 +235,10 @@ var user_type=el.val();
        
     }
 
-    
+     function applicants(id)
+{
+    window.location='<?php echo base_url()?>user/Jobs/applied_members/'+id;
+}
     
 
     function add_job()

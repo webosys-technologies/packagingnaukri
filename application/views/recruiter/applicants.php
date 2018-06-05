@@ -18,7 +18,7 @@
     <section class="content-header">
       <h1>
         <i class="fa fa-users"></i><strong> Applicants </strong>
-        <!--<small>Add, Edit, Delete <?php  ?></small>-->
+        <small>Control Panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -26,13 +26,45 @@
       </ol>
     </section>
     <hr style="border-top: 1px solid #ccc;">
-    
-    <section class="content">   
+    <section class="content">
         <div class="row">
-        <div class="col-md-2">
-     <a href="<?php echo base_url()?>recruiter/Jobs" class="btn btn-info"><< BACK</a><br>
-     </div>
-     </div><br>
+
+  
+
+         <div class="col-md-4">
+   
+    </div>
+    <div class="col-md-6">
+         <?php
+        $this->load->helper('form');
+        $success = $this->session->flashdata('success');
+        if($success)
+        {
+            ?>
+            
+        <div class="alert alert-success alert-dismissible" data-auto-dismiss="5000">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Success!</strong> <?php echo $success; ?> 
+  </div>
+        <?php }?>
+             
+              <?php
+        $this->load->helper('form');
+        $error = $this->session->flashdata('error');
+        if($error)
+        {
+            ?>           
+        <div class="alert alert-danger alert-dismissible" data-auto-dismiss="2000">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Error!</strong> <?php echo $error; ?> 
+  </div>
+        <?php }?>
+             
+             
+       
+        </div>
+        </div>
+  
    
 <div class="table-responsive">
     <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -40,15 +72,14 @@
         <tr bgcolor="#338cbf" style="color:#fff">
           <th>ID</th>
           <th>NAME</th>
+          <th>APPLIED FOR</th>
           <th>EMAIL</th>
-          <th>Qualification</th>
-          <th>Role</th>
-          <th>RESUME</th>
           <th>MOBILE</th>
           <th>CITY</th>
+          <th>RESUME</th>
           <th>APPLY AT</th>
-          <!--<th>STATUS</th>-->
-<th style="width:20px;">ACTION</th>
+          
+          <th width='10px'>ACTION</th>
         </tr>
       </thead>
       <tbody id="myTable">
@@ -60,28 +91,18 @@
              if($res->member_status=='1'){?>
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->member_id; ?>" class="" ></td> --> 
                                         <td><?php echo $res->member_id;?></td>
-                                        <td style="cursor:pointer;" title="member info" onclick="view_member(<?php echo $res->member_id;?>)"><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
+                                        <td><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
+                                        <td><?php echo $res->job_title; ?></td>
                                          <td><?php echo $res->member_email;?></td>
-                                        <td><?php echo $res->education_degree;?></td>
-                                        <td><?php echo $res->employment_designation; ?></td>
-                                        <td><a href="<?php echo base_url().$res->member_resume; ?>">Resume</a></td>
+                                        <!--<td><?php echo $res->member_email;?></td>-->
                                        <td><?php echo $res->member_mobile;?></td>
                                        <td><?php echo $res->member_city;?></td>
+                                       <td><?php if(!empty($res->member_resume)){?><a href="<?php echo base_url().$res->member_resume ?>">Resume</a> <?php }else{ echo "Not Uploaded"; }?></td>
                                        <td><?php echo $res->apply_at;?></td>
-<!--                                       <td>
-                                           <?php 
-                                       if($res->member_status==1)
-                                       {
-                                           echo "Active";
-                                       }
-                                       else 
-                                       {
-                                           echo "Not Active";
-                                       }
-                                       ?></td>-->
+                                      
                                        <td>
                  
-                  <button class="btn btn-info btn-xs" onclick="view_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="view applicants"><i class="glyphicon glyphicon-eye-open"></i></button>
+                  <button class="btn btn-info btn-xs" onclick="view_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Applicant Member"><i class="fa fa-eye"></i></button>
                  
 
                 </td>
@@ -122,7 +143,7 @@ function view_member(id)
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/recruiter/Members/ajax_edit/')?>/" + id,        
+        url : "<?php echo site_url('index.php/admin/Members/ajax_edit/')?>/" + id,        
         type: "GET",
                
         dataType: "JSON",
@@ -184,10 +205,10 @@ function view_member(id)
         <div class="modal-body">
          
             
-            
-        <!--<div class="panel panel-default">-->
-          
-          <div class="panel-body">
+          	
+    		<!--<div class="panel panel-default">-->
+    			
+    			<div class="panel-body">
     <form method="post" action="" id="form">
               <div>
                 <img src="" id="profile_pic" width="100px" height="100px">
@@ -327,9 +348,9 @@ function view_member(id)
                 </div>
             </form>
                             <!--</div>-->
-          
-        </div>         
-       <div class="modal-footer">
+    			
+    		</div>         
+    	 <div class="modal-footer">
              <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
           <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
         </div>

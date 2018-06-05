@@ -111,8 +111,8 @@
                    
                    
                  $info=array(
-		 	'recruiter_fname'=>$res->recruiter_fname,
-                        'recruiter_lname'=>$res->recruiter_lname,
+		 	'recruiter_fname'=> ucfirst(strtolower($res->recruiter_fname)),
+                        'recruiter_lname'=>ucfirst(strtolower($res->recruiter_lname)),
                         'recruiter_email'=>$res->recruiter_email,
                         'recruiter_mobile'=>$res->recruiter_mobile,
                         'recruiter_gender'=>$res->recruiter_gender,
@@ -229,7 +229,7 @@
               </a>
             </li>  
              <li class="treeview">
-              <a href="<?php echo base_url(); ?>recruiter/Members" >
+              <a href="<?php echo base_url(); ?>recruiter/Applicants" >
                 <i class="fa fa-child"></i>
                 <span>Applicant Members</span>
               </a>

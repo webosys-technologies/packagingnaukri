@@ -80,7 +80,7 @@
     <br>
    
 <div class="table-responsive">
-    <table id="table_id" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+    <table id="table_id" class="table table-bordered table-hover" cellspacing="0" width="100%">
       <thead>
         <tr bgcolor="#338cbf" style="color:#fff">
            <th>ID</th>
@@ -92,7 +92,7 @@
                                             <th>Location</th>
 					    <th>Posted Date</th>
                                             <th>Status</th>
-                                            <th width='70px'>Action</th>
+                                            <th style="width:75px;">Action</th>
          
         </tr>
       </thead>
@@ -102,8 +102,9 @@
             
           
          foreach($jobs as $job){
+            
              ?>
-             <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->user_id; ?>" class="" ></td> --> 
+                                                         <tr <?php if($job->job_status==0) {?> style="color:#99A3A4; "<?php }?> >   <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->user_id; ?>" class="" ></td> --> 
                                         <td><?php echo $job->job_id?></td>
                                             <td><?php echo $job->job_title?></td>
                                             <td><?php echo $job->company_name?></td>
@@ -116,15 +117,16 @@
                                             <td><?php 
                                        if($job->job_status==1)
                                        {
-                                           echo "Active";
+                                           echo "Open";
                                        }
                                        else 
                                        {
-                                           echo "Not Active";
+                                           echo '<b style="color:red;">Closed</b>';
                                        }
                                        ?></td>
                                            
-                <td>  <button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
+                <td> <?php if($job->job_status==0){?><button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job" disabled ><i class="glyphicon glyphicon-pencil"></i></button> <?php }else{?>
+                <button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button><?php }?>
                     <button class="btn btn-info btn-xs" onclick="job_info(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="View Job"><i class="fa fa-eye"></i></button>              
                     <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
                  
@@ -490,8 +492,8 @@ var user_type=el.val();
                                   <div class="form-group">
                                     <label>Status<span style="color: red">*</span></label>
                                      <select name="status" class="form-control" >
-                                            <option value="1">Active</option>
-                                            <option value="0">Not Active</option>
+                                            <option value="1">Open</option>
+                                            <option value="0">Close</option>
                                         </select>
                                   </div>
                                 </div>

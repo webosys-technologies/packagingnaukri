@@ -460,6 +460,7 @@ if (isset($_FILES['photo']['name'])) {
     {
         $id=$this->session->userdata('member_id');
        $form=$this->input->post();
+       
        if(!empty($form['skill_name']))
        {
        $data=array(
@@ -478,10 +479,10 @@ if (isset($_FILES['photo']['name'])) {
            
          }else{
               $this->Skills_model->skill_update($data,$where); 
-              echo json_encode(array('success'=>'Skill Added successfully'));
+              echo json_encode(array('success'=>'Skill Updated successfully'));
          }
        }else{
-           echo json_encode(array('error'=>'Skill Name Required'));
+           echo json_encode(array('skill_error'=>'Skill Name Required'));
        }
     }
     

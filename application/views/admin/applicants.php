@@ -22,7 +22,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Manage Members</li>
+        <li class="active">Applicants</li>
       </ol>
     </section>
     <hr style="border-top: 1px solid #ccc;">
@@ -72,11 +72,12 @@
         <tr bgcolor="#338cbf" style="color:#fff">
           <th>ID</th>
           <th>NAME</th>
+          <th>APPLIED FOR</th>
+           <th>COMPANY</th>
           <th>EMAIL</th>
           <th>MOBILE</th>
-          <th>CITY</th>
+          <th>RESUME</th>
           <th>APPLY AT</th>
-          <th>STATUS</th>
           <th width='10px'>ACTION</th>
         </tr>
       </thead>
@@ -90,22 +91,14 @@
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->member_id; ?>" class="" ></td> --> 
                                         <td><?php echo $res->member_id;?></td>
                                         <td><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
-                                         <td><?php echo $res->member_email;?></td>
+                                        <td><?php echo $res->job_title;?></td>
+                                         <td><?php echo $res->company_name;?></td>
+                                        <td><?php echo $res->member_email;?></td>
                                         <!--<td><?php echo $res->member_email;?></td>-->
                                        <td><?php echo $res->member_mobile;?></td>
-                                       <td><?php echo $res->member_city;?></td>
+                                       <td><?php if(!empty($res->member_resume)){?><a href="<?php echo base_url().$res->member_resume ?>">Resume</a> <?php }else{ echo "Not Uploaded"; }?></td>
                                        <td><?php echo $res->apply_at;?></td>
-                                       <td>
-                                           <?php 
-                                       if($res->member_status==1)
-                                       {
-                                           echo "Active";
-                                       }
-                                       else 
-                                       {
-                                           echo "Not Active";
-                                       }
-                                       ?></td>
+                                      
                                        <td>
                  
                   <button class="btn btn-info btn-xs" onclick="view_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Applicant Member"><i class="fa fa-eye"></i></button>

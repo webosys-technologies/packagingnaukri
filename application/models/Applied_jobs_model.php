@@ -10,7 +10,9 @@ class Applied_jobs_model extends CI_Model
      public function get_member_job($id)
      {
      	$this->db->from('applied_job as app');
-        $this->db->join('members as mem','mem.member_id=app.member_id');
+        $this->db->join('members as mem','mem.member_id=app.member_id','LEFT');
+         $this->db->join('jobs as job','job.job_id=app.job_id','LEFT');
+          $this->db->join('companies as comp','comp.company_id=app.company_id','LEFT');
      	$this->db->where('app.recruiter_id',$id);
      	$query=$this->db->get();
             	return $query->result();
@@ -32,6 +34,8 @@ class Applied_jobs_model extends CI_Model
      {       
          $this->db->from('applied_job as app');
         $this->db->join('members as mem','mem.member_id=app.member_id');
+        $this->db->join('jobs as job','job.job_id=app.job_id','LEFT');
+          $this->db->join('companies as comp','comp.company_id=app.company_id','LEFT');
      	$query=$this->db->get();
         return $query->result();
      }
@@ -49,12 +53,13 @@ class Applied_jobs_model extends CI_Model
      {
         
          $this->db->from('applied_job as job');
-         $this->db->join('members as mem','mem.member_id=job.member_id','LEFT');
-         $this->db->join('employments as emp','job.member_id=emp.member_id','LEFT');         
+         $this->db->join('members as mem','mem.member_id=job.member_id','LEFT');         
          $this->db->join('educations as edu','edu.member_id=job.member_id','LEFT');
+//         $this->db->join('employments as emp','job.member_id=emp.member_id','LEFT');         
          
          $this->db->where('job.job_id',$id);
          $query=$this->db->get();
+//         print_r($query->result());
          return $query->result();
      }
      

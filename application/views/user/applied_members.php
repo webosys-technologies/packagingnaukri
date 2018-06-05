@@ -30,7 +30,7 @@
     <section class="content">   
         <div class="row">
         <div class="col-md-2">
-     <a href="<?php echo base_url()?>admin/Jobs" class="btn btn-info"><< BACK</a><br>
+     <a href="<?php echo base_url()?>user/Jobs/view_jobs" class="btn btn-info"><< BACK</a><br>
      </div>
      </div><br>
    

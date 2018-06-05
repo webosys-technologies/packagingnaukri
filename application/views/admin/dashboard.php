@@ -43,7 +43,7 @@
               <p id="num">Members</p>
             </div>
             <div class="icon">
-              <i class="fa fa-institution"></i>
+              <i class="fa fa-users"></i>
             </div>
             <a href="<?php echo base_url(); ?>admin/Members" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -58,9 +58,9 @@
               <p id="num">Job Posted</p>
             </div>
             <div class="icon">
-              <i class="fa fa-book"></i>
+              <i class="fa fa-suitcase"></i>
             </div>
-            <a href="<?php echo base_url(); ?>admin/Jobs/view_jobs" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url(); ?>admin/Jobs/" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
          <!--./col--> 
@@ -73,7 +73,7 @@
               <p id="num">Job Applied</p>
             </div>
             <div class="icon">
-              <i class="fa fa-book"></i>
+              <i class="fa fa-suitcase"></i>
             </div>
             <a href="<?php echo base_url(); ?>admin/Applicants" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -92,14 +92,14 @@
               <p id="num">Companies</p>
             </div>
             <div class="icon">
-              <i class="fa fa-users"></i>
+              <i class="fa fa-institution"></i>
             </div>
             <a href="<?php echo base_url(); ?>admin/Companies" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
          <!--./col--> 
-        <div class="col-lg-3 col-xs-6">
-           <!--small box--> 
+<!--        <div class="col-lg-3 col-xs-6">
+           small box 
           <div class="small-box" style="background:#FF99CC;">
             <div class="inner">
               <h3 id="num"><?php if(isset($admins)){echo count($admins);}else{echo "0";}?><sup style="font-size: 20px"></sup></h3>
@@ -107,11 +107,11 @@
               <p id="num">Admins</p>
             </div>
             <div class="icon">
-              <i class="fa fa-institution"></i>
+              <i class="fa fa-user"></i>
             </div>
             <a href="<?php echo base_url(); ?>admin/Users" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
-        </div>
+        </div>-->
          <!--./col--> 
         <div class="col-lg-3 col-xs-6">
            <!--small box--> 
@@ -122,7 +122,7 @@
               <p id="num">Users</p>
             </div>
             <div class="icon">
-              <i class="fa fa-book"></i>
+              <i class="fa fa-users"></i>
             </div>
             <a href="<?php echo base_url(); ?>admin/Users" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
