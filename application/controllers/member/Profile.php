@@ -53,7 +53,11 @@ class Profile extends CI_Controller
                   'member_city'=>  $form['city'],
                   'member_gender'=> $form['gen'],
                   'member_email'=>$form['email'],
-                  'member_mobile'=>$form['mobile']
+                  'member_mobile'=>$form['mobile'],
+                  'member_address'=>$form['address'],
+                  'member_pincode'=>$form['pincode'],
+                  'member_marital_status'=>$form['marital_status']             
+                  
         );
         $where=array('member_id'=>$id);
         $res=$this->Members_model->member_update($where,$data);
@@ -185,8 +189,8 @@ class Profile extends CI_Controller
         $id=$this->session->userdata('member_id');
         $form=$this->input->post();
         $member_data=  get_member_info($id);
-        
-     if(!empty($form['organization']))
+        $org=str_replace(' ', '', $form['organization']);
+     if(!empty($org))
      {
         $data=array(
             'member_id'=>$id,
@@ -204,6 +208,7 @@ class Profile extends CI_Controller
         $where=array('employment_id'=>$form['employment_id']);
         $where2=array('employment_organization'=>$form['organization']);
      
+              
          
         if(empty($form['employment_id']))
         {
@@ -216,15 +221,18 @@ class Profile extends CI_Controller
             $interval = $datetime1->diff($datetime2);
             $exp=$interval->format('%y yrs %m month');
           
-                $mem_data=array('member_experience'=>$exp);
+                $mem_data=array('member_experience'=>$exp,
+                                'member_anual_salary'=>$form['salary']);
                 $mem_where=array('member_id'=>$id);
                $this->Members_model->member_update($mem_where,$mem_data);
                 $this->Employments_model->insert_employment($data);
             echo json_encode(array('success'=>'Employment Added sucessfully'));  
               } else {
-                  echo json_encode(array('error'=>"Working date is greater than todays date"));
+                  echo json_encode(array('from_err'=>"Working date should minimum than todays date"));
               }
-            }        
+            }  else{
+                echo json_encode(array('from_err'=>"Select working from"));
+            }      
             
         } else {      
            $where3=array('member_id'=>$id);
@@ -238,13 +246,14 @@ class Profile extends CI_Controller
             $interval = $datetime1->diff($datetime2);
             $exp=$interval->format('%y yrs %m month');
           
-                $mem_data=array('member_experience'=>$exp);
+                $mem_data=array('member_experience'=>$exp,
+                                'member_anual_salary'=>$form['salary']);
                 $mem_where=array('member_id'=>$id);
                $this->Members_model->member_update($mem_where,$mem_data);
                  
               }
               else {
-                  echo json_encode(array('error'=>"Working date is greater than todays date"));
+                  echo json_encode(array('from_err'=>"Working date is greater than todays date"));
               }
             }
             $res=$this->Employments_model->update_employment($where,$data);            
@@ -252,6 +261,8 @@ class Profile extends CI_Controller
            
         }
                
+    }else{
+        echo json_encode(array('org_error'=>'Please Enter Organization'));
     }
     }
     

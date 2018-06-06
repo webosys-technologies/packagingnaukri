@@ -34,9 +34,7 @@ class Recruiter extends CI_Controller
         
      function recruiter_add()
     {
-        
-
-        $data=array(
+         $data=array(
             'recruiter_fname'          =>$this->input->post('fname'),
             'recruiter_lname'          => $this->input->post('lname'),
             'recruiter_email'          => $this->input->post('email'),
@@ -45,6 +43,7 @@ class Recruiter extends CI_Controller
             'recruiter_password'       => $this->input->post('password'),
             'recruiter_city'           => $this->input->post('city'),
             'recruiter_state'          => $this->input->post('state'),
+            'recruiter_gender'         => $this->input->post('gender'),
             'recruiter_created_at' => date("Y-m-d "),
             'recruiter_status'        => $this->input->post('status'),
 
@@ -52,12 +51,13 @@ class Recruiter extends CI_Controller
         );
 
       $res=$this->Recruiters_model->recruiter_add($data);
-      if($res)
-      {
+       if (isset($_FILES['photo']['name']))
+          {
+          $this->photo_upload($res);
+      }
+      
           $this->session->set_flashdata('success','recruiter added successfully');
           echo json_encode(array('status'=>'success'));
-          
-      }
       
     }
    
@@ -70,6 +70,7 @@ class Recruiter extends CI_Controller
                         'recruiter_mobile'         => $this->input->post('mobile'),
                         'recruiter_address'        =>$this->input->post('address'),
                         'recruiter_password'       => $this->input->post('password'),
+                        'recruiter_gender'         => $this->input->post('gender'),
                         'recruiter_city'           => $this->input->post('city'),
                         'recruiter_state'          => $this->input->post('state'),
                         'recruiter_status'        => $this->input->post('status'),
@@ -78,10 +79,63 @@ class Recruiter extends CI_Controller
        
         $res = $this->Recruiters_model->recruiter_update(array('recruiter_id'=>$this->input->post('recruiter_id')),$data);
         
+         if (isset($_FILES['photo']['name']))
+          {
+          $this->photo_upload($this->input->post('recruiter_id'));
+      }
+        
            $this->session->set_flashdata('success','Recruiter Updated Successfully');
            echo json_encode(array('status'=>true));
         
     }
+    
+     function photo_upload($rec_id)
+    {
+        $info=$this->Recruiters_model->get_id($rec_id);
+             
+if (isset($_FILES['photo']['name'])) {
+    if (0 < $_FILES['photo']['error']) {
+//        echo 'Error during file upload' . $_FILES['logo']['error'];
+        return false;
+    } else {
+
+        $rand=  mt_rand(1111,9999);
+        $name = $_FILES["photo"]["name"];
+        $ext = end((explode(".", $name)));
+        $filename='photo_'.date('Y-m-d_H.i.s').".".$ext;
+        move_uploaded_file($_FILES['photo']['tmp_name'], 'profile_pic/' . $filename);
+       
+        if(file_exists('profile_pic/'.$filename))
+        {
+            if(file_exists($info->recruiter_profile_pic))
+            {
+            unlink($info->recruiter_profile_pic);
+         $where=array('recruiter_id'=>$rec_id);
+        $data=array('recruiter_profile_pic'=>'profile_pic/'.$filename);
+         $res=$this->Recruiters_model->recruiter_update($where,$data);
+         
+        
+           return true;
+        
+            }else{
+                $where=array('recruiter_id'=>$rec_id);
+        $data=array('recruiter_profile_pic'=>'profile_pic/'.$filename);
+         $res=$this->Recruiters_model->recruiter_update($where,$data);   
+        
+           return true;
+                   
+            }
+        }   else{
+            return false;
+        }  
+//        }
+    }
+} else {
+    return false;
+}
+        
+    }
+    
         
          function ajax_edit($id)
     {
@@ -89,7 +143,18 @@ class Recruiter extends CI_Controller
          
             echo json_encode($data);
     }
-        
+        function delete_pic($id)
+        {
+             $info=$this->Recruiters_model->get_id($id);
+         if(file_exists($info->recruiter_profile_pic))        
+            {
+            unlink($info->recruiter_profile_pic);
+            }
+        $where=array('recruiter_id'=>$id);
+        $data=array('recruiter_profile_pic'=>"");
+         $res=$this->Recruiters_model->recruiter_update($where,$data);
+        redirect('admin/Recruiter');
+        }
         
      function show_cities($state)
         {

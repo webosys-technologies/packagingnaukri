@@ -32,7 +32,7 @@ class Recruiters_model extends CI_Model
 			'recruiter_city'			=> $this->input->post('city'),
 			'recruiter_state'			=> $this->input->post('state'),
                         'recruiter_created_at'	=> date("Y-m-d H:i:s"),
-                        'recruiter_status'        => '1'
+                        'recruiter_status'        => '0'
 
 
 		);

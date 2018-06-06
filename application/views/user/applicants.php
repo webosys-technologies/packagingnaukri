@@ -76,7 +76,7 @@
            <th>COMPANY</th>
           <th>EMAIL</th>
           <th>MOBILE</th>
-         
+          <th>RESUME</th>
           <th>APPLY AT</th>
          
 <th>ACTION</th>
@@ -88,7 +88,7 @@
             
           
          foreach($members as $res){
-             if($res->member_status=='1'){?>
+             ?>
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->member_id; ?>" class="" ></td> --> 
                                         <td><?php echo $res->member_id;?></td>
                                         <td><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
@@ -97,7 +97,7 @@
                                          <td><?php echo $res->member_email;?></td>
                                        
                                        <td><?php echo $res->member_mobile;?></td>
-                                      
+                                       <td><?php if(!empty($res->member_resume)){?><a href="<?php echo base_url().$res->member_resume ?>">Resume</a> <?php }else{ echo "Not Uploaded"; }?></td>
                                        <td><?php echo $res->apply_at;?></td>
                                       
                  <td>
@@ -106,7 +106,7 @@
 
                 </td>
               </tr>
-          <?php }}}?>
+          <?php }}?>
 
 
 
@@ -153,13 +153,16 @@ function view_member(id)
             $('#lname').html(data.member_lname); 
             $('#email').html(data.member_email);
             $('#mobile').html(data.member_mobile);
+           
             $('#gender').html(data.member_gender);
+            $('#dob').html(data.member_dob);
             $('#address').html(data.member_address);
             $('#city').html(data.member_city);
             $('#pincode').html(data.member_pincode);
             $('#state').html(data.member_state);
             $('#experience').html(data.member_experience);
             $('#salary').html(data.member_anual_salary);
+             $('#marital').html(data.member_marital_status);
             if(data.member_profile_pic)
             {
             $('#profile_pic').attr("src", "<?php  echo base_url();?>"+data.member_profile_pic);
@@ -168,15 +171,11 @@ function view_member(id)
              {
                $('#profile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
              }
-            // $('#remove_pic').attr("onclick","remove_profile_pic("+data.member_id+")");
-            // $('#sdob').html(data.member_dob);
-            // $('#susername').html(data.member_username);
-            // $('#spassword').html(data.member_password);
-            // $('#smember_last_education').html(data.member_last_education);
-            // $('#saddress').html(data.member_address);  
-            // $('#scity').html(data.member_city);
-            // $('#sstate').html(data.member_state);
-            // $('#spincode').html(data.member_pincode);
+            if(data.member_resume)
+            {
+                $("#resume_name").html("resume");
+            $('#resume').attr("href", "<?php  echo base_url();?>"+data.member_resume);
+             }
             
             $('#viewModal').modal('show'); // show bootstrap modal when complete loaded
             $('#viewtitle').text('Member Details'); // Set title to Bootstrap modal title
@@ -198,7 +197,7 @@ function view_member(id)
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header" style="background:#3c8dbc">
+        <div class="modal-header" style="background:#3c8dbc; color:white">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <center><h4 id="viewtitle" class="modal-title"></h4></center>
         </div>
@@ -265,7 +264,7 @@ function view_member(id)
                     </div>
                     <div class="col-md-1"><strong>:</strong></div>                    
                     <div class="col-md-7">
-                      <span id="name" class="text_color"></span>
+                      <span id="gender" class="text_color"></span>
                     </div>
                   </div>
                 </div>
@@ -346,14 +345,25 @@ function view_member(id)
                     </div>
                   </div>
                 </div>
+               <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Resume</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                        <a href="" id="resume"><span id="resume_name"></span></a>
+                    </div>
+                  </div>
+                </div>
             </form>
                             <!--</div>-->
           
         </div>         
-       <div class="modal-footer">
+<!--       <div class="modal-footer">
              <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
           <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
-        </div>
+        </div>-->
     </div>           
            
         </div>        

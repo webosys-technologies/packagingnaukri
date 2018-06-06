@@ -362,7 +362,7 @@ function view_user(id)
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header" style="background:#3c8dbc">
+        <div class="modal-header" style="background:#3c8dbc; color: white">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <center><h4 id="title" class="modal-title"></h4></center>
         </div>

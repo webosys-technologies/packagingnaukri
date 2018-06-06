@@ -138,6 +138,36 @@
   $(document).ready( function () {
       
       
+       function readURL(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+     var ext = input.files[0].name.split('.').pop().toLowerCase();
+    if(ext=="jpg" || ext=="jpeg" || ext=="png")
+            {
+
+    reader.onload = function(e) {
+      $('#recruiter_pic').attr('src', e.target.result);
+      $('#recruiter_pic').attr('hidden',false);
+      $("#pic_err").html("");
+    }
+  }else{
+        $("#pic_err").html("This format is not allowed");
+//       $('#photo').attr('src'," ");
+       $('#photo').val("");
+      $('#recruiter_pic').attr('hidden',true);
+  }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#photo").change(function() {
+  readURL(this);
+}); 
+     
+     
         $(".state").change(function() {
         
    var el = $(this) ;
@@ -188,6 +218,10 @@ var state=el.val();
   
     var save_method; //for save method string
     var table;
+
+
+   
+
 
 
 function view_recruiter(id)
@@ -245,11 +279,18 @@ function view_recruiter(id)
     {
         save_method="add";     
         $('#form')[0].reset();
-        $("#title").text("Edit Recruiter");
+        $("#title").text("Add Recruiter");
         $('#myModal').modal('show');
+         $("#pic_err").html("");
+                 $("#remove_btn").html("");
+
+          $('#recruiter_pic').attr('hidden',true);
     }
     function edit_recruiter(id)
     {
+        $("#remove_btn").html("");
+         $('#recruiter_pic').attr('hidden',true);
+         $("#pic_err").html("");
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
            //Ajax Load data from ajax
@@ -274,7 +315,13 @@ function view_recruiter(id)
 //            $("#city").val(data.recruiter_city);
             $(".city").append('<option value="'+ data.recruiter_city +'">' + data.recruiter_city+'</option>');
             $('[name="state"]').val(data.recruiter_state);
-          
+            $('[name="gender"]').val(data.recruiter_gender);
+           if(data.recruiter_profile_pic)
+            {
+                $("#recruiter_pic").attr('src',"<?php echo base_url();?>"+data.recruiter_profile_pic);
+                $("#recruiter_pic").prop('hidden',false);
+            $("#remove_btn").append(' <a href="<?php echo base_url();?>admin/Recruiter/delete_pic/'+data.recruiter_id+'" id="remove_photo" class="btn btn-danger btn-xs pull-right">Remove Photo</a>');
+            }
             
             $("#title").text("Edit Recruiter");
            $('#myModal').modal('show');
@@ -374,7 +421,7 @@ function view_recruiter(id)
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header" style="background:#3c8dbc">
+        <div class="modal-header" style="background:#3c8dbc; color: white">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <center><h4 id="title" class="modal-title"></h4></center>
         </div>
@@ -382,7 +429,7 @@ function view_recruiter(id)
          
             
           	
-    		<div class="panel panel-default">
+    		<!--<div class="panel panel-default">-->
     			
     			<div class="panel-body">
     				<form method="post" action="" id="form">
@@ -430,14 +477,37 @@ function view_recruiter(id)
                                     
                                 </div>
                                </div>
+                                    <div class="row">
+                                <div class="col-md-6  ">                                
+                                    <div class="form-group">
+                                        <label for="fname">Gender<span style="color:red">*</span></label>
+                                        <select name="gender" id="gender" class="form-control">
+                                           <option value="Male">Male</option>
+                                           <option value="Female">Female</option>
+                                       </select>
+                                        <span class="text-danger" id="email_err"></span>
+                                        
+                                    </div>
+                                    <span style="color:red" id="text_field1_error"></span>
+                                    
+                                </div></div>
                                     
                                     <div class="row">
-                                      <div class="col-md-12">
+                                      <div class="col-md-6">
                                       <div class="form-group">
                                         <label>Address<span style="color: red">*</span></label>
-                                        <textarea name="address" class="form-control"  required></textarea>
+                                        <textarea name="address" cols="20" rows="6" class="form-control"  required></textarea>
                                       </div>
                                         </div>
+                                         <div class="col-md-6">                                
+                                    <div class="form-group">
+                                       <label>Profile Picture</label>                                       
+                                    <input type="file" name="photo" id="photo" value="">
+                                   <div id="remove_btn"></div>
+                                        <span class="text-danger" id="pic_err"></span>                                        
+                                    </div> 
+                                    <img src="" id="recruiter_pic" width="90px" height="100px" hidden>
+                                </div> 
                                         </div>
                                           
                            <div class="row">
@@ -499,7 +569,7 @@ function view_recruiter(id)
     				
     			</div>
                    
-                            </div>
+                            <!--</div>-->
     			
     		</div>         
     	 <div class="modal-footer">
@@ -629,10 +699,7 @@ function view_recruiter(id)
                             </div>
           
         </div>         
-       <div class="modal-footer">
-             <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
-          <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
-        </div>
+     
     </div>           
            
         </div>        

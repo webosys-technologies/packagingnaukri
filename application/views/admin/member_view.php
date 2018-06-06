@@ -122,7 +122,7 @@
                   <button class="btn btn-success btn-xs" onclick="edit_member(<?php echo $res->member_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Member"><i class="glyphicon glyphicon-pencil"></i></button>
                   <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Member"><i class="glyphicon glyphicon-trash"></i></button>
 
-                  <button class="btn btn-warning btn-xs" onclick="view_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="View Member"><i class="fa fa-eye"></i></button>
+                  <button class="btn btn-info btn-xs" onclick="view_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="View Member"><i class="fa fa-eye"></i></button>
                  
 
                 </td>
@@ -139,7 +139,37 @@
   </div>
 
   <script type="text/javascript">
-  $(document).ready( function () {   
+  $(document).ready( function () {  
+      
+      
+             function readURL(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+     var ext = input.files[0].name.split('.').pop().toLowerCase();
+    if(ext=="jpg" || ext=="jpeg" || ext=="png")
+            {
+
+    reader.onload = function(e) {
+      $('#member_pic').attr('src', e.target.result);
+      $('#member_pic').attr('hidden',false);
+      $("#pic_err").html("");
+    }
+  }else{
+        $("#pic_err").html("This format is not allowed");
+//       $('#photo').attr('src'," ");
+       $('#photo').val("");
+      $('#member_pic').attr('hidden',true);
+  }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#photo").change(function() {
+  readURL(this);
+}); 
  
  
   $('.state').change(function() {
@@ -214,10 +244,12 @@ function view_member(id)
             $('#email').html(data.member_email);
             $('#mobile').html(data.member_mobile);
             $('#gender').html(data.member_gender);
+            $('#dob').html(data.member_dob);
             $('#address').html(data.member_address);
             $('#city').html(data.member_city);
             $('#pincode').html(data.member_pincode);
             $('#state').html(data.member_state);
+             $('#marital').html(data.member_marital_status);
             $('#experience').html(data.member_experience);
             $('#salary').html(data.member_anual_salary);
             if(data.member_profile_pic)
@@ -228,15 +260,12 @@ function view_member(id)
              {
                $('#profile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
              }
-            // $('#remove_pic').attr("onclick","remove_profile_pic("+data.member_id+")");
-            // $('#sdob').html(data.member_dob);
-            // $('#susername').html(data.member_username);
-            // $('#spassword').html(data.member_password);
-            // $('#smember_last_education').html(data.member_last_education);
-            // $('#saddress').html(data.member_address);  
-            // $('#scity').html(data.member_city);
-            // $('#sstate').html(data.member_state);
-            // $('#spincode').html(data.member_pincode);
+              if(data.member_resume)
+            {
+                $("#resume_name").html("resume");
+            $('#resume').attr("href", "<?php  echo base_url();?>"+data.member_resume);
+             }
+           
             
             $('#viewModal').modal('show'); // show bootstrap modal when complete loaded
             $('#viewtitle').text('Member Details'); // Set title to Bootstrap modal title
@@ -255,13 +284,22 @@ function view_member(id)
        $('#form')[0].reset();
         $("#title").text("Add Member");
         $('#myModal').modal('show');
-//        $("#bt").attr("data-toggle","modal");
-//        $("#bt").attr("data-target","#myModal");
+     
+      
+      $("#pic_err").html("");
+      $('#photo').val("");
+      $('#member_pic').attr('hidden',true);
+      $("#remove_btn").html("");
          
     }
 
     function edit_member(id)
     {     
+       $("#pic_err").html("");
+       $('#photo').val("");
+       $('#member_pic').attr('hidden',true);
+       $("#remove_btn").html("");
+        
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
       $('.city').html("");
@@ -284,7 +322,13 @@ function view_member(id)
             $('[name="state"]').val(data.member_state);
             $('[name="status"]').val(data.member_status);
               $('.city').append('<option value="'+ data.member_city +'">' + data.member_city +'</option>');
-
+              
+            if(data.member_profile_pic)
+            {
+                $("#member_pic").attr('src',"<?php echo base_url();?>"+data.member_profile_pic);
+                $("#member_pic").prop('hidden',false);
+            $("#remove_btn").append(' <a href="<?php echo base_url();?>admin/Members/delete_pic/'+data.member_id+'" id="remove_photo" class="btn btn-danger btn-xs pull-right">Remove Photo</a>');
+            }
                         
            $("#title").text("Edit Member");
            $('#myModal').modal('show');
@@ -364,9 +408,7 @@ function view_member(id)
         $("#delete_member").attr('onclick','delete_member('+id+')');  
              
     }
-
-
-  </script>
+</script>
 
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog" id="modal_dialog">
@@ -412,10 +454,9 @@ function view_member(id)
                                     <div class="form-group">
                                         <label for="fname">Email Id<span style="color:red">*</span></label>
                                         <input type="text" placeholder="Email Id" class="form-control required"  name="email" maxlength="128" required>
-                                        <span class="text-danger" id="email_err"></span>
-                                        
+                                        <span class="text-danger" id="email_err"></span>                                        
                                     </div>
-                                    <span style="color:red" id="text_field1_error"></span>
+                                    
                                     
                                 </div>
                                 <div class="col-md-6">                                
@@ -425,19 +466,29 @@ function view_member(id)
                                         <span class="text-danger" id="mobile_err"></span>
                                         
                                     </div>
-                                    <span style="color:red" id="text_field1_error"></span>
+                                   
                                     
                                 </div>
                                </div>
                                     
                                     <div class="row">
-                                          <div class="col-md-12">
+                                          <div class="col-md-6">
                                             <div class="form-group">
                                               <label>Address<span style="color: red">*</span></label>
-                                              <textarea name="address" class="form-control" required></textarea>
+                                              <textarea rows="5" cols="6" name="address" class="form-control" required></textarea>
                                             </div>
                                           </div>
+                                         <div class="col-md-6">                                
+                                    <div class="form-group">
+                                       <label>Profile Picture</label>                                       
+                                    <input type="file" name="photo" id="photo" value="">
+                                   <div id="remove_btn"></div>
+                                        <span class="text-danger" id="pic_err"></span>                                        
+                                    </div> 
+                                    <img src="" id="member_pic" width="90px" height="100px" hidden>
+                                </div> 
                                         </div>
+                                    
                                     
                                             
                              <div class="row">
@@ -582,7 +633,7 @@ function view_member(id)
                     </div>
                     <div class="col-md-1"><strong>:</strong></div>                    
                     <div class="col-md-7">
-                      <span id="name" class="text_color"></span>
+                      <span id="gender" class="text_color"></span>
                     </div>
                   </div>
                 </div>
@@ -663,16 +714,27 @@ function view_member(id)
                     </div>
                   </div>
                 </div>
+              <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Resume</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>                    
+                    <div class="col-md-7">
+                        <a href="" id="resume"><span id="resume_name"></span></a>
+                    </div>
+                  </div>
+                </div>
             </form>
             
           </div>
                             </div>
           
         </div>         
-       <div class="modal-footer">
+<!--       <div class="modal-footer">
              <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
           <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
-        </div>
+        </div>-->
     </div>           
            
         </div>        

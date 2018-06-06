@@ -52,7 +52,7 @@
     }
     
     #modal_dialog{
-     width: 600px;
+     width: 700px;
       overflow-y: initial !important
 }
 #modal_body{
@@ -260,13 +260,7 @@ document.getElementById("passout").innerHTML = options;
        }
        ); 
        
-       
-            
-         
-       
-       
-     
-      
+ 
             
      
        
@@ -456,9 +450,14 @@ var edu_name=el.val();
    
         function save(data,save_method)
     {     
+        
+//        alert($("#organization").val());
+        if($("#org_error").val()!=" ")
+        {
+            $("#org_error").html("");
+        }
      
-      var url;
-    
+      var url;    
         url = '<?php echo base_url() ?>member/Profile/'+save_method;
       
        // ajax adding data to database
@@ -478,14 +477,14 @@ var edu_name=el.val();
               location.reload();// for reload a page
 
                }
-               if(json.error)
+               if(json.org_error)
                {                   
-             $("#from_err").html(json.error);
+             $("#org_error").html(json.org_error);
 
                }
-               if(json.skill_error)
+               if(json.from_err)
                {
-                   $("#skill_error").html(json.skill_error);
+                   $("#from_err").html(json.from_err);
                }
                
                
@@ -646,6 +645,9 @@ var edu_name=el.val();
                 $("#state").val(data.member_state);
                 $("#city").append('<option value="'+data.member_city+'">'+data.member_city+'</option>');
                 $("#city").val(data.member_city);
+                $("#marital_status").val(data.member_marital_status);
+                $("#pincode").val(data.member_pincode);
+                $("#address").val(data.member_address);
                 
 //                alert(data.education_degree);
                  $("#edu_title").val(data.education_degree);
@@ -814,8 +816,18 @@ var edu_name=el.val();
                     <span><?php echo $member_data->member_mobile;?></span>
             </div>   
                   <div class="col-md-6">
-                 <Span class="form_label">City</span><br>
-                 <span><?php echo $member_data->member_city;?></span>
+                 <Span class="form_label">Address</span><br>
+                 <span><?php echo $member_data->member_address;?></span>
+            </div>   
+           </div>
+          <div class="row">
+                <div class="col-md-6">
+                    <Span class="form_label">Pincode</span><br>
+                    <span><?php echo $member_data->member_pincode;?></span>
+            </div>   
+                  <div class="col-md-6">
+                 <Span class="form_label">Marital Status</span><br>
+                 <span><?php echo $member_data->member_marital_status;?></span>
             </div>   
            </div>
            <div class="row">
@@ -1154,14 +1166,7 @@ var edu_name=el.val();
      
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
-</div><!-- /.modal --><br>
-          
-          
-          
-          
-          
-          
-          
+</div><!-- /.modal --><br>        
        
              
              
@@ -1171,7 +1176,7 @@ var edu_name=el.val();
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <center><h4 style="color:white" id="title" class="modal-title">Perosonal Detail</h4></center>
+          <center><h4 style="color:white" id="title" class="modal-title">Personal Detail</h4></center>
         </div>
         <div class="modal-body" id="personal_body">         	
     				
@@ -1192,15 +1197,13 @@ var edu_name=el.val();
                                          </div>
                             </div><br>
                                     <div class="row">
-                                    <div class="col-md-12  ">                             
+                                    <div class="col-md-6  ">                             
                                         <label for="fname">Email</label>
                                         <input type="Email" placeholder="Email" value="" class="form-control required" id="email" name="email" maxlength="128" required>
                                         <span class="text-danger" id="email_err"></span>                                                          
-                                </div>
-                                        </div><br>
+                                    </div>                         
                                     
-                                     <div class="row">
-                                    <div class="col-md-12  ">                             
+                                    <div class="col-md-6  ">                             
                                         <label for="fname">Mobile</label>
                                         <input type="text" placeholder="Mobile" value='' class="form-control required" id="mobile" name="mobile" maxlength="11" required>
                                         <span class="text-danger" id="mobile_err"></span>                                                          
@@ -1251,7 +1254,31 @@ var edu_name=el.val();
                         <span class="text-danger"><?php echo form_error('city'); ?></span>
 
                     </div>
-                    </div>
+                    </div><br>
+                            <div class="row">
+                             
+                                <div class="col-md-12  ">                             
+                                        <label for="fname">Address</label>
+                                        <textarea name="address" id="address" value="" class="form-control" rows="5"></textarea>
+                                        <span class="text-danger" id="pincode_err"></span>                                                          
+                                </div>
+                                </div><br>
+                            
+                            <div class="row">                             
+                                <div class="col-md-6  ">                             
+                                        <label for="fname">Pincode</label>
+                                        <input type="text" name='pincode' value='' id="pincode" placeholder="Pincode" class="form-control">
+                                        <span class="text-danger" id="pincode_err"></span>                                                          
+                                </div>
+                                <div class="col-md-6">                                   
+                                        <label for="lname">Marital Status</label>
+                                        <select class="form-control" name='marital_status' id='marital_status'>
+                                            <option value="Married">Married</option>
+                                             <option value="Unmarried">Unmarried</option>
+                                        </select>
+                                      <span class="text-danger" id="marital_err"></span>                                   
+                                         </div>
+                            </div>
                                     
                         </div>
                                 </form>
@@ -1300,7 +1327,7 @@ var edu_name=el.val();
                                            <option value="spl_field">other</option>
                                         </select>
                                          </div>
-                            </div><br>
+                            </div>
                              <div class="row">
                                     <div class="col-md-6" id="spl_field" hidden>                             
                                         <label for="fname">Specialization</label>
@@ -1401,7 +1428,7 @@ var edu_name=el.val();
                                 <div class="col-md-6  ">                             
                                         <label for="fname">Organization</label>
                                         <input type="text" placeholder="Company Name" value="" class="form-control required" id="organization" name="organization" maxlength="128" required>
-                                        <span class="text-danger" id="org_err"></span>                                                          
+                                        <span class="text-danger" id="org_error"></span>                                                          
                                 </div>
                                 <div class="col-md-6">                                   
                                         <label for="lname">City</label>
@@ -1436,7 +1463,7 @@ var edu_name=el.val();
                                         <label for="fname">Work From</label>
                                         <input type="date" value="" name="from" id="from" class="form-control">
 <!--                                        <select class="form-control" name="from" id="from"></select>
-                                        <span class="text-danger" id="from_err"></span>                                                          
+                                                                                                 
                                 </div>
                                              <div class="col-md-6  ">                             
                                         <label for="fname">Month</label>
@@ -1543,7 +1570,7 @@ var edu_name=el.val();
                                 <div class="col-md-12  ">                             
                                         <label for="fname">Project Description</label>
                                         <textarea class="form-control" rows="6" name="desc" id="project_desc"></textarea>
-                                        <span class="text-danger" id="from_err"></span>                                                          
+                                        <span class="text-danger" id="desc_err"></span>                                                          
                                 </div>
                                
                                      </div>

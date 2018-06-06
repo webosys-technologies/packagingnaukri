@@ -36,11 +36,13 @@ class Members extends CI_Controller
    {
       
         list($get_insert,$get_data)=$this->Members_model->register();
-        if($get_insert)
+        if (isset($_FILES['photo']['name']))
         {
+            $this->photo_upload($get_insert);
+        }
             $this->session->set_flashdata('success',"member added Successfully");
              echo json_encode(array('success','Member added successfully'));
-        }
+        
            
         }
         
@@ -60,6 +62,12 @@ class Members extends CI_Controller
             
                        
             $res=$this->Members_model->member_update(array('member_id'=>$this->input->post('member_id')),$data);
+            
+            if (isset($_FILES['photo']['name']))
+        {
+            $this->photo_upload($this->input->post('member_id'));
+        }
+            
             
                 $this->session->set_flashdata('success','Member Updated Successfully');
                 echo json_encode(array('status'=>true));
@@ -91,6 +99,66 @@ class Members extends CI_Controller
             $cities=$this->Cities_model->getall_cities(ltrim($st));
           
             echo json_encode($cities);
+        }
+        
+        function photo_upload($rec_id)
+    {
+        $info=$this->Members_model->get_id($rec_id);
+             
+if (isset($_FILES['photo']['name'])) {
+    if (0 < $_FILES['photo']['error']) {
+//        echo 'Error during file upload' . $_FILES['logo']['error'];
+        return false;
+    } else {
+
+        $rand=  mt_rand(1111,9999);
+        $name = $_FILES["photo"]["name"];
+        $ext = end((explode(".", $name)));
+        $filename='photo_'.date('Y-m-d_H.i.s').".".$ext;
+        move_uploaded_file($_FILES['photo']['tmp_name'], 'profile_pic/' . $filename);
+       
+        if(file_exists('profile_pic/'.$filename))
+        {
+            if(file_exists($info->member_profile_pic))
+            {
+            unlink($info->member_profile_pic);
+         $where=array('member_id'=>$rec_id);
+        $data=array('member_profile_pic'=>'profile_pic/'.$filename);
+         $res=$this->Members_model->member_update($where,$data);
+         
+        
+           return true;
+        
+            }else{
+                $where=array('member_id'=>$rec_id);
+        $data=array('member_profile_pic'=>'profile_pic/'.$filename);
+         $res=$this->Members_model->member_update($where,$data);   
+        
+           return true;
+                   
+            }
+        }   else{
+            return false;
+        }  
+//        }
+    }
+} else {
+    return false;
+}
+        
+    }
+    
+    function delete_pic($id)
+        {
+             $info=$this->Members_model->get_id($id);
+         if(file_exists($info->member_profile_pic))        
+            {
+            unlink($info->member_profile_pic);
+            }
+        $where=array('member_id'=>$id);
+        $data=array('member_profile_pic'=>"");
+         $res=$this->Members_model->member_update($where,$data);
+        redirect('admin/Members');
         }
 
 	
