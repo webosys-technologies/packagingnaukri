@@ -143,7 +143,7 @@ function view_member(id)
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/admin/Members/ajax_edit/')?>/" + id,        
+        url : "<?php echo site_url('index.php/recruiter/Members/ajax_edit/')?>/" + id,        
         type: "GET",
                
         dataType: "JSON",
@@ -154,6 +154,9 @@ function view_member(id)
             $('#email').html(data.member_email);
             $('#mobile').html(data.member_mobile);
             $('#gender').html(data.member_gender);
+            $('#dob').html(data.member_dob);
+            $('#marital').html(data.member_marital_status);
+            
             $('#address').html(data.member_address);
             $('#city').html(data.member_city);
             $('#pincode').html(data.member_pincode);
@@ -168,15 +171,7 @@ function view_member(id)
              {
                $('#profile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
              }
-            // $('#remove_pic').attr("onclick","remove_profile_pic("+data.member_id+")");
-            // $('#sdob').html(data.member_dob);
-            // $('#susername').html(data.member_username);
-            // $('#spassword').html(data.member_password);
-            // $('#smember_last_education').html(data.member_last_education);
-            // $('#saddress').html(data.member_address);  
-            // $('#scity').html(data.member_city);
-            // $('#sstate').html(data.member_state);
-            // $('#spincode').html(data.member_pincode);
+           
             
             $('#viewModal').modal('show'); // show bootstrap modal when complete loaded
             $('#viewtitle').text('Member Details'); // Set title to Bootstrap modal title
@@ -265,7 +260,7 @@ function view_member(id)
                     </div>
                     <div class="col-md-1"><strong>:</strong></div>                    
                     <div class="col-md-7">
-                      <span id="name" class="text_color"></span>
+                      <span id="gender" class="text_color"></span>
                     </div>
                   </div>
                 </div>
@@ -350,14 +345,15 @@ function view_member(id)
                             <!--</div>-->
     			
     		</div>         
-    	 <div class="modal-footer">
+<!--    	 <div class="modal-footer">
              <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
           <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
-        </div>
+        </div>-->
     </div>           
            
         </div>        
       </div>
+    </div>
    
 
 

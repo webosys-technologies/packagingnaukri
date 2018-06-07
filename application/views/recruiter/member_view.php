@@ -151,56 +151,6 @@ var state=el.val();
     var table;
 
 
-function view_member(id)
-    {
-      save_method = 'update';
-     $('#form')[0].reset(); // reset form on modals
-
-      //Ajax Load data from ajax
-      $.ajax({
-        url : "<?php echo site_url('index.php/member/Student/ajax_edit/')?>/" + id,        
-        type: "GET",
-               
-        dataType: "JSON",
-        success: function(data)
-        {          
-            $('#sfname').html(data.member_fname);
-            $('#slname').html(data.member_lname); 
-            $('#scourse_name').html(data.course_name);
-            $('#semail').html(data.member_email);
-            $('#smobile').html(data.member_mobile);
-            $('#sgender').html(data.member_gender);
-            $('#saddmission_month').html(data.member_payment_date);
-            $('#scourse_end_date').html(data.member_course_end_date);
-            $('#slast_education').html(data.member_last_education);
-            if(data.member_profile_pic)
-            {
-            $('#sprofile_pic').attr("src", "<?php  echo base_url();?>"+data.member_profile_pic);
-             }
-             else
-             {
-               $('#sprofile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
-             }
-            $('#remove_pic').attr("onclick","remove_profile_pic("+data.member_id+")");
-            $('#sdob').html(data.member_dob);
-            $('#susername').html(data.member_username);
-            $('#spassword').html(data.member_password);
-            $('#smember_last_education').html(data.member_last_education);
-            $('#saddress').html(data.member_address);  
-            $('#scity').html(data.member_city);
-            $('#sstate').html(data.member_state);
-            $('#spincode').html(data.member_pincode);
-            
-            $('#modal_form2').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Student Data'); // Set title to Bootstrap modal title
-
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-            alert('Error get data from ajax 1');
-        }
-    });
-    }
 
     function add_member()
     {  
@@ -211,47 +161,6 @@ function view_member(id)
         $("#bt").attr("data-toggle","modal");
         $("#bt").attr("data-target","#myModal");
     }
-
-//    function edit_member(id)
-//    {
-//      save_method = 'update';
-//     $('#form')[0].reset(); // reset form on modals
-//
-//      //Ajax Load data from ajax
-//      $.ajax({
-//        url : "<?php echo site_url('index.php/admin/Members/ajax_edit/')?>/" + id,
-//        type: "GET",
-//        dataType: "JSON",
-//        success: function(data)
-//        {
-////            $("#append_city").remove();     
-//            $('[name="member_id"]').val(data.member_id);
-//            $('[name="member_fname"]').val(data.member_fname);
-//            $('[name="member_name"]').val(data.member_name);
-//            $('[name="member_lname"]').val(data.member_lname);
-//            $('[name="member_email"]').val(data.member_email);
-//            $('[name="member_mobile"]').val(data.member_mobile);
-//            $('[name="member_gender"]').val(data.member_gender);
-//            $('[name="member_dob"]').val(data.member_dob);
-//            $('[name="member_address"]').val(data.member_address);  
-//            $('[name="member_password"]').val(data.member_password);
-//             $('[name="status"]').val(data.member_status);
-//            $('[name="member_cpassword"]').val(data.member_password);
-//            $('[name="member_city"]').val(data.member_city);
-////             $("#member_city").append('<option value="'+ data.member_city +'" id="append_city">' + data.member_city + '</option>');
-//            $('[name="member_state"]').val(data.member_state);
-//            $('[name="member_pincode"]').val(data.member_pincode);
-//            
-//            $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-//            $('.modal-title').text('Edit Members'); // Set title to Bootstrap modal title
-//
-//        },
-//        error: function (jqXHR, textStatus, errorThrown)
-//        {
-//            alert('Error get data from ajax 1');
-//        }
-//    });
-//    }
 
 
 

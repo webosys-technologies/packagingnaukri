@@ -283,11 +283,20 @@ function view_recruiter(id)
         $('#myModal').modal('show');
          $("#pic_err").html("");
                  $("#remove_btn").html("");
+                 $("#fname_err").html(""); 
+                 $("#lname_err").html(""); 
+                 $("#state_err").html(""); 
+                 $("#city_err").html(""); 
+                 
 
           $('#recruiter_pic').attr('hidden',true);
     }
     function edit_recruiter(id)
     {
+        $("#fname_err").html(""); 
+        $("#lname_err").html(""); 
+        $("#city_err").html(""); 
+        $("#state_err").html(""); 
         $("#remove_btn").html("");
          $('#recruiter_pic').attr('hidden',true);
          $("#pic_err").html("");
@@ -360,10 +369,42 @@ function view_recruiter(id)
             dataType: "JSON",
             success: function(json)
             {
-               if(json.status)
-               {                   
+                if(json.state_err)
+                {
+                $("#state").focus();
+                $("#state_err").html(json.state_err);
+              }else{
+                   $("#state_err").html("");
+              }
+              
+              if(json.city_err)
+              {
+                  $("#city").focus();
+               $("#city_err").html(json.city_err); 
+              }else{
+                  $("#city_err").html(""); 
+              }
+              
+              if(json.fname_err)
+              {
+                   $('[name=fname]').focus();
+               $("#fname_err").html(json.fname_err); 
+              }else{
+                   $("#fname_err").html(""); 
+              }
+              
+               if(json.lname_err)
+              {
+                   $('[name=lname]').focus();
+               $("#lname_err").html(json.lname_err); 
+              }else{
+                   $("#lname_err").html(""); 
+              }
+            
+              if(json.status)
+              {
               location.reload();// for reload a page
-               }
+              }
                 
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -439,19 +480,19 @@ function view_recruiter(id)
                                     <div class="form-group">
                                         <label for="fname">First Name<span style="color:red">*</span></label>
                                         <input type="text" placeholder="First Name" class="form-control required"  name="fname" maxlength="128" required>
-                                        <span class="text-danger" id="fname_err"></span>
+                                       
                                         
                                     </div>
-                                    <span style="color:red" id="text_field1_error"></span>
+                                    <span class="text-danger" id="fname_err"></span>
                                     
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="lname">Last Name<span style="color:red">*</span></label>
                                         <input type="text" placeholder="Last Name" class="form-control"   name="lname" maxlength="128" required>
-                                      <span class="text-danger" id="lname_err"></span>
+                                     
                                     </div>
-                                    <span style="color:red" id="text_field2_error"></span>
+                                     <span class="text-danger" id="lname_err"></span>
                                 </div>
                             </div>
                                     
@@ -514,7 +555,7 @@ function view_recruiter(id)
                           <div class="col-md-6">
                             <div class="form-group">
                               <label class="form-label">State</label><span style="color: red">*</span>
-                              <select name="state"  class="form-control state" required>
+                              <select name="state" id="state" class="form-control state" required>
                                     <option value="">-- Select State --</option>
                                     <?php if(isset($states)){
                                         foreach($states as $state)
@@ -526,7 +567,7 @@ function view_recruiter(id)
                                     
                                     <!--<option value="Maharashtra">Maharashtra</option>-->
                         </select>
-                        <span class="text-danger"><?php echo form_error('state'); ?></span>
+                        <span class="text-danger" id="state_err"><?php echo form_error('state'); ?></span>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -535,7 +576,7 @@ function view_recruiter(id)
                         <select name="city"  class="form-control city" required>
                                     <option value="">-- Select City --</option>                                   
                              </select>
-                        <span class="text-danger"><?php echo form_error('city'); ?></span>
+                        <span class="text-danger" id="city_err"><?php echo form_error('city'); ?></span>
                         </div>
                     </div>
                     </div>
@@ -712,7 +753,7 @@ function view_recruiter(id)
 <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div style="background:#ABB2B9" class="modal-header">
+      <div style="background:#3c8dbc;" class="modal-header">
           
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Recruiter</strong></h4></center>

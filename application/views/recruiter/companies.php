@@ -204,7 +204,10 @@ var user_type=el.val();
 
 
     function add_company()
-    {  
+    {
+         $("#company_err").html(""); 
+        $("#state_err").html(""); 
+        $("#city_err").html(""); 
          $('[name="city"]').html("");
          $("#remove_btn").html("");
          $('#company_logo').attr('hidden',true);
@@ -254,7 +257,11 @@ var user_type=el.val();
 
 
     function edit_company(id)
-    {     
+    { 
+         $("#company_err").html(""); 
+        $("#state_err").html(""); 
+        $("#city_err").html(""); 
+        
        $("#remove_btn").html("");
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
@@ -331,14 +338,39 @@ var user_type=el.val();
             dataType: "JSON",
             success: function(json)
             {
-               
+              if(json.success)
+              {
+                  location.reload();// for reload a page
+              }
               
-              location.reload();// for reload a page
+              if(json.state_err)
+              {
+                   $("#state").focus();
+                $("#state_err").html(json.state_err);
+              }else{
+                   $("#state_err").html("");
+              }
+              
+              if(json.city_err)
+              {
+                  $("#city").focus();
+               $("#city_err").html(json.city_err); 
+              }else{
+                  $("#city_err").html(""); 
+              }
+              if(json.company_err)
+              {
+                   $('[name=company]').focus();
+               $("#company_err").html(json.company_err); 
+              }else{
+                   $("#company_err").html(""); 
+              }
+              
                 
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                alert('Error adding / update data');
+//                alert('Error adding / update data');
             }
         });
     }
@@ -376,7 +408,7 @@ var user_type=el.val();
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header" style="background:#3c8dbc">
+        <div class="modal-header" style="background:#3c8dbc; color:white">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <center><h4 id="title" class="modal-title"></h4></center>
         </div>
@@ -391,7 +423,7 @@ var user_type=el.val();
                                     <div class="form-group">
                                         <label>Company Name</label><span style="color: red">*</span>
                                     <input name="company" class="form-control" placeholder="Compay Name" value="">
-                                        <span class="text-danger" id="fname_err"></span>
+                                        <span class="text-danger" id="company_err"></span>
                                         
                                     </div>
                                                                        
@@ -466,7 +498,7 @@ var user_type=el.val();
                                   <div class="col-md-6">
                                         <label class="form-label">Country</label><span style="color: red">*</span>
                                         <select name="country" id="country" class="form-control" required>
-                                                    <option value="">-- Select Country --</option>                              
+                                                    <!--<option value="">-- Select Country --</option>-->                              
                                                     <option value="India"> India </option>                                   
                                              </select>
                                         <span class="text-danger"><?php echo form_error('city'); ?></span>
@@ -486,7 +518,7 @@ var user_type=el.val();
                                                   
                                                   <!--<option value="Maharashtra">Maharashtra</option>-->
                                       </select>
-                                      <span class="text-danger"><?php echo form_error('state'); ?></span>
+                                      <span id="state_err" class="text-danger"></span>
 
                                   </div>
                     
@@ -499,7 +531,7 @@ var user_type=el.val();
                                         <select name="city" id="city" class="form-control" required>
                                                     <option value="">-- Select City --</option>                                   
                                              </select>
-                                        <span class="text-danger"><?php echo form_error('city'); ?></span>
+                                        <span id="city_err" class="text-danger"></span>
 
                                     </div>
                                     
@@ -522,11 +554,11 @@ var user_type=el.val();
                         </div>  
                         <div class="col-md-6">
                            <label>Company Multinational</label><span style="color: red">*</span>
-                                        <input name="mnc" placeholder="Job Salary" class="form-control" value="">
+                                        <input name="mnc" placeholder="Multinational" class="form-control" value="">
                             <span class="text-danger" id="gen_err"></span>
 
                         </div>  
-                    </div>
+                    </div><br>
                                  <div class="row"> 
                                 <div class="col-md-6">
                                   <div class="form-group">

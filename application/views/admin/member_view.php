@@ -285,7 +285,10 @@ function view_member(id)
         $("#title").text("Add Member");
         $('#myModal').modal('show');
      
-      
+       $("#fname_err").html(""); 
+        $("#lname_err").html(""); 
+        $("#city_err").html(""); 
+        $("#state_err").html(""); 
       $("#pic_err").html("");
       $('#photo').val("");
       $('#member_pic').attr('hidden',true);
@@ -294,7 +297,12 @@ function view_member(id)
     }
 
     function edit_member(id)
-    {     
+    { 
+         $("#fname_err").html(""); 
+        $("#lname_err").html(""); 
+        $("#city_err").html(""); 
+        $("#state_err").html(""); 
+        
        $("#pic_err").html("");
        $('#photo').val("");
        $('#member_pic').attr('hidden',true);
@@ -369,10 +377,42 @@ function view_member(id)
             dataType: "JSON",
             success: function(json)
             {
-               
+              if(json.state_err)
+                {
+                $("#state").focus();
+                $("#state_err").html(json.state_err);
+              }else{
+                   $("#state_err").html("");
+              }
               
+              if(json.city_err)
+              {
+                  $("#city").focus();
+               $("#city_err").html(json.city_err); 
+              }else{
+                  $("#city_err").html(""); 
+              }
+              
+              if(json.fname_err)
+              {
+                   $('[name=fname]').focus();
+               $("#fname_err").html(json.fname_err); 
+              }else{
+                   $("#fname_err").html(""); 
+              }
+              
+               if(json.lname_err)
+              {
+                   $('[name=lname]').focus();
+               $("#lname_err").html(json.lname_err); 
+              }else{
+                   $("#lname_err").html(""); 
+              }
+            
+              if(json.success)
+              {
               location.reload();// for reload a page
-                
+              }
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
@@ -505,20 +545,22 @@ function view_member(id)
                                        <?php }
                                     }?>
                                  
-                                    
+                              
                                     <!--<option value="Maharashtra">Maharashtra</option>-->
                         </select>
-                        <span class="text-danger"><?php echo form_error('state'); ?></span>
+                         <span class="text-danger" id="state_err"><?php echo form_error('state'); ?></span>    
                       </div>
+                                 
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="form-label">City</label><span style="color: red">*</span>
                         <select name="city"  class="form-control city" required>
                                     <option value="">-- Select City --</option>
-                           </select>
-                        <span class="text-danger"><?php echo form_error('city'); ?></span>
+                           </select>                        
+                        <span class="text-danger" id="city_err"><?php echo form_error('city'); ?></span>
                       </div>
+                        
                     </div>
                     </div>
                       <div class="row">
@@ -747,7 +789,7 @@ function view_member(id)
 <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div style="background:#ABB2B9" class="modal-header">
+      <div style="background:#3c8dbc;" class="modal-header">
           
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Member</strong></h4></center>

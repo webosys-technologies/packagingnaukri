@@ -367,7 +367,7 @@ function view_member(id)
         </div>        
       </div>
    
-
+</div>
 
 
 

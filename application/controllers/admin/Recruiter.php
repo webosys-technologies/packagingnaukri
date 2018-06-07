@@ -34,6 +34,17 @@ class Recruiter extends CI_Controller
         
      function recruiter_add()
     {
+         $form=$this->input->post();
+        
+          if(!empty($form['fname']))
+        { 
+           if(!empty($form['lname']))
+        {              
+  if(!empty($form['state']) && $form['state']!="-- Select State --")
+  {
+      if(!empty($form['city']) && $form['city']!="-- Select City --" && $form['city']!="")
+      {
+                   
          $data=array(
             'recruiter_fname'          =>$this->input->post('fname'),
             'recruiter_lname'          => $this->input->post('lname'),
@@ -44,7 +55,7 @@ class Recruiter extends CI_Controller
             'recruiter_city'           => $this->input->post('city'),
             'recruiter_state'          => $this->input->post('state'),
             'recruiter_gender'         => $this->input->post('gender'),
-            'recruiter_created_at' => date("Y-m-d "),
+            'recruiter_created_at'     => date("Y-m-d "),
             'recruiter_status'        => $this->input->post('status'),
 
 
@@ -58,11 +69,38 @@ class Recruiter extends CI_Controller
       
           $this->session->set_flashdata('success','recruiter added successfully');
           echo json_encode(array('status'=>'success'));
+               
+      }
+              else {
+          echo json_encode(array('city_err'=>'Please Select City'));
+      }
+  } else {
+          echo json_encode(array('state_err'=>'Please Select State'));
+      
+        }}else{
+            echo json_encode(array('lname_err'=>'Last Name Required'));
+        }
+        }
+        else{
+              
+           echo json_encode(array('fname_err'=>'First Name Required'));
+        }
       
     }
    
     function recruiter_update()
     {
+       $form=$this->input->post();
+        
+         if(!empty($form['fname']))
+        { 
+           if(!empty($form['lname']))
+        {              
+  if(!empty($form['state']) && $form['state']!="-- Select State --")
+  {
+      if(!empty($form['city']) && $form['city']!="-- Select City --" && $form['city']!="")
+      {
+        
         $data=array(
                          'recruiter_fname'          =>$this->input->post('fname'),
                         'recruiter_lname'          => $this->input->post('lname'),
@@ -86,6 +124,22 @@ class Recruiter extends CI_Controller
         
            $this->session->set_flashdata('success','Recruiter Updated Successfully');
            echo json_encode(array('status'=>true));
+           
+             }
+              else {
+          echo json_encode(array('city_err'=>'Please Select City'));
+      }
+  } else {
+          echo json_encode(array('state_err'=>'Please Select State'));
+      
+        }}else{
+            echo json_encode(array('lname_err'=>'Last Name Required'));
+        }
+        }
+        else{
+              
+           echo json_encode(array('fname_err'=>'First Name Required'));
+        }
         
     }
     

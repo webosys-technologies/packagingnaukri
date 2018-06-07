@@ -216,11 +216,22 @@ var user_type=el.val();
        $('#form')[0].reset();
         $("#title").text("Add Job");
         $('#myModal').modal('show');
+        $("#loc_err").html("");
+        $("#exp_err").html("");
+        $("#comp_err").html("");
+        $("#job_err").html("");
+        $("#qua_err").html("");
 
     }
 
     function edit_job(id)
-    {     
+    {    
+        $("#loc_err").html("");
+        $("#exp_err").html("");
+        $("#comp_err").html("");
+        $("#job_err").html("");
+        $("#qua_err").html("");
+       
       
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
@@ -284,11 +295,42 @@ var user_type=el.val();
             data: data,
             dataType: "JSON",
             success: function(json)
-            {
-               
-              
-              location.reload();// for reload a page
+            { 
+                if(json.loc_err)
+                {
+                     $("#loc_err").html(json.loc_err);
+                }else{
+                     $("#loc_err").html("");
+                }
+                if(json.exp_err)
+                {
+                     $("#exp_err").html(json.exp_err);
+                }else{
+                     $("#exp_err").html("");
+                }
+                if(json.comp_err)
+                {
+                     $("#comp_err").html(json.comp_err);
+                }else{
+                    $("#comp_err").html("");
+                }
+                if(json.qua_err)
+                {
+                    $("#qua_err").html(json.qua_err);
+                }else{
+                    $("#qua_err").html("");
+                }
+                if(json.job_err)
+                {
+                    $("#job_err").html(json.job_err);
+                }else{
+                    $("#job_err").html("");
+                }
                 
+             if(json.success)
+             {
+              location.reload();// for reload a page
+             }  
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
@@ -391,7 +433,7 @@ var user_type=el.val();
                                     <div class="form-group">
                                         <label>Job Title: (*)</label>
                                     <input name="jobtitle" class="form-control" placeholder="Job Title" value="">
-                                        <span class="text-danger" id="fname_err"></span>
+                                        <span class="text-danger" id="job_err"></span>
                                         
                                     </div>
                                                                        
@@ -414,7 +456,7 @@ var user_type=el.val();
                                             }
                                             ?>
                                     </select>
-                                      <span class="text-danger" id="lname_err"></span>
+                                      <span class="text-danger" id="comp_err"></span>
                                     </div>
                                    
                                 </div>
@@ -425,7 +467,7 @@ var user_type=el.val();
                                     <div class="form-group">
                                         <label>Qualification: (*)</label>
                                     <input name="qualification" placeholder="Qualification" class="form-control" value="">
-                                        <span class="text-danger" id="email_err"></span>
+                                        <span class="text-danger" id="qua_err"></span>
                                                                                
                                     </div>
                                                                        
@@ -435,7 +477,7 @@ var user_type=el.val();
                                     <div class="form-group">
                                        <label>Experience: (*)</label>
                                        <input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">
-                                        <span class="text-danger" id="mobile_err"></span>
+                                        <span class="text-danger" id="exp_err"></span>
                                         
                                     </div>
                                                                       
@@ -463,7 +505,7 @@ var user_type=el.val();
                           <div class="col-md-6">
                        <label>Job Location: (*)</label>
                                     <input name="joblocation" placeholder="Job Location" class="form-control" value="">
-                        <span class="text-danger" id="gen_err"></span>
+                        <span class="text-danger" id="loc_err"></span>
 
                     </div>   
                           <div class="col-md-6">
@@ -529,7 +571,7 @@ var user_type=el.val();
 <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div style="background:#ABB2B9" class="modal-header">
+      <div style="background:#3c8dbc;" class="modal-header">
           
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Job</strong></h4></center>

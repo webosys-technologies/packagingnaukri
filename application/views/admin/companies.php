@@ -17,6 +17,7 @@
   overflow-y: auto;
 }
 
+
 </style>
 <div class="content-wrapper" style="background:white;">
     <!-- Content Header (Page header) -->
@@ -119,7 +120,7 @@
                                            
                 <td>  <button class="btn btn-success btn-xs" onclick="edit_company(<?php echo $comp->company_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Add Company"><i class="glyphicon glyphicon-pencil"></i></button>
                      <button class="btn btn-info btn-xs" onclick="view_company(<?php echo $comp->company_id; ?>)" id="btn2" data-toggle="tooltip" data-placement="bottom" title="View Company"><i class="fa fa-eye"></i></button>
-                  <button class="btn btn-danger btn-xs" onclick="delete_company(<?php echo $comp->company_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Company"><i class="glyphicon glyphicon-trash"></i></button>
+                  <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $comp->company_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Company"><i class="glyphicon glyphicon-trash"></i></button>
                              </td>
               </tr>
           <?php }}?>
@@ -219,16 +220,21 @@ var user_type=el.val();
     {  
         $('[name="city"]').html("");
        $("#remove_btn").html("");
+       $("#state_err").html(""); 
+       $("#city_err").html(""); 
+       $("#company_err").html(""); 
         $("#company_logo").prop('hidden',true);
         save_method="add";        
        $('#form')[0].reset();
         $("#title").text("Add Company");
         $('#myModal').modal('show');
-
     }
 
     function edit_company(id)
-    {     
+    { 
+        $("#company_err").html(""); 
+        $("#state_err").html(""); 
+        $("#city_err").html(""); 
       $("#remove_btn").html("");
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
@@ -285,36 +291,6 @@ function delete_logo(id)
     
 }
 
-//function view_company(id)
-//    {
-//              
-//           $.ajax({
-//       url : "<?php echo site_url('index.php/admin/Companies/company_info')?>/" + id,        
-//       type: "GET",
-//              
-//       dataType: "JSON",
-//       success: function(data)
-//       {
-////                 $("#company_name").html(data.company_name);
-////                    
-////                 $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
-////                 $("#email").html(data.company_email);
-////                 $("#contact").html(data.company_contact);
-////                 $("#address").html(data.company_address);
-//                 
-//             
-//            
-//          $("#company_modal").modal('show');
-//       },
-//       error: function (jqXHR, textStatus, errorThrown)
-//       {
-////         alert('Error...!');
-//       }
-//     });
-//       
-//    }
-
-
 
     function save()
     {
@@ -341,9 +317,33 @@ function delete_logo(id)
             dataType: "JSON",
             success: function(json)
             {
-               
+               if(json.state_err)
+              {
+                   $("#state").focus();
+                $("#state_err").html(json.state_err);
+              }else{
+                   $("#state_err").html("");
+              }
               
-//              location.reload();// for reload a page
+              if(json.city_err)
+              {
+                  $("#city").focus();
+               $("#city_err").html(json.city_err); 
+              }else{
+                  $("#city_err").html(""); 
+              }
+              if(json.company_err)
+              {
+                   $('[name=company]').focus();
+               $("#company_err").html(json.company_err); 
+              }else{
+                   $("#company_err").html(""); 
+              }
+            
+              if(json.success)
+              {
+              location.reload();// for reload a page
+              }
                 
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -352,11 +352,17 @@ function delete_logo(id)
             }
         });
     }
+    
+    function delete_menu(id)
+    {
+
+        $("#delete_comp").attr('onclick','delete_company('+id+')');
+        $("#delete_modal").modal('show');
+    }
 
     function delete_company(id)
     {
-      if(confirm('Are you sure delete this data?'))
-      {
+      
         // ajax delete data from database
           $.ajax({
             url : "<?php echo site_url('index.php/admin/Companies/company_delete')?>/"+id,
@@ -374,7 +380,6 @@ function delete_logo(id)
             }
         });
 
-      }
     }
 
     function view_company(id)
@@ -439,7 +444,7 @@ function delete_logo(id)
                                     <div class="form-group">
                                         <label>Company Name</label><span style="color: red">*</span>
                                     <input name="company" class="form-control" placeholder="Compay Name" value="">
-                                        <span class="text-danger" id="fname_err"></span>
+                                        <span class="text-danger" id="company_err"></span>
                                         
                                     </div>
                                                                        
@@ -518,7 +523,7 @@ function delete_logo(id)
                                                     <option value="">-- Select Country --</option>                              
                                                     <option value="India"> India </option>                                   
                                              </select>
-                                        <span class="text-danger"><?php echo form_error('city'); ?></span>
+                                        <span class="text-danger" ><?php echo form_error('city'); ?></span>
 
                                     </div>
                                   <div class="col-md-6">
@@ -535,7 +540,7 @@ function delete_logo(id)
                                                   
                                                   <!--<option value="Maharashtra">Maharashtra</option>-->
                                       </select>
-                                      <span class="text-danger"><?php echo form_error('state'); ?></span>
+                                      <span class="text-danger" id="state_err"><?php echo form_error('state'); ?></span>
 
                                   </div>
                     
@@ -548,7 +553,7 @@ function delete_logo(id)
                                         <select name="city" id="city" class="form-control" required>
                                                     <option value="">-- Select City --</option>                                   
                                              </select>
-                                        <span class="text-danger"><?php echo form_error('city'); ?></span>
+                                        <span class="text-danger" id="city_err"><?php echo form_error('city'); ?></span>
 
                                     </div>
                                     
@@ -603,6 +608,29 @@ function delete_logo(id)
         </div>        
       </div>
    
+  
+  <div class="modal fade" style="margin-top: 200px" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" >
+    <div class="modal-content" >
+      <div style="background:#3c8dbc; height:70px" class="modal-header">
+          
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Company</strong></h4></center>
+      </div>
+      <div id="calendar" style="background:#F2F3F4; height: 90px; " class="modal-body" >
+          <div class="row">
+              <div class="col-md-10 col-md-offset-2">
+                  <label style="color:black">Are you sure want to delete this Company ?</label> <br>
+                  <button class="btn btn-default" id="delete_comp">Yes</button>
+                  <button class="btn btn-default" data-dismiss="modal">No</button>
+          
+                  </div>              
+                 </div>
+      </div>
+     
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 

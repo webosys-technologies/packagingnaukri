@@ -34,7 +34,16 @@ class Members extends CI_Controller
     
    function member_add()
    {
-      
+       $form=$this->input->post();
+       
+      if(!empty($form['fname']))
+        { 
+           if(!empty($form['lname']))
+        {              
+  if(!empty($form['state']) && $form['state']!="-- Select State --")
+  {
+      if(!empty($form['city']) && $form['city']!="-- Select City --" && $form['city']!="")
+      {  
         list($get_insert,$get_data)=$this->Members_model->register();
         if (isset($_FILES['photo']['name']))
         {
@@ -43,11 +52,36 @@ class Members extends CI_Controller
             $this->session->set_flashdata('success',"member added Successfully");
              echo json_encode(array('success','Member added successfully'));
         
+              }
+              else {
+          echo json_encode(array('city_err'=>'Please Select City'));
+      }
+  } else {
+          echo json_encode(array('state_err'=>'Please Select State'));
+      
+        }}else{
+            echo json_encode(array('lname_err'=>'Last Name Required'));
+        }
+        }
+        else{
+              
+        echo json_encode(array('fname_err'=>'First Name Required'));
+        }
+             
            
         }
         
         function member_update()
         {
+            $form=$this->input->post();
+             if(!empty($form['fname']))
+        { 
+           if(!empty($form['lname']))
+        {              
+  if(!empty($form['state']) && $form['state']!="-- Select State --")
+  {
+      if(!empty($form['city']) && $form['city']!="-- Select City --" && $form['city']!="")
+      {
             $data=array(
                         'member_fname'          =>$this->input->post('fname'),
                         'member_lname'          => $this->input->post('lname'),
@@ -70,7 +104,22 @@ class Members extends CI_Controller
             
             
                 $this->session->set_flashdata('success','Member Updated Successfully');
-                echo json_encode(array('status'=>true));
+                echo json_encode(array('success'=>true));
+       }
+              else {
+          echo json_encode(array('city_err'=>'Please Select City'));
+      }
+  } else {
+          echo json_encode(array('state_err'=>'Please Select State'));
+      
+        }}else{
+            echo json_encode(array('lname_err'=>'Last Name Required'));
+        }
+        }
+        else{
+              
+           echo json_encode(array('fname_err'=>'First Name Required'));
+        }
             
         }
         

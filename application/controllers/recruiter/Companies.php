@@ -37,8 +37,13 @@ class Companies extends CI_Controller
         
         $form=$this->input->post();
         $id=$this->session->userdata('recruiter_id');
-        // print_r($form);
-        // die();
+        $comp=$this->Companies_model->check_company($form['company']);
+        if(!empty($form['company']))
+        {        
+  if(!empty($form['state']) && $form['state']!="-- Select State --")
+  {
+      if(!empty($form['city']) && $form['city']!="-- Select City --" && $form['city']!="")
+      {
         $data=array(
                   'recruiter_id'=>$id,
                    'company_name'=>$form['company'],
@@ -55,7 +60,7 @@ class Companies extends CI_Controller
                    'company_establish_in'=>$form['established'],
                    'company_multinational'=>$form['mnc'],
                    'company_created_at'=>date('Y-m-d'),
-                   'company_status'=>$status['status']
+                   'company_status'=>$form['status']
         );
         
           $res=$this->Companies_model->company_add($data);
@@ -69,16 +74,31 @@ class Companies extends CI_Controller
          
                $this->session->set_flashdata('success','company added successfully');
               echo json_encode(array('success'=>'Company added successfully'));
-          
+      } else {
+          echo json_encode(array('city_err'=>'Please Select City'));
+      }
+  } else {
+          echo json_encode(array('state_err'=>'Please Select State'));
+      
+        }}
+        else{
+              
+           echo json_encode(array('company_err'=>'Please Enter Company Name'));
+        }
     }
     
     public function company_update()
     {
 //         echo $id;
          $form=$this->input->post();
-        $company_id=$form['company_id'];       
-        // $id=$this->Companies_model->get_recruiter_by_company($form['company']);
-       
+        $company_id=$form['company_id'];          
+       if(!empty($form['company']))
+        {        
+  if(!empty($form['state']) && $form['state']!="-- Select State --")
+  {
+      if(!empty($form['city']) && $form['city']!="-- Select City --" && $form['city']!="")
+      {
+        
          $data=array(// 'recruiter_id'=>$id,
                    'company_name'=>$form['company'],
                    'company_type'=>$form['type'],
@@ -105,7 +125,19 @@ class Companies extends CI_Controller
           }
         
        $this->session->set_flashdata('success','Data Updated Successfully');
-       echo json_encode(array('status'=>'Data Updated Successfully'));
+       echo json_encode(array('success'=>'Data Updated Successfully'));
+        }
+              else {
+          echo json_encode(array('city_err'=>'Please Select City'));
+      }
+  } else {
+          echo json_encode(array('state_err'=>'Please Select State'));
+      
+        }}
+        else{
+              
+           echo json_encode(array('company_err'=>'Please Enter Company Name'));
+        }
          
     }
     
@@ -206,7 +238,7 @@ if (isset($_FILES['logo']['name'])) {
      function show_cities($state)
         {
            
-            $cities=$this->Cities_model->getall_cities(ltrim($state));
+            $cities=$this->Cities_model->getall_cities(ltrim(str_replace("%20",' ', $state)));
           
             echo json_encode($cities);
         }

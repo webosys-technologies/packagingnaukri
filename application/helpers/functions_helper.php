@@ -59,6 +59,12 @@ function get_recruiter_info($id)
    return $ci->Recruiters_model->get_by_id($id);
 }
 
+function get_companies($rec_id)
+{
+    $ci =& get_instance();
+   return $ci->Companies_model->companies_by_recruiter($rec_id);
+}
+
 
 function custom_encode($string) {
 	$key = "cYbErClINicAdItYa";

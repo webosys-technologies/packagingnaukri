@@ -483,7 +483,7 @@ function view_user(id)
 <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div style="background:#ABB2B9" class="modal-header">
+      <div style="background:#3c8dbc;" class="modal-header">
           
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>User</strong></h4></center>

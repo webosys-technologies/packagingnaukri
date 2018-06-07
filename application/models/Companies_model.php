@@ -28,6 +28,11 @@ class Companies_model extends CI_Model
         $query=$this->db->get($this->table);
         return $query->result();         
      }
+     function check_company($comp)
+     {
+         $query=$this->db->from($this->table)->where('company_name',$comp)->get();
+         return $query->num_rows();
+     }
      
      public function company_add($data)
      {

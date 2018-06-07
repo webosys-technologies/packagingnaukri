@@ -114,7 +114,7 @@
                                            
                 <td>  <button class="btn btn-success btn-xs" onclick="edit_company(<?php echo $comp->company_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
                   <button class="btn btn-info btn-xs" onclick="view_company(<?php echo $comp->company_id; ?>)" id="btn2" data-toggle="tooltip" data-placement="bottom" title="View Company"><i class="fa fa-eye"></i></button>
-                    <button class="btn btn-danger btn-xs" onclick="delete_company(<?php echo $comp->company_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
+                    <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $comp->company_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
                              </td>
               </tr>
           <?php }}?>
@@ -187,64 +187,15 @@ var user_type=el.val();
     var table;
     var id;
 
-
-// function view_company(id)
-//     {
-//       save_method = 'update';
-//      $('#form')[0].reset(); // reset form on modals
-
-//       //Ajax Load data from ajax
-//       $.ajax({
-//         url : "<?php echo site_url('index.php/user/Student/ajax_edit/')?>/" + id,        
-//         type: "GET",
-               
-//         dataType: "JSON",
-//         success: function(data)
-//         {          
-//             $('#sfname').html(data.company_title);
-//             $('#slname').html(data.user_lname); 
-//             $('#scourse_name').html(data.course_name);
-//             $('#semail').html(data.user_email);
-//             $('#smobile').html(data.user_mobile);
-//             $('#sgender').html(data.user_gender);
-//             $('#saddmission_month').html(data.user_payment_date);
-//             $('#scourse_end_date').html(data.user_course_end_date);
-//             $('#slast_education').html(data.user_last_education);
-//             if(data.user_profile_pic)
-//             {
-//             $('#sprofile_pic').attr("src", "<?php  echo base_url();?>"+data.user_profile_pic);
-//              }
-//              else
-//              {
-//                $('#sprofile_pic').attr("src", "<?php echo base_url(); ?>profile_pic/avatar.png");
-//              }
-//             $('#remove_pic').attr("onclick","remove_profile_pic("+data.user_id+")");
-//             $('#sdob').html(data.user_dob);
-//             $('#susername').html(data.user_username);
-//             $('#spassword').html(data.user_password);
-//             $('#suser_last_education').html(data.user_last_education);
-//             $('#saddress').html(data.user_address);  
-//             $('#scity').html(data.user_city);
-//             $('#suser_type').html(data.user_user_type);
-//             $('#spincode').html(data.user_pincode);
-            
-//             $('#modal_form2').modal('show'); // show bootstrap modal when complete loaded
-//             $('.modal-title').text('Student Data'); // Set title to Bootstrap modal title
-
-
-//         },
-//         error: function (jqXHR, textStatus, errorThrown)
-//         {
-//             alert('Error get data from ajax 1');
-//         }
-//     });
-//     }
-    
+ 
 
     function add_company()
     {  
          $('[name="city"]').html("");
-        save_method="add";        
+        save_method="add";   
+        $("#company_err").html(""); 
+        $("#state_err").html(""); 
+        $("#city_err").html(""); 
        $('#form')[0].reset();
         $("#title").text("Add Company");
         $('#myModal').modal('show');
@@ -252,7 +203,10 @@ var user_type=el.val();
     }
 
     function edit_company(id)
-    {     
+    {
+         $("#company_err").html(""); 
+        $("#state_err").html(""); 
+        $("#city_err").html(""); 
       
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
@@ -322,10 +276,34 @@ var user_type=el.val();
             dataType: "JSON",
             success: function(json)
             {
-               
+              if(json.success)
+              {
+                  location.reload();// for reload a page
+              }
               
-              location.reload();// for reload a page
-                
+              if(json.state_err)
+              {
+                   $("#state").focus();
+                $("#state_err").html(json.state_err);
+              }else{
+                   $("#state_err").html("");
+              }
+              
+              if(json.city_err)
+              {
+                  $("#city").focus();
+               $("#city_err").html(json.city_err); 
+              }else{
+                  $("#city_err").html(""); 
+              }
+              if(json.company_err)
+              {
+                   $('[name=company]').focus();
+               $("#company_err").html(json.company_err); 
+              }else{
+                   $("#company_err").html(""); 
+              }
+               
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
@@ -333,11 +311,19 @@ var user_type=el.val();
             }
         });
     }
+    
+    
+     function delete_menu(id)
+    {
+
+        $("#delete_comp").attr('onclick','delete_company('+id+')');
+        $("#delete_modal").modal('show');
+    }
+    
 
     function delete_company(id)
     {
-      if(confirm('Are you sure delete this data?'))
-      {
+      
         // ajax delete data from database
           $.ajax({
             url : "<?php echo site_url('index.php/user/Companies/company_delete')?>/"+id,
@@ -355,7 +341,6 @@ var user_type=el.val();
             }
         });
 
-      }
     }
     
     function view_company(id)
@@ -399,7 +384,7 @@ var user_type=el.val();
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header" style="background:#3c8dbc">
+        <div class="modal-header" style="background:#3c8dbc; color:white">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <center><h4 id="title" class="modal-title"></h4></center>
         </div>
@@ -417,7 +402,7 @@ var user_type=el.val();
                                     <div class="form-group">
                                         <label>Company Name</label><span style="color: red">*</span>
                                     <input name="company" class="form-control" placeholder="Compay Name" value="">
-                                        <span class="text-danger" id="fname_err"></span>
+                                        <span class="text-danger" id="company_err"></span>
                                         
                                     </div>
                                                                        
@@ -504,7 +489,7 @@ var user_type=el.val();
                                                   
                                                   <!--<option value="Maharashtra">Maharashtra</option>-->
                                       </select>
-                                      <span class="text-danger"><?php echo form_error('state'); ?></span>
+                                      <span class="text-danger" id="state_err"><?php echo form_error('state'); ?></span>
 
                                   </div>
                     
@@ -517,7 +502,7 @@ var user_type=el.val();
                                         <select name="city" id="city" class="form-control" required>
                                                     <option value="">-- Select City --</option>                                   
                                              </select>
-                                        <span class="text-danger"><?php echo form_error('city'); ?></span>
+                                        <span class="text-danger" id="city_err"><?php echo form_error('city'); ?></span>
 
                                     </div>
                                     
@@ -540,7 +525,7 @@ var user_type=el.val();
                         </div>  
                         <div class="col-md-6">
                            <label>Company Multinational</label><span style="color: red">*</span>
-                                        <input name="mnc" placeholder="Job Salary" class="form-control" value="">
+                                        <input name="mnc" placeholder="Multinational" class="form-control" value="">
                             <span class="text-danger" id="gen_err"></span>
 
                         </div>  
@@ -573,6 +558,30 @@ var user_type=el.val();
       </div>
    
 
+    
+  <div class="modal fade" style="margin-top: 200px" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" >
+    <div class="modal-content" >
+      <div style="background:#3c8dbc; height:70px" class="modal-header">
+          
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Company</strong></h4></center>
+      </div>
+      <div id="calendar" style="background:#F2F3F4; height: 90px; " class="modal-body" >
+          <div class="row">
+              <div class="col-md-10 col-md-offset-2">
+                  <label style="color:black">Are you sure want to delete this Company ?</label> <br>
+                  <button class="btn btn-default" id="delete_comp">Yes</button>
+                  <button class="btn btn-default" data-dismiss="modal">No</button>
+          
+                  </div>              
+                 </div>
+      </div>
+     
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+  
 
 <div class="modal fade"  id="company_modal" role="dialog">
     <div class="modal-dialog" style="width:550px;" id="modal_dialog">   

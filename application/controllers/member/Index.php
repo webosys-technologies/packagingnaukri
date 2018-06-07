@@ -766,7 +766,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
         {
           //echo $state;
 
-          $city =$this->Cities_model->getall_cities($state);
+          $city =$this->Cities_model->getall_cities(ltrim(str_replace("%20",' ', $state)));
 
           echo json_encode($city);
         }

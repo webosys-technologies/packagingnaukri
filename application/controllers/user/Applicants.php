@@ -88,7 +88,7 @@ class Applicants extends CI_Controller
     
      function show_cities($state)
         {           
-            $cities=$this->Cities_model->getall_cities(ltrim($state));
+            $cities=$this->Cities_model->getall_cities(ltrim(str_replace("%20",' ', $state)));
           
             echo json_encode($cities);
         }

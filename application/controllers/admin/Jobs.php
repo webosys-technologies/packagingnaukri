@@ -40,8 +40,17 @@ class Jobs extends CI_Controller
     public function job_add()
     {
         $form=$this->input->post();
+        if(!empty($form['jobtitle']))
+        {
        if($form['company']!='-- Select Company --')
-       {          
+       { 
+           if(!empty($form['qualification']))
+        {
+               if(!empty($form['experience']))
+        {
+                   if(!empty($form['joblocation']))
+        {
+              
         $id=$this->Companies_model->get_recruiter_by_company($form['company']);
         $data=array(
                    'recruiter_id'=>$id,
@@ -82,11 +91,17 @@ class Jobs extends CI_Controller
         
                $this->session->set_flashdata('success','job added successfully');
               echo json_encode(array('success'=>'job added successfully'));
-       }else
-       {
-           echo json_encode(array('error'=>'Please Select Company Name'));
-       }
-         
+       }else{
+           echo json_encode(array('loc_err'=>'Please Enter job Location'));           
+        }}else{
+           echo json_encode(array('exp_err'=>'Please Enter Experience'));
+        }}else{
+            echo json_encode(array('qua_err'=>'Please Enter Qualification'));
+       }}else{
+           echo json_encode(array('comp_err'=>'Please Select Company Name'));
+       }}else{
+            echo json_encode(array('job_err'=>'Please Enter Job Title'));
+        }
     }
     
     public function job_update()
@@ -95,7 +110,16 @@ class Jobs extends CI_Controller
          $form=$this->input->post();
         $job_id=$form['job_id'];       
         $id=$this->Companies_model->get_recruiter_by_company($form['company']);
-       
+       if(!empty($form['jobtitle']))
+        {
+       if($form['company']!='-- Select Company --')
+       { 
+           if(!empty($form['qualification']))
+        {
+               if(!empty($form['experience']))
+        {
+                   if(!empty($form['joblocation']))
+        {
         $data=array(
                    'recruiter_id'=>$id,
                    'company_id'=>$form['company'],
@@ -134,7 +158,18 @@ class Jobs extends CI_Controller
          
         
        $this->session->set_flashdata('success','Data Updated Successfully');
-       echo json_encode(array('status'=>'Data Updated Successfully'));
+       echo json_encode(array('success'=>'Data Updated Successfully'));
+        }else{
+           echo json_encode(array('loc_err'=>'Please Enter job Location'));           
+        }}else{
+           echo json_encode(array('exp_err'=>'Please Enter Experience'));
+        }}else{
+            echo json_encode(array('qua_err'=>'Please Enter Qualification'));
+       }}else{
+           echo json_encode(array('comp_err'=>'Please Select Company Name'));
+       }}else{
+            echo json_encode(array('job_err'=>'Please Enter Job Title'));
+        }
          
     }
     
