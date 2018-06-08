@@ -109,7 +109,7 @@
                                        ?></td>
                 <td>  <button class="btn btn-success btn-xs" onclick="edit_company(<?php echo $comp->company_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
                      <button class="btn btn-info btn-xs" onclick="view_company(<?php echo $comp->company_id; ?>)" id="btn2" data-toggle="tooltip" data-placement="bottom" title="View Company"><i class="fa fa-eye"></i></button>
-                  <button class="btn btn-danger btn-xs" onclick="delete_company(<?php echo $comp->company_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
+                  <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $comp->company_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
                              </td>
               </tr>
           <?php }}?>
@@ -374,12 +374,17 @@ var user_type=el.val();
             }
         });
     }
+    
+    function delete_menu(id)
+    {
+        
+        $("#delete_modal").modal('show');
+        $("#delete_company").attr('onclick','delete_company('+id+')');
+    }
 
     function delete_company(id)
     {
-      if(confirm('Are you sure delete this data?'))
-      {
-        // ajax delete data from database
+             // ajax delete data from database
           $.ajax({
             url : "<?php echo site_url('index.php/recruiter/Companies/company_delete')?>/"+id,
             type: "POST",
@@ -395,8 +400,6 @@ var user_type=el.val();
                 alert('Error deleting data');
             }
         });
-
-      }
     }
 
 
@@ -653,7 +656,28 @@ var user_type=el.val();
         </div>        
       </div>
 
-
+<div class="modal fade" id="delete_modal" style="margin-top: 200px" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div style="background:#3c8dbc;" class="modal-header">
+          
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Company</strong></h4></center>
+      </div>
+      <div style="background:#F2F3F4; height:90px" class="modal-body">
+          <div class="row">
+              <div class="col-md-10 col-md-offset-2">
+                  <label style="color:black">Are you sure want to delete this Company ?</label> <br>
+                  <button class="btn btn-default" id="delete_company">Yes</button>
+                  <button class="btn btn-default" data-dismiss="modal">No</button>
+          
+                  </div>              
+                 </div>
+      </div>
+     
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 

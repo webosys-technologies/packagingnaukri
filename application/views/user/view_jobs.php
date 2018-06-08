@@ -563,13 +563,12 @@ var user_type=el.val();
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Job</strong></h4></center>
       </div>
-      <div id="calendar" style="background:#F2F3F4" class="modal-body">
+      <div  style="background:#F2F3F4" class="modal-body">
           <div class="row">
               <div class="col-md-10 col-md-offset-2">
                   <label style="color:black">Are you sure want to delete this job ?</label> <br>
                   <button class="btn btn-default" id="delete_job">Yes</button>
-                  <button class="btn btn-default" data-dismiss="modal">No</button>
-          
+                  <button class="btn btn-default" data-dismiss="modal">No</button>          
                   </div>              
                  </div>
       </div>

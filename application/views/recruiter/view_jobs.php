@@ -128,7 +128,7 @@ function applicants(id)
                                            
                             <td><?php if($job->job_status==0){?><button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job" disabled><i class="glyphicon glyphicon-pencil"></i></button><?php }else{?>
                   <button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>  <?php }?>
-                                <button class="btn btn-danger btn-xs" onclick="delete_job(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
+                                <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
                    <button class="btn btn-info btn-xs" onclick="job_info(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="View Job"><i class="fa fa-eye"></i></button>
                              </td>
               </tr>
@@ -345,10 +345,16 @@ var user_type=el.val();
         });
     }
 
+function delete_menu(id)
+    {
+        $("#delete_modal").modal('show');
+        $("#delete_job").attr('onclick','delete_job('+id+')');  
+             
+    }
+
     function delete_job(id)
     {
-      if(confirm('Are you sure delete this data?'))
-      {
+      
         // ajax delete data from database
           $.ajax({
             url : "<?php echo site_url('index.php/recruiter/Jobs/job_delete')?>/"+id,
@@ -366,7 +372,6 @@ var user_type=el.val();
             }
         });
 
-      }
     }
 
     function job_info(id)
@@ -566,6 +571,29 @@ var user_type=el.val();
            
         </div>        
       </div>
+  
+  <div class="modal fade" id="delete_modal" style="margin-top: 200px" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div style="background:#3c8dbc;" class="modal-header">
+          
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Job</strong></h4></center>
+      </div>
+      <div  style="background:#F2F3F4; height: 90px;" class="modal-body">
+          <div class="row">
+              <div class="col-md-10 col-md-offset-2">
+                  <label style="color:black">Are you sure want to delete this job ?</label> <br>
+                  <button class="btn btn-default" id="delete_job">Yes</button>
+                  <button class="btn btn-default" data-dismiss="modal">No</button>
+          
+                  </div>              
+                 </div>
+      </div>
+     
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
    
 
 <div class="modal fade" id="job_modal" role="dialog">
