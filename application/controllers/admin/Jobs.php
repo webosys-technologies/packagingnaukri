@@ -32,6 +32,25 @@ class Jobs extends CI_Controller
        
     }
     
+    function test()
+    {
+//        $data=$this->Jobs_model->getall_jobs();
+//        print_r($data);
+//        echo"<br><br>";
+//        
+//        print_r(get_user_info(1));
+//        
+//        echo"<br><br>";
+//        foreach ($data as $d)
+//        {
+//            print_r($d);
+//        }
+//        echo"<br><br>";
+//        $s=array('name1'=>"suraj",'name2'=>'pawan');
+//        echo $s['name1'];
+        
+    }
+    
     public function view_jobs()
     {        
             
@@ -63,29 +82,12 @@ class Jobs extends CI_Controller
                    'job_experience'=>$form['experience'],
                    'job_salary'=>$form['jobsalary'],
                    'job_created_at'=>date('Y-m-d'),
-                   'job_status'=>$form['status']
+                   'job_status'=>$form['status'],
+                   'job_skill_name' => $form['skill'],
                    );
         
           $res=$this->Jobs_model->job_add($data);
           
-          if(!empty($res))
-          {        
-
-	   $title = $this->input->post('skill');
-          if(!empty($title))
-          {
-              $dataSet = array (         
-          
-                                                   'job_id'=>$res,
-	     				           'job_skill_name' => $title,
-        					   'job_skill_created_at' => date('Y-m-d'),
-	     					   'job_skill_status' => '1',
-
-	     					);
-              
-               $this->Job_skill_model->add($dataSet);
-          }  
-           }
           
 	
         
@@ -130,31 +132,12 @@ class Jobs extends CI_Controller
                    'job_city'=>$form['joblocation'],
                    'job_experience'=>$form['experience'],
                    'job_salary'=>$form['jobsalary'],
-                   'job_status'=>$form['status']
+                   'job_status'=>$form['status'],
+                   'job_skill_name' => $form['skill'],
         );
         
          $result=$this->Jobs_model->update_job($data,$job_id);
          
-          $title = $this->input->post('skill');       
-          if(!empty($title))
-          {              
-              $dataSet = array ('job_skill_name' => $title);              
-              $where=array('job_id'=>$form['job_id']);
-              
-             $check=$this->Jobs_model->check_job_id($form['job_id']);
-             if($check)
-             {
-                 $this->Job_skill_model->skill_update($dataSet,$where);
-                 
-             }else{
-                  $dataSet1=array(                     'job_id'=>$form['job_id'],
-	     				           'job_skill_name' => $title,
-        					   'job_skill_created_at' => date('Y-m-d'),
-	     					   'job_skill_status' => '1',
-                                );
-                  $this->Job_skill_model->add($dataSet1);
-             }               
-          } 
          
         
        $this->session->set_flashdata('success','Data Updated Successfully');
@@ -230,6 +213,159 @@ class Jobs extends CI_Controller
         echo json_encode($result);
         
     }
+    
+    
+     public function search_page()
+    {      
+            $id=$this->session->userdata('admin_id');
+            $result['user_data']=  get_user_info($id);
+            $result['system']=$this->System_model->get_info();
+                     
+                  
+             $this->load->view('admin/header',$result);
+             $this->load->view('admin/jobs');
+             $this->load->view('admin/footer',$result);
+       
+    }
+    function saved_jobs()
+    {
+        $id=$this->session->userdata('admin_id');
+        $result['user_data']=  get_user_info($id);
+        $result['saved']=$this->Saved_jobs_model->get_jobs_by_member($id);
+        
+        
+        $this->load->view('admin/header',$result);
+        $this->load->view('member/saved_jobs',$result);
+        $this->load->view('admin/footer',$result);    
+
+    }
+    function applied_jobs()
+    {
+        
+         $id=$this->session->userdata('admin_id');
+        $result['user_data']=  get_user_info($id);
+        
+        $result['jobs']=$this->Applied_jobs_model->get_job_by_member($id);
+       
+         $this->load->view('admin/header',$result);
+        $this->load->view('member/applied_jobs',$result);
+        $this->load->view('admin/footer',$result);    
+    }
+    
+    function search_title($title)
+    {
+      
+              
+        $result=$this->Members_model->search_query();
+        
+        echo json_encode($result);
+    }
+    
+    function search_jobs()
+    { $this->load->library('encryption');
+         $id=$this->session->userdata('admin_id');
+            $data['user_data']=  get_user_info($id);
+            
+                                
+        $form=$this->input->post();
+        
+        if($form)
+        {
+        $title=$form['title'];
+        $exp=$form['exp'];
+        $salary=$form['salary'];
+        $location=$form['location'];
+        if(!empty($form['full']))
+        {
+        $full=$form['full'];
+        }
+         if(!empty($form['part']))
+        {
+        $part=$form['part'];
+        }
+         if(!empty($form['intern']))
+        {
+        $intern=$form['intern'];
+        }
+         if(!empty($form['temp']))
+        {
+        $part=$form['temp'];
+        }
+        
+        $result=$this->Jobs_model->search_job($form);
+        if($result){
+            $result['jobs']=$result;
+        }else{
+            $result['error']="error";
+        }
+        $this->load->view('admin/header',$data);
+        $this->load->view('admin/jobs',$result);
+        $this->load->view('admin/footer',$data);      
+        }else{
+            redirect('admin/Jobs/search_page');
+        }   
+    }
+    
+    public function get_job_info($id)
+    {
+        $id=$this->session->userdata('admin_id');
+            $result['user_data']=  get_user_info($id);
+             $this->load->view('admin/header',$result);
+             $this->load->view('member/job_info');
+             $this->load->view('admin/footer',$result);
+    }
+    
+        
+    function save_job($id)
+    {
+        $mem_id=$this->session->userdata('admin_id');
+        $rec_data=$this->Jobs_model->job_by_id($id);
+       
+        $data=array('job_id'=>$id,
+                    'recruiter_id'=>$rec_data->recruiter_id,
+                    'member_id'=>$mem_id,
+                    'company_id'=>$rec_data->company_id,
+                    'saved_at'=>date('Y-m-d'));
+        
+        $this->Saved_jobs_model->save_job($data);
+        echo json_encode(array('status'=>'success'));
+    }
+    
+    function unsave_job($id)
+    {
+        $where=array('job_id'=>$id,
+                     'member_id'=>$this->session->userdata('member_id'));
+        $this->Saved_jobs_model->unsave_job($where);
+        echo json_encode(array('status'=>'success'));
+    }
+    
+    function apply_job($id)
+    {
+        $rec_data=$this->Jobs_model->job_by_id($id);
+        $data=array('job_id'=>$id,
+                    'member_id'=>$this->session->userdata('member_id'),
+                    'recruiter_id'=>$rec_data->recruiter_id,
+                    'company_id'=>$rec_data->company_id,
+                    'apply_at'=>date('Y-m-d'),
+                    'apply_status'=>'1');
+         $this->Applied_jobs_model->apply_job($data);
+        echo json_encode(array('status'=>'success'));
+        
+    }
+    
+    function remove_job($id)
+    {
+         $where=array('job_id'=>$id,
+                     'member_id'=>$this->session->userdata('member_id'));
+        $this->Applied_jobs_model->remove_job($where);
+        echo json_encode(array('status'=>'success'));
+    }
+   
+   function query_test()
+   {
+       $this->Jobs_model->query_test();
+   }
+   
     
   
 }

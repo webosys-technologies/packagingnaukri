@@ -299,7 +299,7 @@ class Profile extends CI_Controller
                      echo json_encode(array('success'=>'Project Added Successfully')); 
         }
         }else{
-            echo json_encode(array('error'=>'Project Name Required'));
+            echo json_encode(array('pro_error'=>'Project Name Required'));
         }
       
     }

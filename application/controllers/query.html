@@ -45,3 +45,6 @@ ALTER TABLE `educations` ADD `education_institute_name` VARCHAR(255) NOT NULL AF
 14)institute status create
 ALTER TABLE `institutes` ADD `institute_status` INT(10) NOT NULL AFTER `institute_description`
 
+15)add company_id column in job_skills table;
+ALTER TABLE `jobs` ADD `job_skill_name` VARCHAR(255) NOT NULL AFTER `job_description`
+

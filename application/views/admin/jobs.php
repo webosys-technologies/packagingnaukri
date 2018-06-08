@@ -123,9 +123,9 @@ a:link, a:visited{
              if(check)
             {             
                 
-                url="<?php echo base_url();?>member/Jobs/save_job/"+id;
+                url="<?php echo base_url();?>admin/Jobs/save_job/"+id;
             }else{
-                url="<?php echo base_url();?>member/Jobs/unsave_job/"+id;
+                url="<?php echo base_url();?>admin/Jobs/unsave_job/"+id;
             }
             
             $.ajax({
@@ -151,7 +151,7 @@ a:link, a:visited{
         $("#data_list").html("");
        var title=$("#title").val();
     
-                       url="<?php echo base_url();?>member/Jobs/search_title/"+title;
+                       url="<?php echo base_url();?>admin/Jobs/search_title/"+title;
         $.ajax({
             url : url,
             type: "GET",
@@ -162,7 +162,7 @@ a:link, a:visited{
             $.each(data,function(i,row)
            {            
                
-               $("#data_list").append('<option>'+row.member_email+'</option>');
+               $("#data_list").append('<option>'+row.admin_email+'</option>');
            }
            );
                 
@@ -180,7 +180,7 @@ a:link, a:visited{
     {
               
            $.ajax({
-       url : "<?php echo site_url('index.php/member/Jobs/job_info')?>/" + id,        
+       url : "<?php echo site_url('index.php/admin/Jobs/job_info')?>/" + id,        
        type: "GET",
               
        dataType: "JSON",
@@ -217,7 +217,7 @@ a:link, a:visited{
         
        
            $.ajax({
-       url : "<?php echo site_url('index.php/member/Jobs/recruiter_info')?>/" + id,        
+       url : "<?php echo site_url('index.php/admin/Jobs/recruiter_info')?>/" + id,        
        type: "GET",
               
        dataType: "JSON",
@@ -237,7 +237,7 @@ a:link, a:visited{
     {
         
           $.ajax({
-       url : "<?php echo site_url('index.php/member/Jobs/apply_job')?>/" + id,        
+       url : "<?php echo site_url('index.php/admin/Jobs/apply_job')?>/" + id,        
        type: "GET",
               
        dataType: "JSON",
@@ -264,11 +264,11 @@ a:link, a:visited{
         <small></small>
       </h1>
       <ol class="breadcrumb">
-          <li><a href="<?php echo base_url();?>member/Dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li><a href="<?php echo base_url();?>admin/Dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Jobs</li>
       </ol>
         
-        <form action="<?php echo base_url();?>member/Jobs/search_jobs" method="post" id="">
+        <form action="<?php echo base_url();?>admin/Jobs/search_jobs" method="post" id="">
     <div class="form-group form-group-md">
    
     <div class="row">
@@ -390,9 +390,36 @@ a:link, a:visited{
       
           </div>  
       
-      
-     
-              <div class="modal fade" id="job_modal" role="dialog">
+ </section>
+          </div>   
+    
+    <div class="modal fade" id="recruiter_modal" role="dialog">
+    <div class="modal-dialog" id="modal_dialog">   
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header"style="background:#3c8dbc">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <center><h4 style="color:white" class="modal-title">Recruiter Description</h4></center>
+        </div>
+        <div class="modal-body" id="job_body">         	
+    				
+    			<div class="panel-body">
+    			  <form action="" id="desc_form">  
+                            
+                           
+                                
+                          </form>
+    			</div>                              			
+    		</div>         
+    	 <div class="modal-footer">
+             <button type="button" class="btn btn-warning" value="" id="apply_job"><span id="stat">Apply</span></button>
+          <button type="button" class="btn btn-danger btn-md"  data-dismiss="modal">Close</button>
+        </div>
+    </div>             
+        </div>        
+      </div>
+
+<div class="modal fade" id="job_modal" role="dialog">
     <div class="modal-dialog" id="modal_dialog">   
       <!-- Modal content-->
       <div class="modal-content">
@@ -480,77 +507,43 @@ a:link, a:visited{
     </div>             
         </div>        
       </div>
-       
-       
-       
-      
-
-<div class="modal fade" id="recruiter_modal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog">   
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header"style="background:#3c8dbc">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <center><h4 style="color:white" class="modal-title">Recruiter Description</h4></center>
-        </div>
-        <div class="modal-body" id="job_body">         	
-    				
-    			<div class="panel-body">
-    			  <form action="" id="desc_form">  
-                            
-                           
-                                
-                          </form>
-    			</div>                              			
-    		</div>         
-    	 <div class="modal-footer">
-             <button type="button" class="btn btn-warning" value="" id="apply_job"><span id="stat">Apply</span></button>
-          <button type="button" class="btn btn-danger btn-md"  data-dismiss="modal">Close</button>
-        </div>
-    </div>             
-        </div>        
-      </div>
-</section>
-          </div>   
-
-
   
 
 
  
  
-<?php
-    $saved=$this->Saved_jobs_model->get_jobs_by_member($this->session->userdata('member_id'));
-    if(isset($saved))
-    {
-        foreach($saved as $save)
-        {
-            ?>
+//<?php
+//    $saved=$this->Saved_jobs_model->get_jobs_by_admin($this->session->userdata('admin_id'));
+//    if(isset($saved))
+//    {
+//        foreach($saved as $save)
+//        {
+//            ?>
     <script>
         
-        $("#save<?php echo $save->job_id;?>").attr('checked',true);
+        $("#save//<?php echo $save->job_id;?>").attr('checked',true);
  </script>
-       <?php
-        }
-    }
-    ?>
+       //<?php
+//        }
+//    }
+//    ?>
 
- <?php
-    $applied=$this->Applied_jobs_model->members_applied_job($this->session->userdata('member_id'));
-    if(isset($applied))
-    {
-        foreach($applied as $app)
-        {
-            ?>
+ //<?php
+//    $applied=$this->Applied_jobs_model->admins_applied_job($this->session->userdata('admin_id'));
+//    if(isset($applied))
+//    {
+//        foreach($applied as $app)
+//        {
+//            ?>
     <script>
         
-        $("#apply<?php echo $app->job_id;?>").hide();
-        $("#apply_btn<?php echo $app->job_id;?>").html('<span class="text-success">Applied</span>');
-//        $("#apply<?php echo $app->job_id;?>").attr('onclick','btn btn-success btn-sm');
-//        $("#apply_stat<?php echo $app->job_id;?>").html('Applied');
+        $("#apply//<?php echo $app->job_id;?>").hide();
+        $("#apply_btn//<?php echo $app->job_id;?>").html('<span class="text-success">Applied</span>');
+        $("#apply<?php echo $app->job_id;?>").attr('onclick','btn btn-success btn-sm');
+        $("#apply_stat<?php echo $app->job_id;?>").html('Applied');
         
  </script>
-       <?php
-        }
-    }
-    ?>
+       //<?php
+//        }
+//    }
+//    ?>

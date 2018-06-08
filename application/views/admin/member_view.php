@@ -413,6 +413,7 @@ function view_member(id)
               {
               location.reload();// for reload a page
               }
+              
             },
             error: function (jqXHR, textStatus, errorThrown)
             {

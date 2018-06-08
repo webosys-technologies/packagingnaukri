@@ -164,6 +164,8 @@ class Companies extends CI_Controller
             unlink($info->company_logo);
             }
             $this->Jobs_model->delete_by_company_id($id);
+            $this->Applied_jobs_model->delete_by_company_id($id);
+            $this->Saved_jobs_model->delete_by_company_id($id);
             $this->session->set_flashdata('success','Company deleted successfully');
             echo json_encode(array('success'=>'Company deleted successfully'));
         }

@@ -50,7 +50,7 @@ class Members extends CI_Controller
             $this->photo_upload($get_insert);
         }
             $this->session->set_flashdata('success',"member added Successfully");
-             echo json_encode(array('success','Member added successfully'));
+             echo json_encode(array('success'=>'Member added successfully'));
         
               }
               else {
@@ -133,11 +133,31 @@ class Members extends CI_Controller
         
          function member_delete($id)
     {
-
-        $result=$this->Members_model->delete_by_id($id);
-              
-                   echo json_encode(array("status" => true));
-                $this->session->set_flashdata('success', 'Member Deleted Successfully');
+              $info=$this->Members_model->get_id($id);
+              $result=$this->Members_model->delete_by_id($id);
+              if($result)
+              {                  
+            if(file_exists($info->member_profile_pic))        
+            {
+            unlink($info->member_profile_pic);
+            }
+            if(file_exists($info->member_resume))        
+            {
+            unlink($info->member_resume);
+            }
+            
+            $this->Educations_model->delete_by_id($id);
+            $this->Employments_model->delete_by_id($id);
+            $this->Applied_jobs_model->delete_by_id($id);
+            $this->Projects_model->delete_by_id($id);
+            $this->Saved_jobs_model->delete_by_id($id);
+            $this->Skills_model->delete_by_id($id);
+                     
+           
+            $this->session->set_flashdata('success', 'Member Deleted Successfully');
+             echo json_encode(array("status" => true));
+              }
+                  
                 
        
              }

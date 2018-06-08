@@ -324,6 +324,7 @@ function view_recruiter(id)
 //            $("#city").val(data.recruiter_city);
             $(".city").append('<option value="'+ data.recruiter_city +'">' + data.recruiter_city+'</option>');
             $('[name="state"]').val(data.recruiter_state);
+            alert(data.recruiter_gender);
             $('[name="gender"]').val(data.recruiter_gender);
            if(data.recruiter_profile_pic)
             {

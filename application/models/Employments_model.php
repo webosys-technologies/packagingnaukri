@@ -29,6 +29,11 @@ class Employments_model extends CI_Model
          $this->db->update($this->table,$data,$where);
          return $this->db->affected_rows();
      }
+      function delete_by_id($id)
+     {        
+         $this->db->delete($this->table,array('member_id'=>$id));
+         return $this->db->affected_rows();
+     }
      
      function get_employ_by_member($id)
      {

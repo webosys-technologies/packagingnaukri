@@ -32,14 +32,9 @@ class Jobs_model extends CI_Model
      
      public function job_by_id($id)
      {
-         $check=$this->check_job_id($id);
-         $this->db->from('jobs as job');
-         if($check)
-         {
-         $this->db->join('job_skills as skill','job.job_id=skill.job_id','LEFT');
-         }
-       
-         $this->db->where('job.job_id',$id);
+        
+         $this->db->from($this->table);
+         $this->db->where('job_id',$id);
          $res=$this->db->get();
          return $res->row();
      }

@@ -221,18 +221,28 @@ if (isset($_FILES['photo']['name'])) {
         function recruiter_delete($id)
     {       
             $data=$this->Recruiters_model->get_id($id);
-            
+            $comp=$this->Companies_model->companies_by_recruiter($id);
            $result=$this->Recruiters_model->delete_by_id($id);
              if ($result) {
 
                 if (file_exists($data->recruiter_profile_pic)) {
-
-             unlink($data->recruiter_profile_pic);
-              
+             unlink($data->recruiter_profile_pic);              
             }
             
-            $com=$this->Companies_model->delete_by_recruiter_id($id);
-            $job=$this->Jobs_model->delete_by_recruiter_id($id);
+            if(!empty($comp))
+            {
+                foreach ($comp as $res)
+                {
+            if (file_exists($res->company_logo)) {
+             unlink($res->company_logo);              
+            }
+                }
+            }
+            
+                  $com=$this->Companies_model->delete_by_recruiter_id($id);
+                 $job=$this->Jobs_model->delete_by_recruiter_id($id);
+                  $this->Applied_jobs_model->delete_by_recruiter_id($id);
+                  $this->Saved_jobs_model->delete_by_recruiter_id($id);
                 
                    echo json_encode(array("status" => true));
                 $this->session->set_flashdata('success', 'Recruiter Deleted Successfully');

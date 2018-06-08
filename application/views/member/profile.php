@@ -641,11 +641,17 @@ var edu_name=el.val();
                 $("#email").val(data.member_email);
                 $("#mobile").val(data.member_mobile);
                 $("#dob").val(data.member_dob);
+                if(data.member_gender)
+                {
                 $("#gen").val(data.member_gender);
+                }
                 $("#state").val(data.member_state);
                 $("#city").append('<option value="'+data.member_city+'">'+data.member_city+'</option>');
                 $("#city").val(data.member_city);
+                 if(data.member_marital_status)
+                {
                 $("#marital_status").val(data.member_marital_status);
+                }
                 $("#pincode").val(data.member_pincode);
                 $("#address").val(data.member_address);
                 
@@ -1273,8 +1279,9 @@ var edu_name=el.val();
                                 <div class="col-md-6">                                   
                                         <label for="lname">Marital Status</label>
                                         <select class="form-control" name='marital_status' id='marital_status'>
-                                            <option value="Married">Married</option>
                                              <option value="Unmarried">Unmarried</option>
+                                            <option value="Married">Married</option>
+                                            
                                         </select>
                                       <span class="text-danger" id="marital_err"></span>                                   
                                          </div>
