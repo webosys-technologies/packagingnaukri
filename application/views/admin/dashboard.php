@@ -19,20 +19,7 @@
 
       
             <div class="row">
-        <div class="col-lg-3 col-xs-6">
-           <!--small box--> 
-          <div class="small-box bg-red-gradient">
-            <div class="inner">
-              <h3 id="num"><?php if(isset($recruiters)){echo count($recruiters);}else{echo "0";}?></h3>
-
-              <p id="num">Recruiters</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-users"></i>
-            </div>
-            <a href="<?php echo base_url(); ?>admin/Recruiter" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
+        
          <!--./col--> 
         <div class="col-lg-3 col-xs-6">
            <!--small box--> 
@@ -40,7 +27,7 @@
             <div class="inner">
               <h3 id="num"><?php if(isset($members)){echo count($members);}else{echo "0";}?><sup style="font-size: 20px"></sup></h3>
 
-              <p id="num">Members</p>
+              <p id="num">Member Masters</p>
             </div>
             <div class="icon">
               <i class="fa fa-users"></i>
@@ -63,27 +50,23 @@
             <a href="<?php echo base_url(); ?>admin/Jobs/" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-         <!--./col--> 
-        <div class="col-lg-3 col-xs-6">
+         
+          <div class="col-lg-3 col-xs-6">
            <!--small box--> 
-          <div class="small-box" style="background:#008080">
+          <div class="small-box" style="background:#90EE90;">
             <div class="inner">
-              <h3 id="num"><?php if(isset($applied)){echo count($applied);}else{echo "0";}?></h3>
+              <h3 id="num"><?php if(isset($user)){echo count($user);}else{echo "0";}?></h3>
 
-              <p id="num">Job Applied</p>
+              <p id="num">Users</p>
             </div>
             <div class="icon">
-              <i class="fa fa-suitcase"></i>
+              <i class="fa fa-users"></i>
             </div>
-            <a href="<?php echo base_url(); ?>admin/Applicants" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url(); ?>admin/Users" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-      </div>
-        
-        
-        
-        <div class="row">
-        <div class="col-lg-3 col-xs-6">
+         
+         <div class="col-lg-3 col-xs-6">
            <!--small box--> 
           <div class="small-box bg-aqua">
             <div class="inner">
@@ -95,6 +78,40 @@
               <i class="fa fa-institution"></i>
             </div>
             <a href="<?php echo base_url(); ?>admin/Companies" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+         <!--./col--> 
+<!--        <div class="col-lg-3 col-xs-6">
+           small box 
+          <div class="small-box" style="background:#008080">
+            <div class="inner">
+              <h3 id="num"><?php if(isset($applied)){echo count($applied);}else{echo "0";}?></h3>
+
+              <p id="num">Job Applied</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-suitcase"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>admin/Applicants" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>-->
+      </div>
+        
+        
+        
+        <div class="row">
+        <div class="col-lg-3 col-xs-6">
+           <!--small box--> 
+          <div class="small-box bg-red-gradient">
+            <div class="inner">
+              <h3 id="num"><?php if(isset($recruiters)){echo count($recruiters);}else{echo "0";}?></h3>
+
+              <p id="num">Recruiters</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>admin/Recruiter" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
          <!--./col--> 
@@ -113,20 +130,7 @@
           </div>
         </div>-->
          <!--./col--> 
-        <div class="col-lg-3 col-xs-6">
-           <!--small box--> 
-          <div class="small-box" style="background:#90EE90;">
-            <div class="inner">
-              <h3 id="num"><?php if(isset($user)){echo count($user);}else{echo "0";}?></h3>
-
-              <p id="num">Users</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-users"></i>
-            </div>
-            <a href="<?php echo base_url(); ?>admin/Users" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
+       
          <!--./col--> 
         
       </div>

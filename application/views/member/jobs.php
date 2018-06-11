@@ -87,10 +87,12 @@ a:link, a:visited{
 
 <script>
     $(document).ready(function(){
-       
+      
         $(".description").text(function(index, currentText) {
     return currentText.substr(0, 200);
 //    $(".description").html("....");
+
+
 });
 
   
@@ -115,6 +117,21 @@ a:link, a:visited{
     var data;
     var id;
     var check;
+    
+    function validateForm()
+    {
+    if($('#exp').val()!="" && $("#title").val()=="")
+    {
+       $("#title").focus();
+        return false;
+    }
+    
+    if($('#salary').val()!="" && $("#title").val()=="")
+    {
+       $("#title").focus();
+        return false;
+    }
+    }
     
     
     function job_status(check,id)
@@ -178,6 +195,7 @@ a:link, a:visited{
    
     function job_info(id)
     {
+        $("#salary_field").prop('hidden',true);
               
            $.ajax({
        url : "<?php echo site_url('index.php/member/Jobs/job_info')?>/" + id,        
@@ -192,6 +210,12 @@ a:link, a:visited{
               $("#job_desc").html(data.job_description);
                $("#eligibility").html(data.job_education);
 ////                $("#skills").html();
+                      alert(data.job_salary);
+                    if(data.job_salary)
+                    {
+                 $("#salary").html(data.job_salary);
+                 $("#salary_field").prop('hidden',false);
+                    }
                  $("#salary").html(data.job_salary);
                  $("#experience").html(data.job_experience);
                  $("#location").html(data.job_city);
@@ -255,7 +279,7 @@ a:link, a:visited{
     </script>
     
     
-    
+  
   <div class="content-wrapper" style="background: white">
     <!-- Content Header (Page header) -->
     <section class="content-header" style="background:#F2F4F4">
@@ -268,15 +292,14 @@ a:link, a:visited{
         <li class="active">Jobs</li>
       </ol>
         
-        <form action="<?php echo base_url();?>member/Jobs/search_jobs" method="post" id="">
-    <div class="form-group form-group-md">
-   
+        <form action="<?php echo base_url();?>member/Jobs/search_jobs" onsubmit="return validateForm()" method="post" id="query_form">
+    <div class="form-group form-group-md">   
     <div class="row">
         <div class="col-md-offset-1">
- <datalist id="data_list">  
+     <datalist id="data_list">  
     <option>PHP</option><option>JAVA</option><option>DOT NET</option>  
      </datalist>
-            <input list="data_list" value="<?php echo set_value('title');?>" id="title" onkeyup="search_title()" type="text" placeholder="Skills,Designation,Companies" class="text_design" name="title"><input  type="text" placeholder="Location" name="location" value="<?php echo set_value('location');?>" class="text_design"><input  type="text" placeholder="Experience" name="exp" value="<?php echo set_value('exp');?>" class="text_design"><input  type="text" placeholder="Salary" name="salary" value="<?php echo set_value('salary');?>" class="text_design"><button type="submit" class="btn btn-info btn-md">Search Job <span class="fa fa-search"></span></button>
+            <input list="data_list" value="<?php echo set_value('title');?>" id="title" onkeyup="search_title()" type="text" placeholder="Skills,Designation,Companies" class="text_design" name="title"><input  type="text" placeholder="Location" name="location" value="<?php echo set_value('location');?>" class="text_design"><input  type="text" placeholder="Experience" id="exp" name="exp" value="<?php echo set_value('exp');?>" class="text_design"><input  type="text" placeholder="Salary" name="salary" value="<?php echo set_value('salary');?>" class="text_design" id="salary"><button type="submit" class="btn btn-info btn-md">Search Job <span class="fa fa-search"></span></button>
        
      </div>
         </div>
@@ -348,12 +371,12 @@ a:link, a:visited{
                           </div>
                        </div>
                            
-                          <div class="row" class="">
+<!--                          <div class="row" class="">
                               <div class="col-md-2 skill">key skills: 
                               </div>
                               <div class="col-md-8 skill"><?php echo  $job->job_skill_name;?>
                           </div>
-                       </div> 
+                       </div> -->
                            <div class="row" class="">
                               <div class="col-md-2 description">Job Description:
                               </div>
@@ -412,11 +435,11 @@ a:link, a:visited{
           <label >Eligibility </label>
           </div>: <span id="eligibility" class="job_info"> </span><br>
           </div>
-              <div class="row">
+<!--              <div class="row">
           <div class="col-md-3">        
           <label >Job Skills </label>
           </div>: <span id="skills" class="job_info"> </span><br>
-                    </div>
+                    </div>-->
 
           <div class="row">
               <div class="col-md-3">
@@ -452,7 +475,7 @@ a:link, a:visited{
                : <span id="website" class="job_info"> </span><br> 
                     </div>
 
-            <div class="row">
+<!--            <div class="row">
               <div class="col-md-3">
           <label> Contact </label>
           </div>: <span id="contact" class="job_info"> </span><br>     
@@ -468,7 +491,7 @@ a:link, a:visited{
               <div class="col-md-3">
           <label> Address </label>
           </div>: <span id="address" class="job_info"></span><br> 
-          </div>
+          </div>-->
                    
                           </form>
     			</div>                              			

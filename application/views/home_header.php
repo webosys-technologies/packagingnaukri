@@ -277,10 +277,10 @@ $("#show_otp_box").click(function(){
         <div class="col-md-6">
     <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px">
     </div>
-         <div class="col-md-3 col-md-offset-3" style="padding-top:6px">
-              <a href="#" class="fa fa-google icon"></a>&nbsp;
+         <div class="col-md-2 col-md-offset-4" style="padding-top:6px">
+              <!--<a href="#" class="fa fa-google icon"></a>&nbsp;-->
    <a href="#" class="fa fa-facebook icon"></a>  &nbsp;
-   <a href="#" class="fa fa-skype icon"></a>&nbsp;
+   <!--<a href="#" class="fa fa-skype icon"></a>&nbsp;-->
    <a href="#" class="fa fa-linkedin icon"></a>
     </div>
     </div>
@@ -333,7 +333,7 @@ $("#show_otp_box").click(function(){
           
           
           
-      </ul> <ul style="padding-right:140px" class="nav navbar-nav navbar-right">
+      </ul> <ul style="padding-right:50px" class="nav navbar-nav navbar-right">
               <li><a id="header_link" href="#" data-toggle="modal" onclick="open_login()" data-target="#myModal">Login</a></li>
               <li><a id="header_link" href="<?php echo base_url();?>member/index">Register</a></li>
                 

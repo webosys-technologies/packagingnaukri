@@ -208,17 +208,14 @@ a:hover {
         
         
         
-                        var start = 1975;
+var start = 1975;
 var end = new Date().getFullYear();
 var options = "";
 for(var year = start ; year <=end; year++){
   options += '<option value="'+year+'">'+ year +'</option>';
 //  
 }
-
 document.getElementById("passout").innerHTML = options;
-
-
 
 
 
@@ -481,10 +478,20 @@ var edu_name=el.val();
                {                   
              $("#org_error").html(json.org_error);
 
+               }else{
+                   $("#org_error").html("");
                }
                if(json.from_err)
                {
                    $("#from_err").html(json.from_err);
+               }else{
+                   $("#from_err").html("");
+               }
+                if(json.to_err)
+               {
+                   $("#to_err").html(json.to_err);
+               }else{
+                    $("#to_err").html("");
                }
                
                
@@ -690,7 +697,13 @@ var edu_name=el.val();
                  $("#designation").val(data.employment_designation);
                   $("#profile").val(data.employment_profile);
                    $("#from").val(data.employment_from);
-                   $("#salary").val(data.employment_salary);
+                   $("#to").val(data.employment_to);
+                   if(data.employment_salary){
+                       var s=data.employment_salary.split(".");
+                        $("#lacsalary").val(s[0]);
+                           $("#thsalary").val(s[1]);
+                   }
+                  
 
                      $("#period").val(data.employment_notice_period);
                      $("#employment_id").val(data.employment_id);
@@ -739,7 +752,8 @@ var edu_name=el.val();
                          <div class="col-md-3">
                              <div class="item-details"><i class="fa fa-map-marker"></i><span class="item"> <?php if(isset($member_data)){echo $member_data->member_city.",".$member_data->member_country;}?></span></div>
                              <div class="item-details"><i class="fa fa-suitcase"></i><span class="item"> <?php if(isset($member_data->member_experience)){echo $member_data->member_experience; } ?> </span></div>
-                             <div class="item-details"><i class="fa fa-inr"></i><span class="item"> <?php if(isset($org->employment_salary)){echo "INR ".$org->employment_salary." PA";} ?></span></div>
+                             <?php if(!empty($org->employment_salary) && $org->employment_salary!='0.0' ){$sal=explode(".",$org->employment_salary);} ?>
+                             <div class="item-details"><i class="fa fa-inr"></i><span class="item"> <?php if(!empty($org->employment_salary) && $org->employment_salary!='0.0'){echo "INR ". $sal[0]."Lac ". $sal[1]."Thousand "; echo "PA";}  ?></span></div>
 
                          </div>
                          <div class="col-md-3">
@@ -1481,27 +1495,61 @@ var edu_name=el.val();
                                 </div>
                                              <div class="col-md-6">                                   
                                         <label for="lname">Work To</label>
-                                        <input type="text" class="form-control" name="to" readonly value="Present">
+                                        <input type="date" name="to" value="" id="to" class="form-control"><br>
+                                        <input type="checkbox" name="present" value=""> <span> <b>Present</b> </span>
                                       <span class="text-danger" id="to_err"></span>                                   
                                          </div>
                                 
                             </div><br>
                                     
                                      <div class="row">
+                                         
+                      <div class="col-md-3">
+                        <label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>
+                         <select type="text" name="lacsalary" id="lacsalary" class="form-control">
+                             <option value="0">0 Lac</option>
+                           <script>
+                               var sal = 1;
+                               var sal_end = 99;
+                                var options = "";
+                                for(var dim = sal ; dim <=sal_end; dim++){
+//                                    alert(dim);
+                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              }
+                               </script>
+                        </select>
+                        <span class="text-danger"></span>
+                    </div   >
                                         
-                    <div class="col-md-6">
+                    <div class="col-md-3"> <br>
+                        <label class="form-label"></label> <span style="font-size:12px;"></span>
+                       <select type="text" id="thsalary" name="thsalary" class="form-control">  
+                            <option value="0">0 Thousands</option>
+                             <script>
+                               var sal = 1;
+                               var sal_end = 99;
+                                var options = "";
+                                for(var dim = sal ; dim <=sal_end; dim++){
+//                                    alert(dim);
+//                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              }
+                               </script>
+                        </select>
+                        <span class="text-danger" id="salary_error"><?php echo form_error('state'); ?></span>
+                    </div>
+                                        <div class="col-md-6">
                         <label class="form-label">Notice Period</label>
                         <input type="text" class="form-control" name="period" value="" placeholder="1 year 2 month" id="period">
                         <span class="text-danger"><?php echo form_error('state'); ?></span>
 
                     </div>
+                                         </div>
+                            <div class="row">                   
+                   
                                          
-                    <div class="col-md-6">
-                        <label class="form-label">Salary</label> <span style="font-size:12px;">(salary per anual)</span>
-                        <input type="text" class="form-control" name="salary" value="" placeholder="Salary per Anual" id="salary">
-                        <span class="text-danger"><?php echo form_error('state'); ?></span>
-
-                    </div>
+                   
                     
                     </div>
                                     

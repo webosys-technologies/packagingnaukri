@@ -182,7 +182,7 @@ class Jobs extends CI_Controller
    
    function query_test()
    {
-       $this->Jobs_model->query_test();
+       $this->Jobs_model->test();
    }
     
   

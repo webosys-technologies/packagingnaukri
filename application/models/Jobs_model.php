@@ -68,23 +68,107 @@ class Jobs_model extends CI_Model
      public function search_job($form)
      {
          
-         if(!empty($form['title']) || !empty($form['location']))
-         {        
-             $this->db->from('jobs as job');
-            $res=$this->db->like('job.job_title',$form['title']);
-         
-          if(!empty($form['location']))
-        {             
-              $this->db->like('job.job_city',$form['location']);
-        }
-        $this->db->join('recruiters as rec','rec.recruiter_id=job.recruiter_id','LEFT');
-        $this->db->join('companies as comp','comp.company_id=job.company_id','LEFT');
+         if(!empty($form['title']) && !empty($form['location']) && !empty($form['exp']) && !empty($form['salary']))
+         {
+             
+           $this->db->from('jobs as job');
+           $this->db->like('job.job_title',$form['title']);
+           $this->db->like('job.job_city',$form['location']);
+           $this->db->like('job.job_experience',$form['exp']);
+           $this->db->like('job.job_salary',$form['salary']);
+        $this->join_query();
         $this->db->where('job.job_status','1');
          
          $result=$this->db->get();
          return $result->result();
+         }elseif(!empty($form['title']) && !empty($form['location']) && !empty($form['exp']))
+         {
+            $this->db->from('jobs as job');
+           $this->db->like('job.job_title',$form['title']);
+           $this->db->like('job.job_city',$form['location']);
+           $this->db->like('job.job_experience',$form['exp']);
+         $this->join_query();
+        $this->db->where('job.job_status','1');
+         
+         $result=$this->db->get();
+         return $result->result(); 
+         }elseif(!empty($form['title']) && !empty($form['salary']) && !empty($form['exp']))
+         {
+            $this->db->from('jobs as job');
+           $this->db->like('job.job_title',$form['title']);
+           $this->db->like('job.job_salary',$form['exp']);
+           $this->db->like('job.job_experience',$form['exp']);
+         $this->join_query();
+        $this->db->where('job.job_status','1');
+         
+         $result=$this->db->get();
+         return $result->result(); 
+         }
+         elseif(!empty($form['title']) && !empty($form['location']))
+         {
+            $this->db->from('jobs as job');
+           $this->db->like('job.job_title',$form['title']);
+           $this->db->like('job.job_city',$form['location']);
+          $this->join_query();
+        $this->db->where('job.job_status','1');
+         
+         $result=$this->db->get();
+         return $result->result(); 
+         }elseif(!empty($form['title']) && !empty($form['salary'])){
+              $this->db->from('jobs as job');
+           $this->db->like('job.job_title',$form['title']);
+           $this->db->like('job.job_salary',$form['salary']);
+           $this->join_query();
+        $this->db->where('job.job_status','1');         
+         $result=$this->db->get();
+         return $result->result(); 
+         }elseif(!empty($form['title']) && !empty($form['exp'])){
+              $this->db->from('jobs as job');
+           $this->db->like('job.job_title',$form['title']);
+           $this->db->like('job.job_experience',$form['exp']);
+           $this->join_query();
+        $this->db->where('job.job_status','1');
+         
+         $result=$this->db->get();
+         return $result->result(); 
+         }
+         elseif(!empty($form['title'])){
+              $this->db->from('jobs as job');
+           $this->db->like('job.job_title',$form['title']);
+         $this->join_query();
+        $this->db->where('job.job_status','1');
+         
+         $result=$this->db->get();
+         return $result->result(); 
+         }elseif(!empty($form['location'])){
+              $this->db->from('jobs as job');
+           $this->db->like('job.job_city',$form['location']);       
+           $this->join_query();
+        $this->db->where('job.job_status','1');
+         
+         $result=$this->db->get();
+         return $result->result(); 
          }
           
+     }
+     
+     function join_query()
+     {
+         $this->db->join('recruiters as rec','rec.recruiter_id=job.recruiter_id','LEFT');
+        $this->db->join('companies as comp','comp.company_id=job.company_id','LEFT');
+     }
+     
+     public function test()
+     {
+         $first=$this->db->where('recruiter_id',1)->get('recruiters')->result();
+         print_r($first);
+         echo "<br><br>";
+         $second=$this->db->where('recruiter_id',1)->get('recruiters')->result();
+         print_r($second);
+         echo "<br><br>";
+         
+         print_r( array_merge((array) $first, (array) $second));
+
      }
      
     

@@ -121,7 +121,7 @@ a:link, a:visited{
     
       function job_info(id)
     {
-              
+     $("#salary_field").prop('hidden',true);         
            $.ajax({
        url : "<?php echo site_url('index.php/member/Jobs/job_info')?>/" + id,        
        type: "GET",
@@ -136,14 +136,19 @@ a:link, a:visited{
               $("#job_desc").html(data.job_description);
                $("#eligibility").html(data.job_education);
 ////                $("#skills").html();
+                alert(data.job_salary);
+                    if(data.job_salary)
+                    {
                  $("#salary").html(data.job_salary);
+                 $("#salary_field").prop('hidden',false);
+             }
                  $("#experience").html(data.job_experience);
                  $("#location").html(data.job_city);
                  $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
                  $("#email").html(data.company_email);
                  $("#contact").html(data.company_contact);
                  $("#address").html(data.company_address);
-          $("#job_modal").modal('show');
+//          $("#job_modal").modal('show');
        },
        error: function (jqXHR, textStatus, errorThrown)
        {
@@ -196,12 +201,12 @@ a:link, a:visited{
                           </div>
                        </div>
                            
-                          <div class="row" class="">
+<!--                          <div class="row" class="">
                               <div class="col-md-2 skill">key skills:
                               </div>
                               <div class="col-md-8 skill"><?php echo  $job->job_skill_name;?>
                           </div>
-                       </div> 
+                       </div> -->
                            <div class="row" class="">
                               <div class="col-md-2 description">Job Description:
                               </div>
@@ -313,11 +318,11 @@ a:link, a:visited{
           <label >Eligibility </label>
           </div>: <span id="eligibility" class="job_info"> </span><br>
           </div>
-              <div class="row">
+<!--              <div class="row">
           <div class="col-md-3">        
           <label >Job Skills </label>
           </div>: <span id="skills" class="job_info"> </span><br>
-                    </div>
+                    </div>-->
 
           <div class="row">
               <div class="col-md-3">
@@ -325,7 +330,7 @@ a:link, a:visited{
           </div>: <span id="experience" class="job_info"> </span><br>
                     </div>
 
-          <div class="row">
+          <div class="row" id="salary_field" hidden>
               <div class="col-md-3">
           <label >Salary </label>
           </div>: <span id="salary" class="job_info"> </span><br>

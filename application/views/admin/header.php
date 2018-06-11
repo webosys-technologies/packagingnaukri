@@ -148,27 +148,20 @@
         </li>
      
         <li>
-          <a href="<?php echo base_url(); ?>admin/Recruiter">
-            <i class="fa fa-institution"></i> <span>Recruiters</span>
-            <span class="pull-right-container">
-            </span>
-          </a>
-        </li>
-        <li>
           <a href="<?php echo base_url(); ?>admin/Members">
-            <i class="fa fa-users"></i> <span>Members</span>
+            <i class="fa fa-users"></i> <span>Member Masters</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
-        <li>
-          <a href="<?php echo base_url(); ?>admin/Applicants">
-            <i class="fa fa-users"></i> <span>Applicant Members</span>
-            <span class="pull-right-container">
-            </span>
-          </a>
-        </li> 
+        
          <li>
+          <a href="<?php echo base_url(); ?>admin/Jobs">
+            <i class="fa fa-folder"></i> <span>Manage Jobs</span>            
+          </a>
+         </li>
+         
+          <li>
           <a href="<?php echo base_url(); ?>admin/Users">
             <i class="fa fa-users"></i> <span>Users</span>
             <span class="pull-right-container">
@@ -180,11 +173,16 @@
             <i class="fa fa-folder"></i> <span>Companies</span>            
           </a>
          </li>
+        
         <li>
-          <a href="<?php echo base_url(); ?>admin/Jobs">
-            <i class="fa fa-folder"></i> <span>Manage Jobs</span>            
+          <a href="<?php echo base_url(); ?>admin/Recruiter">
+            <i class="fa fa-institution"></i> <span>Recruiters</span>
+            <span class="pull-right-container">
+            </span>
           </a>
-         </li>
+        </li>
+        
+            
          <li>
           <a href="<?php echo base_url(); ?>admin/Institute">
             <i class="fa fa-folder"></i> <span>Manage University/Institute</span>            

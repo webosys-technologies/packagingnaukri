@@ -186,22 +186,32 @@ class Profile extends CI_Controller
     
     public function employment_update()
     {
+        $to="";
         $id=$this->session->userdata('member_id');
         $form=$this->input->post();
         $member_data=  get_member_info($id);
+        
+        if(!empty ($form['present']))
+        {
+             $to=$form['to'];
+        }  elseif(!empty($form['to'])) {
+             $to=  date('Y-m-d');
+        }
+   
         $org=str_replace(' ', '', $form['organization']);
      if(!empty($org))
      {
+        
         $data=array(
             'member_id'=>$id,
             'employment_organization'=>  $form['organization'],
             'employment_city'=>  $form['city'],
             'employment_designation'=>  $form['designation'],
             'employment_profile'=>  $form['profile'],
-            'employment_salary'=>$form['salary'],
+            'employment_salary'=>$form['lacsalary'].".".$form['thsalary'],
             'employment_notice_period'=>  $form['period'],
             'employment_from'=>  $form['from'],
-            'employment_to'=>  $form['to'],
+            'employment_to'=> $to ,
             'employment_status'=>1
            
         );   
@@ -214,19 +224,29 @@ class Profile extends CI_Controller
         {
            if(!empty($form['from']))
             {
-              if($form['from']<date("Y-m-d"))
+              if($form['from']<=date("Y-m-d"))
               {
-            $datetime1 = new DateTime(date("Y-m-d"));
+                  if(!empty($to) )
+                   {
+                      if($to<=date('Y-m-d'))
+                         {
+            $datetime1 = new DateTime($to);
             $datetime2 = new DateTime($form['from']);
             $interval = $datetime1->diff($datetime2);
             $exp=$interval->format('%y yrs %m month');
           
                 $mem_data=array('member_experience'=>$exp,
-                                'member_anual_salary'=>$form['salary']);
+                                'member_anual_salary'=>$form['lacsalary'].".".$form['thsalary']);
                 $mem_where=array('member_id'=>$id);
                $this->Members_model->member_update($mem_where,$mem_data);
                 $this->Employments_model->insert_employment($data);
-            echo json_encode(array('success'=>'Employment Added sucessfully'));  
+            echo json_encode(array('success'=>'Employment Added sucessfully')); 
+                         }else{
+                            echo json_encode(array('to_err'=>"Working To date should less than todays date")); 
+                         }
+                   }else{
+                        echo json_encode(array('to_err'=>"Select Working TO"));
+                   }
               } else {
                   echo json_encode(array('from_err'=>"Working date should minimum than todays date"));
               }
@@ -239,22 +259,35 @@ class Profile extends CI_Controller
             $row=$this->Employments_model->get_employment($where3);
             if($row->employment_id==$form['employment_id'])
             {
-                       if($form['from']<date("Y-m-d"))
+                  if(!empty($form['from']))
+            {
+              if($form['from']<=date("Y-m-d"))
               {
-            $datetime1 = new DateTime(date("Y-m-d"));
+                  if(!empty($to) )
+                   {
+                      if($to<=date('Y-m-d'))
+                         {
+            $datetime1 =  new DateTime($to);
             $datetime2 = new DateTime($form['from']);
             $interval = $datetime1->diff($datetime2);
             $exp=$interval->format('%y yrs %m month');
           
                 $mem_data=array('member_experience'=>$exp,
-                                'member_anual_salary'=>$form['salary']);
+                                'member_anual_salary'=>$form['lacsalary'].".".$form['thsalary']);
                 $mem_where=array('member_id'=>$id);
                $this->Members_model->member_update($mem_where,$mem_data);
-                 
+              }else{
+                            echo json_encode(array('to_err'=>"Working To date should less than todays date")); 
+                         }
+                   }else{
+                        echo json_encode(array('to_err'=>"Select Working TO"));
+                   }
+              } else {
+                  echo json_encode(array('from_err'=>"Working date should minimum than todays date"));
               }
-              else {
-                  echo json_encode(array('from_err'=>"Working date is greater than todays date"));
-              }
+            }  else{
+                echo json_encode(array('from_err'=>"Select working from"));
+            }      
             }
             $res=$this->Employments_model->update_employment($where,$data);            
             echo json_encode(array('success'=>'Employment updated successfully'));
