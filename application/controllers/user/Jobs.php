@@ -58,6 +58,7 @@ class Jobs extends CI_Controller
                    if(!empty($form['joblocation']))
         {  
         $id=$this->Companies_model->get_recruiter_by_company($form['company']);
+        $salary=$form['lacsalary'].".".$form['thsalary'];
         $data=array(
                    'recruiter_id'=>$id,
                    'company_id'=>$form['company'],
@@ -67,7 +68,7 @@ class Jobs extends CI_Controller
                    'job_description'=>$form['jobdesc'],
                    'job_city'=>$form['joblocation'],
                    'job_experience'=>$form['experience'],
-                   'job_salary'=>$form['jobsalary'],
+                   'job_salary'=>$salary,
                    'job_created_at'=>date('Y-m-d'),
                    'job_status'=>$form['status'],
                    'job_skill_name'=>$form['skill'],
@@ -114,6 +115,12 @@ class Jobs extends CI_Controller
         }
         
     }
+     public function member_info($id)
+    {
+        $result=$this->Members_model->member_info($id);
+        echo json_encode($result);
+        
+    }
     
     public function job_update()
     {
@@ -131,6 +138,7 @@ class Jobs extends CI_Controller
         {
                    if(!empty($form['joblocation']))
         {  
+                       $salary=$form['lacsalary'].".".$form['thsalary'];
         $data=array(
                    'recruiter_id'=>$id,
                    'company_id'=>$form['company'],
@@ -140,7 +148,7 @@ class Jobs extends CI_Controller
                    'job_description'=>$form['jobdesc'],
                    'job_city'=>$form['joblocation'],
                    'job_experience'=>$form['experience'],
-                   'job_salary'=>$form['jobsalary'],
+                   'job_salary'=>$salary,
                    'job_skill_name'=>$form['skill'],
                    'job_status'=>$form['status']
 

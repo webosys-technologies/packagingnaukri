@@ -77,10 +77,18 @@
         </div>
         </div>
     <br>
-   
+    <tr>
+<!--    <table> <td>Minimum age:</td>
+            <td><input type="text" id="min" name="min"></td>
+        </tr>
+        <tr>
+            <td>Maximum age:</td>
+            <td><input type="text" id="max" name="max"></td>
+        </tr></table>-->
 <div class="table-responsive">
     <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
       <thead>
+         
         <tr bgcolor="#338cbf" style="color:#fff">
           <th>ID</th>
           <th>NAME</th>
@@ -139,6 +147,25 @@
   </div>
 
   <script type="text/javascript">
+      
+//       $.fn.dataTable.ext.search.push(
+//    function( settings, data, dataIndex ) {
+//        var min = parseInt( $('#min').val(), 10 );
+//        var max = parseInt( $('#max').val(), 10 );
+//        var age = parseFloat( data[3] ) || 0; // use data for the age column
+// 
+//        if ( ( isNaN( min ) && isNaN( max ) ) ||
+//             ( isNaN( min ) && age <= max ) ||
+//             ( min <= age   && isNaN( max ) ) ||
+//             ( min <= age   && age <= max ) )
+//        {
+//            return true;
+//        }
+//        return false;
+//    }
+//);
+      
+      
   $(document).ready( function () {  
       
       
@@ -207,10 +234,14 @@ var state=el.val();
      }
     
  });  
+
  
  
- 
-      $('#table_id').DataTable();
+      var table=$('#table_id').DataTable();
+      
+       $('#min, #max').keyup( function() {
+        table.draw();
+    } );
   } );
 
     $("#myName").on("keyup", function() {
@@ -636,7 +667,7 @@ function view_member(id)
                     </div>
                   </div>
                 </div>
-                <div class="row">
+<!--                <div class="row">
                   <div class="form-group">
                     <div class="col-md-3">
                       <label>Email-Id</label>
@@ -657,7 +688,7 @@ function view_member(id)
                       <span id="mobile" class="text_color"></span>
                     </div>
                   </div>
-                </div>
+                </div>-->
                 <div class="row">
                   <div class="form-group">
                     <div class="col-md-3">
@@ -691,7 +722,7 @@ function view_member(id)
                     </div>
                   </div>
                 </div>
-                <div class="row">
+<!--                <div class="row">
                   <div class="form-group">
                     <div class="col-md-3">
                       <label>Address</label>
@@ -701,7 +732,7 @@ function view_member(id)
                       <span id="address" class="text_color"></span>
                     </div>
                   </div>
-                </div>
+                </div>-->
                 <div class="row">
                   <div class="form-group">
                     <div class="col-md-3">
@@ -713,7 +744,7 @@ function view_member(id)
                     </div>
                   </div>
                 </div>
-                <div class="row">
+<!--                <div class="row">
                   <div class="form-group">
                     <div class="col-md-3">
                       <label>Pincode</label>
@@ -723,7 +754,7 @@ function view_member(id)
                       <span id="pincode" class="text_color"></span>
                     </div>
                   </div>
-                </div>
+                </div>-->
                 <div class="row">
                   <div class="form-group">
                     <div class="col-md-3">
@@ -764,7 +795,7 @@ function view_member(id)
                     </div>
                     <div class="col-md-1"><strong>:</strong></div>                    
                     <div class="col-md-7">
-                        <a href="" id="resume"><span id="resume_name"></span></a>
+                        <a href="" id="resume"  target="_blank"><span id="resume_name"></span></a>
                     </div>
                   </div>
                 </div>

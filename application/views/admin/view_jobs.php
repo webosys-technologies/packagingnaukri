@@ -125,8 +125,8 @@
                                        }
                                        ?></td>
                                            
-                <td> <?php if($job->job_status==0){?><button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job" disabled ><i class="glyphicon glyphicon-pencil"></i></button> <?php }else{?>
-                <button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button><?php }?>
+                <td> <button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button> 
+               
                     <button class="btn btn-info btn-xs" onclick="job_info(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="View Job"><i class="fa fa-eye"></i></button>              
                     <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
                  
@@ -145,9 +145,15 @@
     
 </section>
   </div>
-
+ <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
   <script type="text/javascript">
+      
+        
   $(document).ready( function () {   
+ 
+                        if($("#jobdesc").length > 0){
+                           $("#jobdesc").ckeditor();
+                                 }
  
  
   $("#user_type").change(function() {
@@ -186,9 +192,6 @@ var user_type=el.val();
  });  
   
  
- 
- 
-      $('#table_id').DataTable();
   } );
 
     $("#myName").on("keyup", function() {
@@ -246,10 +249,15 @@ var user_type=el.val();
           
             $('[name="job_id"]').val(data.job_id);
             $('[name="jobtitle"]').val(data.job_title);
+            alert(data.job_description);
             $('[name="jobdesc"]').val(data.job_description);
             $('[name="joblocation"]').val(data.job_city);
             $('[name="jobtype"]').val(data.job_type);
-            $('[name="jobsalary"]').val(data.job_salary);
+            if(data.job_salary){
+                       var s=data.job_salary.split(".");
+                        $("#lacsalary").val(s[0]);
+                           $("#thsalary").val(s[1]);
+                   }
             $('[name="company"]').val(data.company_id);
             $('[name="qualification"]').val(data.job_education);
             $('[name="experience"]').val(data.job_experience);
@@ -382,8 +390,13 @@ var user_type=el.val();
 ////             $("#j_desc").html();
               $("#job_desc").html(data.job_description);
                $("#eligibility").html(data.job_education);
-////                $("#skills").html();
-                 $("#salary").html(data.job_salary);
+               if(data.job_salary){
+                       var s=data.job_salary.split(".");
+                        $("#salary").html(s[0]+" Lac "+s[1]+" Thousand ");
+                          
+                   }
+                 $("#skills").html(data.job_skill_name);
+                
                  $("#experience").html(data.job_experience);
                  $("#location").html(data.job_city);
                  $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
@@ -483,12 +496,19 @@ var user_type=el.val();
                                                                       
                                 </div>
                                         </div>
-                                    
+                                     
                                     <div class="row">
                                 <div class="col-md-12">                                
                                     <div class="form-group">
                                        <label>Job Description: (*)</label>
-                                    <textarea cols="80" id="editor" class="form-control" name="jobdesc" rows="6"></textarea>
+                                        <textarea value="" name="jobdesc" id="jobdesc"></textarea>
+                                   <script>
+                               
+//                                CKEDITOR.instances.jobdesc.getData();
+
+                                          CKEDITOR.replace( 'jobdesc' );
+                                    </script>
+                                    
                                         <span class="text-danger" id="password_err"></span>
                                         
                                     </div>
@@ -522,13 +542,41 @@ var user_type=el.val();
                      </div><br>
                                     
                      <div class="row">
-                         
-                         <div class="col-md-6">
-                       <label>Job Salary: (*)</label>
-                                    <input name="jobsalary" placeholder="Job Salary" class="form-control" value="">
-                        <span class="text-danger" id="gen_err"></span>
-
-                    </div>  
+                        <div class="col-md-3">
+                        <label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>
+                         <select type="text" name="lacsalary" id="lacsalary" class="form-control">
+                             <option value="0">0 Lac</option>
+                           <script>
+                               var sal = 1;
+                               var sal_end = 99;
+                                var options = "";
+                                for(var dim = sal ; dim <=sal_end; dim++){
+//                                    alert(dim);
+                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              }
+                               </script>
+                        </select>
+                        <span class="text-danger"></span>
+                    </div>
+                                        
+                    <div class="col-md-3" style="top-padding:15px"> 
+                        <label class="form-label"></label> <span style="font-size:12px;"></span>
+                       <select type="text" id="thsalary" name="thsalary" class="form-control">  
+                            <option value="0">0 Thousands</option>
+                             <script>
+                               var sal = 1;
+                               var sal_end = 99;
+                                var options = "";
+                                for(var dim = sal ; dim <=sal_end; dim++){
+//                                    alert(dim);
+//                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              }
+                               </script>
+                        </select>
+                        <span class="text-danger" id="salary_error"><?php echo form_error('state'); ?></span>
+                    </div> 
                         
                                 <div class="col-md-6">
                                   <div class="form-group">

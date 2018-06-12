@@ -55,7 +55,7 @@ class Applied_jobs_model extends CI_Model
          $this->db->from('applied_job as job');
          $this->db->join('members as mem','mem.member_id=job.member_id','LEFT');         
          $this->db->join('educations as edu','edu.member_id=job.member_id','LEFT');
-//         $this->db->join('employments as emp','job.member_id=emp.member_id','LEFT');         
+         $this->db->join('jobs as j','j.job_id=job.job_id','LEFT');         
          
          $this->db->where('job.job_id',$id);
          $query=$this->db->get();

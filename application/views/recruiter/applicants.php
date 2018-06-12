@@ -27,43 +27,11 @@
     </section>
     <hr style="border-top: 1px solid #ccc;">
     <section class="content">
-        <div class="row">
-
-  
-
-         <div class="col-md-4">
-   
-    </div>
-    <div class="col-md-6">
-         <?php
-        $this->load->helper('form');
-        $success = $this->session->flashdata('success');
-        if($success)
-        {
-            ?>
-            
-        <div class="alert alert-success alert-dismissible" data-auto-dismiss="5000">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Success!</strong> <?php echo $success; ?> 
-  </div>
-        <?php }?>
-             
-              <?php
-        $this->load->helper('form');
-        $error = $this->session->flashdata('error');
-        if($error)
-        {
-            ?>           
-        <div class="alert alert-danger alert-dismissible" data-auto-dismiss="2000">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Error!</strong> <?php echo $error; ?> 
-  </div>
-        <?php }?>
-             
-             
-       
-        </div>
-        </div>
+     <div class="row">
+        <div class="col-md-2">
+     <a href="<?php echo base_url()?>recruiter/Jobs" class="btn btn-info"><< BACK</a><br>
+     </div>
+     </div><br>
   
    
 <div class="table-responsive">
@@ -73,8 +41,8 @@
           <th>ID</th>
           <th>NAME</th>
           <th>APPLIED FOR</th>
-          <th>EMAIL</th>
-          <th>MOBILE</th>
+<!--          <th>EMAIL</th>
+          <th>MOBILE</th>-->
           <th>CITY</th>
           <th>RESUME</th>
           <th>APPLY AT</th>
@@ -93,11 +61,9 @@
                                         <td><?php echo $res->member_id;?></td>
                                         <td><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
                                         <td><?php echo $res->job_title; ?></td>
-                                         <td><?php echo $res->member_email;?></td>
-                                        <!--<td><?php echo $res->member_email;?></td>-->
-                                       <td><?php echo $res->member_mobile;?></td>
+                                       
                                        <td><?php echo $res->member_city;?></td>
-                                       <td><?php if(!empty($res->member_resume)){?><a href="<?php echo base_url().$res->member_resume ?>">Resume</a> <?php }else{ echo "Not Uploaded"; }?></td>
+                                       <td><?php if(!empty($res->member_resume)){?><a href="<?php echo base_url().$res->member_resume ?>" target="_blank">Resume</a> <?php }else{ echo "Not Uploaded"; }?></td>
                                        <td><?php echo $res->apply_at;?></td>
                                       
                                        <td>
@@ -220,7 +186,7 @@ function view_member(id)
                     </div>
                   </div>
                 </div>
-                <div class="row">
+<!--                <div class="row">
                   <div class="form-group">
                     <div class="col-md-3">
                       <label>Email-Id</label>
@@ -230,8 +196,8 @@ function view_member(id)
                       <span id="email" class="text_color"></span>
                     </div>
                   </div>
-                </div>
-                <div class="row">
+                </div>-->
+<!--                <div class="row">
                   <div class="form-group">
                     <div class="col-md-3">
                       <label>Mobile</label>
@@ -241,7 +207,7 @@ function view_member(id)
                       <span id="mobile" class="text_color"></span>
                     </div>
                   </div>
-                </div>
+                </div>-->
                 <div class="row">
                   <div class="form-group">
                     <div class="col-md-3">
@@ -275,7 +241,7 @@ function view_member(id)
                     </div>
                   </div>
                 </div>
-                <div class="row">
+<!--                <div class="row">
                   <div class="form-group">
                     <div class="col-md-3">
                       <label>Address</label>
@@ -285,7 +251,7 @@ function view_member(id)
                       <span id="address" class="text_color"></span>
                     </div>
                   </div>
-                </div>
+                </div>-->
                 <div class="row">
                   <div class="form-group">
                     <div class="col-md-3">
@@ -297,7 +263,7 @@ function view_member(id)
                     </div>
                   </div>
                 </div>
-                <div class="row">
+<!--                <div class="row">
                   <div class="form-group">
                     <div class="col-md-3">
                       <label>Pincode</label>
@@ -307,7 +273,7 @@ function view_member(id)
                       <span id="pincode" class="text_color"></span>
                     </div>
                   </div>
-                </div>
+                </div>-->
                 <div class="row">
                   <div class="form-group">
                     <div class="col-md-3">

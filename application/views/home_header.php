@@ -274,10 +274,10 @@ $("#show_otp_box").click(function(){
  
 </script>
 <div class="row" >
-        <div class="col-md-6">
+        <div class="col-md-3">
     <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px">
     </div>
-         <div class="col-md-2 col-md-offset-4" style="padding-top:6px">
+         <div class="col-md-2 col-md-offset-7" style="padding-top:6px">
               <!--<a href="#" class="fa fa-google icon"></a>&nbsp;-->
    <a href="#" class="fa fa-facebook icon"></a>  &nbsp;
    <!--<a href="#" class="fa fa-skype icon"></a>&nbsp;-->

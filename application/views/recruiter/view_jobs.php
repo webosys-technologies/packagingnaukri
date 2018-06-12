@@ -126,8 +126,8 @@ function applicants(id)
                                        ?>  
                             </td>
                                            
-                            <td><?php if($job->job_status==0){?><button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job" disabled><i class="glyphicon glyphicon-pencil"></i></button><?php }else{?>
-                  <button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>  <?php }?>
+                            <td><button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
+                  
                                 <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
                    <button class="btn btn-info btn-xs" onclick="job_info(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="View Job"><i class="fa fa-eye"></i></button>
                              </td>
@@ -254,7 +254,11 @@ var user_type=el.val();
             $('[name="jobdesc"]').val(data.job_description);
             $('[name="joblocation"]').val(data.job_city);
             $('[name="jobtype"]').val(data.job_type);
-            $('[name="jobsalary"]').val(data.job_salary);
+            if(data.job_salary){
+                       var s=data.job_salary.split(".");
+                        $("#lacsalary").val(s[0]);
+                           $("#thsalary").val(s[1]);
+                   }
             $('[name="company"]').val(data.company_id);
             $('[name="qualification"]').val(data.job_education);
             $('[name="experience"]').val(data.job_experience);
@@ -389,8 +393,12 @@ function delete_menu(id)
 ////             $("#j_desc").html();
               $("#job_desc").html(data.job_description);
                $("#eligibility").html(data.job_education);
-////                $("#skills").html();
-                 $("#salary").html(data.job_salary);
+                  if(data.job_salary){
+                       var s=data.job_salary.split(".");
+                        $("#salary").html(s[0]+" Lac "+s[1]+" Thousand ");                          
+                   }
+                 $("#skills").html(data.job_skill_name);
+                
                  $("#experience").html(data.job_experience);
                  $("#location").html(data.job_city);
                  $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
@@ -531,19 +539,47 @@ function delete_menu(id)
                     </div><br>
                                     
                      <div class="row">
-                            
-                         <div class="col-md-6">
-                       <label>Job Salary: (*)</label>
-                                    <input name="jobsalary" placeholder="Job Salary" class="form-control" value="">
-                        <span class="text-danger" id="gen_err"></span>
-
+                      <div class="col-md-3">
+                        <label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>
+                         <select type="text" name="lacsalary" id="lacsalary" class="form-control">
+                             <option value="0">0 Lac</option>
+                           <script>
+                               var sal = 1;
+                               var sal_end = 99;
+                                var options = "";
+                                for(var dim = sal ; dim <=sal_end; dim++){
+//                                    alert(dim);
+                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              }
+                               </script>
+                        </select>
+                        <span class="text-danger"></span>
+                    </div>
+                                        
+                    <div class="col-md-3" style="top-padding:15px"> 
+                        <label class="form-label"></label> <span style="font-size:12px;"></span>
+                        <select type="text" id="thsalary" name="thsalary" class="form-control" style="">  
+                            <option value="0">0 Thousands</option>
+                             <script>
+                               var sal = 1;
+                               var sal_end = 99;
+                                var options = "";
+                                for(var dim = sal ; dim <=sal_end; dim++){
+//                                    alert(dim);
+//                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              }
+                               </script>
+                        </select>
+                        <span class="text-danger" id="salary_error"><?php echo form_error('state'); ?></span>
                     </div>  
                           <div class="col-md-6">
                                   <div class="form-group">
                                     <label>Status<span style="color: red">*</span></label>
                                      <select name="status" class="form-control" >
-                                            <option value="1">Active</option>
-                                            <option value="0">Not Active</option>
+                                            <option value="1">Open</option>
+                                            <option value="0">Closed</option>
                                         </select>
                                   </div>
                                 </div>

@@ -96,7 +96,7 @@
                                         <td><?php echo $res->member_email;?></td>
                                         <!--<td><?php echo $res->member_email;?></td>-->
                                        <td><?php echo $res->member_mobile;?></td>
-                                       <td><?php if(!empty($res->member_resume)){?><a href="<?php echo base_url().$res->member_resume ?>">Resume</a> <?php }else{ echo "Not Uploaded"; }?></td>
+                                       <td><?php if(!empty($res->member_resume)){?><a href="<?php echo base_url().$res->member_resume ?>" target="_blank">Resume</a> <?php }else{ echo "Not Uploaded"; }?></td>
                                        <td><?php echo $res->apply_at;?></td>
                                       
                                        <td>
@@ -350,7 +350,7 @@ function view_member(id)
                     </div>
                     <div class="col-md-1"><strong>:</strong></div>                    
                     <div class="col-md-7">
-                        <a href="" id="resume"><span id="resume_name"></span></a>
+                        <a href="" id="resume" target="_blank"><span id="resume_name"></span></a>
                     </div>
                   </div>
                 </div>
