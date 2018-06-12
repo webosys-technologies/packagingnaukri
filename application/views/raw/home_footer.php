@@ -5,7 +5,7 @@
     }
     </style>
     <div class="row" style="background:#F2F3F4">
-<!--        <div class="container">        
+        <div class="container">        
 		<div class="col-md-9 col-md-offset-1">
 		<h5 style="color:#0BA1DC;">RECENT JOB OPENINGS</h5>
                 
@@ -16,7 +16,7 @@
     <li data-target="#carousel1" data-slide-to="1" ></li>
     <li data-target="#carousel1" data-slide-to="2"></li>
   </ol>
-   Carousel items 
+  <!-- Carousel items -->
   <div class="carousel-inner">
           
       <div class="item active"><center><div id="job1"></div></center></div>
@@ -27,7 +27,7 @@
    
   </div>
   
-   Carousel nav 
+  <!-- Carousel nav -->
   <a class="carousel-control left" href="#carousel1" data-slide="prev">&lsaquo; </a>
   <a class="carousel-control right" href="#carousel1" data-slide="next">&rsaquo;</a>
 </div>	
@@ -35,7 +35,7 @@
 			  
 		</div>  
               
-            </div><br><br>-->
+            </div><br><br>
             
            
                        
@@ -66,18 +66,6 @@
         padding:20px;
          line-height: 22px;
     }
-  
-    .div_design{
-        color:#02B645;       
-        font-family: times;
-        font-size: 20px;
-    }
-    .exp{
-        padding-top:12px;
-        font-family: times;
-        font-size:17px;
-    }
-  
         </style>
     
    <?php 
@@ -88,10 +76,6 @@
                                 {
                                    
                         ?>
-<!--        jobname
-        qualificationsexperience
-        company-->
-
                     <script>
                            function modal_show()
                            {
@@ -101,23 +85,19 @@
                            
                            if('<?php echo $i==1; ?>')
                            {
-                                $("#job1").append('<span class="div_design"><?php echo $res->job_title;?></span><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 0.5px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
+                                $("#job1").append('<div class="col-md-6 col-md-offset-3"><a href="<?php echo base_url();?>Home/job/<?php echo $res->job_id; ?>" ><label class="sapce">job name:</label> <?php echo $res->job_title; ?><br> <label class="sapce">Qualification: </label> <?php echo $res->job_education; ?><br><label class="sapce">Experience: </label> <?php echo $res->job_experience; ?><br><label class="sapce">Company:</label> <?php echo $res->company_name; ?><br></a></div> ');
                             }
                             if('<?php echo $i==2; ?>')
                            {
-                                $("#job2").append('<span class="div_design"><?php echo $res->job_title;?></span><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 0.5px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
-                           }
+                                $("#job2").append('<div class="col-md-6 col-md-offset-3"><a href="<?php echo base_url();?>Home/job/<?php echo $res->job_id; ?>" ><label class="sapce">job name:</label> <?php echo $res->job_title; ?><br> <label class="sapce">Qualification: </label> <?php echo $res->job_education; ?><br><label class="sapce">Experience:</label> <?php $res->job_experience; ?><br><label class="sapce">Company:</label> <?php $res->company_name; ?><br></a></div> ');
+                            }
                             if('<?php echo $i==3; ?>')
                            {
-                                $("#job3").append('<span class="div_design"><?php echo $res->job_title;?></span><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 0.5px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
+                                $("#job3").append('<div class="col-md-6 col-md-offset-3"><a href="<?php echo base_url();?>Home/job/<?php echo $res->job_id; ?>" ><label class="sapce">job name:</label> <?php echo $res->job_title; ?><br> <label class="sapce">Qualification: </label> <?php echo $res->job_education; ?><br><label class="sapce">Experience:</label> <?php $res->job_experience; ?><br><label class="sapce">Company:</label> <?php $res->company_name; ?><br></a></div> ');
                             }
                             if('<?php echo $i==4; ?>')
                            {
-                                $("#job4").append('<span class="div_design"><?php echo $res->job_title;?></span><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 0.5px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
-                            }
-                            if('<?php echo $i==5; ?>')
-                           {
-                                $("#job5").append('<span class="div_design"><?php echo $res->job_title;?></span><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 0.5px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
+                                $("#job4").append('<div class="col-md-6 col-md-offset-3"><a href="<?php echo base_url();?>Home/job/<?php echo $res->job_id; ?>" ><label class="sapce">job name:</label> <?php echo $res->job_title; ?><br> <label class="sapce">Qualification: </label> <?php echo $res->job_education; ?><br><label class="sapce">Experience:</label> <?php $res->job_experience; ?><br><label class="sapce">Company:</label> <?php $res->company_name; ?><br></a></div> ');
                             }
                     </script>
 
