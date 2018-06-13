@@ -40,7 +40,7 @@
         <tr bgcolor="#338cbf" style="color:#fff">
           <th>ID</th>
           <th>NAME</th>        
-          <th>APPLIED FOR</th>
+          <th width="50px">APPLIED FOR</th>
           <th>CURRENT COMPANY</th>
           <th>DESIGNATION</th>
           <th>EXPERIENCE</th>
@@ -80,7 +80,7 @@
                                         <td><?php echo $res->member_mobile;?></td>
                                         <?php $education=$this->Educations_model->get_education_by_member($res->member_id);?>
                                         <td><?php foreach($education as $edu){ echo $edu->education_institute_name."<br>";}?></td>
-                                        <td><?php foreach($education as $edu){echo $edu->education_degree;} if(isset($edu->education_name)){echo "(".$edu->education_name.")";}?><br></td>
+                                        <td><?php foreach($education as $edu){echo $edu->education_degree; if(isset($edu->education_name)){echo "(".$edu->education_name.")";}} ?><br></td>
                                        <td><a href="<?php echo base_url().$res->member_resume; ?>" target="_blank">Resume</a></td>
                                        <td><?php echo $res->apply_at;?></td>
 <!--                                       <td>
