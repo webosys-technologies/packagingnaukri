@@ -228,12 +228,12 @@
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
               </a>
             </li>  
-             <li class="treeview">
+<!--             <li class="treeview">
               <a href="<?php echo base_url(); ?>recruiter/Applicants" >
                 <i class="fa fa-child"></i>
                 <span>Applicant Members</span>
               </a>
-            </li>
+            </li>-->
             <li class="treeview">
               <a href="<?php echo base_url(); ?>recruiter/Companies" >
                 <i class="fa fa-child"></i>

@@ -78,8 +78,9 @@
                                         <td><?php echo $res->member_city;?></td>
                                         <td><?php echo $res->member_email;?></td>
                                         <td><?php echo $res->member_mobile;?></td>
-                                        <td><?php echo $res->education_institute_name;?></td>
-                                        <td><?php echo $res->education_degree."(".$res->education_name.")";?></td>
+                                        <?php $education=$this->Educations_model->get_education_by_member($res->member_id);?>
+                                        <td><?php foreach($education as $edu){ echo $edu->education_institute_name."<br>";}?></td>
+                                        <td><?php foreach($education as $edu){echo $edu->education_degree;} if(isset($edu->education_name)){echo "(".$edu->education_name.")";}?></td>
                                        <td><a href="<?php echo base_url().$res->member_resume; ?>" target="_blank">Resume</a></td>
                                        <td><?php echo $res->apply_at;?></td>
 <!--                                       <td>

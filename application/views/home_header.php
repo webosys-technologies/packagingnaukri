@@ -43,10 +43,7 @@
             #footer{
                 padding:0px;
             }
-/*            #nav_header{
-                padding:12px;
-            }
-           */
+
            
            a:active { 
     background-color: yellow;
@@ -120,7 +117,7 @@
 
     .slick-prev:before,
     .slick-next:before {
-      color: black;
+      color: green;
     }
 
 
@@ -147,9 +144,9 @@
     </div>
          <div class="col-md-2 col-md-offset-7" style="padding-top:6px">
               <!--<a href="#" class="fa fa-google icon"></a>&nbsp;-->
-   <a href="#" class="fa fa-facebook icon"></a>  &nbsp;
+   <a href="https://www.facebook.com/packagingnaukri" class="fa fa-facebook icon"></a>  &nbsp;
    <!--<a href="#" class="fa fa-skype icon"></a>&nbsp;-->
-   <a href="#" class="fa fa-linkedin icon"></a>
+   <a href="https://www.linkedin.com/company/www-packagingnaukri-com" class="fa fa-linkedin icon"></a>
     </div>
     </div>
 	
@@ -298,9 +295,17 @@
   autoplaySpeed: 2000,
       });
       
+      
+       $(".logoes").slick({
+        slidesToShow: 3,
+  slidesToScroll: 1,
+//  autoplay: true,
+//  autoplaySpeed: 2000,
+      });
+      
     });
-	
-	
+    
+   	
   function open_login()
   {
      $('#login_form')[0].reset(); 
@@ -374,26 +379,6 @@
     }
     $(document).ready(function() {
         
-  
-//$("#myModal").on("hidden.bs.modal", function () {
-//    alert();
-//  
-//          $('#login_form')[0].reset(); 
-//       $("#validation_error").html("");
-//       $("#email_err").html("");
-//       $("#password_err").html("");
-//});
-    
-
-        // $("#log").click(function(){
-      
-        // });
-       
-       
-       
-//        $("#myModal").on("hidden.bs.modal", function () {
-   
-// });
         
 
 $("#send_otp").click(function(){

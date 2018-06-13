@@ -75,11 +75,16 @@
           </div>: <span id="location" class="job_info"> <?php echo $job_info->job_city; ?> </span><br>
                     </div>
 
+           <script>
+//               $("#job_desc").text('');
+               
+           </script>
+          
           <div class="row">
             <div class="col-md-3">
                <label>Job Description </label>
                </div><div class="col-md-9 col-xs-9">
-               : <span id="job_desc" class="job_info"> <?php echo $job_info->job_description; ?> </span>
+               : <span id="job_desc" class="job_info">  <?php echo $job_info->job_description; ?>        </span>
                    </div>
                              </div>
 

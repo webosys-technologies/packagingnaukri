@@ -5,28 +5,7 @@
          
   
      </style>
-     
-    
-         
-<!--    <div class="banner-container"> 
-  	<div id="carousel" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carousel" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel" data-slide-to="1" ></li>
-    <li data-target="#carousel" data-slide-to="2"></li>
-  </ol>
-   Carousel items 
-  <div class="carousel-inner">
-    <div class="item active"><img src="<?php echo base_url(); ?>assets/images/a.jpg"  width="100%" height="50%" alt="banner" /></div>
-    <div class="item"><img src="<?php echo base_url(); ?>assets/images/b.jpg"  width="100%" height="50%" /></div>
-    <div class="item"><img src="<?php echo base_url(); ?>assets/images/c.jpg" width="100%" height="50%" alt="banner" /></div>
-  </div>
   
-   Carousel nav 
-  <a class="carousel-control left" href="#carousel" data-slide="prev">&lsaquo;</a>
-  <a class="carousel-control right" href="#carousel" data-slide="next">&rsaquo;</a>
-</div>	
-  </div>-->
      <style>
          .div_style{
              border-style:solid; 
@@ -84,6 +63,23 @@ To provide the right opportunity to the every qualified packaging professional, 
                     </div>
                     </div> <br><br>
              
+<!--  <section style="padding-top: 100px; padding-bottom: 100px;" class="logoes content">
+      <div>
+        <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px">   
+      </div>
+    <div >
+       <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px">
+    </div>
+    <div>
+       <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px">
+    </div>
+    <div>
+       <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px">
+    </div>
+      <div>
+          <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px"> 
+      </div>    
+  </section>  -->
            
 		
         </div>

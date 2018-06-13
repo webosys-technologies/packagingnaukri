@@ -40,13 +40,9 @@
     <hr style="border-top: 1px solid #ccc;">
     <section class="content">
         <div class="row">
-
-  <!--<button type="button" class="btn btn-primary">Open Modal</button>-->
-
-         <div class="col-md-4">
-    <!--<button class="btn btn-primary"  onclick="add_job()" data-toggle="tooltip" data-placement="bottom" title="Add Job">      <i class="glyphicon glyphicon-plus"></i> Add Job</button>-->
+          <div class="col-md-3">   
 <button type="button"  id="bt" class="btn btn-primary" onclick="add_job()"><i></i>Add Job</button>
-    </div>
+          </div>
     <div class="col-md-6">
          <?php
         $this->load->helper('form');
@@ -77,8 +73,44 @@
        
         </div>
         </div>
-    <br>
-   
+    <!--<br>-->
+   <div class="row">
+         <div class="col-md-offset-1 col-md-2">
+             <div class="form-group">
+         <label>Salary From:</label>
+         <select class="form-control" id="min" name="min">
+               <script>
+                               var sal = 0;
+                               var sal_end = 99;
+                                var options = "";
+                                for(var dim = sal ; dim <=sal_end; dim++){
+//                                    alert(dim);
+//                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                             $("#min").append('<option value="'+dim+' Members">'+ dim +" Members"+'</option>');
+                              }
+                               </script>
+         </select>         
+         </div>
+             </div>
+       <div class="col-md-2">
+             <div class="form-group">
+            <label>Salary To:</label>
+            <select class="form-control" id="max" name="max">
+               <script>
+                               var sal = 0;
+                               var sal_end = 99;
+                                var options = "";
+                                for(var dim = sal ; dim <=sal_end; dim++){
+//                                    alert(dim);
+//                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                             $("#max").append('<option value="'+dim+' Members">'+ dim +" Members"+'</option>');
+                              }
+                               </script>
+         </select>  
+            </div>
+             </div>
+   </div>
+        
 <div class="table-responsive">
     <table id="table_id" class="table table-bordered table-hover" cellspacing="0" width="100%">
       <thead>
@@ -147,10 +179,30 @@
   </div>
  <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
   <script type="text/javascript">
-      
-        
-  $(document).ready( function () {   
+  
+  $(document).ready( function () {
+       var table = $('#table_id').DataTable();     
+    // Event listener to the two range filtering inputs to redraw on input
+    $('#min ,#max').on('change', function() {
+        $.fn.dataTable.ext.search.push(
+       
+        function( settings, data, dataIndex ) {
+        var min = parseInt( $('#min').val(), 10 );
+        var max = parseInt( $('#max').val(), 10 );
+        var id = parseFloat( data[3] ) || 0; // use data for the age column
  
+        if ( ( isNaN( min ) && isNaN( max ) ) ||
+             ( isNaN( min ) && id <= max ) ||
+             ( min <= id   && isNaN( max ) ) ||
+             ( min <= id   && id <= max ) )
+        {
+            return true;
+        }
+        return false;
+        }
+        );
+        table.draw();
+    } );
                         if($("#jobdesc").length > 0){
                            $("#jobdesc").ckeditor();
                                  }
@@ -191,8 +243,9 @@ var user_type=el.val();
     
  });  
   
- 
   } );
+
+       
 
     $("#myName").on("keyup", function() {
     var value = $(this).val().toLowerCase();
@@ -235,10 +288,12 @@ var user_type=el.val();
         $("#job_err").html("");
         $("#qua_err").html("");
        
-      
+        CKEDITOR.instances.jobdesc.updateElement();
+        CKEDITOR.instances.jobdesc.getData(); 
+        
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
-
+     
       //Ajax Load data from ajax
       $.ajax({
         url : "<?php echo site_url('index.php/admin/Jobs/ajax_edit/')?>/" + id,
@@ -246,7 +301,7 @@ var user_type=el.val();
         dataType: "JSON",
         success: function(data)
         {     
-          
+             CKEDITOR.replace('jobdesc');
             $('[name="job_id"]').val(data.job_id);
             $('[name="jobtitle"]').val(data.job_title);
             alert(data.job_description);
@@ -280,8 +335,10 @@ var user_type=el.val();
 
 
     function save()
-    {
-        
+    {         
+        CKEDITOR.instances.jobdesc.updateElement();
+        CKEDITOR.instances.jobdesc.getData(); 
+//        alert( document.getElementById( 'jobdesc' ).html() );
         var data = new FormData(document.getElementById("form"));
       var url;
       if(save_method == 'add')
@@ -503,10 +560,8 @@ var user_type=el.val();
                                        <label>Job Description: (*)</label>
                                         <textarea value="" name="jobdesc" id="jobdesc"></textarea>
                                    <script>
-                               
-//                                CKEDITOR.instances.jobdesc.getData();
-
-                                          CKEDITOR.replace( 'jobdesc' );
+                                       CKEDITOR.replace( 'jobdesc' );
+                                                                                                                          
                                     </script>
                                     
                                         <span class="text-danger" id="password_err"></span>
