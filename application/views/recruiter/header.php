@@ -41,7 +41,7 @@
 
     <!-- Data tables.. -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
-    
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
     
     
     <style>

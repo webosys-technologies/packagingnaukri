@@ -44,7 +44,7 @@
  <!--<script src="<?php echo base_url("assets/js/jquery-3.2.1.min.js");?>"></script>-->
   
   <script src="<?php echo base_url("assets/js/bootstrap.min.js"); ?>"></script>
-   
+  <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script> 
     
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 

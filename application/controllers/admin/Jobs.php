@@ -61,7 +61,7 @@ class Jobs extends CI_Controller
         
         $form=$this->input->post();
        
-        echo $form['jobdesc'];
+//        echo $form['jobdesc'];
         
         if(!empty($form['jobtitle']))
         {

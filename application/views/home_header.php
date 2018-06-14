@@ -16,7 +16,7 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
 <link href='<?php echo base_url("assets/bootstrap/css/bootstrap.css"); ?>' rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="<?php echo base_url("assets/js/jQuery-2.1.4.min.js"); ?>"></script>
   <meta charset="UTF-8">

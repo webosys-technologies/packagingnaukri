@@ -74,7 +74,7 @@
         </div>
         </div>
     <!--<br>-->
-   <div class="row">
+<!--   <div class="row">
          <div class="col-md-offset-1 col-md-2">
              <div class="form-group">
          <label>Salary From:</label>
@@ -109,7 +109,7 @@
          </select>  
             </div>
              </div>
-   </div>
+   </div>--><br>
         
 <div class="table-responsive">
     <table id="table_id" class="table table-bordered table-hover" cellspacing="0" width="100%">
@@ -177,7 +177,7 @@
     
 </section>
   </div>
- <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+ 
   <script type="text/javascript">
   
   $(document).ready( function () {
@@ -203,9 +203,9 @@
         );
         table.draw();
     } );
-                        if($("#jobdesc").length > 0){
-                           $("#jobdesc").ckeditor();
-                                 }
+//                        if($("#jobdesc").length > 0){
+//                           $("#jobdesc").ckeditor();
+//                                 }
  
  
   $("#user_type").change(function() {
@@ -242,6 +242,8 @@ var user_type=el.val();
      }
     
  });  
+  
+  $("#jobdesc").ckeditor();
   
   } );
 
@@ -292,7 +294,7 @@ var user_type=el.val();
         CKEDITOR.instances.jobdesc.getData(); 
         
       save_method = 'update';
-     $('#form')[0].reset(); // reset form on modals
+      $('#form')[0].reset(); // reset form on modals
      
       //Ajax Load data from ajax
       $.ajax({
@@ -301,11 +303,11 @@ var user_type=el.val();
         dataType: "JSON",
         success: function(data)
         {     
-             CKEDITOR.replace('jobdesc');
+           CKEDITOR.instances.jobdesc.setData( data.job_description );
             $('[name="job_id"]').val(data.job_id);
             $('[name="jobtitle"]').val(data.job_title);
-            alert(data.job_description);
-            $('[name="jobdesc"]').val(data.job_description);
+//            alert(data.job_description);
+//            $('[name="jobdesc"]').val(data.job_description);
             $('[name="joblocation"]').val(data.job_city);
             $('[name="jobtype"]').val(data.job_type);
             if(data.job_salary){
@@ -449,9 +451,9 @@ var user_type=el.val();
                $("#eligibility").html(data.job_education);
                if(data.job_salary){
                        var s=data.job_salary.split(".");
-                        $("#salary").html(s[0]+" Lac "+s[1]+" Thousand ");
-                          
+                        $("#salary").html(s[0]+" Lac "+s[1]+" Thousand ");                          
                    }
+                   
                  $("#skills").html(data.job_skill_name);
                 
                  $("#experience").html(data.job_experience);
@@ -508,7 +510,9 @@ var user_type=el.val();
                                     </div>
                                                                        
                                 </div>
+                                    
                                      </div>
+                                    
                                     <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">

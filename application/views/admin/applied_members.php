@@ -35,12 +35,13 @@
      </div><br>
    
 <div class="table-responsive">
-    <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <table id="table_id" class="table table-striped table-bordered" width="100%" cellspacing="0">
       <thead>
+         
         <tr bgcolor="#338cbf" style="color:#fff">
           <th>ID</th>
           <th>NAME</th>        
-          <th width="50px">APPLIED FOR</th>
+          <th width="100px">APPLIED FOR</th>
           <th>CURRENT COMPANY</th>
           <th>DESIGNATION</th>
           <th>EXPERIENCE</th>

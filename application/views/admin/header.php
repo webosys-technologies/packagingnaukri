@@ -51,6 +51,7 @@
 </head>
 <script src="<?php echo base_url("assets/js/validation1.js"); ?>">
 </script>
+<script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
