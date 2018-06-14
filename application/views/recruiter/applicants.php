@@ -39,14 +39,20 @@
       <thead>
         <tr bgcolor="#338cbf" style="color:#fff">
           <th>ID</th>
-          <th>NAME</th>
+          <th>NAME</th>        
           <th>APPLIED FOR</th>
-<!--          <th>EMAIL</th>
-          <th>MOBILE</th>-->
-          <th>CITY</th>
+          <th>CURRENT COMPANY</th>
+          <th>DESIGNATION</th>
+          <th>EXPERIENCE</th>
+          <th>LOCATION</th>
+          <th>SALARY</th>
+           <th>CITY</th>
+           <th>EMAIL</th>
+          <th>MOBILE</th>
+          <th>INSTITUTE</th>
+          <th>QUALIFICATION</th>         
           <th>RESUME</th>
           <th>APPLY AT</th>
-          
           <th width='10px'>ACTION</th>
         </tr>
       </thead>
@@ -59,13 +65,23 @@
              if($res->member_status=='1'){?>
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->member_id; ?>" class="" ></td> --> 
                                         <td><?php echo $res->member_id;?></td>
-                                        <td><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
+                                        <td style="cursor:pointer;" title="member info" onclick="view_member(<?php echo $res->member_id;?>)"><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
                                         <td><?php echo $res->job_title; ?></td>
-                                       
-                                       <td><?php echo $res->member_city;?></td>
-                                       <td><?php if(!empty($res->member_resume)){?><a href="<?php echo base_url().$res->member_resume ?>" target="_blank">Resume</a> <?php }else{ echo "Not Uploaded"; }?></td>
+                                        <?php $emp=$this->Employments_model->get_employment(array('member_id'=>$res->member_id))?>
+                                        <td><?php echo $emp->employment_organization; ?></td>
+                                        <td><?php echo $emp->employment_designation; ?></td>
+                                        <td><?php echo $res->member_experience; ?></td>
+                                        <td><?php echo $emp->employment_city; ?></td>
+                                         <?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0' ){$sal=explode(".",$res->member_anual_salary);} ?>
+                                        <td><?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0'){echo $sal[0]." Lac ". $sal[1]." Thousand "; echo "PA";}  ?></td>
+                                        <td><?php echo $res->member_city;?></td>
+                                        <td><?php echo $res->member_email;?></td>
+                                        <td><?php echo $res->member_mobile;?></td>
+                                        <?php $education=$this->Educations_model->get_education_by_member($res->member_id);?>
+                                        <td><?php foreach($education as $edu){ echo $edu->education_institute_name."<br>";}?></td>
+                                        <td><?php foreach($education as $edu){echo $edu->education_degree; if(isset($edu->education_name)){echo "(".$edu->education_name.")";}} ?><br></td>
+                                       <td><a href="<?php echo base_url().$res->member_resume; ?>" target="_blank">Resume</a></td>
                                        <td><?php echo $res->apply_at;?></td>
-                                      
                                        <td>
                  
                   <button class="btn btn-info btn-xs" onclick="view_member(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Applicant Member"><i class="fa fa-eye"></i></button>

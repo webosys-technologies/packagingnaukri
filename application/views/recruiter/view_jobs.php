@@ -240,7 +240,8 @@ var user_type=el.val();
         $("#qua_err").html("");
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
-
+        CKEDITOR.instances.jobdesc.updateElement();
+        CKEDITOR.instances.jobdesc.getData(); 
       //Ajax Load data from ajax
       $.ajax({
         url : "<?php echo site_url('index.php/recruiter/Jobs/ajax_edit/')?>/" + id,
@@ -248,7 +249,7 @@ var user_type=el.val();
         dataType: "JSON",
         success: function(data)
         {     
-          
+             CKEDITOR.instances.jobdesc.setData( data.job_description );
             $('[name="job_id"]').val(data.job_id);
             $('[name="jobtitle"]').val(data.job_title);
             $('[name="jobdesc"]').val(data.job_description);
@@ -282,6 +283,8 @@ var user_type=el.val();
 
     function save()
     {
+        CKEDITOR.instances.jobdesc.updateElement();
+        CKEDITOR.instances.jobdesc.getData(); 
         
         var data = new FormData(document.getElementById("form"));
       var url;
@@ -505,8 +508,11 @@ function delete_menu(id)
                                 <div class="col-md-12">                                
                                     <div class="form-group">
                                        <label>Job Description: (*)</label>
-                                    <textarea cols="80" id="editor" class="form-control" name="jobdesc" rows="10"></textarea>
-                                        <span class="text-danger" id="password_err"></span>
+                                    <textarea cols="80" id="jobdesc" class="form-control" name="jobdesc" rows="10"></textarea>
+                                        <script>
+                                       CKEDITOR.replace( 'jobdesc' );
+                                                                                                                          
+                                    </script>
                                         
                                     </div>
                                    

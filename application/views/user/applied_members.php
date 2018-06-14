@@ -38,17 +38,23 @@
     <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
       <thead>
         <tr bgcolor="#338cbf" style="color:#fff">
-          <th>ID</th>
-          <th>NAME</th>
-          <!--<th>EMAIL</th>-->
-          <th>QUALIFICATION</th>
+         <th>ID</th>
+          <th>NAME</th>        
           <th>APPLIED FOR</th>
-          <!--<th>RESUME</th>-->
-          <th>MOBILE</th>
+          <th>CURRENT COMPANY</th>
+          <th>DESIGNATION</th>
+          <th>EXPERIENCE</th>
+          <th>LOCATION</th>
+          <th>SALARY</th>
           <th>CITY</th>
+          <th>EMAIL</th>
+          <th>MOBILE</th>
+          <th>INSTITUTE</th>
+          <th>QUALIFICATION</th>         
+          <th>RESUME</th>
           <th>APPLY AT</th>
-          <!--<th>STATUS</th>-->
-<th width="25px">ACTION</th>
+          <th width='10px'>ACTION</th>
+
         </tr>
       </thead>
       <tbody id="myTable">
@@ -61,12 +67,21 @@
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->member_id; ?>" class="" ></td> --> 
                                         <td><?php echo $res->member_id;?></td>
                                         <td style="cursor:pointer;" title="member info" onclick="view_member(<?php echo $res->member_id;?>)"><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
-                                         <!--<td><?php echo $res->member_email;?></td>-->
-                                        <td><?php echo $res->education_degree."(".$res->education_name.")";?></td>
                                         <td><?php echo $res->job_title; ?></td>
-                                        <td><a href="<?php echo base_url().$res->member_resume; ?>" target="_blank">Resume</a></td>
-                                       <!--<td><?php echo $res->member_mobile;?></td>-->
-                                       <td><?php echo $res->member_city;?></td>
+                                        <?php $emp=$this->Employments_model->get_employment(array('member_id'=>$res->member_id))?>
+                                        <td><?php echo $emp->employment_organization; ?></td>
+                                        <td><?php echo $emp->employment_designation; ?></td>
+                                        <td><?php echo $res->member_experience; ?></td>
+                                        <td><?php echo $emp->employment_city; ?></td>
+                                         <?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0' ){$sal=explode(".",$res->member_anual_salary);} ?>
+                                        <td><?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0'){echo $sal[0]." Lac ". $sal[1]." Thousand "; echo "PA";}  ?></td>
+                                        <td><?php echo $res->member_city;?></td>
+                                        <td><?php echo $res->member_email;?></td>
+                                        <td><?php echo $res->member_mobile;?></td>
+                                        <?php $education=$this->Educations_model->get_education_by_member($res->member_id);?>
+                                        <td><?php foreach($education as $edu){ echo $edu->education_institute_name."<br>";}?></td>
+                                        <td><?php foreach($education as $edu){echo $edu->education_degree; if(isset($edu->education_name)){echo "(".$edu->education_name.")";}} ?><br></td>
+                                       <td><a href="<?php echo base_url().$res->member_resume; ?>" target="_blank">Resume</a></td>
                                        <td><?php echo $res->apply_at;?></td>
 <!--                                       <td>
                                            <?php 
@@ -99,7 +114,7 @@
 
   <script type="text/javascript">
   $(document).ready( function () { 
-  
+       $('#table_id').DataTable();
   });  
  
  
@@ -153,7 +168,7 @@
         });
 
       }
-      
+           
       </script>
 
     

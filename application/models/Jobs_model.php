@@ -189,9 +189,10 @@ class Jobs_model extends CI_Model
      {
          $this->db->from('jobs as job');
           $this->db->order_by('job_id','desc');
-          $this->db->limit('4');
+          $this->db->limit('5');
          $this->db->join('recruiters as rec','rec.recruiter_id=job.recruiter_id','LEFT');
         $this->db->join('companies as comp','comp.company_id=job.company_id','LEFT');
+        $this->db->where('job.job_status','1');
         $res=$this->db->get();
        
          return $res->result();

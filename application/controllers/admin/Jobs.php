@@ -60,9 +60,9 @@ class Jobs extends CI_Controller
     {
         
         $form=$this->input->post();
-        echo $form['jobdesc'];
+       
+//        echo $form['jobdesc'];
         
-//         CKEDITOR.instances.editor1.getData();
         if(!empty($form['jobtitle']))
         {
        if($form['company']!='-- Select Company --')
