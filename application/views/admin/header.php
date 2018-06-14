@@ -201,12 +201,19 @@
           </a>
         </li>
 
-         <li>
-          <a href="<?php echo base_url(); ?>admin/System">
-            <i class="fa fa-users"></i> <span>System</span>
+         
+        <li class=" treeview">
+          <a href="<?php echo base_url(); ?>admin/System/index">
+            <i class="fa fa-folder"></i> <span>System</span>
             <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url(); ?>admin/System/index"><i class="fa fa-circle-o"></i>Packaging</a></li>
+            <li><a href="<?php echo base_url(); ?>admin/System/printing"><i class="fa fa-circle-o"></i> Printing</a></li>
+            <li><a href="<?php echo base_url(); ?>admin/System/plastic"><i class="fa fa-circle-o"></i>Plastic</a></li>
+             </ul>
         </li>
        
 

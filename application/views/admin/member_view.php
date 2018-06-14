@@ -270,6 +270,7 @@ function view_member(id)
         success: function(data)
         {          
           // alert();
+            $('#source').html(data.source);
             $('#fname').html(data.member_fname);
             $('#lname').html(data.member_lname); 
             $('#email').html(data.member_email);
@@ -349,7 +350,7 @@ function view_member(id)
         dataType: "JSON",
         success: function(data)
         {
-            // $("#append_city").remove();     
+            // $("#append_city").remove();    
             $('[name="member_id"]').val(data.member_id);
             $('[name="fname"]').val(data.member_fname);
             $('[name="lname"]').val(data.member_lname);
@@ -361,6 +362,8 @@ function view_member(id)
             $('[name="state"]').val(data.member_state);
             $('[name="status"]').val(data.member_status);
               $('.city').append('<option value="'+ data.member_city +'">' + data.member_city +'</option>');
+            $('[name="source"]').val(data.source);
+
               
             if(data.member_profile_pic)
             {
@@ -500,7 +503,20 @@ function view_member(id)
     			<div class="panel-body">
     				<form method="post" action="" id="form">
                                     <input type="hidden" value="" name="member_id">
-    				 <div class="row">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label>Source<span style="color: red">*</span></label>
+                                  <select name="source" class="form-control source">
+                                    <option>--Select Source--</option>
+                                    <option value="Packaging">Packaging</option>
+                                    <option value="Printing">Printing</option>
+                                    <option value="Plastic">Plastic</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+    				                 <div class="row">
                                 <div class="col-md-6  ">                                
                                     <div class="form-group">
                                         <label for="fname">First Name<span style="color:red">*</span></label>
@@ -656,6 +672,17 @@ function view_member(id)
                 <img src="" id="profile_pic" width="100px" height="100px">
               </div>
               <br>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Source</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>
+                    <div class="col-md-7">
+                      <span id="source" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
                 <div class="row">
                   <div class="form-group">
                     <div class="col-md-3">

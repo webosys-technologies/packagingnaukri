@@ -92,6 +92,7 @@ class Members extends CI_Controller
                         'member_state'          => $this->input->post('state'),
                         'member_address'        =>$this->input->post('address'),
                         'member_status'         =>$this->input->post('status'),
+                        'source'                =>$this->input->post('source'),
                           );
             
                        

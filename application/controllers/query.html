@@ -48,3 +48,20 @@ ALTER TABLE `institutes` ADD `institute_status` INT(10) NOT NULL AFTER `institut
 15)add company_id column in job_skills table;
 ALTER TABLE `jobs` ADD `job_skill_name` VARCHAR(255) NOT NULL AFTER `job_description`
 
+16)source in companies table
+ALTER TABLE `companies` ADD `source` VARCHAR(60) NOT NULL AFTER `company_created_at`
+
+17)source in jobs table
+ALTER TABLE `jobs` ADD `source` VARCHAR(60) NOT NULL AFTER `job_created_at`
+
+18)source in member table
+ALTER TABLE `members` ADD `source` VARCHAR(60) NOT NULL AFTER `member_created_at`
+
+19)source in recruiter table
+ALTER TABLE `recruiters` ADD `source` VARCHAR(60) NOT NULL AFTER `recruiter_created_at`
+
+20)source in system table
+ALTER TABLE `system` ADD `source` VARCHAR(60) NOT NULL AFTER `system_created_at`
+
+21) Plastic and Printing system details insertion
+INSERT INTO `system` (`system_id`, `user_id`, `system_name`, `system_description`, `system_type`, `system_nickname`, `system_logo`, `system_email`, `system_email2`, `system_phone`, `system_mobile`, `system_address`, `system_city`, `system_pincode`, `system_website`, `system_payment_gateway`, `system_merchant_id`, `system_merchant_name`, `system_created_at`, `source`, `system_status`) VALUES (NULL, '1', 'Printing Naukari', '', '', 'PRT', 'assets/images/pinting_logo.PNG', 'info@printingnaukari.com', 'admin@printingnaukari.com', '0123456789', '097669 59724', 'Warje', 'Pune', '123456', 'www.printingnaukari.com', '', '', '', '2018-06-14', 'Printing', '1'), (NULL, '1', 'Plastic naukari', '', '', 'PLT', '', 'info@plasticnaukari.com', 'admin@plasticnaukari.com', '0123456789', '097669 59724', 'Warje', 'Pune', '123456', 'www.plasticnaukari.com', '', '', '', '2018-06-14', 'Plastic', '1')

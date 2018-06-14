@@ -23,16 +23,45 @@ class System extends CI_Controller
 		
             $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
-            $result['system']=$this->System_model->get_info();
+            $system="Packaging";
+            $result['system']=$this->System_model->get_system_info($system);
+            
+            $this->load->view('admin/header',$result);
+            $this->load->view('admin/packaging_system',$result);
+            $this->load->view('admin/footer');
+	}
+
+	function printing()
+	{
+
+            $id=$this->session->userdata('admin_id');
+            $result['user_data']=get_user_info($id);
+            $system="Printing";
+            $result['system']=$this->System_model->get_system_info($system);
            
             $this->load->view('admin/header',$result);
-            $this->load->view('admin/system',$result);
+            $this->load->view('admin/printing_system',$result);
             $this->load->view('admin/footer');
+
+	}
+
+	function plastic()
+	{
+
+            $id=$this->session->userdata('admin_id');
+            $result['user_data']=get_user_info($id);
+            $system="Plastic";
+            $result['system']=$this->System_model->get_system_info($system);
+           
+            $this->load->view('admin/header',$result);
+            $this->load->view('admin/printing_system',$result);
+            $this->load->view('admin/footer');
+
 	}
 
 	function ajax_edit($id)
 	{
-            $result=$this->System_model->get_info($id);
+            $result=$this->System_model->getinfo_by_id($id);
             echo json_encode($result);
 
 	}
@@ -57,7 +86,7 @@ class System extends CI_Controller
 				'system_website' =>$form['website'],
 		);
 
-		$this->System_model->system_update(array('system_id'=>1),$data);
+		$this->System_model->system_update(array('system_id'=>$form['system_id']),$data);
 
 	//	$this->pic_upload($data);
 		echo json_encode(array('status'=>true));

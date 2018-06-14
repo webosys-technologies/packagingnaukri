@@ -56,8 +56,8 @@ class Recruiter extends CI_Controller
             'recruiter_state'          => $this->input->post('state'),
             'recruiter_gender'         => $this->input->post('gender'),
             'recruiter_created_at'     => date("Y-m-d "),
-            'recruiter_status'        => $this->input->post('status'),
-
+            'recruiter_status'         => $this->input->post('status'),
+            'source'                   =>$this->input->post('source'),
 
         );
 
@@ -112,6 +112,8 @@ class Recruiter extends CI_Controller
                         'recruiter_city'           => $this->input->post('city'),
                         'recruiter_state'          => $this->input->post('state'),
                         'recruiter_status'        => $this->input->post('status'),
+                        'source'                   =>$this->input->post('source'),
+
 
                     );
        
