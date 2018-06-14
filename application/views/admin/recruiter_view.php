@@ -476,7 +476,20 @@ function view_recruiter(id)
     			<div class="panel-body">
     				<form method="post" action="" id="form">
                                     <input type="hidden" name="recruiter_id" value="">
-    				 <div class="row">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label>Source<span style="color: red">*</span></label>
+                                  <select name="source" class="form-control">
+                                    <option value="">--Select Source--</option>
+                                    <option value="Packaging">Packaging</option>
+                                    <option value="Printing">Printing</option>
+                                    <option value="Plastic">Plastic</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+    				                <div class="row">
                                 <div class="col-md-6  ">                                
                                     <div class="form-group">
                                         <label for="fname">First Name<span style="color:red">*</span></label>
@@ -647,6 +660,17 @@ function view_recruiter(id)
                 <img src="" id="profile_pic" width="100px" height="100px">
               </div>
               <br>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label>Source</label>
+                    </div>
+                    <div class="col-md-1"><strong>:</strong></div>
+                    <div class="col-md-7">
+                      <span id="source" class="text_color"></span>
+                    </div>
+                  </div>
+                </div>
                 <div class="row">
                   <div class="form-group">
                     <div class="col-md-3">

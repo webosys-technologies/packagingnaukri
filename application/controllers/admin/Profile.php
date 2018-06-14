@@ -94,7 +94,7 @@ class Profile extends CI_Controller
                        }
                        else
                        {
-                        
+                              
                             $res=$this->User_model->get_user_by_id($id);
                             
                             if(file_exists($res->user_profile_pic))

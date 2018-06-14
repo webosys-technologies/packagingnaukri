@@ -180,7 +180,7 @@ $("#img").change(function (e) {
         dataType: "JSON",
         success: function(data)
         {     
-          
+            $('[name="system_id"]').val(data.system_id);
             $('[name="user_id"]').val(data.user_id);
             $('[name="name"]').val(data.system_name);
             $('[name="nick_name"]').val(data.system_nickname);
@@ -263,6 +263,7 @@ $("#img").change(function (e) {
                              <div class="form-group">
 
     					<div class="row">
+                              <input type="hidden" name="system_id">
                              <input type="hidden" name="user_id">
                                 <div class="col-md-6  ">                             
                                         <label for="name">System Name</label>
