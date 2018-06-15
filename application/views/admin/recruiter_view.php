@@ -115,7 +115,7 @@
                                            echo "Not Active";
                                        }
                                        ?></td>
-                                       <td><?php echo $res->source; ?></td>
+                                       <td><?php echo $res->recruiter_source; ?></td>
                                        <td>
 
                   <button class="btn btn-success btn-xs" onclick="edit_recruiter(<?php echo $res->recruiter_id; ?>)" data-toggle="tooltip" data-placement="bottom" title="Edit Recruiter"><i class="glyphicon glyphicon-pencil"></i></button>

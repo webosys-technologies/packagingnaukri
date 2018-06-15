@@ -157,7 +157,7 @@
                                            echo '<b style="color:red;">Closed</b>';
                                        }
                                        ?></td>
-                                       <td><?php echo $job->source ?></td>
+                                       <td><?php echo $job->job_source ?></td>
                                            
                 <td> <button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button> 
                
