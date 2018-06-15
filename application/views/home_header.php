@@ -138,7 +138,7 @@
          .div_style{
              border-style:solid; 
              background:white;
-             height:400px; 
+             height:430px; 
              /*width:400px;*/ 
              border-color: #ccc;
              border-width: 1px;
@@ -166,9 +166,9 @@
   <!--<div class="container">-->
   <nav class="">
   <!--<nav class="navbar navbar-default navbar-fixed-top navbar-expand-lg" id="nav_header">-->
-  <!--<nav class="navbar navbar-default navbar-static-top" id="nav_header">-->
+  <nav class="navbar navbar-default navbar-static-top" id="nav_header" style="background:#0461A8">
   <!--#0461A8-->
-  <div class="container-fluid"  style="background:#0461A8">
+  <!--<div class="container-fluid"  style="background:#0461A8">-->
      <!--Brand and toggle get grouped for better mobile display--> 
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -304,7 +304,7 @@
   centerPadding: '60px',
   slidesToShow: 3,
     autoplay: true,
-  autoplaySpeed: 2000,
+  autoplaySpeed: 2500,
   dots: true,
   responsive: [
     {
@@ -313,6 +313,7 @@
         arrows: false,
         centerMode: true,
         centerPadding: '40px',
+        centerMode: true,
         slidesToShow: 3
       }
     },
@@ -322,6 +323,7 @@
         arrows: false,
         centerMode: true,
         centerPadding: '40px',
+        centerMode: true,
         slidesToShow: 1
       }
     }
