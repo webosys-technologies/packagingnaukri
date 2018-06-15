@@ -21,7 +21,8 @@ class Profile extends CI_Controller
             $id=$this->session->userdata('recruiter_id');
              $result['data']=$this->Recruiters_model->get_by_id($id);            
             $result['recruiter_data']=$this->Recruiters_model->get_id($id);
-            $result['system']=$this->System_model->get_info();
+            $sys=$this->session->userdata('recruiter_source');
+            $result['system']=$this->System_model->get_system_info($sys);
            $result['states']=$this->Cities_model->getall_state(); 
 
        

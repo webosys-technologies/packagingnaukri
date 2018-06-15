@@ -253,7 +253,8 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                     'recruiter_lname' => $result->recruiter_lname,
                     'recruiter_email' => $result->recruiter_email,
                     'recruiter_mobile' => $result->recruiter_mobile,
-                    'recruiter_LoggedIn' => true
+                    'recruiter_source'   =>$result->recruiter_source,
+                    'recruiter_LoggedIn' => true,
                                     );
                                     
                     $this->session->set_userdata($sessionArray);  
@@ -277,6 +278,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                     'recruiter_lname' => $result->recruiter_lname,
                     'recruiter_email' => $result->recruiter_email,
                     'recruiter_mobile' => $result->recruiter_mobile,
+                    'recruiter_source'   =>$result->recruiter_source,
                     'recruiter_LoggedIn' => true
                                     );
                                     
@@ -323,6 +325,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                     'recruiter_lname' => $result->recruiter_lname,
                     'recruiter_email' => $result->recruiter_email,
                     'recruiter_mobile' => $result->recruiter_mobile,
+                    'recruiter_source'   =>$result->recruiter_source,
                     'recruiter_LoggedIn' => true
                                     );
                                     

@@ -31,8 +31,8 @@ class Jobs extends CI_Controller
     {      
             $id=$this->session->userdata('member_id');
             $result['member_data']=  get_member_info($id);
-            $result['system']=$this->System_model->get_info();
-                     
+             $sys=$this->session->userdata('member_source');          
+            $result['system']=$this->System_model->get_system_info($sys);
                   
              $this->load->view('member/header',$result);
              $this->load->view('member/jobs');
@@ -45,6 +45,8 @@ class Jobs extends CI_Controller
         $result['member_data']=  get_member_info($id);
         $result['saved']=$this->Saved_jobs_model->get_jobs_by_member($id);
         
+             $sys=$this->session->userdata('member_source');          
+            $result['system']=$this->System_model->get_system_info($sys);
         
         $this->load->view('member/header',$result);
         $this->load->view('member/saved_jobs',$result);
@@ -59,6 +61,8 @@ class Jobs extends CI_Controller
         
         $result['jobs']=$this->Applied_jobs_model->get_job_by_member($id);
        
+             $sys=$this->session->userdata('member_source');          
+            $result['system']=$this->System_model->get_system_info($sys);
          $this->load->view('member/header',$result);
         $this->load->view('member/applied_jobs',$result);
         $this->load->view('member/footer',$result);    
@@ -78,6 +82,8 @@ class Jobs extends CI_Controller
          $id=$this->session->userdata('member_id');
             $data['member_data']=  get_member_info($id);
             
+             $sys=$this->session->userdata('member_source');          
+            $data['system']=$this->System_model->get_system_info($sys);
                                 
         $form=$this->input->post();
         
@@ -122,6 +128,9 @@ class Jobs extends CI_Controller
     {
         $id=$this->session->userdata('member_id');
             $result['member_data']=  get_member_info($id);
+            
+             $sys=$this->session->userdata('member_source');          
+            $result['system']=$this->System_model->get_system_info($sys);
              $this->load->view('member/header',$result);
              $this->load->view('member/job_info');
              $this->load->view('member/footer',$result);
