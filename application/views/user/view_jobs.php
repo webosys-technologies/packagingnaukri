@@ -84,8 +84,9 @@
                                             <th>Qualification</th>
                                             <th>Experience</th>
                                             <th>Location</th>
-					    <th>Posted Date</th>
+					                                  <th>Posted Date</th>
                                             <th>Status</th>
+                                            <th>Source</th>
                                             <th>Action</th>
          
         </tr>
@@ -120,6 +121,7 @@
                                        }
                                        ?>  
                             </td>
+                            <td><?php echo $job->source ?></td>
                                            
                 <td><button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
                 
@@ -210,6 +212,7 @@ var user_type=el.val();
        dataType: "JSON",
        success: function(data)
        {
+                    $("#source").html(data.source);
                     $("#company_name").html(data.company_name);
                      $("#job_title").html(data.job_title);
 ////             $("#j_desc").html();
@@ -294,6 +297,7 @@ var user_type=el.val();
             $('[name="qualification"]').val(data.job_education);
             $('[name="experience"]').val(data.job_experience);
             $('[name="status"]').val(data.job_status);
+            $('[name="source"]').val(data.source);
            
            
                         
@@ -415,34 +419,53 @@ var user_type=el.val();
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header" style="background:#3c8dbc">
+        <div class="modal-header" style="background:#3c8dbc; color: white">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <center><h4 id="title" class="modal-title"></h4></center>
         </div>
         <div class="modal-body" id="modal_body">
          
             
-          	
-    		<!--<div class="panel panel-default">-->
-    			
-    			<div class="panel-body">
-    				<form method="post" action="" id="form">
+            
+        <!--<div class="panel panel-default">-->
+          
+          <div class="panel-body">
+            <form method="post" action="" id="form">
                                     <input type="hidden" value="" name="job_id">
-    				 <div class="row">
+                              <div class="row">
+                                <div class="col-md-8">                                
+                                    <div class="form-group">
+                                        <label>Source<span style="color: red">*</span></label>
+                                        <select name="source" class="form-control">
+                                            <option>--Select Source--</option>
+                                            <option value="Packaging">Packaging</option>
+                                            <option value="Printing">Printing</option>
+                                            <option value="Plastic">Plastic</option>
+                                          </select>
+                                        <span class="text-danger" id="source_err"></span>
+                                        
+                                    </div>
+                                                                       
+                                </div>
+                                    
+                              </div>
+                              <div class="row">
                                 <div class="col-md-12">                                
                                     <div class="form-group">
-                                        <label>Job Title: (*)</label>
+                                        <label>Job Title<span style="color: red">*</span></label>
                                     <input name="jobtitle" class="form-control" placeholder="Job Title" value="">
                                         <span class="text-danger" id="job_err"></span>
                                         
                                     </div>
                                                                        
                                 </div>
-                                     </div>
+                                    
+                              </div>
+                                    
                                     <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Company Name: (*)</label>
+                                        <label>Company Name<span style="color: red">*</span></label>
                                         <select name="company" class="form-control">
                                             <option>-- Select Company --</option>
                                             <?php
@@ -463,19 +486,19 @@ var user_type=el.val();
                             </div>
                                     
                                     <div class="row">
-                                <div class="col-md-6  ">                                
+                                <div class="col-md-6">                                
                                     <div class="form-group">
-                                        <label>Qualification: (*)</label>
+                                        <label>Qualification<span style="color: red">*</span></label>
                                     <input name="qualification" placeholder="Qualification" class="form-control" value="">
                                         <span class="text-danger" id="qua_err"></span>
-                                        
+                                                                               
                                     </div>
                                                                        
                                 </div>
                               
                                 <div class="col-md-6">                                
                                     <div class="form-group">
-                                       <label>Experience: (*)</label>
+                                       <label>Experience<span style="color: red">*</span></label>
                                        <input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">
                                         <span class="text-danger" id="exp_err"></span>
                                         
@@ -483,15 +506,18 @@ var user_type=el.val();
                                                                       
                                 </div>
                                         </div>
-                                    
+                                     
                                     <div class="row">
                                 <div class="col-md-12">                                
                                     <div class="form-group">
-                                       <label>Job Description: (*)</label>
-                                    <textarea cols="80" id="jobdesc" class="form-control" name="jobdesc" rows="10"></textarea>
-                                         <script>
-                                       CKEDITOR.replace( 'jobdesc' );                                                                                                                          
+                                       <label>Job Description<span style="color: red">*</span></label>
+                                        <textarea value="" name="jobdesc" id="jobdesc"></textarea>
+                                   <script>
+                                       CKEDITOR.replace( 'jobdesc' );
+                                                                                                                          
                                     </script>
+                                    
+                                        <span class="text-danger" id="password_err"></span>
                                         
                                     </div>
                                    
@@ -505,13 +531,13 @@ var user_type=el.val();
                                     
                      <div class="row">
                           <div class="col-md-6">
-                       <label>Job Location: (*)</label>
+                       <label>Job Location<span style="color: red">*</span></label>
                                     <input name="joblocation" placeholder="Job Location" class="form-control" value="">
                         <span class="text-danger" id="loc_err"></span>
 
-                    </div>    
-                         <div class="col-md-6">
-                       <label>Job Type: (*)</label>
+                    </div>   
+                          <div class="col-md-6">
+                       <label>Job Type<span style="color: red">*</span></label>
                                     <select name="jobtype" id="job_type" class="form-control" value="">
                                         <option value="Full Time">Full Time</option>
                                         <option value="Part Time">Part Time</option>
@@ -521,11 +547,11 @@ var user_type=el.val();
                         <span class="text-danger" id="gen_err"></span>
 
                     </div>  
-                    </div><br>
+                     </div><br>
                                     
                      <div class="row">
-                       <div class="col-md-3">
-                        <label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>
+                        <div class="col-md-3">
+                        <label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span><span style="color: red">*</span>
                          <select type="text" name="lacsalary" id="lacsalary" class="form-control">
                              <option value="0">0 Lac</option>
                            <script>
@@ -544,7 +570,7 @@ var user_type=el.val();
                                         
                     <div class="col-md-3" style="top-padding:15px"> 
                         <label class="form-label"></label> <span style="font-size:12px;"></span>
-                        <select type="text" id="thsalary" name="thsalary" class="form-control" style="">  
+                       <select type="text" id="thsalary" name="thsalary" class="form-control">  
                             <option value="0">0 Thousands</option>
                              <script>
                                var sal = 1;
@@ -559,32 +585,34 @@ var user_type=el.val();
                         </select>
                         <span class="text-danger" id="salary_error"><?php echo form_error('state'); ?></span>
                     </div> 
-                         <div class="col-md-6">
+                        
+                                <div class="col-md-6">
                                   <div class="form-group">
                                     <label>Status<span style="color: red">*</span></label>
                                      <select name="status" class="form-control" >
                                             <option value="1">Open</option>
-                                            <option value="0">Closed</option>
+                                            <option value="0">Close</option>
                                         </select>
                                   </div>
                                 </div>
-                    </div>                    
+                                  
+                    </div>
                      <div class="row">                         
                          <div class="col-md-12">
-                       <label>Job Skills: (*)</label>
+                       <label>Job Skills<span style="color: red">*</span></label>
                       <input name="skill" placeholder="Skill Name" id="skill" class="form-control" value="">
                         <span class="text-danger" id="gen_err"></span>
 
                     </div>  
                          </div>
                              
-    				
-    			</div>
+            
+          </div>
                     </form>
                             <!--</div>-->
-    			
-    		</div>         
-    	 <div class="modal-footer">
+          
+        </div>         
+       <div class="modal-footer">
              <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
           <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
         </div>
@@ -592,8 +620,6 @@ var user_type=el.val();
            
         </div>        
       </div>
-   
-
 
 
 <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -633,6 +659,11 @@ var user_type=el.val();
             <!--<img src="" height="50px" weight="150px"><br>-->                                   
           <h4 style="color:#5DADE2" id="job_title"></h4>
           <h5 id="company_name" class="job_info"></h5>
+          <div class="row">
+              <div class="col-md-3">
+          <label >Source </label>
+          </div>: <span id="source" class="job_info"> </span><br>
+          </div>
           <div class="row">
               <div class="col-md-3">
           <label >Eligibility </label>

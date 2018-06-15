@@ -80,6 +80,7 @@
                                             <th>Location</th>
                                             <th>Established</th>
                                             <th>Status</th>
+                                            <th>Source</th>
                                             <th style="width:75px">Action</th>
          
         </tr>
@@ -111,6 +112,7 @@
                                            echo "Not Active";
                                        }
                                        ?></td>
+                                       <td><?php echo $comp->source ?></td>
                                            
                 <td>  <button class="btn btn-success btn-xs" onclick="edit_company(<?php echo $comp->company_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
                   <button class="btn btn-info btn-xs" onclick="view_company(<?php echo $comp->company_id; ?>)" id="btn2" data-toggle="tooltip" data-placement="bottom" title="View Company"><i class="fa fa-eye"></i></button>
@@ -234,6 +236,7 @@ var user_type=el.val();
             $('[name="established"]').val(data.company_establish_in);
             $('[name="multinational"]').val(data.company_multinational);
             $('[name="status"]').val(data.company_status);
+            $('[name="source"]').val(data.source);
 
            
                         
@@ -354,6 +357,7 @@ var user_type=el.val();
        success: function(data)
        {
 //           alert(data.company_address);
+                 $("#source").html(data.source);
                  $("#company_name").html(data.company_name);
                  $("#company_type").html(data.company_type);
                   $("#establish").html(data.company_establish_in);
@@ -397,7 +401,20 @@ var user_type=el.val();
     			<div class="panel-body">
     				<form method="post" action="" id="form">
                                     <input type="hidden" value="" name="company_id">
-    				 <div class="row">
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label>Source<span style="color: red">*</span></label>
+                                          <select name="source" class="form-control">
+                                            <option>--Select Source--</option>
+                                            <option value="Packaging">Packaging</option>
+                                            <option value="Printing">Printing</option>
+                                            <option value="Plastic">Plastic</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </div>
+    				                 <div class="row">
                                 <div class="col-md-6">                                
                                     <div class="form-group">
                                         <label>Company Name</label><span style="color: red">*</span>
@@ -598,6 +615,12 @@ var user_type=el.val();
             <!--<img src="" height="50px" weight="150px"><br>-->                                   
           <h4 style="color:#5DADE2" id="company_name"></h4>
           
+          
+          <div class="row">
+              <div class="col-md-3">
+          <label >Source </label>
+          </div>: <span id="source" class="job_info"> </span><br>
+          </div>
           <div class="row">
               <div class="col-md-3">
           <label >Company Type </label>

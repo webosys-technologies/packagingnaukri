@@ -87,7 +87,7 @@
                                             <th>Established</th>
                                             <th>Status</th>
                                             <th>Source</th>
-                                            <th style="width:77px">Action</th>
+                                            <th style="width:90px">Action</th>
          
         </tr>
       </thead>
@@ -95,7 +95,6 @@
         <?php
           if (isset($companies)) {
             
-          print_r($companies);
          foreach($companies as $comp){
              ?>
                                      <tr>  
