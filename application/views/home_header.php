@@ -134,6 +134,17 @@
     .slick-current {
       /*opacity: 1;*/
     }
+   
+         .div_style{
+             border-style:solid; 
+             background:white;
+             height:430px; 
+             /*width:400px;*/ 
+             border-color: #ccc;
+             border-width: 1px;
+             padding: 5px;
+         }
+       
   </style>
 </head>
 <body>
@@ -155,9 +166,9 @@
   <!--<div class="container">-->
   <nav class="">
   <!--<nav class="navbar navbar-default navbar-fixed-top navbar-expand-lg" id="nav_header">-->
-  <!--<nav class="navbar navbar-default navbar-static-top" id="nav_header">-->
+  <nav class="navbar navbar-default navbar-static-top" id="nav_header" style="background:#0461A8">
   <!--#0461A8-->
-  <div class="container-fluid"  style="background:#0461A8">
+  <!--<div class="container-fluid"  style="background:#0461A8">-->
      <!--Brand and toggle get grouped for better mobile display--> 
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -288,13 +299,66 @@
   <script type="text/javascript">
     $(document).on('ready', function() {
      
-      $(".regular").slick({
-        slidesToShow: 4,
-  slidesToScroll: 1,
-  autoplay: true,
-  autoplaySpeed: 2000,
-      });
-      
+     $('.regular').slick({
+  centerMode: true,
+  centerPadding: '60px',
+  slidesToShow: 3,
+    autoplay: true,
+  autoplaySpeed: 2500,
+  dots: true,
+  responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        centerMode: true,
+        slidesToShow: 3
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        centerMode: true,
+        slidesToShow: 1
+      }
+    }
+  ]
+});
+     
+//      $(".regular").slick({
+//        slidesToShow: 4,
+//  slidesToScroll: 1,
+//  autoplay: true,
+//  autoplaySpeed: 2000,
+//  
+//  
+//    dots: true,
+//  infinite: true,
+//  cssEase: 'linear',
+////  variableWidth: true,
+//  variableHeight: true,
+//  mobileFirst: true,
+//  responsive: [{
+//    breakpoint: 1024,
+//    settings: {
+////      slidesToShow: 4,
+////      slidesToScroll: 1,
+//      centerMode: false
+//    }
+//  }]
+//      });
+//      
+//     document.getElementById('job1').style.width = 280 + "px";  
+//     document.getElementById('job2').style.width = 280 + "px";  
+//     document.getElementById('job3').style.width = 280 + "px";  
+//     document.getElementById('job4').style.width = 280 + "px";  
+//     document.getElementById('job5').style.width = 280 + "px";  
+//      
       
        $(".logoes").slick({
         slidesToShow: 3,

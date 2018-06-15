@@ -392,9 +392,9 @@ var title=el.val();
   
      $("#university").change(function() {
 
-
+alert();
     var el = $(this) ;
-$("#data_list").html("");
+$("#inst_name").val("");
     
 var title=el.val();
           
