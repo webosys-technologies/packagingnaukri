@@ -112,7 +112,7 @@
                                            echo "Not Active";
                                        }
                                        ?></td>
-                                       <td><?php echo $comp->source ?></td>
+                                       <td><?php echo $comp->company_source; ?></td>
                                            
                 <td>  <button class="btn btn-success btn-xs" onclick="edit_company(<?php echo $comp->company_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
                   <button class="btn btn-info btn-xs" onclick="view_company(<?php echo $comp->company_id; ?>)" id="btn2" data-toggle="tooltip" data-placement="bottom" title="View Company"><i class="fa fa-eye"></i></button>
@@ -237,7 +237,7 @@ var user_type=el.val();
             $('[name="established"]').val(data.company_establish_in);
             $('[name="multinational"]').val(data.company_multinational);
             $('[name="status"]').val(data.company_status);
-            $('[name="source"]').val(data.source);
+            $('[name="source"]').val(data.company_source);
 
            
                         
@@ -366,7 +366,7 @@ var user_type=el.val();
        success: function(data)
        {
 //           alert(data.company_address);
-                 $("#source").html(data.source);
+                 $("#source").html(data.company_source);
                  $("#company_name").html(data.company_name);
                  $("#company_type").html(data.company_type);
                   $("#establish").html(data.company_establish_in);
@@ -420,6 +420,7 @@ var user_type=el.val();
                                             <option value="Printing">Printing</option>
                                             <option value="Plastic">Plastic</option>
                                           </select>
+                                          <span class="text-danger" id="source_err"></span>
                                         </div>
                                       </div>
                                     </div>

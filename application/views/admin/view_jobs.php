@@ -306,7 +306,7 @@ var user_type=el.val();
         success: function(data)
         {     
            CKEDITOR.instances.jobdesc.setData( data.job_description );
-            $('[name="source"]').val(data.source);
+            $('[name="source"]').val(data.job_source);
             $('[name="job_id"]').val(data.job_id);
             $('[name="jobtitle"]').val(data.job_title);
 //            alert(data.job_description);
@@ -447,7 +447,7 @@ var user_type=el.val();
        dataType: "JSON",
        success: function(data)
        {
-                    $("#source").html(data.source);
+                    $("#source").html(data.job_source);
                     $("#company_name").html(data.company_name);
                      $("#job_title").html(data.job_title);
 ////             $("#j_desc").html();

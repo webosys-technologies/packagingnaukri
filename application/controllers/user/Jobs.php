@@ -47,6 +47,8 @@ class Jobs extends CI_Controller
     public function job_add()
     {
         $form=$this->input->post();
+        if(!empty($form['source'])&& $form['source']!="--Select Source--")
+      {
          if(!empty($form['jobtitle']))
         {
        if($form['company']!='-- Select Company --')
@@ -72,7 +74,7 @@ class Jobs extends CI_Controller
                    'job_created_at'=>date('Y-m-d'),
                    'job_status'=>$form['status'],
                    'job_skill_name'=>$form['skill'],
-                   'source'  =>$form['source'],
+                   'job_source'  =>$form['source'],
 
                    );
         
@@ -93,6 +95,9 @@ class Jobs extends CI_Controller
        }}else{
             echo json_encode(array('job_err'=>'Please Enter Job Title'));
         }
+        }else{
+           echo json_encode(array('source_err'=>'Select Source Name'));
+      }
     }
     
     public function applied_members($id)
@@ -130,6 +135,8 @@ class Jobs extends CI_Controller
          $form=$this->input->post();
         $job_id=$form['job_id'];       
         $id=$this->Companies_model->get_recruiter_by_company($form['company']);
+         if(!empty($form['source'])&& $form['source']!="--Select Source--")
+      {
        if(!empty($form['jobtitle']))
         {
        if($form['company']!='-- Select Company --')
@@ -153,7 +160,7 @@ class Jobs extends CI_Controller
                    'job_salary'=>$salary,
                    'job_skill_name'=>$form['skill'],
                    'job_status'=>$form['status'],
-                   'source'  =>$form['source'],
+                   'job_source'  =>$form['source'],
                    
 
         );
@@ -176,6 +183,9 @@ class Jobs extends CI_Controller
        }}else{
             echo json_encode(array('job_err'=>'Please Enter Job Title'));
         }
+         }else{
+           echo json_encode(array('source_err'=>'Select Source Name'));
+      }
          
     }
     

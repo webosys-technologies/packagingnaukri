@@ -36,6 +36,8 @@ class Companies extends CI_Controller
     public function company_add()
     {
         $form=$this->input->post();
+        if(!empty($form['source'])&& $form['source']!="--Select Source--")
+      {
       if(!empty($form['company']))
         {        
   if(!empty($form['state']) && $form['state']!="-- Select State --")
@@ -59,7 +61,7 @@ class Companies extends CI_Controller
                    'company_multinational'=>$form['mnc'],
                    'company_created_at'=>date('Y-m-d'),
                    'company_status'=>$form['status'],
-                   'source'  =>$form['source'],
+                   'company_source'  =>$form['source'],
         );
         
           $res=$this->Companies_model->company_add($data);
@@ -80,13 +82,18 @@ class Companies extends CI_Controller
               
            echo json_encode(array('company_err'=>'Please Enter Company Name'));
         }
+      }else{
+           echo json_encode(array('source_err'=>'Select Source Name'));
+      }
     }
     
     public function company_update()
     {
 //        echo $id;
          $form=$this->input->post();
-        $company_id=$form['company_id'];       
+        $company_id=$form['company_id']; 
+     if(!empty($form['source'])&& $form['source']!="--Select Source--")
+      {
        if(!empty($form['company']))
         {        
   if(!empty($form['state']) && $form['state']!="-- Select State --")
@@ -110,7 +117,7 @@ class Companies extends CI_Controller
                    'company_multinational'=>$form['mnc'],
                    'company_created_at'=>date('Y-m-d'),
                    'company_status'=>$form['status'],
-                   'source'  =>$form['source'],
+                   'company_source'  =>$form['source'],
                    
         );
          $result=$this->Companies_model->company_update(array('company_id' => $company_id),$data);
@@ -125,11 +132,12 @@ class Companies extends CI_Controller
           echo json_encode(array('state_err'=>'Please Select State'));
       
         }}
-        else{
-              
+        else{              
            echo json_encode(array('company_err'=>'Please Enter Company Name'));
         }
-        
+         }else{
+           echo json_encode(array('source_err'=>'Select Source Name'));
+      }
     }
     
     public function ajax_edit($id)

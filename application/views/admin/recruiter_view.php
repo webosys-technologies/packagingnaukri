@@ -238,7 +238,7 @@ function view_recruiter(id)
         dataType: "JSON",
         success: function(data)
         {          
-            $('#source').html(data.source);
+            $('#source').html(data.recruiter_source);
             $('#fname').html(data.recruiter_fname);
             $('#lname').html(data.recruiter_lname); 
             $('#email').html(data.recruiter_email);
@@ -329,7 +329,7 @@ function view_recruiter(id)
 //            $("#city").val(data.recruiter_city);
             $(".city").append('<option value="'+ data.recruiter_city +'">' + data.recruiter_city+'</option>');
             $('[name="state"]').val(data.recruiter_state);
-            $('[name="source"]').val(data.source);
+            $('[name="source"]').val(data.recruiter_source);
             $('[name="gender"]').val(data.recruiter_gender);
            if(data.recruiter_profile_pic)
             {

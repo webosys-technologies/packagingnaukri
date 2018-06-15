@@ -16,8 +16,7 @@ class Members extends CI_Controller
 	}
 
 	public function index()
-    {
-                 
+    {                 
             $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
             $result['members']=$this->Members_model->getall_members();
@@ -26,9 +25,7 @@ class Members extends CI_Controller
             
             $this->load->view('admin/header',$result);
             $this->load->view('admin/member_view',$result);
-            $this->load->view('admin/footer');
-
-        
+            $this->load->view('admin/footer');       
     
     }
     

@@ -121,7 +121,7 @@
                                        }
                                        ?>  
                             </td>
-                            <td><?php echo $job->source ?></td>
+                            <td><?php echo $job->job_source ?></td>
                                            
                 <td><button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
                 
@@ -212,7 +212,7 @@ var user_type=el.val();
        dataType: "JSON",
        success: function(data)
        {
-                    $("#source").html(data.source);
+                    $("#source").html(data.job_source);
                     $("#company_name").html(data.company_name);
                      $("#job_title").html(data.job_title);
 ////             $("#j_desc").html();
@@ -299,7 +299,7 @@ var user_type=el.val();
             $('[name="qualification"]').val(data.job_education);
             $('[name="experience"]').val(data.job_experience);
             $('[name="status"]').val(data.job_status);
-            $('[name="source"]').val(data.source);
+            $('[name="source"]').val(data.job_source);
            
            
                         
