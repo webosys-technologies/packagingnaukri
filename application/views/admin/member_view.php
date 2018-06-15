@@ -97,6 +97,8 @@
           <th>CITY</th>
           <th>CREATED AT</th>
           <th>STATUS</th>
+          <th>SOURCE</th>
+
 
           <th style="width:80px;">ACTION
           </p></th>
@@ -126,6 +128,7 @@
                                            echo "Not Active";
                                        }
                                        ?></td>
+                                       <td><?php echo $res->source; ?></td>
                                        <td>
                   <button class="btn btn-success btn-xs" onclick="edit_member(<?php echo $res->member_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Member"><i class="glyphicon glyphicon-pencil"></i></button>
                   <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $res->member_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Member"><i class="glyphicon glyphicon-trash"></i></button>

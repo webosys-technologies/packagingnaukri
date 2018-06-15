@@ -84,6 +84,7 @@
           <th>PASSWORD</th>
           <th>CREATED AT</th>
           <th>STATUS</th>
+          <th>SOURCE</th>
           <!--class=" badge bg-yellow"-->
 
           <th style="width:75px;">ACTION
@@ -114,12 +115,13 @@
                                            echo "Not Active";
                                        }
                                        ?></td>
+                                       <td><?php echo $res->source; ?></td>
                                        <td>
 
                   <button class="btn btn-success btn-xs" onclick="edit_recruiter(<?php echo $res->recruiter_id; ?>)" data-toggle="tooltip" data-placement="bottom" title="Edit Recruiter"><i class="glyphicon glyphicon-pencil"></i></button>
                   <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $res->recruiter_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Recruiter"><i class="glyphicon glyphicon-trash"></i></button>
                  
-                  <button class="btn btn-warning btn-xs" onclick="view_recruiter(<?php echo $res->recruiter_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Recruiter"><i class="fa fa-eye"></i></button>
+                  <button class="btn btn-info btn-xs" onclick="view_recruiter(<?php echo $res->recruiter_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Recruiter"><i class="fa fa-eye"></i></button>
 
                 </td>
               </tr>
@@ -236,6 +238,7 @@ function view_recruiter(id)
         dataType: "JSON",
         success: function(data)
         {          
+            $('#source').html(data.source);
             $('#fname').html(data.recruiter_fname);
             $('#lname').html(data.recruiter_lname); 
             $('#email').html(data.recruiter_email);
@@ -324,7 +327,7 @@ function view_recruiter(id)
 //            $("#city").val(data.recruiter_city);
             $(".city").append('<option value="'+ data.recruiter_city +'">' + data.recruiter_city+'</option>');
             $('[name="state"]').val(data.recruiter_state);
-            alert(data.recruiter_gender);
+            $('[name="source"]').val(data.source);
             $('[name="gender"]').val(data.recruiter_gender);
            if(data.recruiter_profile_pic)
             {

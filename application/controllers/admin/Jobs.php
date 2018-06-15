@@ -32,29 +32,7 @@ class Jobs extends CI_Controller
        
     }
     
-    function test()
-    {
-//        $data=$this->Jobs_model->getall_jobs();
-//        print_r($data);
-//        echo"<br><br>";
-//        
-//        print_r(get_user_info(1));
-//        
-//        echo"<br><br>";
-//        foreach ($data as $d)
-//        {
-//            print_r($d);
-//        }
-//        echo"<br><br>";
-//        $s=array('name1'=>"suraj",'name2'=>'pawan');
-//        echo $s['name1'];
-        
-    }
     
-    public function view_jobs()
-    {        
-            
-    }
     
     public function job_add()
     {
@@ -89,6 +67,7 @@ class Jobs extends CI_Controller
                    'job_created_at'=>date('Y-m-d'),
                    'job_status'=>$form['status'],
                    'job_skill_name' => $form['skill'],
+                   'source'         => $form['source'],
                    );
         
           $res=$this->Jobs_model->job_add($data);
@@ -140,6 +119,8 @@ class Jobs extends CI_Controller
                    'job_salary'=>$salary,
                    'job_status'=>$form['status'],
                    'job_skill_name' => $form['skill'],
+                   'source'         => $form['source'],
+                   
         );
         
          $result=$this->Jobs_model->update_job($data,$job_id);

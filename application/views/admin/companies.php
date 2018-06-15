@@ -86,6 +86,7 @@
                                             <th>Location</th>
                                             <th>Established</th>
                                             <th>Status</th>
+                                            <th>Source</th>
                                             <th style="width:77px">Action</th>
          
         </tr>
@@ -94,7 +95,7 @@
         <?php
           if (isset($companies)) {
             
-          
+          print_r($companies);
          foreach($companies as $comp){
              ?>
                                      <tr>  
@@ -117,6 +118,7 @@
                                            echo "Not Active";
                                        }
                                        ?></td>
+                                       <td><?php echo $comp->source ; ?></td>
                                            
                 <td>  <button class="btn btn-success btn-xs" onclick="edit_company(<?php echo $comp->company_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Add Company"><i class="glyphicon glyphicon-pencil"></i></button>
                      <button class="btn btn-info btn-xs" onclick="view_company(<?php echo $comp->company_id; ?>)" id="btn2" data-toggle="tooltip" data-placement="bottom" title="View Company"><i class="fa fa-eye"></i></button>
@@ -262,6 +264,7 @@ var user_type=el.val();
             $('[name="established"]').val(data.company_establish_in);
             $('[name="multinational"]').val(data.company_multinational);
             $('[name="status"]').val(data.company_status);
+            $('[name="source"]').val(data.source);
             
             
            
@@ -393,6 +396,8 @@ function delete_logo(id)
        success: function(data)
        {
 //           alert(data.company_address);
+
+                 $("#source").html(data.source);
                  $("#company_name").html(data.company_name);
                  $("#company_type").html(data.company_type);
                   $("#establish").html(data.company_establish_in);
@@ -439,7 +444,20 @@ function delete_logo(id)
     			<div class="panel-body">
     				<form method="post" action="" id="form">
                                     <input type="hidden" value="" name="company_id">
-    				 <div class="row">
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label>Source<span style="color: red">*</span></label>
+                                          <select name="source" class="form-control">
+                                            <option>--Select Source--</option>
+                                            <option value="Packaging">Packaging</option>
+                                            <option value="Printing">Printing</option>
+                                            <option value="Plastic">Plastic</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </div>
+    				                <div class="row">
                                 <div class="col-md-6">                                
                                     <div class="form-group">
                                         <label>Company Name</label><span style="color: red">*</span>
@@ -649,6 +667,12 @@ function delete_logo(id)
            <img src="" width="150px" id="comp_logo" height="50px"><br>                                
           <h4 style="color:#5DADE2" id="company_name"></h4>
           
+          <div class="row">
+              <div class="col-md-3">
+          <label >Source </label>
+          </div>: <span id="source" class="job_info"> </span><br>
+          </div>
+
           <div class="row">
               <div class="col-md-3">
           <label >Company Type </label>
