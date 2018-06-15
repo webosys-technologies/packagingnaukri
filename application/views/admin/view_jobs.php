@@ -74,7 +74,7 @@
         </div>
         </div>
     <!--<br>-->
-<!--   <div class="row">
+   <div class="row">
          <div class="col-md-offset-1 col-md-2">
              <div class="form-group">
          <label>Salary From:</label>
@@ -109,7 +109,8 @@
          </select>  
             </div>
              </div>
-   </div>--><br>
+   </div>
+<br>
         
 <div class="table-responsive">
     <table id="table_id" class="table table-bordered table-hover" cellspacing="0" width="100%">
