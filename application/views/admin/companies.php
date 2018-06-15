@@ -265,7 +265,7 @@ var user_type=el.val();
             $('[name="established"]').val(data.company_establish_in);
             $('[name="multinational"]').val(data.company_multinational);
             $('[name="status"]').val(data.company_status);
-            $('[name="source"]').val(data.source);
+            $('[name="source"]').val(data.company_source);
             
             
            
@@ -406,7 +406,7 @@ function delete_logo(id)
        {
 //           alert(data.company_address);
 
-                 $("#source").html(data.source);
+                 $("#source").html(data.company_source);
                  $("#company_name").html(data.company_name);
                  $("#company_type").html(data.company_type);
                   $("#establish").html(data.company_establish_in);

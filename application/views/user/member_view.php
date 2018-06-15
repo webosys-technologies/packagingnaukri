@@ -273,7 +273,7 @@ function view_member(id)
         success: function(data)
         {          
           // alert();
-            $('#source').html(data.source);
+            $('#source').html(data.member_source);
             $('#fname').html(data.member_fname);
             $('#lname').html(data.member_lname); 
             $('#email').html(data.member_email);
@@ -365,7 +365,7 @@ function view_member(id)
             $('[name="state"]').val(data.member_state);
             $('[name="status"]').val(data.member_status);
               $('.city').append('<option value="'+ data.member_city +'">' + data.member_city +'</option>');
-            $('[name="source"]').val(data.source);
+            $('[name="source"]').val(data.member_source);
 
               
             if(data.member_profile_pic)
