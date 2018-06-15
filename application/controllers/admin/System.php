@@ -33,7 +33,7 @@ class System extends CI_Controller
 
 	function printing()
 	{
-
+                echo base_url();
             $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
             $system="Printing";

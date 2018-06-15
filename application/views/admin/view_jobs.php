@@ -109,7 +109,8 @@
          </select>  
             </div>
              </div>
-   </div>--><br>
+   </div>-->
+<br>
         
 <div class="table-responsive">
     <table id="table_id" class="table table-bordered table-hover" cellspacing="0" width="100%">

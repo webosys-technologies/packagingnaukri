@@ -388,7 +388,16 @@ a:link, a:visited{
                                 <input type="checkbox" class="star" id='save<?php echo $job->job_id;?>' value="<?php echo $job->job_id;?>" title="save job" name="save">
                               </div>  
                               <div class="col-md-3" style="padding-top: 10px;">
-                                  <span class="fa fa-inr"></span> <?php echo $job->job_salary;?> /-
+                                  <?php if(isset($job->job_salary)){
+                                                               $sal=explode('.', $job->job_salary);
+                                                               if(!empty($sal[0]) && $sal[0]!='0')
+                                                               {
+                                                                   $salary=$sal[0]." Lac ".$sal[1]." Thousand ";
+                                                               }else{
+                                                                    $salary=$sal[1]." Thousand ";
+                                                               }
+                                  }?>
+                                  <span class="fa fa-inr"> <?php echo $salary; ?></span>  /-
                               </div>
                               <div class="col-md-5" style="padding-top: 10px;">
                                   <span class="skill">Post By</span> <a href="#"><img src='<?php if(file_exists($job->recruiter_profile_pic)){echo base_url().$job->recruiter_profile_pic;}else{ echo base_url()."profile_pic/avatar.png";}?>' width="20px" height="20px"> <?php echo ucwords(strtolower($job->recruiter_fname))." ".ucwords(strtolower($job->recruiter_lname));?></a>
