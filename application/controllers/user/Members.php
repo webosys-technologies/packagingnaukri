@@ -54,6 +54,8 @@ class Members extends CI_Controller
                         'member_password'       => $this->input->post('password'),
                         'member_city'           => $this->input->post('city'),
                         'member_state'          => $this->input->post('state'),
+                        'source'                =>$this->input->post('source'),
+
                           );
             
                        

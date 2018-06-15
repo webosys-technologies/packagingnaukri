@@ -136,13 +136,13 @@
           </a>         
         </li>
      
-<!--        <li>
-          <a href="<?php echo base_url(); ?>user/Applicants">
-            <i class="fa fa-users"></i> <span>Applicant Members</span>
+       <li>
+          <a href="<?php echo base_url(); ?>user/Members">
+            <i class="fa fa-users"></i> <span>Manage Members</span>
             <span class="pull-right-container">
             </span>
           </a>
-        </li> -->
+        </li>
         <li>
           <a href="<?php echo base_url(); ?>user/Companies">
             <i class="fa fa-folder"></i> <span>Companies</span>            
