@@ -298,7 +298,7 @@
     dots: true,
   infinite: true,
   cssEase: 'linear',
-  variableWidth: true,
+//  variableWidth: true,
   variableHeight: true,
   mobileFirst: true,
   responsive: [{
