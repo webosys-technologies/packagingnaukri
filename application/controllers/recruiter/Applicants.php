@@ -22,7 +22,8 @@ class Applicants extends CI_Controller
             $id=$this->session->userdata('recruiter_id');
             $result['data']=get_recruiter_info($id);
             $result['members']=$this->Applied_jobs_model->get_member_job($id);
-           
+            $sys=$this->session->userdata('recruiter_source');
+            $result['system']=$this->System_model->get_system_info($sys);
                   
             $this->load->view('recruiter/header',$result);
             $this->load->view('recruiter/applicants',$result);

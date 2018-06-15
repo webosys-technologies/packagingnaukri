@@ -35,8 +35,8 @@ class Jobs extends CI_Controller
             $result['data']=$this->Recruiters_model->get_by_id($id);
             $data['companies']=$this->Companies_model->companies_by_recruiter($id);
             $data['jobs']=$this->Jobs_model->get_job_by_recruiterid($id);
-           $result['system']=$this->System_model->get_info();
-      
+            $sys=$this->session->userdata('recruiter_source');
+            $result['system']=$this->System_model->get_system_info($sys);
                   
              $this->load->view('recruiter/header',$result);
              $this->load->view('recruiter/view_jobs',$data);

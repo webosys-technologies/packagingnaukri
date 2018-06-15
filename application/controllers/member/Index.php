@@ -165,7 +165,8 @@ class Index extends CI_Controller
                     'member_lname' => $res->member_lname,
                     'member_email' => $res->member_email,
                      'member_mobile' => $res->member_mobile,
-                    'member_LoggedIn' => true
+                    'member_LoggedIn' => true,
+                    'member_source'    =>$res->member_source,
                                     );
                                     
                     $this->session->set_userdata($sessionArray);                      
@@ -203,7 +204,8 @@ class Index extends CI_Controller
                     'member_lname' => $res->member_lname,
                     'member_email' => $res->member_email,
                      'member_mobile' => $res->member_mobile,
-                    'member_LoggedIn' => true
+                    'member_LoggedIn' => true,
+                    'member_source'  =>$res->member_source,
                                     );
                                     
                     $this->session->set_userdata($sessionArray);                      
@@ -262,7 +264,7 @@ class Index extends CI_Controller
                     'member_email' => $result->member_email,
                      'member_mobile' => $result->member_mobile,
                     'member_LoggedIn' => true,
-                    'member_source'  =>$result->source,
+                    'member_source'  =>$result->member_source,
                                     );
                                     
                     $this->session->set_userdata($sessionArray);  
@@ -552,7 +554,8 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                     'member_email' => $res->member_email,
                     'member_course_id' => $res->course_id,
                     'center_id'=>$res->center_id,
-                    'member_LoggedIn' => true
+                    'member_LoggedIn' => true,
+                    'member_source'  =>$res->member_source,
                                     );                                  
                    
                   

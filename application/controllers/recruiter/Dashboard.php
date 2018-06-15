@@ -42,7 +42,8 @@ class Dashboard extends CI_Controller
              $result['posts']=$this->Jobs_model->get_job_by_recruiterid($id);
              $result['companies']=$this->Companies_model->companies_by_recruiter($id);
              $result['members']=$this->Applied_jobs_model->get_member_job($id);
-            $result['system']=$this->System_model->get_info();
+            $sys=$this->session->userdata('recruiter_source');
+            $result['system']=$this->System_model->get_system_info($sys);
            
 
              $this->load->view('recruiter/header',$result);
