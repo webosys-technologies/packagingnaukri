@@ -324,6 +324,7 @@ function view_member(id)
         $("#lname_err").html(""); 
         $("#city_err").html(""); 
         $("#state_err").html(""); 
+        $("#source_err").html(""); 
       $("#pic_err").html("");
       $('#photo').val("");
       $('#member_pic').attr('hidden',true);
@@ -337,6 +338,7 @@ function view_member(id)
         $("#lname_err").html(""); 
         $("#city_err").html(""); 
         $("#state_err").html(""); 
+        $("#source_err").html(""); 
         
        $("#pic_err").html("");
        $('#photo').val("");
@@ -445,6 +447,13 @@ function view_member(id)
               }else{
                    $("#lname_err").html(""); 
               }
+               if(json.source_err)
+              {
+                   $('[name=source]').focus();
+               $("#source_err").html(json.source_err); 
+              }else{
+                   $("#source_err").html(""); 
+              }
             
               if(json.success)
               {
@@ -516,7 +525,9 @@ function view_member(id)
                                     <option value="Printing">Printing</option>
                                     <option value="Plastic">Plastic</option>
                                   </select>
+                                   <span id="source_err" class="text-danger"></span>
                                 </div>
+                                 
                               </div>
                             </div>
     				                 <div class="row">

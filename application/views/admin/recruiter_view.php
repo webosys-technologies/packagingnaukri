@@ -285,6 +285,7 @@ function view_recruiter(id)
         $("#title").text("Add Recruiter");
         $('#myModal').modal('show');
          $("#pic_err").html("");
+                  $("#source_err").html(""); 
                  $("#remove_btn").html("");
                  $("#fname_err").html(""); 
                  $("#lname_err").html(""); 
@@ -301,6 +302,7 @@ function view_recruiter(id)
         $("#city_err").html(""); 
         $("#state_err").html(""); 
         $("#remove_btn").html("");
+         $("#source_err").html(""); 
          $('#recruiter_pic').attr('hidden',true);
          $("#pic_err").html("");
       save_method = 'update';
@@ -404,7 +406,14 @@ function view_recruiter(id)
               }else{
                    $("#lname_err").html(""); 
               }
-            
+              if(json.source_err)
+              {
+                   $('[name=source]').focus();
+               $("#source_err").html(json.source_err); 
+              }else{
+                   $("#source_err").html(""); 
+              }
+              
               if(json.status)
               {
               location.reload();// for reload a page
@@ -489,6 +498,7 @@ function view_recruiter(id)
                                     <option value="Printing">Printing</option>
                                     <option value="Plastic">Plastic</option>
                                   </select>
+                                  <span id="source_err" class="text-danger"></span>
                                 </div>
                               </div>
                             </div>

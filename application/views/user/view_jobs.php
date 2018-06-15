@@ -254,6 +254,7 @@ var user_type=el.val();
         $("#title").text("Add Job");
         $('#myModal').modal('show');
         
+         $("#source_err").html(""); 
          $("#loc_err").html("");
         $("#exp_err").html("");
         $("#comp_err").html("");
@@ -264,6 +265,7 @@ var user_type=el.val();
 
     function edit_job(id)
     {     
+         $("#source_err").html(""); 
        $("#loc_err").html("");
         $("#exp_err").html("");
         $("#comp_err").html("");
@@ -371,6 +373,14 @@ var user_type=el.val();
                 }else{
                     $("#job_err").html("");
                 }
+                
+                if(json.source_err)
+              {
+                   $('[name=source]').focus();
+               $("#source_err").html(json.source_err); 
+              }else{
+                   $("#source_err").html(""); 
+              }
                 
              if(json.success)
              {

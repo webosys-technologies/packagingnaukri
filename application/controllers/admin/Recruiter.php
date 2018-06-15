@@ -35,7 +35,8 @@ class Recruiter extends CI_Controller
      function recruiter_add()
     {
          $form=$this->input->post();
-        
+        if(!empty($form['source'])&& $form['source']!="--Select Source--")
+      {
           if(!empty($form['fname']))
         { 
            if(!empty($form['lname']))
@@ -85,13 +86,16 @@ class Recruiter extends CI_Controller
               
            echo json_encode(array('fname_err'=>'First Name Required'));
         }
-      
+      }else{
+           echo json_encode(array('source_err'=>'Select Source Name'));
+      }  
     }
    
     function recruiter_update()
     {
        $form=$this->input->post();
-        
+         if(!empty($form['source'])&& $form['source']!="--Select Source--")
+      {
          if(!empty($form['fname']))
         { 
            if(!empty($form['lname']))
@@ -142,7 +146,9 @@ class Recruiter extends CI_Controller
               
            echo json_encode(array('fname_err'=>'First Name Required'));
         }
-        
+      }else{
+           echo json_encode(array('source_err'=>'Select Source Name'));
+      } 
     }
     
      function photo_upload($rec_id)
