@@ -139,7 +139,7 @@
              border-style:solid; 
              background:white;
              height:400px; 
-             width:280px; 
+             /*width:400px;*/ 
              border-color: #ccc;
              border-width: 1px;
              padding: 5px;
@@ -300,18 +300,16 @@
     $(document).on('ready', function() {
      
       $(".regular").slick({
-       slidesToShow: 4,
+        slidesToShow: 4,
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 2000,
-  infinite: true,
-       
   
   
     dots: true,
   infinite: true,
   cssEase: 'linear',
-  variableWidth: true,
+//  variableWidth: true,
   variableHeight: true,
   mobileFirst: true,
   responsive: [{
@@ -319,7 +317,7 @@
     settings: {
 //      slidesToShow: 4,
 //      slidesToScroll: 1,
-      centerMode: true
+      centerMode: false
     }
   }]
       });
