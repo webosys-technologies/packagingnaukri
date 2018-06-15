@@ -191,6 +191,7 @@ var user_type=el.val();
 
     function add_company()
     {  
+         $("#source_err").html(""); 
          $('[name="city"]').html("");
         save_method="add";   
         $("#company_err").html(""); 
@@ -203,7 +204,7 @@ var user_type=el.val();
     }
 
     function edit_company(id)
-    {
+    {    $("#source_err").html(""); 
          $("#company_err").html(""); 
         $("#state_err").html(""); 
         $("#city_err").html(""); 
@@ -302,6 +303,14 @@ var user_type=el.val();
                $("#company_err").html(json.company_err); 
               }else{
                    $("#company_err").html(""); 
+              }
+              
+              if(json.source_err)
+              {
+                   $('[name=source]').focus();
+               $("#source_err").html(json.source_err); 
+              }else{
+                   $("#source_err").html(""); 
               }
                
             },

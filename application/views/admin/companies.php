@@ -225,6 +225,7 @@ var user_type=el.val();
        $("#state_err").html(""); 
        $("#city_err").html(""); 
        $("#company_err").html(""); 
+       $("#source_err").html(""); 
         $("#company_logo").prop('hidden',true);
         save_method="add";        
        $('#form')[0].reset();
@@ -238,6 +239,7 @@ var user_type=el.val();
         $("#state_err").html(""); 
         $("#city_err").html(""); 
       $("#remove_btn").html("");
+      $("#source_err").html(""); 
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
 
@@ -341,6 +343,14 @@ function delete_logo(id)
                $("#company_err").html(json.company_err); 
               }else{
                    $("#company_err").html(""); 
+              }
+              
+               if(json.source_err)
+              {
+                   $('[name=source]').focus();
+               $("#source_err").html(json.source_err); 
+              }else{
+                   $("#source_err").html(""); 
               }
             
               if(json.success)
@@ -454,6 +464,7 @@ function delete_logo(id)
                                             <option value="Printing">Printing</option>
                                             <option value="Plastic">Plastic</option>
                                           </select>
+                                          <span id="source_err" class="text-danger"></span>
                                         </div>
                                       </div>
                                     </div>

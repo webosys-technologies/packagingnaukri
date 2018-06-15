@@ -35,7 +35,8 @@ class Members extends CI_Controller
    function member_add()
    {
        $form=$this->input->post();
-       
+      if(!empty($form['source'])&& $form['source']!="--Select Source--")
+      {
       if(!empty($form['fname']))
         { 
            if(!empty($form['lname']))
@@ -67,13 +68,17 @@ class Members extends CI_Controller
               
         echo json_encode(array('fname_err'=>'First Name Required'));
         }
-             
+      }else{
+           echo json_encode(array('source_err'=>'Select Source Name'));
+      }    
            
         }
         
         function member_update()
         {
             $form=$this->input->post();
+             if(!empty($form['source'])&& $form['source']!="--Select Source--")
+          {
              if(!empty($form['fname']))
         { 
            if(!empty($form['lname']))
@@ -121,7 +126,9 @@ class Members extends CI_Controller
               
            echo json_encode(array('fname_err'=>'First Name Required'));
         }
-            
+          }else{
+           echo json_encode(array('source_err'=>'Select Source Name'));
+      } 
         }
         
          function ajax_edit($id)
