@@ -299,35 +299,64 @@
   <script type="text/javascript">
     $(document).on('ready', function() {
      
-      $(".regular").slick({
-        slidesToShow: 4,
-  slidesToScroll: 1,
-  autoplay: true,
+     $('.regular').slick({
+  centerMode: true,
+  centerPadding: '60px',
+  slidesToShow: 3,
+    autoplay: true,
   autoplaySpeed: 2000,
-  
-  
-    dots: true,
-  infinite: true,
-  cssEase: 'linear',
-//  variableWidth: true,
-  variableHeight: true,
-  mobileFirst: true,
-  responsive: [{
-    breakpoint: 1024,
-    settings: {
-//      slidesToShow: 4,
-//      slidesToScroll: 1,
-      centerMode: false
+  dots: true,
+  responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 3
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 1
+      }
     }
-  }]
-      });
-      
-     document.getElementById('job1').style.width = 280 + "px";  
-     document.getElementById('job2').style.width = 280 + "px";  
-     document.getElementById('job3').style.width = 280 + "px";  
-     document.getElementById('job4').style.width = 280 + "px";  
-     document.getElementById('job5').style.width = 280 + "px";  
-      
+  ]
+});
+     
+//      $(".regular").slick({
+//        slidesToShow: 4,
+//  slidesToScroll: 1,
+//  autoplay: true,
+//  autoplaySpeed: 2000,
+//  
+//  
+//    dots: true,
+//  infinite: true,
+//  cssEase: 'linear',
+////  variableWidth: true,
+//  variableHeight: true,
+//  mobileFirst: true,
+//  responsive: [{
+//    breakpoint: 1024,
+//    settings: {
+////      slidesToShow: 4,
+////      slidesToScroll: 1,
+//      centerMode: false
+//    }
+//  }]
+//      });
+//      
+//     document.getElementById('job1').style.width = 280 + "px";  
+//     document.getElementById('job2').style.width = 280 + "px";  
+//     document.getElementById('job3').style.width = 280 + "px";  
+//     document.getElementById('job4').style.width = 280 + "px";  
+//     document.getElementById('job5').style.width = 280 + "px";  
+//      
       
        $(".logoes").slick({
         slidesToShow: 3,
