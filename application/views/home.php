@@ -17,7 +17,7 @@
          }
          </style>
   <section class="regular slider content">
-      <div id="job1" class="div_style">
+      <div id="job1" class="box-xs div_style">
           
       </div>
     <div id="job2" class="div_style">
@@ -36,9 +36,9 @@
   
          
         
-        <div class="row" style="background:#F2F3F4">
+        <div class="row" id="content_body" style="background:#F2F3F4">
         <div class="container">        
-		<div class="col-md-9 col-md-offset-1">
+		<div class="col-md-9 col-xs-9 col-md-offset-1">
 		<h3 style="color:#02B645;">Enjoy building your career with lots of ready jobs!</h3>
 			<p>To provide the right opportunity to the every qualified packaging professional.</p>   
 		</div>  <br>

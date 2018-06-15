@@ -293,7 +293,29 @@
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 2000,
+  
+  
+    dots: true,
+  infinite: true,
+  cssEase: 'linear',
+  variableWidth: true,
+  variableHeight: true,
+  mobileFirst: true,
+  responsive: [{
+    breakpoint: 1024,
+    settings: {
+//      slidesToShow: 4,
+//      slidesToScroll: 1,
+      centerMode: false
+    }
+  }]
       });
+      
+     document.getElementById('job1').style.width = 280 + "px";  
+     document.getElementById('job2').style.width = 280 + "px";  
+     document.getElementById('job3').style.width = 280 + "px";  
+     document.getElementById('job4').style.width = 280 + "px";  
+     document.getElementById('job4').style.width = 280 + "px";  
       
       
        $(".logoes").slick({
