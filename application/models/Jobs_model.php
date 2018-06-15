@@ -8,7 +8,7 @@ class Jobs_model extends CI_Model
      public function getall_jobs()
      {
         $this->db->from('jobs as job');
-        $this->db->join('companies as camp','camp.company_id=job.company_id','LEFT');
+        $this->db->join('companies as camp','job.company_id=camp.company_id','LEFT');
         $res=$this->db->get();
         return $res->result();
      }

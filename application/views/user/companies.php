@@ -112,7 +112,7 @@
                                            echo "Not Active";
                                        }
                                        ?></td>
-                                       <td><?php echo $comp->source ?></td>
+                                       <td><?php echo $comp->company_source; ?></td>
                                            
                 <td>  <button class="btn btn-success btn-xs" onclick="edit_company(<?php echo $comp->company_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
                   <button class="btn btn-info btn-xs" onclick="view_company(<?php echo $comp->company_id; ?>)" id="btn2" data-toggle="tooltip" data-placement="bottom" title="View Company"><i class="fa fa-eye"></i></button>
@@ -420,6 +420,7 @@ var user_type=el.val();
                                             <option value="Printing">Printing</option>
                                             <option value="Plastic">Plastic</option>
                                           </select>
+                                          <span class="text-danger" id="source_err"></span>
                                         </div>
                                       </div>
                                     </div>

@@ -121,7 +121,7 @@
                                        }
                                        ?>  
                             </td>
-                            <td><?php echo $job->source ?></td>
+                            <td><?php echo $job->job_source ?></td>
                                            
                 <td><button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
                 
