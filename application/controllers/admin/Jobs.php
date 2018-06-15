@@ -67,7 +67,7 @@ class Jobs extends CI_Controller
                    'job_created_at'=>date('Y-m-d'),
                    'job_status'=>$form['status'],
                    'job_skill_name' => $form['skill'],
-                   'source'         => $form['source'],
+                   'job_source'         => $form['source'],
                    );
         
           $res=$this->Jobs_model->job_add($data);
@@ -119,7 +119,7 @@ class Jobs extends CI_Controller
                    'job_salary'=>$salary,
                    'job_status'=>$form['status'],
                    'job_skill_name' => $form['skill'],
-                   'source'         => $form['source'],
+                   'job_source'         => $form['source'],
                    
         );
         

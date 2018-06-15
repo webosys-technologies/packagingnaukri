@@ -64,7 +64,7 @@ class Members_model extends CI_Model
             'member_state'          => $this->input->post('state'),
             'member_created_at'     => date("Y-m-d "),
             'member_status'        => '1',
-            'source'                =>$this->input->post('source'),
+            'member_source'                =>$this->input->post('source'),
 
 
         );

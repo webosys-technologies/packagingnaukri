@@ -261,7 +261,8 @@ class Index extends CI_Controller
                     'member_lname' => $result->member_lname,
                     'member_email' => $result->member_email,
                      'member_mobile' => $result->member_mobile,
-                    'member_LoggedIn' => true
+                    'member_LoggedIn' => true,
+                    'member_source'  =>$result->source,
                                     );
                                     
                     $this->session->set_userdata($sessionArray);  

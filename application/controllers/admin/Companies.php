@@ -60,7 +60,7 @@ class Companies extends CI_Controller
                    'company_multinational'=>$form['mnc'],
                    'company_created_at'=>date('Y-m-d'),
                    'company_status'=>$form['status'],
-                   'source' =>$form['source'],
+                   'company_source' =>$form['source'],
         );
         
           $res=$this->Companies_model->company_add($data);
@@ -117,7 +117,7 @@ class Companies extends CI_Controller
                    'company_multinational'=>$form['mnc'],
                    'company_created_at'=>date('Y-m-d'),
                     'company_status'=>$form['status'],
-                    'source' =>$form['source'],
+                    'company_source' =>$form['source'],
         );
          $result=$this->Companies_model->company_update(array('company_id' => $company_id),$data);
         
