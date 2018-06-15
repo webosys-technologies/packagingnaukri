@@ -6,18 +6,9 @@
   
      </style>
   
-     <style>
-         .div_style{
-             border-style:solid; 
-             background:white;
-             height:400px; 
-             border-color: #ccc;
-             border-width: 1px;
-             padding: 5px;
-         }
-         </style>
+   
   <section class="regular slider content">
-      <div id="job1" class="box-xs div_style">
+      <div id="job1" class="div_style">
           
       </div>
     <div id="job2" class="div_style">

@@ -134,6 +134,17 @@
     .slick-current {
       /*opacity: 1;*/
     }
+   
+         .div_style{
+             border-style:solid; 
+             background:white;
+             height:400px; 
+             width:280px; 
+             border-color: #ccc;
+             border-width: 1px;
+             padding: 5px;
+         }
+       
   </style>
 </head>
 <body>
@@ -289,16 +300,18 @@
     $(document).on('ready', function() {
      
       $(".regular").slick({
-        slidesToShow: 4,
+       slidesToShow: 4,
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 2000,
+  infinite: true,
+       
   
   
     dots: true,
   infinite: true,
   cssEase: 'linear',
-//  variableWidth: true,
+  variableWidth: true,
   variableHeight: true,
   mobileFirst: true,
   responsive: [{
@@ -306,7 +319,7 @@
     settings: {
 //      slidesToShow: 4,
 //      slidesToScroll: 1,
-      centerMode: false
+      centerMode: true
     }
   }]
       });
@@ -315,7 +328,7 @@
      document.getElementById('job2').style.width = 280 + "px";  
      document.getElementById('job3').style.width = 280 + "px";  
      document.getElementById('job4').style.width = 280 + "px";  
-     document.getElementById('job4').style.width = 280 + "px";  
+     document.getElementById('job5').style.width = 280 + "px";  
       
       
        $(".logoes").slick({
