@@ -57,6 +57,7 @@ class Jobs extends CI_Controller
     {
         
          $id=$this->session->userdata('member_id');
+         $source=$this->session->userdata('member_source');
         $result['member_data']=  get_member_info($id);
         
         $result['jobs']=$this->Applied_jobs_model->get_job_by_member($id);
@@ -80,7 +81,7 @@ class Jobs extends CI_Controller
     function search_jobs()
     { $this->load->library('encryption');
          $id=$this->session->userdata('member_id');
-            $data['member_data']=  get_member_info($id);
+           $data['member_data']=  get_member_info($id);
             
              $sys=$this->session->userdata('member_source');          
             $data['system']=$this->System_model->get_system_info($sys);
@@ -109,7 +110,7 @@ class Jobs extends CI_Controller
         {
         $part=$form['temp'];
         }
-        
+        $form['source']=$data['system']->source;
         $result=$this->Jobs_model->search_job($form);
         if($result){
             $result['jobs']=$result;

@@ -275,7 +275,7 @@
               <a class="btn btn-info">
                   <span class="fa fa-google"></span> <span style="color:white">Sign in with Google</span>
   </a>
-              <a class="btn" style="background-color:3b5998">
+              <a class="btn" style="background-color:#3B5998;">
     <span class="fa fa-facebook"></span><span style="color:white"> Sign in with Facebook</span>
   </a>
            

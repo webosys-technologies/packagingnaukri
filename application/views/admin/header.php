@@ -216,6 +216,14 @@
             <li><a href="<?php echo base_url(); ?>admin/System/plastic"><i class="fa fa-circle-o"></i>Plastic</a></li>
              </ul>
         </li>
+        
+         <li>
+          <a href="<?php echo base_url(); ?>admin/Setting">
+            <i class="fa fa-users"></i> <span>Setting</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
        
 
 

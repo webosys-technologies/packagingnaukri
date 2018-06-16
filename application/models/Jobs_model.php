@@ -78,6 +78,7 @@ class Jobs_model extends CI_Model
            $this->db->like('job.job_salary',$form['salary']);
         $this->join_query();
         $this->db->where('job.job_status','1');
+         $this->db->where('job.job_source',$form['source']);
          
          $result=$this->db->get();
          return $result->result();
@@ -89,6 +90,7 @@ class Jobs_model extends CI_Model
            $this->db->like('job.job_experience',$form['exp']);
          $this->join_query();
         $this->db->where('job.job_status','1');
+         $this->db->where('job.job_source',$form['source']);
          
          $result=$this->db->get();
          return $result->result(); 
@@ -100,6 +102,7 @@ class Jobs_model extends CI_Model
            $this->db->like('job.job_experience',$form['exp']);
          $this->join_query();
         $this->db->where('job.job_status','1');
+        $this->db->where('job.job_source',$form['source']);
          
          $result=$this->db->get();
          return $result->result(); 
@@ -111,6 +114,7 @@ class Jobs_model extends CI_Model
            $this->db->like('job.job_city',$form['location']);
           $this->join_query();
         $this->db->where('job.job_status','1');
+        $this->db->where('job.job_source',$form['source']);
          
          $result=$this->db->get();
          return $result->result(); 
@@ -119,7 +123,8 @@ class Jobs_model extends CI_Model
            $this->db->like('job.job_title',$form['title']);
            $this->db->like('job.job_salary',$form['salary']);
            $this->join_query();
-        $this->db->where('job.job_status','1');         
+        $this->db->where('job.job_status','1');  
+        $this->db->where('job.job_source',$form['source']);
          $result=$this->db->get();
          return $result->result(); 
          }elseif(!empty($form['title']) && !empty($form['exp'])){
@@ -128,6 +133,7 @@ class Jobs_model extends CI_Model
            $this->db->like('job.job_experience',$form['exp']);
            $this->join_query();
         $this->db->where('job.job_status','1');
+        $this->db->where('job.job_source',$form['source']);
          
          $result=$this->db->get();
          return $result->result(); 
@@ -137,6 +143,7 @@ class Jobs_model extends CI_Model
            $this->db->like('job.job_title',$form['title']);
          $this->join_query();
         $this->db->where('job.job_status','1');
+        $this->db->where('job.job_source',$form['source']);
          
          $result=$this->db->get();
          return $result->result(); 
@@ -145,6 +152,7 @@ class Jobs_model extends CI_Model
            $this->db->like('job.job_city',$form['location']);       
            $this->join_query();
         $this->db->where('job.job_status','1');
+        $this->db->where('job.job_source',$form['source']);
          
          $result=$this->db->get();
          return $result->result(); 

@@ -62,7 +62,7 @@ class Index extends CI_Controller
             {
                
                     $sessionArray = array(                        
-                         'admin_id' => $result->user_id,
+                    'admin_id' => $result->user_id,
                     'admin_fname' => $result->user_fname,
                     'admin_lname' => $result->user_lname,
                     'admin_email' => $result->user_email,
