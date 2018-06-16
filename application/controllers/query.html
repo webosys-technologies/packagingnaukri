@@ -65,3 +65,6 @@ ALTER TABLE `system` ADD `source` VARCHAR(60) NOT NULL AFTER `system_created_at`
 
 21) Plastic and Printing system details insertion
 INSERT INTO `system` (`system_id`, `user_id`, `system_name`, `system_description`, `system_type`, `system_nickname`, `system_logo`, `system_email`, `system_email2`, `system_phone`, `system_mobile`, `system_address`, `system_city`, `system_pincode`, `system_website`, `system_payment_gateway`, `system_merchant_id`, `system_merchant_name`, `system_created_at`, `source`, `system_status`) VALUES (NULL, '1', 'Printing Naukari', '', '', 'PRT', 'assets/images/pinting_logo.PNG', 'info@printingnaukari.com', 'admin@printingnaukari.com', '0123456789', '097669 59724', 'Warje', 'Pune', '123456', 'www.printingnaukari.com', '', '', '', '2018-06-14', 'Printing', '1'), (NULL, '1', 'Plastic naukari', '', '', 'PLT', '', 'info@plasticnaukari.com', 'admin@plasticnaukari.com', '0123456789', '097669 59724', 'Warje', 'Pune', '123456', 'www.plasticnaukari.com', '', '', '', '2018-06-14', 'Plastic', '1')
+
+22)source status in system panel
+ALTER TABLE `system` ADD `source_status` INT(10) NOT NULL AFTER `source`
