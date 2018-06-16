@@ -53,24 +53,54 @@ Packaging and related businesses has seen a phenomenal growth trajectory in the 
 To provide the right opportunity to the every qualified packaging professional, to achieve his/her career objective. At the same time to provide the suitable candidate as per employer’s business need and develop a win-win relationship</p>   
                     </div>
                     </div> <br><br>
+           
+                    
+  <section style="padding-top: 100px; padding-bottom: 100px;" class="logoes slider content">
+      <?php $company=$this->Companies_model->get_recent_company();
              
-<!--  <section style="padding-top: 100px; padding-bottom: 100px;" class="logoes content">
-      <div>
-        <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px">   
+      if(isset($company)) 
+         
+      {    $i=0;
+          foreach($company as $comp){
+        
+          if($i==0){?>
+           <div>
+        <img src="<?php echo  base_url().$comp->company_logo;?>" width="310px" height="63px">   
       </div>
-    <div >
-       <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px">
-    </div>
-    <div>
-       <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px">
-    </div>
-    <div>
-       <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px">
-    </div>
-      <div>
-          <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px"> 
-      </div>    
-  </section>  -->
+          <?php }
+          if($i==1){?>
+             <div>
+        <img src="<?php echo  base_url().$comp->company_logo;?>" width="310px" height="63px">   
+      </div>
+          <?php }
+          if($i==2){?>
+       <div>
+        <img src="<?php echo  base_url().$comp->company_logo;?>" width="310px" height="63px">   
+      </div>
+          <?php }
+          if($i==3){?>
+       <div>
+        <img src="<?php echo  base_url().$comp->company_logo;?>" width="310px" height="63px">   
+      </div>
+          <?php   
+          }
+          if($i==4){ ?>
+             <div>
+        <img src="<?php echo  base_url().$comp->company_logo;?>" width="310px" height="63px">   
+      </div> 
+        <?php  } 
+          
+          $i++;
+          } 
+      }
+       
+      
+      ?>  
+     
+      
+     
+      
+  </section>  
            
 		
         </div>

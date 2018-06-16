@@ -43,7 +43,6 @@
             #footer{
                 padding:0px;
             }
-
            
            a:active { 
     background-color: yellow;
@@ -62,26 +61,21 @@
   text-decoration: none;
   margin: 5px 2px;
 }
-
 .icon:hover {
     opacity: 0.7;
 }
-
 .fa-facebook {
   background: #3B5998;
   color: white;
 }
-
 .fa-skype {
   background: #00aff0;
   color: white;
 }
-
 .fa-google {
   background: #dd4b39;
   color: white;
 }
-
 .fa-linkedin {
   background: #007bb5;
   color: white;
@@ -93,44 +87,35 @@
       background:#F2F3F4;
       
     }
-
     * {
       box-sizing: border-box;
       
     }
-
     .slider {
         width: 90%;
         margin: 50px auto;
        
     }
-
     .slick-slide {
       margin: 0px 10px;
       
     }
-
     .slick-slide img {
         
       width: 100%;
     }
-
     .slick-prev:before,
     .slick-next:before {
       color: green;
     }
-
-
     .slick-slide {
          
       transition: all ease-in-out .3s;
       /*opacity: .2;*/
     }
-
     .slick-active {
       /*opacity: .5;*/
     }
-
     .slick-current {
       /*opacity: 1;*/
     }
@@ -363,10 +348,34 @@
 //      
       
        $(".logoes").slick({
-        slidesToShow: 3,
-  slidesToScroll: 1,
-//  autoplay: true,
-//  autoplaySpeed: 2000,
+       //  centerMode: true,
+  centerPadding: '60px',
+  slidesToShow: 4,
+    autoplay: true,
+  autoplaySpeed: 2500,
+  dots: true,
+  responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+//        centerMode: true,
+        centerPadding: '40px',
+//        centerMode: true,
+        slidesToShow: 4
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+//        centerMode: true,
+        centerPadding: '40px',
+//        centerMode: true,
+        slidesToShow: 1
+      }
+    }
+  ]
       });
       
     });
@@ -386,7 +395,6 @@
     $("#show_otp_box").show();
     $("#pass_field").show();
   }
-
   function member_login() {  
       
         //var val= member_log_validation();
@@ -446,7 +454,6 @@
     $(document).ready(function() {
         
         
-
 $("#send_otp").click(function(){
     $("#otp").val("");
     
@@ -498,16 +505,13 @@ $("#send_otp").click(function(){
   }
     
 });
-
 $("#show_pass_box").click(function(){
     $("#show_pass_box").hide();
     $("#otp_box").hide();
     $("#show_otp_box").show();
     $("#pass_field").show();
     $('#send_otp').hide();
-
 });
-
 $("#show_otp_box").click(function(){
     $("#show_pass_box").show();
     $("#otp_box").show();
@@ -515,11 +519,7 @@ $("#show_otp_box").click(function(){
     $("#pass_field").hide();
     $('#send_otp').show();
 });
-
-
   });
-
-
 	
 </script>
 
