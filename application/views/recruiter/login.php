@@ -28,7 +28,7 @@
   function send_otp()
     {
       var mobile=$('[name="recruiter_email"]').val(); 
-     // alert(mobile);
+//      alert(mobile);
             // otp_val=rec_email_validation();
         if(!isNaN(mobile))
         { 

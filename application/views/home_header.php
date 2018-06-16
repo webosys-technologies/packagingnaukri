@@ -138,7 +138,8 @@
          .div_style{
              border-style:solid; 
              background:white;
-             height:430px; 
+             height:430px;
+             overflow-y: auto;
              /*width:400px;*/ 
              border-color: #ccc;
              border-width: 1px;
@@ -296,13 +297,14 @@
 
   <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
   <script src="<?php echo base_url();?>assets/slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="<?php echo base_url();?>assets/js/member_log_validation.js" type="text/javascript"></script>
   <script type="text/javascript">
     $(document).on('ready', function() {
      
      $('.regular').slick({
-  centerMode: true,
+//  centerMode: true,
   centerPadding: '60px',
-  slidesToShow: 3,
+  slidesToShow: 4,
     autoplay: true,
   autoplaySpeed: 2500,
   dots: true,
@@ -311,19 +313,19 @@
       breakpoint: 768,
       settings: {
         arrows: false,
-        centerMode: true,
+//        centerMode: true,
         centerPadding: '40px',
-        centerMode: true,
-        slidesToShow: 3
+//        centerMode: true,
+        slidesToShow: 4
       }
     },
     {
       breakpoint: 480,
       settings: {
         arrows: false,
-        centerMode: true,
+//        centerMode: true,
         centerPadding: '40px',
-        centerMode: true,
+//        centerMode: true,
         slidesToShow: 1
       }
     }

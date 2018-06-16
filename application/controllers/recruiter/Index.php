@@ -91,8 +91,10 @@ class Index extends CI_Controller
     
     
             function send_otp()
-        {          
-           $email=$this->input->post('recruiter_email');
+        {      
+                echo "hello";
+          echo $email=$this->input->post('recruiter_email');
+          die;
             $val=is_numeric($email);
             
             if(!is_numeric($email))
