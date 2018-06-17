@@ -17,68 +17,68 @@ class Home extends CI_Controller
 	{
 	     $result['jobs']=$this->Jobs_model->get_recent_job();
              
-            $this->load->view('home_header');
-            $this->load->view('home');
-            $this->load->view('home_footer',$result);
+            $this->load->view('packaging/home_header');
+            $this->load->view('packaging/home');
+            $this->load->view('packaging/home_footer',$result);
             
 	}
         function services()
         {
              $result['jobs']=$this->Jobs_model->get_recent_job();
-            $this->load->view('home_header');
-             $this->load->view('services');
-             $this->load->view('home_footer',$result);
+            $this->load->view('packaging/home_header');
+             $this->load->view('packaging/services');
+             $this->load->view('packaging/home_footer',$result);
         }
         function about_us()
         {
              $result['jobs']=$this->Jobs_model->get_recent_job();
-            $this->load->view('home_header');
-             $this->load->view('about_us');
-             $this->load->view('home_footer',$result);
+            $this->load->view('packaging/home_header');
+             $this->load->view('packaging/about_us');
+             $this->load->view('packaging/home_footer',$result);
         }
         function contact_us()
         {
              $result['jobs']=$this->Jobs_model->get_recent_job();
-            $this->load->view('home_header');
-             $this->load->view('contact_us');
-             $this->load->view('home_footer',$result);
+            $this->load->view('packaging/home_header');
+             $this->load->view('packaging/contact_us');
+             $this->load->view('packaging/home_footer',$result);
         }
         function post_resume()
         {
              $result['jobs']=$this->Jobs_model->get_recent_job();
-            $this->load->view('home_header');
-             $this->load->view('post_resume');
-             $this->load->view('home_footer',$result);
+            $this->load->view('packaging/home_header');
+             $this->load->view('packaging/post_resume');
+             $this->load->view('packaging/home_footer',$result);
         }
         function post_requirement()
         {
              $result['jobs']=$this->Jobs_model->get_recent_job();
-            $this->load->view('home_header');
-             $this->load->view('post_requirement');
-             $this->load->view('home_footer',$result);
+            $this->load->view('packaging/home_header');
+             $this->load->view('packaging/post_requirement');
+             $this->load->view('packaging/home_footer',$result);
         }
         function recruitment()
         {
              $result['jobs']=$this->Jobs_model->get_recent_job();
-            $this->load->view('home_header');
-             $this->load->view('recruitment');
-             $this->load->view('home_footer',$result);
+            $this->load->view('packaging/home_header');
+             $this->load->view('packaging/recruitment');
+             $this->load->view('packaging/home_footer',$result);
         }
         function resource_outsourcing()
         {
              $result['jobs']=$this->Jobs_model->get_recent_job();
-            $this->load->view('home_header');
-             $this->load->view('resource_outsourcing');
-             $this->load->view('home_footer',$result);
+            $this->load->view('packaging/home_header');
+             $this->load->view('packaging/resource_outsourcing');
+             $this->load->view('packaging/home_footer',$result);
         }
         
         function job($id)
         {
              $result['jobs']=$this->Jobs_model->get_recent_job();
              $result['job_info']=$this->Jobs_model->job_info($id);
-             $this->load->view('home_header');
-             $this->load->view('job_info',$result);
-             $this->load->view('home_footer',$result);
+             $this->load->view('packaging/home_header');
+             $this->load->view('packaging/job_info',$result);
+             $this->load->view('packaging/home_footer',$result);
         }
 
          function show_cities($state)

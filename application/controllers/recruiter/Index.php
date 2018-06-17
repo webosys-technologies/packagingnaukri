@@ -93,9 +93,9 @@ class Index extends CI_Controller
             function send_otp()
         {          
            $email=$this->input->post('recruiter_email');
-            $val=is_numeric($email);
+            // $val=is_numeric($email);
             
-            if(!is_numeric($email))
+            if(is_numeric($email))
             {
                 $res=$this->Recruiters_model->check_mobile_exist($email);
                 if($res = false)
