@@ -15,70 +15,55 @@ class Home extends CI_Controller
 	
 	function index()
 	{
-	     $result['jobs']=$this->Jobs_model->get_recent_job();
+	     // $result['jobs']=$this->Jobs_model->get_recent_job();
              
-            $this->load->view('packaging/home_header');
-            $this->load->view('packaging/home');
-            $this->load->view('packaging/home_footer',$result);
+      //       $this->load->view('packaging/home_header');
+      //       $this->load->view('packaging/home');
+      //       $this->load->view('packaging/home_footer',$result);
+        $view='home';
+        $this->load_views($view);
             
 	}
         function services()
         {
-             $result['jobs']=$this->Jobs_model->get_recent_job();
-            $this->load->view('packaging/home_header');
-             $this->load->view('packaging/services');
-             $this->load->view('packaging/home_footer',$result);
+            $view='services';
+            $this->load_views($view);
         }
         function about_us()
         {
-             $result['jobs']=$this->Jobs_model->get_recent_job();
-            $this->load->view('packaging/home_header');
-             $this->load->view('packaging/about_us');
-             $this->load->view('packaging/home_footer',$result);
+            $view='about_us';
+            $this->load_views($view);
         }
         function contact_us()
         {
-             $result['jobs']=$this->Jobs_model->get_recent_job();
-            $this->load->view('packaging/home_header');
-             $this->load->view('packaging/contact_us');
-             $this->load->view('packaging/home_footer',$result);
+            $view='contact_us';
+            $this->load_views($view);
         }
         function post_resume()
         {
-             $result['jobs']=$this->Jobs_model->get_recent_job();
-            $this->load->view('packaging/home_header');
-             $this->load->view('packaging/post_resume');
-             $this->load->view('packaging/home_footer',$result);
+            $view='post_resume';
+            $this->load_views($view);
         }
         function post_requirement()
         {
-             $result['jobs']=$this->Jobs_model->get_recent_job();
-            $this->load->view('packaging/home_header');
-             $this->load->view('packaging/post_requirement');
-             $this->load->view('packaging/home_footer',$result);
+            $view='post_requirement';
+            $this->load_views($view);
         }
         function recruitment()
         {
-             $result['jobs']=$this->Jobs_model->get_recent_job();
-            $this->load->view('packaging/home_header');
-             $this->load->view('packaging/recruitment');
-             $this->load->view('packaging/home_footer',$result);
+            $view='recruitment';
+            $this->load_views($view);
         }
         function resource_outsourcing()
         {
-             $result['jobs']=$this->Jobs_model->get_recent_job();
-            $this->load->view('packaging/home_header');
-             $this->load->view('packaging/resource_outsourcing');
-             $this->load->view('packaging/home_footer',$result);
+            $view='resource_outsourcing';
+            $this->load_views($view);
         }
         
         function job($id)
         {
-             $result['jobs']=$this->Jobs_model->get_recent_job();
-             $result['job_info']=$this->Jobs_model->job_info($id);
-             $this->load->view('packaging/home_header');
-             $this->load->view('packaging/job_info',$result);
-             $this->load->view('packaging/home_footer',$result);
+            $view='job';
+            $this->load_views($view);
         }
 
          function show_cities($state)
@@ -89,11 +74,30 @@ class Home extends CI_Controller
             echo json_encode($cities);
         }
 
-        function load_views()
+        function load_views($view)
         {
-            $site=base_url();
-            $url=explode('/', $site);
-            print_r($url);
+            
+            $result['jobs']=$this->Jobs_model->get_recent_job();           
+            
+            $url=explode('/', base_url());
+            if ($url[3] == 'packagingnaukri') {
+            
+              $page='packaging/'.$view;
+            $this->load->view('packaging/home_header');
+             $this->load->view($page,$result);
+             $this->load->view('packaging/home_footer',$result);
+            }
+            elseif ($url[3] == 'printingnaukari') {
+                  $page='printing/'.$view;
+                $this->load->view('packaging/home_header');
+                 $this->load->view($page,$result);
+                 $this->load->view('packaging/home_footer',$result);                    
+            }else{
+                  $page='plastic/'.$view;
+                $this->load->view('packaging/home_header');
+                 $this->load->view($page,$result);
+                 $this->load->view('packaging/home_footer',$result);                
+            }
         }
 
     
