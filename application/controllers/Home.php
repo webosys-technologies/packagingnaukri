@@ -92,8 +92,8 @@ class Home extends CI_Controller
         function load_views()
         {
             $site=base_url();
-            $url=explode('.', $site);
-            echo $url[0];
+            $url=explode('/', $site);
+            print_r($url);
         }
 
     
