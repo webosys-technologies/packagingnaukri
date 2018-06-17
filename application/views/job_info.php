@@ -35,22 +35,22 @@
           <h5 id="company_name" class="job_info"><?php echo $job_info->company_name; ?></h5>
         
           <div class="row">
-              <div class="col-md-3 col-xs-3">
+              <div class="col-md-2 col-xs-3">
           <label >Qualification </label>
-          </div><div class="col-md-9 col-xs-9"> :<span id="eligibility" class="job_info"> <?php echo  $job_info->job_education; ?> </span></div><br>
+          </div><div class="col-md-10 col-xs-10"> :<span id="eligibility" class="job_info"> <?php echo  $job_info->job_education; ?> </span></div><br>
           </div>
           <?php if(!empty($job_info->job_skill_name)){?>
               <div class="row">
-          <div class="col-md-3 col-xs-3">        
+          <div class="col-md-2 col-xs-3">        
           <label > Skills </label>
-          </div><div class="col-md-9 col-xs-9">: <span id="skills" class="job_info"> <?php echo $job_info->job_skill_name; ?>  </span></div><br>
+          </div><div class="col-md-10 col-xs-9">: <span id="skills" class="job_info"> <?php echo $job_info->job_skill_name; ?>  </span></div><br>
                     </div>
           <?php }?>
 
           <div class="row">
-              <div class="col-md-3 col-xs-3">
+              <div class="col-md-2 col-xs-3">
           <label >Experience </label>
-          </div><div class="col-md-9 col-xs-9">: <span id="experience" class="job_info"> <?php echo $job_info->job_experience; ?> </span></div><br>
+          </div><div class="col-md-10 col-xs-9">: <span id="experience" class="job_info"> <?php echo $job_info->job_experience; ?> </span></div><br>
                     </div>
          <?php if(!empty($job_info->job_salary)){
             $sal=explode(".",$job_info->job_salary);
@@ -63,16 +63,17 @@
 ?>
           
           <div class="row">
-              <div class="col-md-3 col-xs-3">
+              <div class="col-md-2 col-xs-3">
           <label >Salary </label>
-          </div><div class="col-md-9 col-xs-9">: <span id="salary" class="job_info"> <?php echo $salary;?> </span></div><br>
+          </div><div class="col-md-10 col-xs-9">: <span id="salary" class="job_info"> <?php echo $salary;?> </span></div><br>
                     </div>
            <?php }?>
 
           <div class="row">
-              <div class="col-md-3 col-xs-3">
+              <div class="col-md-2 col-xs-3">
           <label>Location </label>
-          </div><div class="col-md-9 col-xs-9">: <span id="location" class="job_info"> <?php echo $job_info->job_city; ?> </span></div><br>
+          </div>
+              <div class="col-md-10 col-xs-9">: <span id="location" class="job_info"> <?php echo $job_info->job_city; ?> </span></div><br>
                     </div>
 
            <script>
@@ -81,18 +82,24 @@
            </script>
           
           <div class="row">
-            <div class="col-md-3 col-xs-3">
+            <div class="col-md-2 col-xs-3">
                <label>Job Description </label>
                </div>
-               <div class="col-md-9 col-xs-9">: <span id="job_desc">  <?php echo $job_info->job_description; ?></span> </div>                 
+               <div class="col-md-10 col-xs-9">: <span id="job_desc">  <?php echo $job_info->job_description; ?></span> </div>                 
                              </div>
 
            
            <div class="row">
-               <div class="col-md-3 col-xs-3">
+               <div class="col-md-2 col-xs-3">
           <label> Website </label>
           </div>
-         <div class="col-md-9 col-xs-9">    : <span id="website" class="job_info"><a href="http://<?php echo $job_info->company_website;?>" target="_blank"><?php echo $job_info->company_website;?></a></span></div><br> 
+         <div class="col-md-10 col-xs-9">    : <span id="website" class="job_info"><a href="http://<?php echo $job_info->company_website;?>" target="_blank"><?php echo $job_info->company_website;?></a></span></div><br> 
+         </div>
+           <div class="row">
+               <div class="col-md-2 col-xs-3">
+          <label> posted date </label>
+          </div>
+         <div class="col-md-10 col-xs-9">    :</div><br> 
          </div>
 
            
