@@ -68,14 +68,18 @@
     }
   
     .div_design{
-        color:#02B645;       
-        font-family: times;
-        font-size: 20px;
+   font-size: 14px;
+    font-weight: bold;
+    color: #005dab;
+    letter-spacing: inherit;
+    text-transform: none;
+    
     }
     .exp{
-        padding-top:12px;
-        font-family: times;
-        font-size:17px;
+    letter-spacing: inherit;
+    text-transform: none;
+    margin-top: 10px;
+    padding:2px;
     }
   
         </style>

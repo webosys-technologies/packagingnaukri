@@ -27,8 +27,7 @@
  <script>
   function send_otp()
     {
-      var mobile=$('[name="recruiter_email"]').val(); 
-//      alert(mobile);
+      var mobile=$('[name="recruiter_email"]').val();
             // otp_val=rec_email_validation();
         if(!isNaN(mobile))
         { 
@@ -44,7 +43,7 @@
                $.ajax({
            url : "<?php echo site_url('index.php/recruiter/index/send_otp')?>/" ,        
            type: "post",
-            data:{member_email : mobile},
+            data:{recruiter_email : mobile},
            dataType: "JSON",
            success: function(data)
            {            
