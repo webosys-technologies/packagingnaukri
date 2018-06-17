@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Home | Packaging Naukri</title>
+<title>Desire Host a Web Hosting Flat Bootstarp Resposive Website Template | Home :: w3layouts</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Desire Host Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
@@ -21,8 +21,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--webfonts-->
   <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,100italic,400italic,700italic|Abril+Fatface|Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 <!--//webfonts-->
-	<link href="<?php echo base_url();?>assets/css/popup.css" rel="stylesheet" type="text/css">
-
+<title>Home | Packaging Naukri</title>
          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">    
         <!--<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" />-->
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -224,85 +223,61 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
                   
 	</div>
-
-
-    
-  
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div style="background:#0461A8" class="modal-header">
-          
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Member Sign In</strong></h4></center>
-      </div>
-      <div id="calendar" style="background:#F2F3F4" class="modal-body">
-          <div class="row">
-              <div class="col-md-8 col-md-offset-2">
-                  <span id="validation_error" class="text-danger"></span>
-                  <form action="" id="login_form" method="post">
-                  <input type="hidden" id="job_id" name="job_id" value="">    
-          <div class="form-group has-feedback">
-            <input type="text" class="form-control" id="member_email" placeholder="Email or Mobile No" name="member_email" required /><span class="text-danger" id="email_err"></span>
-            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-          </div>
-          <div class="form-group">
-            <center>  <a type="button" id="send_otp" class="label label-success "  />Send Otp</a></center>
-            </div>
-           
-          <div class="form-group has-feedback" id="pass_field">
-            <input type="password" class="form-control" placeholder="Password" id="password" name="member_password" required /><span class="text-danger" id="password_err"></span>
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-          </div>
-                      
-             <div class="form-group has-feedback" id="otp_box" style="display:none;">
-            <input type="text" class="form-control" placeholder="Enter OTP" id="otp" name="member_otp" required /><span class="text-danger" id="otp_err"></span><span class="text-success" id="otp_success"></span>
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span><br>
-          </div>
-                      
-             
-           
-          <div class="row">
-            <div class="col-xs-8">    
-              <!-- <div class="checkbox icheck">
-                <label>
-                  <input type="checkbox"> Remember Me
-                </label>
-              </div>  -->                       
-            </div><!-- /.col -->
-            <center>
-              <button type="button" onclick="member_login()"class="btn btn-primary btn-block btn-flat"  />Sign In</button>
-            
-             <p>or</p>
-             <center><h4><a class="label label-warning" id="show_otp_box">Login With OTP</a></h4></center>
-            <center><h4><a class="label label-warning" id="show_pass_box">Login With Password</a></h4></center>
-
-              <a class="btn btn-info">
-                  <span class="fa fa-google"></span> <span style="color:white">Sign in with Google</span>
-  </a>
-              <a class="btn" style="background-color:#3B5998;">
-    <span class="fa fa-facebook"></span><span style="color:white"> Sign in with Facebook</span>
-  </a>
-           
-          </div>
-        </form>
-                  </div>     
-                 
-                           </div>
-      </div>
-     
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
-
-  
- <script src="<?php echo base_url();?>assets/js/jquery.magnific-popup.js" type="text/javascript"></script>
 			
-  <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
-  <script src="<?php echo base_url();?>assets/slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="<?php echo base_url();?>assets/js/member_log_validation.js" type="text/javascript"></script>
+        
+        
+		<!--content-top-->
+		<div class="content_top">
+			<div class="container">
+				
+			</div>
+		</div>
+	
+<!--domain-->
+	<div class="domain">
+	<div class="container">
+		<h3>OUR CUSTOMERS !!</h3>
+		
+				 <script src="js/jquery.easydropdown.js"></script>
+                       <script type="text/javascript">
+                       $('#tldlist').change(function(event) {
+                            $('#tldDisplay').html( '.' +$('#tldlist').val());
+                        }); 
+                    </script>
+              <!--domain-search -->            
+	    </div>
+</div>
+
+				<!-- Add fancyBox main JS and CSS files -->
+				<script src="<?php echo base_url();?>assets/js/jquery.magnific-popup.js" type="text/javascript"></script>
+				<link href="<?php echo base_url();?>assets/css/popup.css" rel="stylesheet" type="text/css">
+						<script>
+							$(document).ready(function() {
+								$('.popup-with-zoom-anim').magnificPopup({
+									type: 'inline',
+									fixedContentPos: false,
+									fixedBgPos: true,
+									overflowY: 'auto',
+									closeBtnInside: true,
+									preloader: false,
+									midClick: true,
+									removalDelay: 300,
+									mainClass: 'my-mfp-zoom-in'
+							});
+						});
+						</script>
+	
+	<!---- footer --->
+			<div class="footer text-center">
+				<div class="container">
+					<div class="copy">
+		              <p> <strong style="color:white">Copyright &copy; 2018 Packaging Naukri. All rights reserved. </strong><span style="color:#5df95a">Developed by <a style="color:#5df95a" href="http://webosys.com/" target="_blank">Webosys Technologies</a></span>	</p>
+		            </div>
+					
+				</div>
+			</div>
+        
+ 
   <script type="text/javascript">
     $(document).on('ready', function() {
      
@@ -336,12 +311,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }
   ]
 });
-     
-
-
-                     
-			
-      
+    
        $(".logoes").slick({
        //  centerMode: true,
   centerPadding: '60px',
@@ -372,13 +342,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }
   ]
       });
-      
-      
-       $().UItoTop({ easingType: 'easeOutQuart' });
-			$(".scroll").click(function(event){		
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-			});
       
     });
     
@@ -524,7 +487,33 @@ $("#show_otp_box").click(function(){
   });
 	
 </script>
-<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+
+			<!--start-smoth-scrolling-->
+			<script type="text/javascript">
+								jQuery(document).ready(function($) {
+									$(".scroll").click(function(event){		
+										event.preventDefault();
+										$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+									});
+								});
+								</script>
+							<!--start-smoth-scrolling-->
+						<script type="text/javascript">
+									$(document).ready(function() {
+										/*
+										var defaults = {
+								  			containerID: 'toTop', // fading element id
+											containerHoverID: 'toTopHover', // fading element hover id
+											scrollSpeed: 1200,
+											easingType: 'linear' 
+								 		};
+										*/
+										
+										$().UItoTop({ easingType: 'easeOutQuart' });
+										
+									});
+								</script>
+		<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 
 </body>
 </html>

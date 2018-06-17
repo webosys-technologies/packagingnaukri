@@ -1,28 +1,8 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
-<title>Home | Packaging Naukri</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Desire Host Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href="<?php echo base_url();?>assets/new/css/bootstrap.css" rel='stylesheet' type='text/css' />
-<!-- Custom Theme files -->
-<link href="<?php echo base_url();?>assets/new/css/style.css" rel='stylesheet' type='text/css' />	
-<link href="<?php echo base_url();?>assets/new/css/popup.css" rel='stylesheet' type='text/css' />	
-<script src="<?php echo base_url();?>assets/new/js/jquery.min.js"> </script>
-<!--webfonts-->
-  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,100italic,400italic,700italic|Abril+Fatface|Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-<!--//webfonts-->
-	<link href="<?php echo base_url();?>assets/css/popup.css" rel="stylesheet" type="text/css">
-
+  
+   <title>Home | Packaging Naukri</title>
          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">    
         <!--<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" />-->
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -44,11 +24,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/slick/slick-theme.css">
   <link href='<?php echo base_url("assets/bootstrap/css/bootstrap.css"); ?>' rel='stylesheet' type='text/css' />
   <script type="text/javascript" src='<?php echo base_url("assets/js/jQuery-2.1.4.min.js"); ?>'></script>
-  <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
-  <script src="<?php echo base_url();?>assets/slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="<?php echo base_url();?>assets/js/member_log_validation.js" type="text/javascript"></script>
-  
-    <style type="text/css">
+  <style type="text/css">
    #header{
                 margin:0px;
                
@@ -79,11 +55,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             
             .icon {
   padding: 10px;
-  font-size: 20px;
+  font-size: 25px;
   width: 40px;
   text-align: center;
   text-decoration: none;
-  margin: 0px 0px;
+  margin: 5px 2px;
 }
 .icon:hover {
     opacity: 0.7;
@@ -160,33 +136,51 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          }
        
   </style>
-  
 </head>
 <body>
-	<!--start-home-->
-			<div id="home" class="header">
-				<div class="strip">
-					 <div class="container">
-						<!--<p class="location"><i class="location"></i>16A, Honey Street (Green Door)</p>-->
-						<p class="phonenum">
+
+<div class="row" style="background:white;">
+        <div class="col-md-3 col-xs-3">
+    <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px">
+    </div>
+    <div class="col-md-7 col-xs-6">
+      
+    </div>
+         <div class="col-md-2 col-xs-3" style="padding-top:6px">
+              <!--<a href="#" class="fa fa-google icon"></a>&nbsp;-->
    <a href="https://www.facebook.com/packagingnaukri" class="fa fa-facebook icon"></a>  &nbsp;
    <!--<a href="#" class="fa fa-skype icon"></a>&nbsp;-->
-   <a href="https://www.linkedin.com/company/www-packagingnaukri-com" class="fa fa-linkedin icon"></a></p>
-							<div class="clearfix"></div>
-					</div>
-				</div>
-			<div class="header-bottom">
-			<div class="container">
-				<div class="logo">
-					 <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px">
-				</div>
-				<span class="menu"></span>
-				<div class="top-menu">
-                                    <nav class="cl-effect-5"><ul>
-	<li><a  href="<?php echo base_url();?>Home/index">Home</a></li>
-        <li><a  href="<?php echo base_url();?>Home/about_us">About Us</a></li>
+   <a href="https://www.linkedin.com/company/www-packagingnaukri-com" class="fa fa-linkedin icon"></a>
+    </div>
+    </div>
+	
+	
+ <!--<header class="header" id="header">-->
+  <!--<div class="container">-->
+  <nav class="">
+  <!--<nav class="navbar navbar-default navbar-fixed-top navbar-expand-lg" id="nav_header">-->
+  <nav class="navbar navbar-default navbar-static-top" id="nav_header" style="background:#0461A8">
+  <!--#0461A8-->
+  <!--<div class="container-fluid"  style="background:#0461A8">-->
+     <!--Brand and toggle get grouped for better mobile display--> 
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <!--<a id="logo" class="navbar-brand" href="#"><img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="200px" height="50px"></a>-->
+    </div>
+
+     <!--Collect the nav links, forms, and other content for toggling--> 
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
+          <li><a id="header_link" href="<?php echo base_url();?>Home/index">Home</a></li>
+        <li><a id="header_link" href="<?php echo base_url();?>Home/about_us">About Us</a></li>
        <li class="dropdown">
-          <a  href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
+          <a id="header_link" href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
           <ul class="dropdown-menu">
               <li><a href="<?php echo base_url();?>Home/recruitment">Recruitment</a></li>
             <li role="separator" class="divider"></li>
@@ -195,35 +189,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </li>
                
        <li class="dropdown">
-          <a  href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Recruiter<span class="caret"></span></a>
+          <a id="header_link" href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Recruiter<span class="caret"></span></a>
           <ul class="dropdown-menu">
               <li><a href="<?php echo base_url();?>recruiter/index/login">Login</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="<?php echo base_url();?>recruiter/index">Register</a></li>
           </ul>
         </li>
-         <!--<li><a  href="<?php echo base_url();?>Home/post_requirement">Post Your Requirement</a></li>-->
-          <li><a  href="<?php echo base_url();?>Home/contact_us">Contact Us</a></li>   
-          <li><a  href="#" data-toggle="modal" onclick="open_login()" data-target="#myModal">Login</a></li>
-          <li><a  href="<?php echo base_url();?>member/index">Register</a></li>
-          </ul> 
-					</nav>
-					</ul>
-				</div>
-				<!-- script for menu -->
-				<script>
-				$( "span.menu" ).click(function() {
-				  $( ".top-menu" ).slideToggle( "slow", function() {
-				    // Animation complete.
-				  });
-				});
-			</script>
-			<!-- script for menu -->
-				<div class="clearfix"></div>
-			</div>
-		</div>
-                  
-	</div>
+         <!--<li><a id="header_link" href="<?php echo base_url();?>Home/post_requirement">Post Your Requirement</a></li>-->
+          <li><a id="header_link" href="<?php echo base_url();?>Home/contact_us">Contact Us</a></li>   
+            
+          
+          
+          
+      </ul> <ul style="padding-right: 6%;" class="nav navbar-nav navbar-right">
+              <li><a id="header_link" href="#" data-toggle="modal" onclick="open_login()" data-target="#myModal">Login</a></li>
+              <li><a id="header_link" href="<?php echo base_url();?>member/index">Register</a></li>
+                
+           </ul>
+        
+        
+    </div>  
+  </div> 
+</nav>
 
 
     
@@ -298,8 +286,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
   
- <script src="<?php echo base_url();?>assets/js/jquery.magnific-popup.js" type="text/javascript"></script>
-			
+
   <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
   <script src="<?php echo base_url();?>assets/slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="<?php echo base_url();?>assets/js/member_log_validation.js" type="text/javascript"></script>
@@ -337,10 +324,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   ]
 });
      
-
-
-                     
-			
+//      $(".regular").slick({
+//        slidesToShow: 4,
+//  slidesToScroll: 1,
+//  autoplay: true,
+//  autoplaySpeed: 2000,
+//  
+//  
+//    dots: true,
+//  infinite: true,
+//  cssEase: 'linear',
+////  variableWidth: true,
+//  variableHeight: true,
+//  mobileFirst: true,
+//  responsive: [{
+//    breakpoint: 1024,
+//    settings: {
+////      slidesToShow: 4,
+////      slidesToScroll: 1,
+//      centerMode: false
+//    }
+//  }]
+//      });
+//      
+//     document.getElementById('job1').style.width = 280 + "px";  
+//     document.getElementById('job2').style.width = 280 + "px";  
+//     document.getElementById('job3').style.width = 280 + "px";  
+//     document.getElementById('job4').style.width = 280 + "px";  
+//     document.getElementById('job5').style.width = 280 + "px";  
+//      
       
        $(".logoes").slick({
        //  centerMode: true,
@@ -372,13 +384,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }
   ]
       });
-      
-      
-       $().UItoTop({ easingType: 'easeOutQuart' });
-			$(".scroll").click(function(event){		
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-			});
       
     });
     
@@ -524,7 +529,7 @@ $("#show_otp_box").click(function(){
   });
 	
 </script>
-<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+
 
 </body>
 </html>
