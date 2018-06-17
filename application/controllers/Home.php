@@ -89,6 +89,13 @@ class Home extends CI_Controller
             echo json_encode($cities);
         }
 
+        function load_views()
+        {
+            $site=base_url();
+            $url=explode('.', $site);
+            echo $url[0];
+        }
+
     
 }
 
