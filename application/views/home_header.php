@@ -123,7 +123,7 @@
          .div_style{
              border-style:solid; 
              background:white;
-             height:430px;
+             height:325px;
              overflow-y: auto;
              /*width:400px;*/ 
              border-color: #ccc;
