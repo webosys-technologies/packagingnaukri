@@ -68,9 +68,9 @@
     }
   
     .div_design{
-        color:#02B645;       
-        font-family: times;
-        font-size: 20px;
+/*        color:#02B645;       
+        font-family: times;*/
+        font-size: 16px;
     }
     .exp{
         padding-top:12px;
