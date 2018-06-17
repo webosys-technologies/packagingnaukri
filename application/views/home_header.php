@@ -119,7 +119,10 @@
     .slick-current {
       /*opacity: 1;*/
     }
-   
+    .nav{
+        margin-left:5%;
+    }
+    
          .div_style{
              border-style:solid; 
              background:white;
@@ -137,10 +140,13 @@
 <body>
 
 <div class="row" style="background:white;">
-        <div class="col-md-3">
+        <div class="col-md-3 col-xs-3">
     <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px">
     </div>
-         <div class="col-md-2 col-md-offset-7" style="padding-top:6px">
+    <div class="col-md-7 col-xs-6">
+      
+    </div>
+         <div class="col-md-2 col-xs-3" style="padding-top:6px">
               <!--<a href="#" class="fa fa-google icon"></a>&nbsp;-->
    <a href="https://www.facebook.com/packagingnaukri" class="fa fa-facebook icon"></a>  &nbsp;
    <!--<a href="#" class="fa fa-skype icon"></a>&nbsp;-->
@@ -196,7 +202,7 @@
           
           
           
-      </ul> <ul style="padding-right:50px" class="nav navbar-nav navbar-right">
+      </ul> <ul style="padding-right: 6%;" class="nav navbar-nav navbar-right">
               <li><a id="header_link" href="#" data-toggle="modal" onclick="open_login()" data-target="#myModal">Login</a></li>
               <li><a id="header_link" href="<?php echo base_url();?>member/index">Register</a></li>
                 
