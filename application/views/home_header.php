@@ -43,7 +43,6 @@
             #footer{
                 padding:0px;
             }
-
            
            a:active { 
     background-color: yellow;
@@ -62,26 +61,21 @@
   text-decoration: none;
   margin: 5px 2px;
 }
-
 .icon:hover {
     opacity: 0.7;
 }
-
 .fa-facebook {
   background: #3B5998;
   color: white;
 }
-
 .fa-skype {
   background: #00aff0;
   color: white;
 }
-
 .fa-google {
   background: #dd4b39;
   color: white;
 }
-
 .fa-linkedin {
   background: #007bb5;
   color: white;
@@ -93,56 +87,52 @@
       background:#F2F3F4;
       
     }
-
     * {
       box-sizing: border-box;
       
     }
-
     .slider {
         width: 90%;
         margin: 50px auto;
        
     }
-
     .slick-slide {
       margin: 0px 10px;
       
     }
-
     .slick-slide img {
         
       width: 100%;
     }
-
     .slick-prev:before,
     .slick-next:before {
       color: green;
     }
-
-
     .slick-slide {
          
       transition: all ease-in-out .3s;
       /*opacity: .2;*/
     }
-
     .slick-active {
       /*opacity: .5;*/
     }
-
     .slick-current {
       /*opacity: 1;*/
     }
-   
+    .nav{
+        margin-left:5%;
+    }
+    
          .div_style{
              border-style:solid; 
              background:white;
-             height:430px; 
+             height:325px;
+             overflow-y: auto;
              /*width:400px;*/ 
              border-color: #ccc;
              border-width: 1px;
-             padding: 5px;
+             padding: 12px;
+             
          }
        
   </style>
@@ -150,10 +140,13 @@
 <body>
 
 <div class="row" style="background:white;">
-        <div class="col-md-3">
+        <div class="col-md-3 col-xs-3">
     <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="310px" height="63px">
     </div>
-         <div class="col-md-2 col-md-offset-7" style="padding-top:6px">
+    <div class="col-md-7 col-xs-6">
+      
+    </div>
+         <div class="col-md-2 col-xs-3" style="padding-top:6px">
               <!--<a href="#" class="fa fa-google icon"></a>&nbsp;-->
    <a href="https://www.facebook.com/packagingnaukri" class="fa fa-facebook icon"></a>  &nbsp;
    <!--<a href="#" class="fa fa-skype icon"></a>&nbsp;-->
@@ -209,7 +202,7 @@
           
           
           
-      </ul> <ul style="padding-right:50px" class="nav navbar-nav navbar-right">
+      </ul> <ul style="padding-right: 6%;" class="nav navbar-nav navbar-right">
               <li><a id="header_link" href="#" data-toggle="modal" onclick="open_login()" data-target="#myModal">Login</a></li>
               <li><a id="header_link" href="<?php echo base_url();?>member/index">Register</a></li>
                 
@@ -275,7 +268,7 @@
               <a class="btn btn-info">
                   <span class="fa fa-google"></span> <span style="color:white">Sign in with Google</span>
   </a>
-              <a class="btn" style="background-color:3b5998">
+              <a class="btn" style="background-color:#3B5998;">
     <span class="fa fa-facebook"></span><span style="color:white"> Sign in with Facebook</span>
   </a>
            
@@ -296,13 +289,14 @@
 
   <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
   <script src="<?php echo base_url();?>assets/slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="<?php echo base_url();?>assets/js/member_log_validation.js" type="text/javascript"></script>
   <script type="text/javascript">
     $(document).on('ready', function() {
      
      $('.regular').slick({
-  centerMode: true,
+//  centerMode: true,
   centerPadding: '60px',
-  slidesToShow: 3,
+  slidesToShow: 4,
     autoplay: true,
   autoplaySpeed: 2500,
   dots: true,
@@ -311,19 +305,19 @@
       breakpoint: 768,
       settings: {
         arrows: false,
-        centerMode: true,
+//        centerMode: true,
         centerPadding: '40px',
-        centerMode: true,
-        slidesToShow: 3
+//        centerMode: true,
+        slidesToShow: 4
       }
     },
     {
       breakpoint: 480,
       settings: {
         arrows: false,
-        centerMode: true,
+//        centerMode: true,
         centerPadding: '40px',
-        centerMode: true,
+//        centerMode: true,
         slidesToShow: 1
       }
     }
@@ -361,10 +355,34 @@
 //      
       
        $(".logoes").slick({
-        slidesToShow: 3,
-  slidesToScroll: 1,
-//  autoplay: true,
-//  autoplaySpeed: 2000,
+       //  centerMode: true,
+  centerPadding: '60px',
+  slidesToShow: 4,
+    autoplay: true,
+  autoplaySpeed: 2500,
+  dots: true,
+  responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+//        centerMode: true,
+        centerPadding: '40px',
+//        centerMode: true,
+        slidesToShow: 4
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+//        centerMode: true,
+        centerPadding: '40px',
+//        centerMode: true,
+        slidesToShow: 1
+      }
+    }
+  ]
       });
       
     });
@@ -384,7 +402,6 @@
     $("#show_otp_box").show();
     $("#pass_field").show();
   }
-
   function member_login() {  
       
         //var val= member_log_validation();
@@ -444,7 +461,6 @@
     $(document).ready(function() {
         
         
-
 $("#send_otp").click(function(){
     $("#otp").val("");
     
@@ -496,16 +512,13 @@ $("#send_otp").click(function(){
   }
     
 });
-
 $("#show_pass_box").click(function(){
     $("#show_pass_box").hide();
     $("#otp_box").hide();
     $("#show_otp_box").show();
     $("#pass_field").show();
     $('#send_otp').hide();
-
 });
-
 $("#show_otp_box").click(function(){
     $("#show_pass_box").show();
     $("#otp_box").show();
@@ -513,11 +526,7 @@ $("#show_otp_box").click(function(){
     $("#pass_field").hide();
     $('#send_otp').show();
 });
-
-
   });
-
-
 	
 </script>
 

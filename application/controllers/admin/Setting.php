@@ -3,7 +3,7 @@
 //require APPPATH . '/libraries/BaseController.php';
 
 
-class Dashboard extends CI_Controller
+class Setting extends CI_Controller
 {
     /**
      * This is default constructor of the class
@@ -28,18 +28,25 @@ class Dashboard extends CI_Controller
       
             $id=$this->session->userdata('admin_id');
             $result['user_data']=$this->User_model->get_user_by_id($id);
-            $result['recruiters']=$this->Recruiters_model->getall();
-            $result['members']=$this->Members_model->getall_members();
-            $result['posted']=$this->Jobs_model->getall_jobs();
-            $result['applied']=$this->Applied_jobs_model->applied_members();
-            $result['companies']=$this->Companies_model->getall_companies();
-            $result['system']=$this->System_model->get_info();
-            $result['user']=$this->User_model->getall_user($name=" ");
+            $result['data']=$this->System_model->getinfo_by_id($id);
+          
                   
              $this->load->view('admin/header',$result);
-             $this->load->view('admin/dashboard');
+             $this->load->view('admin/setting',$result);
              $this->load->view('admin/footer');             
     }
+    
+    public function source_status($val)
+    {
+         $this->session->userdata('admin_id');
+        $where=array('user_id'=>$this->session->userdata('admin_id'));
+        $data=array('source_status'=>$val);
+
+        $this->System_model->system_update($where,$data);
+
+        $this->session->set_flashdata('success','source status update Successfully');
+        echo json_encode(array('success'=>'source status update Successfully'));
+        }
     
   
 
