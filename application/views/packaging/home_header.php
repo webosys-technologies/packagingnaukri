@@ -97,7 +97,7 @@
        
     }
     .slick-slide {
-      margin: 0px 10px;
+      margin: 0px 13px;
       
     }
     .slick-slide img {
@@ -352,7 +352,7 @@
   centerPadding: '60px',
   slidesToShow: 4,
     autoplay: true,
-  autoplaySpeed: 2500,
+  autoplaySpeed: 2000,
   dots: true,
   responsive: [
     {

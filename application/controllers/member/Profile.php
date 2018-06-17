@@ -30,6 +30,7 @@ class Profile extends CI_Controller
             $result['employments']=$this->Employments_model->get_employment_member($id);
             $result['skills']=$this->Skills_model->get_members_skill($id);
             $result['educations']=$this->Educations_model->get_education_by_member($id);
+            $result['institutes']=$this->Institute_model->getall($id);
             
              $sys=$this->session->userdata('member_source');          
             $result['system']=$this->System_model->get_system_info($sys);

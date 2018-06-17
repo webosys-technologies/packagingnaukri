@@ -52,7 +52,7 @@ Packaging and related businesses has seen a phenomenal growth trajectory in the 
 
 To provide the right opportunity to the every qualified packaging professional, to achieve his/her career objective. At the same time to provide the suitable candidate as per employer’s business need and develop a win-win relationship</p>   
                     </div>
-                    </div> <br><br>
+                    </div>
            
                     
   <section style="padding-top: 100px; padding-bottom: 100px;" class="logoes slider content">

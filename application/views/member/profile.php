@@ -390,37 +390,37 @@ var title=el.val();
   });
   
   
-     $("#university").change(function() {
-
-alert();
-    var el = $(this) ;
-$("#inst_name").val("");
-    
-var title=el.val();
-          
-       $.ajax({
-        url : "<?php echo site_url('index.php/member/Profile/get_university')?>/" + title,        
-        type: "GET",
-               
-        dataType: "JSON",
-        success: function(data)
-        {
-//y          $("#edu_name").html("");
-           $.each(data,function(i,row)
-           {
-            
-               $("#data_list").append('<option value="'+ row.institute_name+'">' + row.institute_name + '</option>');
-           }
-           );
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-//          alert('Error...!');
-        }
-      });
-    
-     
-  });
+//     $("#university").change(function() {
+//
+//alert();
+//    var el = $(this) ;
+//$("#inst_name").val("");
+//    
+//var title=el.val();
+//          
+//       $.ajax({
+//        url : "<?php echo site_url('index.php/member/Profile/get_university')?>/" + title,        
+//        type: "GET",
+//               
+//        dataType: "JSON",
+//        success: function(data)
+//        {
+////y          $("#edu_name").html("");
+//           $.each(data,function(i,row)
+//           {
+//            
+//               $("#data_list").append('<option value="'+ row.institute_name+'">' + row.institute_name + '</option>');
+//           }
+//           );
+//        },
+//        error: function (jqXHR, textStatus, errorThrown)
+//        {
+////          alert('Error...!');
+//        }
+//      });
+//    
+//     
+//  });
   
   
   
@@ -905,10 +905,10 @@ var edu_name=el.val();
             </div>   
            </div>
           <div class="row">
-                <div class="col-md-6">
+<!--                <div class="col-md-6">
                     <Span class="form_label">University/Institute</span><br>
                     <span><?php if(isset($edu->education_university)){ echo $edu->education_university;}?></span>
-            </div>   
+                </div>   -->
                    <div class="col-md-6">
                     <Span class="form_label">University/Institute Name</span><br>
                     <span><?php if(isset($edu->education_institute_name)){echo $edu->education_institute_name;}?></span>
@@ -1359,7 +1359,7 @@ var edu_name=el.val();
                                     </div></div><br>
                                     
                                     <div class="row">
-                                    <div class="col-md-6  ">                             
+<!--                                    <div class="col-md-6  ">                             
                                         <label for="fname">University/Institute</label>
                                         <select class="form-control required" id="university" name="university">
                                             <option>-- Select University/Institute --</option>
@@ -1367,13 +1367,16 @@ var edu_name=el.val();
                                             <option value="Institute">Institute</option>
                                         </select>
                                         <span class="text-danger" id="email_err"></span>                                                          
-                                    </div>
-                                        <div class="col-md-6  "> 
+                                    </div>-->
+                                        <div class="col-md-6"> 
                                             <label for="fname">University/Institute Name</label>
-                                            <datalist  id="data_list">  
-                                        <!--<option>SPPU</option>-->
-                                        </datalist>
-                                       <input list="data_list" id="inst_name" type="text" placeholder="University/Institute Name" class="form-control text_design" name="inst_title">
+                                            <select class="form-control"  id="inst_name" name="inst_title">
+                                                <?php if(isset($institutes)){
+                                                    foreach($institutes as $inst){?>
+                                        <option value="<?php echo $inst->institute_name;?>"><?php echo $inst->institute_name;?></option>
+                                                <?php } }?>
+                                        </select>
+                                       <!--<input list="data_list"  type="text" placeholder="University/Institute Name" class="form-control text_design" name="inst_title">-->
                                         </div>
                                     </div>
                                      <div class="row">
