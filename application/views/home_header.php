@@ -128,7 +128,8 @@
              /*width:400px;*/ 
              border-color: #ccc;
              border-width: 1px;
-             padding: 5px;
+             padding: 12px;
+             
          }
        
   </style>
