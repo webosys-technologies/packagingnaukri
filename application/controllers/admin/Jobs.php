@@ -24,7 +24,8 @@ class Jobs extends CI_Controller
             $result['user_data']=get_user_info($id);
             $result['jobs']=$this->Jobs_model->getall_jobs();
             $result['companies']=$this->Companies_model->getall_companies();
-            $result['system']=$this->System_model->get_info();
+            $sys=$this->session->userdata('admin_source');
+            $result['system']=$this->System_model->get_system_info($sys);
            
              $this->load->view('admin/header',$result);
              $this->load->view('admin/view_jobs',$result);
@@ -181,6 +182,8 @@ class Jobs extends CI_Controller
         {
             $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
+            $sys=$this->session->userdata('admin_source');
+            $result['system']=$this->System_model->get_system_info($sys);
             
         $this->load->view('admin/header',$result);
         $this->load->view('admin/applied_members',$result);
@@ -206,8 +209,8 @@ class Jobs extends CI_Controller
     {      
             $id=$this->session->userdata('admin_id');
             $result['user_data']=  get_user_info($id);
-            $result['system']=$this->System_model->get_info();
-                     
+            $sys=$this->session->userdata('admin_source');
+            $result['system']=$this->System_model->get_system_info($sys);
                   
              $this->load->view('admin/header',$result);
              $this->load->view('admin/jobs');
@@ -219,6 +222,8 @@ class Jobs extends CI_Controller
         $id=$this->session->userdata('admin_id');
         $result['user_data']=  get_user_info($id);
         $result['saved']=$this->Saved_jobs_model->get_jobs_by_member($id);
+            $sys=$this->session->userdata('admin_source');
+            $result['system']=$this->System_model->get_system_info($sys);
         
         
         $this->load->view('admin/header',$result);
@@ -233,6 +238,8 @@ class Jobs extends CI_Controller
         $result['user_data']=  get_user_info($id);
         
         $result['jobs']=$this->Applied_jobs_model->get_job_by_member($id);
+            $sys=$this->session->userdata('admin_source');
+            $result['system']=$this->System_model->get_system_info($sys);
        
          $this->load->view('admin/header',$result);
         $this->load->view('member/applied_jobs',$result);
@@ -297,6 +304,8 @@ class Jobs extends CI_Controller
     {
         $id=$this->session->userdata('admin_id');
             $result['user_data']=  get_user_info($id);
+            $sys=$this->session->userdata('admin_source');
+            $result['system']=$this->System_model->get_system_info($sys);
              $this->load->view('admin/header',$result);
              $this->load->view('member/job_info');
              $this->load->view('admin/footer',$result);

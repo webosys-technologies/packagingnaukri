@@ -36,10 +36,12 @@ class Index extends CI_Controller
 		if ($this->form_validation->run() == false)
         {
 			
-		$state['states']=$this->Cities_model->getall_state();	
-                $this->load->view('home_header');  
+		$state['states']=$this->Cities_model->getall_state();
+        $sys=$this->System_model->source_name();        
+            $result['system']=$this->System_model->get_system_info($sys);	
+                $this->load->view($sys.'/home_header',$result);  
                 $this->load->view('recruiter/register',$state); 
-                 $this->load->view('home_footer');  
+                 $this->load->view($sys.'/home_footer');  
                 
                     
         }
@@ -78,9 +80,12 @@ class Index extends CI_Controller
         }
         else
         {
-             $this->load->view('home_header');  
+
+        $sys=$this->System_model->source_name();        
+            $result['system']=$this->System_model->get_system_info($sys);   
+             $this->load->view($sys.'/home_header',$result);  
              $this->load->view('recruiter/login');
-             $this->load->view('home_footer');  
+             $this->load->view($sys.'/home_footer',$result);  
 
             
         }

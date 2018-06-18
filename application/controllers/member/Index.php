@@ -17,10 +17,12 @@ class Index extends CI_Controller
 	function index()
 	{
            $data['states']=$this->Cities_model->getall_state();
+        $sys=$this->System_model->source_name();        
+            $result['system']=$this->System_model->get_system_info($sys);
           
-          $this->load->view('home_header');
+          $this->load->view($sys.'/home_header');
           $this->load->view('member/sin',$data);
-          $this->load->view('home_footer');
+          $this->load->view($sys.'/home_footer');
 	}
 
    function register()
@@ -45,10 +47,13 @@ class Index extends CI_Controller
          //  echo  "validate error";
       
    $state['states']=$this->Cities_model->getall_state(); 
-                                $this->load->view('home_header');
-              
+
+        $sys=$this->System_model->source_name();        
+            $result['system']=$this->System_model->get_system_info($sys);
+
+                $this->load->view($sys.'/home_header',$result);             
                 $this->load->view('member/sin',$state);                     
-                   $this->load->view('home_footer');
+                $this->load->view($sys.'/home_footer',$result);
                     
         }
         else
@@ -57,48 +62,29 @@ class Index extends CI_Controller
             
       list($get_insert,$get_data)=$this->Members_model->register();
       if($get_insert)
-      {
-                            // $default_sub_recruiter=array('recruiter_id'=>$get_insert,
-                            //                 'sub_recruiter_fullname'=>'Owner Name',
-                            //                 'sub_recruiter_name'=>'Main Sub-Center',
-                            //                 'sub_recruiter_created_at'=>date('Y-m-d'),
-                            //                 'sub_recruiter_status'=>'1');                    
-                            //   $this->Sub_recruiters_model->sub_recruiter_add($default_sub_recruiter); 
-                
-                            
-        $msg=array(
-                                    'title'=>'Delto Center Registration...!',
-                                    'data'=>'Your Member Registration Successfully with Packaging Naukari',
-                                    'email'=>$get_data['member_email']
-                                );
-        
-                               //$result=$this->signup_email($get_data,$msg);
-                              // $this->verification_email($get_data,$msg);
-                               if(true==true)
-                                {
-                                  $this->session->set_flashdata('signup_success','Registration Successfull,please check email & verify your Account!');
-                                //$this->load->view('member/signup');
-                                  redirect('member/index/login');
-                                }
-                                else
-                                {                                  
-                                     $this->session->set_flashdata('signup_error','please Enter Valid Email...!');
-                                    // $cities['cities']=$this->Cities_model->getall_cities("Maharashtra");
-                                $this->load->view('member/home_header');
-
-                                $this->load->view('member/signup');
-                                $this->load->view('member/home_footer');
-
-                                }
+      {                        
+                                  $this->session->set_flashdata('signup_success','Registration Successfull, Please login!');
+                                  redirect('member/index');
+                                
 
       }
       else
                             {
                            
                           //  $cities['cities']=$this->Cities_model->getall_cities("Maharashtra");
-                                $this->load->view('member/home_header');
-                                $this->load->view('member/sin');
-                                $this->load->view('member/home_footer');
+//                                $this->load->view('member/home_header');
+//                                $this->load->view('member/sin');
+//                                $this->load->view('member/home_footer');
+
+   $state['states']=$this->Cities_model->getall_state(); 
+
+        $sys=$this->System_model->source_name();        
+            $result['system']=$this->System_model->get_system_info($sys);
+
+                $this->load->view($sys.'/home_header',$result);             
+                $this->load->view('member/sin',$state);                     
+                $this->load->view($sys.'/home_footer',$result);
+
         
       }
 

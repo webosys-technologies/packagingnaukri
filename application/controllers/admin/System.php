@@ -23,9 +23,8 @@ class System extends CI_Controller
 		
             $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
-            $system="Packaging";
-            $result['system']=$this->System_model->get_system_info($system);
-            
+            $sys=$this->session->userdata('admin_source');
+            $result['system']=$this->System_model->get_system_info($sys);
             $this->load->view('admin/header',$result);
             $this->load->view('admin/packaging_system',$result);
             $this->load->view('admin/footer');
@@ -36,11 +35,12 @@ class System extends CI_Controller
 //                echo base_url();
             $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
-            $system="Printing";
-            $result['system']=$this->System_model->get_system_info($system);
-           
+            $sys=$this->session->userdata('admin_source');
+            $result['system']=$this->System_model->get_system_info($sys);
+            $val="printing";
+            $data['system']=$this->System_model->get_system_info($val);
             $this->load->view('admin/header',$result);
-            $this->load->view('admin/printing_system',$result);
+            $this->load->view('admin/printing_system',$data);
             $this->load->view('admin/footer');
 
 	}
@@ -50,11 +50,13 @@ class System extends CI_Controller
 
             $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
-            $system="Plastic";
-            $result['system']=$this->System_model->get_system_info($system);
-           
+            $sys=$this->session->userdata('admin_source');
+            $result['system']=$this->System_model->get_system_info($sys);
+            $val="plastic";
+            $data['system']=$this->System_model->get_system_info($val);
+
             $this->load->view('admin/header',$result);
-            $this->load->view('admin/printing_system',$result);
+            $this->load->view('admin/printing_system',$data);
             $this->load->view('admin/footer');
 
 	}

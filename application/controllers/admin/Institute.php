@@ -20,7 +20,8 @@ class Institute extends CI_Controller
             $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
              $result['insti']=$this->Institute_model->getall();
-            $result['system']=$this->System_model->get_info();
+            $sys=$this->session->userdata('admin_source');
+            $result['system']=$this->System_model->get_system_info($sys);
              
             $this->load->view('admin/header',$result);
             $this->load->view('admin/institute',$result);

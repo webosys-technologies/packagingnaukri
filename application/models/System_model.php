@@ -36,6 +36,27 @@ class System_model extends CI_Model
 		$this->db->update($this->table,$data,$where);
 		return $this->db->affected_rows();
 	}
+
+	function source_name()
+	{
+		 $url=explode('/', base_url());
+            if ($url[3] == 'packagingnaukri') {
+            
+              $page='packaging';
+              return $page;
+            }
+            elseif ($url[3] == 'printingnaukari') {
+
+                  $page='printing';  
+             		 return $page;
+
+            }elseif($url[3] == 'plasticnaukari'){
+
+                  $page='plastic'; 
+              	  return $page;
+
+            }
+	}
 }
 
 

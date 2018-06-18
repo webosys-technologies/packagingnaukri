@@ -231,7 +231,8 @@
         <form id="recruiter_form" action="<?php echo base_url(); ?>/recruiter/index/loginMe" method="post">
             <span id="log_err" style="color:red"></span>
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" id="email" placeholder="Email or Mobile No" name="recruiter_email" required/><span class="text-danger" id="email_err"></span>
+            <input type="text" class="form-control" id="email" placeholder="Email or Mobile No" name="recruiter_email" required/>
+            <span class="text-danger" id="email_err"></span>
             <span class="text-danger" id="no_err"></span>
             <span class="text-success" id="email_success"></span>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

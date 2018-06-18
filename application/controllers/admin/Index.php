@@ -60,13 +60,15 @@ class Index extends CI_Controller
             
             if($result > 0 && $result->user_status==1 && $result->user_type == 'admin')
             {
-               
+               $source=$this->System_model->source_name();
+
                     $sessionArray = array(                        
                     'admin_id' => $result->user_id,
                     'admin_fname' => $result->user_fname,
                     'admin_lname' => $result->user_lname,
                     'admin_email' => $result->user_email,
-                    'admin_LoggedIn' => true
+                    'admin_LoggedIn' => true,
+                    'admin_source'   => $source,
                                     );
                                     
                     $this->session->set_userdata($sessionArray);  
