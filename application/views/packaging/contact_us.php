@@ -4,19 +4,20 @@
        }
            </style>
         
-        <div class="row" id="label" style="background:#bcd0e0">
+        <div class="row" id="label">
         <div class="container">        
 		<div class="col-md-9 col-md-offset-1">
-		<h3>Contact Us</h3>
+		<h3 style="color:#02B645;"><b>Contact Us</b></h3>
 			</div> 
                
 		
         </div>
             </div>
+           <div style="background:white">
           <div class="container">    
               <div class="row">
 		<div class="col-md-5 col-md-offset-1">
-		<h5 style="color:#0BA1DC;">Home <i class="fas fa-angle-double-right"></i> Contact Us</h5>
+		<h5 style="color:#02B645;">Home <i class="fas fa-angle-double-right"></i> Contact Us</h5>
                
                 
                
@@ -29,7 +30,7 @@
                <div class="row">
                    <form action="">
                     <div class="col-md-5 col-md-offset-1">
-                                <h4 style="color:#0BA1DC;">Get a Free Consultion</h4><hr style="border-top: 1px solid #ccc;">
+                                <h4 style="color:#02B645;">Get a Free Consultion</h4><hr style="border-top: 1px solid #ccc;">
                        
                     <div class="row">
                     <div class="col-md-8">
@@ -76,7 +77,7 @@
                     </div>
                        
                        </form>
-                    <div class="col-md-5 col-md-offset-1" style="color:#0BA1DC;">
+                    <div class="col-md-5 col-md-offset-1" style="color:#02B645;">
 				 <h4 >Contact us for business queries :</h4><hr style="border-top: 1px solid #ccc;">
                                  <b>Contact:</b> ANSHUMAN UPADHYAY<br>
                                 <b>Cell:</b> +91-22-25701724<br>
@@ -89,10 +90,11 @@
               <br>
            
 		
-        </div> 
+        </div>   <br>
+               </div>
            
            
-           <br>
+         
            
 		
         </div>

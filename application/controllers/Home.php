@@ -85,14 +85,14 @@ class Home extends CI_Controller
             $url=explode('/', base_url());
             if ($url[3] == 'packagingnaukri') {
             $result['system']=$this->System_model->get_system_info('packaging');
-           
+          
             $page='packaging/'.$view;
-            $this->load->view('packaging/home_header',$result);
-             $this->load->view($page,$result);
-             $this->load->view('packaging/home_footer',$result);
-//              $this->load->view('plastic/home_header');
-//             $this->load->view('plastic/home',$result);
-//             $this->load->view('plastic/home_footer',$result);
+//            $this->load->view('packaging/home_header',$result);
+//             $this->load->view($page,$result);
+//             $this->load->view('packaging/home_footer',$result);
+              $this->load->view('plastic/home_header');
+             $this->load->view('plastic/home',$result);
+             $this->load->view('plastic/home_footer',$result);
             }
             elseif ($url[3] == 'printingnaukari') {
                 $result['system']=$this->System_model->get_system_info('printing');
@@ -101,11 +101,10 @@ class Home extends CI_Controller
                  $this->load->view($page,$result);
                  $this->load->view('packaging/home_footer',$result);                    
             }else{
-                 print_r($result['system']);
-            die;
+                 
                   $page='plastic/'.$view;
                   $result['system']=$this->System_model->get_system_info('plastic');
-                $this->load->view('packaging/home_header',$result);
+                  $this->load->view('packaging/home_header',$result);
                  $this->load->view($page,$result);
                  $this->load->view('packaging/home_footer',$result);                
             }

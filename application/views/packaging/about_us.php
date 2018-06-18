@@ -4,18 +4,19 @@
        }
            </style>
         
-        <div class="row" id="about_label" style="background:#bcd0e0">
+        <div class="row" id="about_label" style="background:">
         <div class="container">        
 		<div class="col-md-9 col-md-offset-1">
-		<h3>About Us</h3>
+		<h3 style="color:#02B645;"><b>About Us</b></h3>
 			</div> 
                
 		
         </div>
-            </div>
+            </div><br>
+           <div style="background:white">
          <div class="container">        
 		<div class="col-md-10 col-md-offset-1">
-		<h5 style="color:#0BA1DC;">Home <i class="fas fa-angle-double-right"></i> About Us</h5>
+		<h5 style="color:#02B645;">Home <i class="fas fa-angle-double-right"></i> About Us</h5>
                 <p>
                     We are a team of packaging professionals, by qualification and by experience, with varied expertise in packaging materials , processes, Consultancy, New product development, molds and machineries. We have a deep reach in to the packaging industry due to associations with various packaging related organizations and institutes. This has helped us create a vast array of database of talents which can fulfill specific requirement of the industry. We also have HR professionals as a part of our team to analyze aspects in a candidate other than technical.
 <br><br>
@@ -23,7 +24,7 @@ As packaging professionals we can understand requirements of the client in absol
                 </p>
                 <hr>
 			
-<h5 style="color:#0BA1DC;">Key Strengths</h5>
+<h5 style="color:#02B645;">Key Strengths</h5>
 <li>Team of qualified & experienced packaging professionals, HR professionals directly involved in recruitment, screening and interviewing process.</li>
 <li>Exclusive packaging professionals recruitment firm.</li>
 <li>Largest database and networking of packaging professionals.</li>
@@ -32,7 +33,9 @@ As packaging professionals we can understand requirements of the client in absol
 		</div>  <br>
            
 		
-        </div>
+        </div>  <br>
+               </div>
+          
         
         
         
