@@ -168,6 +168,7 @@
    var el = $(this) ;
 
    //if(el.val() === "Maharashtra" ) {
+    $('#city').html(" ");
 var state= $('#state option:selected').val();
 //alert(state);
           

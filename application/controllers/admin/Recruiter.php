@@ -22,7 +22,8 @@ class Recruiter extends CI_Controller
             $result['user_data']=$this->User_model->get_user_by_id($id);
             $result['recruiters']=$this->Recruiters_model->getall();
             $result['states']=$this->Cities_model->getall_state();
-            $result['system']=$this->System_model->get_info();
+            $sys=$this->session->userdata('admin_source');
+            $result['system']=$this->System_model->get_system_info($sys);
             
             $this->load->view('admin/header',$result);
             $this->load->view('admin/recruiter_view',$result);

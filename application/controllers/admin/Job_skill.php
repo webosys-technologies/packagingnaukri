@@ -25,7 +25,8 @@ class Job_skill extends CI_Controller
             $result['jobs']=$this->Jobs_model->getall_jobs();
             $result['job_skill']=$this->Job_skill_model->getall_job_skill();
             $result['companies']=$this->Companies_model->getall_companies();
-            $result['system']=$this->System_model->get_info();
+            $sys=$this->session->userdata('admin_source');
+            $result['system']=$this->System_model->get_system_info($sys);
            
              $this->load->view('admin/header',$result);
              $this->load->view('admin/job_skill',$result);

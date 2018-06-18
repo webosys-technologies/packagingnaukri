@@ -37,7 +37,8 @@ class Jobs extends CI_Controller
             $result['user_data']=get_user_info($id);
             $result['jobs']=$this->Jobs_model->getall_jobs();
             $result['companies']=$this->Companies_model->getall_companies();
-            $result['system']=$this->System_model->get_info();
+            $sys=$this->session->userdata('user_source');
+            $result['system']=$this->System_model->get_system_info($sys);
             
              $this->load->view('user/header',$result);
              $this->load->view('user/view_jobs',$result);
@@ -110,6 +111,8 @@ class Jobs extends CI_Controller
         {
             $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
+            $sys=$this->session->userdata('user_source');
+            $result['system']=$this->System_model->get_system_info($sys);
             
         $this->load->view('user/header',$result);
         $this->load->view('user/applied_members',$result);
