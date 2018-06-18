@@ -87,8 +87,8 @@ class Home extends CI_Controller
              $this->load->view($page,$result);
              $this->load->view('packaging/home_footer',$result);
 //              $this->load->view('plastic/home_header');
-//             $this->load->view('printing/home',$result);
-//             $this->load->view('printing/home_footer',$result);
+//             $this->load->view('plastic/home',$result);
+//             $this->load->view('plastic/home_footer',$result);
             }
             elseif ($url[3] == 'printingnaukari') {
                   $page='printing/'.$view;

@@ -16,7 +16,7 @@
          <div class="container">        
 		<div class="col-md-10 col-md-offset-1">
 		<h5 style="color:#0BA1DC;">Home <i class="fas fa-angle-double-right"></i> Services <i class="fas fa-angle-double-right"></i> Resource Outsourcing</h5>
-                <p>We have a vast array of dynamic packaging professionals with varied experience across industries. These professionals are available to fulfill the requirement of the customer on a short or long term basis.</p>
+                <p>We have a vast array of dynamic printing professionals with varied experience across industries. These professionals are available to fulfill the requirement of the customer on a short or long term basis.</p>
                 <h4 style="color:#0BA1DC;">There are two models in place here :</h4>
                
 <li><b>On Site Support :</b></li><p>Dedicated resource will be work from the customers office or other location as per customers requirement and will work as an internal team member with focus on the custom’s business objectives.</p>

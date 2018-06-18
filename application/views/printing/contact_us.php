@@ -81,7 +81,7 @@
                                  <b>Contact:</b> ANSHUMAN UPADHYAY<br>
                                 <b>Cell:</b> +91-22-25701724<br>
                                 <b>Address:</b> 1076, Heera Pana Centre, Hiranandani Gardens, Powai, Mumbai - 400078 (INDIA)<br>
-                                <b>Email:</b> info@packagingnaukri.com
+                                <b>Email:</b> info@printingnaukri.com
                         </div>
                 </div>
               
