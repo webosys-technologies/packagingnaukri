@@ -39,7 +39,7 @@ class Index extends CI_Controller
 		$state['states']=$this->Cities_model->getall_state();
         $sys=$this->System_model->source_name();        
             $result['system']=$this->System_model->get_system_info($sys);	
-                $this->load->view('Packaging/home_header',$result);  
+                $this->load->view($sys.'/home_header',$result);  
                 $this->load->view('recruiter/register',$state); 
                  $this->load->view($sys.'/home_footer',$result);  
                 

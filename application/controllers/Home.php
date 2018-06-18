@@ -82,32 +82,14 @@ class Home extends CI_Controller
             }
           
              $result['jobs']=$this->Jobs_model->get_recent_job();    
-            $url=explode('/', base_url());
-            if ($url[3] == 'packagingnaukri') {
-            $result['system']=$this->System_model->get_system_info('packaging');
-          
-            $page='packaging/'.$view;
-//            $this->load->view('packaging/home_header',$result);
-//             $this->load->view($page,$result);
-//             $this->load->view('packaging/home_footer',$result);
-              $this->load->view('plastic/home_header');
+             $sys=$this->System_model->source_name();
+            $result['system']=$this->System_model->get_system_info($sys);
+
+              $this->load->view($source.'/home_header',$result);
              $this->load->view('plastic/home',$result);
-             $this->load->view('plastic/home_footer',$result);
-            }
-            elseif ($url[3] == 'printingnaukari') {
-                $result['system']=$this->System_model->get_system_info('printing');
-                  $page='printing/'.$view;
-                $this->load->view('packaging/home_header',$result);
-                 $this->load->view($page,$result);
-                 $this->load->view('packaging/home_footer',$result);                    
-            }else{
-                 
-                  $page='plastic/'.$view;
-                  $result['system']=$this->System_model->get_system_info('plastic');
-                  $this->load->view('packaging/home_header',$result);
-                 $this->load->view($page,$result);
-                 $this->load->view('packaging/home_footer',$result);                
-            }
+             $this->load->view($source.'/home_footer',$result);
+
+
         }
 
     
