@@ -85,6 +85,8 @@ class Home extends CI_Controller
             $url=explode('/', base_url());
             if ($url[3] == 'packagingnaukri') {
             $result['system']=$this->System_model->get_system_info('packaging');
+            print_r($result['system']);
+            die;
             $page='packaging/'.$view;
             $this->load->view('packaging/home_header',$result);
              $this->load->view($page,$result);
