@@ -39,7 +39,7 @@ class Index extends CI_Controller
 		$state['states']=$this->Cities_model->getall_state();
         $sys=$this->System_model->source_name();        
             $result['system']=$this->System_model->get_system_info($sys);	
-                $this->load->view($sys.'/home_header',$result);  
+                $this->load->view('Packaging/home_header',$result);  
                 $this->load->view('recruiter/register',$state); 
                  $this->load->view($sys.'/home_footer',$result);  
                 
@@ -533,6 +533,21 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
 			return FALSE;
 		}
 	}
+
+    function check_otp_verification($requested_otp)
+  {
+    $ses_mobile=$this->session->userdata('mobile');
+    $ses_otp=$this->session->userdata('otp');
+    // print_r($ses_mobile);
+    // echo $ses_otp;
+    $mob=$this->input->post('mobile');
+    if ($ses_mobile == $mob && $ses_otp == $requested_otp) {
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+
+  }
 
   public function ajax_edit($id)
   {
