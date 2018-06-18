@@ -178,7 +178,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="header-bottom">
 			<div class="container">
 				<div class="logo">
-					 <img src="<?php echo  base_url();?>assets/images/packagelogo.png" width="300x" height="63px">
+			        <img src="<?php echo  base_url().$system->system_logo;?>" width="300x" height="63px">
 				</div>
 				<span class="menu"></span>
 				<div class="top-menu">

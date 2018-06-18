@@ -47,7 +47,7 @@
       <div class="footer text-center">
 				<div class="container">
 					<div class="copy">
-		              <p> <strong style="color:white">Copyright &copy; 2018 Packaging Naukri. All rights reserved. </strong><span style="color:#5df95a">Developed by <a style="color:#5df95a" href="http://webosys.com/" target="_blank">Webosys Technologies</a></span>	</p>
+		              <p> <strong style="color:white">Copyright &copy; 2018 <?php echo $system->system_name;?>. All rights reserved. </strong><span style="color:#5df95a">Developed by <a style="color:#5df95a" href="http://webosys.com/" target="_blank">Webosys Technologies</a></span>	</p>
 		            </div>
 					
 				</div>

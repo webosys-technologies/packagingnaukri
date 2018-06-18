@@ -397,7 +397,7 @@ a:link, a:visited{
                                                                     $salary=$sal[1]." Thousand ";
                                                                }
                                   }?>
-                                  <span class="fa fa-inr"> <?php echo $salary; ?></span>  /-
+                                  <span class="fa fa-inr"> <?php if(isset($job->job_salary)){echo $salary;}?></span>  /-
                               </div>
                               <div class="col-md-5" style="padding-top: 10px;">
                                   <span class="skill">Post By</span> <a href="#"><img src='<?php if(file_exists($job->recruiter_profile_pic)){echo base_url().$job->recruiter_profile_pic;}else{ echo base_url()."profile_pic/avatar.png";}?>' width="20px" height="20px"> <?php echo ucwords(strtolower($job->recruiter_fname))." ".ucwords(strtolower($job->recruiter_lname));?></a>

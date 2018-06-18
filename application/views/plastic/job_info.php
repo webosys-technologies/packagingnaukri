@@ -9,8 +9,9 @@
              box-shadow: 5px 5px 10px #CCD1D1;
              background:white;
              line-height: 15px;
+             margin-bottom: 100px;
              /*font-family:georgia,serif;*/
-             height:500px;
+             /*height:auto;*/
               }
          
                 .job_info{
@@ -93,7 +94,7 @@
                <div class="col-md-2 col-xs-3">
           <label> Website </label>
           </div>
-         <div class="col-md-10 col-xs-9">:&nbsp;<span id="website" class="job_info"><a href="http://<?php echo $job_info->company_website;?>" target="_blank"><?php echo $job_info->company_website;?></a></span></div><br> 
+         <div class="col-md-10 col-xs-9">:&nbsp;<span id="website" class="job_info"><a href="https://<?php echo $job_info->company_website;?>" target="_blank"><?php echo $job_info->company_website;?></a></span></div><br> 
          </div>
            <div class="row">
                <div class="col-md-2 col-xs-3">

@@ -10,7 +10,7 @@
              background:white;
              line-height: 15px;
              /*font-family:georgia,serif;*/
-             height:500px;
+             height:auto;
               }
          
                 .job_info{

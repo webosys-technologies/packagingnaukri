@@ -181,23 +181,7 @@ a:link, a:visited{
    <!--<hr style="border-top: 1px solid #ccc;">-->
    <section class="content">
       
-<!--      <div class="shadow">
-           <div class="row content">  
-               <div class="box-header">
-          <h4 style="color:#5DADE2">Walk in for PHP Developer</h4>
-          <h5>Webosys Technologies</h5>
-          <label>Eligibility :</label><span> BE</span><br>
-          <label>Experience :</label><span> 1-2 year</span><br>
-          <label>Salary :</label><span> 12000/-</span><br>
-          <label>Job Location :</label><span> Pune</span><br>
-              
-               <label>Company Profile :</label>
-               <p> Softebizz technologies is global services in Web Application Development, E-commerce Development, Content Management Systems, Cloud Solution, Software Testing with its global headquarter at Pune, India.<p>
-              </div>
-           </div>
-              </div>-->
 
- 
            
                <div class="container" >
                    <?php if(isset($saved)){
@@ -254,8 +238,17 @@ a:link, a:visited{
                             <div class="col-md-1">
                                 <input class="star" id='save<?php echo $save->job_id;?>' onclick='job_status("<?php echo $save->job_id;?>")' type="checkbox" title="Unsave job" name="save">
                               </div>  
+                               <?php if(isset($save->job_salary)){
+                                                               $sal=explode('.', $save->job_salary);
+                                                               if(!empty($sal[0]) && $sal[0]!='0')
+                                                               {
+                                                                   $salary=$sal[0]." Lac ".$sal[1]." Thousand ";
+                                                               }else{
+                                                                    $salary=$sal[1]." Thousand ";
+                                                               }
+                                  }?>
                               <div class="col-md-3" style="padding-top: 10px;">
-                                  <span class="fa fa-inr"></span> <?php echo $save->job_salary;?>
+                                  <span class="fa fa-inr"></span> <?php if(isset($save->job_salary)){echo $salary;}?>
                               </div>
                               <div class="col-md-5" style="padding-top: 10px;">
                                   <span class="skill">Post By </span><a href="#"><img src='<?php if(file_exists($save->recruiter_profile_pic)){echo base_url().$save->recruiter_profile_pic;}else{ echo base_url()."profile_pic/avatar.png";}?>' width="20px" height="20px"> <?php echo ucfirst(strtolower($save->recruiter_fname))." ".ucfirst(strtolower($save->recruiter_lname));?></a>
