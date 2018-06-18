@@ -186,7 +186,7 @@ var state=el.val();
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group"><br>
-                                        <button class="btn btn-warning" onclick="send_otp()">Send Otp</button>
+                                        <button type="button" class="btn btn-warning" onclick="send_otp()">Send Otp</button>
                                     </div>
                                     
                                 </div>

@@ -21,7 +21,7 @@ class Recruiters_model extends CI_Model
     }
 	function register()
 	{
-		
+		$source=$this->System_model->source_name();
 
 		$data=array(
 			'recruiter_fname'			=>$this->input->post('fname'),
@@ -32,6 +32,7 @@ class Recruiters_model extends CI_Model
 			'recruiter_city'			=> $this->input->post('city'),
 			'recruiter_state'			=> $this->input->post('state'),
             'recruiter_created_at'	     => date("Y-m-d H:i:s"),
+            'recruiter_source'          => $source,
             'recruiter_status'           => '0',
 
 
