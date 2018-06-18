@@ -50,13 +50,11 @@ We intend and aim to place the candidate as per the precise need of the position
 
 Packaging and related businesses has seen a phenomenal growth trajectory in the last decade and the momentum is increasing on a daily basis and so is the need for qualified and experienced professionals on this front. Being a vast and diversified field it is difficult to find talent suited to a particular requirement with the required expertise. This is were we step in.<br><br>
 
-To provide the right opportunity to the every qualified packaging professional, to achieve his/her career objective. At the same time to provide the suitable candidate as per employers business need and develop a win-win relationship</p>   
+To provide the right opportunity to the every qualified packaging professional, to achieve his/her career objective. At the same time to provide the suitable candidate as per employerâ€™s business need and develop a win-win relationship</p>   
                     </div>
                     </div>
            
-        <br>
-	<div class="container">
-		<center><h3><b>OUR CUSTOMERS !!</b></h3></center>          
+                    
   <section style="padding-top: 100px; padding-bottom: 100px;" class="logoes slider content">
       <?php $company=$this->Companies_model->get_recent_company();
              
@@ -103,8 +101,7 @@ To provide the right opportunity to the every qualified packaging professional, 
      
       
   </section>  
-        </div>
-      
+           
 		
         </div>
         

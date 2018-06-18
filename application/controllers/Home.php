@@ -83,11 +83,12 @@ class Home extends CI_Controller
             if ($url[3] == 'packagingnaukri') {
             
               $page='packaging/'.$view;
-//              $this->load->view('packaging/index');
-//              $this->load->view('packaging/index_home');
             $this->load->view('packaging/home_header');
              $this->load->view($page,$result);
              $this->load->view('packaging/home_footer',$result);
+//              $this->load->view('plastic/home_header');
+//             $this->load->view('printing/home',$result);
+//             $this->load->view('printing/home_footer',$result);
             }
             elseif ($url[3] == 'printingnaukari') {
                   $page='printing/'.$view;

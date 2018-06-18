@@ -97,7 +97,7 @@ class Index extends CI_Controller
                            
                           //  $cities['cities']=$this->Cities_model->getall_cities("Maharashtra");
                                 $this->load->view('member/home_header');
-        $this->load->view('member/sin');
+                                $this->load->view('member/sin');
                                 $this->load->view('member/home_footer');
         
       }
