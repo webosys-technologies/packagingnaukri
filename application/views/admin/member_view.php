@@ -76,15 +76,144 @@
        
         </div>
         </div>
-    <br>
-    <tr>
-<!--    <table> <td>Minimum age:</td>
-            <td><input type="text" id="min" name="min"></td>
-        </tr>
-        <tr>
-            <td>Maximum age:</td>
-            <td><input type="text" id="max" name="max"></td>
-        </tr></table>-->
+      <?php
+      if(isset($_GET['Search']))
+      {        
+        $exp_from=$_GET['experience_from'];  
+        $exp_to=$_GET['experience_to'];  
+        $sal_from=$_GET['salary_from'];
+        $sal_to=$_GET['salary_to']; 
+        $data=array('salary_from'=>$_GET['salary_from'],
+                    'salary_to'=>$_GET['salary_to'],
+                    'experience_from'=>$_GET['experience_from'],
+                    'experience_to'=>$_GET['experience_to']);
+        
+        $members=$this->Members_model->search_members($data);
+      }      
+      ?>
+      
+        <form action="" method="get" onsubmit="return validateForm()">
+        <div class="row">
+           
+            <div class="col-md-4 col-md-offset-2">
+                <div class="row">
+                    <div class="form-group">
+                    <div class="col-md-6">
+                        <label>Experince From</label>
+                        <select name="experience_from" id="experience_from" class="form-control">
+                            <option>Experience From</option>
+                         <script>
+                                var i=1;
+                                for(i; i<21; i++)
+                                {
+                                   $('[name="experience_from"]').append('<option value="'+i+'">'+i+ " Year"+'</option>');
+                                }
+                               
+                               <?php
+                               if(isset($exp_from))
+                               { ?>
+                                 $('[name="experience_from"]').val('<?php echo $exp_from;?>');  
+                              <?php }
+                               ?>
+                                                  
+                            </script>                            
+                        </select>
+                        <span class="text-danger" id="exp_from_err"></span>
+                    </div>
+                        <div class="col-md-6">
+                        <label>Experince To</label>
+                        <select name="experience_to" class="form-control">
+                            <option>Experience To</option>
+                         <script>
+                                var i=1;
+                                for(i; i<21; i++)
+                                {
+                                   $('[name="experience_to"]').append('<option value="'+i+'">'+i+ " Year"+'</option>');
+                                }
+                                 <?php
+                               if(isset($exp_to))
+                               { ?>
+                                 $('[name="experience_to"]').val('<?php echo $exp_to;?>');  
+                              <?php }
+                               ?>
+                            </script>
+                            <option>greater than 20</option>
+                        </select>
+                        <span class="text-danger" id="exp_to_err"></span>
+                    </div>
+                    </div>                    
+             </div>
+            </div>
+                            
+            
+                     
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="form-group">
+                    <div class="col-md-6">
+                        <label>Salary From</label>
+                        <select name="salary_from" class="form-control">
+                            <option>Salary From</option>
+
+                            <script>
+                                var i=1;
+                                for(i; i<100; i++)
+                                {
+                                   $('[name="salary_from"]').append('<option value="'+i+'">'+i+ " Lac"+'</option>');
+                                }
+                                
+                                 <?php
+                               if(isset($sal_from))
+                               { ?>
+                                 $('[name="salary_from"]').val('<?php echo $sal_from;?>');  
+                              <?php }
+                               ?>
+                            </script>
+                        </select>
+                        <span class="text-danger" id="sal_from_err"></span>
+                    </div>
+                        <div class="col-md-6">
+                        <label>Salary To</label>
+                        <select name="salary_to" class="form-control">
+                             <option>Salary To</option>
+
+                        <script>
+                                var i=1;
+                                for(i; i<100; i++)
+                                {
+                                   $('[name="salary_to"]').append('<option value="'+i+'">'+i+ " Lac"+'</option>');
+                                }
+                                 <?php
+                               if(isset($sal_to))
+                               { ?>
+                                 $('[name="salary_to"]').val('<?php echo $sal_to;?>');  
+                              <?php }
+                               ?>
+                            </script>
+                        </select>
+                        <span class="text-danger" id="sal_to_err"></span>
+                        
+                    </div>
+                    </div>                    
+             </div>
+                
+             </div>
+           
+        </div>
+         <div class="row">
+                     <div class="col-md-offset-4">
+                    <div class="form-group">
+                    <div class="col-md-2">
+                        <input type="submit" value="Search" name="Search" class="btn btn-info">
+                    </div>
+                        <div class="col-md-2">
+                            <a href="<?php echo base_url();?>admin/Members" class="btn btn-danger">Reset</a>
+                    </div>
+                    </div>    
+                         </div>
+             </div>
+         </form>
+      
 <div class="table-responsive">
     <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
       <thead>
@@ -150,23 +279,7 @@
   </div>
 
   <script type="text/javascript">
-      
-//       $.fn.dataTable.ext.search.push(
-//    function( settings, data, dataIndex ) {
-//        var min = parseInt( $('#min').val(), 10 );
-//        var max = parseInt( $('#max').val(), 10 );
-//        var age = parseFloat( data[3] ) || 0; // use data for the age column
-// 
-//        if ( ( isNaN( min ) && isNaN( max ) ) ||
-//             ( isNaN( min ) && age <= max ) ||
-//             ( min <= age   && isNaN( max ) ) ||
-//             ( min <= age   && age <= max ) )
-//        {
-//            return true;
-//        }
-//        return false;
-//    }
-//);
+
       
       
   $(document).ready( function () {  
@@ -238,6 +351,8 @@ var state=el.val();
     
  });  
 
+            
+
  
  
       var table=$('#table_id').DataTable();
@@ -257,6 +372,34 @@ var state=el.val();
     var save_method; //for save method string
     var table;
     var id;
+
+  function validateForm()
+  {
+//        var exp_from;
+//       if($('[name="experience_from"]').val()!="" && $('[name="experience_from"]').val()!="Experience From" && $('[name="experience_from"]').val()!="" && $('[name="experience_from"]').val()!="Experience From" && $('[name="salary_from"]').val()!="" && $('[name="salary_from"]').val()!="Salary From")
+//       {
+//       }
+//      if($('[name="experience_from"]').val()!="" && $('[name="experience_from"]').val()!="Experience From")
+//      {
+//          if($('[name="experience_to"]').val()!="" && $('[name="experience_to"]').val()!="Experience To")
+//          {
+//             return true;
+//          }else{
+//              $("#exp_to_err").html("Experience To Required");   
+//             return false;
+//                }
+//              
+//      }else{
+//           $("#exp_from_err").html("Experience From Required");         
+//          return false;
+//      }
+      
+//      $("#sal_to_err").html("Salary TO Required");
+//      $("#exp_from_err").html("Experience From Required");
+//      $("#exp_to_err").html("Experience TO Required");
+// $("#sal_from_err").html("Salary From Required");
+//     return false;
+  }
 
 
 function view_member(id)
@@ -284,9 +427,13 @@ function view_member(id)
             $('#city').html(data.member_city);
             $('#pincode').html(data.member_pincode);
             $('#state').html(data.member_state);
-             $('#marital').html(data.member_marital_status);
-            $('#experience').html(data.member_experience);
-            $('#salary').html(data.member_anual_salary);
+            $('#marital').html(data.member_marital_status);
+            $('#experience').html(data.member_experience+' year ');
+              if(data.member_anual_salary)
+              {
+                  var salary=data.member_anual_salary.split('.');
+                  $("#salary").html(salary[0]+' Lac '+salary[1]+' Thousand');
+              }
             if(data.member_profile_pic)
             {
             $('#profile_pic').attr("src", "<?php  echo base_url();?>"+data.member_profile_pic);

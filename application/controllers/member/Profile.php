@@ -234,7 +234,7 @@ class Profile extends CI_Controller
             $datetime1 = new DateTime($to);
             $datetime2 = new DateTime($form['from']);
             $interval = $datetime1->diff($datetime2);
-            $exp=$interval->format('%y yrs %m month');
+            $exp=$interval->format('%y.%m');
           
                 $mem_data=array('member_experience'=>$exp,
                                 'member_anual_salary'=>$form['lacsalary'].".".$form['thsalary']);
@@ -271,7 +271,7 @@ class Profile extends CI_Controller
             $datetime1 =  new DateTime($to);
             $datetime2 = new DateTime($form['from']);
             $interval = $datetime1->diff($datetime2);
-            $exp=$interval->format('%y yrs %m month');
+            $exp=$interval->format('%y.%m');
           
                 $mem_data=array('member_experience'=>$exp,
                                 'member_anual_salary'=>$form['lacsalary'].".".$form['thsalary']);
@@ -568,7 +568,7 @@ if (isset($_FILES['photo']['name'])) {
             $datetime1 = new DateTime(date("Y-m-d"));
     $datetime2 = new DateTime('2017-06-3');
     $interval = $datetime1->diff($datetime2);
-    echo $interval->format('%y yrs %m month');
+    echo $interval->format('%y.%m');
         }
 
   

@@ -34,6 +34,26 @@ class Members_model extends CI_Model
    
     }
     
+    function search_members($data)
+    {
+//       if(!empty($data['salary_from']) && !empty($data['salary_to']) && $data['salary_from']!="Salary From" && $data['salary_to']!="Salary To" && !empty($data['experience_from']) && !empty($data['experience_to']) && $data['experience_from']!="Experience From" && $data['experience_to']!="Experience To")
+//       {
+//           $query=$this->db->query('SELECT * FROM members WHERE member_anual_salary BETWEEN '.$data['salary_from'].' AND '.$data['salary_to'].'AND member_experience BETWEEN '.$data['experience_from'].' AND '.$data['experience_to']);               
+//           return $query->result();
+//       }
+//       else  
+       if(!empty($data['salary_from']) && !empty($data['salary_to']) && $data['salary_from']!="Salary From" && $data['salary_to']!="Salary To")
+       {
+      $query=$this->db->query('SELECT * FROM members WHERE member_anual_salary BETWEEN '.$data['salary_from'].' AND '.$data['salary_to']);               
+      return $query->result();
+       }else if(!empty($data['experience_from']) && !empty($data['experience_to']) && $data['experience_from']!="Experience From" && $data['experience_to']!="Experience To")
+           {
+            $query=$this->db->query('SELECT * FROM members WHERE member_experience BETWEEN '.$data['experience_from'].' AND '.$data['experience_to']);               
+              return $query->result();
+       }
+              
+    }
+    
     function login_with_otp($where)
     {
         $this->db->from($this->table);

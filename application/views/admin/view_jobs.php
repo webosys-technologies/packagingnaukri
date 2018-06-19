@@ -145,7 +145,7 @@
                                             <td style="cursor:pointer; :hover{background-color: red;}"  onclick="applicants(<?php echo $job->job_id ?>)">
                                                 <?php echo count($this->Applied_jobs_model->get_by_job_id($job->job_id))." Members";?></td>
                                             <td><?php echo $job->job_education?></td>
-                                            <td><?php echo $job->job_experience?></td>
+                                            <td><?php if($job->job_experience){echo $job->job_experience;}?></td>
                                             <td><?php echo $job->job_city?></td>
 				            <td><?php echo $job->job_created_at?></td>
                                             <td><?php 

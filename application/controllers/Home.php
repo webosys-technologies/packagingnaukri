@@ -86,8 +86,11 @@ class Home extends CI_Controller
             $result['system']=$this->System_model->get_system_info($sys);
 
               $this->load->view($sys.'/home_header',$result);
-             $this->load->view('plastic/home',$result);
+             $this->load->view($sys."/".$view,$result);
              $this->load->view($sys.'/home_footer',$result);
+//            $this->load->view('printing/home_header',$result);
+//             $this->load->view('printing/contact_us',$result);
+//             $this->load->view('printing/home_footer',$result);
 
 
         }

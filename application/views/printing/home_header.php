@@ -130,7 +130,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }
     .slick-prev:before,
     .slick-next:before {
-      color: green;
+      color: orange;
     }
     .slick-slide {
          

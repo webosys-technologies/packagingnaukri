@@ -30,7 +30,7 @@
         <div class="row" id="content_body" style="background:#F2F3F4">
         <div class="container">        
 		<div class="col-md-9 col-xs-9">
-		<h3 style="color:#02B645;">Enjoy building your career with lots of ready jobs!</h3>
+		<h3 style="color:orange">Enjoy building your career with lots of ready jobs!</h3>
 			<p>To provide the right opportunity to the every qualified packaging professional.</p>   
 		</div>  <br>
                 <div class="col-md-2">
@@ -42,9 +42,9 @@
          <div class="row" id="content_body" style="background:white;">        
 		<div class="container">
                     <div class="col-md-9">
-		<h4 style="color:#02B645;">Welcome to Packaging Naukri</h4><hr style="border-top: 1px solid #ccc;">
+		<h4 style="color:orange;">Welcome to Packaging Naukri</h4><hr style="border-top: 1px solid #ccc;">
 			
-<h5 style="color:#02B645;">Objective</h5>
+<h5 style="color:orange;">Objective</h5>
 <p>
 We intend and aim to place the candidate as per the precise need of the position in terms of experience, expertise, and budget resulting in a symbiotic business relationship between the employee and the employer.<br><br>
 

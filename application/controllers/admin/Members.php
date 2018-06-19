@@ -30,6 +30,24 @@ class Members extends CI_Controller
     
     }
     
+    function search()
+    {
+        $data=$this->input->get();
+        
+            $id=$this->session->userdata('admin_id');
+            $result['user_data']=get_user_info($id);
+            $result['states']=$this->Cities_model->getall_state();
+            $sys=$this->session->userdata('admin_source');
+            $result['system']=$this->System_model->get_system_info($sys);
+            
+            $result['members']=$this->Members_model->search_members($data);
+            
+            $this->load->view('admin/header',$result);
+            $this->load->view('admin/member_view',$result);
+            $this->load->view('admin/footer');       
+       
+    }
+    
    function member_add()
    {
        $form=$this->input->post();

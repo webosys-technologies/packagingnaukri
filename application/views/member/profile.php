@@ -751,7 +751,7 @@ var edu_name=el.val();
                      </div>
                          <div class="col-md-3">
                              <div class="item-details"><i class="fa fa-map-marker"></i><span class="item"> <?php if(isset($member_data)){echo $member_data->member_city.",".$member_data->member_country;}?></span></div>
-                             <div class="item-details"><i class="fa fa-suitcase"></i><span class="item"> <?php if(isset($member_data->member_experience)){echo $member_data->member_experience; } ?> </span></div>
+                             <div class="item-details"><i class="fa fa-suitcase"></i><span class="item"> <?php if(isset($member_data->member_experience)){echo $member_data->member_experience." Year"; } ?> </span></div>
                              <?php if(!empty($org->employment_salary) && $org->employment_salary!='0.0' ){$sal=explode(".",$org->employment_salary);} ?>
                              <div class="item-details"><i class="fa fa-inr"></i><span class="item"> <?php if(!empty($org->employment_salary) && $org->employment_salary!='0.0'){echo "INR ". $sal[0]."Lac ". $sal[1]."Thousand "; echo "PA";}  ?></span></div>
 
