@@ -1,25 +1,25 @@
-<style>
+<!--<style>
     #num{
         color:white;
     }
     </style>
-<!--next here sunil-->
+next here sunil
 <!DOCTYPE html>
-  <!-- Content Wrapper. Contains page content -->
+   Content Wrapper. Contains page content 
   <div class="content-wrapper" style="background-color:white;">
-    <!-- Content Header (Page header) -->
+     Content Header (Page header) 
     <section class="content-header">
       <h1><strong>Add Jobs</strong>
         
        
       </h1>
-<!--      <ol class="breadcrumb">
+      <ol class="breadcrumb">
         <li><a href="<?php echo base_url(); ?>admin/Dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Dashboard</li>
-      </ol>-->
+      </ol>
     </section>
 <hr style="border-top: 1px solid #ccc;">
-    <!-- Main content -->
+     Main content 
     <section class="content">
    
             <div class="row">
@@ -58,8 +58,8 @@
 				</div>					
             </div>
     </section>
-    <!-- /.content -->
+     /.content 
   </div>
-  <!-- /.content-wrapper -->
+   /.content-wrapper 
   
-
+-->
