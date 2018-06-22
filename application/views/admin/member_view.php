@@ -201,6 +201,7 @@
            
         </div>
          <div class="row">
+             
                      <div class="col-md-offset-4">
                     <div class="form-group">
                     <div class="col-md-2">
@@ -211,6 +212,10 @@
                     </div>
                     </div>    
                          </div>
+            
+             </div>
+             <div class="row">
+             <div class="col-md-offset-4"><span id="field_err" class="text-danger"></span></div>
              </div>
          </form>
       
@@ -375,10 +380,15 @@ var state=el.val();
 
   function validateForm()
   {
+     
 //        var exp_from;
-//       if($('[name="experience_from"]').val()!="" && $('[name="experience_from"]').val()!="Experience From" && $('[name="experience_from"]').val()!="" && $('[name="experience_from"]').val()!="Experience From" && $('[name="salary_from"]').val()!="" && $('[name="salary_from"]').val()!="Salary From")
-//       {
-//       }
+       if($('[name="salary_from"]').val()=="Salary From" && $('[name="salary_to"]').val()=="Salary To" && $('[name="experience_from"]').val()=="Experience From"  && $('[name="experience_to"]').val()=="Experience To")
+       {
+           $("#field_err").html("Please Select Anyone Field.");
+           return false;
+       }else{
+           return true;
+           }
 //      if($('[name="experience_from"]').val()!="" && $('[name="experience_from"]').val()!="Experience From")
 //      {
 //          if($('[name="experience_to"]').val()!="" && $('[name="experience_to"]').val()!="Experience To")
