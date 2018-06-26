@@ -226,6 +226,11 @@
         <tr bgcolor="#338cbf" style="color:#fff">
           <th>ID</th>
           <th>NAME</th>
+          <th>CURRENT COMPANY</th>
+          <th>DESIGNATION</th>
+          <th>EXPERIENCE</th>
+          <th>LOCATION</th>
+          <th>SALARY</th>
           <th>EMAIL</th>
           <th>MOBILE</th>
           <th>CITY</th>
@@ -247,6 +252,11 @@
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->member_id; ?>" class="" ></td> --> 
                                         <td><?php echo $res->member_id;?></td>
                                         <td><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
+                                         <?php $emp=$this->Employments_model->get_employment(array('member_id'=>$res->member_id))?>
+                                        <td><?php if(isset($emp->employment_organization)){echo $emp->employment_organization; }?></td>
+                                        <td><?php if(isset($emp->employment_desigation)){echo $emp->employment_designation;} ?></td>
+                                        <td><?php if($res->member_experience){echo $res->member_experience." Year";} ?></td>
+         <td><?php if(isset($emp->employment_city)){echo $emp->employment_city;} ?></td>
                                         <td><?php echo $res->member_email;?></td>
                                        <td><?php echo $res->member_mobile;?></td>
                                        <td><?php echo $res->member_city;?></td>

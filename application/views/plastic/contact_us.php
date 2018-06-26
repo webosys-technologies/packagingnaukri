@@ -78,10 +78,10 @@
                        </form>
                     <div class="col-md-5 col-md-offset-1" style="color:#0BA1DC;">
 				 <h4 >Contact us for business queries :</h4><hr style="border-top: 1px solid #ccc;">
-                                 <b>Contact:</b> ANSHUMAN UPADHYAY<br>
+                                  <b>Contact:</b> Ms. Preeti Singh<br>
                                 <b>Cell:</b> +91-22-25701724<br>
                                 <b>Address:</b> 1076, Heera Pana Centre, Hiranandani Gardens, Powai, Mumbai - 400078 (INDIA)<br>
-                                <b>Email:</b> info@plasticnaukri.com
+                                <b>Email:</b> preeti@packagingnaukri.com
                         </div>
                 </div>
               

@@ -58,7 +58,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 margin:100px;
                
             }
-            .modal-backdrop {background: none;}
+            /*.modal-backdrop {background: none;}*/
            
             #header_link{
                 color:white;
@@ -169,9 +169,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					 <div class="container">
 						<!--<p class="location"><i class="location"></i>16A, Honey Street (Green Door)</p>-->
 						<p class="phonenum">
-   <a href="https://www.facebook.com/packagingnaukri" class="fa fa-facebook icon"></a>  &nbsp;
+   <a href="https://www.facebook.com/packagingnaukri" target="_blank" class="fa fa-facebook icon"></a>  &nbsp;
    <!--<a href="#" class="fa fa-skype icon"></a>&nbsp;-->
-   <a href="https://www.linkedin.com/company/www-packagingnaukri-com" class="fa fa-linkedin icon"></a></p>
+   <a href="https://www.linkedin.com/company/www-packagingnaukri-com" target="_blank" class="fa fa-linkedin icon"></a>                                               
+                                                </p>
 							<div class="clearfix"></div>
 					</div>
 				</div>
@@ -297,6 +298,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 
+
+
+  <div class="modal fade" id="job_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div style="color:#fff; background-color:#338cbf" class="modal-header">
+          
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Job Info</strong></h4></center>
+      </div>
+      <div style="background:#F2F3F4" class="modal-body">
+         
+          
+          ljhl
+      </div>
+     
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
   
  <script src="<?php echo base_url();?>assets/js/jquery.magnific-popup.js" type="text/javascript"></script>
 			
@@ -374,10 +399,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       });
       
       
-       $().UItoTop({ easingType: 'easeOutQuart' });
+//       $().UItoTop({ easingType: 'easeOutQuart' });
 			$(".scroll").click(function(event){		
 			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},700);
 			});
       
     });
@@ -397,6 +422,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     $("#show_otp_box").show();
     $("#pass_field").show();
   }
+  
+  
+  
+  
   function member_login() {  
       
         //var val= member_log_validation();

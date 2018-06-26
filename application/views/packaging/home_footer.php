@@ -4,6 +4,12 @@
         padding:10px;
     }
     </style>
+   
+    
+    
+    
+    
+    
     <div class="row" style="background:#F2F3F4">
 <!--        <div class="container">        
 		<div class="col-md-9 col-md-offset-1">
@@ -91,32 +97,27 @@
         company-->
 
                     <script>
-                           function modal_show()
-                           {
-//                               $("#job_modal").modal('show');
-
-                           }
-                           
-                           if('<?php echo $i==1; ?>')
-                           {
-                                $("#job1").append('<a href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>"><span class="div_design"><?php echo $res->job_title;?></span></a><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 1px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
-                            }
-                            if('<?php echo $i==2; ?>')
-                           {
-                                $("#job2").append('<a href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>"><span class="div_design"><?php echo $res->job_title;?></span></a><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 1px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
-                           }
-                            if('<?php echo $i==3; ?>')
-                           {
-                                $("#job3").append('<a href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>"><span class="div_design"><?php echo $res->job_title;?></span></a><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 1px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
-                            }
-                            if('<?php echo $i==4; ?>')
-                           {
-                                $("#job4").append('<a href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>"><span class="div_design"><?php echo $res->job_title;?></span></a><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 1px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
-                            }
-                            if('<?php echo $i==5; ?>')
-                           {
-                                $("#job5").append('<a href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>"><span class="div_design"><?php echo $res->job_title;?></span></a><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 1px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
-                            }
+                        
+//                           if('<?php echo $i==1; ?>')
+//                           {
+//                                $("#job1").append('<a href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>"><span class="div_design"><?php echo $res->job_title;?></span></a><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 1px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
+//                            }
+//                            if('<?php echo $i==2; ?>')
+//                           {
+//                                $("#job2").append('<a href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>"><span class="div_design"><?php echo $res->job_title;?></span></a><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 1px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
+//                           }
+//                            if('<?php echo $i==3; ?>')
+//                           {
+//                                $("#job3").append('<a href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>"><span class="div_design"><?php echo $res->job_title;?></span></a><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 1px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
+//                            }
+//                            if('<?php echo $i==4; ?>')
+//                           {
+//                                $("#job4").append('<a href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>"><span class="div_design"><?php echo $res->job_title;?></span></a><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 1px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
+//                            }
+//                            if('<?php echo $i==5; ?>')
+//                           {
+//                                $("#job5").append('<a href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>"><span class="div_design"><?php echo $res->job_title;?></span></a><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 1px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
+//                            }
                     </script>
 
                         <?php $i++; } 

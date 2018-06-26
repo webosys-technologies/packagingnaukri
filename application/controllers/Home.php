@@ -6,20 +6,13 @@ class Home extends CI_Controller
 		parent::__construct();
 		$this->load->helper(array('form','url','date'));
 		$this->load->library(array('session', 'form_validation', 'email'));
-		$this->load->database();
-		
-
-                 
+		$this->load->database();                
 	}
        
 	
 	function index()
 	{
-	     // $result['jobs']=$this->Jobs_model->get_recent_job();
-             
-      //       $this->load->view('packaging/home_header');
-      //       $this->load->view('packaging/home');
-      //       $this->load->view('packaging/home_footer',$result);
+	    
         $view='home';
         $this->load_views($view);
             
@@ -74,11 +67,27 @@ class Home extends CI_Controller
           
             echo json_encode($cities);
         }
+        
+        function apply($job_id)
+        {
+            $GLOBALS['job_id'] = $job_id;
+            $view='apply';
+            $this->load_views($view);
+        }
 
         function load_views($view)
         {            
             if(!empty($GLOBALS['id'])){
            $result['job_info']=$this->Jobs_model->job_info($GLOBALS['id']);    
+            }
+            
+            if(!empty($GLOBALS['job_id'])){
+           $result['job_title']=$this->Jobs_model->job_by_id($GLOBALS['job_id']);    
+            }
+            
+            if($view=='home')
+            {
+                $result['show_icon']=true;
             }
           
              $result['jobs']=$this->Jobs_model->get_recent_job();    

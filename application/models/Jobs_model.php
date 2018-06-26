@@ -187,9 +187,7 @@ class Jobs_model extends CI_Model
           $this->db->join('companies as comp','comp.company_id=job.company_id','LEFT');
          $this->db->where('job.job_id',$id);
          $query=$this->db->get();
-         return $query->row();
-         
-         
+         return $query->row();        
      }
      
      
