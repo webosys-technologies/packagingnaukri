@@ -165,10 +165,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 	<!--start-home-->
 			<div id="home" class="header">
-				<div class="strip">
+				<div class="strip" style="background:white;">
+                                    <div class="logo">
+			        <img src="<?php echo  base_url().$system->system_logo;?>" width="300x" height="63px">
+				</div>
 					 <div class="container">
 						<!--<p class="location"><i class="location"></i>16A, Honey Street (Green Door)</p>-->
-						<p class="phonenum">
+						<p class="phonenum" style="padding-top:10px">
    <a href="https://www.facebook.com/packagingnaukri" target="_blank" class="fa fa-facebook icon"></a>  &nbsp;
    <!--<a href="#" class="fa fa-skype icon"></a>&nbsp;-->
    <a href="https://www.linkedin.com/company/www-packagingnaukri-com" target="_blank" class="fa fa-linkedin icon"></a>                                               
@@ -176,15 +179,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="clearfix"></div>
 					</div>
 				</div>
-			<div class="header-bottom">
+			<div class="header-bottom" style="background:#43B851;">
 			<div class="container">
-				<div class="logo">
-			        <img src="<?php echo  base_url().$system->system_logo;?>" width="300x" height="63px">
-				</div>
-				<span class="menu"></span>
+				
+                            <span class="menu" style="color: white;"></span>
 				<div class="top-menu">
                                     <nav class="cl-effect-5"><ul>
-	<li><a  href="<?php echo base_url();?>Home/index">Home</a></li>
+	<li><a href="<?php echo base_url();?>Home/index">Home</a></li>
         <li><a  href="<?php echo base_url();?>Home/about_us">About Us</a></li>
        <li class="dropdown">
           <a  href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>

@@ -17,6 +17,7 @@ class Home extends CI_Controller
         $this->load_views($view);
             
 	}
+        
         function services()
         {
             $view='services';
@@ -94,6 +95,7 @@ class Home extends CI_Controller
              $sys=$this->System_model->source_name();
             $result['system']=$this->System_model->get_system_info($sys);
 
+            
               $this->load->view($sys.'/home_header',$result);
              $this->load->view($sys."/".$view,$result);
              $this->load->view($sys.'/home_footer',$result);
