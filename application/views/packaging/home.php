@@ -113,7 +113,8 @@
               <div class="col-md-10"><span> : <?php echo $d->job_city; ?> </span><br></div></div>
       
          
-           <div class="row"><div class="col-md-2"><label>Job Description </label></div>
+       
+               <div class="row"><div class="col-md-2"><label>Job Description </label></div>
                <div class="col-md-10" style="padding-left:27px;">  <?php echo $d->job_description; ?></div></div>
                
                 <div class="row"><div class="col-md-2"><label>Job Posted At </label></div>
