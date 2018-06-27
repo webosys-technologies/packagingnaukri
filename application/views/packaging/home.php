@@ -87,10 +87,10 @@
            
            
          
-           <div class="row"><div class="col-md-2"><label >Qualification :</label></div>
-           <div class="col-md-10"> <span > <?php echo  $d->job_education; ?> </span></div> </div>        
-          <div class="row"><div class="col-md-2"><label >Experience :</label></div>
-          <div class="col-md-10"><span> <?php echo $d->job_experience; ?> </span></div></div>
+           <div class="row"><div class="col-md-2"><label >Qualification </label></div>
+           <div class="col-md-10"> <span > : <?php echo  $d->job_education; ?> </span></div> </div>        
+          <div class="row"><div class="col-md-2"><label >Experience </label></div>
+          <div class="col-md-10"><span> : <?php echo $d->job_experience; ?> </span></div></div>
                    
          <?php if(!empty($d->job_salary)){
             $sal=explode(".",$d->job_salary);
@@ -103,25 +103,25 @@
 ?>
           
           
-           <div class="row"><div class="col-md-2"><label >Salary :</label></div>
-         <div class="col-md-10"><span> <?php echo $salary;?> </span></div></div>
+           <div class="row"><div class="col-md-2"><label >Salary </label></div>
+         <div class="col-md-10"><span> : <?php echo $salary;?> </span></div></div>
                   
            <?php }?>
 
           
-          <div class="row"><div class="col-md-2"><label>Location :</label></div>
-              <div class="col-md-10"><span> <?php echo $d->job_city; ?> </span><br></div></div>
+          <div class="row"><div class="col-md-2"><label>Location </label></div>
+              <div class="col-md-10"><span> : <?php echo $d->job_city; ?> </span><br></div></div>
       
          
-           <div class="row"><div class="col-md-2"><label>Job Description :</label></div>
-               <div class="col-md-10" style="padding-left:27px;"> <?php echo $d->job_description; ?></div></div>
+           <div class="row"><div class="col-md-2"><label>Job Description </label></div>
+               <div class="col-md-10" style="padding-left:27px;">  <?php echo $d->job_description; ?></div></div>
                
-                <div class="row"><div class="col-md-2"><label>Job Posted At :</label></div>
-               <div class="col-md-10" style=""> <?php echo $d->job_created_at; ?></div></div>
+                <div class="row"><div class="col-md-2"><label>Job Posted At </label></div>
+               <div class="col-md-10" style=""> : <?php echo $d->job_created_at; ?></div></div>
            
           
-           <div class="row"><div class="col-md-2"><label> Website :</label></div>
-               <div class="col-md-10"> <span id="website" class="job_info"> <a href="http://<?php echo $d->company_website;?>" target="_blank"><?php echo $d->company_website;?></a></span></div></div>
+           <div class="row"><div class="col-md-2"><label> Website </label></div>
+               <div class="col-md-10"> <span id="website" class="job_info"> : <a href="http://<?php echo $d->company_website;?>" target="_blank"><?php echo $d->company_website;?></a></span></div></div>
         
            <div class="row">
                <div class="col-md-12">

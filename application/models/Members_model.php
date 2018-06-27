@@ -119,6 +119,12 @@ class Members_model extends CI_Model
         $query=$this->db->get($this->table);
         return $query->row();
     }
+    public function member_info_by_mobile($mobile)
+    {
+        $this->db->where('member_mobile',$mobile);
+        $query=$this->db->get($this->table);
+        return $query->row();
+    }
    
 
    

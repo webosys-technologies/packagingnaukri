@@ -4,11 +4,74 @@
        }
            </style>
            <script>
-                 function apply_job() {  
-      
-        //var val= member_log_validation();
+          
+          var resume;
+          var mobile;
+               
+    $(document).ready(function(){
+        
+         $('#resume').change(function(e){
+            var fileName = e.target.files[0].name;
+            
+            var ext=fileName.split('.').pop();
+            
+           
+            if(ext=="pdf" || ext=="doc" || ext=="docx" || ext=="rtf")
+            {     
+                resume=true;
+ 
+             $("#resume_err").html("");
+            }else{
+                  resume=false;
+                   $("#resume").val("");
+                 $("#resume_err").html("This Type of file is not allowed"); 
+                 
+            }
+             });
+        });
        
-        if(true)
+     
+    var job_id;
+   function login_to_apply(job_id)
+   {
+       $("#show_pass_box").hide();
+       $("#job_id").val(job_id);
+       $("#myModal").modal('show');
+       
+       
+   }
+               
+               
+                 function apply() {  
+      var number=$("#mobile").val();
+      var num_length=number.length;
+        if(number!='')
+            {                
+                if(isNaN(number))
+                {
+                    
+                 mobile=false;                 
+                 $("#mobile_err").html("Please Enter Valid Mobile Number");
+                }else if(num_length<10 || num_length>11)
+                {
+                    mobile=false;   
+                     $('#mobile_err').html("Mobile no digit should be 10 or 11 digit");
+                }else{
+                    
+                    mobile=true;
+                    $("#mobile_err").html("");
+                }
+            }else{
+                 mobile=false;                 
+                 $("#mobile_err").html("Please Enter Mobile Number");
+             }
+             
+             if(resume!=true)
+             {
+              $("#resume_err").html("Please Select File");    
+             }
+       
+        if(mobile==true && resume==true)
         {
        var data = new FormData(document.getElementById("apply_job"));
        var url = "<?php echo site_url('index.php/Home/apply_job')?>";
@@ -22,17 +85,34 @@
             data: data,
             dataType: "JSON",
         success: function(data)
-        {  var success;
-            var email_error;
-            var pass_error;
-            var val_error;        
+        {  
+            if(data.mobile_err)
+            {
+                $("#mobile_err").html(data.mobile_err);
+            }else{
+                $("#mobile_err").html("");
+            }
+            
+            if(data.job_err)
+            {
+                $("#job_err").html(data.job_err);
+            }else{
+                $("#job_err").html("");
+            }
+            
+            if(data.success)
+            {
+                location.reload();
+//                $("#mobile_err").html(data.mobile_err);
+            }
         },
         error: function (jqXHR, textStatus, errorThrown)
         {            
           alert('Error...!');
         }
       });
-      }
+      
+    }
     }
                </script>
         
@@ -70,7 +150,7 @@
                                 <div class="form-group">
 					<label for="name">Job_title:</label><span style="color:red">*</span>
                                         <input class="form-control" name="title" id="title" minlength="2" required="" type="text"  value="<?php if(isset($job_title)){ echo $job_title->job_title; } ?>" readonly="" /><span class="text-danger" id="name_err"></span>
-					<span class="text-danger"><?php echo form_error('recruiter_fname'); ?></span>
+					<span class="text-danger" id="job_err"><?php echo form_error('recruiter_fname'); ?></span>
 				</div>
                         </div>
                   </div>
@@ -90,12 +170,13 @@
                                 <div class="form-group">
 					<label for="name">Upload CV:</label><span style="color:red">*</span>
 					<input class="form-control" name="resume" id="resume" minlength="2" required="" type="file"  value="<?php echo set_value('recruiter_fname'); ?>" /><span class="text-danger" id="name_err"></span>
-					<span class="text-danger"><?php echo form_error('recruiter_fname'); ?></span>
+					<span class="text-danger" id="resume_err"></span>
 				</div>
                         </div>
                   </div>
-                                                          
-                    <input type="submit" class="btn btn-success" name="submit">
+                                     <br>                     
+                                <button type="button" onclick="apply()" class="btn btn-success btn-sm" name="submit">Apply</button>
+                                &nbsp;<button type="button" data-toggle="modal" data-target="#myModal" onclick="login_to_apply(<?php echo $job_title->job_id; ?>)" class="btn btn-sm" style="background:#778899;color:white;" name="log">Login To Apply</button>
                     </div>
                        
                        </form>

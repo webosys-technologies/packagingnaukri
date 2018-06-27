@@ -231,6 +231,9 @@ class Index extends CI_Controller
                 
                 if(!empty($job_id))
                 {
+                if(empty($this->Applied_jobs_model->check_apply(array('member_id'=>$result->member_id,
+                                                                'job_id'=>$job_id,))))
+                {
                 $rec_data=$this->Jobs_model->job_by_id($job_id);
              $data=array('job_id'=>$job_id,
                     'member_id'=>$result->member_id,
@@ -240,6 +243,7 @@ class Index extends CI_Controller
                     'apply_status'=>'1');
                  $this->Applied_jobs_model->apply_job($data);
                  $this->session->set_flashdata('success','Job Applied Successfully');
+                }
                 }
                 
                 

@@ -103,6 +103,15 @@ class Applied_jobs_model extends CI_Model
          $this->db->delete($this->table);
          return $this->db->affected_rows();
      }
+     
+     public function check_apply($where)
+     {
+         $this->db->from($this->table);
+         $this->db->where($where);
+         $query=$this->db->get();
+         return $query->row();
+        
+     }
 }
 
   

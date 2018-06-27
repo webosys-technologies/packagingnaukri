@@ -190,6 +190,15 @@ class Jobs_model extends CI_Model
          return $query->row();        
      }
      
+     function get_job_by_id($id)
+     {
+         $this->db->from('jobs as job');
+          $this->db->join('companies as comp','comp.company_id=job.company_id','LEFT');
+           $this->db->join('recruiters as rec','rec.recruiter_id=comp.recruiter_id','LEFT');
+         $this->db->where('job.job_id',$id);
+         $query=$this->db->get();
+         return $query->row();    
+     }
      
      function get_recent_job()
      {

@@ -103,6 +103,77 @@ class Home extends CI_Controller
 
 
         }
+        
+        function apply_job()
+        {
+            $form=$this->input->post();
+            
+            $data=$this->Members_model->member_info_by_mobile($form['mobile']);
+                            
+            if(!empty($data))
+            {
+                $where=array('job_id'=>$form['job_id'],
+                             'member_id'=>$data->member_id);
+            $check=$this->Applied_jobs_model->check_apply($where);
+            if(empty($check))
+            {   
+                if (0 < $_FILES['resume']['error']) {
+        echo 'Error during file upload' . $_FILES['resume']['error'];
+    } else {
+         $job=$this->Jobs_model->get_job_by_id($form['job_id']);       
+         
+        $rand=  mt_rand(1111,9999);
+        $name = $_FILES["resume"]["name"];
+        $ext = end((explode(".", $name)));
+        $filename='resume_'.date('Y-m-d_H.i.s').".".$ext;
+        move_uploaded_file($_FILES['resume']['tmp_name'], 'resume/' . $filename);
+       
+        if(file_exists('resume/'.$filename))
+        {
+            if(file_exists($data->member_resume))
+            {
+            unlink($data->member_resume);
+         $where=array('member_id'=>$data->member_id);
+        $resume=array('member_resume'=>'resume/'.$filename);
+         $res=$this->Members_model->member_update($where,$resume);
+         
+            
+            $this->Applied_jobs_model->apply_job(array('job_id'=>$form['job_id'],
+                                                        'recruiter_id'=>$job->recruiter_id,
+                                                        'company_id'=>$job->company_id,
+                                                        'member_id'=>$data->member_id,
+                                                        'apply_at'=>  date('Y-m-d')));
+            echo json_encode(array('success'=>"Applied Successfully"));
+        
+            }else{
+                $where=array('member_id'=>$data->member_id);
+               $resume=array('member_resume'=>'resume/'.$filename);
+               $res=$this->Members_model->member_update($where,$resume);
+               
+                $this->Applied_jobs_model->apply_job(array('job_id'=>$form['job_id'],
+                                                        'recruiter_id'=>$job->recruiter_id,
+                                                        'company_id'=>$job->company_id,
+                                                        'member_id'=>$data->member_id,
+                                                        'apply_at'=>  date('Y-m-d')));
+               
+                    echo json_encode(array('success'=>"Applied Successfully"));               
+            }
+        }   else{
+            echo json_encode(array('error'=>"Something Wrong"));
+        }   
+       
+       
+            
+//        }
+    }
+            }else{
+                 echo json_encode(array('job_err'=>'Already Applied for this job'));
+            } 
+            }else{
+                echo json_encode(array('mobile_err'=>'This Mobile is not Registered'));
+            }    
+            
+        }
 
     
 }

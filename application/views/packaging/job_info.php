@@ -117,13 +117,13 @@
         </div>
         
      <script>
-         var id;
-         var method;
-         $("#show_otp_box").hide();
-        function apply(id,method)
-         {            
-//             alert(method);
-             $("#job_id").val(id);
-
-         }
+//         var id;
+//         var method;
+//         $("#show_otp_box").hide();
+//        function apply(id,method)
+//         {            
+////             alert(method);
+//             $("#job_id").val(id);
+//
+//         }
          </script>
