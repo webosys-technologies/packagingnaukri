@@ -136,7 +136,7 @@ a:link, a:visited{
               $("#job_desc").html(data.job_description);
                $("#eligibility").html(data.job_education);
 ////                $("#skills").html();
-                alert(data.job_salary);
+//                alert(data.job_salary);
                     if(data.job_salary)
                     {
                  $("#salary").html(data.job_salary);
