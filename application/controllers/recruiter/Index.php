@@ -114,7 +114,7 @@ class Index extends CI_Controller
                 $this->Recruiters_model->recruiter_update($where,$data);
 //     Your authentication key
 
-$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
+$authKey = "217899AjUpTycrXx6K5b0e2283";    //suraj9195shinde for
 
 //Multiple mobiles numbers separated by comma
 

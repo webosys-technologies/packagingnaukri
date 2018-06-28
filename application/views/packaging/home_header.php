@@ -279,12 +279,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
              <center><h4><a class="label label-warning" id="show_otp_box">Login With OTP</a></h4></center>
             <center><h4><a class="label label-warning" id="show_pass_box">Login With Password</a></h4></center>
 
-              <a class="btn btn-info">
+<!--              <a class="btn btn-info">
                   <span class="fa fa-google"></span> <span style="color:white">Sign in with Google</span>
   </a>
               <a class="btn" style="background-color:#3B5998;">
     <span class="fa fa-facebook"></span><span style="color:white"> Sign in with Facebook</span>
-  </a>
+  </a>-->
            
           </div>
         </form>
