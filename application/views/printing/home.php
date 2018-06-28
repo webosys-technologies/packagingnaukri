@@ -6,24 +6,29 @@
   
      </style>
   
+     <div class="banner-container"> 
+  	<div id="carousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel" data-slide-to="1" ></li>
+    <li data-target="#carousel" data-slide-to="2"></li>
+  </ol>
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+    <div class="item active"><img src="<?php echo base_url(); ?>assets/images/a.jpg"  width="100%" height="50%" alt="banner" /></div>
+    <div class="item"><img src="<?php echo base_url(); ?>assets/images/b.jpg"  width="100%" height="50%" /></div>
+    <div class="item"><img src="<?php echo base_url(); ?>assets/images/c.jpg" width="100%" height="50%" alt="banner" /></div>
+  </div>
+  
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#carousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#carousel" data-slide="next">&rsaquo;</a>
+</div>	
+  </div>
+     
+     
    
-  <section class="regular slider content">
-      <div id="job1" class="div_style">
-          
-      </div>
-    <div id="job2" class="div_style">
-      
-    </div>
-    <div id="job3" class="div_style">
-      
-    </div>
-    <div id="job4" class="div_style">
-      
-    </div>
-      <div id="job5" class="div_style">
-          
-      </div>    
-  </section>
+  
   
          
         
@@ -34,7 +39,7 @@
 			<p>To provide the right opportunity to the every qualified packaging professional.</p>   
 		</div>  <br>
                 <div class="col-md-2">
-                    <a href=""  data-toggle="modal" data-target="#myModal" class="btn btn-success" style="color:#02B645;" ><span style="color:white">GO!</span></a>
+                    <a href=""  data-toggle="modal" data-target="#myModal" class="btn btn-warning" style="color:#02B645;" ><span style="color:white">GO!</span></a>
             </div>
 		
         </div>
@@ -61,51 +66,43 @@ To provide the right opportunity to the every qualified packaging professional, 
       <?php $company=$this->Companies_model->get_recent_company();
              
       if(isset($company)) 
-         
-      {    $i=0;
+    {    $i=0;
           foreach($company as $comp){
         
-          if($i==0){?>
+          ?>
            <div>
-        <img src="<?php echo  base_url().$comp->company_logo;?>" width="310px" height="63px">   
+        <img src="<?php echo  base_url().$comp->company_logo;?>" height="100px" width="auto">   
       </div>
-          <?php }
-          if($i==1){?>
-             <div>
-        <img src="<?php echo  base_url().$comp->company_logo;?>" width="310px" height="63px">   
-      </div>
-          <?php }
-          if($i==2){?>
-       <div>
-        <img src="<?php echo  base_url().$comp->company_logo;?>" width="310px" height="63px">   
-      </div>
-          <?php }
-          if($i==3){?>
-       <div>
-        <img src="<?php echo  base_url().$comp->company_logo;?>" width="310px" height="63px">   
-      </div>
-          <?php   
-          }
-          if($i==4){ ?>
-             <div>
-        <img src="<?php echo  base_url().$comp->company_logo;?>" width="310px" height="63px">   
-      </div> 
-        <?php  } 
-          
-          $i++;
+          <?php 
           } 
       }
        
       
       ?>  
-     
       
-     
-      
-  </section>  
+  </section> 
+                
+               
+                
         </div>
       
 		
         </div>
         
-        
+         <section class="regular slider content">
+      <div id="job1" class="div_style">
+          
+      </div>
+    <div id="job2" class="div_style">
+      
+    </div>
+    <div id="job3" class="div_style">
+      
+    </div>
+    <div id="job4" class="div_style">
+      
+    </div>
+      <div id="job5" class="div_style">
+          
+      </div>    
+  </section>

@@ -183,7 +183,7 @@ To provide the right opportunity to the every qualified packaging professional, 
         
           ?>
            <div>
-        <img src="<?php echo  base_url().$comp->company_logo;?>" height="100px">   
+        <img src="<?php echo  base_url().$comp->company_logo;?>" height="100px" width="auto">   
       </div>
           <?php 
           } 

@@ -83,7 +83,8 @@ class Jobs extends CI_Controller
          $id=$this->session->userdata('member_id');
            $data['member_data']=  get_member_info($id);
             
-             $sys=$this->session->userdata('member_source');          
+             $sys=$this->session->userdata('member_source'); 
+             
             $data['system']=$this->System_model->get_system_info($sys);
                                 
         $form=$this->input->post();
