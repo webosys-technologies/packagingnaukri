@@ -374,7 +374,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
        $(".logoes").slick({
        //  centerMode: true,
   centerPadding: '60px',
-  slidesToShow: 4,
+  slidesToShow: 3,
     autoplay: false,
   autoplaySpeed: 2000,
   dots: true,
