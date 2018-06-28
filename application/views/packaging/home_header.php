@@ -123,9 +123,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     .slick-slide {
       margin: 0px 13px;
      }
-    .logoes > .slick-slide {
-      width:auto !important;
-    }
+    
+    
 /*    .slick-slide img{
         
         width: 100%;
@@ -332,6 +331,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <script src="<?php echo base_url();?>assets/js/member_log_validation.js" type="text/javascript"></script>
   <script type="text/javascript">
     $(document).on('ready', function() {
+     $( ".logoes" ).find( ".slick-slide" ).css( "width", "auto" );		
      
      $('.regular').slick({
 //  centerMode: true,
@@ -367,7 +367,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
                      
-			
+	 
       
        $(".logoes").slick({
        //  centerMode: true,
