@@ -4,6 +4,10 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
+ .head_menu{
+             color:white;
+         }
+
 html, body{
   	font-family: 'Open Sans', sans-serif;
     font-size: 100%;
@@ -1316,6 +1320,10 @@ ul.footer_social li a i.phone{
 	
 }
 @media (max-width:800px){
+    
+    .head_menu {
+    color: black;
+  }
  	.contact_index-right {
 	  margin-top: 2em;
 	}
@@ -1553,10 +1561,14 @@ ul.footer_social li a i.phone{
 	  }
 }
 @media (max-width:768px){
+    
+    .head_menu {
+    color: black;
+  }
 	span.menu{
 	  width:28px;
 	  height: 28px;
-	  background: url(../images/nav.png)no-repeat 0px -1px;
+	  background: url(../images/menu.jpg)no-repeat 0px -1px;
 	  display: inline-block;
 	  float: right;
 	  cursor: pointer;
@@ -1823,11 +1835,16 @@ ul.footer_social li a i.phone{
 	  }
 }
 @media (max-width:640px){
+    .head_menu {
+    color: black;
+  }
+    
 	.ab-pic {
 	  margin-top: 1%;
 	  float: none;
 	  width: 100%;
 	}
+
 	.cont-head p {
 	  font-size: 0.85em;
 	  margin: 0em auto 5em;
@@ -1978,7 +1995,20 @@ ul.footer_social li a i.phone{
 	  font-size: 1.5em;
 	}
 }
+
+@media (max-width: 600px) {
+  .head_menu {
+    color: black;
+  }
+}
+
+
 @media (max-width:480px){
+    
+    .head_menu {
+    color: black;
+  }
+    
 	.logo a h1 {
 	  font-size: 1.7em;
 	}
@@ -2142,6 +2172,9 @@ ul.footer_social li a i.phone{
 	}
 }
 @media (max-width:320px){
+    .head_menu {
+    color: black;
+  }
 	.logo a h1 {
 	  font-size: 1.6em;
 	  margin-top: 2px;
@@ -2167,12 +2200,12 @@ ul.footer_social li a i.phone{
 	span.menu {
 	   width: 28px;
 	  height: 28px;
-	  background: url(../images/nav.png)no-repeat 0px 2px;
+	  /*background: url('localhost/packagingnaukri/assets/images/1.png')no-repeat 0px 2px;*/
 	  display: inline-block;
 	  float: right;
 	  cursor: pointer;
-	    margin-top: 2px;
-	background-size: 80%;
+	  margin-top: 2px;
+	  background-size: 80%;
 	}
 	.span_1_of_2 p {
 	  overflow: hidden;

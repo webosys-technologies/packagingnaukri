@@ -158,6 +158,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
              padding: 12px;
              
          }
+         
+        
        
   </style>
   
@@ -182,13 +184,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="header-bottom" style="background:#43B851;">
 			<div class="container">
 				
-                            <span class="menu" style="color: white;"></span>
+                            <span class="menu"></span>
 				<div class="top-menu">
                                     <nav class="cl-effect-5"><ul>
-	<li><a href="<?php echo base_url();?>Home/index">Home</a></li>
-        <li><a  href="<?php echo base_url();?>Home/about_us">About Us</a></li>
+	<li><a href="<?php echo base_url();?>Home/index"><b class="head_menu">Home</b></a></li>
+        <li><a href="<?php echo base_url();?>Home/about_us"><b class="head_menu">About Us</b></a></li>
        <li class="dropdown">
-          <a  href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
+          <a style="color:white;" href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b class="head_menu">Services </b><span class="caret"></span></a>
           <ul class="dropdown-menu">
               <li><a href="<?php echo base_url();?>Home/recruitment">Recruitment</a></li>
             <li role="separator" class="divider"></li>
@@ -197,7 +199,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </li>
                
        <li class="dropdown">
-          <a  href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Recruiter<span class="caret"></span></a>
+          <a style="color:white;" href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b class="head_menu">Recruiter</b><span class="caret"></span></a>
           <ul class="dropdown-menu">
               <li><a href="<?php echo base_url();?>recruiter/index/login">Login</a></li>
             <li role="separator" class="divider"></li>
@@ -205,9 +207,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           </ul>
         </li>
          <!--<li><a  href="<?php echo base_url();?>Home/post_requirement">Post Your Requirement</a></li>-->
-          <li><a  href="<?php echo base_url();?>Home/contact_us">Contact Us</a></li>   
-          <li><a  href="#" data-toggle="modal" onclick="open_login()" data-target="#myModal">Login</a></li>
-          <li><a  href="<?php echo base_url();?>member/index">Register</a></li>
+          <li><a  href="<?php echo base_url();?>Home/contact_us"><b class="head_menu">Contact Us</b></a></li>   
+          <li><a  href="#" data-toggle="modal" onclick="open_login()" data-target="#myModal"><b class="head_menu">Login</b></a></li>
+          <li><a  href="<?php echo base_url();?>member/index"><b class="head_menu">Register</b></a></li>
           </ul> 
 					</nav>
 					</ul>
