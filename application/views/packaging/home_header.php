@@ -311,8 +311,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       </div>
       <div style="background:#F2F3F4" class="modal-body">
          
-          
-          ljhl
+        
       </div>
      
     </div><!-- /.modal-content -->
@@ -372,7 +371,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
        //  centerMode: true,
   centerPadding: '60px',
   slidesToShow: 4,
-    autoplay: true,
+    autoplay: false,
   autoplaySpeed: 2000,
   dots: true,
   responsive: [

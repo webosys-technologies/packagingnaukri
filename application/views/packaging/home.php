@@ -178,38 +178,14 @@ To provide the right opportunity to the every qualified packaging professional, 
       <?php $company=$this->Companies_model->get_recent_company();
              
       if(isset($company)) 
-         
-      {    $i=0;
+    {    $i=0;
           foreach($company as $comp){
         
-          if($i==0){?>
+          ?>
            <div>
-        <img src="<?php echo  base_url().$comp->company_logo;?>" width="310px" height="63px">   
+        <img src="<?php echo  base_url().$comp->company_logo;?>" height="100px">   
       </div>
-          <?php }
-          if($i==1){?>
-             <div>
-        <img src="<?php echo  base_url().$comp->company_logo;?>" width="310px" height="63px">   
-      </div>
-          <?php }
-          if($i==2){?>
-       <div>
-        <img src="<?php echo  base_url().$comp->company_logo;?>" width="310px" height="63px">   
-      </div>
-          <?php }
-          if($i==3){?>
-       <div>
-        <img src="<?php echo  base_url().$comp->company_logo;?>" width="310px" height="63px">   
-      </div>
-          <?php   
-          }
-          if($i==4){ ?>
-             <div>
-        <img src="<?php echo  base_url().$comp->company_logo;?>" width="310px" height="63px">   
-      </div> 
-        <?php  } 
-          
-          $i++;
+          <?php 
           } 
       }
        
