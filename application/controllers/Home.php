@@ -17,6 +17,7 @@ class Home extends CI_Controller
         $this->load_views($view);
             
 	}
+        
         function services()
         {
             $view='services';
@@ -94,6 +95,7 @@ class Home extends CI_Controller
              $sys=$this->System_model->source_name();
             $result['system']=$this->System_model->get_system_info($sys);
 
+            
               $this->load->view($sys.'/home_header',$result);
              $this->load->view($sys."/".$view,$result);
              $this->load->view($sys.'/home_footer',$result);
@@ -174,6 +176,180 @@ class Home extends CI_Controller
             }    
             
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        function printing_index()
+	{
+	    
+        $view='home';
+        $this->printing_load_views($view);
+            
+	}
+        
+        function printing_services()
+        {
+            $view='services';
+            $this->printing_load_views($view);
+        }
+        function printing_about_us()
+        {
+            $view='about_us';
+            $this->printing_load_views($view);
+        }
+        function printing_contact_us()
+        {
+            $view='contact_us';
+            $this->printing_load_views($view);
+        }
+        function printing_post_resume()
+        {
+            $view='post_resume';
+            $this->printing_load_views($view);
+        }
+        function printing_post_requirement()
+        {
+            $view='post_requirement';
+            $this->printing_load_views($view);
+        }
+        function printing_recruitment()
+        {
+            $view='recruitment';
+            $this->printing_load_views($view);
+        }
+        
+        function printing_resource_outsourcing()
+        {
+            $view='resource_outsourcing';
+            $this->printing_load_views($view);
+        }
+        
+        function printing_job($id)
+        {
+            $GLOBALS['id'] = $id;
+            $view='job_info';
+            $this->printing_load_views($view);
+        }
+        
+         function printing_load_views($view)
+        {            
+            if(!empty($GLOBALS['id'])){
+           $result['job_info']=$this->Jobs_model->job_info($GLOBALS['id']);    
+            }
+            
+            if(!empty($GLOBALS['job_id'])){
+           $result['job_title']=$this->Jobs_model->job_by_id($GLOBALS['job_id']);    
+            }
+            
+            if($view=='home')
+            {
+                $result['show_icon']=true;
+            }
+          
+             $result['jobs']=$this->Jobs_model->get_recent_job();    
+             $sys="printing";
+            $result['system']=$this->System_model->get_system_info('printing');
+
+            
+              $this->load->view($sys.'/home_header',$result);
+             $this->load->view($sys."/".$view,$result);
+             $this->load->view($sys.'/home_footer',$result);
+//            $this->load->view('printing/home_header',$result);
+//             $this->load->view('printing/contact_us',$result);
+//             $this->load->view('printing/home_footer',$result);
+
+
+        }
+        
+        
+        
+         function plastic_index()
+	{
+	    
+        $view='home';
+        $this->plastic_load_views($view);
+            
+	}
+        
+        function plastic_services()
+        {
+            $view='services';
+            $this->plastic_load_views($view);
+        }
+        function plastic_about_us()
+        {
+            $view='about_us';
+            $this->plastic_load_views($view);
+        }
+        function plastic_contact_us()
+        {
+            $view='contact_us';
+            $this->plastic_load_views($view);
+        }
+        function plastic_post_resume()
+        {
+            $view='post_resume';
+            $this->plastic_load_views($view);
+        }
+        function plastic_post_requirement()
+        {
+            $view='post_requirement';
+            $this->plastic_load_views($view);
+        }
+        function plastic_recruitment()
+        {
+            $view='recruitment';
+            $this->plastic_load_views($view);
+        }
+        
+        function plastic_resource_outsourcing()
+        {
+            $view='resource_outsourcing';
+            $this->plastic_load_views($view);
+        }
+        
+        function plastic_job($id)
+        {
+            $GLOBALS['id'] = $id;
+            $view='job_info';
+            $this->plastic_load_views($view);
+        }
+        
+         function plastic_load_views($view)
+        {            
+            if(!empty($GLOBALS['id'])){
+           $result['job_info']=$this->Jobs_model->job_info($GLOBALS['id']);    
+            }
+            
+            if(!empty($GLOBALS['job_id'])){
+           $result['job_title']=$this->Jobs_model->job_by_id($GLOBALS['job_id']);    
+            }
+            
+            if($view=='home')
+            {
+                $result['show_icon']=true;
+            }
+          
+             $result['jobs']=$this->Jobs_model->get_recent_job();    
+             $sys="plastic";
+            $result['system']=$this->System_model->get_system_info('plastic');
+
+            
+              $this->load->view($sys.'/home_header',$result);
+             $this->load->view($sys."/".$view,$result);
+             $this->load->view($sys.'/home_footer',$result);
+//            $this->load->view('printing/home_header',$result);
+//             $this->load->view('printing/contact_us',$result);
+//             $this->load->view('printing/home_footer',$result);
+
+
+        }
+        
 
     
 }

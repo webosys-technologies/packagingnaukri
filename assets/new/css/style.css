@@ -77,7 +77,7 @@ label{
 	margin: 0;
 }
 .top-menu ul li a.active{
-	  color: #E64C3C;
+	  color: white;
 }
 .top-menu ul li a:hover{
 	  color: #E64C3C;
@@ -149,12 +149,12 @@ nav a:focus {
 	position:relative;
 }
 .header-bottom {
-  padding:0.9em 0;
+  padding:0.3em 0;
   /*border-bottom:7px solid #C19575;*/
   background: #fff;
 }
 .strip {
-  padding:0.5em 0;
+  /*padding:0.5em 0;*/
   background:#0AA54E;
 }
 i.location {
@@ -1994,7 +1994,7 @@ ul.footer_social li a i.phone{
 	  font-size: 0.8em;
 	}
 	.strip {
-	  padding: 0.5em 0;
+	  /*padding: 0.5em 0;*/
 	}
 	.span_1_of_2 p {
 	  font-size: 0.8em;
