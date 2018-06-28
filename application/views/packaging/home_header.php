@@ -124,9 +124,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       margin: 0px 13px;
       
     }
-    .slick-slide{
+    .slick-slide img{
         
-        width: 110px !important;
+        width: 100%;
     }
     .slick-prev:before,
     .slick-next:before {
