@@ -172,15 +172,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <div class="logo">
 			        <img src="<?php echo  base_url().$system->system_logo;?>" width="300x" height="63px">
 				</div>
-					 <div class="container">
+					 <!--<div class="container">-->
 						<!--<p class="location"><i class="location"></i>16A, Honey Street (Green Door)</p>-->
-						<p class="phonenum" style="padding-top:10px">
+						<p class="phonenum" style="padding-top:10px; padding-right:10px">
    <a href="https://www.facebook.com/packagingnaukri" target="_blank" class="fa fa-facebook icon"></a>  &nbsp;
    <!--<a href="#" class="fa fa-skype icon"></a>&nbsp;-->
    <a href="https://www.linkedin.com/company/www-packagingnaukri-com" target="_blank" class="fa fa-linkedin icon"></a>                                               
                                                 </p>
 							<div class="clearfix"></div>
-					</div>
+					<!--</div>-->
 				</div>
 			<div class="header-bottom" style="background:#43B851;">
 			<div class="container">
