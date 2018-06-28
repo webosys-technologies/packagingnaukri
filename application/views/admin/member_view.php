@@ -217,7 +217,7 @@
              <div class="row">
              <div class="col-md-offset-4"><span id="field_err" class="text-danger"></span></div>
              </div>
-         </form>
+         </form><br>
       
 <div class="table-responsive">
     <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -234,6 +234,9 @@
           <th>EMAIL</th>
           <th>MOBILE</th>
           <th>CITY</th>
+          <th>INSTITUTE</th>
+          <th>QUALIFICATION</th>
+          <th>RESUME</th>
           <th>CREATED AT</th>
           <th>STATUS</th>
           <th>SOURCE</th>
@@ -254,12 +257,19 @@
                                         <td><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
                                          <?php $emp=$this->Employments_model->get_employment(array('member_id'=>$res->member_id))?>
                                         <td><?php if(isset($emp->employment_organization)){echo $emp->employment_organization; }?></td>
-                                        <td><?php if(isset($emp->employment_desigation)){echo $emp->employment_designation;} ?></td>
+                                        <td><?php if(isset($emp->employment_designation)){echo $emp->employment_designation;} ?></td>
                                         <td><?php if($res->member_experience){echo $res->member_experience." Year";} ?></td>
-         <td><?php if(isset($emp->employment_city)){echo $emp->employment_city;} ?></td>
+                                        <td><?php if(isset($emp->employment_city)){echo $emp->employment_city;} ?></td>
+                                         <?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0' ){$sal=explode(".",$res->member_anual_salary);} ?>
+                                        <td><i class="fa fa-inr"></i> <?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0'){echo $sal[0]."Lac ". $sal[1]."Thousand "; echo "PA";} ?></td>
                                         <td><?php echo $res->member_email;?></td>
                                        <td><?php echo $res->member_mobile;?></td>
                                        <td><?php echo $res->member_city;?></td>
+                                       <?php $edu=$this->Educations_model->get_by_id($res->member_id);?>
+                                       <td><?php if($edu){echo $edu->education_institute_name;}?></td>
+                                       <td><?php if($edu){echo $edu->education_name."(".$edu->education_degree.")";}?></td>
+                                       <td><?php if($res->member_resume){?><a href="<?php echo base_url().$res->member_resume;?>" target="_blank">resume</a><?php } ?></td>
+                                           
                                        <td><?php echo $res->member_created_at;?></td>
                                        <td>
                                            <?php 

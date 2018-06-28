@@ -16,6 +16,16 @@ class Educations_model extends CI_Model
         $query=$this->db->get($this->table);
         return $query->num_rows();        
     }
+    
+     public function get_by_id($id)
+    {         
+        $this->db->where('member_id',$id);
+        $query=$this->db->get($this->table);
+        echo $query->num_rows();
+       
+            return $query->row();
+        
+    }
      
      public function update_education($where,$data)
      {
