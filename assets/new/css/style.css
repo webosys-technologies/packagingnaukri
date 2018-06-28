@@ -1324,6 +1324,9 @@ ul.footer_social li a i.phone{
     .head_menu {
     color: black;
   }
+   #head_logo{
+      width:70%;
+  }
  	.contact_index-right {
 	  margin-top: 2em;
 	}
@@ -1564,6 +1567,9 @@ ul.footer_social li a i.phone{
     
     .head_menu {
     color: black;
+  }
+   #head_logo{
+      width:70%;
   }
 	span.menu{
 	  width:28px;
@@ -1838,6 +1844,10 @@ ul.footer_social li a i.phone{
     .head_menu {
     color: black;
   }
+  
+  #head_logo{
+      width:70%;
+  }
     
 	.ab-pic {
 	  margin-top: 1%;
@@ -2000,6 +2010,10 @@ ul.footer_social li a i.phone{
   .head_menu {
     color: black;
   }
+  
+   #head_logo{
+      width:70%;
+  }
 }
 
 
@@ -2007,6 +2021,10 @@ ul.footer_social li a i.phone{
     
     .head_menu {
     color: black;
+  }
+  
+   #head_logo{
+      width:70%;
   }
     
 	.logo a h1 {
@@ -2174,6 +2192,9 @@ ul.footer_social li a i.phone{
 @media (max-width:320px){
     .head_menu {
     color: black;
+  }
+   #head_logo{
+      width:70%;
   }
 	.logo a h1 {
 	  font-size: 1.6em;
