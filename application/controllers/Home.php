@@ -106,6 +106,25 @@ class Home extends CI_Controller
 
         }
         
+        function send_msg()
+        {
+            $form=$this->input->post();
+          
+                
+                    $headers = "From: support@Packagingnaukari.in";
+                    $headers .= ". PackagingNaukari-Team" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $to = 'suraj9195shinde@gmail.com';
+                    $subject = "Welcome To Packaging Naukari";
+                    $txt="hello";
+                                                               
+                 
+                       $success=  mail($to,$subject,$txt,$headers); 
+                      
+            
+        }
+        
+        
         function apply_job()
         {
             $form=$this->input->post();

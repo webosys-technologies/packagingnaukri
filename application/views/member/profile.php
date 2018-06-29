@@ -1128,8 +1128,8 @@ var edu_name=el.val();
               
           <div class="shadow" id="skill">               
          <div class="box-header" > <div class="row">
-                 <div class="col-md-9">
-             <h3 class="box-title"><b>Skills</b></h3></div><div class="col-md-3"><a class="btn_color" href="#skill" id="add_skill"><span class="fa fa-plus"> Add </span> </a></div>
+                 <div class="col-md-9 col-sm-9 col-xs-9">
+             <h3 class="box-title"><b>Skills</b></h3></div><div class="col-md-3 col-sm-3 col-xs-3"><a class="btn_color" href="#skill" id="add_skill"><span class="fa fa-plus"> Add </span> </a></div>
              </div>
              </div>
               
