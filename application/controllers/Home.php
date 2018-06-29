@@ -111,12 +111,12 @@ class Home extends CI_Controller
             $form=$this->input->post();
           
                 
-                    $headers = "From: support@Packagingnaukari.in";
+                    $headers = "From: ".$form['email'];
                     $headers .= ". PackagingNaukari-Team" . "\r\n";
                     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                     $to = 'suraj9195shinde@gmail.com';
-                    $subject = "Welcome To Packaging Naukari";
-                    $txt="hello";
+                    $subject = "Query by Member";
+                    $txt=$form['comment'];
                                                                
                  
                        $success=  mail($to,$subject,$txt,$headers); 

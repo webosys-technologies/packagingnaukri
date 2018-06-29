@@ -56,7 +56,7 @@
                     <div class="col-md-12">
                                 <div class="form-group">
 					<label for="name">Mobile No:</label><span style="color:red">*</span>
-					<input class="form-control" name="mobile" id="mobile" minlength="2" required="" type="text"  value="<?php echo set_value('recruiter_fname'); ?>" /><span class="text-danger" id="name_err"></span>
+                                        <input class="form-control"  name="mobile" id="mobile" minlength="10" maxlength="11" required="" type="text"  value="<?php echo set_value('recruiter_fname'); ?>" /><span class="text-danger" id="name_err"></span>
 					<span class="text-danger"><?php echo form_error('recruiter_fname'); ?></span>
 				</div>
                         </div>
@@ -66,7 +66,7 @@
                     <div class="col-md-12">
                                 <div class="form-group">
 					<label for="name">Comment:</label><span style="color:red">*</span>
-					 <textarea class="form-control" name="comment"  required="" rows="4" cols="50" value="<?php echo set_value('recruiter_address'); ?>">
+                                        <textarea class="form-control" name="comment"  rows="4" cols="50" value="<?php echo set_value('recruiter_address'); ?>" required>
                                         </textarea>
 					<span class="text-danger"><?php echo form_error('recruiter_fname'); ?></span>
 				</div>
