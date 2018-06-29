@@ -145,19 +145,19 @@ a:hover {
             }
 
 @media (max-width:800px){
-    #modal_dialog,#modal_dialog1,#modal_dialog2,#modal_dialog3,#modal_dialog4,#modal_dialog5,#modal_dialog6{
+    #modal_dialog,#modal_dialog1,#modal_dialog2,#modal_dialog3,#modal_dialog4,#modal_dialog5,#modal_dialog6,modal_dialog7{
      width: 100%;
       overflow-y: initial !important
 }
 }
 @media (max-width:768px){
-    #modal_dialog,#modal_dialog1,#modal_dialog2,#modal_dialog3,#modal_dialog4,#modal_dialog5,#modal_dialog6{
+    #modal_dialog,#modal_dialog1,#modal_dialog2,#modal_dialog3,#modal_dialog4,#modal_dialog5,#modal_dialog6,modal_dialog7{
      width: 100%;
       overflow-y: initial !important
 }
 }
 @media (max-width:320px){
-    #modal_dialog,#modal_dialog1,#modal_dialog2,#modal_dialog3,#modal_dialog4,#modal_dialog5,#modal_dialog6{
+    #modal_dialog,#modal_dialog1,#modal_dialog2,#modal_dialog3,#modal_dialog4,#modal_dialog5,#modal_dialog6,modal_dialog7{
      width: 100%;
       overflow-y: initial !important
 }
@@ -1182,7 +1182,7 @@ var edu_name=el.val();
           
           
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog" id="modal_dialog7">
     <div class="modal-content">
       <div style="background:#ABB2B9" class="modal-header">
           
