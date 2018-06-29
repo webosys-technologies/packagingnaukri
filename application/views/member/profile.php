@@ -995,7 +995,7 @@ var edu_name=el.val();
               foreach($employments as $emp)
                   {?>
           <div class="row">
-              <div class="col-md-offset-9 col-md-3">
+              <div class="col-md-offset-9 col-sm-offset-9 col-xs-offset-9 col-md-3 col-sm-3 col-xs-3">
                   <a href="#employment" onclick='edit_employment(<?php echo $emp->employment_id;?>)'><span class="fa fa-pencil"></span></a> &nbsp; <a href="#employment" onclick='delete_employment(<?php echo $emp->employment_id; ?>,"employment_delete")'><span class="fa fa-times"></span></a>
               </div>
           </div>
@@ -1073,7 +1073,7 @@ var edu_name=el.val();
                   {?>
            
             <div class="row">
-              <div class="col-md-offset-9 col-md-3">
+              <div class="col-md-offset-9 col-sm-offset-9 col-xs-offset-9 col-md-3 col-sm-3 col-xs-3">
                   <a href="#project" onclick='edit_project(<?php echo $pro->project_id;?>)'><span class="fa fa-pencil"></span></a> &nbsp; <a href="#project" onclick='delete_project(<?php echo $pro->project_id; ?>,"project_delete")'><span class="fa fa-times"></span></a>
               </div>
           </div>
@@ -1139,7 +1139,7 @@ var edu_name=el.val();
               foreach($skills as $skill)
                   {?>
            <div class="row">
-              <div class="col-md-offset-9 col-md-3">
+              <div class="col-md-offset-9 col-sm-offset-9 col-xs-offset-9 col-md-3 col-sm-3 col-xs-3">
                   <a href="#skill" onclick='edit_skill(<?php echo  $skill->skill_id;?>)'><span class="fa fa-pencil"></span></a> &nbsp; <a href="#skill" onclick='delete_skill(<?php echo $skill->skill_id; ?>,"skill_delete")'><span class="fa fa-times"></span></a>
               </div>
           </div>
