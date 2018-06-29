@@ -183,7 +183,7 @@ a:link, a:visited{
                    <?php if(isset($jobs)){
                        foreach($jobs as $job){?>
                    <div class="row">
-                       <div class="col-md-offset-1 col-md-8">
+                       <div class="col-md-offset-1 col-md-8 col-xs-12 col-sm-12">
                        <div class="panel-body">
                        <div class="shadow">
                            <div class="row">
@@ -192,7 +192,7 @@ a:link, a:visited{
                           <a href="#" onclick='job_info("<?php echo $job->job_id;?>")'> <span class="job_name"><?php echo $job->job_title;?></span></a><br>
                           <span class="comp_name"><?php echo $job->company_name;?></span>
                            </div>
-                               <div class="col-md-2"><button type="button" onclick="delete_job('<?php echo $job->job_id; ?>')" class="btn btn-danger btn-sm">Remove</button></div>
+                               <div class="col-md-2 pull-right"><button type="button" onclick="delete_job('<?php echo $job->job_id; ?>')" class="btn btn-danger btn-sm">Remove</button></div>
                            </div>
                           <div class="row" class="">
                               <div class="col-md-2 experience"><i class="fa fa-suitcase" aria-hidden="true"></i> <?php echo $job->job_experience;?>
