@@ -145,19 +145,19 @@ a:hover {
             }
 
 @media (max-width:800px){
-    #modal_dialog,#modal_dialog1,#modal_dialog2,#modal_dialog3,#modal_dialog4,#modal_dialog5,#modal_dialog6,modal_dialog7{
+    #modal_dialog,#modal_dialog1,#modal_dialog2,#modal_dialog3,#modal_dialog4,#modal_dialog5,#modal_dialog6,#modal_dialog7{
      width: 100%;
       overflow-y: initial !important
 }
 }
 @media (max-width:768px){
-    #modal_dialog,#modal_dialog1,#modal_dialog2,#modal_dialog3,#modal_dialog4,#modal_dialog5,#modal_dialog6,modal_dialog7{
+    #modal_dialog,#modal_dialog1,#modal_dialog2,#modal_dialog3,#modal_dialog4,#modal_dialog5,#modal_dialog6,#modal_dialog7{
      width: 100%;
       overflow-y: initial !important
 }
 }
 @media (max-width:320px){
-    #modal_dialog,#modal_dialog1,#modal_dialog2,#modal_dialog3,#modal_dialog4,#modal_dialog5,#modal_dialog6,modal_dialog7{
+    #modal_dialog,#modal_dialog1,#modal_dialog2,#modal_dialog3,#modal_dialog4,#modal_dialog5,#modal_dialog6,#modal_dialog7{
      width: 100%;
       overflow-y: initial !important
 }
