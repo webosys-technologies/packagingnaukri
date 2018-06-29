@@ -81,7 +81,26 @@ a:link, a:visited{
 }
 
 #cont{
-    padding-left: 60px;
+    padding-left: 0px;
+}
+
+@media (max-width:800px){
+    #modal_dialog{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:768px){
+    #modal_dialog{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:320px){
+    #modal_dialog{
+     width: 100%;
+      overflow-y: initial !important
+}
 }
 </style>
 
@@ -351,9 +370,9 @@ a:link, a:visited{
             }
            
 ?>
-      <div style="padding-left:50px" id="cont<?php echo $job->job_id;?>">
+      <div class="container" class="job_info_div" style="padding-left:50px" id="cont<?php echo $job->job_id;?>">
                    <div class="row">
-                       <div class=" col-md-8 col-sm-12 col-xs-12">
+                       <div class=" col-md-8">
                        <div class="panel-body">
                        <div class="shadow">
                            <div class="row">
@@ -362,7 +381,7 @@ a:link, a:visited{
                            <span class="job_name"><a href="#cont<?php echo $job->job_id;?>" onclick="job_info(<?php echo $job->job_id;?>)"><?php echo $job->job_title;?></a></span><br>
                           <span class="comp_name"><?php echo $job->company_name;?></span>
                            </div>
-                               <div class="col-md-2 pull-right" id='apply_btn<?php echo $job->job_id;?>'><button type="button" id='apply<?php echo $job->job_id;?>' onclick="apply(<?php echo $job->job_id;?>)" class="btn btn-warning btn-sm"><span id='apply_stat<?php echo $job->job_id;?>'>Apply</span></button></div>
+                               <div class="col-md-2" id='apply_btn<?php echo $job->job_id;?>'><button type="button" id='apply<?php echo $job->job_id;?>' onclick="apply(<?php echo $job->job_id;?>)" class="btn btn-warning btn-sm"><span id='apply_stat<?php echo $job->job_id;?>'>Apply</span></button></div>
                            </div>
                           <div class="row" class="">
                               <div class="col-md-2 experience"><i class="fa fa-suitcase" aria-hidden="true"></i> <?php echo $job->job_experience;?>
