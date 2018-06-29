@@ -8,6 +8,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
              color:white;
          }
 
+ #content_body{
+                width:70%;
+               }       
+         
 html, body{
   	font-family: 'Open Sans', sans-serif;
     font-size: 100%;
@@ -1321,6 +1325,10 @@ ul.footer_social li a i.phone{
 }
 @media (max-width:800px){
     
+    #content_body{
+                width:100%;
+               }       
+    
     .head_menu {
     color: black;
   }
@@ -1565,6 +1573,10 @@ ul.footer_social li a i.phone{
 }
 @media (max-width:768px){
     
+    #content_body{
+                width:100%;
+               }       
+               
     .head_menu {
     color: black;
   }
@@ -1841,6 +1853,10 @@ ul.footer_social li a i.phone{
 	  }
 }
 @media (max-width:640px){
+    #content_body{
+                width:100%;
+               }       
+    
     .head_menu {
     color: black;
   }
@@ -2007,6 +2023,11 @@ ul.footer_social li a i.phone{
 }
 
 @media (max-width: 600px) {
+    
+    #content_body{
+                width:100%;
+               }       
+               
   .head_menu {
     color: black;
   }
@@ -2018,6 +2039,10 @@ ul.footer_social li a i.phone{
 
 
 @media (max-width:480px){
+    
+    #content_body{
+                width:100%;
+               }       
     
     .head_menu {
     color: black;
@@ -2190,6 +2215,11 @@ ul.footer_social li a i.phone{
 	}
 }
 @media (max-width:320px){
+    
+    #content_body{
+                width:100%;
+               }       
+    
     .head_menu {
     color: black;
   }

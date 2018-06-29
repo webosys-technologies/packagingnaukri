@@ -62,7 +62,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
            
             #header_link{
                 color:white;
-            }
+            }            
+             
                                     
             #footer{
                 padding:0px;
@@ -241,7 +242,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Member Sign In</strong></h4></center>
       </div>
-      <div id="calendar" style="background:#F2F3F4" class="modal-body">
+      <div style="background:#F2F3F4" class="modal-body">
           <div class="row">
               <div class="col-md-8 col-md-offset-2">
                   <span id="validation_error" class="text-danger"></span>
