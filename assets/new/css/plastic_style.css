@@ -4,11 +4,17 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
+#content_body2{
+                width:70%;
+               }  
+
 html, body{
   	font-family: 'Open Sans', sans-serif;
     font-size: 100%;
   	background: #FFf;
 }
+
+
 body a,.grid_1,plan_1,plan_1.one,plan_1.two,i.icon1, i.icon2, i.icon3, i.icon4, i.icon5, i.icon6 {
 	transition:0.5s all;
 	-webkit-transition:0.5s all;
@@ -1316,6 +1322,10 @@ ul.footer_social li a i.phone{
 	
 }
 @media (max-width:800px){
+      #content_body2{
+                width:100%;
+               } 
+    
  	.contact_index-right {
 	  margin-top: 2em;
 	}
@@ -1553,6 +1563,10 @@ ul.footer_social li a i.phone{
 	  }
 }
 @media (max-width:768px){
+     #content_body2{
+                width:100%;
+               } 
+    
 	span.menu{
 	  width:28px;
 	  height: 28px;
@@ -1823,6 +1837,10 @@ ul.footer_social li a i.phone{
 	  }
 }
 @media (max-width:640px){
+     #content_body2{
+                width:100%;
+               } 
+    
 	.ab-pic {
 	  margin-top: 1%;
 	  float: none;
@@ -1979,6 +1997,10 @@ ul.footer_social li a i.phone{
 	}
 }
 @media (max-width:480px){
+     #content_body2{
+                width:100%;
+               } 
+    
 	.logo a h1 {
 	  font-size: 1.7em;
 	}
@@ -2142,6 +2164,10 @@ ul.footer_social li a i.phone{
 	}
 }
 @media (max-width:320px){
+     #content_body2{
+                width:100%;
+               } 
+    
 	.logo a h1 {
 	  font-size: 1.6em;
 	  margin-top: 2px;

@@ -4,7 +4,7 @@
     display: block !important;
 }
 .modal-dialog{
-     width: 700px;
+     width: 60%;
       overflow-y: initial !important
 }
 .modal-body{
@@ -18,6 +18,25 @@ td{
 .job_info{
     color:#707B7C;
 }
+
+@media (max-width:800px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:768px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:320px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}    
 </style>
 <script>
 function applicants(id)
@@ -428,7 +447,7 @@ function delete_menu(id)
   </script>
 
 <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="modal_dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
@@ -639,7 +658,7 @@ function delete_menu(id)
    
 
 <div class="modal fade" id="job_modal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog">   
+    <div class="modal-dialog" id="modal_dialog1">   
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">

@@ -3,7 +3,7 @@
  .modal fade{
     display: block !important;
 }
-#modal_dialog{
+#modal_dialog,modal_dialog1{
      width: 700px;
       overflow-y: initial !important
 }
@@ -18,7 +18,24 @@
                 margin:150px;
                
             }
-
+@media (max-width:800px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:768px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:320px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
 </style>
 <div class="content-wrapper" style="background:white;">
     <!-- Content Header (Page header) -->

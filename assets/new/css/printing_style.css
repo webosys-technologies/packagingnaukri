@@ -9,6 +9,12 @@ html, body{
     font-size: 100%;
   	background: #FFf;
 }
+
+#content_body3{
+                width:70%;
+               }  
+
+
 body a,.grid_1,plan_1,plan_1.one,plan_1.two,i.icon1, i.icon2, i.icon3, i.icon4, i.icon5, i.icon6 {
 	transition:0.5s all;
 	-webkit-transition:0.5s all;
@@ -1316,6 +1322,11 @@ ul.footer_social li a i.phone{
 	
 }
 @media (max-width:800px){
+    
+    #content_body3{
+                width:100%;
+               }
+    
  	.contact_index-right {
 	  margin-top: 2em;
 	}
@@ -1553,6 +1564,10 @@ ul.footer_social li a i.phone{
 	  }
 }
 @media (max-width:768px){
+     #content_body3{
+                width:100%;
+               }
+    
 	span.menu{
 	  width:28px;
 	  height: 28px;
@@ -1823,6 +1838,10 @@ ul.footer_social li a i.phone{
 	  }
 }
 @media (max-width:640px){
+     #content_body3{
+                width:100%;
+               }
+    
 	.ab-pic {
 	  margin-top: 1%;
 	  float: none;
@@ -1979,6 +1998,10 @@ ul.footer_social li a i.phone{
 	}
 }
 @media (max-width:480px){
+     #content_body3{
+                width:100%;
+               }
+    
 	.logo a h1 {
 	  font-size: 1.7em;
 	}
@@ -2142,6 +2165,10 @@ ul.footer_social li a i.phone{
 	}
 }
 @media (max-width:320px){
+     #content_body3{
+                width:100%;
+               }
+    
 	.logo a h1 {
 	  font-size: 1.6em;
 	  margin-top: 2px;

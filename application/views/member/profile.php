@@ -52,7 +52,7 @@
     }
     
     #modal_dialog{
-     width: 700px;
+     width: 60%;
       overflow-y: initial !important
 }
 #modal_body{
@@ -128,8 +128,7 @@ a:hover {
 }
 
 .modal-dialog{
-     width: 450px;
-     
+     width: 60%;     
 }
 
  #myModal{
@@ -145,7 +144,24 @@ a:hover {
                
             }
 
-
+@media (max-width:800px){
+    #modal_dialog,#modal_dialog1,#modal_dialog2,#modal_dialog3,#modal_dialog4,#modal_dialog5{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:768px){
+    #modal_dialog,#modal_dialog1,#modal_dialog2,#modal_dialog3,#modal_dialog4,#modal_dialog5{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:320px){
+    #modal_dialog,#modal_dialog1,#modal_dialog2,#modal_dialog3,#modal_dialog4,#modal_dialog5{
+     width: 100%;
+      overflow-y: initial !important
+}
+}    
 
 </style>
 
@@ -731,7 +747,7 @@ var edu_name=el.val();
              
              <div class="row" id="profile_info">
                  <div class="row" style="margin-top:10px; margin-left:10px">
-                     <div class="col-md-2">
+                     <div class="col-md-2 col-sm-2 col-xs-2">
                         
                          <button type="file" onclick="upload_photo()" class="pull-right"><i style="color:#668cff" class="fa fa-camera"></i></button><br>
                          <img src='<?php if(isset($member_data->member_profile_pic)){ echo base_url().$member_data->member_profile_pic; }else{echo base_url()."profile_pic/avatar.PNG";}?>' width='90px' height='90px'class='img-circle' alt='user-image'>
@@ -740,7 +756,7 @@ var edu_name=el.val();
                      $org=$this->Employments_model->get_employment(array('member_id'=>$this->session->userdata('member_id')))
                      ?>
                      
-                     <div class="col-md-6">
+                     <div class="col-md-6 col-sm-6 col-xs-6">
                      <label style="font-size:20px"><?php if(isset($member_data)){echo $member_data->member_fname." ".$member_data->member_lname;} ?></label><br>
                      <span><?php if(isset($org)){echo $org->employment_designation." at ".$org->employment_organization;}else{echo "Fresher";} ?></span>
                     </div>
@@ -749,7 +765,7 @@ var edu_name=el.val();
                      <div class="col-md-2">
                          
                      </div>
-                         <div class="col-md-3">
+                         <div class="col-md-3 col-sm-6 col-xs-6">
                              <div class="item-details"><i class="fa fa-map-marker"></i><span class="item"> <?php if(isset($member_data)){echo $member_data->member_city.",".$member_data->member_country;}?></span></div>
                              <div class="item-details"><i class="fa fa-suitcase"></i><span class="item"> <?php if(isset($member_data->member_experience)){echo $member_data->member_experience." Year"; } ?> </span></div>
                              <?php if(!empty($org->employment_salary) && $org->employment_salary!='0.0' ){$sal=explode(".",$org->employment_salary);} ?>
@@ -814,58 +830,58 @@ var edu_name=el.val();
         <div class="shadow" id="personal"> 
               
          <div class="box-header" > <div class="row">          
-          <div class="col-md-9"><h3 class="box-title"><b>Personal Details</b></h3></div><div class="col-md-3"><a href="#personal" id="edit_personal" class="btn_color"><span class="fa fa-pencil"> edit </span></a></div>
+          <div class="col-md-9 col-xs-9"><h3 class="box-title"><b>Personal Details</b></h3></div><div class="col-md-3 col-xs-3"><a href="#personal" id="edit_personal" class="btn_color"><span class="fa fa-pencil"> edit </span></a></div>
            </div>  </div>
       
       <div class="box-footer text-black data" >
           
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-6 col-xs-6 ">
                     <input type="hidden" name="member_id" id="member_id" value="<?php echo $member_data->member_id;?>">
                     <Span class="form_label">Name</span><br>
                     <span><?php echo $member_data->member_fname." ".$member_data->member_lname;?></span>
             </div>   
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-sm-6 col-xs-6">
                  <Span class="form_label">Email</span><br>
                  <span><?php echo $member_data->member_email;?></span>
             </div>   
            </div>
           <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-6 col-xs-6">
                     <Span class="form_label">Mobile</span><br>
                     <span><?php echo $member_data->member_mobile;?></span>
             </div>   
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-sm-6 col-xs-6">
                  <Span class="form_label">Address</span><br>
                  <span><?php echo $member_data->member_address;?></span>
             </div>   
            </div>
           <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-6 col-xs-6">
                     <Span class="form_label">Pincode</span><br>
                     <span><?php echo $member_data->member_pincode;?></span>
             </div>   
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-sm-6 col-xs-6">
                  <Span class="form_label">Marital Status</span><br>
                  <span><?php echo $member_data->member_marital_status;?></span>
             </div>   
            </div>
            <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-6 col-xs-6" >
                     <Span class="form_label">DOB</span><br>
                     <span><?php echo $member_data->member_dob;?></span>
             </div>   
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-sm-6 col-xs-6">
                  <Span class="form_label">Gender</span><br>
                  <span><?php echo $member_data->member_gender;?></span>
             </div>   
            </div>
            <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-6 col-xs-6">
                     <Span class="form_label">State</span><br>
                     <span><?php echo $member_data->member_state;?></span>
             </div>   
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-sm-6 col-xs-6">
                  <Span class="form_label">City</span><br>
                  <span><?php echo $member_data->member_city;?></span>
             </div>   
@@ -889,17 +905,17 @@ var edu_name=el.val();
               </div>
           </div>
           <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-6 col-xs-6">
                     <Span class="form_label">Education Title</span><br>
                     <span><?php if(isset($edu->education_degree)){echo $edu->education_degree;}?></span>
             </div>   
          </div>
          <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-6 col-xs-6">
                     <Span class="form_label">Education Name</span><br>
                     <span><?php if(isset($edu->education_name)){echo $edu->education_name;}?></span>
             </div>   
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-sm-6 col-xs-6">
                  <Span class="form_label">Specialization</span><br>
                  <span><?php if(isset($edu->education_specialization)){echo $edu->education_specialization;}?></span>
             </div>   
@@ -909,7 +925,7 @@ var edu_name=el.val();
                     <Span class="form_label">University/Institute</span><br>
                     <span><?php if(isset($edu->education_university)){ echo $edu->education_university;}?></span>
                 </div>   -->
-                   <div class="col-md-6">
+                   <div class="col-md-6 col-sm-6 col-xs-6">
                     <Span class="form_label">University/Institute Name</span><br>
                     <span><?php if(isset($edu->education_institute_name)){echo $edu->education_institute_name;}?></span>
             </div>   
@@ -919,11 +935,11 @@ var edu_name=el.val();
                     <Span class="form_label">Admission</span><br>
                     <span><?php if(isset($edu->education_passing_in)){ echo $edu->education_passing_in;}?></span>
             </div>   -->
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6 col-xs-6">
                     <Span class="form_label">Percentage</span><br>
                     <span><?php if(isset($edu->education_percentage)){echo $edu->education_percentage."%";}?></span>
             </div>  
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-sm-6 col-xs-6">
                  <Span class="form_label">Pass Out</span><br>
                  <span><?php if(isset($edu->education_passing_out)){echo $edu->education_passing_out;}?></span>
             </div>   
@@ -985,45 +1001,45 @@ var edu_name=el.val();
           </div>
           
                   <div class="row"> 
-                <div class="col-md-6">
+                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">
                     <!--<input type="hidden" name="member_id" id="member_id" value="<?php echo $emp->member_id;?>">-->
                     <Span class="form_label">Organization</span><br>
                     <span><?php echo $emp->employment_organization;?></span>
             </div>   
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">
                  <Span class="form_label">Company Location</span><br>
                  <span><?php echo $emp->employment_city;?></span>
             </div>   
            </div>
           
            <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">
                     <Span class="form_label">Designation</span><br>
                     <span><?php echo $emp->employment_designation;?></span>
             </div>   
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">
                  <Span class="form_label">Work Profile</span><br>
                  <span><?php echo $emp->employment_profile;?></span>
             </div>   
            </div>
           
            <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">
                     <Span class="form_label">Work From</span><br>
                     <span><?php echo $emp->employment_from;?></span>
             </div>   
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">
                  <Span class="form_label">Work To</span><br>
                  <span><?php echo $emp->employment_to;?></span>
             </div>   
            </div>
           
           <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">
                     <Span class="form_label">Notice Period</span><br>
                     <span><?php echo $emp->employment_notice_period;?></span>
             </div> 
-               <div class="col-md-6">
+               <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">
                     <Span class="form_label">Salary</span><br>
                     <span><?php echo $emp->employment_salary." PA";?></span>
             </div> 
@@ -1062,12 +1078,12 @@ var edu_name=el.val();
               </div>
           </div>
                   <div class="row"> 
-                <div class="col-md-6">
+                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">
                     <!--<input type="hidden" name="member_id" id="member_id" value="<?php echo $pro->member_id;?>">-->
                     <Span class="form_label">Project Name</span><br>
                     <span><?php echo $pro->project_name;?></span>
             </div>   
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">
                  <Span class="form_label">Project With</span><br>
                  <span><?php echo $pro->employment_organization;?></span>
             </div>   
@@ -1075,17 +1091,17 @@ var edu_name=el.val();
           
           
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">
                     <Span class="form_label">Project Start</span><br>
                     <span><?php echo $pro->project_start;?></span>
             </div>   
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">
                  <Span class="form_label">Project To</span><br>
                  <span><?php echo $pro->project_to;?></span>
             </div>   
            </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">
                     <Span class="form_label">Client Name</span><br>
                     <span><?php echo $pro->project_client_name;?></span>
             </div>   
@@ -1128,11 +1144,11 @@ var edu_name=el.val();
               </div>
           </div>
                   <div class="row"> 
-                <div class="col-md-6">                    
+                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">                    
                     <Span class="form_label">Skill Name</span><br>
                     <span><?php echo $skill->skill_name;?></span>
             </div>   
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">
                  <Span class="form_label">Skill Description</span><br>
                  <span><?php echo $skill->skill_description;?></span>
             </div>   
@@ -1191,7 +1207,7 @@ var edu_name=el.val();
              
              
              <div class="modal fade" id="personal_modal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog">   
+    <div class="modal-dialog" id="modal_dialog1">   
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">
@@ -1205,25 +1221,25 @@ var edu_name=el.val();
                                 <div class="form-group">
     			<div class="row">
                              
-                                <div class="col-md-6  ">                             
+                                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6 ">                             
                                         <label for="fname">First Name</label>
                                         <input type="text" placeholder="First Name" value="" class="form-control required" id="fname" name="fname" maxlength="128" required>
                                         <span class="text-danger" id="fname_err"></span>                                                          
                                 </div>
-                                <div class="col-md-6">                                   
+                                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">                                   
                                         <label for="lname">Last Name</label>
                                         <input type="text" placeholder="Last Name" value="" class="form-control" id="lname"  name="lname" maxlength="128" required>
                                       <span class="text-danger" id="lname_err"></span>                                   
                                          </div>
                             </div><br>
                                     <div class="row">
-                                    <div class="col-md-6  ">                             
+                                    <div class="col-md-6 col-md-6 col-sm-6 col-xs-6 ">                             
                                         <label for="fname">Email</label>
                                         <input type="Email" placeholder="Email" value="" class="form-control required" id="email" name="email" maxlength="128" required>
                                         <span class="text-danger" id="email_err"></span>                                                          
                                     </div>                         
                                     
-                                    <div class="col-md-6  ">                             
+                                    <div class="col-md-6 col-md-6 col-sm-6 col-xs-6 ">                             
                                         <label for="fname">Mobile</label>
                                         <input type="text" placeholder="Mobile" value='' class="form-control required" id="mobile" name="mobile" maxlength="11" required>
                                         <span class="text-danger" id="mobile_err"></span>                                                          
@@ -1232,12 +1248,12 @@ var edu_name=el.val();
                                     
                                     	<div class="row">
                              
-                                <div class="col-md-6  ">                             
+                                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6 ">                             
                                         <label for="fname">DOB</label>
                                         <input type="date" name='dob' value='' id="dob" placeholder="DOB" class="form-control">
                                         <span class="text-danger" id="dob_err"></span>                                                          
                                 </div>
-                                <div class="col-md-6">                                   
+                                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">                                   
                                         <label for="lname">Gender</label>
                                         <select class="form-control" name='gen'id='gen'>
                                             <option value="Male">Male</option>
@@ -1285,12 +1301,12 @@ var edu_name=el.val();
                                 </div><br>
                             
                             <div class="row">                             
-                                <div class="col-md-6  ">                             
+                                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">                             
                                         <label for="fname">Pincode</label>
                                         <input type="text" name='pincode' value='' id="pincode" placeholder="Pincode" class="form-control">
                                         <span class="text-danger" id="pincode_err"></span>                                                          
                                 </div>
-                                <div class="col-md-6">                                   
+                                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">                                   
                                         <label for="lname">Marital Status</label>
                                         <select class="form-control" name='marital_status' id='marital_status'>
                                              <option value="Unmarried">Unmarried</option>
@@ -1318,7 +1334,7 @@ var edu_name=el.val();
              
              
      <div class="modal fade" id="education_modal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog">   
+    <div class="modal-dialog" id="modal_dialog2">   
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">
@@ -1332,7 +1348,7 @@ var edu_name=el.val();
                                  <div class="form-group">
     			<div class="row">
                              <input type="hidden" name="education_id" id="education_id" value="">
-                                <div class="col-md-6  ">                             
+                                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6 ">                             
                                         <label for="fname">Title</label>
                                         <select  id="edu_title" name="edu_title" class="form-control">
                                             <option>Select Title</option>
@@ -1341,7 +1357,7 @@ var edu_name=el.val();
                                             <option value="Doctarate">Doctarate</option>
                                         </select>
                                 </div>
-                                <div class="col-md-6">                                   
+                                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">                                   
                                         <label for="lname">Education/Degree</label>
                                        <select id="edu_name" name="edu_name" class="form-control">
                                            <option>--- Select Education ---</option>
@@ -1350,7 +1366,7 @@ var edu_name=el.val();
                                          </div>
                             </div>
                              <div class="row">
-                                    <div class="col-md-6" id="spl_field" hidden>                             
+                                    <div class="col-md-6 col-md-6 col-sm-6 col-xs-6" id="spl_field" hidden>                             
                                         <label for="fname">Specialization</label>
 <!--                                          <select id="edu_spl" name="edu_spl" class="form-control">
                                            <option>--- Select Specialization ---</option>
@@ -1368,7 +1384,7 @@ var edu_name=el.val();
                                         </select>
                                         <span class="text-danger" id="email_err"></span>                                                          
                                     </div>-->
-                                        <div class="col-md-6"> 
+                                        <div class="col-md-6 col-md-6 col-sm-6 col-xs-6"> 
                                             <label for="fname">University/Institute Name</label>
                                             <select class="form-control"  id="inst_name" name="inst_title">
                                                 <?php if(isset($institutes)){
@@ -1400,14 +1416,14 @@ var edu_name=el.val();
                                         <select class="form-control" name='passin'id='passin'></select>
                                         <span class="text-danger" id="add_err"></span>                                                          
                                 </div>-->
-                                <div class="col-md-6">                                   
+                                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">                                   
                                         <label for="lname">Pass Out</label>
                                         <select class="form-control" name='passout'id='passout'>
                                           
                                         </select>
                                       <span class="text-danger" id="lname_err"></span>                                   
                                          </div>
-                                    <div class="col-md-6  ">                             
+                                    <div class="col-md-6 col-md-6 col-sm-6 col-xs-6 ">                             
                                         <label for="fname">Percentage</label>
                                         <input type="text" class="form-control" name="percentage" id="percentage" placeholder="0.1% to 100%" maxlength="6">
                                         <span class="text-danger" id="add_err"></span>                                                          
@@ -1435,7 +1451,7 @@ var edu_name=el.val();
              
              
              <div class="modal fade" id="employment_modal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog">   
+    <div class="modal-dialog" id="modal_dialog3">   
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">
@@ -1449,12 +1465,12 @@ var edu_name=el.val();
                                   <div class="form-group">
     			<div class="row">
                              <input type='hidden' id='employment_id' name="employment_id" value="">
-                                <div class="col-md-6  ">                             
+                                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6 ">                             
                                         <label for="fname">Organization</label>
                                         <input type="text" placeholder="Company Name" value="" class="form-control required" id="organization" name="organization" maxlength="128" required>
                                         <span class="text-danger" id="org_error"></span>                                                          
                                 </div>
-                                <div class="col-md-6">                                   
+                                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">                                   
                                         <label for="lname">City</label>
                                         <select name="city" id="emp_city" class="form-control">
                                             <option value="">Select City</option>
@@ -1483,7 +1499,7 @@ var edu_name=el.val();
                                     
                                     	<div class="row">
                              
-                                <div class="col-md-6  ">                             
+                                <div class="col-md-6 col-md-6 col-sm-6 col-xs-6 ">                             
                                         <label for="fname">Work From</label>
                                         <input type="date" value="" name="from" id="from" class="form-control">
 <!--                                        <select class="form-control" name="from" id="from"></select>
@@ -1496,7 +1512,7 @@ var edu_name=el.val();
                                         </select>-->
                                         <span class="text-danger" id="from_err"></span>                                                          
                                 </div>
-                                             <div class="col-md-6">                                   
+                                             <div class="col-md-6 col-md-6 col-sm-6 col-xs-6">                                   
                                         <label for="lname">Work To</label>
                                         <input type="date" name="to" value="" id="to" class="form-control"><br>
                                         <input type="checkbox" name="present" value=""> <span> <b>Present</b> </span>
@@ -1570,7 +1586,7 @@ var edu_name=el.val();
              
              
              <div class="modal fade" id="project_modal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog">   
+    <div class="modal-dialog" id="modal_dialog4">   
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">
@@ -1593,12 +1609,12 @@ var edu_name=el.val();
                                
                             </div><br>
                                     <div class="row">
-                                    <div class="col-md-6  ">                             
+                                    <div class="col-md-6 col-md-6 col-sm-6 col-xs-6 ">                             
                                         <label for="fname">Client Name</label>
                                         <input type="text" placeholder="Client Name" value="" class="form-control required" id="client" name="client" maxlength="128" required>
                                         <span class="text-danger" id="designation_err"></span>                                                          
                                 </div>
-                                         <div class="col-md-6  ">                             
+                                         <div class="col-md-6 col-md-6 col-sm-6 col-xs-6 ">                             
                                         <label for="fname">Project With</label>
                                         <select class="form-control" name="emp_id" id="emp_id">
                                             <?php if(isset($employments)){foreach($employments as $emp){?>
@@ -1616,7 +1632,7 @@ var edu_name=el.val();
                                         <input type="date" placeholder="Project Start" value='' class="form-control required" id="project_from" name="from" maxlength="11" required>
                                         <span class="text-danger" id="profile_err"></span>                                                          
                                 </div>
-                                         <div class="col-md-6  ">                             
+                                         <div class="col-md-6 col-md-6 col-sm-6 col-xs-6 ">                             
                                         <label for="fname">Project To</label>
                                         <input type="date" placeholder="Project To" value='' class="form-control required" id="project_to" name="to" maxlength="11" required>
                                         <span class="text-danger" id="profile_err"></span>                                                          
@@ -1648,7 +1664,7 @@ var edu_name=el.val();
              
              
              <div class="modal fade" id="skill_modal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog">   
+    <div class="modal-dialog" id="modal_dialog5">   
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">
@@ -1697,7 +1713,7 @@ var edu_name=el.val();
 
       
              <div class="modal fade" id="photo_modal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog">   
+    <div class="modal-dialog" id="modal_dialog6">   
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">

@@ -64,7 +64,7 @@
                                 {                                   
                         ?>
      <div class="modal fade" style="" id="job_modal<?php echo $j;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-         <div class="modal-dialog" id="content_body">
+         <div class="modal-dialog" id="content_body1">
     <div class="modal-content">
       <div style="color:#fff; background-color:#338cbf" class="modal-header">
           

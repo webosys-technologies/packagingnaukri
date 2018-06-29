@@ -3,8 +3,8 @@
  .modal fade{
     display: block !important;
 }
-#modal_dialog{
-     width: 700px;
+#modal_dialog,#modal_dialog1{
+     width: 60%;
       overflow-y: initial !important
 }
 #modal_body{
@@ -22,6 +22,24 @@
   color: #707B7C;
 }
 
+@media (max-width:800px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:768px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:320px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
 
 </style>
 <div class="content-wrapper" style="background:white;">
@@ -843,7 +861,7 @@ function view_member(id)
 <!--                      View model      -->
 
 <div class="modal fade" id="viewModal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog">
+    <div class="modal-dialog" id="modal_dialog1">
     
       <!-- Modal content-->
       <div class="modal-content">

@@ -3,8 +3,8 @@
   .modal fade{
     display: block !important;
 }
-#modal_dialog{
-     width: 700px;
+#modal_dialog,#modal_dialog1{
+     width: 60%;
       overflow-y: initial !important
 }
 #modal_body{
@@ -18,6 +18,25 @@
                 margin:150px;
                
             }
+            
+            @media (max-width:800px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:768px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:320px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
 </style>
 <div class="content-wrapper" style="background:white;">
     <!-- Content Header (Page header) -->
@@ -653,7 +672,7 @@ function view_recruiter(id)
 <!--                      View model      -->
 
 <div class="modal fade" id="viewModal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog">
+    <div class="modal-dialog" id="modal_dialog1">
     
       <!-- Modal content-->
       <div class="modal-content">
