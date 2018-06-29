@@ -894,7 +894,7 @@ var edu_name=el.val();
             <div class="shadow" id="education"> 
               
                 <div class="box-header" >   <div class="row">        
-            <div class="col-md-9"> <h3 class="box-title"><b>Education Details</b></h3></div><div class="col-md-3"><a class="btn_color" href="#education" id="add_education"><span class="fa fa-plus"> Add </span></a> </div>
+            <div class="col-md-9 col-sm-9 col-xs-9"> <h3 class="box-title"><b>Education Details</b></h3></div><div class="col-md-3 col-sm-3 col-xs-3"><a class="btn_color" href="#education" id="add_education"><span class="fa fa-plus"> Add </span></a> </div>
              </div></div>
       <div class="box-footer text-black data" >
          <?php if(isset($educations)){
@@ -987,7 +987,7 @@ var edu_name=el.val();
           
            <div  class="shadow" id="employment">               
          <div class="box-header" >  <div class="row">         
-          <div class="col-md-9"><h3 class="box-title"><b>Employment Details</b></h3></div><div class="col-md-3"><a class="btn_color" href="#employment" id="add_employment"><span class="fa fa-plus"> Add </span></a> </div>
+          <div class="col-md-9 col-sm-9 col-xs-9"><h3 class="box-title"><b>Employment Details</b></h3></div><div class="col-md-3 col-sm-3 col-xs-3"><a class="btn_color" href="#employment" id="add_employment"><span class="fa fa-plus"> Add </span></a> </div>
              </div></div>
       
       <div class="box-footer text-black data" >
@@ -1059,7 +1059,7 @@ var edu_name=el.val();
           
                     <div  class="shadow" id="project">               
               <div class="box-header" > <div class="row">          
-            <div class="col-md-9"> <h3 class="box-title"><b>Project Details</b></h3></div><div class="col-md-3"><a href="#project" class="btn_color" id="add_project"><span class="fa fa-plus"> Add </span></a> </div>
+            <div class="col-md-9 col-sm-9 col-xs-9"> <h3 class="box-title"><b>Project Details</b></h3></div><div class="col-md-3 col-sm-3 col-xs-3"><a href="#project" class="btn_color" id="add_project"><span class="fa fa-plus"> Add </span></a> </div>
              </div>
                   </div>
               
