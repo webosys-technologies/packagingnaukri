@@ -900,7 +900,7 @@ var edu_name=el.val();
          <?php if(isset($educations)){
              foreach($educations as $edu){?>    
            <div class="row">
-              <div class="col-md-offset-9 col-md-3">
+              <div class="col-md-offset-9 col-sm-offset-9 col-xs-offset-9 col-md-3 col-sm-3 col-xs-3">
                   <a href="#education" onclick='edit_education(<?php echo $edu->education_id;?>)'><span class="fa fa-pencil"></span></a> &nbsp; <a href="#education" onclick='delete_education(<?php echo $edu->education_id;?>,"education_delete")'><span class="fa fa-times"></span></a>
               </div>
           </div>
