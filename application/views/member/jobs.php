@@ -351,9 +351,9 @@ a:link, a:visited{
             }
            
 ?>
-      <div class="container" style="padding-left:50px" id="cont<?php echo $job->job_id;?>">
+      <div style="padding-left:50px" id="cont<?php echo $job->job_id;?>">
                    <div class="row">
-                       <div class="col-md-offset col-md-8 col-sm-12 col-xs-12">
+                       <div class=" col-md-8 col-sm-12 col-xs-12">
                        <div class="panel-body">
                        <div class="shadow">
                            <div class="row">
