@@ -179,7 +179,7 @@ a:link, a:visited{
       
 
            
-               <div class="container">
+               <!--<div class="container">-->
                    <?php if(isset($jobs)){
                        foreach($jobs as $job){?>
                    <div class="row">
@@ -242,7 +242,7 @@ a:link, a:visited{
               </div>
      </div>
                    <?php } }?>      
-      </div>
+      <!--</div>-->
      
 
     
