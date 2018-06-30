@@ -70,11 +70,10 @@ class Users extends CI_Controller
             
                        
             $res=$this->User_model->user_update(array('user_id'=>$this->input->post('user_id')),$data);
-            if($res)
-            {
+          
                 $this->session->set_flashdata('success','User Updated Successfully');
                 echo json_encode(array('status'=>true));
-            }
+            
         }
         
          function ajax_edit($id)

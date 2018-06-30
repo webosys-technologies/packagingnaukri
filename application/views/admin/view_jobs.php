@@ -58,7 +58,7 @@
     <section class="content">
         <div class="row">
           <div class="col-md-3">   
-<button type="button"  id="bt" class="btn btn-primary" onclick="add_job()"><i></i>Add Job</button>
+<button type="button"  id="bt" class="btn btn-primary" onclick="add_job()"><i></i>Post Job</button>
           </div>
     <div class="col-md-6">
          <?php
@@ -292,7 +292,7 @@ var user_type=el.val();
     {  
         save_method="add";        
        $('#form')[0].reset();
-        $("#title").text("Add Job");
+        $("#title").text("Post Job");
         $('#myModal').modal('show');
         $("#loc_err").html("");
         $("#exp_err").html("");
@@ -527,7 +527,7 @@ var user_type=el.val();
                                     <div class="form-group">
                                         <label>Source<span style="color: red">*</span></label>
                                         <select name="source" class="form-control">
-                                            <option>--Select Source--</option>
+                                            <!--<option>--Select Source--</option>-->
                                             <option value="Packaging">Packaging</option>
                                             <option value="Printing">Printing</option>
                                             <option value="Plastic">Plastic</option>
@@ -641,7 +641,8 @@ var user_type=el.val();
                                     
                      <div class="row">
                         <div class="col-md-3">
-                        <label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span><span style="color: red">*</span>
+                        <!--<label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>-->
+                            <label class="form-label">MIN Salary</label><span style="font-size:12px;">(per anual)</span>
                          <select type="text" name="lacsalary" id="lacsalary" class="form-control">
                              <option value="0">0 Lac</option>
                            <script>
@@ -659,9 +660,9 @@ var user_type=el.val();
                     </div>
                                         
                     <div class="col-md-3" style="top-padding:15px"> 
-                        <label class="form-label"></label> <span style="font-size:12px;"></span>
+                        <label class="form-label">MAX Salary</label> <span style="font-size:12px;"></span>
                        <select type="text" id="thsalary" name="thsalary" class="form-control">  
-                            <option value="0">0 Thousands</option>
+                            <option value="0">0 Lac</option>
                              <script>
                                var sal = 1;
                                var sal_end = 99;

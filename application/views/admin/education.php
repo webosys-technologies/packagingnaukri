@@ -156,7 +156,7 @@
   		  var i = 1;
             $('#add').click(function(){
                 i++;
-                $('#dynamic_field').append('<tr id="row'+i+'"><td class="col-md-11"><div class="form-group"><label class="control-label col-md-3">Title<span class="req">*</span></label><div class="col-md-7"><select name="title[]" class="form-control"><option value="Graduation">Graduation</option><option value="Postgraduation">Post Graduation</option><option value="Doctorate">Doctorate</option> </select></div></div><br><br><div class="form-group"><label class="control-label col-md-3">Education<span style="color:red">*</span></label><div class="col-md-9"><input type="text" required class="form-control" name="education[]"/></div></div><br><br><div class="form-group"><label class="control-label col-md-3">Status<span style="color:red">*</span></label><div class="col-md-9"><select name="status[]" class="form-control"><option value="1">Active</option><option value="0">Not Active</option></select></div></div><br><br></td><td class="col-md-1"><button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+                $('#dynamic_field').append('<tr id="row'+i+'"><td class="col-md-11"><div class="form-group"><label class="control-label col-md-3">Title<span class="req">*</span></label><div class="col-md-7"><select name="title[]" class="form-control"><option value="Diploma">Diploma</option><option value="Graduation">Graduation</option><option value="Postgraduation">Post Graduation</option><option value="Doctorate">Doctorate</option><option value="Distance Education">Distance Education</option> </select></div></div><br><br><div class="form-group"><label class="control-label col-md-3">Education<span style="color:red">*</span></label><div class="col-md-9"><input type="text" required class="form-control" name="education[]"/></div></div><br><br><div class="form-group"><label class="control-label col-md-3">Status<span style="color:red">*</span></label><div class="col-md-9"><select name="status[]" class="form-control"><option value="1">Active</option><option value="0">Not Active</option></select></div></div><br><br></td><td class="col-md-1"><button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
             });
 
             $(document).on('click','.btn_remove', function(){
@@ -367,9 +367,11 @@
                             <label class="control-label col-md-3">Title<span style="color:red">*</span></label>
                             <div class="col-md-7">
                             <select name="title[]" class="form-control">
+                                <option value="Diploma">Diploma</option>
                                <option value="Graduation">Graduation</option>
                                <option value="Postgraduation">Post Graduation</option>
                                <option value="Doctorate">Doctorate</option>
+                               <option value="Distance Education">Distance Education</option>
                            </select>
                             </div>
                         </div><br><br>
