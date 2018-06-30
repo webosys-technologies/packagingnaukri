@@ -91,7 +91,7 @@
         </div>
         </div>
     <!--<br>-->
-   <div class="row">
+<!--   <div class="row">
          <div class="col-md-offset-1 col-md-2">
              <div class="form-group">
          <label>Salary From:</label>
@@ -126,7 +126,7 @@
          </select>  
             </div>
              </div>
-   </div>
+   </div>-->
 <br>
         
 <div class="table-responsive">
@@ -558,7 +558,7 @@ var user_type=el.val();
                                         <label>Company Name<span style="color: red">*</span></label>
                                         <select name="company" class="form-control">
                                             <option>-- Select Company --</option>
-                                            <option>Custome</option>
+                                            <option value="custom">Custom</option>
                                             <?php
                                             if(isset($companies))
                                             {
@@ -575,6 +575,18 @@ var user_type=el.val();
                                    
                                 </div>
                             </div>
+                                    
+                                    <div class="row">
+                                <div class="col-md-12">                                
+                                    <div class="form-group">
+                                        <label></label>
+                                    <input name="custom" placeholder="Custom" class="form-control" value="">
+                                        <span class="text-danger" id="qua_err"></span>
+                                                                               
+                                    </div>
+                                                                       
+                                </div>
+                                        </div>
                                     
                                     <div class="row">
                                 <div class="col-md-6">                                
