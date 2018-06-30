@@ -53,6 +53,7 @@ class Jobs_model extends CI_Model
      
      public function job_add($data)
      {
+        
          $this->db->insert($this->table,$data);
          return $this->db->insert_id();
      }

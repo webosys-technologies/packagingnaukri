@@ -68,3 +68,6 @@ INSERT INTO `system` (`system_id`, `user_id`, `system_name`, `system_description
 
 22)source status in system panel
 ALTER TABLE `system` ADD `source_status` INT(10) NOT NULL AFTER `source`
+
+23)user_type column in recruiters
+ALTER TABLE `recruiters` ADD `user_type` VARCHAR(255) NOT NULL AFTER `recruiter_role`;

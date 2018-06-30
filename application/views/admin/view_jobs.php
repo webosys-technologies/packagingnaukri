@@ -162,7 +162,17 @@
                                             <td style="cursor:pointer; :hover{background-color: red;}"  onclick="applicants(<?php echo $job->job_id ?>)">
                                                 <?php echo count($this->Applied_jobs_model->get_by_job_id($job->job_id))." Members";?></td>
                                             <td><?php echo $job->job_education?></td>
-                                            <td><?php if($job->job_experience){echo $job->job_experience;}?></td>
+                                            <?php $exp=explode(".",$job->job_experience);
+                                                     
+                                                    if($exp[0]==$exp[1])
+                                                    {
+                                                      $experience=$exp[0]." Year";  
+                                                    }else{
+                                                       $experience=$exp[0]."-".$exp[1]." Year";  
+                                                    }
+//                                                    
+                                              ?>
+                                            <td><?php if($job->job_experience){echo $experience;}?></td>
                                             <td><?php echo $job->job_city?></td>
 				            <td><?php echo $job->job_created_at?></td>
                                             <td><?php 
@@ -199,7 +209,7 @@
   </div>
  
   <script type="text/javascript">
-  
+  var glob;
   $(document).ready( function () {
        var table = $('#table_id').DataTable();     
     // Event listener to the two range filtering inputs to redraw on input
@@ -226,7 +236,42 @@
 //                        if($("#jobdesc").length > 0){
 //                           $("#jobdesc").ckeditor();
 //                                 }
- 
+  $('[name="company"]').change(function() {
+
+    var cm = $(this) ;   
+    var cmp_name=cm.val();
+    if(cmp_name=="Custom")
+    {
+            $("#custom_field").prop('hidden',false);
+    }else{
+            $("#custom_field").prop('hidden',true);
+    }
+      });
+      
+      
+      
+       $('#min_salary').change(function() {
+           $("#max_salary").html("");
+         glob=$('#min_salary').val();
+//         $("#max_salary").append('<option value="'+dim+'">'+ dim +'Lac</option>');
+          for(var dim = glob; dim <=99; dim++)
+          {
+
+           $("#max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+           }
+         
+      });
+      
+       $('#min_exp').change(function() {
+           $("#max_exp").html("");
+           var temp=$('#min_exp').val();
+            for(var dim = temp; dim <=30; dim++)
+          {
+
+           $("#max_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+           }
+       });
+  
  
   $("#user_type").change(function() {
         
@@ -299,6 +344,7 @@ var user_type=el.val();
         $("#comp_err").html("");
         $("#job_err").html("");
         $("#qua_err").html("");
+        
 
     }
 
@@ -558,7 +604,7 @@ var user_type=el.val();
                                         <label>Company Name<span style="color: red">*</span></label>
                                         <select name="company" class="form-control">
                                             <option>-- Select Company --</option>
-                                            <option value="custom">Custom</option>
+                                            <option value="Custom">Custom</option>
                                             <?php
                                             if(isset($companies))
                                             {
@@ -576,17 +622,17 @@ var user_type=el.val();
                                 </div>
                             </div>
                                     
-                                    <div class="row">
+                                <div class="row" id="custom_field" hidden>
                                 <div class="col-md-12">                                
                                     <div class="form-group">
-                                        <label></label>
-                                    <input name="custom" placeholder="Custom" class="form-control" value="">
-                                        <span class="text-danger" id="qua_err"></span>
+                                        <!--<label></label>-->
+                                        <input name="custom" placeholder="Enter Company Name" class="form-control" value="">
+                                        <!--<span class="text-danger" id="qua_err"></span>-->
                                                                                
                                     </div>
                                                                        
                                 </div>
-                                        </div>
+                                </div>
                                     
                                     <div class="row">
                                 <div class="col-md-6">                                
@@ -599,10 +645,43 @@ var user_type=el.val();
                                                                        
                                 </div>
                               
-                                <div class="col-md-6">                                
+                                <div class="col-md-3">                                
                                     <div class="form-group">
-                                       <label>Experience<span style="color: red">*</span></label>
-                                       <input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">
+                                       <label>MIN Experience</label>
+                                       <select name="min_exp" id="min_exp" class="form-control">
+                                           <option value="0">0 year</option>
+                                            <script>
+                               var exp = 1;
+                               var exp_end = 30;
+                                var options = "";
+                                for(var dim = exp ; dim <=exp_end; dim++){
+//                                    alert(dim);
+                            $("#min_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              }
+                               </script>
+                                           </select>
+                                        <span class="text-danger" id="exp_err"></span>
+                                        
+                                    </div>
+                                                                      
+                                </div>
+                                        <div class="col-md-3">                                
+                                    <div class="form-group">
+                                       <label>MAX Experience</label>
+                                       <select name="max_exp" id="max_exp" class="form-control">
+                                           <option value="0">0 year</option>
+                                            <script>
+                               var exp = 1;
+                               var exp_end = 30;
+                                var options = "";
+                                for(var dim = exp ; dim <=exp_end; dim++){
+//                                    alert(dim);
+                            $("#max_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              }
+                               </script>
+                                           </select>
                                         <span class="text-danger" id="exp_err"></span>
                                         
                                     </div>
@@ -656,16 +735,16 @@ var user_type=el.val();
                         <div class="col-md-3">
                         <!--<label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>-->
                             <label class="form-label">MIN Salary</label><span style="font-size:12px;">(per anual)</span>
-                         <select type="text" name="lacsalary" id="lacsalary" class="form-control">
+                         <select type="text" name="min_salary" id="min_salary" class="form-control">
                              <option value="0">0 Lac</option>
                            <script>
                                var sal = 1;
                                var sal_end = 99;
                                 var options = "";
                                 for(var dim = sal ; dim <=sal_end; dim++){
-//                                    alert(dim);
-                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
-//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+
+                            $("#min_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+
                               }
                                </script>
                         </select>
@@ -674,18 +753,17 @@ var user_type=el.val();
                                         
                     <div class="col-md-3" style="top-padding:15px"> 
                         <label class="form-label">MAX Salary</label> <span style="font-size:12px;"></span>
-                       <select type="text" id="thsalary" name="thsalary" class="form-control">  
-                            <option value="0">0 Lac</option>
-                             <script>
-                               var sal = 1;
+                       <select type="text" id="max_salary" name="max_salary" class="form-control">  
+                           <script>
+                               var sal = 0;
                                var sal_end = 99;
                                 var options = "";
                                 for(var dim = sal ; dim <=sal_end; dim++){
 //                                    alert(dim);
-//                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
-                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                            $("#max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
                               }
-                               </script>
+                               </script> 
                         </select>
                         <span class="text-danger" id="salary_error"><?php echo form_error('state'); ?></span>
                     </div> 

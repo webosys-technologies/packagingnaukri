@@ -259,6 +259,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                     'recruiter_email' => $result->recruiter_email,
                     'recruiter_mobile' => $result->recruiter_mobile,
                     'recruiter_source'   =>$result->recruiter_source,
+                    'user_type'         =>$result->user_type,
                     'recruiter_LoggedIn' => true,
                                     );
                                     

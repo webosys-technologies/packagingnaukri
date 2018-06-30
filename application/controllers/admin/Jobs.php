@@ -48,13 +48,59 @@ class Jobs extends CI_Controller
        { 
            if(!empty($form['qualification']))
         {
-               if(!empty($form['experience']))
-        {
+//               if(!isset($form['min_exp']))
+//        {
                    if(!empty($form['joblocation']))
         {
+              if($form['min_exp']==$form['max_exp'])
+              {
+                  $experience=$form['min_exp'].".".$form['min_exp'];
+              }else{
+                  $experience=$form['min_exp'].".".$form['max_exp'];
+              }
               
-        $id=$this->Companies_model->get_recruiter_by_company($form['company']);
-        $salary=$form['lacsalary'].".".$form['thsalary'];
+              if($form['min_salary']==$form['max_salary'])
+              {
+                  $salary=$form['min_salary'].".".$form['min_salary'];
+              }else{
+                  $salary=$form['min_salary'].".".$form['max_salary'];
+              }
+              
+        if($form['company']=='Custom')
+        {   
+            $id=$this->session->userdata('recruiter_id');
+           
+//            $id="1";
+            $company=array(
+                   'recruiter_id'=>$id,
+                   'company_name'=>$form['custom'],
+                   'company_type'=>"",
+                   'company_email'=>"",
+                   'company_contact'=>"",
+                   'company_website'=>"",
+                   'company_address'=>"",
+                   'company_country'=>"",
+//                   'company_country'=>$form['country'],
+                   'company_state'=>"",
+                   'company_city'=>"",
+                   'company_pincode'=>"",
+                   'company_establish_in'=>"",
+                   'company_multinational'=>"",
+                   'company_created_at'=>date('Y-m-d'),
+                   'company_status'=>'1',
+                   'company_source' =>$form['source'],
+        );
+         $this->Companies_model->company_add($company);
+        }
+        else
+        {
+         $id=$this->Companies_model->get_recruiter_by_company($form['company']);
+        }
+              
+              
+       
+        
+//        $salary=$form['min_salary'].".".$form['max_salary'];
         $data=array(
                    'recruiter_id'=>$id,
                    'company_id'=>$form['company'],
@@ -63,14 +109,17 @@ class Jobs extends CI_Controller
                    'job_education'=>$form['qualification'],
                    'job_description'=>$form['jobdesc'],
                    'job_city'=>$form['joblocation'],
-                   'job_experience'=>$form['experience'],
+                   'job_experience'=>$experience,
                    'job_salary'=>$salary,
                    'job_created_at'=>date('Y-m-d'),
                    'job_status'=>$form['status'],
                    'job_skill_name' => $form['skill'],
                    'job_source'         => $form['source'],
                    );
+               
         
+         
+         
           $res=$this->Jobs_model->job_add($data);
           
           
@@ -80,9 +129,12 @@ class Jobs extends CI_Controller
               echo json_encode(array('success'=>'job added successfully'));
        }else{
            echo json_encode(array('loc_err'=>'Please Enter job Location'));           
-        }}else{
-           echo json_encode(array('exp_err'=>'Please Enter Experience'));
-        }}else{
+        }}
+        else
+//            {
+//           echo json_encode(array('exp_err'=>'Please Enter Experience'));
+//        }}else
+            {
             echo json_encode(array('qua_err'=>'Please Enter Qualification'));
        }}else{
            echo json_encode(array('comp_err'=>'Please Select Company Name'));
