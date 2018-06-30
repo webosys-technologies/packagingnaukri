@@ -483,6 +483,23 @@ function delete_logo(id)
                                           <span id="source_err" class="text-danger"></span>
                                         </div>
                                       </div>
+                                         <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label>Recruiters<span style="color: red">*</span></label>
+                                          <select name="recruiter" class="form-control">
+                                            <?php 
+                                            if(isset($recruiters))
+                                            {
+                                                foreach ($recruiters as $rec)
+                                                {
+                                                    echo '<option value='.$rec->recruiter_id.'>'.$rec->recruiter_fname." ".$rec->recruiter_lname;'</option>';
+                                                }
+                                            }
+                                            ?>
+                                          </select>
+                                          <span id="source_err" class="text-danger"></span>
+                                        </div>
+                                      </div>
                                     </div>
     				                <div class="row">
                                 <div class="col-md-6">                                

@@ -558,6 +558,7 @@ var user_type=el.val();
                                         <label>Company Name<span style="color: red">*</span></label>
                                         <select name="company" class="form-control">
                                             <option>-- Select Company --</option>
+                                            <option>Custome</option>
                                             <?php
                                             if(isset($companies))
                                             {

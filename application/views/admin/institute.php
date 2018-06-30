@@ -407,7 +407,7 @@
       
            
           <div class="modal-footer">
-              <button type="button" name="add" id="add" class="btn btn-success">Add More</button>
+              <!--<button type="button" name="add" id="add" class="btn btn-success">Add More</button>-->
             <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">Save</button>
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
               
