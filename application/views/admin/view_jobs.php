@@ -379,12 +379,19 @@ var user_type=el.val();
             $('[name="jobtype"]').val(data.job_type);
             if(data.job_salary){
                        var s=data.job_salary.split(".");
-                        $("#lacsalary").val(s[0]);
-                           $("#thsalary").val(s[1]);
+//                       alert(s[0]);
+                        $("#min_salary").val(s[0]);
+                           $("#max_salary").val(s[1]);
+                   }
+                    if(data.job_experience){
+                       var e=data.job_experience.split(".");
+//                       alert(s[0]);
+                        $("#min_exp").val(e[0]);
+                           $("#max_exp").val(e[1]);
                    }
             $('[name="company"]').val(data.company_id);
             $('[name="qualification"]').val(data.job_education);
-            $('[name="experience"]').val(data.job_experience);
+//            $('[name="experience"]').val(data.job_experience);
             $('[name="status"]').val(data.job_status);
             $('[name="skill"]').val(data.job_skill_name);
            
@@ -752,7 +759,7 @@ var user_type=el.val();
                     </div>
                                         
                     <div class="col-md-3" style="top-padding:15px"> 
-                        <label class="form-label">MAX Salary</label> <span style="font-size:12px;"></span>
+                        <label class="form-label">MAX Salary</label> <span style="font-size:12px;">(per anual)</span>
                        <select type="text" id="max_salary" name="max_salary" class="form-control">  
                            <script>
                                var sal = 0;

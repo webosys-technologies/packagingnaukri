@@ -392,6 +392,8 @@ function view_user(id)
     			<div class="panel-body">
     				<form method="post" action="" id="form">
                                     <input type="hidden" value="" name="user_id">
+                                    
+                                    
     				 <div class="row">
                                 <div class="col-md-6  ">                                
                                     <div class="form-group">

@@ -33,6 +33,23 @@ class Users extends CI_Controller
     
    function user_add()
    {
+       $sys=$this->System_model->source_name();
+       $recruiter=array(
+            'recruiter_fname'          =>$this->input->post('fname'),
+            'recruiter_lname'          => $this->input->post('lname'),
+            'recruiter_email'          => $this->input->post('email'),
+            'recruiter_mobile'         => $this->input->post('mobile'),
+            'recruiter_address'        =>"",
+            'recruiter_password'       => $this->input->post('password'),
+            'recruiter_city'           => "",
+            'recruiter_state'          => "",
+            'recruiter_gender'         => $this->input->post('gender'),
+            'recruiter_created_at'     => date("Y-m-d "),
+            'recruiter_status'         => "2",
+            'recruiter_source'         =>  ucfirst($sys),
+
+        );
+      $rec_id=$this->Recruiters_model->recruiter_add($recruiter);
        
        
         $data=array(
@@ -43,9 +60,13 @@ class Users extends CI_Controller
                         'user_password'       => $this->input->post('password'),
                         'user_gender'         => $this->input->post('gender'),
                         'user_type'           => $this->input->post('user_type'),
+                        'recruiter_id'        =>$rec_id,
                         'user_created_at'     => date('Y-m-d'),
                         'user_status'         =>'1'
                           );
+        
+      
+        
       
         $res=$this->User_model->user_add($data);
         if($res)

@@ -475,7 +475,7 @@ function delete_logo(id)
                                         <div class="form-group">
                                           <label>Source<span style="color: red">*</span></label>
                                           <select name="source" class="form-control">
-                                            <option>--Select Source--</option>
+                                            <!--<option>--Select Source--</option>-->
                                             <option value="Packaging">Packaging</option>
                                             <option value="Printing">Printing</option>
                                             <option value="Plastic">Plastic</option>
@@ -483,10 +483,12 @@ function delete_logo(id)
                                           <span id="source_err" class="text-danger"></span>
                                         </div>
                                       </div>
+                                        
                                          <div class="col-md-6">
                                         <div class="form-group">
                                           <label>Recruiters<span style="color: red">*</span></label>
                                           <select name="recruiter" class="form-control">
+                                              <option value="<?php echo $this->session->userdata('recruiter_id');?>">SELF</option>
                                             <?php 
                                             if(isset($recruiters))
                                             {

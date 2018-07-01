@@ -48,7 +48,7 @@ class Companies extends CI_Controller
       if(!empty($form['city']) && $form['city']!="-- Select City --" && $form['city']!="")
       {
         $data=array(
-                  // 'recruiter_id'=>$id,
+                   'recruiter_id'=>$form['recruiter'],
                    'company_name'=>$form['company'],
                    'company_type'=>$form['type'],
                    'company_email'=>$form['email'],
