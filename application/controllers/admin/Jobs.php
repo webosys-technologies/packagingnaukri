@@ -52,6 +52,9 @@ class Jobs extends CI_Controller
 //        {
                    if(!empty($form['joblocation']))
         {
+          
+          if(!empty($form['custom']))
+          {
               if($form['min_exp']==$form['max_exp'])
               {
                   $experience=$form['min_exp'].".".$form['min_exp'];
@@ -69,8 +72,7 @@ class Jobs extends CI_Controller
         if($form['company']=='Custom')
         {   
             $id=$this->session->userdata('recruiter_id');
-           
-//            $id="1";
+         
             $company=array(
                    'recruiter_id'=>$id,
                    'company_name'=>$form['custom'],
@@ -90,10 +92,11 @@ class Jobs extends CI_Controller
                    'company_status'=>'1',
                    'company_source' =>$form['source'],
         );
-         $this->Companies_model->company_add($company);
-        }
+         $cid=$this->Companies_model->company_add($company);
+          }
         else
         {
+         $cid=$form['company'];
          $id=$this->Companies_model->get_recruiter_by_company($form['company']);
         }
               
@@ -103,7 +106,7 @@ class Jobs extends CI_Controller
 //        $salary=$form['min_salary'].".".$form['max_salary'];
         $data=array(
                    'recruiter_id'=>$id,
-                   'company_id'=>$form['company'],
+                   'company_id'=>$cid,
                    'job_title'=>$form['jobtitle'],
                    'job_type'=>$form['jobtype'],
                    'job_education'=>$form['qualification'],
@@ -128,18 +131,21 @@ class Jobs extends CI_Controller
                $this->session->set_flashdata('success','job added successfully');
               echo json_encode(array('success'=>'job added successfully'));
        }else{
-           echo json_encode(array('loc_err'=>'Please Enter job Location'));           
+               echo json_encode(array('custom_err'=>'Enter Custom Company'));
+          }
+          }else{
+           echo json_encode(array('loc_err'=>'Enter job Location'));           
         }}
         else
 //            {
 //           echo json_encode(array('exp_err'=>'Please Enter Experience'));
 //        }}else
             {
-            echo json_encode(array('qua_err'=>'Please Enter Qualification'));
+            echo json_encode(array('qua_err'=>'Enter Qualification'));
        }}else{
-           echo json_encode(array('comp_err'=>'Please Select Company Name'));
+           echo json_encode(array('comp_err'=>'Select Company Name'));
        }}else{
-            echo json_encode(array('job_err'=>'Please Enter Job Title'));
+            echo json_encode(array('job_err'=>'Enter Job Title'));
         }
     }
     
@@ -189,7 +195,7 @@ class Jobs extends CI_Controller
                    'job_skill_name' => $form['skill'],
                    'job_source'         => $form['source'],
                    
-        );
+                   );
         
          $result=$this->Jobs_model->update_job($data,$job_id);
          
@@ -198,15 +204,15 @@ class Jobs extends CI_Controller
        $this->session->set_flashdata('success','Data Updated Successfully');
        echo json_encode(array('success'=>'Data Updated Successfully'));
         }else{
-           echo json_encode(array('loc_err'=>'Please Enter job Location'));           
+           echo json_encode(array('loc_err'=>'Enter job Location'));           
         }}else{
 //           echo json_encode(array('exp_err'=>'Please Enter Experience'));
 //        }}else{
-            echo json_encode(array('qua_err'=>'Please Enter Qualification'));
+            echo json_encode(array('qua_err'=>'Enter Qualification'));
        }}else{
-           echo json_encode(array('comp_err'=>'Please Select Company Name'));
+           echo json_encode(array('comp_err'=>'Select Company Name'));
        }}else{
-            echo json_encode(array('job_err'=>'Please Enter Job Title'));
+            echo json_encode(array('job_err'=>'Enter Job Title'));
         }
          
     }

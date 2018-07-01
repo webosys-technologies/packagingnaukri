@@ -205,7 +205,14 @@ class Recruiters_model extends CI_Model
 
         return $query->row();
     }
+    public function get_recruiter($where)
+    {
+         $this->db->from($this->table);
+        $this->db->where($where);
+        $query = $this->db->get();
 
+        return $query->row();
+    }
      public function getall_recruiters_no()
     {
         $this->db->from($this->table);        

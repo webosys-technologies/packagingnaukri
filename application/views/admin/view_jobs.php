@@ -383,6 +383,7 @@ var user_type=el.val();
                         $("#min_salary").val(s[0]);
                            $("#max_salary").val(s[1]);
                    }
+                   
                     if(data.job_experience){
                        var e=data.job_experience.split(".");
 //                       alert(s[0]);
@@ -440,30 +441,45 @@ var user_type=el.val();
                 if(json.loc_err)
                 {
                      $("#loc_err").html(json.loc_err);
+                      $('[name="joblocation"]').focus();
                 }else{
+                    
                      $("#loc_err").html("");
                 }
+                
                 if(json.exp_err)
                 {
                      $("#exp_err").html(json.exp_err);
                 }else{
                      $("#exp_err").html("");
                 }
+                
+                if(json.custom_err)
+                {
+                     $("#custom_err").html(json.custom_err);
+                      $('[name="custom"]').focus();
+                }else{
+                     $("#custom_err").html("");
+                }
+                
                 if(json.comp_err)
                 {
                      $("#comp_err").html(json.comp_err);
+                      $('[name="company"]').focus();
                 }else{
                     $("#comp_err").html("");
                 }
                 if(json.qua_err)
                 {
                     $("#qua_err").html(json.qua_err);
+                     $('[name="qualification"]').focus();
                 }else{
                     $("#qua_err").html("");
                 }
                 if(json.job_err)
                 {
                     $("#job_err").html(json.job_err);
+                     $('[name="jobtitle"]').focus();
                 }else{
                     $("#job_err").html("");
                 }
@@ -633,7 +649,7 @@ var user_type=el.val();
                                     <div class="form-group">
                                         <!--<label></label>-->
                                         <input name="custom" placeholder="Enter Company Name" class="form-control" value="">
-                                        <!--<span class="text-danger" id="qua_err"></span>-->
+                                        <span class="text-danger" id="custom_err"></span>
                                                                                
                                     </div>
                                                                        
@@ -787,7 +803,7 @@ var user_type=el.val();
                     </div>
                      <div class="row">                         
                          <div class="col-md-12">
-                       <label>Job Skills<span style="color: red">*</span></label>
+                       <label>Job Skills</label>
                       <input name="skill" placeholder="Skill Name" id="skill" class="form-control" value="">
                         <span class="text-danger" id="gen_err"></span>
 
@@ -841,7 +857,7 @@ var user_type=el.val();
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <center><h4 style="color:white" id="title" class="modal-title">Company Details</h4></center>
+          <center><h4 style="color:white" id="title" class="modal-title">Job Details</h4></center>
         </div>
         <div class="modal-body" id="skill_body">         	
     				

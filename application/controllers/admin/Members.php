@@ -56,28 +56,54 @@ class Members extends CI_Controller
       if(!empty($form['fname']))
         { 
            if(!empty($form['lname']))
-        {              
+        {                 
+           if(!empty($form['email']))
+        {
+            $em=$this->Members_model->login_with_otp(array('member_email'=>$form['email'])); 
+        
+            if($em==false)
+            {              
+           if(!empty($form['mobile']))
+            {  
+               $m=$this->Members_model->login_with_otp(array('member_mobile'=>$form['mobile'])); 
+               if($m==false)
+               {
   if(!empty($form['state']) && $form['state']!="-- Select State --")
   {
       if(!empty($form['city']) && $form['city']!="-- Select City --" && $form['city']!="")
-      {  
+      {         
+          
+          
+          
         list($get_insert,$get_data)=$this->Members_model->register();
         if (isset($_FILES['photo']['name']))
         {
             $this->photo_upload($get_insert);
         }
-            $this->session->set_flashdata('success',"member added Successfully");
-             echo json_encode(array('success'=>'Member added successfully'));
+        $this->session->set_flashdata('success',"member added Successfully");
+        echo json_encode(array('success'=>'Member added successfully'));
         
-              }
-              else {
+                       
+             
+             
+             
+        }else {
           echo json_encode(array('city_err'=>'Please Select City'));
       }
   } else {
           echo json_encode(array('state_err'=>'Please Select State'));
       
         }}else{
-            echo json_encode(array('lname_err'=>'Last Name Required'));
+             echo json_encode(array('mobile_err'=>'Mobile already register'));
+            }}else{
+             echo json_encode(array('mobile_err'=>'Mobile No required'));
+            }}else{
+              echo json_encode(array('email_err'=>'Email Already Exists'));   
+            }
+        }else{
+           echo json_encode(array('email_err'=>'Email Required'));
+        }}else{
+             echo json_encode(array('lname_err'=>'Last Name Required'));
         }
         }
         else{
@@ -98,7 +124,11 @@ class Members extends CI_Controller
              if(!empty($form['fname']))
         { 
            if(!empty($form['lname']))
-        {              
+        {     
+               if(!empty($form['email']))
+        {  
+           if(!empty($form['mobile']))
+        {  
   if(!empty($form['state']) && $form['state']!="-- Select State --")
   {
       if(!empty($form['city']) && $form['city']!="-- Select City --" && $form['city']!="")
@@ -134,7 +164,15 @@ class Members extends CI_Controller
   } else {
           echo json_encode(array('state_err'=>'Please Select State'));
       
-        }}else{
+        }
+        }else{
+             echo json_encode(array('state_err'=>'Mobile No required'));
+        }
+        }else{
+           echo json_encode(array('email_err'=>'Email Required'));
+        }
+        
+        }else{
             echo json_encode(array('lname_err'=>'Last Name Required'));
         }
         }

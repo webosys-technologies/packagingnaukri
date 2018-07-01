@@ -251,7 +251,7 @@ function view_recruiter(id)
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/admin/Recruiter/ajax_edit/')?>/" + id,        
+        url : "<?php echo site_url('index.php/user/Recruiter/ajax_edit/')?>/" + id,        
         type: "GET",
                
         dataType: "JSON",
@@ -329,7 +329,7 @@ function view_recruiter(id)
            //Ajax Load data from ajax
             $(".city").html("");
       $.ajax({
-        url : "<?php echo site_url('index.php/admin/Recruiter/ajax_edit/')?>/" + id,
+        url : "<?php echo site_url('index.php/user/Recruiter/ajax_edit/')?>/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
@@ -354,7 +354,7 @@ function view_recruiter(id)
             {
                 $("#recruiter_pic").attr('src',"<?php echo base_url();?>"+data.recruiter_profile_pic);
                 $("#recruiter_pic").prop('hidden',false);
-            $("#remove_btn").append(' <a href="<?php echo base_url();?>admin/Recruiter/delete_pic/'+data.recruiter_id+'" id="remove_photo" class="btn btn-danger btn-xs pull-right">Remove Photo</a>');
+            $("#remove_btn").append(' <a href="<?php echo base_url();?>user/Recruiter/delete_pic/'+data.recruiter_id+'" id="remove_photo" class="btn btn-danger btn-xs pull-right">Remove Photo</a>');
             }
             
             $("#title").text("Edit Recruiter");
@@ -376,11 +376,11 @@ function view_recruiter(id)
       var url;
       if(save_method == 'add')
       {
-        url = "<?php echo site_url('index.php/admin/Recruiter/recruiter_add')?>";
+        url = "<?php echo site_url('index.php/user/Recruiter/recruiter_add')?>";
       }
       else
       {
-        url = "<?php echo site_url('index.php/admin/Recruiter/recruiter_update')?>";
+        url = "<?php echo site_url('index.php/user/Recruiter/recruiter_update')?>";
       }
 
        // ajax adding data to database
@@ -466,7 +466,7 @@ function view_recruiter(id)
     function delete_recruiter(id)
     {
          $.ajax({
-            url : "<?php echo base_url()?>admin/Recruiter/recruiter_delete/"+id,
+            url : "<?php echo base_url()?>user/Recruiter/recruiter_delete/"+id,
             type: "GET",
             dataType: "JSON",
             success: function(data)

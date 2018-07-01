@@ -331,9 +331,42 @@ function view_user(id)
             dataType: "JSON",
             success: function(json)
             {
-               
+              if(json.fname_err)
+              {
+                   $('[name=fname]').focus();
+               $("#fname_err").html(json.fname_err); 
+              }else{
+                   $("#fname_err").html(""); 
+              }
               
+              if(json.email_err)
+              {
+                   $('[name=email]').focus();
+               $("#email_err").html(json.email_err); 
+              }else{
+                   $("#email_err").html(""); 
+              }
+              
+               if(json.mobile_err)
+              {
+                   $('[name=mobile]').focus();
+               $("#mobile_err").html(json.mobile_err); 
+              }else{
+                   $("#mobile_err").html(""); 
+              }
+              
+               if(json.lname_err)
+              {
+                   $('[name=lname]').focus();
+               $("#lname_err").html(json.lname_err); 
+              }else{
+                   $("#lname_err").html(""); 
+              }
+              
+             if(json.success)
+             {
               location.reload();// for reload a page
+             }
                 
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -398,20 +431,20 @@ function view_user(id)
                                 <div class="col-md-6  ">                                
                                     <div class="form-group">
                                         <label for="fname">First Name<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="First Name" class="form-control required" id="fname" name="fname" maxlength="128" required>
+                                        <input type="text" placeholder="First Name" class="form-control required" name="fname" maxlength="128" required>
                                         <span class="text-danger" id="fname_err"></span>
                                         
                                     </div>
-                                    <span style="color:red" id="text_field1_error"></span>
+                                    
                                     
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="lname">Last Name<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Last Name" class="form-control" id="lname"  name="lname" maxlength="128" required>
+                                        <input type="text" placeholder="Last Name" class="form-control"  name="lname" maxlength="128" required>
                                       <span class="text-danger" id="lname_err"></span>
                                     </div>
-                                    <span style="color:red" id="text_field2_error"></span>
+                                   
                                 </div>
                             </div>
                                     
@@ -419,11 +452,11 @@ function view_user(id)
                                 <div class="col-md-12  ">                                
                                     <div class="form-group">
                                         <label for="fname">Email Id<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Email Id" class="form-control required" id="email" name="email" maxlength="128" required>
+                                        <input type="text" placeholder="Email Id" class="form-control required" name="email" maxlength="128" required>
                                         <span class="text-danger" id="email_err"></span>
                                         
                                     </div>
-                                    <span style="color:red" id="text_field1_error"></span>
+                                   
                                     
                                 </div>
                                </div>
@@ -432,7 +465,7 @@ function view_user(id)
                                 <div class="col-md-12">                                
                                     <div class="form-group">
                                         <label for="fname">Mobile No<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Mobile No" class="form-control required" id="mobile" name="mobile" maxlength="128" required>
+                                        <input type="text" placeholder="Mobile No" class="form-control required" name="mobile" maxlength="11" minlength="10" required>
                                         <span class="text-danger" id="mobile_err"></span>
                                         
                                     </div>
@@ -445,7 +478,7 @@ function view_user(id)
                                 <div class="col-md-12">                                
                                     <div class="form-group">
                                         <label for="fname">Password<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Password" class="form-control required" id="password" name="password" maxlength="128" required>
+                                        <input type="text" placeholder="Password" class="form-control required" name="password" maxlength="128" required>
                                         <span class="text-danger" id="password_err"></span>
                                         
                                     </div>
@@ -460,7 +493,7 @@ function view_user(id)
                                     
                      <div class="row">
                           <div class="col-md-6">
-                        <label class="form-label">Gender</label><span style="color: red">*</span>
+                        <label class="form-label">Gender</label>
                         <select name="gender" id="gender" class="form-control" required>
                                     <option value="">-- Select Gender --</option>
                                     <option value="Male">Male</option>

@@ -53,12 +53,28 @@ class Jobs extends CI_Controller
        { 
            if(!empty($form['qualification']))
         {
-               if(!empty($form['experience']))
+               if(!empty($form['min_exp']))
         {
                    if(!empty($form['joblocation']))
         {  
+                       
+                       if($form['min_exp']==$form['max_exp'])
+              {
+                  $experience=$form['min_exp'].".".$form['min_exp'];
+              }else{
+                  $experience=$form['min_exp'].".".$form['max_exp'];
+              }
+              
+              if($form['min_salary']==$form['max_salary'])
+              {
+                  $salary=$form['min_salary'].".".$form['min_salary'];
+              }else{
+                  $salary=$form['min_salary'].".".$form['max_salary'];
+              }
+                       
+                       
         $id=$this->Companies_model->get_recruiter_by_company($form['company']);
-        $salary=$form['lacsalary'].".".$form['thsalary'];
+       
         $data=array(
                    'recruiter_id'=>$id,
                    'company_id'=>$form['company'],
@@ -67,7 +83,7 @@ class Jobs extends CI_Controller
                    'job_education'=>$form['qualification'],
                    'job_description'=>$form['jobdesc'],
                    'job_city'=>$form['joblocation'],
-                   'job_experience'=>$form['experience'],
+                   'job_experience'=>$experience,
                    'job_salary'=>$salary,
                    'job_created_at'=>date('Y-m-d'),
                    'job_skill_name'=>$form['skill'],

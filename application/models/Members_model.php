@@ -56,12 +56,13 @@ class Members_model extends CI_Model
     
     function login_with_otp($where)
     {
+       
         $this->db->from($this->table);
         $this->db->where($where);
         $query=$this->db->get();
     
         $res=$query->row();
-        
+      
         if($res)
         {
             return $res;

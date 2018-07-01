@@ -26,13 +26,16 @@ class Users extends CI_Controller
             $this->load->view('admin/header',$result);
             $this->load->view('admin/users',$result);
             $this->load->view('admin/footer');
-
-        
-    
+  
     }
     
    function user_add()
    {
+       $form=$this->input->post();
+       list($err,$val)=$this->user_add_validation($form);
+       
+       if($val=="success")
+       {
        $sys=$this->System_model->source_name();
        $recruiter=array(
             'recruiter_fname'          =>$this->input->post('fname'),
@@ -75,11 +78,59 @@ class Users extends CI_Controller
              echo json_encode(array('success','User added successfully'));
         }
            
+        }else{
+            echo json_encode(array($err=>$val));
         }
+   }
         
+        function user_add_validation($form)
+        {
+            
+             if(!empty($form['fname']))
+        { 
+           if(!empty($form['lname']))
+        {                 
+           if(!empty($form['email']))
+        {
+         if(empty($this->User_model->get_user(array('user_email'=>$form['email']))))
+         {
+        if(!empty($form['mobile']))
+        {
+            if(empty($this->User_model->get_user(array('user_mobile'=>$form['mobile']))))
+            {
+              return array('status',"success");
+            }else{
+              return array('mobile_err',"Mobile already registered"); 
+            }
+        }
+        else
+        {
+           return array('mobile_err',"Mobile Required"); 
+        }        
+        }
+        else
+        {
+          return array('email_err',"Email Already Exists");  
+        }
+        }else
+        {
+           
+            return array('email_err',"Email Required");
+        }            
+        }
+        else
+        {          
+            return array('lname_err',"Last Name Required");
+        }
+        }
+        else
+        {            
+             return array('fname_err',"First Name Required");
+        }
+        }
         function user_update()
         {
-            $sys=$this->System_model->source_name();
+            $user_data=$this->User_model->get_user_by_id($this->input->post('user_id'));
              $recruiter=array(
             'recruiter_fname'          =>$this->input->post('fname'),
             'recruiter_lname'          => $this->input->post('lname'),
@@ -93,9 +144,8 @@ class Users extends CI_Controller
 //            'recruiter_created_at'     => date("Y-m-d "),
 //            'recruiter_status'         => "2",
 //            'recruiter_source'         =>  ucfirst($sys),
-
-        );
-//       $rec_id=$this->Recruiters_model->recruiter_add($recruiter);
+                             );
+       $rec_id=$this->Recruiters_model->recruiter_update(array('recruiter_id'=>$user_data->recruiter_id),$recruiter);
             
             
             $data=array(
@@ -112,7 +162,7 @@ class Users extends CI_Controller
             $res=$this->User_model->user_update(array('user_id'=>$this->input->post('user_id')),$data);
           
                 $this->session->set_flashdata('success','User Updated Successfully');
-                echo json_encode(array('status'=>true));
+                echo json_encode(array('success'=>true));
             
         }
         

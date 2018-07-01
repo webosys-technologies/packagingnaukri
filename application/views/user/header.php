@@ -135,14 +135,20 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>          
           </a>         
         </li>
-     
-       <li>
+      <li>
+          <a href="<?php echo base_url(); ?>user/Recruiter">
+            <i class="fa fa-users"></i> <span>Manage Recruiter</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
+<!--       <li>
           <a href="<?php echo base_url(); ?>user/Members">
             <i class="fa fa-users"></i> <span>Manage Members</span>
             <span class="pull-right-container">
             </span>
           </a>
-        </li>
+        </li>-->
         <li>
           <a href="<?php echo base_url(); ?>user/Companies">
             <i class="fa fa-folder"></i> <span>Companies</span>            
@@ -153,16 +159,16 @@
             <i class="fa fa-folder"></i> <span>Jobs</span>            
           </a>
          </li>
-        <li>
+<!--        <li>
           <a href="<?php echo base_url(); ?>user/Institute">
             <i class="fa fa-folder"></i> <span>Manage university/Institute</span>            
           </a>
-         </li>
-        <li>
+         </li>-->
+<!--        <li>
           <a href="<?php echo base_url(); ?>user/Education">
             <i class="fa fa-folder"></i> <span>Manage Education</span>            
           </a>
-         </li>
+         </li>-->
          <li>
           <a href="<?php echo base_url(); ?>user/Profile">
             <i class="fa fa-users"></i> <span>Profile</span>

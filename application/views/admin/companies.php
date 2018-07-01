@@ -282,7 +282,8 @@ var user_type=el.val();
             $('[name="established"]').val(data.company_establish_in);
             $('[name="multinational"]').val(data.company_multinational);
             $('[name="status"]').val(data.company_status);
-            $('[name="source"]').val(data.company_source);
+            $('[name="recruiter"]').val(data.recruiter_id);
+           
             
             
            
@@ -516,7 +517,7 @@ function delete_logo(id)
                                     
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Company Type</label><span style="color: red">*</span>
+                                        <label>Company Type</label>
                                        
                                     <input name="type" class="form-control" placeholder="MNC or Small Scale" value="">
                                         <span class="text-danger" id="type_err"></span>
@@ -529,7 +530,7 @@ function delete_logo(id)
                                     <div class="row">
                                 <div class="col-md-12  ">                                
                                     <div class="form-group">
-                                        <label>Company Email</label><span style="color: red">*</span>
+                                        <label>Company Email</label>
                                     <input name="email" placeholder="Company Email" class="form-control" value="">
                                         <span class="text-danger" id="email_err"></span>
                                         
@@ -541,7 +542,7 @@ function delete_logo(id)
                                 <div class="row">
                                   <div class="col-md-6">                                
                                       <div class="form-group">
-                                         <label>Contact</label><span style="color: red">*</span>
+                                         <label>Contact</label>
                                          <input name="contact" placeholder="Company Contact" class="form-control" value="">
                                           <span class="text-danger" id="contact_err"></span>
                                           
@@ -550,7 +551,7 @@ function delete_logo(id)
                                   </div>
                                 
                                   <div class="col-md-6">
-                                     <label>Website</label><span style="color: red">*</span>
+                                     <label>Website</label>
                                      <input name="website" placeholder="Company Website" class="form-control" value="">
                                       <span class="text-danger" id="website_err"></span>
 
@@ -560,7 +561,7 @@ function delete_logo(id)
                                     <div class="row">
                                 <div class="col-md-6">                                
                                     <div class="form-group">
-                                       <label>Company Address</label><span style="color: red">*</span>
+                                       <label>Company Address</label>
                                     <textarea cols="80" id="address" class="form-control" name="address" rows="5"></textarea>
                                         <span class="text-danger" id="password_err"></span>
                                         
@@ -568,7 +569,7 @@ function delete_logo(id)
                                 </div>
                                         <div class="col-md-6">                                
                                     <div class="form-group">
-                                       <label>Company Logo</label><span style="color: red">*</span>
+                                       <label>Company Logo</label>
                                        
                                     <input type="file" name="logo" id="logo" value="">
                                    <div id="remove_btn"></div>
@@ -623,7 +624,7 @@ function delete_logo(id)
                                     
                                      <div class="col-md-6">                                
                                       <div class="form-group">
-                                         <label>Pincode</label><span style="color: red">*</span>
+                                         <label>Pincode</label>
                                          <input name="pincode" placeholder="Pincode" class="form-control" value="">
                                           <span class="text-danger" id="mobile_err"></span>                                        
                                       </div>                                                                      
@@ -633,13 +634,13 @@ function delete_logo(id)
                                     
                      <div class="row">
                           <div class="col-md-6">
-                           <label>Company Established</label><span style="color: red">*</span>
+                           <label>Company Established</label>
                                         <input name="established" placeholder="Established Year" class="form-control" value="">
                             <span class="text-danger" id="gen_err"></span>
 
                         </div>  
                         <div class="col-md-6">
-                           <label>Company Multinational</label><span style="color: red">*</span>
+                           <label>Company Multinational</label>
                                         <input name="mnc" placeholder="Company Multinational" class="form-control" value="">
                             <span class="text-danger" id="gen_err"></span>
 
