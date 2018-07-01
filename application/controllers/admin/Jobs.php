@@ -155,8 +155,8 @@ class Jobs extends CI_Controller
        { 
            if(!empty($form['qualification']))
         {
-               if(!empty($form['experience']))
-        {
+//               if(!empty($form['experience']))
+//        {
                    if(!empty($form['joblocation']))
         {
                         $salary=$form['lacsalary'].".".$form['thsalary'];
@@ -185,8 +185,8 @@ class Jobs extends CI_Controller
         }else{
            echo json_encode(array('loc_err'=>'Please Enter job Location'));           
         }}else{
-           echo json_encode(array('exp_err'=>'Please Enter Experience'));
-        }}else{
+//           echo json_encode(array('exp_err'=>'Please Enter Experience'));
+//        }}else{
             echo json_encode(array('qua_err'=>'Please Enter Qualification'));
        }}else{
            echo json_encode(array('comp_err'=>'Please Select Company Name'));
