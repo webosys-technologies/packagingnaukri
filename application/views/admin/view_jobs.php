@@ -575,7 +575,7 @@ var user_type=el.val();
     			<div class="panel-body">
     				<form method="post" action="" id="form">
                                     <input type="hidden" value="" name="job_id">
-    				                  <div class="row">
+    		               <div class="row">
                                 <div class="col-md-8">                                
                                     <div class="form-group">
                                         <label>Source<span style="color: red">*</span></label>
@@ -589,8 +589,7 @@ var user_type=el.val();
                                         
                                     </div>
                                                                        
-                                </div>
-                                    
+                                </div>                                    
                               </div>
                               <div class="row">
                                 <div class="col-md-12">                                
@@ -741,7 +740,7 @@ var user_type=el.val();
                      <div class="row">
                         <div class="col-md-3">
                         <!--<label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>-->
-                            <label class="form-label">MIN Salary</label><span style="font-size:12px;">(per anual)</span>
+                            <label class="form-label">MIN Salary</label><span style="font-size:11px;">(per anual)</span>
                          <select type="text" name="min_salary" id="min_salary" class="form-control">
                              <option value="0">0 Lac</option>
                            <script>
@@ -759,7 +758,7 @@ var user_type=el.val();
                     </div>
                                         
                     <div class="col-md-3" style="top-padding:15px"> 
-                        <label class="form-label">MAX Salary</label> <span style="font-size:12px;">(per anual)</span>
+                        <label class="form-label">MAX Salary</label><span style="font-size:11px;">(per anual)</span>
                        <select type="text" id="max_salary" name="max_salary" class="form-control">  
                            <script>
                                var sal = 0;

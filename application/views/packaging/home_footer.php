@@ -84,44 +84,7 @@
   
         </style>
     
-   <?php 
-				 $result=$this->Jobs_model->get_recent_job();
-                            if($result){ $i=1;
-
-                                foreach($result as $res)
-                                {
-                                   
-                        ?>
-<!--        jobname
-        qualificationsexperience
-        company-->
-
-                    <script>
-                        
-//                           if('<?php echo $i==1; ?>')
-//                           {
-//                                $("#job1").append('<a href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>"><span class="div_design"><?php echo $res->job_title;?></span></a><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 1px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
-//                            }
-//                            if('<?php echo $i==2; ?>')
-//                           {
-//                                $("#job2").append('<a href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>"><span class="div_design"><?php echo $res->job_title;?></span></a><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 1px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
-//                           }
-//                            if('<?php echo $i==3; ?>')
-//                           {
-//                                $("#job3").append('<a href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>"><span class="div_design"><?php echo $res->job_title;?></span></a><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 1px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
-//                            }
-//                            if('<?php echo $i==4; ?>')
-//                           {
-//                                $("#job4").append('<a href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>"><span class="div_design"><?php echo $res->job_title;?></span></a><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 1px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
-//                            }
-//                            if('<?php echo $i==5; ?>')
-//                           {
-//                                $("#job5").append('<a href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>"><span class="div_design"><?php echo $res->job_title;?></span></a><p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p><p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p><p class="exp"><b>Company :</b> Webosys Technologies</p><hr style="border-top: 1px solid #ccc;"><center><a class="btn btn-primary" href="<?php echo base_url(); ?>Home/job/<?php echo $res->job_id;?>">view</a><center>');
-//                            }
-                    </script>
-
-                        <?php $i++; } 
-                            }?>         
+     
 <div class="modal fade" id="job_modal" role="dialog">
     <div class="modal-dialog" id="modal_dialog">   
       <!-- Modal content-->

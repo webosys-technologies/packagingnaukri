@@ -41,11 +41,21 @@
 				 $result=$this->Jobs_model->get_recent_job();
                             if($result){ $i=1;
                                 foreach($result as $res)
-                                {                                   
+                                {     
+                                    $exp=explode(".",$res->job_experience);
+                                                     
+                                                    if($exp[0]==$exp[1])
+                                                    {
+                                                      $experience=$exp[0]." Year";  
+                                                    }else{
+                                                       $experience=$exp[0]."-".$exp[1]." Year";  
+                                                    }
+//                                                    
+                                             
                         ?>
                          <div class="div_style">     
                              <a data-toggle="modal" data-target="#job_modal<?php echo $i;?>"><span class="div_design"><?php echo $res->job_title;?></span></a>
-                            <p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p>
+                            <p class="exp"><b>Experience :</b> <?php echo $experience;?></p>
                             <p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p>
                             <p class="exp"><b>Company :</b> Webosys Technologies</p>
                             <hr style="border-top: 1px solid #ccc;">
@@ -74,23 +84,24 @@
       <div style="background:white" class="modal-body">
            <?php if(isset($d->company_logo)){?><img src="<?php echo base_url().$d->company_logo;?>" height="60px" width="190px"><?php } ?>               
            <h4><b><?php echo $d->job_title; ?></b></h4>
-           <h5><?php echo $d->company_name; ?></h5>
+           <h5><?php echo $d->company_name; ?></h5> 
            
-           
-           
-           
-           
-           
-           
-           
-           
-           
+           <?php $exp=explode(".",$d->job_experience);
+                                                     
+                                                    if($exp[0]==$exp[1])
+                                                    {
+                                                      $experience=$exp[0]." Year";  
+                                                    }else{
+                                                       $experience=$exp[0]."-".$exp[1]." Year";  
+                                                    }
+//                                                    
+                                              ?>
            
          
            <div class="row"><div class="col-md-2"><label >Qualification </label></div>
            <div class="col-md-10"> <span > : <?php echo  $d->job_education; ?> </span></div> </div>        
           <div class="row"><div class="col-md-2"><label >Experience </label></div>
-          <div class="col-md-10"><span> : <?php echo $d->job_experience; ?> </span></div></div>
+          <div class="col-md-10"><span> : <?php echo $experience; ?> </span></div></div>
                    
          <?php if(!empty($d->job_salary)){
             $sal=explode(".",$d->job_salary);
@@ -180,13 +191,15 @@ To provide the right opportunity to the every qualified packaging professional, 
       if(isset($company)) 
     {    $i=0;
           foreach($company as $comp){
-        
+//          if(exists($comp->company_logo))
+//          {
           ?>
            <div>
         <img src="<?php echo  base_url().$comp->company_logo;?>" height="100px" width="auto">   
       </div>
-          <?php 
-          } 
+          <?php
+          }
+//          } 
       }
        
       
