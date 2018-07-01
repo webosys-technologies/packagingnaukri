@@ -110,7 +110,7 @@
       }      
       ?>
       
-        <form action="" method="get" onsubmit="return validateForm()">
+<!--        <form action="" method="get" onsubmit="return validateForm()">
         <div class="row">
            
             <div class="col-md-4 col-md-offset-2">
@@ -235,7 +235,7 @@
              <div class="row">
              <div class="col-md-offset-4"><span id="field_err" class="text-danger"></span></div>
              </div>
-         </form><br>
+         </form><br>-->
       
 <div class="table-responsive">
     <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
