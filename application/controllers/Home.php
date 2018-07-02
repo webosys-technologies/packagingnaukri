@@ -133,7 +133,7 @@ class Home extends CI_Controller
                     $headers .= ". PackagingNaukari-Team" . "\r\n";
                     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                     $to = $email;
-                    $subject = "Query by Member";
+                    $subject = "Email Verification";
                     $txt=$rand.' is your OTP for verifying Email Id on packagingnaukri.com.';
                                                                
                  
@@ -147,6 +147,26 @@ class Home extends CI_Controller
                        }
                       
             
+        }
+        
+        function login_detail_email($email)
+        {
+             $headers = "From: ". "team@packagingnaukri.com ";
+                    $headers .= ". PackagingNaukari-Team" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $to = $email;
+                    $subject = "Login Details";
+                    $txt=$rand.' is your OTP for verifying Email Id on packagingnaukri.com.';
+                                                               
+                 
+                       $success=  mail($to,$subject,$txt,$headers); 
+                       if($success)
+                       {
+                           $this->session->set_userdata(array('email_otp'=>$rand));
+                           return true;
+                       }else{
+                           return false;
+                       }
         }
         
         
