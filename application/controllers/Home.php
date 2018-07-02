@@ -189,13 +189,22 @@ class Home extends CI_Controller
                             'member_source'=>$sys,
                             'member_experience'=>$form['exp'],);
                 
-                $this->Members_model->member_add($data);
+                $mem_id=$this->Members_model->member_add($data);
                 
                 $emp=array('employment_notice_period'=>$form['notice'],
                             'employment_current'=>$form['location'],
                             );
-                
+                $job=$this->jobs_model->job_by_id($form['apply_job_id']);
                 $this->Employments_model->insert_employment($emp);
+                
+                $apply=array('member_id'=>$mem_id,
+                            'job_id'=>$form['apply_job_id'],
+                            'company_id'=>$job->company_id,
+                            'recruitre_id'=>$job->recruiter_id,
+                            'apply_at'=>date("Y-m-d"),
+                            'apply_status'=>"1");
+                
+                $this->Applied_model->apply_job($apply);
                 
                 echo json_encode(array('success'=>'Job Applied Successfully'));
                 $this->session->set_flashdata('success','Register and Job Applied Successfully');  
@@ -272,7 +281,7 @@ class Home extends CI_Controller
                  echo json_encode(array('job_err'=>'Already Applied for this job'));
             } 
             }else{
-//                $this->email_cerification_mail($form['email']);
+                $this->email_cerification_mail($form['email']);
                 echo json_encode(array('email_id_err'=>'This Email is not Registered',
                                        'job_id'=>$form['job_id']));
             }    
