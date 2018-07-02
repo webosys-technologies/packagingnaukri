@@ -176,7 +176,31 @@ class Home extends CI_Controller
         function register_to_apply()
         {
             $form=$this->input->post();
-            print_r($form);
+            if($form['otp']==$this->session->userdata('email_otp'))
+            {
+                $data=array('member_fname'=>$form['fname'],
+                            'member_lname'=>$form['fname'],
+                            'member_email'=>$form['fname'],
+                            'member_mobile'=>$form['fname'],
+                            'member_anual_salary'=>$form['current'],
+                            'member_experience'=>$form['exp'],);
+                
+                $this->Members_model->member_add($data);
+                
+                $emp=array('employment_notice_period'=>$form['notics'],
+                            'employment_current'=>$form['location'],
+                            );
+                
+                $this->Employments_model->insert_employment($emp);
+                
+                echo json_encode(array('success'=>'Job Applied Successfully'));
+                $this->session->set_flashdata('success','Register and Job Applied Successfully');  
+                $this->session->unset_userdata('email_otp');
+            }else{
+                echo json_encode(array('otp_err'=>'Wrong OTP'));
+            }
+            
+           
         }
         
         function apply_job()
@@ -244,7 +268,7 @@ class Home extends CI_Controller
                  echo json_encode(array('job_err'=>'Already Applied for this job'));
             } 
             }else{
-                $this->email_cerification_mail($form['email']);
+//                $this->email_cerification_mail($form['email']);
                 echo json_encode(array('email_id_err'=>'This Email is not Registered',
                                        'job_id'=>$form['job_id']));
             }    

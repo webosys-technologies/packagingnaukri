@@ -101,7 +101,10 @@
         success: function(data)
         {  
              $("#apply_btn").attr('data-target',"");
-           
+             if(data.otp_err)
+             {
+                 $("#otp_err").html(data.otp_err);
+             }
           
             
             if(data.success)
@@ -333,7 +336,10 @@
               
             
 <div class="container">
-
+<?php if($this->session->flashdata('success')){
+    echo "<span class=text-success>".$this->session->flashdata('succecc')."</span>";
+}
+?>
      <form action="" id="apply_job">
      <input type="hidden" name="job_id" value="<?php if(isset($job_title)){ echo $job_title->job_id; }?>">
 	 <div class="row">
