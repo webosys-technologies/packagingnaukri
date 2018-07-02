@@ -204,7 +204,7 @@ class Home extends CI_Controller
                             'member_email'=>$form['fname'],
                             'member_mobile'=>$form['fname'],
                             'member_anual_salary'=>$form['current'],
-                            'member_created_at'=>date(Y-m-d),
+                            'member_created_at'=>date('Y-m-d'),
                             'member_status'=>'1',
                             'member_source'=>$sys,
                             'member_experience'=>$form['exp'],);
