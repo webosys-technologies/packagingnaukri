@@ -53,8 +53,8 @@ class Jobs extends CI_Controller
                    if(!empty($form['joblocation']))
         {
           
-          if(!empty($form['custom']))
-          {
+//          if(!empty($form['custom'])  )
+//          {
               if($form['min_exp']==$form['max_exp'])
               {
                   $experience=$form['min_exp'].".".$form['min_exp'];
@@ -130,9 +130,9 @@ class Jobs extends CI_Controller
         
                $this->session->set_flashdata('success','job added successfully');
               echo json_encode(array('success'=>'job added successfully'));
-       }else{
-               echo json_encode(array('custom_err'=>'Enter Custom Company'));
-          }
+//       }else{
+//               echo json_encode(array('custom_err'=>'Enter Custom Company'));
+//          }
           }else{
            echo json_encode(array('loc_err'=>'Enter job Location'));           
         }}

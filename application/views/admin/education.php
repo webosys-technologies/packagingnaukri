@@ -278,7 +278,7 @@
 
     function save()
     {
-        
+//        $("#save_btn").attr('disabled',true);
       var url;
       if(save_method == 'add')
       {         
@@ -401,7 +401,7 @@
            
           <div class="modal-footer">
               <!--<button type="button" name="add" id="add" class="btn btn-success">Add More</button>-->
-            <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">Save</button>
+            <button type="button" id="save_btn" onclick="save()" class="btn btn-primary">Save</button>
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
               
           </div>

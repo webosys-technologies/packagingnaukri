@@ -316,6 +316,7 @@ function delete_logo(id)
 
     function save()
     {
+        $("#save_btn").attr('disabled',true);
         
         var data = new FormData(document.getElementById("form"));
       var url;
@@ -373,6 +374,8 @@ function delete_logo(id)
               if(json.success)
               {
               location.reload();// for reload a page
+              }else{
+                  $("#save_btn").attr('disabled',false);
               }
                 
             },
@@ -665,7 +668,7 @@ function delete_logo(id)
     			
     		</div>         
     	 <div class="modal-footer">
-             <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
+             <button type="button" class="btn btn-primary" id="save_btn" onclick="save()">Save</button>
           <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
         </div>
     </div>           

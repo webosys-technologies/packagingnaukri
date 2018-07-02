@@ -308,6 +308,7 @@ function view_user(id)
 
     function save()
     {
+        $("#save_btn").attr('disabled',true);
         
         var data = new FormData(document.getElementById("form"));
       var url;
@@ -366,6 +367,8 @@ function view_user(id)
              if(json.success)
              {
               location.reload();// for reload a page
+             }else{
+                 $("#save_btn").attr('disabled',false);
              }
                 
             },
@@ -523,7 +526,7 @@ function view_user(id)
     			
     		</div>         
     	 <div class="modal-footer">
-             <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
+             <button type="button" class="btn btn-primary" id="save_btn" onclick="save()">Save</button>
           <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
         </div>
     </div>           

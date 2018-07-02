@@ -75,7 +75,7 @@ class Users extends CI_Controller
         if($res)
         {
             $this->session->set_flashdata('success',"User added Successfully");
-             echo json_encode(array('success','User added successfully'));
+             echo json_encode(array('success'=>'User added successfully'));
         }
            
         }else{
@@ -92,11 +92,13 @@ class Users extends CI_Controller
         {                 
            if(!empty($form['email']))
         {
-         if(empty($this->User_model->get_user(array('user_email'=>$form['email']))))
+              $email=$this->User_model->get_user(array('user_email'=>$form['email']));
+         if(empty($email))
          {
         if(!empty($form['mobile']))
         {
-            if(empty($this->User_model->get_user(array('user_mobile'=>$form['mobile']))))
+            $mobile=$this->User_model->get_user(array('user_mobile'=>$form['mobile']));
+            if(empty($mobile))
             {
               return array('status',"success");
             }else{

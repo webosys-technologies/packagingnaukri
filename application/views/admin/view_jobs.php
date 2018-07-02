@@ -412,7 +412,9 @@ var user_type=el.val();
 
 
     function save()
-    {         
+    {   
+        $("#save_btn").attr('disabled',true);
+        
         CKEDITOR.instances.jobdesc.updateElement();
         CKEDITOR.instances.jobdesc.getData(); 
 //        alert( document.getElementById( 'jobdesc' ).html() );
@@ -487,7 +489,9 @@ var user_type=el.val();
              if(json.success)
              {
               location.reload();// for reload a page
-             }  
+             }  else{
+                 $("#save_btn").attr('disabled',false);
+             }
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
@@ -817,7 +821,7 @@ var user_type=el.val();
     			
     		</div>         
     	 <div class="modal-footer">
-             <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
+             <button type="button" class="btn btn-primary" id="save_btn"  onclick="save()">Save</button>
           <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
         </div>
     </div>           
