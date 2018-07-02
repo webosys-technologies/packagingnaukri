@@ -211,6 +211,33 @@
   <script type="text/javascript">
   var glob;
   $(document).ready( function () {
+      
+      
+      
+      function readURL(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('#company_logo').attr('src', e.target.result);
+      $('#company_logo').attr('hidden',false);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#logo").change(function() {
+  readURL(this);
+});
+      
+      
+      
+      
+      
+      
+      
        var table = $('#table_id').DataTable();     
     // Event listener to the two range filtering inputs to redraw on input
     $('#min ,#max').on('change', function() {
@@ -649,15 +676,26 @@ var user_type=el.val();
                             </div>
                                     
                                 <div class="row" id="custom_field" hidden>
-                                <div class="col-md-12">                                
+                                <div class="col-md-6">                                
                                     <div class="form-group">
                                         <!--<label></label>-->
                                         <input name="custom" placeholder="Enter Company Name" class="form-control" value="">
-                                        <span class="text-danger" id="custom_err"></span>
-                                                                               
-                                    </div>
-                                                                       
+                                        <span class="text-danger" id="custom_err"></span>                                                                               
+                                    </div>                                                                       
                                 </div>
+                                    
+                                     <div class="col-md-6">                                
+                                    <div class="form-group">
+                                       <label>Company Logo</label>
+                                       
+                                    <input type="file" name="logo" id="logo" value="">
+                                   <div id="remove_btn"></div>
+                                        <span class="text-danger" id="comp_err"></span>
+                                        
+                                    </div> 
+                                    <img src="" id="company_logo" width="120px" height="60px" hidden>
+                                </div> 
+                                    <br><br>
                                 </div>
                                     
                                     <div class="row">

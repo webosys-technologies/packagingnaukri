@@ -93,6 +93,13 @@ class Jobs extends CI_Controller
                    'company_source' =>$form['source'],
         );
          $cid=$this->Companies_model->company_add($company);
+         
+          if (isset($_FILES['logo']['name']))
+          {
+             
+              $this->logo_upload($cid);
+          }
+         
           }
         else
         {
@@ -148,6 +155,60 @@ class Jobs extends CI_Controller
             echo json_encode(array('job_err'=>'Enter Job Title'));
         }
     }
+    
+    
+    
+    
+       function logo_upload($comp_id)
+    {
+        $info=$this->Companies_model->company_by_id($comp_id);
+             
+if (isset($_FILES['logo']['name'])) {
+    if (0 < $_FILES['logo']['error']) {
+//        echo 'Error during file upload' . $_FILES['logo']['error'];
+        return false;
+    } else {
+
+        $rand=  mt_rand(1111,9999);
+        $name = $_FILES["logo"]["name"];
+        $ext = end((explode(".", $name)));
+        $filename='logo_'.date('Y-m-d_H.i.s').".".$ext;
+        move_uploaded_file($_FILES['logo']['tmp_name'], 'company_logo/' . $filename);
+       
+        if(file_exists('company_logo/'.$filename))
+        {
+            if(file_exists($info->company_logo))
+            {
+            unlink($info->company_logo);
+         $where=array('company_id'=>$comp_id);
+        $data=array('company_logo'=>'company_logo/'.$filename);
+         $res=$this->Companies_model->company_update($where,$data);
+         
+        
+           return true;
+        
+            }else{
+                $where=array('company_id'=>$comp_id);
+        $data=array('company_logo'=>'company_logo/'.$filename);
+         $res=$this->Companies_model->company_update($where,$data);   
+        
+           return true;
+                   
+            }
+        }   else{
+            return false;
+        }  
+//        }
+    }
+} else {
+    return false;
+}
+        
+    }
+    
+    
+    
+    
     
     public function job_update()
     {

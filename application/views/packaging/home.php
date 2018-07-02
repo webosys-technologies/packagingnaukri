@@ -19,6 +19,18 @@
      </style>
      
      
+     <script>
+          function logintoapply(job_id)
+   {
+       
+       $("#show_pass_box").hide();
+       $("#job_id").val(job_id);
+//      
+      
+       
+   }
+         </script>
+     
   
    
   <section class="regular slider content">
@@ -57,7 +69,7 @@
                              <a data-toggle="modal" data-target="#job_modal<?php echo $i;?>"><span class="div_design"><?php echo $res->job_title;?></span></a>
                             <p class="exp"><b>Experience :</b> <?php echo $experience;?></p>
                             <p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p>
-                            <p class="exp"><b>Company :</b> Webosys Technologies</p>
+                            <p class="exp"><b>Company :</b> <?php echo $res->company_name;?></p>
                             <hr style="border-top: 1px solid #ccc;">
                             <center><a class="btn btn-primary" data-toggle="modal" data-target="#job_modal<?php echo $i;?>">view</a></center>
                            </div>
@@ -73,7 +85,7 @@
                                 foreach($data as $d)
                                 {                                   
                         ?>
-     <div class="modal fade" style="" id="job_modal<?php echo $j;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal fade" style="" class="apply" id="job_modal<?php echo $j;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
          <div class="modal-dialog" id="content_body1">
     <div class="modal-content">
       <div style="color:#fff; background-color:#338cbf" class="modal-header">
@@ -138,7 +150,7 @@
            <div class="row">
                <div class="col-md-12">
                    <div class="pull-right"><a href='<?php echo base_url()?>Home/apply/<?php echo $d->job_id;?>' class='btn btn-primary btn-sm'>Apply</a>
-                     <!--<button type='button' class='btn btn-info' onclick='apply("<?php echo $d->job_id; ?>"."register_to_apply")'>Register to Apply</button>-->
+                    &nbsp;<a href="#myModal" data-toggle="modal" data-dismiss="modal" onclick="logintoapply(<?php echo $d->job_id; ?>)" class="btn btn-sm" style="background:#778899;color:white;" name="log">Login To Apply</a>
               </div>
                     </div>
                </div>

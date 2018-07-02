@@ -124,12 +124,66 @@ class Home extends CI_Controller
             
         }
         
+         function email_cerification_mail($email)
+        {
+                  $rand=mt_rand(100000, 999999);
+                    
+                
+                    $headers = "From: ". "team@packagingnaukri.com ";
+                    $headers .= ". PackagingNaukari-Team" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $to = $email;
+                    $subject = "Query by Member";
+                    $txt=$rand.' is your OTP for verifying Email Id on packagingnaukri.com.';
+                                                               
+                 
+                       $success=  mail($to,$subject,$txt,$headers); 
+                       if($success)
+                       {
+                           $this->session->set_userdata(array('email_otp'=>$rand));
+                           return true;
+                       }else{
+                           return false;
+                       }
+                      
+            
+        }
+        
+        
+        function apply_job_with_otp()
+        {
+            $form=$this->input->post();
+            
+            if($this->session->userdata('apply_otp')==$form['otp'])
+            {
+            $job=$this->Jobs_model->get_job_by_id($form['apply_id']); 
+            $data=$this->Members_model->member_info_by_mobile($form['otpmobile']);
+            
+            
+            $this->Applied_jobs_model->apply_job(array('job_id'=>$form['apply_id'],
+                                                        'recruiter_id'=>$job->recruiter_id,
+                                                        'company_id'=>$job->company_id,
+                                                        'member_id'=>$data->member_id,
+                                                        'apply_at'=>  date('Y-m-d')));
+            $this->session->set_flashdata('success','Job Applied Successfully');
+            echo json_encode(array('success'=>"Applied Successfully"));
+            }else{
+             echo json_encode(array('otp_err'=>"Wrong OTP"));    
+            }
+            
+        }
+        
+        function register_to_apply()
+        {
+            $form=$this->input->post();
+            print_r($form);
+        }
         
         function apply_job()
         {
             $form=$this->input->post();
             
-            $data=$this->Members_model->member_info_by_mobile($form['mobile']);
+            $data=$this->Members_model->login_with_otp(array('member_email'=>$form['email']));
                             
             if(!empty($data))
             {
@@ -138,60 +192,61 @@ class Home extends CI_Controller
             $check=$this->Applied_jobs_model->check_apply($where);
             if(empty($check))
             {   
-                if (0 < $_FILES['resume']['error']) {
-        echo 'Error during file upload' . $_FILES['resume']['error'];
-    } else {
-         $job=$this->Jobs_model->get_job_by_id($form['job_id']);       
-         
-        $rand=  mt_rand(1111,9999);
-        $name = $_FILES["resume"]["name"];
-        $ext = end((explode(".", $name)));
-        $filename='resume_'.date('Y-m-d_H.i.s').".".$ext;
-        move_uploaded_file($_FILES['resume']['tmp_name'], 'resume/' . $filename);
+              
+//        $this->send_otp($form['mobile']);
+//         $job=$this->Jobs_model->get_job_by_id($form['job_id']);       
+//         
+//        $rand=  mt_rand(1111,9999);
+//        $name = $_FILES["resume"]["name"];
+//        $ext = end((explode(".", $name)));
+//        $filename='resume_'.date('Y-m-d_H.i.s').".".$ext;
+//        move_uploaded_file($_FILES['resume']['tmp_name'], 'resume/' . $filename);
+//       
+//        if(file_exists('resume/'.$filename))
+//        {
+//            if(file_exists($data->member_resume))
+//            {
+//            unlink($data->member_resume);
+//         $where=array('member_id'=>$data->member_id);
+//        $resume=array('member_resume'=>'resume/'.$filename);
+//         $res=$this->Members_model->member_update($where,$resume);
+//         
+//            
+//            $this->Applied_jobs_model->apply_job(array('job_id'=>$form['job_id'],
+//                                                        'recruiter_id'=>$job->recruiter_id,
+//                                                        'company_id'=>$job->company_id,
+//                                                        'member_id'=>$data->member_id,
+//                                                        'apply_at'=>  date('Y-m-d')));
+//            echo json_encode(array('success'=>"Applied Successfully"));
+//        
+//            }else{
+//                $where=array('member_id'=>$data->member_id);
+//               $resume=array('member_resume'=>'resume/'.$filename);
+//               $res=$this->Members_model->member_update($where,$resume);
+//               
+//                $this->Applied_jobs_model->apply_job(array('job_id'=>$form['job_id'],
+//                                                        'recruiter_id'=>$job->recruiter_id,
+//                                                        'company_id'=>$job->company_id,
+//                                                        'member_id'=>$data->member_id,
+//                                                        'apply_at'=>  date('Y-m-d')));
+//               
+//               echo json_encode(array('success'=>"Applied Successfully"));               
+//            }
+//        }   else{
+//            echo json_encode(array('error'=>"Something Wrong"));
+//        }   
+       echo json_encode(array('email'=>$form['email'],
+                              'job_id'=>$form['job_id']));
+
        
-        if(file_exists('resume/'.$filename))
-        {
-            if(file_exists($data->member_resume))
-            {
-            unlink($data->member_resume);
-         $where=array('member_id'=>$data->member_id);
-        $resume=array('member_resume'=>'resume/'.$filename);
-         $res=$this->Members_model->member_update($where,$resume);
-         
-            
-            $this->Applied_jobs_model->apply_job(array('job_id'=>$form['job_id'],
-                                                        'recruiter_id'=>$job->recruiter_id,
-                                                        'company_id'=>$job->company_id,
-                                                        'member_id'=>$data->member_id,
-                                                        'apply_at'=>  date('Y-m-d')));
-            echo json_encode(array('success'=>"Applied Successfully"));
-        
             }else{
-                $where=array('member_id'=>$data->member_id);
-               $resume=array('member_resume'=>'resume/'.$filename);
-               $res=$this->Members_model->member_update($where,$resume);
-               
-                $this->Applied_jobs_model->apply_job(array('job_id'=>$form['job_id'],
-                                                        'recruiter_id'=>$job->recruiter_id,
-                                                        'company_id'=>$job->company_id,
-                                                        'member_id'=>$data->member_id,
-                                                        'apply_at'=>  date('Y-m-d')));
-               
-                    echo json_encode(array('success'=>"Applied Successfully"));               
-            }
-        }   else{
-            echo json_encode(array('error'=>"Something Wrong"));
-        }   
-       
-       
-            
-//        }
-    }
-            }else{
+                 
                  echo json_encode(array('job_err'=>'Already Applied for this job'));
             } 
             }else{
-                echo json_encode(array('mobile_err'=>'This Mobile is not Registered'));
+                $this->email_cerification_mail($form['email']);
+                echo json_encode(array('email_id_err'=>'This Email is not Registered',
+                                       'job_id'=>$form['job_id']));
             }    
             
         }
@@ -368,6 +423,91 @@ class Home extends CI_Controller
 
 
         }
+        
+       function send_otp($email)
+        {
+                   
+          
+                    
+                     $rand=mt_rand(000000,999999);
+                      
+                     $this->session->set_userdata(array('apply_otp'=>$rand));
+
+$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
+
+//Multiple mobiles numbers separated by comma
+
+$mobileNumber = $email;
+//Sender ID,While using route4 sender id should be 6 characters long.
+
+$senderId = "PKGNAU";
+//Your message to send, Add URL encoding here.
+
+$message =$rand.' is your OTP for verifying mobile number on packagingnaukri.com.';
+
+
+//Define route 
+
+$route = "4";
+//Prepare you post parameters
+
+$postData = array(
+
+    'authkey' => $authKey,
+
+    'mobiles' => $mobileNumber,
+
+    'message' => $message,
+
+    'sender' => $senderId,
+
+    'route' => $route
+
+);
+
+
+//API URL
+
+$url="http://api.msg91.com/api/sendhttp.php";
+
+
+// init the resource
+
+$ch = curl_init();
+curl_setopt_array($ch, array(
+
+    CURLOPT_URL => $url,
+
+    CURLOPT_RETURNTRANSFER => true,
+
+    CURLOPT_POST => true,
+
+    CURLOPT_POSTFIELDS => $postData
+
+    //,CURLOPT_FOLLOWLOCATION => true
+
+));
+//Ignore SSL certificate verification
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+//get response
+
+$output = curl_exec($ch);
+//Print error if any
+if(curl_errno($ch))
+{
+//    echo json_encode(array('error'=> curl_error($ch)));
+}
+curl_close($ch);
+//echo json_encode(array('send'=>'OTP is sent Successfully'));       
+//echo $output;
+            }
+
+
+
+        
+        
         
 
     
