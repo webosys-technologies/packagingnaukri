@@ -178,16 +178,20 @@ class Home extends CI_Controller
             $form=$this->input->post();
             if($form['otp']==$this->session->userdata('email_otp'))
             {
+                $sys=$this->System_model->source_name();
                 $data=array('member_fname'=>$form['fname'],
                             'member_lname'=>$form['fname'],
                             'member_email'=>$form['fname'],
                             'member_mobile'=>$form['fname'],
                             'member_anual_salary'=>$form['current'],
+                            'member_created_at'=>date(Y-m-d),
+                            'member_status'=>'1',
+                            'member_source'=>$sys,
                             'member_experience'=>$form['exp'],);
                 
                 $this->Members_model->member_add($data);
                 
-                $emp=array('employment_notice_period'=>$form['notics'],
+                $emp=array('employment_notice_period'=>$form['notice'],
                             'employment_current'=>$form['location'],
                             );
                 
