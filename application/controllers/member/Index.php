@@ -274,6 +274,7 @@ class Index extends CI_Controller
                             $this->session->set_userdata($sessionArray);  
                             
                             echo json_encode(array('status'=> 'success'));
+                           
                             if(!empty($job_id))
                         {
                 if(empty($this->Applied_jobs_model->check_apply(array('member_id'=>$result->member_id,
