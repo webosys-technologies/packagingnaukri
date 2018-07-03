@@ -158,7 +158,7 @@ class Index extends CI_Controller
                                 'member_LoggedIn' => true,
                                 'member_source'    =>$res->member_source,
                                                 );
-                                                
+                                  $this->session->unset_userdata('member_otp');              
                                 $this->session->set_userdata($sessionArray);                      
                                 echo json_encode(array('status'=> 'success')); 
                     }else
@@ -206,7 +206,7 @@ class Index extends CI_Controller
                             'member_LoggedIn' => true,
                             'member_source'  =>$res->member_source,
                                             );
-                                            
+                            $this->session->unset_userdata('member_otp');                       
                             $this->session->set_userdata($sessionArray);                      
                             echo json_encode(array('status'=> 'success'));
                     }else{
@@ -822,7 +822,8 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
 //                return True;               
 //            }
 //            else{
-
+             echo $data->member_source."<br>";
+             echo $source;
                     if ($source == $data->member_source) {
 
                         return true;
