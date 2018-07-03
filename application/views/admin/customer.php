@@ -3,8 +3,8 @@
   .modal fade{
     display: block !important;
 }
-#modal-dialog,#modal_dialog1{
-     width: 60%;
+.modal-dialog{
+     width: 700px;
       overflow-y: initial !important
 }
 .modal-body{
@@ -17,35 +17,18 @@
   overflow-y: auto;
 }
 
-@media (max-width:800px){
-    #modal_dialog,#modal_dialog1{
-     width: 100%;
-      overflow-y: initial !important
-}
-}
-@media (max-width:768px){
-    #modal_dialog,#modal_dialog1{
-     width: 100%;
-      overflow-y: initial !important
-}
-}
-@media (max-width:320px){
-    #modal_dialog,#modal_dialog1{
-     width: 100%;
-      overflow-y: initial !important
-}
-}
+
 </style>
 <div class="content-wrapper" style="background:white;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-users"></i><strong> Companies Management </strong>
+        <i class="fa fa-users"></i><strong> Customer Management </strong>
         <small>Add, Edit, Delete <?php  ?></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Manage Companies</li>
+        <li class="active">Manage Customer</li>
       </ol>
     </section>
     <hr style="border-top: 1px solid #ccc;">
@@ -56,7 +39,7 @@
 
          <div class="col-md-4">
     <!--<button class="btn btn-primary"  onclick="add_company()" data-toggle="tooltip" data-placement="bottom" title="Add Company">      <i class="glyphicon glyphicon-plus"></i> Add Company</button>-->
-<button type="button"  id="bt" class="btn btn-primary" onclick="add_company()"><i></i>Add Company</button>
+<button type="button"  id="bt" class="btn btn-primary" onclick="add_customer()"><i></i>Add Customer</button>
     </div>
     <div class="col-md-6">
          <?php
@@ -95,13 +78,9 @@
       <thead>
         <tr bgcolor="#338cbf" style="color:#fff">
            <th>ID</th>
-                                            <th>Company Name</th>
+                                            <th>Customer Name</th>
                                             <th>Logo</th>
-                                            <th>Recruiter</th>
-                                            <th>Email</th>
-                                            <th>Contact</th>
-                                            <th>Location</th>
-                                            <th>Established</th>
+                                            <th>Created At</th>
                                             <th>Status</th>
                                             <th>Source</th>
                                             <th style="width:90px">Action</th>
@@ -110,22 +89,17 @@
       </thead>
       <tbody id="myTable">
         <?php
-          if (isset($companies)) {
+          if (isset($customer)) {
             
-         foreach($companies as $comp){
+         foreach($customer as $cust){
              ?>
                                      <tr>  
-                                        <td><?php echo $comp->company_id?></td>
-                                            <td><?php echo $comp->company_name?></td>
-                                             
-                                            <td><img src="<?php echo base_url().$comp->company_logo;?>" width="80px" height="30px"></td>
-                                           <td><?php echo $comp->recruiter_fname." ".$comp->recruiter_lname;?></td>
-                                            <td><?php echo $comp->company_email?></td>
-                                            <td><?php echo $comp->company_contact?></td>
-                                            <td><?php echo $comp->company_city?></td>
-				            <td><?php echo $comp->company_created_at?></td>
+                                      <td><?php echo $cust->customer_id?></td>
+                                      <td><?php echo $cust->customer_name?></td>                                             
+                                      <td><img src="<?php echo base_url().$cust->customer_logo;?>" width="80px" height="30px"></td>
+				                              <td><?php echo $cust->customer_created_at?></td>
                                             <td> <?php 
-                                       if($comp->company_status==1)
+                                       if($cust->customer_status==1)
                                        {
                                            echo "Active";
                                        }
@@ -134,11 +108,11 @@
                                            echo "Not Active";
                                        }
                                        ?></td>
-                                       <td><?php echo $comp->company_source ; ?></td>
+                                       <td><?php echo $cust->customer_source ; ?></td>
                                            
-                <td>  <button class="btn btn-success btn-xs" onclick="edit_company(<?php echo $comp->company_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Add Company"><i class="glyphicon glyphicon-pencil"></i></button>
-                     <button class="btn btn-info btn-xs" onclick="view_company(<?php echo $comp->company_id; ?>)" id="btn2" data-toggle="tooltip" data-placement="bottom" title="View Company"><i class="fa fa-eye"></i></button>
-                  <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $comp->company_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Company"><i class="glyphicon glyphicon-trash"></i></button>
+                <td>  <button class="btn btn-success btn-xs" onclick="edit_customer(<?php echo $cust->customer_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Add Company"><i class="glyphicon glyphicon-pencil"></i></button>
+                     <!-- <button class="btn btn-info btn-xs" onclick="view_company(<?php echo $cust->customer_id; ?>)" id="btn2" data-toggle="tooltip" data-placement="bottom" title="View Company"><i class="fa fa-eye"></i></button> -->
+                  <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $cust->customer_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Company"><i class="glyphicon glyphicon-trash"></i></button>
                              </td>
               </tr>
           <?php }}?>
@@ -234,7 +208,7 @@ var user_type=el.val();
     var id;
 
 
-  function add_company()
+  function add_customer()
     {  
         $('[name="city"]').html("");
        $("#remove_btn").html("");
@@ -249,7 +223,7 @@ var user_type=el.val();
         $('#myModal').modal('show');
     }
 
-    function edit_company(id)
+    function edit_customer(id)
     { 
         $("#company_err").html(""); 
         $("#state_err").html(""); 
@@ -261,37 +235,23 @@ var user_type=el.val();
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo site_url('index.php/admin/Companies/ajax_edit/')?>/" + id,
+        url : "<?php echo site_url('index.php/admin/Customer/ajax_edit/')?>/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
         {     
           
-            $('[name="company_id"]').val(data.company_id);
-            $('[name="company"]').val(data.company_name);
-            $('[name="type"]').val(data.company_type);
-            $('[name="email"]').val(data.company_email);
-            $('[name="address"]').val(data.company_address);
-            $('[name="contact"]').val(data.company_contact);
-            $('[name="pincode"]').val(data.company_pincode);
-            $('[name="state"]').val(data.company_state);
-            $('[name="city"]').append('<option value="'+data.company_city+'">'+data.company_city+'</option>');
-            $('[name="city"]').val(data.company_city);
-            $('[name="country"]').val(data.company_country);
-            $('[name="website"]').val(data.company_website);
-            $('[name="established"]').val(data.company_establish_in);
-            $('[name="multinational"]').val(data.company_multinational);
-            $('[name="status"]').val(data.company_status);
-            $('[name="recruiter"]').val(data.recruiter_id);
-           
+            $('[name="id"]').val(data.customer_id);
+            $('[name="name"]').val(data.customer_name);
+            $('[name="source"]').val(data.company_source);
             
             
            
-            if(data.company_logo)
+            if(data.customer_logo)
             {
-                $("#company_logo").attr('src',"<?php echo base_url();?>"+data.company_logo);
-                $("#company_logo").prop('hidden',false);
-            $("#remove_btn").append(' <a href="<?php echo base_url();?>admin/Companies/delete_logo/'+data.company_id+'" id="remove_logo" class="btn btn-danger btn-xs pull-right">Remove Logo</a>');
+                $("#customer_logo").attr('src',"<?php echo base_url();?>"+data.customer_logo);
+                $("#customer_logo").prop('hidden',false);
+            $("#remove_btn").append(' <a href="<?php echo base_url();?>admin/Customer/delete_logo/'+data.customer_id+'" id="remove_logo" class="btn btn-danger btn-xs pull-right">Remove Logo</a>');
             }
            
                         
@@ -316,17 +276,16 @@ function delete_logo(id)
 
     function save()
     {
-        $("#save_btn").attr('disabled',true);
         
         var data = new FormData(document.getElementById("form"));
       var url;
       if(save_method == 'add')
       {         
-        url = "<?php echo site_url('index.php/admin/Companies/company_add')?>";
+        url = "<?php echo site_url('index.php/admin/Customer/customer_add')?>";
       }
       else
       {
-        url = "<?php echo site_url('index.php/admin/Companies/company_update')?>";
+        url = "<?php echo site_url('index.php/admin/Customer/customer_update')?>";
       }
 
        // ajax adding data to database
@@ -374,8 +333,6 @@ function delete_logo(id)
               if(json.success)
               {
               location.reload();// for reload a page
-              }else{
-                  $("#save_btn").attr('disabled',false);
               }
                 
             },
@@ -389,11 +346,11 @@ function delete_logo(id)
     function delete_menu(id)
     {
 
-        $("#delete_comp").attr('onclick','delete_company('+id+')');
+        $("#delete_comp").attr('onclick','delete_customer('+id+')');
         $("#delete_modal").modal('show');
     }
 
-    function delete_company(id)
+    function delete_customer(id)
     {
       
         // ajax delete data from database
@@ -415,7 +372,7 @@ function delete_logo(id)
 
     }
 
-    function view_company(id)
+    function view_customer(id)
     {
               
            $.ajax({
@@ -457,7 +414,7 @@ function delete_logo(id)
   </script>
 
 <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog">
+    <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
@@ -473,13 +430,13 @@ function delete_logo(id)
     			
     			<div class="panel-body">
     				<form method="post" action="" id="form">
-                                    <input type="hidden" value="" name="company_id">
+                                    <input type="hidden" value="" name="id">
                                     <div class="row">
-                                      <div class="col-md-6">
+                                      <div class="col-md-12">
                                         <div class="form-group">
                                           <label>Source<span style="color: red">*</span></label>
                                           <select name="source" class="form-control">
-                                            <!--<option>--Select Source--</option>-->
+                                            <option>--Select Source--</option>
                                             <option value="Packaging">Packaging</option>
                                             <option value="Printing">Printing</option>
                                             <option value="Plastic">Plastic</option>
@@ -487,170 +444,39 @@ function delete_logo(id)
                                           <span id="source_err" class="text-danger"></span>
                                         </div>
                                       </div>
-                                        
-                                         <div class="col-md-6">
-                                        <div class="form-group">
-                                          <label>Recruiters<span style="color: red">*</span></label>
-                                          <select name="recruiter" class="form-control">
-                                              <option value="<?php echo $this->session->userdata('recruiter_id');?>">SELF</option>
-                                            <?php 
-                                            if(isset($recruiters))
-                                            {
-                                                foreach ($recruiters as $rec)
-                                                {
-                                                    echo '<option value='.$rec->recruiter_id.'>'.$rec->recruiter_fname." ".$rec->recruiter_lname;'</option>';
-                                                }
-                                            }
-                                            ?>
-                                          </select>
-                                          <span id="source_err" class="text-danger"></span>
-                                        </div>
-                                      </div>
                                     </div>
     				                <div class="row">
-                                <div class="col-md-6">                                
+                                <div class="col-md-12">                                
                                     <div class="form-group">
-                                        <label>Company Name</label><span style="color: red">*</span>
-                                    <input name="company" class="form-control" placeholder="Compay Name" value="">
-                                        <span class="text-danger" id="company_err"></span>
+                                        <label>Customer Name</label><span style="color: red">*</span>
+                                    <input name="name" class="form-control" placeholder="Customer Name" value="">
+                                        <span class="text-danger" id="name_err"></span>
                                         
                                     </div>
                                                                        
                                 </div>
                                     
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Company Type</label>
-                                       
-                                    <input name="type" class="form-control" placeholder="MNC or Small Scale" value="">
-                                        <span class="text-danger" id="type_err"></span>
-                                      
-                                    </div>
-                                   
-                                </div>
                             </div>
                                     
-                                    <div class="row">
-                                <div class="col-md-12  ">                                
-                                    <div class="form-group">
-                                        <label>Company Email</label>
-                                    <input name="email" placeholder="Company Email" class="form-control" value="">
-                                        <span class="text-danger" id="email_err"></span>
-                                        
-                                    </div>
-                                                                       
-                                </div>
-                               </div>
                                     
-                                <div class="row">
-                                  <div class="col-md-6">                                
-                                      <div class="form-group">
-                                         <label>Contact</label>
-                                         <input name="contact" placeholder="Company Contact" class="form-control" value="">
-                                          <span class="text-danger" id="contact_err"></span>
-                                          
-                                      </div>
-                                                                        
-                                  </div>
+                            <div class="row">
                                 
-                                  <div class="col-md-6">
-                                     <label>Website</label>
-                                     <input name="website" placeholder="Company Website" class="form-control" value="">
-                                      <span class="text-danger" id="website_err"></span>
-
-                                  </div>         
-                                </div><br>
-                                    
-                                    <div class="row">
-                                <div class="col-md-6">                                
+                                        <div class="col-md-12">                                
                                     <div class="form-group">
-                                       <label>Company Address</label>
-                                    <textarea cols="80" id="address" class="form-control" name="address" rows="5"></textarea>
-                                        <span class="text-danger" id="password_err"></span>
-                                        
-                                    </div>                                  
-                                </div>
-                                        <div class="col-md-6">                                
-                                    <div class="form-group">
-                                       <label>Company Logo</label>
+                                       <label>Company Logo</label><span style="color: red">*</span>
                                        
                                     <input type="file" name="logo" id="logo" value="">
                                    <div id="remove_btn"></div>
                                         <span class="text-danger" id="comp_err"></span>
                                         
                                     </div> 
-                                    <img src="" id="company_logo" width="120px" height="60px" hidden>
+                                    <img src="" id="customer_logo" width="120px" height="60px" hidden>
                                 </div> 
-                                     </div> 
+                            </div> 
 
-
-                                <div class="row">
-                                  <div class="col-md-6">
-                                        <label class="form-label">Country</label><span style="color: red">*</span>
-                                        <select name="country" id="country" class="form-control" required>
-                                                    <option value="">-- Select Country --</option>                              
-                                                    <option value="India"> India </option>                                   
-                                             </select>
-                                        <span class="text-danger" ><?php echo form_error('city'); ?></span>
-
-                                    </div>
-                                  <div class="col-md-6">
-                                      <label class="form-label">State</label><span style="color: red">*</span>
-                                      <select name="state" id="state" class="form-control" required>
-                                                  <option value="">-- Select State --</option>
-                                                  <?php if(isset($states)){
-                                                      foreach($states as $state)
-                                                      { ?>
-                                                         <option value="<?php echo $state->stateID; ?>"><?php echo $state->stateName; ?></option>
-                                                     <?php }
-                                                  }?>
-                                               
-                                                  
-                                                  <!--<option value="Maharashtra">Maharashtra</option>-->
-                                      </select>
-                                      <span class="text-danger" id="state_err"><?php echo form_error('state'); ?></span>
-
-                                  </div>
-                    
-                                </div><br>
-
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label class="form-label">City</label><span style="color: red">*</span>
-                                        <select name="city" id="city" class="form-control" required>
-                                                    <option value="">-- Select City --</option>                                   
-                                             </select>
-                                        <span class="text-danger" id="city_err"><?php echo form_error('city'); ?></span>
-
-                                    </div>
-                                    
-                                     <div class="col-md-6">                                
-                                      <div class="form-group">
-                                         <label>Pincode</label>
-                                         <input name="pincode" placeholder="Pincode" class="form-control" value="">
-                                          <span class="text-danger" id="mobile_err"></span>                                        
-                                      </div>                                                                      
-                                     </div>
-                               </div>
-                
-                                    
-                     <div class="row">
-                          <div class="col-md-6">
-                           <label>Company Established</label>
-                                        <input name="established" placeholder="Established Year" class="form-control" value="">
-                            <span class="text-danger" id="gen_err"></span>
-
-                        </div>  
-                        <div class="col-md-6">
-                           <label>Company Multinational</label>
-                                        <input name="mnc" placeholder="Company Multinational" class="form-control" value="">
-                            <span class="text-danger" id="gen_err"></span>
-
-                        </div>  
-                    </div>
+                     
                                <div class="row"> 
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                   <div class="form-group">
                                     <label>Status<span style="color: red">*</span></label>
                                      <select name="status" class="form-control" >
@@ -668,7 +494,7 @@ function delete_logo(id)
     			
     		</div>         
     	 <div class="modal-footer">
-             <button type="button" class="btn btn-primary" id="save_btn" onclick="save()">Save</button>
+             <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
           <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
         </div>
     </div>           
@@ -703,7 +529,7 @@ function delete_logo(id)
 
 
 <div class="modal fade"  id="company_modal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog1">   
+    <div class="modal-dialog" style="width:550px;" id="modal_dialog">   
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">

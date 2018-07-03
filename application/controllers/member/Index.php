@@ -16,6 +16,7 @@ class Index extends CI_Controller
 	
 	function index()
 	{
+            $country='IND';
            $data['states']=$this->Cities_model->getall_state();
         $sys=$this->System_model->source_name();        
             $result['system']=$this->System_model->get_system_info($sys);
@@ -131,32 +132,41 @@ class Index extends CI_Controller
                        $res=$this->Members_model->login_with_otp($where);     
 
             if($res)
-            {          
-                
-                if(!empty($job_id))
-                {
-                $rec_data=$this->Jobs_model->job_by_id($job_id);
-             $data=array('job_id'=>$job_id,
-                    'member_id'=>$res->member_id,
-                    'recruiter_id'=>$rec_data->recruiter_id,
-                    'company_id'=>$rec_data->company_id,
-                    'apply_at'=>date('Y-m-d'),
-                    'apply_status'=>'1');
-                 $this->Applied_jobs_model->apply_job($data);
-                 $this->session->set_flashdata('success','Job Applied Successfully');
-                }
-                    $sessionArray = array(                        
-                    'member_id' => $res->member_id,
-                    'member_fname' => $res->member_fname,
-                    'member_lname' => $res->member_lname,
-                    'member_email' => $res->member_email,
-                     'member_mobile' => $res->member_mobile,
-                    'member_LoggedIn' => true,
-                    'member_source'    =>$res->member_source,
-                                    );
-                                    
-                    $this->session->set_userdata($sessionArray);                      
-                    echo json_encode(array('status'=> 'success'));               
+            {    
+                $source=$this->source_verification($res);
+                    if($source)
+                    {          
+                            
+                            if(!empty($job_id))
+                            {
+                            $rec_data=$this->Jobs_model->job_by_id($job_id);
+                         $data=array('job_id'=>$job_id,
+                                'member_id'=>$res->member_id,
+                                'recruiter_id'=>$rec_data->recruiter_id,
+                                'company_id'=>$rec_data->company_id,
+                                'apply_at'=>date('Y-m-d'),
+                                'apply_status'=>'1');
+                             $this->Applied_jobs_model->apply_job($data);
+                             $this->session->set_flashdata('success','Job Applied Successfully');
+                            }
+                                $sessionArray = array(                        
+                                'member_id' => $res->member_id,
+                                'member_fname' => $res->member_fname,
+                                'member_lname' => $res->member_lname,
+                                'member_email' => $res->member_email,
+                                 'member_mobile' => $res->member_mobile,
+                                'member_LoggedIn' => true,
+                                'member_source'    =>$res->member_source,
+                                                );
+                                                
+                                $this->session->set_userdata($sessionArray);                      
+                                echo json_encode(array('status'=> 'success')); 
+                    }else
+                    {
+                        
+                    echo json_encode(array('account_error'=> 'Invalid Source Login.'));
+
+                    }              
               }           
             else
             {                   
@@ -170,32 +180,39 @@ class Index extends CI_Controller
 
             if($res)
             {       
-                
-                if(!empty($job_id))
-                {
-                $rec_data=$this->Jobs_model->job_by_id($job_id);
-             $data=array('job_id'=>$job_id,
-                    'member_id'=>$res->member_id,
-                    'recruiter_id'=>$rec_data->recruiter_id,
-                    'company_id'=>$rec_data->company_id,
-                    'apply_at'=>date('Y-m-d'),
-                    'apply_status'=>'1');
-                 $this->Applied_jobs_model->apply_job($data);
-                 $this->session->set_flashdata('success','Job Applied Successfully');
-                }
-                
-                    $sessionArray = array(                        
-                    'member_id' => $res->member_id,
-                    'member_fname' => $res->member_fname,
-                    'member_lname' => $res->member_lname,
-                    'member_email' => $res->member_email,
-                     'member_mobile' => $res->member_mobile,
-                    'member_LoggedIn' => true,
-                    'member_source'  =>$res->member_source,
-                                    );
-                                    
-                    $this->session->set_userdata($sessionArray);                      
-                    echo json_encode(array('status'=> 'success'));               
+                    $source=$this->source_verification($res);
+                    if($source)
+                    {    
+                        if(!empty($job_id))
+                        {
+                        $rec_data=$this->Jobs_model->job_by_id($job_id);
+                     $data=array('job_id'=>$job_id,
+                            'member_id'=>$res->member_id,
+                            'recruiter_id'=>$rec_data->recruiter_id,
+                            'company_id'=>$rec_data->company_id,
+                            'apply_at'=>date('Y-m-d'),
+                            'apply_status'=>'1');
+                         $this->Applied_jobs_model->apply_job($data);
+                         $this->session->set_flashdata('success','Job Applied Successfully');
+                        }
+                        
+                            $sessionArray = array(                        
+                            'member_id' => $res->member_id,
+                            'member_fname' => $res->member_fname,
+                            'member_lname' => $res->member_lname,
+                            'member_email' => $res->member_email,
+                             'member_mobile' => $res->member_mobile,
+                            'member_LoggedIn' => true,
+                            'member_source'  =>$res->member_source,
+                                            );
+                                            
+                            $this->session->set_userdata($sessionArray);                      
+                            echo json_encode(array('status'=> 'success'));
+                    }else{
+
+                 echo json_encode(array('account_error'=> 'Invalid Source Login.'));
+
+                }               
               }           
             else
             {                   
@@ -227,10 +244,38 @@ class Index extends CI_Controller
        {       
 
             if(!empty($result) && $result->member_status==1)
-            {         
-                
-                if(!empty($job_id))
+            {      
+                $source=$this->source_verification($result);   
+                if($source)
                 {
+                        if(!empty($job_id))
+                        {
+                        $rec_data=$this->Jobs_model->job_by_id($job_id);
+                     $data=array('job_id'=>$job_id,
+                            'member_id'=>$result->member_id,
+                            'recruiter_id'=>$rec_data->recruiter_id,
+                            'company_id'=>$rec_data->company_id,
+                            'apply_at'=>date('Y-m-d'),
+                            'apply_status'=>'1');
+                         $this->Applied_jobs_model->apply_job($data);
+                         $this->session->set_flashdata('success','Job Applied Successfully');
+                        }
+                        
+                        
+                            $sessionArray = array(                        
+                                 'member_id' => $result->member_id,
+                            'member_fname' => $result->member_fname,
+                            'member_lname' => $result->member_lname,
+                            'member_email' => $result->member_email,
+                             'member_mobile' => $result->member_mobile,
+                            'member_LoggedIn' => true,
+                            'member_source'  =>$result->member_source,
+                                            );
+                                            
+                            $this->session->set_userdata($sessionArray);  
+                            
+                            echo json_encode(array('status'=> 'success'));
+
                 if(empty($this->Applied_jobs_model->check_apply(array('member_id'=>$result->member_id,
                                                                 'job_id'=>$job_id,))))
                 {
@@ -259,8 +304,11 @@ class Index extends CI_Controller
                                     
                     $this->session->set_userdata($sessionArray);  
                     
-                    echo json_encode(array('status'=> 'success'));
-       
+                }else{
+
+                 echo json_encode(array('account_error'=> 'Invalid Source Login.'));
+
+                }
                
               }
            
@@ -756,6 +804,27 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                       
         }
 
+        public function source_verification($data)
+        {
+            $source=ucfirst($this->System_model->source_name());
+          $sys=$this->System_model->get_system_info($source);
+           
+          if ($sys->source_status) 
+            {              
+                return True;               
+            }
+            else{
+
+                    if ($source == $data->member_source) {
+
+                        return true;
+                       
+                   }else{
+                    return false;
+                   }
+            }
+        }
+
         public function show_cities($state)
         {
           //echo $state;
@@ -775,7 +844,6 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
           }
         }
 
-       
 		
     
 }

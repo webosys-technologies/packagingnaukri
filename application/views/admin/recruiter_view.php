@@ -211,7 +211,7 @@ var state=el.val();
           $.each(data,function(i,row)
           {
           
-              $(".city").append('<option value="'+ row.city_name +'">' + row.city_name+'</option>');
+              $(".city").append('<option value="'+ row.cityName +'">' + row.cityName+'</option>');
           }
           );
        },
@@ -626,7 +626,7 @@ function view_recruiter(id)
                                     <?php if(isset($states)){
                                         foreach($states as $state)
                                         { ?>
-                                           <option value="<?php echo $state->city_state; ?>"><?php echo $state->city_state; ?></option>
+                                           <option value="<?php echo $state->stateID; ?>"><?php echo $state->stateName; ?></option>
                                        <?php }
                                     }?>
                                  

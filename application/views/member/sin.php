@@ -104,7 +104,7 @@
                                     <?php if(isset($states)){
                                         foreach($states as $state)
                                         { ?>
-                                           <option value="<?php echo $state->city_state; ?>"><?php echo $state->city_state; ?></option>
+                                           <option value="<?php echo $state->stateID; ?>"><?php echo $state->stateName; ?></option>
                                        <?php }
                                     }?>
                                  
@@ -173,7 +173,7 @@ var state= $('#state option:selected').val();
 //alert(state);
           
       $.ajax({
-       url : "<?php echo site_url('index.php/member/Index/show_cities')?>/" + state,        
+       url : "<?php echo site_url('index.php/home/show_cities')?>/" + state,        
        type: "GET",
         
        dataType: "JSON",
@@ -184,7 +184,7 @@ var state= $('#state option:selected').val();
           {
             //alert(row.city_name);
            
-              $("#city").append('<option value="'+ row.city_name +'">' + row.city_name + '</option>');
+              $("#city").append('<option value="'+ row.cityName +'">' + row.cityName + '</option>');
           }
           );
        },

@@ -178,7 +178,7 @@ var user_type=el.val();
         {
             
       $.ajax({
-       url : "<?php echo site_url('index.php/recruiter/Companies/show_cities')?>/" + user_type,        
+       url : "<?php echo site_url('index.php/home/show_cities')?>/" + user_type,        
        type: "GET",
               
        dataType: "JSON",
@@ -188,7 +188,7 @@ var user_type=el.val();
           $.each(data,function(i,row)
           {
           
-              $("#city").append('<option value="'+ row.city_name +'">' + row.city_name+'</option>');
+              $("#city").append('<option value="'+ row.cityName +'">' + row.cityName+'</option>');
           }
           );
        },
@@ -534,7 +534,7 @@ var user_type=el.val();
                                                   <?php if(isset($states)){
                                                       foreach($states as $state)
                                                       { ?>
-                                                         <option value="<?php echo $state->city_state; ?>"><?php echo $state->city_state; ?></option>
+                                                         <option value="<?php echo $state->stateID; ?>"><?php echo $state->stateName; ?></option>
                                                      <?php }
                                                   }?>
                                                
