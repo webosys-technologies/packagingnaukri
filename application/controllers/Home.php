@@ -136,11 +136,11 @@ class Home extends CI_Controller
                     $subject = "Email Verification";
                     $txt=$rand.' is your OTP for verifying Email Id on packagingnaukri.com.';
                                                                
-                 
+                     $this->session->set_userdata(array('email_otp'=>$rand));
                        $success=  mail($to,$subject,$txt,$headers); 
                        if($success)
                        {
-                           $this->session->set_userdata(array('email_otp'=>$rand));
+                           
                            return true;
                        }else{
                            return false;
@@ -149,14 +149,25 @@ class Home extends CI_Controller
             
         }
         
-        function login_detail_email($email)
+        function login_detail_email($email,$pwd,$fname)
         {
              $headers = "From: ". "team@packagingnaukri.com ";
                     $headers .= ". PackagingNaukari-Team" . "\r\n";
                     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                     $to = $email;
                     $subject = "Login Details";
-                    $txt=$rand.' is your OTP for verifying Email Id on packagingnaukri.com.';
+                    $txt='<html>
+                            <body>
+                            <span>Hello </span>'.$fname.'
+                                <br><span>Thank You for Register with Packaging Naukri</span><br><br>
+                                You can now login with following login details.<br><br>
+                                <span>Username: </span>'.$email.'
+                                <br><span>Password: </span>'.$pwd.'<br><br>
+                                    <span>Thanks & Regards</span><br>
+                                    <span>Packaging Team</span><br>
+                                    <a href="'.  base_url().'Home" target="_blank">'.base_url().'</a>
+                            </body>
+                            </html>';
                                                                
                  
                        $success=  mail($to,$subject,$txt,$headers); 
@@ -196,13 +207,27 @@ class Home extends CI_Controller
         function register_to_apply()
         {
             $form=$this->input->post();
+            
+            $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+             $passcode = array(); 
+             $alpha_length = strlen($alphabet) - 1; 
+             for ($i = 0; $i < 8; $i++) 
+             {
+                 $n = rand(0, $alpha_length);
+                 $passcode[] = $alphabet[$n];
+             }
+             $pwd= implode($passcode);
+            
+            
+          
             if($form['otp']==$this->session->userdata('email_otp'))
             {
                 $sys=$this->System_model->source_name();
                 $data=array('member_fname'=>$form['fname'],
                             'member_lname'=>$form['fname'],
-                            'member_email'=>$form['fname'],
-                            'member_mobile'=>$form['fname'],
+                            'member_email'=>$form['member_email'],
+                            'member_password'=>$pwd,
+                            'member_mobile'=>$form['mobile'],
                             'member_anual_salary'=>$form['current'],
                             'member_created_at'=>date('Y-m-d'),
                             'member_status'=>'1',
@@ -214,20 +239,20 @@ class Home extends CI_Controller
                 $emp=array('employment_notice_period'=>$form['notice'],
                             'employment_current'=>$form['location'],
                             );
-                $job=$this->jobs_model->job_by_id($form['apply_job_id']);
+                $job=$this->Jobs_model->job_by_id($form['apply_job_id']);
                 $this->Employments_model->insert_employment($emp);
                 
                 $apply=array('member_id'=>$mem_id,
                             'job_id'=>$form['apply_job_id'],
                             'company_id'=>$job->company_id,
-                            'recruitre_id'=>$job->recruiter_id,
+                            'recruiter_id'=>$job->recruiter_id,
                             'apply_at'=>date("Y-m-d"),
                             'apply_status'=>"1");
                 
-                $this->Applied_model->apply_job($apply);
-                
+                $this->Applied_jobs_model->apply_job($apply);
+//                $this->login_detail_email($form['member_email'],$pwd,$form['fname']);
                 echo json_encode(array('success'=>'Job Applied Successfully'));
-                $this->session->set_flashdata('success','Register and Job Applied Successfully');  
+                $this->session->set_flashdata('success','Registered and Job Applied Successfully. check login detail on given email id');  
                 $this->session->unset_userdata('email_otp');
             }else{
                 echo json_encode(array('otp_err'=>'Wrong OTP'));
@@ -301,7 +326,7 @@ class Home extends CI_Controller
                  echo json_encode(array('job_err'=>'Already Applied for this job'));
             } 
             }else{
-                $this->email_cerification_mail($form['email']);
+//                $this->email_cerification_mail($form['email']);
                 echo json_encode(array('email_id_err'=>'This Email is not Registered',
                                        'job_id'=>$form['job_id']));
             }    

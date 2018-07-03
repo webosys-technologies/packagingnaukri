@@ -31,8 +31,7 @@ class Jobs_model extends CI_Model
      }
      
      public function job_by_id($id)
-     {
-        
+     {        
          $this->db->from($this->table);
          $this->db->where('job_id',$id);
          $res=$this->db->get();
