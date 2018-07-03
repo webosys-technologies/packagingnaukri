@@ -675,7 +675,8 @@ curl_close($ch);
  function login_detail_msg($data)
         {           
           
-                    
+     print_r($data);
+     
                      $rand=mt_rand(000000,999999);
                       
                    
