@@ -82,7 +82,7 @@ h3{
         
        ?>
 		<div class="box box-solid" >
-	<center>	<img src="<?php if($recruiter_data->recruiter_profile_pic){echo base_url(); echo $recruiter_data->recruiter_profile_pic;}else{ echo base_url()."profile_pic/boss.PNG"; }?>" width="100px" height="100px" style="border-radius: 6px"></center><br>
+	<center>	<img src="<?php if(file_exists($recruiter_data->recruiter_profile_pic)){echo base_url(); echo $recruiter_data->recruiter_profile_pic;}else{ echo base_url()."profile_pic/boss.png"; }?>" width="100px" height="100px" style="border-radius: 6px"></center><br>
 	<center><h3 ><?php echo  $recruiter_data->recruiter_fname." ".$recruiter_data->recruiter_lname; ?></h3></center>
 	</div>
 	</div>

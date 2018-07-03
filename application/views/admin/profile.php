@@ -63,7 +63,7 @@ h3{
         
        ?>
 		<div class="box box-solid" >
-	<center>	<img src="<?php if($user_data->user_profile_pic){echo base_url(). $user_data->user_profile_pic;}else{ echo base_url()." /profile_pic/avatar.png";}?>" width="100px" height="100px" style="border-radius: 6px"></center><br>
+	<center>	<img src="<?php if(file_exists($user_data->user_profile_pic)){echo base_url(). $user_data->user_profile_pic;}else{ echo base_url()."profile_pic/boss.png";}?>" width="100px" height="100px" style="border-radius: 6px"></center><br>
 	<center><h3 ><?php echo  $user_data->user_fname." ".$user_data->user_lname; ?></h3></center>
 	</div>
 	</div>

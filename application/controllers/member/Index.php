@@ -158,7 +158,7 @@ class Index extends CI_Controller
                                 'member_LoggedIn' => true,
                                 'member_source'    =>$res->member_source,
                                                 );
-                                                
+                                  $this->session->unset_userdata('member_otp');              
                                 $this->session->set_userdata($sessionArray);                      
                                 echo json_encode(array('status'=> 'success')); 
                     }else
@@ -176,7 +176,7 @@ class Index extends CI_Controller
               
           }
           else{
-         $res=$res=$this->Members_model->member_info_by_mobile($member_email);
+               $res=$this->Members_model->member_info_by_email($member_email);
          
 
             if($this->input->post('member_otp')==$this->session->userdata('member_otp'))
@@ -206,7 +206,7 @@ class Index extends CI_Controller
                             'member_LoggedIn' => true,
                             'member_source'  =>$res->member_source,
                                             );
-                                            
+                            $this->session->unset_userdata('member_otp');                       
                             $this->session->set_userdata($sessionArray);                      
                             echo json_encode(array('status'=> 'success'));
                     }else{
@@ -822,7 +822,8 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
 //                return True;               
 //            }
 //            else{
-
+       
+          
                     if ($source == $data->member_source) {
 
                         return true;

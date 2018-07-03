@@ -750,7 +750,7 @@ var edu_name=el.val();
                      <div class="col-md-2 col-sm-2 col-xs-2">
                         
                          <button type="file" onclick="upload_photo()" class="pull-right"><i style="color:#668cff" class="fa fa-camera"></i></button><br>
-                         <img src='<?php if(file_exists($member_data->member_profile_pic)){ echo base_url().$member_data->member_profile_pic; }else{echo base_url()."profile_pic/avatar.PNG";}?>' width='90px' height='90px'class='img-circle' alt='user-image'>
+                         <img src='<?php if(file_exists($member_data->member_profile_pic)){ echo base_url().$member_data->member_profile_pic; }else{echo base_url()."profile_pic/avatar.png";}?>' width='90px' height='90px'class='img-circle' alt='user-image'>
                      </div>
                      <?php
                      $org=$this->Employments_model->get_employment(array('member_id'=>$this->session->userdata('member_id')))
@@ -1725,7 +1725,7 @@ var edu_name=el.val();
     			  <form action="" id="photo_form"> 
                               <center>
                               <div class="shadow" style="width:120px; height:130px"> 
-                                  <img src='<?php if(isset($member_data->member_profile_pic)){ echo base_url().$member_data->member_profile_pic; }else{echo base_url()."profile_pic/avatar.PNG";}?>' width='120px' height='130px'>
+                                  <img src='<?php if(file_exists($member_data->member_profile_pic)){ echo base_url().$member_data->member_profile_pic; }else{echo base_url()."profile_pic/avatar.png";}?>' width='120px' height='130px'>
                               </div><br><br>
                                <label class="btn-bs-file btn-md btn-xs btn-sm btn-info">
                             Upload Photo
