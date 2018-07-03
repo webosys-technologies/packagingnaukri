@@ -106,10 +106,10 @@
                  mobile=false;                 
                  $("#mobile_err").html("Please Enter Mobile Number");
              }
-       
+        
        if(mobile==true)
        {
-           
+          $("#otp_send_btn").attr("disabled",true);
 //       var data = new FormData(document.getElementById("otp_apply_form"));
        var url = "<?php echo site_url('index.php/Home/send_mobile_otp/')?>"+number;
            
@@ -123,6 +123,8 @@
            if(data.mobile_err)
            {
                $("#mobile_err").html(data.mobile_err);
+           }else{
+               $("#otp_send_btn").attr("disabled",false);
            }
            
            if(data.otp_success)
@@ -143,7 +145,8 @@
    
    function register_to_apply()
    {
-       $("#apply_btn").attr('disabled',true);
+//       $("#register_apply_btn").attr("disabled",true);
+       
        var val=validation();
        if(val)
        {
@@ -164,6 +167,7 @@
              if(data.apply_otp_err)
              {
                  $("#apply_otp_err").html(data.apply_otp_err);
+                $("#register_apply_btn").attr("disabled",false);  
              }
           
             
@@ -172,7 +176,7 @@
                 location.reload();
 //                $("#mobile_err").html(data.mobile_err);
             }else{
-                $("#apply_btn").attr('disabled',false);
+                
             }
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -182,6 +186,7 @@
       });
            
        }
+      
        
    }
    
@@ -429,7 +434,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                       <br>
-                                        <a href="#" onclick="send_mobile_otp()" class="btn btn-warning">Send OTP</a>
+                                        <a href="#" onclick="send_mobile_otp()" id="otp_send_btn" class="btn btn-warning">Send OTP</a>
                                     </div>
                                     </div>
                                </div>  
@@ -525,7 +530,7 @@
     
         </div><!-- /.modal-content -->
         <div class="modal-footer">
-             <button type="button" onclick="register_to_apply()" id="apply_btn" class="btn btn-success" name="submit">Apply</button>
+             <button type="button" onclick="register_to_apply()" id="register_apply_btn" class="btn btn-success" name="">Apply</button>
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
   <!-- End Bootstrap modal --></div>     
