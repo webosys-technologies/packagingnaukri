@@ -147,8 +147,7 @@ class Home extends CI_Controller
                      $this->session->set_userdata(array('email_otp'=>$rand));
                        $success=  mail($to,$subject,$txt,$headers); 
                        if($success)
-                       {
-                           
+                       {                           
                            return true;
                        }else{
                            return false;
@@ -181,7 +180,7 @@ class Home extends CI_Controller
                        $success=  mail($to,$subject,$txt,$headers); 
                        if($success)
                        {
-                           $this->session->set_userdata(array('email_otp'=>$rand));
+//                           $this->session->set_userdata(array('email_otp'=>$rand));
                            return true;
                        }else{
                            return false;
@@ -333,48 +332,6 @@ class Home extends CI_Controller
             if(empty($check))
             {   
               
-//        $this->send_otp($form['mobile']);
-//         $job=$this->Jobs_model->get_job_by_id($form['job_id']);       
-//         
-//        $rand=  mt_rand(1111,9999);
-//        $name = $_FILES["resume"]["name"];
-//        $ext = end((explode(".", $name)));
-//        $filename='resume_'.date('Y-m-d_H.i.s').".".$ext;
-//        move_uploaded_file($_FILES['resume']['tmp_name'], 'resume/' . $filename);
-//       
-//        if(file_exists('resume/'.$filename))
-//        {
-//            if(file_exists($data->member_resume))
-//            {
-//            unlink($data->member_resume);
-//         $where=array('member_id'=>$data->member_id);
-//        $resume=array('member_resume'=>'resume/'.$filename);
-//         $res=$this->Members_model->member_update($where,$resume);
-//         
-//            
-//            $this->Applied_jobs_model->apply_job(array('job_id'=>$form['job_id'],
-//                                                        'recruiter_id'=>$job->recruiter_id,
-//                                                        'company_id'=>$job->company_id,
-//                                                        'member_id'=>$data->member_id,
-//                                                        'apply_at'=>  date('Y-m-d')));
-//            echo json_encode(array('success'=>"Applied Successfully"));
-//        
-//            }else{
-//                $where=array('member_id'=>$data->member_id);
-//               $resume=array('member_resume'=>'resume/'.$filename);
-//               $res=$this->Members_model->member_update($where,$resume);
-//               
-//                $this->Applied_jobs_model->apply_job(array('job_id'=>$form['job_id'],
-//                                                        'recruiter_id'=>$job->recruiter_id,
-//                                                        'company_id'=>$job->company_id,
-//                                                        'member_id'=>$data->member_id,
-//                                                        'apply_at'=>  date('Y-m-d')));
-//               
-//               echo json_encode(array('success'=>"Applied Successfully"));               
-//            }
-//        }   else{
-//            echo json_encode(array('error'=>"Something Wrong"));
-//        }   
        echo json_encode(array('email'=>$form['email'],
                               'job_id'=>$form['job_id']));
 
