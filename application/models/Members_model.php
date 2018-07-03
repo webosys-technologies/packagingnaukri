@@ -90,6 +90,9 @@ class Members_model extends CI_Model
 
 
         );
+        if (!empty($this->input->post('pincode'))) {
+            $data['pincode']=$this->input->post('pincode');
+        }
 
         $this->db->insert('members',$data);
         $insert=$this->db->insert_id();
@@ -117,8 +120,10 @@ class Members_model extends CI_Model
     
     public function get_id($id)
     {
+        $this->db->from('members as mem');
+        $this->db->join('states as st','st.stateID=mem.member_state','Left');
         $this->db->where('member_id',$id);
-        $query=$this->db->get($this->table);
+        $query=$this->db->get();
         return $query->row();
     }
     public function member_info_by_mobile($mobile)

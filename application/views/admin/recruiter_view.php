@@ -358,7 +358,6 @@ function view_recruiter(id)
         dataType: "JSON",
         success: function(data)
         {
-
             $('[name="recruiter_id"]').val(data.recruiter_id);
             $('[name="fname"]').val(data.recruiter_fname);
             $('[name="lname"]').val(data.recruiter_lname);
@@ -366,16 +365,12 @@ function view_recruiter(id)
             $('[name="mobile"]').val(data.recruiter_mobile);
             $('[name="password"]').val(data.recruiter_password);
             $('[name="address"]').val(data.recruiter_address);
-            $('[name="country"]').val(data.recruiter_countryName);
-            $('[name="state"]').val(data.recruiter_stateName);
-            $('[name="city"]').val(data.recruiter_city);
-            $('[name="status"]').val(data.recruiter_status);
-// //            $("#city").val(data.recruiter_city);
+            $('[name="country"]').val(data.recruiter_country);
             $(".city").append('<option value="'+ data.recruiter_city +'">' + data.recruiter_city+'</option>');
-            $(".city").append('<option value="'+ data.recruiter_stateName +'">' + data.recruiter_stateName+'</option>');
-            $(".city").append('<option value="'+ data.recruiter_countryName +'">' + data.recruiter_countryName+'</option>');
+            $(".state").append('<option value="'+ data.stateName +'">' + data.stateName+'</option>');
             $('[name="pincode"]').val(data.recruiter_pincode);
             $('[name="source"]').val(data.recruiter_source);
+            $('[name="status"]').val(data.recruiter_status);
             $('[name="gender"]').val(data.recruiter_gender);
            if(data.recruiter_profile_pic)
             {

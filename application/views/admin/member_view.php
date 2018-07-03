@@ -362,25 +362,19 @@ $("#photo").change(function() {
         // alert();
    var el = $(this) ;
               $('.city').html("");
-
-
+              $(".city").append('<option value="">--Select City--</option>');              
 var state=el.val();
-
         if(state)
         {
-          // alert(state);
-            
+          // alert(state);            
       $.ajax({
        url : "<?php echo site_url('index.php/Home/show_cities')?>/" + state,        
-       type: "GET",
-              
+       type: "GET",              
        dataType: "JSON",
        success: function(data)
-       {
-        
+       {        
           $.each(data,function(i,row)
-          {
-          
+          {          
               $('.city').append('<option value="'+ row.cityName +'">' + row.cityName+'</option>');
           }
           );
@@ -390,9 +384,38 @@ var state=el.val();
 //         alert('Error...!');
        }
      });
-     }
-    
- });  
+     }    
+ });
+
+    $(".country").change(function() {        
+   var el = $(this) ;
+              $(".state").html("");
+              $(".city").html("");
+              $(".state").append('<option value="">--Select State--</option>');
+              $(".city").append('<option value="">--Select City--</option>');
+
+var country=el.val();
+        if(country)
+        {            
+      $.ajax({
+       url : "<?php echo site_url('index.php/home/show_states')?>/" + country,        
+       type: "GET",              
+       dataType: "JSON",
+       success: function(data)
+       {        
+          $.each(data,function(i,row)
+          {          
+              $(".state").append('<option value="'+ row.stateID +'">' + row.stateName+'</option>');
+          }
+          );
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+     }    
+ }); 
 
             
 
@@ -558,10 +581,11 @@ function view_member(id)
             $('[name="mobile"]').val(data.member_mobile);
             $('[name="password"]').val(data.member_password);
             $('[name="address"]').val(data.member_address);
-            // $('[name="city"]').val(data.member_city);
-            $('[name="state"]').val(data.member_state);
+            $('[name="pincode"]').val(data.member_pincode);
+            $('[name="country"]').val(data.member_country);
             $('[name="status"]').val(data.member_status);
               $('.city').append('<option value="'+ data.member_city +'">' + data.member_city +'</option>');
+              $('.state').append('<option value="'+ data.stateName +'">' + data.stateName +'</option>');
             $('[name="source"]').val(data.member_source);
 
               
@@ -811,23 +835,34 @@ function view_member(id)
                             <div class="col-md-6">
                       <div class="form-group">
 
-                                <label class="form-label">State</label><span style="color: red">*</span>
-                                <select name="state"  class="form-control state" required>
-                                    <option value="">-- Select State --</option>
-                                    <?php if(isset($states)){
-                                        foreach($states as $state)
+                                <label class="form-label">Country</label><span style="color: red">*</span>
+                                <select name="country"  class="form-control country" required>
+                                    <option value="">-- Select Country --</option>
+                                    <?php if(isset($country)){
+                                        foreach($country as $country)
                                         { ?>
-                                           <option value="<?php echo $state->stateID; ?>"><?php echo $state->stateName; ?></option>
+                                           <option value="<?php echo $country->countryID; ?>"><?php echo $country->countryName; ?></option>
                                        <?php }
                                     }?>
+                                    <!--<option value="Maharashtra">Maharashtra</option>-->
+                        </select>
+                         <span class="text-danger" id="state_err"><?php echo form_error('country'); ?></span>    
+                      </div>
                                  
-                              
+                    </div>
+                            <div class="col-md-6">
+                      <div class="form-group">
+
+                                <label class="form-label">State</label><span style="color: red">*</span>
+                                <select name="state"  class="form-control state" required>
                                     <!--<option value="Maharashtra">Maharashtra</option>-->
                         </select>
                          <span class="text-danger" id="state_err"><?php echo form_error('state'); ?></span>    
                       </div>
                                  
                     </div>
+                    </div>
+                    <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="form-label">City</label><span style="color: red">*</span>
@@ -835,9 +870,14 @@ function view_member(id)
                                     <option value="">-- Select City --</option>
                            </select>                        
                         <span class="text-danger" id="city_err"><?php echo form_error('city'); ?></span>
-                      </div>
-                        
+                      </div>                        
                     </div>
+                    <div class="col-md-6">
+                      <div class="form-group"> 
+                      <label class="form-label">Pincode</label>
+                      <input type="text" name="pincode" class="form-control" placeholder="Pincode" required>                     
+                    </div>
+                      </div>
                     </div>
                       <div class="row">
                                 <div class="col-md-6">                                

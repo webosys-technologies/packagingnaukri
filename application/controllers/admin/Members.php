@@ -21,7 +21,7 @@ class Members extends CI_Controller
             
             $result['user_data']=get_user_info($id);
             $result['members']=$this->Members_model->getall_members();
-            $result['states']=$this->Cities_model->getall_state();
+            $result['country']=$this->Cities_model->getall_country();
             $sys=$this->session->userdata('admin_source');
             $result['system']=$this->System_model->get_system_info($sys);
             
@@ -142,8 +142,10 @@ class Members extends CI_Controller
                         'member_password'       => $this->input->post('password'),
                         'member_city'           => $this->input->post('city'),
                         'member_state'          => $this->input->post('state'),
+                        'member_country'           => $this->input->post('country'),
                         'member_address'        =>$this->input->post('address'),
                         'member_status'         =>$this->input->post('status'),
+                        'member_pincode'         =>$this->input->post('pincode'),
                         'member_source'                =>$this->input->post('source'),
                           );
             
