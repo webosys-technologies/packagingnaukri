@@ -69,8 +69,16 @@ class Home extends CI_Controller
 
          function show_cities($state)
         {           
-            $st=str_replace('%20', ' ', $state);
-            $cities=$this->Cities_model->getall_cities(ltrim($st));
+          //  $st=str_replace('%20', ' ', $state);
+            $cities=$this->Cities_model->getall_cities(ltrim($state));
+          
+            echo json_encode($cities);
+        }
+
+        function show_state($country)
+        {           
+            // $st=str_replace('%20', ' ', $state);
+            $cities=$this->Cities_model->getall_state(ltrim($country));
           
             echo json_encode($cities);
         }

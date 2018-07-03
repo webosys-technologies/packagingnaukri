@@ -35,8 +35,9 @@ class Index extends CI_Controller
 		// $submit=$this->input->post('submit');
 		if ($this->form_validation->run() == false)
         {
-			
+			$country='IND';
 		$state['states']=$this->Cities_model->getall_state();
+        
         $sys=$this->System_model->source_name();        
             $result['system']=$this->System_model->get_system_info($sys);	
                 $this->load->view($sys.'/home_header',$result);  
@@ -252,43 +253,67 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                    $result= $this->Recruiters_model->login_with_otp($where);
                     if($result)
                     {
-                        $sessionArray = array(                        
-                         'recruiter_id' => $result->recruiter_id,
-                    'recruiter_fname' => $result->recruiter_fname,
-                    'recruiter_lname' => $result->recruiter_lname,
-                    'recruiter_email' => $result->recruiter_email,
-                    'recruiter_mobile' => $result->recruiter_mobile,
-                    'recruiter_source'   =>$result->recruiter_source,
-                    'recruiter_LoggedIn' => true,
-                                    );
-                                    
-                    $this->session->set_userdata($sessionArray);  
-                    
-                    // echo json_encode(array('status'=>true));  
-                    redirect('recruiter/Index/login');
+                        $source=$this->source_verification($result);
+
+                            if ($source) {
+                                            
+                                    $sessionArray = array(                        
+                                     'recruiter_id' => $result->recruiter_id,
+                                'recruiter_fname' => $result->recruiter_fname,
+                                'recruiter_lname' => $result->recruiter_lname,
+                                'recruiter_email' => $result->recruiter_email,
+                                'recruiter_mobile' => $result->recruiter_mobile,
+                                'recruiter_source'   =>$result->recruiter_source,
+                                'recruiter_LoggedIn' => true,
+                                                );
+                                                
+                                $this->session->set_userdata($sessionArray);  
+                                
+                                // echo json_encode(array('status'=>true));  
+                                redirect('recruiter/Index/login');
+                            }else{
+
+                             $this->session->set_flashdata('log_error','Invalid source login.');
+                             redirect('recruiter/Index/login');
+                            }
+                                
                     }else{
                          // echo json_encode(array('otp_error'=>"Wrong OTP")); 
                          $this->session->set_flashdata('error','Wrong OTP');
                          redirect('recruiter/Index/login');
                     }
+                            
        }else{
            $where=array('recruiter_email'=>$username,
                         'recruiter_otp'=>$otp);
                     $result=$this->Recruiters_model->login_with_otp($where);
                     if($result)
                     {
-                        $sessionArray = array(                        
-                         'recruiter_id' => $result->recruiter_id,
-                    'recruiter_fname' => $result->recruiter_fname,
-                    'recruiter_lname' => $result->recruiter_lname,
-                    'recruiter_email' => $result->recruiter_email,
-                    'recruiter_mobile' => $result->recruiter_mobile,
-                    'recruiter_source'   =>$result->recruiter_source,
-                    'recruiter_LoggedIn' => true
-                                    );
-                                    
-                    $this->session->set_userdata($sessionArray);  
-                    echo json_encode(array('status'=>true)); 
+                        $source=$this->source_verification($result);
+
+                            if ($source) {
+                                
+
+                                        $sessionArray = array(                        
+                                         'recruiter_id' => $result->recruiter_id,
+                                    'recruiter_fname' => $result->recruiter_fname,
+                                    'recruiter_lname' => $result->recruiter_lname,
+                                    'recruiter_email' => $result->recruiter_email,
+                                    'recruiter_mobile' => $result->recruiter_mobile,
+                                    'recruiter_source'   =>$result->recruiter_source,
+                                    'recruiter_LoggedIn' => true
+                                                    );
+                                                    
+                                    $this->session->set_userdata($sessionArray);  
+                                    echo json_encode(array('status'=>true)); 
+                            }else
+                            {
+
+                             $this->session->set_flashdata('log_error','Invalid source login.');
+                             redirect('recruiter/Index/login');
+
+                            } 
+
                     }else{
                           $this->session->set_flashdata('error','Wrong OTP');
                          redirect('recruiter/Index/login');
@@ -324,6 +349,10 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                 
             if(!empty($result) && $result->recruiter_status==1)
             {          
+                $source=$this->source_verification($result);
+                if ($source) {
+                    
+                
                     $sessionArray = array(                        
                          'recruiter_id' => $result->recruiter_id,
                     'recruiter_fname' => $result->recruiter_fname,
@@ -338,7 +367,13 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                     
                     // echo json_encode(array('status'=>'success'));       
                     redirect('recruiter/Index/Login');       
-               
+                }else
+                {
+
+                 $this->session->set_flashdata('log_error','Invalid source login.');
+                 redirect('recruiter/Index/login');
+
+                } 
               }
            
             else
@@ -679,6 +714,26 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
            }
       
                              
+        }
+        public function source_verification($data)
+        {
+            $source=ucfirst($this->System_model->source_name());
+          $sys=$this->System_model->get_system_info($source);
+           
+          if ($sys->source_status) 
+            {              
+                return True;               
+            }
+            else{
+
+                    if ($source == $data->recruiter_source) {
+
+                        return true;
+                       
+                   }else{
+                    return false;
+                   }
+            }
         }
         
         function show_cities($state)

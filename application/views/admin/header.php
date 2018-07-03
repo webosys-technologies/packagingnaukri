@@ -193,6 +193,11 @@
           <a href="<?php echo base_url(); ?>admin/Education">
             <i class="fa fa-folder"></i> <span>Manage Education</span>            
           </a>
+         </li>         
+         <li>
+          <a href="<?php echo base_url(); ?>admin/Customer">
+            <i class="fa fa-folder"></i> <span>Manage Customer</span>            
+          </a>
          </li>
          <li>
           <a href="<?php echo base_url(); ?>admin/Profile">

@@ -278,7 +278,7 @@ var state=el.val();
           $('#city').append("");
             
       $.ajax({
-       url : "<?php echo site_url('index.php/recruiter/index/show_cities')?>/" + state,        
+       url : "<?php echo site_url('index.php/home/show_cities')?>/" + state,        
        type: "GET",
               
        dataType: "JSON",
@@ -288,7 +288,7 @@ var state=el.val();
           $.each(data,function(i,row)
           {
           
-              $("#city").append('<option value="'+ row.city_name +'">' + row.city_name+'</option>');
+              $("#city").append('<option value="'+ row.cityName +'">' + row.cityName+'</option>');
           }
           );
        },
@@ -357,7 +357,7 @@ var state=el.val();
                                                <?php if(isset($states)){
                                           foreach($states as $state)
                                           {
-                                             echo '<option value="'.$state->city_state.'">'.$state->city_state.'</option>';
+                                             echo '<option value="'.$state->stateID.'">'.$state->stateName.'</option>';
                                           }
                                                }?>
                                    
