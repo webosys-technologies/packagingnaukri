@@ -133,13 +133,13 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                     <img src='<?php if(file_exists($info['recruiter_profile_pic'])){echo base_url(); echo $info['recruiter_profile_pic'];}else{ echo base_url()."profile_pic/boss.PNG"; }?>' class="user-image" alt="User Image"/>
+                     <img src='<?php if(file_exists($info['recruiter_profile_pic'])){echo base_url(); echo $info['recruiter_profile_pic'];}else{ echo base_url()."profile_pic/boss.png"; }?>' class="user-image" alt="User Image"/>
                      <span class="hidden-xs"><?php echo $info['recruiter_fname']."&nbsp;".$info['recruiter_lname'];?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src='<?php if(file_exists($info['recruiter_profile_pic'])){echo base_url(); echo $info['recruiter_profile_pic'];}else{ echo base_url()."profile_pic/boss.PNG"; }?>' class="img-circle" alt="User Image"/>
+                    <img src='<?php if(file_exists($info['recruiter_profile_pic'])){echo base_url(); echo $info['recruiter_profile_pic'];}else{ echo base_url()."profile_pic/boss.png"; }?>' class="img-circle" alt="User Image"/>
                     <p>
                       <?php echo $info['recruiter_fname']."&nbsp;".$info['recruiter_lname'];?>
                       <small><?php echo 'Recruiter' ?></small><br>
