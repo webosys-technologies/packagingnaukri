@@ -36,7 +36,7 @@ class Index extends CI_Controller
 		if ($this->form_validation->run() == false)
         {
 			$country='IND';
-		$state['states']=$this->Cities_model->getall_state();
+		$state['country']=$this->Cities_model->getall_country();
         
         $sys=$this->System_model->source_name();        
             $result['system']=$this->System_model->get_system_info($sys);	

@@ -22,7 +22,7 @@ class Companies extends CI_Controller
     {       
              $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
-            $result['states']=$this->Cities_model->getall_state();
+            $result['country']=$this->Cities_model->getall_country();
             $result['companies']=$this->Companies_model->getall_companies();
             $result['recruiters']=$this->Recruiters_model->getall();
             $sys=$this->session->userdata('admin_source');

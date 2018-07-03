@@ -164,26 +164,19 @@
     $(document).ready(function() {
 
  $("#state").change(function() {
-
    var el = $(this) ;
-
-   //if(el.val() === "Maharashtra" ) {
     $('#city').html(" ");
 var state= $('#state option:selected').val();
-//alert(state);
-          
+//alert(state);          
       $.ajax({
        url : "<?php echo site_url('index.php/home/show_cities')?>/" + state,        
-       type: "GET",
-        
+       type: "GET",        
        dataType: "JSON",
        success: function(data)
-       {
-        
+       {        
           $.each(data,function(i,row)
           {
-            //alert(row.city_name);
-           
+            //alert(row.city_name);           
               $("#city").append('<option value="'+ row.cityName +'">' + row.cityName + '</option>');
           }
           );
@@ -192,9 +185,31 @@ var state= $('#state option:selected').val();
        {
        //  alert('Error...!');
        }
-     });
-  // }
-    
+     });      
+ });
+ $("#country").change(function() {
+   var el = $(this) ;
+    $('#city').html(" ");
+var state= $('#state option:selected').val();
+//alert(state);          
+      $.ajax({
+       url : "<?php echo site_url('index.php/home/show_states')?>/" + state,        
+       type: "GET",        
+       dataType: "JSON",
+       success: function(data)
+       {        
+          $.each(data,function(i,row)
+          {
+            //alert(row.city_name);           
+              $("#city").append('<option value="'+ row.stateID +'">' + row.stateName + '</option>');
+          }
+          );
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+       //  alert('Error...!');
+       }
+     });      
  });
 
 });

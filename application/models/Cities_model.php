@@ -8,7 +8,16 @@ class Cities_model extends CI_Model
      public function getall_state()
      {
         $this->db->from('states');
-        $this->db->or_like('countryID','IND');
+        $this->db->where('countryID','101');
+        $query=$this->db->get();
+
+        return $query->result();
+     }
+
+     public function getall_states($country)
+     {
+        $this->db->from('states');
+        $this->db->where('countryID',$country);
         $query=$this->db->get();
 
         return $query->result();
@@ -23,13 +32,19 @@ class Cities_model extends CI_Model
      public function getall_cities($state)
      {
      	$this->db->from($this->table);
-     	$this->db->or_like('stateID',$state);
+     	$this->db->where('stateID',$state);
      	$query=$this->db->get();
 
      	return $query->result();
      }
      
+     public function getall_country()
+     {
+        $this->db->from('countries');
+        $query=$this->db->get();
 
+        return $query->result();
+     }
    
 }
 

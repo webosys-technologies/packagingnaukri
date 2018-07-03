@@ -289,7 +289,7 @@ class Index extends CI_Controller
                  $this->Applied_jobs_model->apply_job($data);
                  $this->session->set_flashdata('success','Job Applied Successfully');
                 }
-                }
+                } 
                 
                 
                     $sessionArray = array(                        

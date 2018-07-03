@@ -31,11 +31,12 @@ class Recruiters_model extends CI_Model
 			'recruiter_email' 		    => $this->input->post('email'),
 			'recruiter_mobile' 		    => $this->input->post('mobile'),
 			'recruiter_password' 		=> $this->input->post('password'),
+            'recruiter_country'         => $this->input->post('country'),
 			'recruiter_city'			=> $this->input->post('city'),
 			'recruiter_state'			=> $this->input->post('state'),
-                        'recruiter_created_at'	     => date("Y-m-d H:i:s"),
-                        'recruiter_source'          => ucfirst($source),
-                        'recruiter_status'           => '0',
+            'recruiter_created_at'	     => date("Y-m-d H:i:s"),
+            'recruiter_source'          => ucfirst($source),
+            'recruiter_status'           => '0',
 
 
 

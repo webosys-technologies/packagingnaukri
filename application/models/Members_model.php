@@ -81,6 +81,7 @@ class Members_model extends CI_Model
             'member_email'          => $this->input->post('email'),
             'member_mobile'         => $this->input->post('mobile'),
             'member_password'       => $this->input->post('password'),
+            'member_country'           => $this->input->post('country'),
             'member_city'           => $this->input->post('city'),
             'member_state'          => $this->input->post('state'),
             'member_created_at'     => date("Y-m-d "),

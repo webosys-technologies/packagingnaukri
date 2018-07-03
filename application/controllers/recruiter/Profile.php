@@ -11,7 +11,7 @@ class Profile extends CI_Controller
 		parent::__construct();
 		if(!is_recruiter_LoggedIn($this->session->userdata('recruiter_LoggedIn')))
                 {
-                    redirect('admin/index');
+                    redirect('recruiter/index/login');
                 }
 	}
 
@@ -23,9 +23,8 @@ class Profile extends CI_Controller
             $result['recruiter_data']=$this->Recruiters_model->get_id($id);
             $sys=$this->session->userdata('recruiter_source');
             $result['system']=$this->System_model->get_system_info($sys);
-           $result['states']=$this->Cities_model->getall_state(); 
+           $result['country']=$this->Cities_model->getall_country(); 
 
-       
             $this->load->view('recruiter/header',$result);
             $this->load->view('recruiter/profile',$result);
             $this->load->view('recruiter/footer');
@@ -52,6 +51,7 @@ class Profile extends CI_Controller
         'recruiter_gender' =>$form['gender'],
         'recruiter_address' =>$form['address'],
         'recruiter_state' =>$form['state'],
+        'recruiter_country' =>$form['country'],
         'recruiter_city' =>$form['city'],
 				'recruiter_pincode' =>$form['pincode'],
 		);
