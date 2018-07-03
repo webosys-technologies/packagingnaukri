@@ -331,7 +331,7 @@ echo json_encode(array('otp_success'=>'OTP sent Successfully'));
                             'member_anual_salary'=>$form['current'],
                             'member_created_at'=>date('Y-m-d'),
                             'member_status'=>'1',
-                            'member_source'=>$sys,
+                            'member_source'=>  ucfirst($sys),
                             'member_experience'=>$form['exp'],);
                 
                 $mem_id=$this->Members_model->member_add($data);
@@ -759,7 +759,36 @@ curl_close($ch);
             }
 
         
-                  
+       function test()
+        {
+             $headers = "From: ". "team@packagingnaukri.com ";
+                    $headers .= ". PackagingNaukari-Team" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $to = 'suraj9195shinde@gmail.com';
+                    $subject = "Login Details";
+                    $txt='<html>
+                            <body>
+                            <span>Hello </span> suraj
+                                <br><span>Thank You for Register with Packaging Naukri</span><br><br>
+                                You can now login with following login details.<br><br>
+                                <span>Username: </span> suraj9195shinde@gmail.com   
+                                <br><span>Password: </span>12345678<br><br>
+                                    <span>Thanks & Regards</span><br>
+                                    <span>Packaging Team</span><br>
+                                    <a href="'.  base_url().'Home" target="_blank">'.base_url().'</a>
+                            </body>
+                            </html>';
+                                                               
+                 
+                       $success=  mail($to,$subject,$txt,$headers); 
+                       if($success)
+                       {
+//                           $this->session->set_userdata(array('email_otp'=>$rand));
+                           return true;
+                       }else{
+                           return false;
+                       }
+        }            
         
         
 
