@@ -187,6 +187,98 @@ class Home extends CI_Controller
                        }
         }
         
+              function send_mobile_otp($mobile)
+        {          
+          
+                $res=$this->Members_model->check_mobile_exist($mobile);
+              
+                if($res==false)
+                {
+                     echo json_encode(array('mobile_err'=>'This Mobile is already registered'));
+                }else{
+                    
+                     $rand=mt_rand(000000,999999);
+                      $where=array('member_mobile'=>$mobile);
+                $data=array('member_otp'=>$rand);
+                $this->session->set_userdata(array('apply_mobile_otp'=>$rand));
+                $this->Members_model->member_update($where,$data);
+     //Your authentication key
+
+$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
+
+//Multiple mobiles numbers separated by comma
+
+$mobileNumber = $mobile;
+//Sender ID,While using route4 sender id should be 6 characters long.
+
+$senderId = "PKGNAU";
+//Your message to send, Add URL encoding here.
+
+$message =$rand.' is your OTP for verifying mobile number on packagingnaukri.com.';
+
+
+//Define route 
+
+$route = "4";
+//Prepare you post parameters
+
+$postData = array(
+
+    'authkey' => $authKey,
+
+    'mobiles' => $mobileNumber,
+
+    'message' => $message,
+
+    'sender' => $senderId,
+
+    'route' => $route
+
+);
+
+
+//API URL
+
+$url="http://api.msg91.com/api/sendhttp.php";
+
+
+// init the resource
+
+$ch = curl_init();
+curl_setopt_array($ch, array(
+
+    CURLOPT_URL => $url,
+
+    CURLOPT_RETURNTRANSFER => true,
+
+    CURLOPT_POST => true,
+
+    CURLOPT_POSTFIELDS => $postData
+
+    //,CURLOPT_FOLLOWLOCATION => true
+
+));
+//Ignore SSL certificate verification
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+//get response
+
+$output = curl_exec($ch);
+//Print error if any
+if(curl_errno($ch))
+{
+    echo json_encode(array('error'=> curl_error($ch)));
+}
+curl_close($ch);
+echo json_encode(array('otp_success'=>'OTP sent Successfully'));       
+//echo $output;
+            }
+
+
+
+ }
+        
         
         function apply_job_with_otp()
         {
@@ -226,13 +318,14 @@ class Home extends CI_Controller
              $pwd= implode($passcode);
             
             
-          
-            if($form['otp']==$this->session->userdata('email_otp'))
+          if(!empty($form['otp']))
+          {
+            if($form['otp']==$this->session->userdata('apply_mobile_otp'))
             {
                 $sys=$this->System_model->source_name();
                 $data=array('member_fname'=>$form['fname'],
                             'member_lname'=>$form['lname'],
-                            'member_email'=>$form['member_email'],
+                            'member_email'=>$form['email'],
                             'member_password'=>$pwd,
                             'member_mobile'=>$form['mobile'],
                             'member_anual_salary'=>$form['current'],
@@ -278,16 +371,20 @@ class Home extends CI_Controller
                             'apply_status'=>"1");
                 
                 $this->Applied_jobs_model->apply_job($apply);
-                $email_data=array('email'=>$form['member_email'],
+                $email_data=array('email'=>$form['email'],
                                   'password'=>$pwd,
                                   'fname'=>$form['fname']);
-                $this->login_detail_email($email_data);
+//                $this->login_detail_email($email_data);
+                $this->login_detail_msg($email_data);
                 echo json_encode(array('success'=>'Job Applied Successfully'));
-                $this->session->set_flashdata('success','Job Applied Successfully. check login detail on given email id');  
+                $this->session->set_flashdata('success','Job Applied Successfully. check login detail on given email id and mobile Number');  
                 $this->session->unset_userdata('email_otp');
             }else{
-                echo json_encode(array('otp_err'=>'Wrong OTP'));
+                echo json_encode(array('apply_otp_err'=>'Wrong OTP'));
             }
+          }else{
+              echo json_encode(array('apply_otp_err'=>'OTP Required'));
+          }
             
            
         }       
@@ -297,9 +394,9 @@ class Home extends CI_Controller
         {
             $form=$this->input->post();
             
-            $data=$this->Members_model->login_with_otp(array('member_email'=>$form['email']));
+            $data=$this->Members_model->check_in_email_or_mobile(($form['email']));
                             
-            if(!empty($data))
+            if($data)
             {
                 $where=array('job_id'=>$form['job_id'],
                              'member_id'=>$data->member_id);
@@ -497,8 +594,7 @@ class Home extends CI_Controller
         }
         
        function send_otp($email)
-        {
-                   
+        {           
           
                     
                      $rand=mt_rand(000000,999999);
@@ -576,7 +672,90 @@ curl_close($ch);
 //echo $output;
             }
 
+ function login_detail_msg($data)
+        {           
+          
+                    
+                     $rand=mt_rand(000000,999999);
+                      
+                   
 
+$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
+
+//Multiple mobiles numbers separated by comma
+
+$mobileNumber = $data['mobile'];
+//Sender ID,While using route4 sender id should be 6 characters long.
+
+$senderId = "PKGNAU";
+//Your message to send, Add URL encoding here.
+
+$message ='Welcome to'
+        . 'PACKAGINGNAUKRI.COM'
+        . ''
+        . 'You can login next time with your registered EMAIL or MOBILE number'
+        . ''
+        . 'Email:'.$data['email']
+        . 'Password:'.$data['password'];
+
+
+//Define route 
+
+$route = "4";
+//Prepare you post parameters
+
+$postData = array(
+
+    'authkey' => $authKey,
+
+    'mobiles' => $mobileNumber,
+
+    'message' => $message,
+
+    'sender' => $senderId,
+
+    'route' => $route
+
+);
+
+
+//API URL
+
+$url="http://api.msg91.com/api/sendhttp.php";
+
+
+// init the resource
+
+$ch = curl_init();
+curl_setopt_array($ch, array(
+
+    CURLOPT_URL => $url,
+
+    CURLOPT_RETURNTRANSFER => true,
+
+    CURLOPT_POST => true,
+
+    CURLOPT_POSTFIELDS => $postData
+
+    //,CURLOPT_FOLLOWLOCATION => true
+
+));
+//Ignore SSL certificate verification
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+//get response
+
+$output = curl_exec($ch);
+//Print error if any
+if(curl_errno($ch))
+{
+//    echo json_encode(array('error'=> curl_error($ch)));
+}
+curl_close($ch);
+//echo json_encode(array('send'=>'OTP is sent Successfully'));       
+//echo $output;
+            }
 
         
         

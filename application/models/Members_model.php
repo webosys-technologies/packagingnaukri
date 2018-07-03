@@ -70,6 +70,28 @@ class Members_model extends CI_Model
             return false;
         }
     }
+    
+    function check_in_email_or_mobile($username)
+    {
+        $this->db->from($this->table);
+        
+     if(is_numeric($username)) 
+     {
+         $this->db->where('member_mobile',$username);
+     }else{
+         $this->db->where('member_email',$username);
+     }
+     
+      $query=$this->db->get();
+      $res=$query->row();
+      if($res)
+      {
+          return $res;
+      }else{
+          return false;
+      }
+     
+    }
 
     function register()
     {
@@ -284,6 +306,8 @@ class Members_model extends CI_Model
         $this->db->where('member_mobile',$member_mobile);
         $query=$this->db->get($this->table);
         $result=$query->num_rows();
+       
+        
         if($result > 0)
         {
             return FALSE;
