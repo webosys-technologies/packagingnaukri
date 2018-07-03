@@ -18,6 +18,7 @@ class Companies_model extends CI_Model
      {
         $this->db->from('companies as comp');
         $this->db->join('recruiters as rec','rec.recruiter_id=comp.recruiter_id','LEFT');
+        $this->db->join('states as st','st.stateID=comp.company_state','LEFT');
         $this->db->where('comp.company_id',$id);
         $query=$this->db->get();
         return $query->row();

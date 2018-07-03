@@ -287,22 +287,15 @@ var country=el.val();
         dataType: "JSON",
         success: function(data)
         {     
-          
             $('[name="company_id"]').val(data.company_id);
             $('[name="company"]').val(data.company_name);
              $('[name="recruiter"]').val(data.recruiter_id);
-//            $('[name="type"]').val(data.company_type);
-//            $('[name="email"]').val(data.company_email);
             $('[name="address"]').val(data.company_address);
-//            $('[name="contact"]').val(data.company_contact);
             $('[name="pincode"]').val(data.company_pincode);
-            $('[name="state"]').val(data.company_state);
+            $('[name="state"]').append('<option value="'+data.stateName+'">'+data.stateName+'</option>');
             $('[name="city"]').append('<option value="'+data.company_city+'">'+data.company_city+'</option>');
-            $('[name="city"]').val(data.company_city);
             $('[name="country"]').val(data.company_country);
             $('[name="website"]').val(data.company_website);
-//            $('[name="established"]').val(data.company_establish_in);
-//            $('[name="multinational"]').val(data.company_multinational);
             $('[name="status"]').val(data.company_status);
             $('[name="recruiter"]').val(data.recruiter_id);
            
