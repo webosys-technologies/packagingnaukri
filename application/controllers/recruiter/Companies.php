@@ -25,7 +25,7 @@ class Companies extends CI_Controller
             $result['companies']=$this->Companies_model->companies_by_recruiter($id);
             $sys=$this->session->userdata('recruiter_source');
             $result['system']=$this->System_model->get_system_info($sys);
-           $result['states']=$this->Cities_model->getall_state();
+           $result['country']=$this->Cities_model->getall_country();
            
              $this->load->view('recruiter/header',$result);
              $this->load->view('recruiter/companies',$result);

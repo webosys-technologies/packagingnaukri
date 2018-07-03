@@ -43,13 +43,12 @@ class Customer extends CI_Controller
         $data=array(
                   // 'recruiter_id'=>$id,
                    'customer_name'=>$form['name'],
-                   'customer_logo'=>$form['type'],
-                   'company_status'=>$form['status'],
-                   'company_created_at' =>date('Y-m-d'),
+                   'customer_status'=>$form['status'],
+                   'customer_created_at' =>date('Y-m-d'),
                    'customer_source' =>$form['source'],
         );
         
-          $res=$this->Companies_model->company_add($data);
+          $res=$this->Customer_model->customer_add($data);
           
            if (isset($_FILES['logo']['name']))
           {
@@ -74,8 +73,7 @@ class Customer extends CI_Controller
         $data=array(
                   // 'recruiter_id'=>$id,
                    'customer_name'=>$form['name'],
-                   'customer_logo'=>$form['type'],
-                   'company_status'=>$form['status'],
+                   'customer_status'=>$form['status'],
                    'customer_source' =>$form['source'],
                    
         );
@@ -85,11 +83,11 @@ class Customer extends CI_Controller
            if (isset($_FILES['logo']['name']))
           {
              
-              $this->logo_upload($res);
+              $this->logo_upload($form['id']);
           }
           
          
-               $this->session->set_flashdata('success','company added successfully');
+               $this->session->set_flashdata('success','customer added successfully');
               echo json_encode(array('success'=>'Customer added successfully'));
       
       }else{
@@ -155,24 +153,25 @@ if (isset($_FILES['logo']['name'])) {
         $name = $_FILES["logo"]["name"];
         $ext = end((explode(".", $name)));
         $filename='logo_'.date('Y-m-d_H.i.s').".".$ext;
+        
         move_uploaded_file($_FILES['logo']['tmp_name'], 'company_logo/' . $filename);
        
         if(file_exists('company_logo/'.$filename))
         {
-            if(file_exists($info->company_logo))
+            if(file_exists($info->customer_logo))
             {
-            unlink($info->company_logo);
-         $where=array('company_id'=>$comp_id);
-        $data=array('company_logo'=>'company_logo/'.$filename);
-         $res=$this->Companies_model->company_update($where,$data);
+            unlink($info->customer_logo);
+         $where=array('customer_id'=>$comp_id);
+        $data=array('customer_logo'=>'customer_logo/'.$filename);
+         $res=$this->Customer_model->customer_update($where,$data);
          
         
            return true;
         
             }else{
-                $where=array('company_id'=>$comp_id);
-        $data=array('company_logo'=>'company_logo/'.$filename);
-         $res=$this->Companies_model->company_update($where,$data);   
+                $where=array('customer_id'=>$comp_id);
+        $data=array('customer_logo'=>'company_logo/'.$filename);
+         $res=$this->Customer_model->customer_update($where,$data);
         
            return true;
                    

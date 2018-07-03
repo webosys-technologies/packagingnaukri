@@ -284,26 +284,18 @@ $("#img").change(function (e) {
 
      $(document).ready( function () {
                         $("#state").change(function() {
-                           
-        
    var el = $(this) ;
               $("#city").html("");
-
-
 var state=el.val();
-
         if(state)
         {
-          $('#city').append("");
-            
+          $('#city').append("");            
       $.ajax({
        url : "<?php echo site_url('index.php/home/show_cities')?>/" + state,        
-       type: "GET",
-              
+       type: "GET",              
        dataType: "JSON",
        success: function(data)
-       {
-        
+       {        
           $.each(data,function(i,row)
           {
           
@@ -316,9 +308,37 @@ var state=el.val();
         // alert('Error...!');
        }
      });
-     }
-    
+     }    
  });  
+    $("#country").change(function() {        
+   var el = $(this) ;
+              $("#state").html("");
+              $("#city").html("");
+              $("#state").append('<option value="">--Select State--</option>');
+              $("#city").append('<option value="">--Select City--</option>');
+
+var country=el.val();
+        if(country)
+        {            
+      $.ajax({
+       url : "<?php echo site_url('index.php/home/show_states')?>/" + country,        
+       type: "GET",              
+       dataType: "JSON",
+       success: function(data)
+       {        
+          $.each(data,function(i,row)
+          {          
+              $("#state").append('<option value="'+ row.stateID +'">' + row.stateName+'</option>');
+          }
+          );
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+     }    
+ }); 
  });
 </script>
 
@@ -364,51 +384,11 @@ var state=el.val();
                                 </div>
                                         </div><br>
                                         <div class="row">
-                                          <div class="col-md-12">
+                                          <div class="col-md-6">
                                             <label>Address</label>
                                             <textarea name="address" class="form-control" id="address"></textarea>
                                           </div>
-                                        </div><br>
-                                    <div class="row">
-                                    	<div class="col-md-6  ">                             
-                                        <label for="fname">State</label>
-                                        <select name="state" id="state" class="form-control">
-                                               <?php if(isset($states)){
-                                          foreach($states as $state)
-                                          {
-                                             echo '<option value="'.$state->stateID.'">'.$state->stateName.'</option>';
-                                          }
-                                               }?>
-                                   
-                                        </select>
-                                        <span class="text-danger" id="email_err"></span>                                                          
-                                </div>
-                                <div class="col-md-6">                             
-                                        <label for="fname">City</label>
-                                        <select name="city" id="city" class="form-control">
-                                          
-                                        </select>
-                                        <span class="text-danger" id="mobile_err"></span>                                                          
-                                </div>
-                                    	
-                                    </div><br>
-                                    
-                                    	<div class="row">
-                                    
-                                <div class="col-md-6">                             
-                                        <label for="fname">Pincode</label>
-                                        <input type="text" placeholder="Pincode" value='' class="form-control required" id="Pincode" name="pincode" maxlength="11" required>
-                                        <span class="text-danger" id="mobile_err"></span>                                                          
-                                </div>
-                                <div class="col-md-6  ">                             
-                                        <label for="fname">Password</label>
-                                        <input type="text" placeholder="Password" value='' class="form-control required" id="password" name="password"  required>
-                                        <span class="text-danger" id="password_err"></span>                                                          
-                                </div>
-                                        </div>
-                                <br>
-                                     <div class="row">
-                                    <div class="col-md-6">                                   
+                                          <div class="col-md-6">                                   
                                         <label for="lname">Gender</label>
                                         <select class="form-control" name='gender' id='gen'>
                                             <option value="Male">Male</option>
@@ -416,6 +396,54 @@ var state=el.val();
                                         </select>
                                       <span class="text-danger" id="lname_err"></span>                                   
                                          </div>
+                                        </div><br>
+                                    <div class="row">
+                                      <div class="col-md-6  ">                             
+                                        <label for="fname">Country</label>
+                                        <select name="country" id="country" class="form-control">
+                                               <?php if(isset($country)){
+                                          foreach($country as $country)
+                                          {
+                                             echo '<option value="'.$country->countryID.'">'.$country->countryName.'</option>';
+                                          }
+                                               }?>
+                                   
+                                        </select>
+                                        <span class="text-danger" id="email_err"></span>                                                          
+                                      </div>
+                                    	<div class="col-md-6  ">                             
+                                        <label for="fname">State</label>
+                                        <select name="state" id="state" class="form-control">
+                                          
+                                        </select>
+                                        <span class="text-danger" id="email_err"></span>                                                          
+                                </div>
+                                
+                                    	
+                                    </div><br>
+                                    
+                                    	<div class="row">
+                                    <div class="col-md-6">                             
+                                        <label for="fname">City</label>
+                                        <select name="city" id="city" class="form-control">
+                                          
+                                        </select>
+                                        <span class="text-danger" id="mobile_err"></span>                                                          
+                                </div>
+                                <div class="col-md-6">                             
+                                        <label for="fname">Pincode</label>
+                                        <input type="text" placeholder="Pincode" value='' class="form-control required" id="Pincode" name="pincode" maxlength="11" required>
+                                        <span class="text-danger" id="mobile_err"></span>                                                          
+                                </div>
+                                
+                                        </div>
+                                <br>
+                                     <div class="row">
+                                          <div class="col-md-6  ">                             
+                                              <label for="fname">Password</label>
+                                              <input type="text" placeholder="Password" value='' class="form-control required" id="password" name="password"  required>
+                                              <span class="text-danger" id="password_err"></span>                                                          
+                                      </div>
 
                                          <div class="col-md-5 col-md-offset-1">
                                          	<label for="state">Profile Picture</label><br>

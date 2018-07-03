@@ -166,28 +166,21 @@ $("#logo").change(function() {
 });
  
  
-  $("#state").change(function() {
-        
+  $("#state").change(function() {        
    var el = $(this) ;
               $("#city").html("");
-
-
-var user_type=el.val();
-
-        if(user_type)
-        {
-            
+var state=el.val();
+        if(state)
+        {            
       $.ajax({
-       url : "<?php echo site_url('index.php/home/show_cities')?>/" + user_type,        
+       url : "<?php echo site_url('index.php/home/show_cities')?>/" + state,        
        type: "GET",
               
        dataType: "JSON",
        success: function(data)
-       {
-        
+       {        
           $.each(data,function(i,row)
-          {
-          
+          {          
               $("#city").append('<option value="'+ row.cityName +'">' + row.cityName+'</option>');
           }
           );
@@ -197,10 +190,38 @@ var user_type=el.val();
          alert('Error...!');
        }
      });
-     }
-    
+     }    
  });  
   
+  $("#country").change(function() {        
+   var el = $(this) ;
+              $("#state").html("");
+              $("#city").html("");
+              $("#state").append('<option value="">--Select State--</option>');
+              $("#city").append('<option value="">--Select City--</option>');
+
+var country=el.val();
+        if(country)
+        {            
+      $.ajax({
+       url : "<?php echo site_url('index.php/home/show_states')?>/" + country,        
+       type: "GET",              
+       dataType: "JSON",
+       success: function(data)
+       {        
+          $.each(data,function(i,row)
+          {          
+              $("#state").append('<option value="'+ row.stateID +'">' + row.stateName+'</option>');
+          }
+          );
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+     }    
+ }); 
  
  
  
@@ -227,6 +248,8 @@ var user_type=el.val();
         $("#state_err").html(""); 
         $("#city_err").html(""); 
          $('[name="city"]').html("");
+              $("#state").append('<option value="">--Select State--</option>');
+              $("#city").append('<option value="">--Select City--</option>');
          $("#remove_btn").html("");
          $('#company_logo').attr('hidden',true);
         save_method="add";        
@@ -521,8 +544,13 @@ var user_type=el.val();
                                   <div class="col-md-6">
                                         <label class="form-label">Country</label><span style="color: red">*</span>
                                         <select name="country" id="country" class="form-control" required>
-                                                    <!--<option value="">-- Select Country --</option>-->                              
-                                                    <option value="India"> India </option>                                   
+                                                    <option value="">-- Select Country --</option>
+                                                    <?php if(isset($country)){
+                                                      foreach($country as $country)
+                                                      { ?>
+                                                         <option value="<?php echo $country->countryID; ?>"><?php echo $country->countryName; ?></option>
+                                                     <?php }
+                                                  }?>                                                               
                                              </select>
                                         <span class="text-danger"><?php echo form_error('city'); ?></span>
 
@@ -530,15 +558,7 @@ var user_type=el.val();
                                   <div class="col-md-6">
                                       <label class="form-label">State</label><span style="color: red">*</span>
                                       <select name="state" id="state" class="form-control" required>
-                                                  <option value="">-- Select State --</option>
-                                                  <?php if(isset($states)){
-                                                      foreach($states as $state)
-                                                      { ?>
-                                                         <option value="<?php echo $state->stateID; ?>"><?php echo $state->stateName; ?></option>
-                                                     <?php }
-                                                  }?>
-                                               
-                                                  
+                                                                                                
                                                   <!--<option value="Maharashtra">Maharashtra</option>-->
                                       </select>
                                       <span id="state_err" class="text-danger"></span>
@@ -551,8 +571,7 @@ var user_type=el.val();
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label class="form-label">City</label><span style="color: red">*</span>
-                                        <select name="city" id="city" class="form-control" required>
-                                                    <option value="">-- Select City --</option>                                   
+                                        <select name="city" id="city" class="form-control" required>                              
                                              </select>
                                         <span id="city_err" class="text-danger"></span>
 
