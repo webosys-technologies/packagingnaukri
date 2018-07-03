@@ -279,7 +279,7 @@ class Home extends CI_Controller
                             'apply_status'=>"1");
                 
                 $this->Applied_jobs_model->apply_job($apply);
-//                $this->login_detail_email($form['member_email'],$pwd,$form['fname']);
+                $this->login_detail_email($form['member_email'],$pwd,$form['fname']);
                 echo json_encode(array('success'=>'Job Applied Successfully'));
                 $this->session->set_flashdata('success','Registered and Job Applied Successfully. check login detail on given email id');  
                 $this->session->unset_userdata('email_otp');
@@ -384,7 +384,7 @@ class Home extends CI_Controller
                  echo json_encode(array('job_err'=>'Already Applied for this job'));
             } 
             }else{
-//                $this->email_cerification_mail($form['email']);
+                $this->email_cerification_mail($form['email']);
                 echo json_encode(array('email_id_err'=>'This Email is not Registered',
                                        'job_id'=>$form['job_id']));
             }    
