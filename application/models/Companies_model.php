@@ -16,8 +16,9 @@ class Companies_model extends CI_Model
 
      public function company_by_id($id)
      {
-        $this->db->from($this->table);
-        $this->db->where('company_id',$id);
+        $this->db->from('companies as comp');
+        $this->db->join('recruiters as rec','rec.recruiter_id=comp.recruiter_id','LEFT');
+        $this->db->where('comp.company_id',$id);
         $query=$this->db->get();
         return $query->row();
      }

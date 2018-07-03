@@ -127,6 +127,13 @@ class Members_model extends CI_Model
         $query=$this->db->get($this->table);
         return $query->row();
     }
+    
+     public function member_info_by_email($email)
+    {
+        $this->db->where('member_email',$email);
+        $query=$this->db->get($this->table);
+        return $query->row();
+    }
    
 
    

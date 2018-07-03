@@ -283,43 +283,15 @@ class Home extends CI_Controller
                                   'fname'=>$form['fname']);
                 $this->login_detail_email($email_data);
                 echo json_encode(array('success'=>'Job Applied Successfully'));
-                $this->session->set_flashdata('success','Registered and Job Applied Successfully. check login detail on given email id');  
+                $this->session->set_flashdata('success','Job Applied Successfully. check login detail on given email id');  
                 $this->session->unset_userdata('email_otp');
             }else{
                 echo json_encode(array('otp_err'=>'Wrong OTP'));
             }
             
            
-        }
+        }       
         
-        function asf()
-        {
-            if (isset($_FILES['resume']['name'])) {
-    if (0 < $_FILES['resume']['error']) {
-        echo 'Error during file upload' . $_FILES['resume']['error'];
-    } else {
-
-        $rand=  mt_rand(1111,9999);
-        $name = $_FILES["resume"]["name"];
-        $ext = end((explode(".", $name)));
-        $filename='resume_'.date('Y-m-d_H.i.s').".".$ext;
-        move_uploaded_file($_FILES['resume']['tmp_name'], 'resume/' . $filename);
-       
-        if(file_exists('resume/'.$filename))
-        {
-            
-                $where=array('member_id'=>$mem_id);
-               $data=array('member_resume'=>'resume/'.$filename);
-               $res=$this->Members_model->member_update($where,$data);
-               
-                               
-        }   else{
-            echo json_encode(array('error'=>"Something Wrong"));
-        }               
-
-    }
-       }
-         }
         
         function apply_job()
         {
@@ -344,7 +316,7 @@ class Home extends CI_Controller
                  echo json_encode(array('job_err'=>'Already Applied for this job'));
             } 
             }else{
-                $this->email_cerification_mail($form['email']);
+//                $this->email_cerification_mail($form['email']);
                 echo json_encode(array('email_id_err'=>'This Email is not Registered',
                                        'job_id'=>$form['job_id']));
             }    
