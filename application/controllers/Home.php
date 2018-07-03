@@ -156,7 +156,7 @@ class Home extends CI_Controller
             
         }
         
-        function login_detail_email($email,$pwd,$fname)
+        function login_detail_email($data)
         {
              $headers = "From: ". "team@packagingnaukri.com ";
                     $headers .= ". PackagingNaukari-Team" . "\r\n";
@@ -165,11 +165,11 @@ class Home extends CI_Controller
                     $subject = "Login Details";
                     $txt='<html>
                             <body>
-                            <span>Hello </span>'.$fname.'
+                            <span>Hello </span>'.$data['fname'].'
                                 <br><span>Thank You for Register with Packaging Naukri</span><br><br>
                                 You can now login with following login details.<br><br>
-                                <span>Username: </span>'.$email.'
-                                <br><span>Password: </span>'.$pwd.'<br><br>
+                                <span>Username: </span>'.$data['email'].'
+                                <br><span>Password: </span>'.$data['password'].'<br><br>
                                     <span>Thanks & Regards</span><br>
                                     <span>Packaging Team</span><br>
                                     <a href="'.  base_url().'Home" target="_blank">'.base_url().'</a>
@@ -278,7 +278,10 @@ class Home extends CI_Controller
                             'apply_status'=>"1");
                 
                 $this->Applied_jobs_model->apply_job($apply);
-                $this->login_detail_email($form['member_email'],$pwd,$form['fname']);
+                $email_data=array('email'=>$form['member_email'],
+                                  'password'=>$pwd,
+                                  'fname'=>$form['fname']);
+                $this->login_detail_email($email_data);
                 echo json_encode(array('success'=>'Job Applied Successfully'));
                 $this->session->set_flashdata('success','Registered and Job Applied Successfully. check login detail on given email id');  
                 $this->session->unset_userdata('email_otp');
