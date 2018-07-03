@@ -161,7 +161,7 @@ class Home extends CI_Controller
              $headers = "From: ". "team@packagingnaukri.com ";
                     $headers .= ". PackagingNaukari-Team" . "\r\n";
                     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    $to = $email;
+                    $to = $data['email'];
                     $subject = "Login Details";
                     $txt='<html>
                             <body>
