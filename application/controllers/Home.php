@@ -691,13 +691,13 @@ $mobileNumber = $data['mobile'];
 $senderId = "PKGNAU";
 //Your message to send, Add URL encoding here.
 
-$message ='Welcome to'
-        . 'PACKAGINGNAUKRI.COM'
+$message ='Welcome To \r\n'
+        . 'PACKAGINGNAUKRI.COM \r\n \r\n'
         . ''
-        . 'You can login next time with your registered EMAIL or MOBILE number'
+        . 'You can login next time with your registered EMAIL or MOBILE number \r\n  \r\n'
         . ''
-        . 'Email:'.$data['email']
-        . 'Password:'.$data['password'];
+        . 'Email: '.$data['email']
+        . '\r\n Password: '.$data['password'];
 
 
 //Define route 
@@ -759,6 +759,7 @@ curl_close($ch);
             }
 
         
+                  
         
         
 
