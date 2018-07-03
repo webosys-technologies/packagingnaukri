@@ -98,10 +98,10 @@
                                             <th>Company Name</th>
                                             <th>Logo</th>
                                             <th>Recruiter</th>
-                                            <th>Email</th>
-                                            <th>Contact</th>
+<!--                                            <th>Email</th>
+                                            <th>Contact</th>-->
                                             <th>Location</th>
-                                            <th>Established</th>
+                                            <th>Created At</th>
                                             <th>Status</th>
                                             <th>Source</th>
                                             <th style="width:90px">Action</th>
@@ -120,8 +120,8 @@
                                              
                                             <td><img src="<?php echo base_url().$comp->company_logo;?>" width="80px" height="30px"></td>
                                            <td><?php echo $comp->recruiter_fname." ".$comp->recruiter_lname;?></td>
-                                            <td><?php echo $comp->company_email?></td>
-                                            <td><?php echo $comp->company_contact?></td>
+<!--                                            <td><?php echo $comp->company_email?></td>
+                                            <td><?php echo $comp->company_contact?></td>-->
                                             <td><?php echo $comp->company_city?></td>
 				            <td><?php echo $comp->company_created_at?></td>
                                             <td> <?php 
@@ -269,18 +269,18 @@ var user_type=el.val();
           
             $('[name="company_id"]').val(data.company_id);
             $('[name="company"]').val(data.company_name);
-            $('[name="type"]').val(data.company_type);
-            $('[name="email"]').val(data.company_email);
+//            $('[name="type"]').val(data.company_type);
+//            $('[name="email"]').val(data.company_email);
             $('[name="address"]').val(data.company_address);
-            $('[name="contact"]').val(data.company_contact);
+//            $('[name="contact"]').val(data.company_contact);
             $('[name="pincode"]').val(data.company_pincode);
             $('[name="state"]').val(data.company_state);
             $('[name="city"]').append('<option value="'+data.company_city+'">'+data.company_city+'</option>');
             $('[name="city"]').val(data.company_city);
             $('[name="country"]').val(data.company_country);
             $('[name="website"]').val(data.company_website);
-            $('[name="established"]').val(data.company_establish_in);
-            $('[name="multinational"]').val(data.company_multinational);
+//            $('[name="established"]').val(data.company_establish_in);
+//            $('[name="multinational"]').val(data.company_multinational);
             $('[name="status"]').val(data.company_status);
             $('[name="recruiter"]').val(data.recruiter_id);
            
@@ -429,12 +429,12 @@ function delete_logo(id)
 
                  $("#source").html(data.company_source);
                  $("#company_name").html(data.company_name);
-                 $("#company_type").html(data.company_type);
-                  $("#establish").html(data.company_establish_in);
+//                 $("#company_type").html(data.company_type);
+//                  $("#establish").html(data.company_establish_in);
 //                    
                  $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
-                 $("#email").html(data.company_email);
-                 $("#contact").html(data.company_contact);
+//                 $("#email").html(data.company_email);
+//                 $("#contact").html(data.company_contact);
                  $("#comp_address").html(data.company_address);
                   if(data.company_logo)
             {
@@ -508,7 +508,7 @@ function delete_logo(id)
                                       </div>
                                     </div>
     				                <div class="row">
-                                <div class="col-md-6">                                
+                                <div class="col-md-12">                                
                                     <div class="form-group">
                                         <label>Company Name</label><span style="color: red">*</span>
                                     <input name="company" class="form-control" placeholder="Compay Name" value="">
@@ -516,21 +516,11 @@ function delete_logo(id)
                                         
                                     </div>
                                                                        
-                                </div>
-                                    
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Company Type</label>
-                                       
-                                    <input name="type" class="form-control" placeholder="MNC or Small Scale" value="">
-                                        <span class="text-danger" id="type_err"></span>
-                                      
-                                    </div>
-                                   
-                                </div>
+                                </div>                                    
+                                
                             </div>
                                     
-                                    <div class="row">
+<!--                                    <div class="row">
                                 <div class="col-md-12  ">                                
                                     <div class="form-group">
                                         <label>Company Email</label>
@@ -540,10 +530,10 @@ function delete_logo(id)
                                     </div>
                                                                        
                                 </div>
-                               </div>
+                               </div>-->
                                     
                                 <div class="row">
-                                  <div class="col-md-6">                                
+<!--                                  <div class="col-md-6">                                
                                       <div class="form-group">
                                          <label>Contact</label>
                                          <input name="contact" placeholder="Company Contact" class="form-control" value="">
@@ -551,9 +541,9 @@ function delete_logo(id)
                                           
                                       </div>
                                                                         
-                                  </div>
+                                  </div>-->
                                 
-                                  <div class="col-md-6">
+                                  <div class="col-md-12">
                                      <label>Website</label>
                                      <input name="website" placeholder="Company Website" class="form-control" value="">
                                       <span class="text-danger" id="website_err"></span>
@@ -635,7 +625,7 @@ function delete_logo(id)
                                </div>
                 
                                     
-                     <div class="row">
+<!--                     <div class="row">
                           <div class="col-md-6">
                            <label>Company Established</label>
                                         <input name="established" placeholder="Established Year" class="form-control" value="">
@@ -648,7 +638,7 @@ function delete_logo(id)
                             <span class="text-danger" id="gen_err"></span>
 
                         </div>  
-                    </div>
+                    </div>-->
                                <div class="row"> 
                                 <div class="col-md-6">
                                   <div class="form-group">
@@ -723,22 +713,22 @@ function delete_logo(id)
           </div>: <span id="source" class="job_info"> </span><br>
           </div>
 
-          <div class="row">
+<!--          <div class="row">
               <div class="col-md-3">
           <label >Company Type </label>
           </div>: <span id="company_type" class="job_info"> </span><br>
-          </div>
-              <div class="row">
+          </div>-->
+<!--              <div class="row">
           <div class="col-md-3">        
           <label >Email </label>
           </div>: <span id="email" class="job_info"> </span><br>
-                    </div>
+                    </div>-->
 
-          <div class="row">
+<!--          <div class="row">
               <div class="col-md-3">
           <label >Contact </label>
           </div>: <span id="contact" class="job_info"> </span><br>
-                    </div>
+                    </div>-->
 
           <div class="row">
               <div class="col-md-3">
@@ -752,13 +742,13 @@ function delete_logo(id)
           </div>: <span id="website" class="job_info"></span><br>
                     </div>
 
-          <div class="row">
+<!--          <div class="row">
             <div class="col-md-3">
                <label>Established In</label>
                </div><div class="">
                : <span id="establish" class="job_info"></span>
                    </div>
-                             </div>
+                             </div>-->
 
                    
                           </form>
