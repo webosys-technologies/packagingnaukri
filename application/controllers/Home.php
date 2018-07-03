@@ -373,7 +373,8 @@ echo json_encode(array('otp_success'=>'OTP sent Successfully'));
                 $this->Applied_jobs_model->apply_job($apply);
                 $email_data=array('email'=>$form['email'],
                                   'password'=>$pwd,
-                                  'fname'=>$form['fname']);
+                                  'fname'=>$form['fname'],
+                                  'mobile'=>$form['mobile']);
                 $this->login_detail_email($email_data);
                 $this->login_detail_msg($email_data);
                 echo json_encode(array('success'=>'Job Applied Successfully'));
@@ -675,8 +676,7 @@ curl_close($ch);
  function login_detail_msg($data)
         {           
           
-     print_r($data);
-     
+         
                      $rand=mt_rand(000000,999999);
                       
                    
