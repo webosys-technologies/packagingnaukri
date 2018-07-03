@@ -449,7 +449,7 @@
     <div class="modal-content">
       <div class="modal-header" style="color:#fff; background-color:#338cbf" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-       <center> <h3 class="modal-title">Register  To Apply</h3></center>
+       <center> <h3 class="modal-title">Apply Job</h3></center>
        
       </div>
       <div class="modal-body form">

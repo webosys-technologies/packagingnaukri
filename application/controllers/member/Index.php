@@ -340,8 +340,7 @@ class Index extends CI_Controller
 
                 
             }
-        
-                    
+                          
         }
     } 
         

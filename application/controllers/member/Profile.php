@@ -24,8 +24,8 @@ class Profile extends CI_Controller
         
             $id=$this->session->userdata('member_id');
             $result['member_data']=get_member_info($id);
-            $result['cities']=$this->Cities_model->get_all_cities();
-            $result['states']=$this->Cities_model->getall_state();
+//            $result['cities']=$this->Cities_model->get_all_cities();
+//            $result['states']=$this->Cities_model->getall_state();
             $result['project_data']=$this->Projects_model->project_by_member($id);
             $result['employments']=$this->Employments_model->get_employment_member($id);
             $result['skills']=$this->Skills_model->get_members_skill($id);
