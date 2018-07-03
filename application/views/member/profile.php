@@ -1725,7 +1725,7 @@ var edu_name=el.val();
     			  <form action="" id="photo_form"> 
                               <center>
                               <div class="shadow" style="width:120px; height:130px"> 
-                                  <img src='<?php if(isset($member_data->member_profile_pic)){ echo base_url().$member_data->member_profile_pic; }else{echo base_url()."profile_pic/avatar.png";}?>' width='120px' height='130px'>
+                                  <img src='<?php if(file_exists($member_data->member_profile_pic)){ echo base_url().$member_data->member_profile_pic; }else{echo base_url()."profile_pic/avatar.png";}?>' width='120px' height='130px'>
                               </div><br><br>
                                <label class="btn-bs-file btn-md btn-xs btn-sm btn-info">
                             Upload Photo
