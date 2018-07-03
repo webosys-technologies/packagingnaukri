@@ -82,14 +82,14 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!--<img src="<?php echo base_url(); ?>assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">-->
-               <img src='<?php if(isset($user_data)){echo base_url(); echo $user_data->user_profile_pic;}else{ echo base_url()."profile_pic/boss.png"; }?>' class="user-image" alt="User Image"/>
+                <img src='<?php if((file_exists($user_data->user_profile_pic))){echo base_url(); echo $user_data->user_profile_pic;}else{ echo base_url()."profile_pic/boss.png"; }?>' class="user-image" alt="User Image"/>
                <span class="hidden-xs"><?php if(isset($user_data)){echo ucfirst(strtolower($user_data->user_fname))." ".ucfirst(strtolower($user_data->user_lname));}else{echo "NO NAME";}?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
                 <!--<img src="<?php echo base_url(); ?>profile_pic/boss.png" class="img-circle" alt="User Image">-->
-  <img src='<?php if(isset($user_data)){echo base_url(); echo $user_data->user_profile_pic;}else{ echo base_url()."profile_pic/boss.png"; }?>' class="img-circle" alt="User Image"/>
+  <img src='<?php if(file_exists($user_data->user_profile_pic)){echo base_url(); echo $user_data->user_profile_pic;}else{ echo base_url()."profile_pic/boss.png"; }?>' class="img-circle" alt="User Image"/>
                 <p>
                  <?php if(isset($user_data)){echo ucfirst(strtolower($user_data->user_fname))." ".ucfirst(strtolower($user_data->user_lname));}else{echo "NO NAME";}?>
                   <small>Admin</small>
@@ -121,7 +121,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php if(isset($user_data)){echo base_url(); echo $user_data->user_profile_pic;}else{ echo base_url()."profile_pic/boss.png"; }?>" class="img-circle" alt="User Image">
+          <img src="<?php if(file_exists($user_data->user_profile_pic)){echo base_url(); echo $user_data->user_profile_pic;}else{ echo base_url()."profile_pic/boss.png"; }?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php if(isset($user_data)){echo ucfirst(strtolower($user_data->user_fname))." ".ucfirst(strtolower($user_data->user_lname));}else{echo "NO NAME";}?></p>

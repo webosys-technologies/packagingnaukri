@@ -4,7 +4,7 @@
     display: block !important;
 }
 .modal-dialog{
-     width: 700px;
+     width: 60%;
       overflow-y: initial !important
 }
 .modal-body{
@@ -12,6 +12,24 @@
   overflow-y: auto;
 }
 
+@media (max-width:800px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:768px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:320px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}    
 </style>
 <div class="content-wrapper" style="background:white;">
     <!-- Content Header (Page header) -->
@@ -315,7 +333,7 @@ var user_type=el.val();
 
     function save()
     {
-        
+        $("#save_btn").attr('disabled',true);
         var data = new FormData(document.getElementById("form"));
       var url;
       if(save_method == 'add')
@@ -341,6 +359,8 @@ var user_type=el.val();
               if(json.success)
               {
                   location.reload();// for reload a page
+              }else{
+                  $("#save_btn").attr('disabled',false);
               }
               
               if(json.state_err)
@@ -407,7 +427,7 @@ var user_type=el.val();
   </script>
 
 <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="modal_dialog1">
     
       <!-- Modal content-->
       <div class="modal-content">
@@ -435,7 +455,7 @@ var user_type=el.val();
                                     <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Company Type</label><span style="color: red">*</span>
+                                        <label>Company Type</label>
                                        
                                     <input name="type" class="form-control" placeholder="MNC or Small Scale" value="">
                                         <span class="text-danger" id="type_err"></span>
@@ -446,7 +466,7 @@ var user_type=el.val();
                          
                                 <div class="col-md-6">                                
                                     <div class="form-group">
-                                        <label>Company Email</label><span style="color: red">*</span>
+                                        <label>Company Email</label>
                                     <input name="email" placeholder="Company Email" class="form-control" value="">
                                         <span class="text-danger" id="email_err"></span>
                                         
@@ -458,7 +478,7 @@ var user_type=el.val();
                                 <div class="row">
                                   <div class="col-md-6">                                
                                       <div class="form-group">
-                                         <label>Contact</label><span style="color: red">*</span>
+                                         <label>Contact</label>
                                          <input name="contact" placeholder="Company Contact" class="form-control" value="">
                                           <span class="text-danger" id="contact_err"></span>
                                           
@@ -467,7 +487,7 @@ var user_type=el.val();
                                   </div>
                                
                                   <div class="col-md-6">
-                                     <label>Website</label><span style="color: red">*</span>
+                                     <label>Website</label>
                                      <input name="website" placeholder="Company Website" class="form-control" value="">
                                       <span class="text-danger" id="website_err"></span>
 
@@ -477,7 +497,7 @@ var user_type=el.val();
                                     <div class="row">
                                 <div class="col-md-6">                                
                                     <div class="form-group">
-                                       <label>Company Address</label><span style="color: red">*</span>
+                                       <label>Company Address</label>
                                     <textarea cols="80" id="address" class="form-control" name="address" rows="5"></textarea>
                                         <span class="text-danger" id="password_err"></span>
                                         
@@ -486,7 +506,7 @@ var user_type=el.val();
                                         
                                 <div class="col-md-6">                                
                                     <div class="form-group">
-                                       <label>Company Logo</label><span style="color: red">*</span>
+                                       <label>Company Logo</label>
                                     <input type="file" name="logo" id="logo" value="">
                                     <div id="remove_btn"></div>
                                         <span class="text-danger" id="comp_err"></span>
@@ -540,7 +560,7 @@ var user_type=el.val();
                                     
                                      <div class="col-md-6">                                
                                       <div class="form-group">
-                                         <label>Pincode</label><span style="color: red">*</span>
+                                         <label>Pincode</label>
                                          <input name="pincode" placeholder="Pincode" class="form-control" value="">
                                           <span class="text-danger" id="mobile_err"></span>                                        
                                       </div>                                                                      
@@ -550,13 +570,13 @@ var user_type=el.val();
                                     
                      <div class="row">
                           <div class="col-md-6">
-                           <label>Company Established</label><span style="color: red">*</span>
+                           <label>Company Established</label>
                                         <input name="established" placeholder="Established Year" class="form-control" value="">
                             <span class="text-danger" id="gen_err"></span>
 
                         </div>  
                         <div class="col-md-6">
-                           <label>Company Multinational</label><span style="color: red">*</span>
+                           <label>Company Multinational</label>
                                         <input name="mnc" placeholder="Multinational" class="form-control" value="">
                             <span class="text-danger" id="gen_err"></span>
 
@@ -581,7 +601,7 @@ var user_type=el.val();
     			
     		</div>         
     	 <div class="modal-footer">
-             <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
+             <button type="button" class="btn btn-primary" id="save_btn" onclick="save()">Save</button>
           <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
         </div>
     </div>           
@@ -593,7 +613,7 @@ var user_type=el.val();
   
   
 <div class="modal fade" id="company_modal" role="dialog">
-    <div class="modal-dialog" style="width:550px;" id="modal_dialog">   
+    <div class="modal-dialog"  id="modal_dialog1">   
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">

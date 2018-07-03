@@ -28,12 +28,12 @@
               
                           
                <div class="row">
-                   <form action="">
+                   <form action="<?php echo base_url()?>Home/send_msg" method="post">
                     <div class="col-md-5 col-md-offset-1">
                                 <h4 style="color:#02B645;">Get a Free Consultion</h4><hr style="border-top: 1px solid #ccc;">
                        
                     <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                                 <div class="form-group">
 					<label for="name">Name:</label><span style="color:red">*</span>
 					<input class="form-control" name="name" id="fname" minlength="2" required="" type="text"  value="<?php echo set_value('recruiter_fname'); ?>" /><span class="text-danger" id="name_err"></span>
@@ -43,30 +43,30 @@
                   </div>
                                 
                                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                                 <div class="form-group">
 					<label for="name">Email Id:</label><span style="color:red">*</span>
-					<input class="form-control" name="name" id="fname" minlength="2" required="" type="text"  value="<?php echo set_value('recruiter_fname'); ?>" /><span class="text-danger" id="name_err"></span>
+					<input class="form-control" name="email" id="email" minlength="2" required="" type="email"  value="<?php echo set_value('recruiter_fname'); ?>" required /><span class="text-danger" id="name_err"></span>
 					<span class="text-danger"><?php echo form_error('recruiter_fname'); ?></span>
 				</div>
                         </div>
                   </div>
                                 
                                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                                 <div class="form-group">
 					<label for="name">Mobile No:</label><span style="color:red">*</span>
-					<input class="form-control" name="name" id="fname" minlength="2" required="" type="text"  value="<?php echo set_value('recruiter_fname'); ?>" /><span class="text-danger" id="name_err"></span>
+                                        <input class="form-control"  name="mobile" id="mobile" minlength="10" maxlength="11" required="" type="text"  value="<?php echo set_value('recruiter_fname'); ?>" /><span class="text-danger" id="name_err"></span>
 					<span class="text-danger"><?php echo form_error('recruiter_fname'); ?></span>
 				</div>
                         </div>
                   </div>
                                 
                                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                                 <div class="form-group">
 					<label for="name">Comment:</label><span style="color:red">*</span>
-					 <textarea required class="form-control" name="recruiter_address"   rows="4" cols="50" value="<?php echo set_value('recruiter_address'); ?>">
+                                        <textarea class="form-control" name="comment"  rows="4" cols="50" value="<?php echo set_value('recruiter_address'); ?>" required>
                                         </textarea>
 					<span class="text-danger"><?php echo form_error('recruiter_fname'); ?></span>
 				</div>
@@ -79,10 +79,10 @@
                        </form>
                     <div class="col-md-5 col-md-offset-1" style="color:#02B645;">
 				 <h4 >Contact us for business queries :</h4><hr style="border-top: 1px solid #ccc;">
-                                 <b>Contact:</b> ANSHUMAN UPADHYAY<br>
+                                 <b>Contact:</b> Ms. Preeti Singh<br>
                                 <b>Cell:</b> +91-22-25701724<br>
                                 <b>Address:</b> 1076, Heera Pana Centre, Hiranandani Gardens, Powai, Mumbai - 400078 (INDIA)<br>
-                                <b>Email:</b> info@packagingnaukri.com
+                                <b>Email:</b> preeti@packagingnaukri.com
                         </div>
                 </div>
               

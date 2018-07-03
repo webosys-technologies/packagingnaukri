@@ -19,6 +19,25 @@
                
             }
 
+            
+  @media (max-width:800px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:768px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}   
+}
+@media (max-width:320px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}           
 </style>
 <div class="content-wrapper" style="background:white;">
     <!-- Content Header (Page header) -->
@@ -262,7 +281,7 @@
 
     function save()
     {
-        
+//        $("#save_btn").attr('disabled',true);
       var url;
       if(save_method == 'add')
       {         
@@ -388,8 +407,8 @@
       
            
           <div class="modal-footer">
-              <button type="button" name="add" id="add" class="btn btn-success">Add More</button>
-            <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">Save</button>
+              <!--<button type="button" name="add" id="add" class="btn btn-success">Add More</button>-->
+            <button type="button" id="save_btn" onclick="save()" class="btn btn-primary">Save</button>
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
               
           </div>

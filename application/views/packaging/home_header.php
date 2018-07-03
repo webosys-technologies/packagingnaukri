@@ -58,11 +58,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 margin:100px;
                
             }
-            .modal-backdrop {background: none;}
+            /*.modal-backdrop {background: none;}*/
            
             #header_link{
                 color:white;
-            }
+            }            
+             
                                     
             #footer{
                 padding:0px;
@@ -122,12 +123,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }
     .slick-slide {
       margin: 0px 13px;
-      
-    }
-    .slick-slide img {
+     }
+    
+    
+/*    .slick-slide img{
         
-      width: 100%;
-    }
+        width: 100%;
+    }*/
     .slick-prev:before,
     .slick-next:before {
       color: green;
@@ -158,6 +160,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
              padding: 12px;
              
          }
+         
+        
        
   </style>
   
@@ -165,28 +169,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 	<!--start-home-->
 			<div id="home" class="header">
-				<div class="strip">
-					 <div class="container">
+				<div class="strip" style="background:white;">
+                                    <div class="logo">
+			        <img id="head_logo" src="<?php echo  base_url().$system->system_logo;?>" width="300x" height="63px">
+				</div>
+					 <!--<div class="container">-->
 						<!--<p class="location"><i class="location"></i>16A, Honey Street (Green Door)</p>-->
-						<p class="phonenum">
-   <a href="https://www.facebook.com/packagingnaukri" class="fa fa-facebook icon"></a>  &nbsp;
+						<p class="phonenum" style="padding-top:10px; padding-right:10px">
+   <a href="https://www.facebook.com/packagingnaukri" target="_blank" class="fa fa-facebook icon"></a>  &nbsp;
    <!--<a href="#" class="fa fa-skype icon"></a>&nbsp;-->
-   <a href="https://www.linkedin.com/company/www-packagingnaukri-com" class="fa fa-linkedin icon"></a></p>
+   <a href="https://www.linkedin.com/company/www-packagingnaukri-com" target="_blank" class="fa fa-linkedin icon"></a>                                               
+                                                </p>
 							<div class="clearfix"></div>
-					</div>
+					<!--</div>-->
 				</div>
-			<div class="header-bottom">
+			<div class="header-bottom" style="background:#43B851;">
 			<div class="container">
-				<div class="logo">
-			        <img src="<?php echo  base_url().$system->system_logo;?>" width="300x" height="63px">
-				</div>
-				<span class="menu"></span>
+				
+                            <span class="menu"></span>
 				<div class="top-menu">
                                     <nav class="cl-effect-5"><ul>
-	<li><a  href="<?php echo base_url();?>Home/index">Home</a></li>
-        <li><a  href="<?php echo base_url();?>Home/about_us">About Us</a></li>
+	<li><a href="<?php echo base_url();?>Home/index"><b class="head_menu">Home</b></a></li>
+        <li><a href="<?php echo base_url();?>Home/about_us"><b class="head_menu">About Us</b></a></li>
        <li class="dropdown">
-          <a  href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
+          <a style="color:white;" href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b class="head_menu">Services </b><span class="caret"></span></a>
           <ul class="dropdown-menu">
               <li><a href="<?php echo base_url();?>Home/recruitment">Recruitment</a></li>
             <li role="separator" class="divider"></li>
@@ -195,7 +201,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </li>
                
        <li class="dropdown">
-          <a  href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Recruiter<span class="caret"></span></a>
+          <a style="color:white;" href="<?php echo base_url();?>Home/Services" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b class="head_menu">Recruiter</b><span class="caret"></span></a>
           <ul class="dropdown-menu">
               <li><a href="<?php echo base_url();?>recruiter/index/login">Login</a></li>
             <li role="separator" class="divider"></li>
@@ -203,9 +209,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           </ul>
         </li>
          <!--<li><a  href="<?php echo base_url();?>Home/post_requirement">Post Your Requirement</a></li>-->
-          <li><a  href="<?php echo base_url();?>Home/contact_us">Contact Us</a></li>   
-          <li><a  href="#" data-toggle="modal" onclick="open_login()" data-target="#myModal">Login</a></li>
-          <li><a  href="<?php echo base_url();?>member/index">Register</a></li>
+          <li><a  href="<?php echo base_url();?>Home/contact_us"><b class="head_menu">Contact Us</b></a></li>   
+          <li><a  href="#" data-toggle="modal" onclick="open_login()" data-target="#myModal"><b class="head_menu">Login</b></a></li>
+          <li><a  href="<?php echo base_url();?>member/index"><b class="head_menu">Register</b></a></li>
           </ul> 
 					</nav>
 					</ul>
@@ -236,7 +242,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Member Sign In</strong></h4></center>
       </div>
-      <div id="calendar" style="background:#F2F3F4" class="modal-body">
+      <div style="background:#F2F3F4" class="modal-body">
           <div class="row">
               <div class="col-md-8 col-md-offset-2">
                   <span id="validation_error" class="text-danger"></span>
@@ -277,12 +283,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
              <center><h4><a class="label label-warning" id="show_otp_box">Login With OTP</a></h4></center>
             <center><h4><a class="label label-warning" id="show_pass_box">Login With Password</a></h4></center>
 
-              <a class="btn btn-info">
+<!--              <a class="btn btn-info">
                   <span class="fa fa-google"></span> <span style="color:white">Sign in with Google</span>
   </a>
               <a class="btn" style="background-color:#3B5998;">
     <span class="fa fa-facebook"></span><span style="color:white"> Sign in with Facebook</span>
-  </a>
+  </a>-->
            
           </div>
         </form>
@@ -297,6 +303,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 
+
+
+  <div class="modal fade" id="job_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div style="color:#fff; background-color:#338cbf" class="modal-header">
+          
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Job Info</strong></h4></center>
+      </div>
+      <div style="background:#F2F3F4" class="modal-body">
+         
+        
+      </div>
+     
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
   
  <script src="<?php echo base_url();?>assets/js/jquery.magnific-popup.js" type="text/javascript"></script>
 			
@@ -305,6 +334,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <script src="<?php echo base_url();?>assets/js/member_log_validation.js" type="text/javascript"></script>
   <script type="text/javascript">
     $(document).on('ready', function() {
+     $( ".logoes" ).find( ".slick-slide" ).css( "width", "auto" );		
      
      $('.regular').slick({
 //  centerMode: true,
@@ -312,7 +342,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   slidesToShow: 4,
     autoplay: true,
   autoplaySpeed: 2500,
-  dots: true,
+//  dots: true,
   responsive: [
     {
       breakpoint: 768,
@@ -340,15 +370,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
                      
-			
+	 
       
        $(".logoes").slick({
        //  centerMode: true,
   centerPadding: '60px',
-  slidesToShow: 4,
-    autoplay: true,
+  slidesToShow: 3,
+    autoplay: false,
   autoplaySpeed: 2000,
-  dots: true,
+//  dots: true,
   responsive: [
     {
       breakpoint: 768,
@@ -374,10 +404,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       });
       
       
-       $().UItoTop({ easingType: 'easeOutQuart' });
+//       $().UItoTop({ easingType: 'easeOutQuart' });
 			$(".scroll").click(function(event){		
 			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},700);
 			});
       
     });
@@ -397,6 +427,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     $("#show_otp_box").show();
     $("#pass_field").show();
   }
+  
+  
+  
+  
   function member_login() {  
       
         //var val= member_log_validation();

@@ -69,7 +69,7 @@
                     </div>
            <?php }?>
 
-          <div class="row">
+          <div class="row" >
               <div class="col-md-2 col-xs-3">
           <label>Location </label>
           </div>
@@ -117,14 +117,13 @@
         </div>
         
      <script>
-         var id;
-         var method;
-         $("#show_otp_box").hide();
-        function apply(id,method)
-         {
-             
-//             alert(method);
-             $("#job_id").val(id);
-
-         }
+//         var id;
+//         var method;
+//         $("#show_otp_box").hide();
+//        function apply(id,method)
+//         {            
+////             alert(method);
+//             $("#job_id").val(id);
+//
+//         }
          </script>

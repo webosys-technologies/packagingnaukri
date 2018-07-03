@@ -14,12 +14,14 @@ class Recruiters_model extends CI_Model
      public function getall()
     {
         $this->db->from($this->table);        
-        $query=$this->db->get();
+         $this->db->where_not_in('recruiter_status','2');
+        $query=$this->db->get();    
         
         return $query->result();
 
     }
-	function register()
+	
+    function register()
 	{
 		$source=$this->System_model->source_name();
 
@@ -31,9 +33,9 @@ class Recruiters_model extends CI_Model
 			'recruiter_password' 		=> $this->input->post('password'),
 			'recruiter_city'			=> $this->input->post('city'),
 			'recruiter_state'			=> $this->input->post('state'),
-            'recruiter_created_at'	     => date("Y-m-d H:i:s"),
-            'recruiter_source'          => ucfirst($source),
-            'recruiter_status'           => '0',
+                        'recruiter_created_at'	     => date("Y-m-d H:i:s"),
+                        'recruiter_source'          => ucfirst($source),
+                        'recruiter_status'           => '0',
 
 
 
@@ -203,7 +205,14 @@ class Recruiters_model extends CI_Model
 
         return $query->row();
     }
+    public function get_recruiter($where)
+    {
+         $this->db->from($this->table);
+        $this->db->where($where);
+        $query = $this->db->get();
 
+        return $query->row();
+    }
      public function getall_recruiters_no()
     {
         $this->db->from($this->table);        

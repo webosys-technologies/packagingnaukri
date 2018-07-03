@@ -1,4 +1,4 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
+    <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 
 class Jobs extends CI_Controller
@@ -48,29 +48,88 @@ class Jobs extends CI_Controller
        { 
            if(!empty($form['qualification']))
         {
-               if(!empty($form['experience']))
-        {
+//               if(!isset($form['min_exp']))
+//        {
                    if(!empty($form['joblocation']))
         {
+          
+//          if(!empty($form['custom'])  )
+//          {
+              if($form['min_exp']==$form['max_exp'])
+              {
+                  $experience=$form['min_exp'].".".$form['min_exp'];
+              }else{
+                  $experience=$form['min_exp'].".".$form['max_exp'];
+              }
               
-        $id=$this->Companies_model->get_recruiter_by_company($form['company']);
-        $salary=$form['lacsalary'].".".$form['thsalary'];
+              if($form['min_salary']==$form['max_salary'])
+              {
+                  $salary=$form['min_salary'].".".$form['min_salary'];
+              }else{
+                  $salary=$form['min_salary'].".".$form['max_salary'];
+              }
+              
+        if($form['company']=='Custom')
+        {   
+            $id=$this->session->userdata('recruiter_id');
+         
+            $company=array(
+                   'recruiter_id'=>$id,
+                   'company_name'=>$form['custom'],
+                   'company_type'=>"",
+                   'company_email'=>"",
+                   'company_contact'=>"",
+                   'company_website'=>"",
+                   'company_address'=>"",
+                   'company_country'=>"",
+//                   'company_country'=>$form['country'],
+                   'company_state'=>"",
+                   'company_city'=>"",
+                   'company_pincode'=>"",
+                   'company_establish_in'=>"",
+                   'company_multinational'=>"",
+                   'company_created_at'=>date('Y-m-d'),
+                   'company_status'=>'1',
+                   'company_source' =>$form['source'],
+        );
+         $cid=$this->Companies_model->company_add($company);
+         
+          if (isset($_FILES['logo']['name']))
+          {
+             
+              $this->logo_upload($cid);
+          }
+         
+          }
+        else
+        {
+         $cid=$form['company'];
+         $id=$this->Companies_model->get_recruiter_by_company($form['company']);
+        }
+              
+              
+       
+        
+//        $salary=$form['min_salary'].".".$form['max_salary'];
         $data=array(
                    'recruiter_id'=>$id,
-                   'company_id'=>$form['company'],
+                   'company_id'=>$cid,
                    'job_title'=>$form['jobtitle'],
                    'job_type'=>$form['jobtype'],
                    'job_education'=>$form['qualification'],
                    'job_description'=>$form['jobdesc'],
                    'job_city'=>$form['joblocation'],
-                   'job_experience'=>$form['experience'],
+                   'job_experience'=>$experience,
                    'job_salary'=>$salary,
                    'job_created_at'=>date('Y-m-d'),
                    'job_status'=>$form['status'],
                    'job_skill_name' => $form['skill'],
                    'job_source'         => $form['source'],
                    );
+               
         
+         
+         
           $res=$this->Jobs_model->job_add($data);
           
           
@@ -78,18 +137,78 @@ class Jobs extends CI_Controller
         
                $this->session->set_flashdata('success','job added successfully');
               echo json_encode(array('success'=>'job added successfully'));
-       }else{
-           echo json_encode(array('loc_err'=>'Please Enter job Location'));           
-        }}else{
-           echo json_encode(array('exp_err'=>'Please Enter Experience'));
-        }}else{
-            echo json_encode(array('qua_err'=>'Please Enter Qualification'));
+//       }else{
+//               echo json_encode(array('custom_err'=>'Enter Custom Company'));
+//          }
+          }else{
+           echo json_encode(array('loc_err'=>'Enter job Location'));           
+        }}
+        else
+//            {
+//           echo json_encode(array('exp_err'=>'Please Enter Experience'));
+//        }}else
+            {
+            echo json_encode(array('qua_err'=>'Enter Qualification'));
        }}else{
-           echo json_encode(array('comp_err'=>'Please Select Company Name'));
+           echo json_encode(array('comp_err'=>'Select Company Name'));
        }}else{
-            echo json_encode(array('job_err'=>'Please Enter Job Title'));
+            echo json_encode(array('job_err'=>'Enter Job Title'));
         }
     }
+    
+    
+    
+    
+       function logo_upload($comp_id)
+    {
+        $info=$this->Companies_model->company_by_id($comp_id);
+             
+if (isset($_FILES['logo']['name'])) {
+    if (0 < $_FILES['logo']['error']) {
+//        echo 'Error during file upload' . $_FILES['logo']['error'];
+        return false;
+    } else {
+
+        $rand=  mt_rand(1111,9999);
+        $name = $_FILES["logo"]["name"];
+        $ext = end((explode(".", $name)));
+        $filename='logo_'.date('Y-m-d_H.i.s').".".$ext;
+        move_uploaded_file($_FILES['logo']['tmp_name'], 'company_logo/' . $filename);
+       
+        if(file_exists('company_logo/'.$filename))
+        {
+            if(file_exists($info->company_logo))
+            {
+            unlink($info->company_logo);
+         $where=array('company_id'=>$comp_id);
+        $data=array('company_logo'=>'company_logo/'.$filename);
+         $res=$this->Companies_model->company_update($where,$data);
+         
+        
+           return true;
+        
+            }else{
+                $where=array('company_id'=>$comp_id);
+        $data=array('company_logo'=>'company_logo/'.$filename);
+         $res=$this->Companies_model->company_update($where,$data);   
+        
+           return true;
+                   
+            }
+        }   else{
+            return false;
+        }  
+//        }
+    }
+} else {
+    return false;
+}
+        
+    }
+    
+    
+    
+    
     
     public function job_update()
     {
@@ -103,11 +222,26 @@ class Jobs extends CI_Controller
        { 
            if(!empty($form['qualification']))
         {
-               if(!empty($form['experience']))
-        {
+//               if(!empty($form['experience']))
+//        {
                    if(!empty($form['joblocation']))
         {
-                        $salary=$form['lacsalary'].".".$form['thsalary'];
+                        if($form['min_exp']==$form['max_exp'])
+              {
+                  $experience=$form['min_exp'].".".$form['min_exp'];
+              }else{
+                  $experience=$form['min_exp'].".".$form['max_exp'];
+              }
+              
+              if($form['min_salary']==$form['max_salary'])
+              {
+                  $salary=$form['min_salary'].".".$form['min_salary'];
+              }else{
+                  $salary=$form['min_salary'].".".$form['max_salary'];
+              }
+                       
+                       
+                        
         $data=array(
                    'recruiter_id'=>$id,
                    'company_id'=>$form['company'],
@@ -116,13 +250,13 @@ class Jobs extends CI_Controller
                    'job_education'=>$form['qualification'],
                    'job_description'=>$form['jobdesc'],
                    'job_city'=>$form['joblocation'],
-                   'job_experience'=>$form['experience'],
+                   'job_experience'=>$experience,
                    'job_salary'=>$salary,
                    'job_status'=>$form['status'],
                    'job_skill_name' => $form['skill'],
                    'job_source'         => $form['source'],
                    
-        );
+                   );
         
          $result=$this->Jobs_model->update_job($data,$job_id);
          
@@ -131,15 +265,15 @@ class Jobs extends CI_Controller
        $this->session->set_flashdata('success','Data Updated Successfully');
        echo json_encode(array('success'=>'Data Updated Successfully'));
         }else{
-           echo json_encode(array('loc_err'=>'Please Enter job Location'));           
+           echo json_encode(array('loc_err'=>'Enter job Location'));           
         }}else{
-           echo json_encode(array('exp_err'=>'Please Enter Experience'));
-        }}else{
-            echo json_encode(array('qua_err'=>'Please Enter Qualification'));
+//           echo json_encode(array('exp_err'=>'Please Enter Experience'));
+//        }}else{
+            echo json_encode(array('qua_err'=>'Enter Qualification'));
        }}else{
-           echo json_encode(array('comp_err'=>'Please Select Company Name'));
+           echo json_encode(array('comp_err'=>'Select Company Name'));
        }}else{
-            echo json_encode(array('job_err'=>'Please Enter Job Title'));
+            echo json_encode(array('job_err'=>'Enter Job Title'));
         }
          
     }

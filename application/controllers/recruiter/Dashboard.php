@@ -50,6 +50,26 @@ class Dashboard extends CI_Controller
              $this->load->view('recruiter/dashboard',$result);
              $this->load->view('recruiter/footer');
              
+             
+//              if($r->user_type=="Admin")
+//            {
+//                $this->load->view('admin/header',$result);
+//                $this->load->view('admin/dashboard',$result);
+//                $this->load->view('admin/footer');
+//            }
+//            elseif($r->user_type=="User")
+//            {
+//                $this->load->view('user/header',$result);
+//                $this->load->view('user/dashboard',$result);
+//                $this->load->view('user/footer');
+//            }
+//            elseif($r->user_type=="Recruiter")
+//            {             
+//                $this->load->view('recruiter/header',$result);
+//                $this->load->view('recruiter/dashboard',$result);
+//                $this->load->view('recruiter/footer');
+//            }
+             
 
         }
         else

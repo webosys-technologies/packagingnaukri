@@ -24,6 +24,7 @@ class Companies extends CI_Controller
             $result['user_data']=get_user_info($id);
             $result['states']=$this->Cities_model->getall_state();
             $result['companies']=$this->Companies_model->getall_companies();
+            $result['recruiters']=$this->Recruiters_model->getall();
             $sys=$this->session->userdata('admin_source');
             $result['system']=$this->System_model->get_system_info($sys);
             
@@ -47,7 +48,7 @@ class Companies extends CI_Controller
       if(!empty($form['city']) && $form['city']!="-- Select City --" && $form['city']!="")
       {
         $data=array(
-                  // 'recruiter_id'=>$id,
+                   'recruiter_id'=>$form['recruiter'],
                    'company_name'=>$form['company'],
                    'company_type'=>$form['type'],
                    'company_email'=>$form['email'],

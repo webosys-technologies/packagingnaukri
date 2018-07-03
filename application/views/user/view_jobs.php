@@ -4,7 +4,7 @@
     display: block !important;
 }
 #modal_dialog{
-     width: 700px;
+     width: 60%;
       overflow-y: initial !important
 }
 #modal_body{
@@ -18,6 +18,25 @@
                 margin:150px;
                
             }
+            
+@media (max-width:800px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:768px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:320px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}    
 </style>
 <div class="content-wrapper" style="background:white;">
     <!-- Content Header (Page header) -->
@@ -319,6 +338,8 @@ var user_type=el.val();
 
     function save()
     {
+        $("#save_btn").attr('disabled',true);
+        
         CKEDITOR.instances.jobdesc.updateElement();
         CKEDITOR.instances.jobdesc.getData(); 
         var data = new FormData(document.getElementById("form"));
@@ -385,7 +406,9 @@ var user_type=el.val();
              if(json.success)
              {
               location.reload();// for reload a page
-             }  
+             }else{
+                 $("#save_btn").attr('disabled',false);
+             }
             },
             error: function (jqXHR, textStatus, errorThrown)
             {

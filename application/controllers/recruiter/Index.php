@@ -115,7 +115,7 @@ class Index extends CI_Controller
                 $this->Recruiters_model->recruiter_update($where,$data);
 //     Your authentication key
 
-$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
+$authKey = "217899AjUpTycrXx6K5b0e2283";    //suraj9195shinde for
 
 //Multiple mobiles numbers separated by comma
 
@@ -276,7 +276,22 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                              $this->session->set_flashdata('log_error','Invalid source login.');
                              redirect('recruiter/Index/login');
                             }
-                                
+       
+                        $sessionArray = array(                        
+                         'recruiter_id' => $result->recruiter_id,
+                    'recruiter_fname' => $result->recruiter_fname,
+                    'recruiter_lname' => $result->recruiter_lname,
+                    'recruiter_email' => $result->recruiter_email,
+                    'recruiter_mobile' => $result->recruiter_mobile,
+                    'recruiter_source'   =>$result->recruiter_source,
+                    'user_type'         =>$result->user_type,
+                    'recruiter_LoggedIn' => true,
+                                    );
+                                    
+                    $this->session->set_userdata($sessionArray);  
+                    
+                    // echo json_encode(array('status'=>true));  
+                    redirect('recruiter/Index/login');
                     }else{
                          // echo json_encode(array('otp_error'=>"Wrong OTP")); 
                          $this->session->set_flashdata('error','Wrong OTP');

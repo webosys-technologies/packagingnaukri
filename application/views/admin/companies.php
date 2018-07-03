@@ -3,8 +3,8 @@
   .modal fade{
     display: block !important;
 }
-.modal-dialog{
-     width: 700px;
+#modal-dialog,#modal_dialog1{
+     width: 60%;
       overflow-y: initial !important
 }
 .modal-body{
@@ -17,7 +17,24 @@
   overflow-y: auto;
 }
 
-
+@media (max-width:800px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:768px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:320px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
 </style>
 <div class="content-wrapper" style="background:white;">
     <!-- Content Header (Page header) -->
@@ -265,7 +282,8 @@ var user_type=el.val();
             $('[name="established"]').val(data.company_establish_in);
             $('[name="multinational"]').val(data.company_multinational);
             $('[name="status"]').val(data.company_status);
-            $('[name="source"]').val(data.company_source);
+            $('[name="recruiter"]').val(data.recruiter_id);
+           
             
             
            
@@ -298,6 +316,7 @@ function delete_logo(id)
 
     function save()
     {
+        $("#save_btn").attr('disabled',true);
         
         var data = new FormData(document.getElementById("form"));
       var url;
@@ -355,6 +374,8 @@ function delete_logo(id)
               if(json.success)
               {
               location.reload();// for reload a page
+              }else{
+                  $("#save_btn").attr('disabled',false);
               }
                 
             },
@@ -436,7 +457,7 @@ function delete_logo(id)
   </script>
 
 <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="modal_dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
@@ -458,10 +479,29 @@ function delete_logo(id)
                                         <div class="form-group">
                                           <label>Source<span style="color: red">*</span></label>
                                           <select name="source" class="form-control">
-                                            <option>--Select Source--</option>
+                                            <!--<option>--Select Source--</option>-->
                                             <option value="Packaging">Packaging</option>
                                             <option value="Printing">Printing</option>
                                             <option value="Plastic">Plastic</option>
+                                          </select>
+                                          <span id="source_err" class="text-danger"></span>
+                                        </div>
+                                      </div>
+                                        
+                                         <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label>Recruiters<span style="color: red">*</span></label>
+                                          <select name="recruiter" class="form-control">
+                                              <option value="<?php echo $this->session->userdata('recruiter_id');?>">SELF</option>
+                                            <?php 
+                                            if(isset($recruiters))
+                                            {
+                                                foreach ($recruiters as $rec)
+                                                {
+                                                    echo '<option value='.$rec->recruiter_id.'>'.$rec->recruiter_fname." ".$rec->recruiter_lname;'</option>';
+                                                }
+                                            }
+                                            ?>
                                           </select>
                                           <span id="source_err" class="text-danger"></span>
                                         </div>
@@ -480,7 +520,7 @@ function delete_logo(id)
                                     
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Company Type</label><span style="color: red">*</span>
+                                        <label>Company Type</label>
                                        
                                     <input name="type" class="form-control" placeholder="MNC or Small Scale" value="">
                                         <span class="text-danger" id="type_err"></span>
@@ -493,7 +533,7 @@ function delete_logo(id)
                                     <div class="row">
                                 <div class="col-md-12  ">                                
                                     <div class="form-group">
-                                        <label>Company Email</label><span style="color: red">*</span>
+                                        <label>Company Email</label>
                                     <input name="email" placeholder="Company Email" class="form-control" value="">
                                         <span class="text-danger" id="email_err"></span>
                                         
@@ -505,7 +545,7 @@ function delete_logo(id)
                                 <div class="row">
                                   <div class="col-md-6">                                
                                       <div class="form-group">
-                                         <label>Contact</label><span style="color: red">*</span>
+                                         <label>Contact</label>
                                          <input name="contact" placeholder="Company Contact" class="form-control" value="">
                                           <span class="text-danger" id="contact_err"></span>
                                           
@@ -514,7 +554,7 @@ function delete_logo(id)
                                   </div>
                                 
                                   <div class="col-md-6">
-                                     <label>Website</label><span style="color: red">*</span>
+                                     <label>Website</label>
                                      <input name="website" placeholder="Company Website" class="form-control" value="">
                                       <span class="text-danger" id="website_err"></span>
 
@@ -524,7 +564,7 @@ function delete_logo(id)
                                     <div class="row">
                                 <div class="col-md-6">                                
                                     <div class="form-group">
-                                       <label>Company Address</label><span style="color: red">*</span>
+                                       <label>Company Address</label>
                                     <textarea cols="80" id="address" class="form-control" name="address" rows="5"></textarea>
                                         <span class="text-danger" id="password_err"></span>
                                         
@@ -532,7 +572,7 @@ function delete_logo(id)
                                 </div>
                                         <div class="col-md-6">                                
                                     <div class="form-group">
-                                       <label>Company Logo</label><span style="color: red">*</span>
+                                       <label>Company Logo</label>
                                        
                                     <input type="file" name="logo" id="logo" value="">
                                    <div id="remove_btn"></div>
@@ -587,7 +627,7 @@ function delete_logo(id)
                                     
                                      <div class="col-md-6">                                
                                       <div class="form-group">
-                                         <label>Pincode</label><span style="color: red">*</span>
+                                         <label>Pincode</label>
                                          <input name="pincode" placeholder="Pincode" class="form-control" value="">
                                           <span class="text-danger" id="mobile_err"></span>                                        
                                       </div>                                                                      
@@ -597,13 +637,13 @@ function delete_logo(id)
                                     
                      <div class="row">
                           <div class="col-md-6">
-                           <label>Company Established</label><span style="color: red">*</span>
+                           <label>Company Established</label>
                                         <input name="established" placeholder="Established Year" class="form-control" value="">
                             <span class="text-danger" id="gen_err"></span>
 
                         </div>  
                         <div class="col-md-6">
-                           <label>Company Multinational</label><span style="color: red">*</span>
+                           <label>Company Multinational</label>
                                         <input name="mnc" placeholder="Company Multinational" class="form-control" value="">
                             <span class="text-danger" id="gen_err"></span>
 
@@ -628,7 +668,7 @@ function delete_logo(id)
     			
     		</div>         
     	 <div class="modal-footer">
-             <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
+             <button type="button" class="btn btn-primary" id="save_btn" onclick="save()">Save</button>
           <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
         </div>
     </div>           
@@ -663,7 +703,7 @@ function delete_logo(id)
 
 
 <div class="modal fade"  id="company_modal" role="dialog">
-    <div class="modal-dialog" style="width:550px;" id="modal_dialog">   
+    <div class="modal-dialog" id="modal_dialog1">   
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">

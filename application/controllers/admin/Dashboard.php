@@ -53,7 +53,7 @@ class Dashboard extends CI_Controller
     
     function query()
     {
-        $this->load->view('query');
+        $this->load->view('packaging/query');
     }
     function insert()
     {

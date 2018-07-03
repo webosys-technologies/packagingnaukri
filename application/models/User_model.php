@@ -72,6 +72,13 @@ class User_model extends CI_Model
         return $query->row();
     }
     
+    public function get_user($where)
+    {
+       $this->db->from($this->table);
+        $this->db->where($where);
+        $query=$this->db->get();
+        return $query->row(); 
+    }
     
     public function delete_by_id($id)
     {

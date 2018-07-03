@@ -294,9 +294,8 @@
                   var lenght=number.length;
                   if(isNaN(number))
                   {
-                       $('#mobile_err').html("Invalid Mobile Number ");
-                      $('#mobile_err').show();
-                                         
+                      $('#mobile_err').html("Invalid Mobile Number ");
+                      $('#mobile_err').show();                                         
                   }
                   else if(lenght<10 || length>11)
                   {

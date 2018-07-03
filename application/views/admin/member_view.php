@@ -3,8 +3,8 @@
  .modal fade{
     display: block !important;
 }
-#modal_dialog{
-     width: 700px;
+#modal_dialog,#modal_dialog1{
+     width: 60%;
       overflow-y: initial !important
 }
 #modal_body{
@@ -22,6 +22,24 @@
   color: #707B7C;
 }
 
+@media (max-width:800px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:768px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:320px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
 
 </style>
 <div class="content-wrapper" style="background:white;">
@@ -76,15 +94,149 @@
        
         </div>
         </div>
-    <br>
-    <tr>
-<!--    <table> <td>Minimum age:</td>
-            <td><input type="text" id="min" name="min"></td>
-        </tr>
-        <tr>
-            <td>Maximum age:</td>
-            <td><input type="text" id="max" name="max"></td>
-        </tr></table>-->
+      <?php
+      if(isset($_GET['Search']))
+      {        
+        $exp_from=$_GET['experience_from'];  
+        $exp_to=$_GET['experience_to'];  
+        $sal_from=$_GET['salary_from'];
+        $sal_to=$_GET['salary_to']; 
+        $data=array('salary_from'=>$_GET['salary_from'],
+                    'salary_to'=>$_GET['salary_to'],
+                    'experience_from'=>$_GET['experience_from'],
+                    'experience_to'=>$_GET['experience_to']);
+        
+        $members=$this->Members_model->search_members($data);
+      }      
+      ?>
+      
+<!--        <form action="" method="get" onsubmit="return validateForm()">
+        <div class="row">
+           
+            <div class="col-md-4 col-md-offset-2">
+                <div class="row">
+                    <div class="form-group">
+                    <div class="col-md-6">
+                        <label>Experince From</label>
+                        <select name="experience_from" id="experience_from" class="form-control">
+                            <option>Experience From</option>
+                         <script>
+                                var i=1;
+                                for(i; i<21; i++)
+                                {
+                                   $('[name="experience_from"]').append('<option value="'+i+'">'+i+ " Year"+'</option>');
+                                }
+                               
+                               <?php
+                               if(isset($exp_from))
+                               { ?>
+                                 $('[name="experience_from"]').val('<?php echo $exp_from;?>');  
+                              <?php }
+                               ?>
+                                                  
+                            </script>                            
+                        </select>
+                        <span class="text-danger" id="exp_from_err"></span>
+                    </div>
+                        <div class="col-md-6">
+                        <label>Experince To</label>
+                        <select name="experience_to" class="form-control">
+                            <option>Experience To</option>
+                         <script>
+                                var i=1;
+                                for(i; i<21; i++)
+                                {
+                                   $('[name="experience_to"]').append('<option value="'+i+'">'+i+ " Year"+'</option>');
+                                }
+                                 <?php
+                               if(isset($exp_to))
+                               { ?>
+                                 $('[name="experience_to"]').val('<?php echo $exp_to;?>');  
+                              <?php }
+                               ?>
+                            </script>
+                            <option>greater than 20</option>
+                        </select>
+                        <span class="text-danger" id="exp_to_err"></span>
+                    </div>
+                    </div>                    
+             </div>
+            </div>
+                            
+            
+                     
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="form-group">
+                    <div class="col-md-6">
+                        <label>Salary From</label>
+                        <select name="salary_from" class="form-control">
+                            <option>Salary From</option>
+
+                            <script>
+                                var i=1;
+                                for(i; i<100; i++)
+                                {
+                                   $('[name="salary_from"]').append('<option value="'+i+'">'+i+ " Lac"+'</option>');
+                                }
+                                
+                                 <?php
+                               if(isset($sal_from))
+                               { ?>
+                                 $('[name="salary_from"]').val('<?php echo $sal_from;?>');  
+                              <?php }
+                               ?>
+                            </script>
+                        </select>
+                        <span class="text-danger" id="sal_from_err"></span>
+                    </div>
+                        <div class="col-md-6">
+                        <label>Salary To</label>
+                        <select name="salary_to" class="form-control">
+                             <option>Salary To</option>
+
+                        <script>
+                                var i=1;
+                                for(i; i<100; i++)
+                                {
+                                   $('[name="salary_to"]').append('<option value="'+i+'">'+i+ " Lac"+'</option>');
+                                }
+                                 <?php
+                               if(isset($sal_to))
+                               { ?>
+                                 $('[name="salary_to"]').val('<?php echo $sal_to;?>');  
+                              <?php }
+                               ?>
+                            </script>
+                        </select>
+                        <span class="text-danger" id="sal_to_err"></span>
+                        
+                    </div>
+                    </div>                    
+             </div>
+                
+             </div>
+           
+        </div>
+         <div class="row">
+             
+                     <div class="col-md-offset-4">
+                    <div class="form-group">
+                    <div class="col-md-2">
+                        <input type="submit" value="Search" name="Search" class="btn btn-info">
+                    </div>
+                        <div class="col-md-2">
+                            <a href="<?php echo base_url();?>admin/Members" class="btn btn-danger">Reset</a>
+                    </div>
+                    </div>    
+                         </div>
+            
+             </div>
+             <div class="row">
+             <div class="col-md-offset-4"><span id="field_err" class="text-danger"></span></div>
+             </div>
+         </form><br>-->
+      
 <div class="table-responsive">
     <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
       <thead>
@@ -92,9 +244,17 @@
         <tr bgcolor="#338cbf" style="color:#fff">
           <th>ID</th>
           <th>NAME</th>
+          <th>CURRENT COMPANY</th>
+          <th>DESIGNATION</th>
+          <th>EXPERIENCE</th>
+          <th>LOCATION</th>
+          <th>SALARY</th>
           <th>EMAIL</th>
           <th>MOBILE</th>
           <th>CITY</th>
+          <th>INSTITUTE</th>
+          <th>QUALIFICATION</th>
+          <th>RESUME</th>
           <th>CREATED AT</th>
           <th>STATUS</th>
           <th>SOURCE</th>
@@ -113,9 +273,21 @@
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->member_id; ?>" class="" ></td> --> 
                                         <td><?php echo $res->member_id;?></td>
                                         <td><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
+                                         <?php $emp=$this->Employments_model->get_employment(array('member_id'=>$res->member_id))?>
+                                        <td><?php if(isset($emp->employment_organization)){echo $emp->employment_organization; }?></td>
+                                        <td><?php if(isset($emp->employment_designation)){echo $emp->employment_designation;} ?></td>
+                                        <td><?php if($res->member_experience){echo $res->member_experience." Year";} ?></td>
+                                        <td><?php if(isset($emp->employment_city)){echo $emp->employment_city;} ?></td>
+                                         <?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0' ){$sal=explode(".",$res->member_anual_salary);} ?>
+                                        <td><i class="fa fa-inr"></i> <?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0'){echo $sal[0]."Lac ". $sal[1]."Thousand "; echo "PA";} ?></td>
                                         <td><?php echo $res->member_email;?></td>
                                        <td><?php echo $res->member_mobile;?></td>
                                        <td><?php echo $res->member_city;?></td>
+                                       <?php $edu=$this->Educations_model->get_by_id($res->member_id);?>
+                                       <td><?php if($edu){echo $edu->education_institute_name;}?></td>
+                                       <td><?php if($edu){echo $edu->education_name."(".$edu->education_degree.")";}?></td>
+                                       <td><?php if($res->member_resume){?><a href="<?php echo base_url().$res->member_resume;?>" target="_blank">resume</a><?php } ?></td>
+                                           
                                        <td><?php echo $res->member_created_at;?></td>
                                        <td>
                                            <?php 
@@ -150,23 +322,7 @@
   </div>
 
   <script type="text/javascript">
-      
-//       $.fn.dataTable.ext.search.push(
-//    function( settings, data, dataIndex ) {
-//        var min = parseInt( $('#min').val(), 10 );
-//        var max = parseInt( $('#max').val(), 10 );
-//        var age = parseFloat( data[3] ) || 0; // use data for the age column
-// 
-//        if ( ( isNaN( min ) && isNaN( max ) ) ||
-//             ( isNaN( min ) && age <= max ) ||
-//             ( min <= age   && isNaN( max ) ) ||
-//             ( min <= age   && age <= max ) )
-//        {
-//            return true;
-//        }
-//        return false;
-//    }
-//);
+
       
       
   $(document).ready( function () {  
@@ -238,6 +394,8 @@ var state=el.val();
     
  });  
 
+            
+
  
  
       var table=$('#table_id').DataTable();
@@ -257,6 +415,39 @@ var state=el.val();
     var save_method; //for save method string
     var table;
     var id;
+
+  function validateForm()
+  {
+     
+//        var exp_from;
+       if($('[name="salary_from"]').val()=="Salary From" && $('[name="salary_to"]').val()=="Salary To" && $('[name="experience_from"]').val()=="Experience From"  && $('[name="experience_to"]').val()=="Experience To")
+       {
+           $("#field_err").html("Please Select Anyone Field.");
+           return false;
+       }else{
+           return true;
+           }
+//      if($('[name="experience_from"]').val()!="" && $('[name="experience_from"]').val()!="Experience From")
+//      {
+//          if($('[name="experience_to"]').val()!="" && $('[name="experience_to"]').val()!="Experience To")
+//          {
+//             return true;
+//          }else{
+//              $("#exp_to_err").html("Experience To Required");   
+//             return false;
+//                }
+//              
+//      }else{
+//           $("#exp_from_err").html("Experience From Required");         
+//          return false;
+//      }
+      
+//      $("#sal_to_err").html("Salary TO Required");
+//      $("#exp_from_err").html("Experience From Required");
+//      $("#exp_to_err").html("Experience TO Required");
+// $("#sal_from_err").html("Salary From Required");
+//     return false;
+  }
 
 
 function view_member(id)
@@ -284,9 +475,13 @@ function view_member(id)
             $('#city').html(data.member_city);
             $('#pincode').html(data.member_pincode);
             $('#state').html(data.member_state);
-             $('#marital').html(data.member_marital_status);
-            $('#experience').html(data.member_experience);
-            $('#salary').html(data.member_anual_salary);
+            $('#marital').html(data.member_marital_status);
+            $('#experience').html(data.member_experience+' year ');
+              if(data.member_anual_salary)
+              {
+                  var salary=data.member_anual_salary.split('.');
+                  $("#salary").html(salary[0]+' Lac '+salary[1]+' Thousand');
+              }
             if(data.member_profile_pic)
             {
             $('#profile_pic').attr("src", "<?php  echo base_url();?>"+data.member_profile_pic);
@@ -393,7 +588,8 @@ function view_member(id)
 
     function save()
     {
-        
+       $("#save_btn").attr('disabled',true);
+       
         var data = new FormData(document.getElementById("form"));
       var url;
       if(save_method == 'add')
@@ -440,6 +636,22 @@ function view_member(id)
                    $("#fname_err").html(""); 
               }
               
+              if(json.email_err)
+              {
+                   $('[name=email]').focus();
+               $("#email_err").html(json.email_err); 
+              }else{
+                   $("#email_err").html(""); 
+              }
+              
+               if(json.mobile_err)
+              {
+                   $('[name=mobile]').focus();
+               $("#mobile_err").html(json.mobile_err); 
+              }else{
+                   $("#mobile_err").html(""); 
+              }
+              
                if(json.lname_err)
               {
                    $('[name=lname]').focus();
@@ -458,6 +670,8 @@ function view_member(id)
               if(json.success)
               {
               location.reload();// for reload a page
+              }else{
+                   $("#save_btn").attr('disabled',false);
               }
               
             },
@@ -564,7 +778,7 @@ function view_member(id)
                                 <div class="col-md-6">                                
                                     <div class="form-group">
                                         <label for="fname">Mobile No<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Mobile No" class="form-control required"  name="mobile" maxlength="128" required>
+                                        <input type="text" placeholder="Mobile No" class="form-control required"  name="mobile" maxlength="11" minlength="10" required>
                                         <span class="text-danger" id="mobile_err"></span>
                                         
                                     </div>
@@ -630,11 +844,9 @@ function view_member(id)
                                     <div class="form-group">
                                         <label for="fname">Password<span style="color:red">*</span></label>
                                         <input type="text" placeholder="Password" class="form-control required"  name="password" maxlength="128" required>
-                                        <span class="text-danger" id="password_err"></span>
-                                        
+                                        <span class="text-danger" id="password_err"></span>                                        
                                     </div>
-                                    <span style="color:red" id="text_field1_error"></span>
-                                    
+                                    <span style="color:red" id="text_field1_error"></span>                                    
                                 </div>
                                 <div class="col-md-6">
                                   <div class="form-group">
@@ -642,7 +854,7 @@ function view_member(id)
                                      <select name="status" class="form-control" >
                                             <option value="1">Active</option>
                                             <option value="0">Not Active</option>
-                                        </select>
+                                      </select>
                                   </div>
                                 </div>
                                 
@@ -655,7 +867,7 @@ function view_member(id)
     			
     		</div>         
     	 <div class="modal-footer">
-             <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
+             <button type="button" class="btn btn-primary" id="save_btn" onclick="save()">Save</button>
           <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
         </div>
     </div>           
@@ -666,7 +878,7 @@ function view_member(id)
 <!--                      View model      -->
 
 <div class="modal fade" id="viewModal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog">
+    <div class="modal-dialog" id="modal_dialog1">
     
       <!-- Modal content-->
       <div class="modal-content">

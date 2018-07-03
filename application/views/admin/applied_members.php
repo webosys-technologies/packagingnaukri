@@ -72,7 +72,7 @@
                                         <?php $emp=$this->Employments_model->get_employment(array('member_id'=>$res->member_id))?>
                                         <td><?php echo $emp->employment_organization; ?></td>
                                         <td><?php echo $emp->employment_designation; ?></td>
-                                        <td><?php echo $res->member_experience; ?></td>
+                                        <td><?php if($res->member_experience){echo $res->member_experience." Year";} ?></td>
                                         <td><?php echo $emp->employment_city; ?></td>
                                          <?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0' ){$sal=explode(".",$res->member_anual_salary);} ?>
                                         <td><?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0'){echo $sal[0]." Lac ". $sal[1]." Thousand "; echo "PA";}  ?></td>
@@ -140,9 +140,13 @@
             $('#city').html(data.member_city);
             $('#pincode').html(data.member_pincode);
             $('#state').html(data.member_state);
-             $('#marital').html(data.member_marital_status);
-            $('#experience').html(data.member_experience);
-            $('#salary').html(data.member_anual_salary);
+            $('#marital').html(data.member_marital_status);
+            $('#experience').html(data.member_experience+' year ');
+              if(data.member_anual_salary)
+              {
+                  var salary=data.member_anual_salary.split('.');
+                  $("#salary").html(salary[0]+' Lac '+salary[1]+' Thousand');
+              }
             if(data.member_profile_pic)
             {
             $('#profile_pic').attr("src", "<?php  echo base_url();?>"+data.member_profile_pic);

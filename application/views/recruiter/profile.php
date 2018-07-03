@@ -4,7 +4,7 @@
     display: block !important;
 }
 .modal-dialog{
-     width: 700px;
+     width: 60%;
       overflow-y: initial !important
 }
 .modal-body{
@@ -39,6 +39,25 @@ h3{
         font-family: Times new Roman;
         font-weight: bold;
     }
+    
+    @media (max-width:800px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:768px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:320px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}    
 </style>
   <div  class="content-wrapper" style="background:white">
         <section class="content-header">
@@ -63,7 +82,7 @@ h3{
         
        ?>
 		<div class="box box-solid" >
-	<center>	<img src="<?php if(isset($recruiter_data->recruiter_profile_pic)){echo base_url($recruiter_data->recruiter_profile_pic);}else{ echo base_url()." /profile_pic/avatar.png";}?>" width="100px" height="100px" style="border-radius: 6px"></center><br>
+	<center>	<img src="<?php if($recruiter_data->recruiter_profile_pic){echo base_url(); echo $recruiter_data->recruiter_profile_pic;}else{ echo base_url()."profile_pic/boss.PNG"; }?>" width="100px" height="100px" style="border-radius: 6px"></center><br>
 	<center><h3 ><?php echo  $recruiter_data->recruiter_fname." ".$recruiter_data->recruiter_lname; ?></h3></center>
 	</div>
 	</div>

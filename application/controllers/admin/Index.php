@@ -69,6 +69,7 @@ class Index extends CI_Controller
                     'admin_email' => $result->user_email,
                     'admin_LoggedIn' => true,
                     'admin_source'   => $source,
+                    'recruiter_id'=> $result->recruiter_id
                                     );
                                     
                     $this->session->set_userdata($sessionArray);  

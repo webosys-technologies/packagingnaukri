@@ -4,7 +4,7 @@
     display: block !important;
 }
 .modal-dialog{
-     width: 700px;
+     width: 60%;
       overflow-y: initial !important
 }
 .modal-body{
@@ -18,6 +18,25 @@ td{
 .job_info{
     color:#707B7C;
 }
+
+@media (max-width:800px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:768px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:320px){
+    #modal_dialog,#modal_dialog1{
+     width: 100%;
+      overflow-y: initial !important
+}
+}    
 </style>
 <script>
 function applicants(id)
@@ -110,7 +129,19 @@ function applicants(id)
                                             <td style="cursor:pointer;" onclick="applicants(<?php echo $job->job_id ?>)">
                                                 <?php echo count($this->Applied_jobs_model->get_by_job_id($job->job_id))." Member";?></td>
                                             <td><?php echo $job->job_education?></td>
-                                            <td><?php echo $job->job_experience?></td>
+                                            
+                                              <?php $exp=explode(".",$job->job_experience);
+                                                     
+                                                    if($exp[0]==$exp[1])
+                                                    {
+                                                      $experience=$exp[0]." Year";  
+                                                    }else{
+                                                       $experience=$exp[0]."-".$exp[1]." Year";  
+                                                    }
+//                                                    
+                                              ?>
+                                            
+                                            <td><?php echo $experience; ?></td>
                                             <td><?php echo $job->job_city?></td>
                             <td><?php echo $job->job_created_at?></td>
                             <td>
@@ -186,13 +217,28 @@ var user_type=el.val();
  });  
   
   
-//   var start_exp = 0;
-//var end = 15;
-//var options = "";
-//for(var exp = start_exp ; exp <=end; exp++){
-//  options += '<option value="'+exp+'">'+ exp + " yrs" +'</option>'; 
-//}
-//document.getElementById("experience").innerHTML = options;
+ $('#min_salary').change(function() {
+           $("#max_salary").html("");
+         glob=$('#min_salary').val();
+//         $("#max_salary").append('<option value="'+dim+'">'+ dim +'Lac</option>');
+          for(var dim = glob; dim <=99; dim++)
+          {
+
+           $("#max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+           }
+         
+      });
+      
+       $('#min_exp').change(function() {
+           $("#max_exp").html("");
+           var temp=$('#min_exp').val();
+            for(var dim = temp; dim <=30; dim++)
+          {
+
+           $("#max_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+           }
+       });
+  
 
 
 
@@ -255,14 +301,26 @@ var user_type=el.val();
             $('[name="jobdesc"]').val(data.job_description);
             $('[name="joblocation"]').val(data.job_city);
             $('[name="jobtype"]').val(data.job_type);
+            
+            
             if(data.job_salary){
                        var s=data.job_salary.split(".");
-                        $("#lacsalary").val(s[0]);
-                           $("#thsalary").val(s[1]);
+//                       alert(s[0]);
+                        $("#min_salary").val(s[0]);
+                           $("#max_salary").val(s[1]);
                    }
+                   
+                    if(data.job_experience){
+                       var e=data.job_experience.split(".");
+//                       alert(s[0]);
+                        $("#min_exp").val(e[0]);
+                           $("#max_exp").val(e[1]);
+                   }
+            
+            
             $('[name="company"]').val(data.company_id);
             $('[name="qualification"]').val(data.job_education);
-            $('[name="experience"]').val(data.job_experience);
+            
             $('[name="status"]').val(data.job_status);
             $('[name="skill"]').val(data.job_skill_name);
            
@@ -283,6 +341,8 @@ var user_type=el.val();
 
     function save()
     {
+        $("#save_btn").attr('disabled',true);
+        
         CKEDITOR.instances.jobdesc.updateElement();
         CKEDITOR.instances.jobdesc.getData(); 
         
@@ -342,7 +402,9 @@ var user_type=el.val();
              if(json.success)
              {
               location.reload();// for reload a page
-             }  
+             }  else{
+                 $("#save_btn").attr('disabled',false);
+             }
                 
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -350,6 +412,9 @@ var user_type=el.val();
 //                alert('Error adding / update data');
             }
         });
+        
+        e.stopImmediatePropagation();
+          return false;
     }
 
 function delete_menu(id)
@@ -428,7 +493,7 @@ function delete_menu(id)
   </script>
 
 <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="modal_dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
@@ -448,7 +513,7 @@ function delete_menu(id)
                      <div class="row">
                                 <div class="col-md-12">                                
                                     <div class="form-group">
-                                        <label>Job Title: (*)</label>
+                                        <label>Job Title: <span style="color: red">*</span></label>
                                     <input name="jobtitle" class="form-control" placeholder="Job Title" value="">
                                         <span class="text-danger" id="job_err"></span>
                                         
@@ -459,7 +524,7 @@ function delete_menu(id)
                                     <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Company Name: (*)</label>
+                                        <label>Company Name: <span style="color: red">*</span></label>
                                         <select name="company" class="form-control">
                                             <option>-- Select Company --</option>
                                             <?php
@@ -482,7 +547,7 @@ function delete_menu(id)
                                     <div class="row">
                                 <div class="col-md-6 ">                                
                                     <div class="form-group">
-                                        <label>Qualification: (*)</label>
+                                        <label>Qualification: <span style="color: red">*</span></label>
                                     <input name="qualification" placeholder="Qualification" class="form-control" value="">
                                         <span class="text-danger" id="qua_err"></span>
                                         
@@ -490,24 +555,56 @@ function delete_menu(id)
                                                                        
                                 </div>
                                
-                                <div class="col-md-6">                                
+                                <div class="col-md-3">                                
                                     <div class="form-group">
-                                       <label>Experience: (*)</label>
-                                       <input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">
-                                       <!--<select name="experience" id="experience" class="form-control"></select>-->
-                                       <!--<select name="exp_month" id="exp_month" class="form-control"></select>-->
+                                       <label>MIN Experience</label>
+                                       <select name="min_exp" id="min_exp" class="form-control">
+                                           <option value="0">0 year</option>
+                                            <script>
+                               var exp = 1;
+                               var exp_end = 30;
+                                var options = "";
+                                for(var dim = exp ; dim <=exp_end; dim++){
+//                                    alert(dim);
+                            $("#min_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              }
+                               </script>
+                                           </select>
                                         <span class="text-danger" id="exp_err"></span>
                                         
                                     </div>
                                                                       
                                 </div>
+                                        <div class="col-md-3">                                
+                                    <div class="form-group">
+                                       <label>MAX Experience</label>
+                                       <select name="max_exp" id="max_exp" class="form-control">
+                                           <option value="0">0 year</option>
+                                            <script>
+                               var exp = 1;
+                               var exp_end = 30;
+                                var options = "";
+                                for(var dim = exp ; dim <=exp_end; dim++){
+//                                    alert(dim);
+                            $("#max_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              }
+                               </script>
+                                           </select>
+                                        <span class="text-danger" id="exp_err"></span>
+                                        
+                                    </div>
+                                                                      
+                                </div>
+                                        
                                       
                                         </div>
                                     
                                     <div class="row">
                                 <div class="col-md-12">                                
                                     <div class="form-group">
-                                       <label>Job Description: (*)</label>
+                                       <label>Job Description:</label>
                                     <textarea cols="80" id="jobdesc" class="form-control" name="jobdesc" rows="10"></textarea>
                                         <script>
                                        CKEDITOR.replace( 'jobdesc' );
@@ -526,13 +623,13 @@ function delete_menu(id)
                                     
                      <div class="row">
                           <div class="col-md-6">
-                       <label>Job Location: (*)</label>
+                       <label>Job Location: <span style="color: red">*</span></label>
                                     <input name="joblocation" placeholder="Job Location" class="form-control" value="">
                         <span class="text-danger" id="loc_err"></span>
 
                     </div>  
                           <div class="col-md-6">
-                       <label>Job Type: (*)</label>
+                       <label>Job Type: <span style="color: red">*</span></label>
                                     <select name="jobtype" id="job_type" class="form-control" value="">
                                         <option value="Full Time">Full Time</option>
                                         <option value="Part Time">Part Time</option>
@@ -545,18 +642,19 @@ function delete_menu(id)
                     </div><br>
                                     
                      <div class="row">
-                      <div class="col-md-3">
-                        <label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>
-                         <select type="text" name="lacsalary" id="lacsalary" class="form-control">
+                        <div class="col-md-3">
+                        <!--<label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>-->
+                            <label class="form-label">MIN Salary</label><span style="font-size:11px;">(per anual)</span>
+                         <select type="text" name="min_salary" id="min_salary" class="form-control">
                              <option value="0">0 Lac</option>
                            <script>
                                var sal = 1;
                                var sal_end = 99;
                                 var options = "";
                                 for(var dim = sal ; dim <=sal_end; dim++){
-//                                    alert(dim);
-                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
-//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+
+                            $("#min_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+
                               }
                                </script>
                         </select>
@@ -564,22 +662,22 @@ function delete_menu(id)
                     </div>
                                         
                     <div class="col-md-3" style="top-padding:15px"> 
-                        <label class="form-label"></label> <span style="font-size:12px;"></span>
-                        <select type="text" id="thsalary" name="thsalary" class="form-control" style="">  
-                            <option value="0">0 Thousands</option>
-                             <script>
-                               var sal = 1;
+                        <label class="form-label">MAX Salary</label><span style="font-size:11px;">(per anual)</span>
+                       <select type="text" id="max_salary" name="max_salary" class="form-control">  
+                           <script>
+                               var sal = 0;
                                var sal_end = 99;
                                 var options = "";
                                 for(var dim = sal ; dim <=sal_end; dim++){
 //                                    alert(dim);
-//                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
-                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                            $("#max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
                               }
-                               </script>
+                               </script> 
                         </select>
                         <span class="text-danger" id="salary_error"><?php echo form_error('state'); ?></span>
-                    </div>  
+                    </div> 
+                         
                           <div class="col-md-6">
                                   <div class="form-group">
                                     <label>Status<span style="color: red">*</span></label>
@@ -592,7 +690,7 @@ function delete_menu(id)
                     </div>
                      <div class="row">                         
                          <div class="col-md-12">
-                       <label>Job Skills: (*)</label>
+                       <label>Job Skills: </label>
                       <input name="skill" placeholder="Skill Name" id="skill" class="form-control" value="">
                         <span class="text-danger" id="gen_err"></span>
 
@@ -639,7 +737,7 @@ function delete_menu(id)
    
 
 <div class="modal fade" id="job_modal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog">   
+    <div class="modal-dialog" id="modal_dialog1">   
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">

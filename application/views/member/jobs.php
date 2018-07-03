@@ -81,7 +81,26 @@ a:link, a:visited{
 }
 
 #cont{
-    padding-left: 60px;
+    padding-left: 0px;
+}
+
+@media (max-width:800px){
+    #modal_dialog{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:768px){
+    #modal_dialog{
+     width: 100%;
+      overflow-y: initial !important
+}
+}
+@media (max-width:320px){
+    #modal_dialog{
+     width: 100%;
+      overflow-y: initial !important
+}
 }
 </style>
 
@@ -351,9 +370,9 @@ a:link, a:visited{
             }
            
 ?>
-      <div class="container" style="padding-left:50px" id="cont<?php echo $job->job_id;?>">
+      <div class="container" class="job_info_div" style="padding-left:50px" id="cont<?php echo $job->job_id;?>">
                    <div class="row">
-                       <div class="col-md-offset col-md-8">
+                       <div class=" col-md-8">
                        <div class="panel-body">
                        <div class="shadow">
                            <div class="row">

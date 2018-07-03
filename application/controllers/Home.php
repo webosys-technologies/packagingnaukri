@@ -6,24 +6,18 @@ class Home extends CI_Controller
 		parent::__construct();
 		$this->load->helper(array('form','url','date'));
 		$this->load->library(array('session', 'form_validation', 'email'));
-		$this->load->database();
-		
-
-                 
+		$this->load->database();                
 	}
        
 	
 	function index()
 	{
-	     // $result['jobs']=$this->Jobs_model->get_recent_job();
-             
-      //       $this->load->view('packaging/home_header');
-      //       $this->load->view('packaging/home');
-      //       $this->load->view('packaging/home_footer',$result);
+	    
         $view='home';
         $this->load_views($view);
             
 	}
+        
         function services()
         {
             $view='services';
@@ -82,23 +76,504 @@ class Home extends CI_Controller
           
             echo json_encode($cities);
         }
+        
+        function apply($job_id)
+        {
+            $GLOBALS['job_id'] = $job_id;
+            $view='apply';
+            $this->load_views($view);
+        }
 
         function load_views($view)
         {            
             if(!empty($GLOBALS['id'])){
            $result['job_info']=$this->Jobs_model->job_info($GLOBALS['id']);    
             }
+            
+            if(!empty($GLOBALS['job_id'])){
+           $result['job_title']=$this->Jobs_model->job_by_id($GLOBALS['job_id']);    
+            }
+            
+            if($view=='home')
+            {
+                $result['show_icon']=true;
+            }
           
              $result['jobs']=$this->Jobs_model->get_recent_job();    
              $sys=$this->System_model->source_name();
             $result['system']=$this->System_model->get_system_info($sys);
 
+            
               $this->load->view($sys.'/home_header',$result);
-             $this->load->view('plastic/home',$result);
+             $this->load->view($sys."/".$view,$result);
              $this->load->view($sys.'/home_footer',$result);
+//            $this->load->view('printing/home_header',$result);
+//             $this->load->view('printing/contact_us',$result);
+//             $this->load->view('printing/home_footer',$result);
 
 
         }
+        
+        function send_msg()
+        {
+            $form=$this->input->post();
+          
+                
+                    $headers = "From: ".$form['email'];
+                    $headers .= ". PackagingNaukari-Team" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $to = 'suraj9195shinde@gmail.com';
+                    $subject = "Query by Member";
+                    $txt=$form['comment'];
+                                                               
+                 
+                       $success=  mail($to,$subject,$txt,$headers); 
+                      
+            
+        }
+        
+         function email_cerification_mail($email)
+        {
+                  $rand=mt_rand(100000, 999999);
+                    
+                
+                    $headers = "From: ". "team@packagingnaukri.com ";
+                    $headers .= ". PackagingNaukari-Team" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $to = $email;
+                    $subject = "Email Verification";
+                    $txt=$rand.' is your OTP for verifying Email Id on packagingnaukri.com.';
+                                                               
+                 
+                       $success=  mail($to,$subject,$txt,$headers); 
+                       if($success)
+                       {
+                           $this->session->set_userdata(array('email_otp'=>$rand));
+                           return true;
+                       }else{
+                           return false;
+                       }
+                      
+            
+        }
+        
+        function login_detail_email($email)
+        {
+             $headers = "From: ". "team@packagingnaukri.com ";
+                    $headers .= ". PackagingNaukari-Team" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $to = $email;
+                    $subject = "Login Details";
+                    $txt=$rand.' is your OTP for verifying Email Id on packagingnaukri.com.';
+                                                               
+                 
+                       $success=  mail($to,$subject,$txt,$headers); 
+                       if($success)
+                       {
+                           $this->session->set_userdata(array('email_otp'=>$rand));
+                           return true;
+                       }else{
+                           return false;
+                       }
+        }
+        
+        
+        function apply_job_with_otp()
+        {
+            $form=$this->input->post();
+            
+            if($this->session->userdata('apply_otp')==$form['otp'])
+            {
+            $job=$this->Jobs_model->get_job_by_id($form['apply_id']); 
+            $data=$this->Members_model->member_info_by_mobile($form['otpmobile']);
+            
+            
+            $this->Applied_jobs_model->apply_job(array('job_id'=>$form['apply_id'],
+                                                        'recruiter_id'=>$job->recruiter_id,
+                                                        'company_id'=>$job->company_id,
+                                                        'member_id'=>$data->member_id,
+                                                        'apply_at'=>  date('Y-m-d')));
+            $this->session->set_flashdata('success','Job Applied Successfully');
+            echo json_encode(array('success'=>"Applied Successfully"));
+            }else{
+             echo json_encode(array('otp_err'=>"Wrong OTP"));    
+            }
+            
+        }
+        
+        function register_to_apply()
+        {
+            $form=$this->input->post();
+            if($form['otp']==$this->session->userdata('email_otp'))
+            {
+                $sys=$this->System_model->source_name();
+                $data=array('member_fname'=>$form['fname'],
+                            'member_lname'=>$form['fname'],
+                            'member_email'=>$form['fname'],
+                            'member_mobile'=>$form['fname'],
+                            'member_anual_salary'=>$form['current'],
+                            'member_created_at'=>date('Y-m-d'),
+                            'member_status'=>'1',
+                            'member_source'=>$sys,
+                            'member_experience'=>$form['exp'],);
+                
+                $mem_id=$this->Members_model->member_add($data);
+                
+                $emp=array('employment_notice_period'=>$form['notice'],
+                            'employment_current'=>$form['location'],
+                            );
+                $job=$this->jobs_model->job_by_id($form['apply_job_id']);
+                $this->Employments_model->insert_employment($emp);
+                
+                $apply=array('member_id'=>$mem_id,
+                            'job_id'=>$form['apply_job_id'],
+                            'company_id'=>$job->company_id,
+                            'recruitre_id'=>$job->recruiter_id,
+                            'apply_at'=>date("Y-m-d"),
+                            'apply_status'=>"1");
+                
+                $this->Applied_model->apply_job($apply);
+                
+                echo json_encode(array('success'=>'Job Applied Successfully'));
+                $this->session->set_flashdata('success','Register and Job Applied Successfully');  
+                $this->session->unset_userdata('email_otp');
+            }else{
+                echo json_encode(array('otp_err'=>'Wrong OTP'));
+            }
+            
+           
+        }
+        
+        function apply_job()
+        {
+            $form=$this->input->post();
+            
+            $data=$this->Members_model->login_with_otp(array('member_email'=>$form['email']));
+                            
+            if(!empty($data))
+            {
+                $where=array('job_id'=>$form['job_id'],
+                             'member_id'=>$data->member_id);
+            $check=$this->Applied_jobs_model->check_apply($where);
+            if(empty($check))
+            {   
+              
+//        $this->send_otp($form['mobile']);
+//         $job=$this->Jobs_model->get_job_by_id($form['job_id']);       
+//         
+//        $rand=  mt_rand(1111,9999);
+//        $name = $_FILES["resume"]["name"];
+//        $ext = end((explode(".", $name)));
+//        $filename='resume_'.date('Y-m-d_H.i.s').".".$ext;
+//        move_uploaded_file($_FILES['resume']['tmp_name'], 'resume/' . $filename);
+//       
+//        if(file_exists('resume/'.$filename))
+//        {
+//            if(file_exists($data->member_resume))
+//            {
+//            unlink($data->member_resume);
+//         $where=array('member_id'=>$data->member_id);
+//        $resume=array('member_resume'=>'resume/'.$filename);
+//         $res=$this->Members_model->member_update($where,$resume);
+//         
+//            
+//            $this->Applied_jobs_model->apply_job(array('job_id'=>$form['job_id'],
+//                                                        'recruiter_id'=>$job->recruiter_id,
+//                                                        'company_id'=>$job->company_id,
+//                                                        'member_id'=>$data->member_id,
+//                                                        'apply_at'=>  date('Y-m-d')));
+//            echo json_encode(array('success'=>"Applied Successfully"));
+//        
+//            }else{
+//                $where=array('member_id'=>$data->member_id);
+//               $resume=array('member_resume'=>'resume/'.$filename);
+//               $res=$this->Members_model->member_update($where,$resume);
+//               
+//                $this->Applied_jobs_model->apply_job(array('job_id'=>$form['job_id'],
+//                                                        'recruiter_id'=>$job->recruiter_id,
+//                                                        'company_id'=>$job->company_id,
+//                                                        'member_id'=>$data->member_id,
+//                                                        'apply_at'=>  date('Y-m-d')));
+//               
+//               echo json_encode(array('success'=>"Applied Successfully"));               
+//            }
+//        }   else{
+//            echo json_encode(array('error'=>"Something Wrong"));
+//        }   
+       echo json_encode(array('email'=>$form['email'],
+                              'job_id'=>$form['job_id']));
+
+       
+            }else{
+                 
+                 echo json_encode(array('job_err'=>'Already Applied for this job'));
+            } 
+            }else{
+                $this->email_cerification_mail($form['email']);
+                echo json_encode(array('email_id_err'=>'This Email is not Registered',
+                                       'job_id'=>$form['job_id']));
+            }    
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        function printing_index()
+	{
+	    
+        $view='home';
+        $this->printing_load_views($view);
+            
+	}
+        
+        function printing_services()
+        {
+            $view='services';
+            $this->printing_load_views($view);
+        }
+        function printing_about_us()
+        {
+            $view='about_us';
+            $this->printing_load_views($view);
+        }
+        function printing_contact_us()
+        {
+            $view='contact_us';
+            $this->printing_load_views($view);
+        }
+        function printing_post_resume()
+        {
+            $view='post_resume';
+            $this->printing_load_views($view);
+        }
+        function printing_post_requirement()
+        {
+            $view='post_requirement';
+            $this->printing_load_views($view);
+        }
+        function printing_recruitment()
+        {
+            $view='recruitment';
+            $this->printing_load_views($view);
+        }
+        
+        function printing_resource_outsourcing()
+        {
+            $view='resource_outsourcing';
+            $this->printing_load_views($view);
+        }
+        
+        function printing_job($id)
+        {
+            $GLOBALS['id'] = $id;
+            $view='job_info';
+            $this->printing_load_views($view);
+        }
+        
+         function printing_load_views($view)
+        {            
+            if(!empty($GLOBALS['id'])){
+           $result['job_info']=$this->Jobs_model->job_info($GLOBALS['id']);    
+            }
+            
+            if(!empty($GLOBALS['job_id'])){
+           $result['job_title']=$this->Jobs_model->job_by_id($GLOBALS['job_id']);    
+            }
+            
+            if($view=='home')
+            {
+                $result['show_icon']=true;
+            }
+          
+             $result['jobs']=$this->Jobs_model->get_recent_job();    
+             $sys="printing";
+            $result['system']=$this->System_model->get_system_info('printing');
+
+            
+              $this->load->view($sys.'/home_header',$result);
+             $this->load->view($sys."/".$view,$result);
+             $this->load->view($sys.'/home_footer',$result);
+//            $this->load->view('printing/home_header',$result);
+//             $this->load->view('printing/contact_us',$result);
+//             $this->load->view('printing/home_footer',$result);
+
+
+        }
+        
+        
+        
+         function plastic_index()
+	{
+	    
+        $view='home';
+        $this->plastic_load_views($view);
+            
+	}
+        
+        function plastic_services()
+        {
+            $view='services';
+            $this->plastic_load_views($view);
+        }
+        function plastic_about_us()
+        {
+            $view='about_us';
+            $this->plastic_load_views($view);
+        }
+        function plastic_contact_us()
+        {
+            $view='contact_us';
+            $this->plastic_load_views($view);
+        }
+        function plastic_post_resume()
+        {
+            $view='post_resume';
+            $this->plastic_load_views($view);
+        }
+        function plastic_post_requirement()
+        {
+            $view='post_requirement';
+            $this->plastic_load_views($view);
+        }
+        function plastic_recruitment()
+        {
+            $view='recruitment';
+            $this->plastic_load_views($view);
+        }
+        
+        function plastic_resource_outsourcing()
+        {
+            $view='resource_outsourcing';
+            $this->plastic_load_views($view);
+        }
+        
+        function plastic_job($id)
+        {
+            $GLOBALS['id'] = $id;
+            $view='job_info';
+            $this->plastic_load_views($view);
+        }
+        
+         function plastic_load_views($view)
+        {            
+            if(!empty($GLOBALS['id'])){
+           $result['job_info']=$this->Jobs_model->job_info($GLOBALS['id']);    
+            }
+            
+            if(!empty($GLOBALS['job_id'])){
+           $result['job_title']=$this->Jobs_model->job_by_id($GLOBALS['job_id']);    
+            }
+            
+            if($view=='home')
+            {
+                $result['show_icon']=true;
+            }
+          
+             $result['jobs']=$this->Jobs_model->get_recent_job();    
+             $sys="plastic";
+            $result['system']=$this->System_model->get_system_info('plastic');
+
+            
+              $this->load->view($sys.'/home_header',$result);
+             $this->load->view($sys."/".$view,$result);
+             $this->load->view($sys.'/home_footer',$result);
+//            $this->load->view('printing/home_header',$result);
+//             $this->load->view('printing/contact_us',$result);
+//             $this->load->view('printing/home_footer',$result);
+
+
+        }
+        
+       function send_otp($email)
+        {
+                   
+          
+                    
+                     $rand=mt_rand(000000,999999);
+                      
+                     $this->session->set_userdata(array('apply_otp'=>$rand));
+
+$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
+
+//Multiple mobiles numbers separated by comma
+
+$mobileNumber = $email;
+//Sender ID,While using route4 sender id should be 6 characters long.
+
+$senderId = "PKGNAU";
+//Your message to send, Add URL encoding here.
+
+$message =$rand.' is your OTP for verifying mobile number on packagingnaukri.com.';
+
+
+//Define route 
+
+$route = "4";
+//Prepare you post parameters
+
+$postData = array(
+
+    'authkey' => $authKey,
+
+    'mobiles' => $mobileNumber,
+
+    'message' => $message,
+
+    'sender' => $senderId,
+
+    'route' => $route
+
+);
+
+
+//API URL
+
+$url="http://api.msg91.com/api/sendhttp.php";
+
+
+// init the resource
+
+$ch = curl_init();
+curl_setopt_array($ch, array(
+
+    CURLOPT_URL => $url,
+
+    CURLOPT_RETURNTRANSFER => true,
+
+    CURLOPT_POST => true,
+
+    CURLOPT_POSTFIELDS => $postData
+
+    //,CURLOPT_FOLLOWLOCATION => true
+
+));
+//Ignore SSL certificate verification
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+//get response
+
+$output = curl_exec($ch);
+//Print error if any
+if(curl_errno($ch))
+{
+//    echo json_encode(array('error'=> curl_error($ch)));
+}
+curl_close($ch);
+//echo json_encode(array('send'=>'OTP is sent Successfully'));       
+//echo $output;
+            }
+
+
+
+        
+        
+        
 
     
 }

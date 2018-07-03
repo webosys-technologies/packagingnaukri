@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Home | Packaging Naukri</title>
+<title>Home | Printing Naukri</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Desire Host Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
@@ -58,7 +58,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 margin:100px;
                
             }
-            .modal-backdrop {background: none;}
+            /*.modal-backdrop {background: none;}*/
            
             #header_link{
                 color:white;
@@ -130,7 +130,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }
     .slick-prev:before,
     .slick-next:before {
-      color: green;
+      color: orange;
     }
     .slick-slide {
          
@@ -277,12 +277,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
              <center><h4><a class="label label-warning" id="show_otp_box">Login With OTP</a></h4></center>
             <center><h4><a class="label label-warning" id="show_pass_box">Login With Password</a></h4></center>
 
-              <a class="btn btn-info">
+<!--              <a class="btn btn-info">
                   <span class="fa fa-google"></span> <span style="color:white">Sign in with Google</span>
   </a>
               <a class="btn" style="background-color:#3B5998;">
     <span class="fa fa-facebook"></span><span style="color:white"> Sign in with Facebook</span>
-  </a>
+  </a>-->
            
           </div>
         </form>
@@ -374,10 +374,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       });
       
       
-       $().UItoTop({ easingType: 'easeOutQuart' });
+//       $().UItoTop({ easingType: 'easeOutQuart' });
 			$(".scroll").click(function(event){		
 			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},800);
 			});
       
     });

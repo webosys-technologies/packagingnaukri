@@ -74,7 +74,7 @@ class Companies_model extends CI_Model
      {
          $this->db->from($this->table);
 //          $this->db->order_by('company_id','desc');
-          $this->db->limit('5');
+//          $this->db->limit('5');
          $this->db->where('company_status','1');
         $res=$this->db->get();
        

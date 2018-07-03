@@ -17,15 +17,15 @@ class Education extends CI_Controller
 	public function index()
 	{
 
-            $id=$this->session->userdata('user_id');
-            $result['user_data']=get_user_info($id);
-             $result['edu']=$this->Master_edu_model->getall();
-            $sys=$this->session->userdata('user_source');
-            $result['system']=$this->System_model->get_system_info($sys);
-             
-            $this->load->view('user/header',$result);
-            $this->load->view('user/education',$result);
-            $this->load->view('user/footer');
+//            $id=$this->session->userdata('user_id');
+//            $result['user_data']=get_user_info($id);
+//             $result['edu']=$this->Master_edu_model->getall();
+//            $sys=$this->session->userdata('user_source');
+//            $result['system']=$this->System_model->get_system_info($sys);
+//             
+//            $this->load->view('user/header',$result);
+//            $this->load->view('user/education',$result);
+//            $this->load->view('user/footer');
 	}
 
 
