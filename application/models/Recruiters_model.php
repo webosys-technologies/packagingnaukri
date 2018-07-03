@@ -200,8 +200,10 @@ class Recruiters_model extends CI_Model
 
     public function get_id($id)
     {
-        $this->db->from($this->table);
+        $this->db->from('recruiters as rc');
         $this->db->where('recruiter_id',$id);
+        $this->db->join('states as st','st.stateID=rc.recruiter_state','Left');
+        $this->db->join('countries as cn','cn.countryID=rc.recruiter_country','Left');        
         $query = $this->db->get();
 
         return $query->row();

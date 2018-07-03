@@ -21,7 +21,7 @@ class Recruiter extends CI_Controller
             $id=$this->session->userdata('admin_id');
             $result['user_data']=$this->User_model->get_user_by_id($id);
             $result['recruiters']=$this->Recruiters_model->getall();
-            $result['states']=$this->Cities_model->getall_state();
+            $result['country']=$this->Cities_model->getall_country();
             $sys=$this->session->userdata('admin_source');
             $result['system']=$this->System_model->get_system_info($sys);
             
@@ -64,6 +64,8 @@ class Recruiter extends CI_Controller
             'recruiter_password'       => $this->input->post('password'),
             'recruiter_city'           => $this->input->post('city'),
             'recruiter_state'          => $this->input->post('state'),
+            'recruiter_country'          => $this->input->post('country'),
+            'recruiter_pincode'          => $this->input->post('pincode'),
             'recruiter_gender'         => $this->input->post('gender'),
             'recruiter_created_at'     => date("Y-m-d "),
             'recruiter_status'         => $this->input->post('status'),
@@ -137,7 +139,9 @@ class Recruiter extends CI_Controller
                         'recruiter_password'       => $this->input->post('password'),
                         'recruiter_gender'         => $this->input->post('gender'),
                         'recruiter_city'           => $this->input->post('city'),
+                         'recruiter_country'          => $this->input->post('country'),
                         'recruiter_state'          => $this->input->post('state'),
+                        'recruiter_pincode'          => $this->input->post('pincode'),
                         'recruiter_status'        => $this->input->post('status'),
                         'recruiter_source'                   =>$this->input->post('source'),
 

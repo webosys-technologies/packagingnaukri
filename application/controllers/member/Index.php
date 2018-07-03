@@ -17,7 +17,7 @@ class Index extends CI_Controller
 	function index()
 	{
             $country='IND';
-           $data['states']=$this->Cities_model->getall_state();
+           $data['country']=$this->Cities_model->getall_country();
         $sys=$this->System_model->source_name();        
             $result['system']=$this->System_model->get_system_info($sys);
           
@@ -47,8 +47,8 @@ class Index extends CI_Controller
 
          //  echo  "validate error";
       
-   $state['states']=$this->Cities_model->getall_state(); 
-
+   $state['country']=$this->Cities_model->getall_country(); 
+   
         $sys=$this->System_model->source_name();        
             $result['system']=$this->System_model->get_system_info($sys);
 

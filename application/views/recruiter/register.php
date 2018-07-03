@@ -248,7 +248,7 @@ var country=el.val();
                                     
                                     <!--<option value="Maharashtra">Maharashtra</option>-->
                         </select>
-                        <span class="text-danger"><?php echo form_error('state'); ?></span>
+                        <span class="text-danger"><?php echo form_error('country'); ?></span>
 
                     </div>
                     <div class="col-md-6">

@@ -98,40 +98,43 @@
                     <div class="form-group">
                     <div class="row">
                     <div class="col-md-6">
-                        <label class="form-label">State</label><span style="color: red">*</span>
-                        <select name="state" id="state" class="form-control" required>
-                                    <option value="">-- Select State --</option>
-                                    <?php if(isset($states)){
-                                        foreach($states as $state)
+                        <label class="form-label">Country</label><span style="color: red">*</span>
+                        <select name="country" id="country" class="form-control" required>
+                                    <option value="">-- Select Country --</option>
+                                    <?php if(isset($country)){
+                                        foreach($country as $country)
                                         { ?>
-                                           <option value="<?php echo $state->stateID; ?>"><?php echo $state->stateName; ?></option>
+                                           <option value="<?php echo $country->countryID; ?>"><?php echo $country->countryName; ?></option>
                                        <?php }
                                     }?>
-                                 
-                                    
+                                    <!--<option value="Maharashtra">Maharashtra</option>-->
+                        </select>
+                        <span class="text-danger"><?php echo form_error('country'); ?></span>
+
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">State</label><span style="color: red">*</span>
+                        <select name="state" id="state" class="form-control" required>
+                                    <option value="">-- Select state --</option>
                                     <!--<option value="Maharashtra">Maharashtra</option>-->
                         </select>
                         <span class="text-danger"><?php echo form_error('state'); ?></span>
 
                     </div>
-                    <div class="col-md-6">
+                    </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-6">
                         <label class="form-label">City</label><span style="color: red">*</span>
                         <select name="city" id="city" class="form-control" required>
                                     <option value="">-- Select City --</option>
-                                    <?php if(isset($city)){
-                                        foreach($city as $city)
-                                        {
-                                           echo '<option value="">'.$state->city_state.'</option>';
-                                        }
-                                    }?>
-                                 
-                                    
                                     <!--<option value="Maharashtra">Maharashtra</option>-->
                         </select>
                         <span class="text-danger"><?php echo form_error('city'); ?></span>
 
                     </div>
-                    </div>
+                      </div>
                     </div>
 
                     <hr style="border-top: 1px solid #ccc;">
@@ -166,6 +169,8 @@
  $("#state").change(function() {
    var el = $(this) ;
     $('#city').html(" ");
+              $("#city").append('<option value="">--Select City--</option>');
+    
 var state= $('#state option:selected').val();
 //alert(state);          
       $.ajax({
@@ -187,31 +192,35 @@ var state= $('#state option:selected').val();
        }
      });      
  });
- $("#country").change(function() {
+ $("#country").change(function() {        
    var el = $(this) ;
-    $('#city').html(" ");
-var state= $('#state option:selected').val();
-//alert(state);          
+              $("#state").html("");
+              $("#city").html("");
+              $("#state").append('<option value="">--Select State--</option>');
+              $("#city").append('<option value="">--Select City--</option>');
+
+var country=el.val();
+        if(country)
+        {            
       $.ajax({
-       url : "<?php echo site_url('index.php/home/show_states')?>/" + state,        
-       type: "GET",        
+       url : "<?php echo site_url('index.php/home/show_states')?>/" + country,        
+       type: "GET",              
        dataType: "JSON",
        success: function(data)
        {        
           $.each(data,function(i,row)
-          {
-            //alert(row.city_name);           
-              $("#city").append('<option value="'+ row.stateID +'">' + row.stateName + '</option>');
+          {          
+              $("#state").append('<option value="'+ row.stateID +'">' + row.stateName+'</option>');
           }
           );
        },
        error: function (jqXHR, textStatus, errorThrown)
        {
-       //  alert('Error...!');
+//         alert('Error...!');
        }
-     });      
+     });
+     }    
  });
-
 });
 
     function send_otp()
