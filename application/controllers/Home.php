@@ -290,36 +290,8 @@ class Home extends CI_Controller
             }
             
            
-        }
+        }       
         
-        function asf()
-        {
-            if (isset($_FILES['resume']['name'])) {
-    if (0 < $_FILES['resume']['error']) {
-        echo 'Error during file upload' . $_FILES['resume']['error'];
-    } else {
-
-        $rand=  mt_rand(1111,9999);
-        $name = $_FILES["resume"]["name"];
-        $ext = end((explode(".", $name)));
-        $filename='resume_'.date('Y-m-d_H.i.s').".".$ext;
-        move_uploaded_file($_FILES['resume']['tmp_name'], 'resume/' . $filename);
-       
-        if(file_exists('resume/'.$filename))
-        {
-            
-                $where=array('member_id'=>$mem_id);
-               $data=array('member_resume'=>'resume/'.$filename);
-               $res=$this->Members_model->member_update($where,$data);
-               
-                               
-        }   else{
-            echo json_encode(array('error'=>"Something Wrong"));
-        }               
-
-    }
-       }
-         }
         
         function apply_job()
         {

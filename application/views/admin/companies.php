@@ -269,6 +269,7 @@ var user_type=el.val();
           
             $('[name="company_id"]').val(data.company_id);
             $('[name="company"]').val(data.company_name);
+             $('[name="recruiter"]').val(data.recruiter_id);
 //            $('[name="type"]').val(data.company_type);
 //            $('[name="email"]').val(data.company_email);
             $('[name="address"]').val(data.company_address);
