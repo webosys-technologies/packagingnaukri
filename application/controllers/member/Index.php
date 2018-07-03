@@ -248,19 +248,18 @@ class Index extends CI_Controller
                 $source=$this->source_verification($result);   
                 if($source)
                 {
-                        if(!empty($job_id))
-                        {
-                        $rec_data=$this->Jobs_model->job_by_id($job_id);
-                     $data=array('job_id'=>$job_id,
-                            'member_id'=>$result->member_id,
-                            'recruiter_id'=>$rec_data->recruiter_id,
-                            'company_id'=>$rec_data->company_id,
-                            'apply_at'=>date('Y-m-d'),
-                            'apply_status'=>'1');
-                         $this->Applied_jobs_model->apply_job($data);
-                         $this->session->set_flashdata('success','Job Applied Successfully');
-                        }
-                        
+//                        if(!empty($job_id))
+//                        {
+//                        $rec_data=$this->Jobs_model->job_by_id($job_id);
+//                     $data=array('job_id'=>$job_id,
+//                            'member_id'=>$result->member_id,
+//                            'recruiter_id'=>$rec_data->recruiter_id,
+//                            'company_id'=>$rec_data->company_id,
+//                            'apply_at'=>date('Y-m-d'),
+//                            'apply_status'=>'1');
+//                         $this->Applied_jobs_model->apply_job($data);
+//                         $this->session->set_flashdata('success','Job Applied Successfully');
+//                        }                       
                         
                             $sessionArray = array(                        
                                  'member_id' => $result->member_id,
@@ -275,7 +274,9 @@ class Index extends CI_Controller
                             $this->session->set_userdata($sessionArray);  
                             
                             echo json_encode(array('status'=> 'success'));
-
+                           
+                            if(!empty($job_id))
+                        {
                 if(empty($this->Applied_jobs_model->check_apply(array('member_id'=>$result->member_id,
                                                                 'job_id'=>$job_id,))))
                 {
@@ -289,7 +290,12 @@ class Index extends CI_Controller
                  $this->Applied_jobs_model->apply_job($data);
                  $this->session->set_flashdata('success','Job Applied Successfully');
                 }
+
                 } 
+
+                                    
+                        
+                
                 
                 
                     $sessionArray = array(                        

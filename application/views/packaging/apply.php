@@ -66,7 +66,7 @@
            
            if(data.otp_err)
            {
-               $("#otp_err").html(data.otp_err);
+               $("#apply_otp_err").html(data.otp_err);
            }
            
             if(data.success)
@@ -103,7 +103,7 @@
              $("#apply_btn").attr('data-target',"");
              if(data.otp_err)
              {
-                 $("#otp_err").html(data.otp_err);
+                 $("#apply_otp_err").html(data.otp_err);
              }
           
             
@@ -212,9 +212,17 @@
                lname=false;
               $("#lname_err").html("Please Enter Last Name");
           }
+          
+          if(resume==true)
+          {
+               $("#resume_err").html("");
+             
+          }else{
+                  $("#resume_err").html("Please Select Resume");
+          }
              
              
-             if(mobile==true && fname==true && lname==true && location==true && exp==true && notice==true && current==true)
+             if(mobile==true && fname==true && lname==true && location==true && exp==true && notice==true && current==true && resume==true)
              {
 //                 alert();
                  return true;
@@ -337,7 +345,7 @@
             
 <div class="container">
 <?php if($this->session->flashdata('success')){
-    echo "<span class=text-success>".$this->session->flashdata('succecc')."</span>";
+    echo "<center><span class=text-success>".$this->session->flashdata('success')."</span></center>";
 }
 ?>
      <form action="" id="apply_job">
@@ -414,7 +422,7 @@
                             <label class="control-label col-md-3">Enter OTP<span class="text-danger"> *</span></label>
                             <div class="col-md-7">
                                 <input type="text" name="otp" required="" minlength="6" maxlength="6" class="form-control" >
-                                <span id="otp_err" class="text-danger"></span>
+                                <span id="" class="text-danger"></span>
                             </div>
                         </div>
                         <br><br><br>               
@@ -487,7 +495,16 @@
                                     </div>
                                     
                                     
-                     </div>                
+                     </div>   
+                                   
+                    <div class="col-md-6">
+                                <div class="form-group">
+					<label for="name">Upload CV:</label><span style="color:red">*</span>
+					<input class="form-control" name="resume" id="resume" minlength="2" required="" type="file"  value="" /><span class="text-danger" id="name_err"></span>
+					<span class="text-danger" id="resume_err"></span>
+				</div>
+                        </div>
+                                 
                    
                   </div>
                           
@@ -551,7 +568,7 @@
                                         
                                         <label for="fname">Enter OTP<span style="color:red">*</span></label>
                                         <input type="text" placeholder="Enter OTP" class="form-control required"  name="otp"  required>
-                                        <span class="text-danger" id="notice_err"></span>
+                                        <span class="text-danger" id="apply_otp_err"></span>
                                         
                                     </div>                                   
                                 </div>

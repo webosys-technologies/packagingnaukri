@@ -144,11 +144,10 @@ class Home extends CI_Controller
                     $subject = "Email Verification";
                     $txt=$rand.' is your OTP for verifying Email Id on packagingnaukri.com.';
                                                                
-                 
+                     $this->session->set_userdata(array('email_otp'=>$rand));
                        $success=  mail($to,$subject,$txt,$headers); 
                        if($success)
-                       {
-                           $this->session->set_userdata(array('email_otp'=>$rand));
+                       {                           
                            return true;
                        }else{
                            return false;
@@ -157,20 +156,31 @@ class Home extends CI_Controller
             
         }
         
-        function login_detail_email($email)
+        function login_detail_email($data)
         {
              $headers = "From: ". "team@packagingnaukri.com ";
                     $headers .= ". PackagingNaukari-Team" . "\r\n";
                     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    $to = $email;
+                    $to = $data['email'];
                     $subject = "Login Details";
-                    $txt=$rand.' is your OTP for verifying Email Id on packagingnaukri.com.';
+                    $txt='<html>
+                            <body>
+                            <span>Hello </span>'.$data['fname'].'
+                                <br><span>Thank You for Register with Packaging Naukri</span><br><br>
+                                You can now login with following login details.<br><br>
+                                <span>Username: </span>'.$data['email'].'
+                                <br><span>Password: </span>'.$data['password'].'<br><br>
+                                    <span>Thanks & Regards</span><br>
+                                    <span>Packaging Team</span><br>
+                                    <a href="'.  base_url().'Home" target="_blank">'.base_url().'</a>
+                            </body>
+                            </html>';
                                                                
                  
                        $success=  mail($to,$subject,$txt,$headers); 
                        if($success)
                        {
-                           $this->session->set_userdata(array('email_otp'=>$rand));
+//                           $this->session->set_userdata(array('email_otp'=>$rand));
                            return true;
                        }else{
                            return false;
@@ -204,13 +214,27 @@ class Home extends CI_Controller
         function register_to_apply()
         {
             $form=$this->input->post();
+            
+            $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+             $passcode = array(); 
+             $alpha_length = strlen($alphabet) - 1; 
+             for ($i = 0; $i < 8; $i++) 
+             {
+                 $n = rand(0, $alpha_length);
+                 $passcode[] = $alphabet[$n];
+             }
+             $pwd= implode($passcode);
+            
+            
+          
             if($form['otp']==$this->session->userdata('email_otp'))
             {
                 $sys=$this->System_model->source_name();
                 $data=array('member_fname'=>$form['fname'],
-                            'member_lname'=>$form['fname'],
-                            'member_email'=>$form['fname'],
-                            'member_mobile'=>$form['fname'],
+                            'member_lname'=>$form['lname'],
+                            'member_email'=>$form['member_email'],
+                            'member_password'=>$pwd,
+                            'member_mobile'=>$form['mobile'],
                             'member_anual_salary'=>$form['current'],
                             'member_created_at'=>date('Y-m-d'),
                             'member_status'=>'1',
@@ -218,24 +242,48 @@ class Home extends CI_Controller
                             'member_experience'=>$form['exp'],);
                 
                 $mem_id=$this->Members_model->member_add($data);
+                if($mem_id)
+                {
+                     if (isset($_FILES['resume']['name'])) {
+    if (0 < $_FILES['resume']['error']) {
+        echo 'Error during file upload' . $_FILES['resume']['error'];
+    } else {
+
+        $rand=  mt_rand(1111,9999);
+        $name = $_FILES["resume"]["name"];
+        $ext = end((explode(".", $name)));
+        $filename='resume_'.date('Y-m-d_H.i.s').".".$ext;
+        move_uploaded_file($_FILES['resume']['tmp_name'],'resume/'.$filename);
+       
+            
+                $where=array('member_id'=>$mem_id);
+               $data=array('member_resume'=>'resume/'.$filename);
+               $res=$this->Members_model->member_update($where,$data);                     
+         
+    }
+       }
+                }
                 
                 $emp=array('employment_notice_period'=>$form['notice'],
                             'employment_current'=>$form['location'],
                             );
-                $job=$this->jobs_model->job_by_id($form['apply_job_id']);
+                $job=$this->Jobs_model->job_by_id($form['apply_job_id']);
                 $this->Employments_model->insert_employment($emp);
                 
                 $apply=array('member_id'=>$mem_id,
                             'job_id'=>$form['apply_job_id'],
                             'company_id'=>$job->company_id,
-                            'recruitre_id'=>$job->recruiter_id,
+                            'recruiter_id'=>$job->recruiter_id,
                             'apply_at'=>date("Y-m-d"),
                             'apply_status'=>"1");
                 
-                $this->Applied_model->apply_job($apply);
-                
+                $this->Applied_jobs_model->apply_job($apply);
+                $email_data=array('email'=>$form['member_email'],
+                                  'password'=>$pwd,
+                                  'fname'=>$form['fname']);
+                $this->login_detail_email($email_data);
                 echo json_encode(array('success'=>'Job Applied Successfully'));
-                $this->session->set_flashdata('success','Register and Job Applied Successfully');  
+                $this->session->set_flashdata('success','Registered and Job Applied Successfully. check login detail on given email id');  
                 $this->session->unset_userdata('email_otp');
             }else{
                 echo json_encode(array('otp_err'=>'Wrong OTP'));
@@ -243,6 +291,35 @@ class Home extends CI_Controller
             
            
         }
+        
+        function asf()
+        {
+            if (isset($_FILES['resume']['name'])) {
+    if (0 < $_FILES['resume']['error']) {
+        echo 'Error during file upload' . $_FILES['resume']['error'];
+    } else {
+
+        $rand=  mt_rand(1111,9999);
+        $name = $_FILES["resume"]["name"];
+        $ext = end((explode(".", $name)));
+        $filename='resume_'.date('Y-m-d_H.i.s').".".$ext;
+        move_uploaded_file($_FILES['resume']['tmp_name'], 'resume/' . $filename);
+       
+        if(file_exists('resume/'.$filename))
+        {
+            
+                $where=array('member_id'=>$mem_id);
+               $data=array('member_resume'=>'resume/'.$filename);
+               $res=$this->Members_model->member_update($where,$data);
+               
+                               
+        }   else{
+            echo json_encode(array('error'=>"Something Wrong"));
+        }               
+
+    }
+       }
+         }
         
         function apply_job()
         {
@@ -258,48 +335,6 @@ class Home extends CI_Controller
             if(empty($check))
             {   
               
-//        $this->send_otp($form['mobile']);
-//         $job=$this->Jobs_model->get_job_by_id($form['job_id']);       
-//         
-//        $rand=  mt_rand(1111,9999);
-//        $name = $_FILES["resume"]["name"];
-//        $ext = end((explode(".", $name)));
-//        $filename='resume_'.date('Y-m-d_H.i.s').".".$ext;
-//        move_uploaded_file($_FILES['resume']['tmp_name'], 'resume/' . $filename);
-//       
-//        if(file_exists('resume/'.$filename))
-//        {
-//            if(file_exists($data->member_resume))
-//            {
-//            unlink($data->member_resume);
-//         $where=array('member_id'=>$data->member_id);
-//        $resume=array('member_resume'=>'resume/'.$filename);
-//         $res=$this->Members_model->member_update($where,$resume);
-//         
-//            
-//            $this->Applied_jobs_model->apply_job(array('job_id'=>$form['job_id'],
-//                                                        'recruiter_id'=>$job->recruiter_id,
-//                                                        'company_id'=>$job->company_id,
-//                                                        'member_id'=>$data->member_id,
-//                                                        'apply_at'=>  date('Y-m-d')));
-//            echo json_encode(array('success'=>"Applied Successfully"));
-//        
-//            }else{
-//                $where=array('member_id'=>$data->member_id);
-//               $resume=array('member_resume'=>'resume/'.$filename);
-//               $res=$this->Members_model->member_update($where,$resume);
-//               
-//                $this->Applied_jobs_model->apply_job(array('job_id'=>$form['job_id'],
-//                                                        'recruiter_id'=>$job->recruiter_id,
-//                                                        'company_id'=>$job->company_id,
-//                                                        'member_id'=>$data->member_id,
-//                                                        'apply_at'=>  date('Y-m-d')));
-//               
-//               echo json_encode(array('success'=>"Applied Successfully"));               
-//            }
-//        }   else{
-//            echo json_encode(array('error'=>"Something Wrong"));
-//        }   
        echo json_encode(array('email'=>$form['email'],
                               'job_id'=>$form['job_id']));
 
