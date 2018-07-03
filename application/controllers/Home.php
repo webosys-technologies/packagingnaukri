@@ -231,7 +231,7 @@ class Home extends CI_Controller
             {
                 $sys=$this->System_model->source_name();
                 $data=array('member_fname'=>$form['fname'],
-                            'member_lname'=>$form['fname'],
+                            'member_lname'=>$form['lname'],
                             'member_email'=>$form['member_email'],
                             'member_password'=>$pwd,
                             'member_mobile'=>$form['mobile'],
