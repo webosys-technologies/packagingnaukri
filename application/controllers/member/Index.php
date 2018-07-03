@@ -129,9 +129,9 @@ class Index extends CI_Controller
                        $member_otp = $this->input->post('member_otp');
                        $where=array('member_mobile'=>$member_email,
                          'member_otp'=>$member_otp); 
-                       $res=$this->Members_model->login_with_otp($where);     
-
-            if($res)
+//                       $res=$this->Members_model->login_with_otp($where);     
+                        $res=$this->Members_model->member_info_by_mobile($member_email);
+            if($this->input->post('member_otp')==$this->session->userdata('member_otp'))
             {    
                 $source=$this->source_verification($res);
                     if($source)
@@ -174,11 +174,12 @@ class Index extends CI_Controller
             } 
               
               
-          }else{
-         $res=$this->Members_model->login_with_otp($where);
+          }
+          else{
+         $res=$res=$this->Members_model->member_info_by_mobile($member_email);
          
 
-            if($res)
+            if($this->input->post('member_otp')==$this->session->userdata('member_otp'))
             {       
                     $source=$this->source_verification($res);
                     if($source)
@@ -360,6 +361,7 @@ class Index extends CI_Controller
                      $rand=mt_rand(000000,999999);
                       $where=array('member_mobile'=>$email);
                 $data=array('member_otp'=>$rand);
+                $this->session->set_userdata(array('member_otp'=>$rand));
                 $this->Members_model->member_update($where,$data);
      //Your authentication key
 
@@ -370,7 +372,7 @@ $authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
 $mobileNumber = $email;
 //Sender ID,While using route4 sender id should be 6 characters long.
 
-$senderId = "pkgnau";
+$senderId = "PKGNAU";
 //Your message to send, Add URL encoding here.
 
 $message =$rand.' is your OTP for verifying mobile number on packagingnaukri.com.';
@@ -439,7 +441,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
             $res=$this->Members_model->check_if_email_exist($email);
             if($res)
             {
-                echo json_encode(array('email_error'=>'This email is not registered'));
+                echo json_encode(array('email_error'=>'This Username is not registered'));
             }else{
                 
                 $send=$this->email_otp($email);
@@ -458,6 +460,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                 $where=array('member_email'=>$email);
                 $data=array('member_otp'=>$rand);
                 $this->Members_model->member_update($where,$data);
+                $this->session->set_userdata(array('member_otp'=>$rand));
                               
                 
                     $headers = "From: support@Packagingnaukari.in";
@@ -466,7 +469,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                     $to = $email;
                     $subject = "Welcome To Packaging Naukari";
 
-                    $txt = $rand;  
+                    $txt = $rand.' is your OTP for verifying Email Id on packagingnaukri.com.';  
                                             
                  
                        $success=  mail($to,$subject,$txt,$headers); 
@@ -814,11 +817,11 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
             $source=ucfirst($this->System_model->source_name());
           $sys=$this->System_model->get_system_info($source);
            
-          if ($sys->source_status) 
-            {              
-                return True;               
-            }
-            else{
+//          if ($sys->source_status) 
+//            {              
+//                return True;               
+//            }
+//            else{
 
                     if ($source == $data->member_source) {
 
@@ -827,7 +830,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                    }else{
                     return false;
                    }
-            }
+//            }
         }
 
         public function show_cities($state)
