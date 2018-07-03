@@ -176,7 +176,7 @@ class Index extends CI_Controller
               
           }
           else{
-         $res=$res=$this->Members_model->member_info_by_mobile($member_email);
+               $res=$this->Members_model->member_info_by_email($member_email);
          
 
             if($this->input->post('member_otp')==$this->session->userdata('member_otp'))
