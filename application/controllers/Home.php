@@ -374,7 +374,7 @@ echo json_encode(array('otp_success'=>'OTP sent Successfully'));
                 $email_data=array('email'=>$form['email'],
                                   'password'=>$pwd,
                                   'fname'=>$form['fname']);
-//                $this->login_detail_email($email_data);
+                $this->login_detail_email($email_data);
                 $this->login_detail_msg($email_data);
                 echo json_encode(array('success'=>'Job Applied Successfully'));
                 $this->session->set_flashdata('success','Job Applied Successfully. check login detail on given email id and mobile Number');  
