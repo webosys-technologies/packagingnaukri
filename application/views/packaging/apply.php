@@ -169,6 +169,12 @@
                  $("#apply_otp_err").html(data.apply_otp_err);
                 $("#register_apply_btn").attr("disabled",false);  
              }
+             
+              if(data.apply_email_err)
+             {
+                 $("#apply_email_err").html(data.apply_email_err);
+                $("#register_apply_btn").attr("disabled",false);  
+             }
           
             
             if(data.success)

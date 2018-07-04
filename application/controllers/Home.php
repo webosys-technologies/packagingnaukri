@@ -316,8 +316,9 @@ echo json_encode(array('otp_success'=>'OTP sent Successfully'));
                  $passcode[] = $alphabet[$n];
              }
              $pwd= implode($passcode);
-            
-            
+         $em=$this->Members_model->member_info_by_email($form['email']);   
+            if(empty($em))
+            {
           if(!empty($form['otp']))
           {
             if($form['otp']==$this->session->userdata('apply_mobile_otp'))
@@ -386,6 +387,9 @@ echo json_encode(array('otp_success'=>'OTP sent Successfully'));
           }else{
               echo json_encode(array('apply_otp_err'=>'OTP Required'));
           }
+            }else{
+                echo json_encode(array('apply_email_err'=>'Email Already Exists.'));
+            }
             
            
         }       
