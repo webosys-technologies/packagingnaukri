@@ -110,7 +110,7 @@
       }      
       ?>
       
-<!--        <form action="" method="get" onsubmit="return validateForm()">
+        <form action="" method="get" onsubmit="return validateForm()">
         <div class="row">
            
             <div class="col-md-4 col-md-offset-2">
@@ -235,7 +235,7 @@
              <div class="row">
              <div class="col-md-offset-4"><span id="field_err" class="text-danger"></span></div>
              </div>
-         </form><br>-->
+         </form><br>
       
 <div class="table-responsive">
     <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -270,16 +270,55 @@
           // print_r($members);  
           
          foreach($members as $res){?>
-             <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->member_id; ?>" class="" ></td> --> 
+             <tr>   
                                         <td><?php echo $res->member_id;?></td>
                                         <td><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
                                          <?php $emp=$this->Employments_model->get_employment(array('member_id'=>$res->member_id))?>
                                         <td><?php if(isset($emp->employment_organization)){echo $emp->employment_organization; }?></td>
                                         <td><?php if(isset($emp->employment_designation)){echo $emp->employment_designation;} ?></td>
-                                        <td><?php if($res->member_experience){echo $res->member_experience." Year";} ?></td>
+                                        
+                                        <?php if(!empty($res->member_experience) && $res->member_experience!='0.0')
+                                            {
+                                            $exp=explode(".",$res->member_experience);
+                                            
+                                             if($exp[0]=="0")
+                                            {
+                                             $experience=$exp[1]." Month PA";  
+                                            }elseif($exp[1]=="0")
+                                            {
+                                              $experience=$exp[0]." Year PA";  
+                                            }else
+                                            {
+                                            $experience=$exp[0]." Year ". $exp[1]." Month PA";  
+                                            }                                           
+                                            
+                                            } else{
+                                            $experience="Not Mentioned";
+                                            }
+                                            ?>
+                                        
+                                        <td><?php echo $experience; ?></td>
                                         <td><?php if(isset($emp->employment_city)){echo $emp->employment_city;} ?></td>
-                                         <?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0' ){$sal=explode(".",$res->member_anual_salary);} ?>
-                                        <td><i class="fa fa-inr"></i> <?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0'){echo $sal[0]."Lac ". $sal[1]."Thousand "; echo "PA";} ?></td>
+                                         <?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0' ){
+                                          $sal=explode(".",$res->member_anual_salary);                                         
+                                          if($sal[0]=="0")
+                                            {
+                                             $salary= $sal[1]." Thousand";  
+                                            }elseif($sal[1]=="0")
+                                            {
+                                              $salary= $sal[0]." Lac ";  
+                                            }else
+                                            {
+                                           $salary= $sal[0]." Lac ". $sal[1]."Thousand PA";  
+                                            }
+                                            }
+                                            else
+                                            { $salary= "Not Mentioned";}
+                                         
+                                         ?>
+                                        <td>
+                                            <?php echo $salary;?>
+                                        </td>
                                         <td><?php echo $res->member_email;?></td>
                                        <td><?php echo $res->member_mobile;?></td>
                                        <td><?php echo $res->member_city;?></td>
