@@ -161,7 +161,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
              
          }
          
-        
+        #head_logo
+        {
+            width: 300px;
+            height: 60px;
+            padding: 3px 0px 1px 2px;
+        }
        
   </style>
   
@@ -170,8 +175,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!--start-home-->
 			<div id="home" class="header">
 				<div class="strip" style="background:white;">
-                                    <div class="logo" style="padding-left:80px;">
-			        <img id="head_logo" src="<?php echo  base_url().$system->system_logo;?>" width="300x" height="63px">
+                                    <div class="logo">
+			        <img id="head_logo" src="<?php echo  base_url().$system->system_logo;?>">
 				</div>
 					 <!--<div class="container">-->
 						<!--<p class="location"><i class="location"></i>16A, Honey Street (Green Door)</p>-->
