@@ -35,8 +35,45 @@
                  
             }
              });
+             
+          
+          
+          $('#min_salary').change(function() {
+           $("#max_salary").html("");
+         glob=$('#min_salary').val();
+//         $("#max_salary").append('<option value="'+dim+'">'+ dim +'Lac</option>');
+          for(var dim = glob; dim <=99; dim++)
+          {
+
+           $("#max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+           }
+         
+      });
+      
+       $('#min_exp').change(function() {
+           $("#max_exp").html("");
+           var temp=$('#min_exp').val();
+            for(var dim = temp; dim <=30; dim++)
+          {
+
+           $("#max_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+           }
+       });
+          
+          
+             
         });
-       
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
      
     var job_id;
    function login_to_apply(job_id)
@@ -476,7 +513,56 @@
                              </div>
                           
                                 <div class="row">
-                    <div class="col-md-6">                                
+                                    
+                                    <div class="col-md-6">
+                                    <label for="fname">Total Work Experience<span style="color:red">*</span></label>
+                        <div class="row"><div class="col-md-6">                                
+                                    <div class="form-group">
+                                       <!--<label></label>-->
+                                       <select name="min_exp" id="min_exp" class="form-control">
+                                           <option value="0">select year</option>
+                                            <script>
+                               var exp = 0;
+                               var exp_end = 30;
+                                var options = "";
+                                for(var dim = exp ; dim <=exp_end; dim++){
+//                                    alert(dim);
+                            $("#min_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              }
+                               </script>
+                                           </select>
+                                        <span class="text-danger" id="min_err"></span>
+                                        
+                                    </div>
+                                                                      
+                                </div>     
+                                     <div class="col-md-6">                                
+                                    <div class="form-group">
+                                       <!--<label></label>-->
+                                       <select name="max_exp" id="max_exp" class="form-control">
+                                           <option value="0">select month</option>
+                                            <script>
+                               var exp = 1;
+                               var exp_end = 12;
+                                var options = "";
+                                for(var dim = exp ; dim <=exp_end; dim++){
+//                                    alert(dim);
+                            $("#max_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              }
+                               </script>
+                                           </select>
+                                        
+                                        
+                                    </div>
+                                                                     
+                                </div> 
+                            <span class="text-danger" id="exp_err"></span> 
+                            </div>
+                            </div>
+                                    
+<!--                    <div class="col-md-6">                                
                                     <div class="form-group">
                                         <label for="fname">Total Work Experience<span style="color:red">*</span></label>
                                         <input type="text" placeholder="Total Work Experience" class="form-control required"  name="exp" required>
@@ -484,7 +570,7 @@
                                         
                                     </div>
                                                      
-                                </div>  
+                                </div>  -->
                     <div class="col-md-6">                                
                                     <div class="form-group">
                                         <label for="fname">Current Location<span style="color:red">*</span></label>
@@ -496,8 +582,53 @@
                                     
                                 </div>
                    </div>
+                                
+                                
+                                
+                                
                               <div class="row">  
-                               <div class="col-md-6">                                
+                                  <div class="col-md-6">
+                                      <div class="row">
+                                      <label>Current CTC (in Laks)<span style="color:red">*</span></label>
+                                  <div class="col-md-6">
+                        <!--<label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>-->
+                            <!--<label class="form-label">MIN Salary</label><span style="font-size:11px;">(per anual)</span>-->
+                         <select type="text" name="min_salary" id="min_salary" class="form-control">
+                             <option value="0">0 Lac</option>
+                           <script>
+                               var sal = 1;
+                               var sal_end = 99;
+                                var options = "";
+                                for(var dim = sal ; dim <=sal_end; dim++){
+
+                            $("#min_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+
+                              }
+                               </script>
+                        </select>
+                        <span class="text-danger"></span>
+                    </div>
+                                        
+                    <div class="col-md-6" style="top-padding:15px"> 
+                        <!--<label class="form-label">MAX Salary</label><span style="font-size:11px;">(per anual)</span>-->
+                       <select type="text" id="max_salary" name="max_salary" class="form-control">
+                           <option value="0">0 Thousand</option>
+                           <script>
+                               var sal = 1;
+                               var sal_end = 99;
+                                var options = "";
+                                for(var dim = sal ; dim <=sal_end; dim++){
+//                                    alert(dim);
+                            $("#max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              }
+                               </script> 
+                        </select>
+                        
+                    </div> </div>
+                                      <span class="text-danger" id="current_err"></span>
+                                      </div>
+<!--                               <div class="col-md-6">                                
                                     <div class="form-group">
                                         <label for="fname">Current CTC (in Laks)<span style="color:red">*</span></label>
                                         <input type="text" placeholder="Current CTC" class="form-control required" value=""  name="current"  required>
@@ -512,9 +643,9 @@
                                         <span class="text-danger" id="err"></span>
                                         
                                     </div>                                   
-                                </div>
+                                </div>-->
                                   </div>
-                                
+                                <br>
                                 <div class="row">
                                  <div class="col-md-6">                                
                                     <div class="form-group">

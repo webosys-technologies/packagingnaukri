@@ -329,11 +329,11 @@ echo json_encode(array('otp_success'=>'OTP sent Successfully'));
                             'member_email'=>$form['email'],
                             'member_password'=>$pwd,
                             'member_mobile'=>$form['mobile'],
-                            'member_anual_salary'=>$form['current'],
+                            'member_anual_salary'=>$form['min_salary'].".".$form['max_salary'],
                             'member_created_at'=>date('Y-m-d'),
                             'member_status'=>'1',
                             'member_source'=>  ucfirst($sys),
-                            'member_experience'=>$form['exp'],);
+                            'member_experience'=>$form['min_exp'].".".$form['max_exp'],);
                 
                 $mem_id=$this->Members_model->member_add($data);
                 if($mem_id)

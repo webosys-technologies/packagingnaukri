@@ -42,7 +42,7 @@
               $("#location_err").html("Please Enter Location");
           }
           
-          if($('[name="current"]').val()!="")
+          if($('[name="min_salary"]').val()!="0" || $('[name="max_salary"]').val()!="0")
           {
                current=true;
               $("#current_err").html("");
@@ -52,9 +52,8 @@
           }
           
                    
-          if($('[name="exp"]').val()!="")
-          {
-               exp=true;
+          if($('[name="min_exp"]').val()!="0" || $('[name="max_exp"]').val()!="0")
+          {               exp=true;
               $("#exp_err").html("");
           }else{
                exp=false;
