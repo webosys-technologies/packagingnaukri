@@ -198,16 +198,16 @@ To provide the right opportunity to the every qualified packaging professional, 
 	<div class="container">
 		<center><h3><b>OUR CUSTOMERS !!</b></h3></center>          
   <section style="padding-top: 100px; padding-bottom: 100px;" class="logoes slider content">
-      <?php $company=$this->Companies_model->get_recent_company();
+      <?php $customer=$this->Customer_model->getall_customer();
              
-      if(isset($company)) 
+      if(isset($customer)) 
     {    $i=0;
-          foreach($company as $comp){
+          foreach($customer as $cust){
 //          if(exists($comp->company_logo))
 //          {
           ?>
            <div>
-        <img src="<?php echo  base_url().$comp->company_logo;?>" height="100px" width="auto">   
+        <img src="<?php echo  base_url().$cust->customer_logo;?>" height="100px" width="auto">   
       </div>
           <?php
           }
