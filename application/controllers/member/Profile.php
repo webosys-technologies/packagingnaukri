@@ -52,6 +52,8 @@ class Profile extends CI_Controller
                   'member_lname'=>  $form['lname'],
                   'member_dob'=>  $form['dob'],
                   'member_city'=>  $form['city'],
+                  'member_state'=>  $form['state'],
+                  'member_country'=>  $form['country'],
                   'member_gender'=> $form['gen'],
                   'member_email'=>$form['email'],
                   'member_mobile'=>$form['mobile'],
