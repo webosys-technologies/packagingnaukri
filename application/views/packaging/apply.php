@@ -4,7 +4,7 @@
        }
            </style>
          
-           
+   <script src="<?php echo base_url();?>assets/js/apply_job_validation.js" type="text/javascript"></script>        
            <script>
           
           
@@ -44,8 +44,7 @@
        $("#show_pass_box").hide();
        $("#job_id").val(job_id);
        $("#myModal").modal('show');
-//       $(".apply").hide('modal');
-       
+//       $(".apply").hide('modal');       
    }
    
    function otp_to_apply()
@@ -82,58 +81,10 @@
       }); 
    }
    
-   function register_to_apply()
-   {
-       var val=validation();
-       if(val)
-       {
-                  var data = new FormData(document.getElementById("register_to_apply"));
-       var url = "<?php echo site_url('index.php/Home/register_to_apply')?>";
-           
-       $.ajax({               
-            url : url,
-            type: "POST",
-            async: false,
-            processData: false,
-            contentType: false,            
-            data: data,
-            dataType: "JSON",
-        success: function(data)
-        {  
-             $("#apply_btn").attr('data-target',"");
-             if(data.otp_err)
-             {
-                 $("#apply_otp_err").html(data.otp_err);
-             }
-          
-            
-            if(data.success)
-            {
-                location.reload();
-//                $("#mobile_err").html(data.mobile_err);
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {            
-//          alert('Error...!');
-        }
-      });
-           
-       }
-       
-   }
    
-   function validation()
-   {
-       var fname;
-       var lname;
-       var location;
-       var current;
-       var expected;
-       var exp;
-       var notice;
-       
-    var number=$("#mobile").val();
+      function send_mobile_otp()
+   { 
+           var number=$("#mobile").val();
       var num_length=number.length;
         if(number!='')
             {                
@@ -155,113 +106,104 @@
                  mobile=false;                 
                  $("#mobile_err").html("Please Enter Mobile Number");
              }
-             
-          if($('[name="location"]').val()!="")
-          {
-             
-              location=true;
-              $("#location_err").html("");
-          }else{
-               location=false;
-              $("#location_err").html("Please Enter Location");
-          }
-          
-          if($('[name="current"]').val()!="")
-          {
-               current=true;
-              $("#current_err").html("");
-          }else{
-               current=false;
-              $("#current_err").html("Please Enter Current CTC");
-          }
-          
-                   
-          if($('[name="exp"]').val()!="")
-          {
-               exp=true;
-              $("#exp_err").html("");
-          }else{
-               exp=false;
-              $("#exp_err").html("Please Enter Experience");
-          }
-          
-          
-          if($('[name="notice"]').val()!="")
-          {
-              notice=true;
-              $("#notice_err").html("");
-          }else{
-              notice=false;
-              $("#notice_err").html("Please Enter Notice Period.");
-          }
-          
-          if($('[name="fname"]').val()!="")
-          {
-               fname=true;
-              $("#fname_err").html("");
-          }else{
-              fname=false;
-              $("#fname_err").html("Please Enter First Name");
-          }
+        
+       if(mobile==true)
+       {
+          $("#otp_send_btn").attr("disabled",true);
+//       var data = new FormData(document.getElementById("otp_apply_form"));
+       var url = "<?php echo site_url('index.php/Home/send_mobile_otp/')?>"+number;
            
-          if($('[name="lname"]').val()!="")
-          {
-               lname=true;
-              $("#lname_err").html("");
-          }else{
-               lname=false;
-              $("#lname_err").html("Please Enter Last Name");
-          }
-          
-          if(resume==true)
-          {
-               $("#resume_err").html("");
-             
-          }else{
-                  $("#resume_err").html("Please Select Resume");
-          }
-             
-             
-             if(mobile==true && fname==true && lname==true && location==true && exp==true && notice==true && current==true && resume==true)
-             {
-//                 alert();
-                 return true;
-             }else{
-                 return false;
-             }
+       $.ajax({               
+            url : url,
+            type: "GET",                      
+            dataType: "JSON",
+        success: function(data)
+        {  
+           
+           if(data.mobile_err)
+           {
+               $("#mobile_err").html(data.mobile_err);
+           }else{
+               $("#otp_send_btn").attr("disabled",false);
+           }
+           
+           if(data.otp_success)
+           {
+               $("#otp_success_msg").html(data.otp_success);
+           }
+         
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {            
+          alert('Error...!');
+        }
+      }); 
+           }
    }
    
+   
+   
+   function register_to_apply()
+   {
+//       $("#register_apply_btn").attr("disabled",true);
+       
+       var val=validation();
+       if(val)
+       {
+                  var data = new FormData(document.getElementById("register_to_apply"));
+       var url = "<?php echo site_url('index.php/Home/register_to_apply')?>";
+           
+       $.ajax({               
+            url : url,
+            type: "POST",
+            async: false,
+            processData: false,
+            contentType: false,            
+            data: data,
+            dataType: "JSON",
+        success: function(data)
+        {  
+             $("#apply_btn").attr('data-target',"");
+             if(data.apply_otp_err)
+             {
+                 $("#apply_otp_err").html(data.apply_otp_err);
+                $("#register_apply_btn").attr("disabled",false);  
+             }
+             
+              if(data.apply_email_err)
+             {
+                 $("#apply_email_err").html(data.apply_email_err);
+                $("#register_apply_btn").attr("disabled",false);  
+             }
+          
+            
+            if(data.success)
+            {
+                location.reload();
+//                $("#mobile_err").html(data.mobile_err);
+            }else{
+                
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {            
+//          alert('Error...!');
+        }
+      });
+           
+       }
+      
+       
+   }
+   
+   
+      
+      
      
                
                  function apply() { 
-         $("#job_err").html("");            
-     var sEmail=$("#email").val();
-     
-        if(sEmail!='')
-            {  sEmail = $('#email').val();
-                  
-                   var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
-                   if (filter.test(sEmail))                    
-                    {    
-                        
-                      $('#email_id_err').html("");
-                      email=true;                 
-                    }
-                    else
-                    {   
-                        email=false;
-                       $('#email_id_err').html("Invalid Email Id"); 
-                     }
-            }else{
-                 
-                 $("#email_id_err").html("Please Enter Email ID");
-                 email=false;
-             }
-             
-            
-      
-        if(email==true)
-        {
+         $("#job_err").html("");       
+       
        var data = new FormData(document.getElementById("apply_job"));
        var url = "<?php echo site_url('index.php/Home/apply_job')?>";
            
@@ -279,7 +221,7 @@
            
            if(data.email_id_err)
            {
-               $('[name="member_email"]').val(sEmail);
+               
                $('#apply_job_id').val(data.job_id);
                $("#email_id_err").html(data.email_id_err);
                 $("#apply_btn").attr('data-target',"#register_modal");
@@ -315,7 +257,7 @@
         }
       });
       
-    }
+    
     }
                </script>
         
@@ -365,7 +307,7 @@
     <div class="row">
                     <div class="col-md-6">
                                 <div class="form-group">
-					<label for="name">Email</label><span style="color:red">*</span>
+					<label for="name">Email / Mobile</label><span style="color:red">*</span>
 					<input class="form-control" name="email" id="email" required="" type="text"  value="" /><span class="text-danger" id="name_err"></span>
 					<span class="text-danger" id="email_id_err"></span>
 				</div>
@@ -446,7 +388,7 @@
      <!-- Bootstrap modal -->
   <div class="modal fade" id="register_modal" role="dialog">
   <div class="modal-dialog">
-    <div class="modal-content">
+      <div class="modal-content" style="background:#F2F3F4;">
       <div class="modal-header" style="color:#fff; background-color:#338cbf" >
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
        <center> <h3 class="modal-title">Apply Job</h3></center>
@@ -462,7 +404,7 @@
                     <div class="col-md-12">
                                 <!--<h4 style="color:#02B645;">Upload Resume</h4>-->
                                 <!--<hr style="border-top: 1px solid #ccc;">-->
-                                <input type="hidden" value="" id="member_email" name="member_email">
+                                <!--<input type="hidden" value="" id="member_email" name="member_email">-->
                                 <input type="hidden" name="apply_job_id" id="apply_job_id"  value="">
                    <div class="row">
                                 <div class="col-md-6">                                
@@ -487,26 +429,51 @@
                              
                             
                                 <div class="row">
-                     <div class="col-md-6  ">                                
+                              <div class="col-md-6  ">                                
                                     <div class="form-group">
                                         <label for="fname">Mobile<span style="color:red">*</span></label>
                                         <input type="text" placeholder="Mobile No" class="form-control required" id="mobile"  name="mobile" maxlength="11" required>
                                         <span class="text-danger" id="mobile_err"></span>                                        
                                     </div>
                                     
+                                 </div>  
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                      <br>
+                                        <a href="#" onclick="send_mobile_otp()" id="otp_send_btn" class="btn btn-warning">Send OTP</a>
+                                    </div>
+                                    </div>
+                               </div>  
+                                
+                               
+                                 <div class="row">                                    
+                                 <div class="col-md-12">                                
+                                    <div class="form-group">                                        
+                                        <label for="fname">Enter OTP<span style="color:red">*</span><span class="text-success" id="otp_success_msg"></span></label>
+                                        <input type="text" placeholder="Enter OTP" class="form-control required" id=""  name="otp"  required>
+                                        <span class="text-danger" id="apply_otp_err"></span>                                        
+                                    </div>                                   
+                                </div>
+                                    </div>
+                                
+                                <div class="row">  
                                     
-                     </div>   
-                                   
-                    <div class="col-md-6">
+                           <div class="col-md-6">                                
+                                    <div class="form-group">                                        
+                                        <label for="fname">Email<span style="color:red">*</span></label>
+                                        <input type="text" placeholder="Enter Email" class="form-control required" id="apply_email"  name="email"  required>
+                                        <span class="text-danger" id="apply_email_err"></span>                                        
+                                    </div>                                   
+                                </div>          
+                         <div class="col-md-6">
                                 <div class="form-group">
 					<label for="name">Upload CV:</label><span style="color:red">*</span>
 					<input class="form-control" name="resume" id="resume" minlength="2" required="" type="file"  value="" /><span class="text-danger" id="name_err"></span>
 					<span class="text-danger" id="resume_err"></span>
 				</div>
-                        </div>
-                                 
+                         </div>                               
                    
-                  </div>
+                             </div>
                           
                                 <div class="row">
                     <div class="col-md-6">                                
@@ -542,7 +509,7 @@
                                     <div class="form-group">
                                         <label for="fname">Expected CTC (in Laks)</label>
                                         <input type="text" placeholder="Expected CTC" class="form-control required"  name="expected"  required>
-                                        <span class="text-danger" id="mobile_err"></span>
+                                        <span class="text-danger" id="err"></span>
                                         
                                     </div>                                   
                                 </div>
@@ -557,23 +524,7 @@
                                         
                                     </div>                                   
                                 </div>
-                                    </div>
-                                <div class="row">
-                                    <span class="text-success">OTP is successfully send to your Email Address</span>
-                                </div>
-                                <div class="row">
-                                    
-                                 <div class="col-md-6">                                
-                                    <div class="form-group">
-                                        
-                                        <label for="fname">Enter OTP<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Enter OTP" class="form-control required"  name="otp"  required>
-                                        <span class="text-danger" id="apply_otp_err"></span>
-                                        
-                                    </div>                                   
-                                </div>
-                                    </div>
-                                
+                                    </div>                            
                                                
                                
                              
@@ -585,7 +536,7 @@
     
         </div><!-- /.modal-content -->
         <div class="modal-footer">
-             <button type="button" onclick="register_to_apply()" class="btn btn-success btn-sm" name="submit">Apply</button>
+             <button type="button" onclick="register_to_apply()" id="register_apply_btn" class="btn btn-success" name="">Apply</button>
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
   <!-- End Bootstrap modal --></div>     
