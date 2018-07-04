@@ -109,7 +109,7 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <button type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#myModal"><i class="fa fa-key"></i> Change Password</button>
+                      <button type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#password_modal"><i class="fa fa-key"></i> Change Password</button>
                     </div>
                      
                     <div class="pull-right">
@@ -189,9 +189,117 @@
         </section>
         <!-- /.sidebar -->
       </aside>
- 
+      <script>
+          
+          function change_password()
+          {
+   
+                 var pass_val;
+           
+                 var pass=$('#password').val();
+                 var cpass=$('#cpassword').val();
+                     var length=pass.length;
+                   //  var confirm_pass=$('#cpassword').val();
+                   //  var lenght1=confirm_pass.length;
+                     if(length<8)
+                     {
+                     $("#password_err").html("Enter Password at least 8 character");
+                      pass_val=false;
+                     }else if(pass!=cpass)
+                     {
+                         $("#password_err").html("");
+                          $("#cpassword_err").html("Password does not match");
+                           pass_val=false;
+                     }else{
+                         $("#password_err").html("");
+                         $("#cpassword_err").html("");
+                          pass_val=true;
+                     }
+                         
+                 
+                                            
+                    
+                    
+          
+          
+          
+          
+   if(pass_val)
+   {
+       var data = new FormData(document.getElementById("password_form"));
+       var url = "<?php echo base_url()?>member/Index/change_password";
+           
+       $.ajax({               
+            url : url,
+            type: "POST",
+            async: false,
+            processData: false,
+            contentType: false,            
+            data: data,
+            dataType: "JSON",
+        success: function(json)
+        {  
+           if(json.success)
+           {
+               location.reload();
+           }
+          
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {            
+//          alert('Error...!');
+        }
+      }); 
+   }
+   }
+          
+      </script>
       
-      
+     <div class="modal fade" id="password_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" id="modal_dialog7">
+    <div class="modal-content">
+      <div style="background:#3c8dbc" class="modal-header">
+          
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Change Password</strong></h4></center>
+      </div>
+      <div style="background:#F2F3F4" class="modal-body">
+          <form action="" method="post" id="password_form">
+          <div class="row">
+              <div class="col-md-8 col-md-offset-2">
+                  <div class="row">
+                      <div class="col-md-12">
+                      <div class="form-group">
+                          <label>New Password :</label>
+                      <input type="password" class="form-control" name="password" id="password">
+                      <span class="text-danger" id="password_err"></span>
+                      </div>
+                          
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                      <div class="form-group">
+                           <label>Confirm Password :</label>
+                  <input type="password" class="form-control" name="cpassword" id="cpassword">
+                  <span class="text-danger" id="cpassword_err"></span>
+                  </div>
+                          
+                          </div>
+                  </div>
+                 </div>
+              <div class="col-md-2">
+              </div>
+     
+    </div><!-- /.modal-content -->
+    </form>
+  </div><!-- /.modal-dialog -->
+  <div class="modal-footer">
+      <button onclick="change_password()" class="btn btn-primary">Submit</button>
+  </div>
+</div> 
+         </div>
+         </div>
 
      
       

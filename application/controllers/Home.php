@@ -696,9 +696,9 @@ $senderId = "PKGNAU";
 //Your message to send, Add URL encoding here.
 
 $message ='Welcome To \r\n'
-        . 'PACKAGINGNAUKRI.COM \r\n \r\n'
+        . 'PACKAGINGNAUKRI.COM \r\n'
         . ''
-        . 'You can login next time with your registered EMAIL or MOBILE number \r\n  \r\n'
+        . 'You can login next time with your registered EMAIL or MOBILE number \r\n'
         . ''
         . 'Email: '.$data['email']
         . '\r\n Password: '.$data['password'];

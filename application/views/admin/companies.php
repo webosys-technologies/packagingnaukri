@@ -625,13 +625,23 @@ function delete_logo(id)
 
                                     </div>
                                     
-                                     <div class="col-md-6">                                
+                                     <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label>Status<span style="color: red">*</span></label>
+                                     <select name="status" class="form-control" >
+                                            <option value="1">Active</option>
+                                            <option value="0">Not Active</option>
+                                        </select>
+                                  </div>
+                                </div>
+                                    
+<!--                                     <div class="col-md-6">                                
                                       <div class="form-group">
                                          <label>Pincode</label>
                                          <input name="pincode" placeholder="Pincode" class="form-control" value="">
                                           <span class="text-danger" id="mobile_err"></span>                                        
                                       </div>                                                                      
-                                     </div>
+                                     </div>-->
                                </div>
                 
                                     
@@ -650,15 +660,7 @@ function delete_logo(id)
                         </div>  
                     </div>-->
                                <div class="row"> 
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label>Status<span style="color: red">*</span></label>
-                                     <select name="status" class="form-control" >
-                                            <option value="1">Active</option>
-                                            <option value="0">Not Active</option>
-                                        </select>
-                                  </div>
-                                </div>
+                               
                                    </div>
                              
     			 </form>	

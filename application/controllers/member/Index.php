@@ -723,9 +723,14 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
         
         if(isset($member_LoggedIn) || $member_LoggedIn == TRUE)
         {
-        	$this->load->view('member/change_password');
-                
+            
         	
+                $this->Members_model->member_update(array('member_id'=>$this->session->userdata('member_id')),
+                                                    array('member_password'=>$this->input->post('cpassword'))
+                                                    );
+        
+                $this->session->set_flashdata('success','password updated successfully');
+                echo json_encode(array('success'=>"password updated successfully"));
         }
         else
         {
