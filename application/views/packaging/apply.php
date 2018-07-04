@@ -146,7 +146,7 @@
         
        if(mobile==true)
        {
-          $("#otp_send_btn").attr("disabled",true);
+//          $("#otp_send_btn").attr("disabled",true);
 //       var data = new FormData(document.getElementById("otp_apply_form"));
        var url = "<?php echo site_url('index.php/Home/send_mobile_otp/')?>"+number;
            
