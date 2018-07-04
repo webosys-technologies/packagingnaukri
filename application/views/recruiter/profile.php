@@ -231,7 +231,9 @@ $("#img").change(function (e) {
             $('[name="address"]').val(data.recruiter_address);
             $('#state').val(data.recruiter_state);
             $('#city').append('<option value="'+data.recruiter_city+'">'+data.recruiter_city+'</option>');
+            $('#state').append('<option value="'+data.stateID+'">'+data.stateName+'</option>');
             $('[name="pincode"]').val(data.recruiter_pincode);
+            $('[name="country"]').val(data.recruiter_country);
 
            
                         
@@ -348,7 +350,7 @@ var country=el.val();
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <center><h4 style="color:white" id="title" class="modal-title">Perosonal Detail</h4></center>
+          <center><h4 style="color:white" id="title" class="modal-title">Personal Detail</h4></center>
         </div>
         <div class="modal-body" id="personal_body">         	
     				

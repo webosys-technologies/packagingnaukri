@@ -634,6 +634,7 @@ function delete_logo(id)
                                         </select>
                                   </div>
                                 </div>
+
                                     
 <!--                                     <div class="col-md-6">                                
                                       <div class="form-group">
@@ -642,6 +643,7 @@ function delete_logo(id)
                                           <span class="text-danger" id="mobile_err"></span>                                        
                                       </div>                                                                      
                                      </div>-->
+
                                </div>
                 
                                     
@@ -659,9 +661,11 @@ function delete_logo(id)
 
                         </div>  
                     </div>-->
+
                                <div class="row"> 
                                
                                    </div>
+
                              
     			 </form>	
     			</div>
