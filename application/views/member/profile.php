@@ -259,6 +259,7 @@ document.getElementById("passout").innerHTML = options;
         $("#edit_personal").click(function(){ 
            
             id=$("#member_id").val();
+
             method="edit_member";
             edit_form(id,method);
                 
@@ -334,29 +335,22 @@ document.getElementById("passout").innerHTML = options;
        
        
        
-        $("#state").change(function() {
-        
+        $("#state").change(function() {        
    var el = $(this) ;
               $("#city").html("");
-
-
+              $("#city").append('<option value="">--Select City--</option>');              
 var state=el.val();
-
         if(state)
         {
-           $("#city").html(""); 
       $.ajax({
        url : "<?php echo site_url('index.php/member/Profile/show_cities')?>/" + state,        
-       type: "GET",
-              
+       type: "GET",              
        dataType: "JSON",
        success: function(data)
-       {
-        
+       {        
           $.each(data,function(i,row)
-          {
-          
-              $("#city").append('<option value="'+ row.city_name +'">' + row.city_name+'</option>');
+          {          
+              $("#city").append('<option value="'+ row.cityName +'">' + row.cityName+'</option>');
           }
           );
        },
@@ -365,8 +359,37 @@ var state=el.val();
 //         alert('Error...!');
        }
      });
-     }
-    
+     }    
+ });  
+
+ $("#country").change(function() {        
+   var el = $(this) ;
+              $("#state").html("");
+              $("#city").html("");
+              $("#state").append('<option value="">--Select State--</option>');
+              $("#city").append('<option value="">--Select City--</option>');
+
+var country=el.val();
+        if(country)
+        {            
+      $.ajax({
+       url : "<?php echo site_url('index.php/home/show_states')?>/" + country,        
+       type: "GET",              
+       dataType: "JSON",
+       success: function(data)
+       {        
+          $.each(data,function(i,row)
+          {          
+              $("#state").append('<option value="'+ row.stateID +'">' + row.stateName+'</option>');
+          }
+          );
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+     }    
  });  
  
  
@@ -670,7 +693,8 @@ var edu_name=el.val();
                 }
                 $("#state").val(data.member_state);
                 $("#city").append('<option value="'+data.member_city+'">'+data.member_city+'</option>');
-                $("#city").val(data.member_city);
+                $("#state").append('<option value="'+data.stateID+'">'+data.stateName+'</option>');
+                $("#country").val(data.member_country);
                  if(data.member_marital_status)
                 {
                 $("#marital_status").val(data.member_marital_status);
@@ -1262,48 +1286,11 @@ var edu_name=el.val();
                                       <span class="text-danger" id="lname_err"></span>                                   
                                          </div>
                             </div><br>
-                                    
-                                     <div class="row">
-                    <div class="col-md-6">
-                        <label class="form-label">State</label><span style="color: red">*</span>
-                        <select name="state" id="state" class="form-control" required>
-                                    <option value="">-- Select State --</option>
-                                    <?php if(isset($states)){
-                                        foreach($states as $state)
-                                        { ?>
-                                           <option value="<?php echo $state->city_state; ?>"><?php echo $state->city_state; ?></option>
-                                       <?php }
-                                    }?>
-                                 
-                                    
-                                    <!--<option value="Maharashtra">Maharashtra</option>-->
-                        </select>
-                        <span class="text-danger"><?php echo form_error('state'); ?></span>
 
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">City</label><span style="color: red">*</span>
-                        <select name="city" id="city" class="form-control" required>
-                                    <option value="">-- Select City --</option>
-                                   
-                             </select>
-                        <span class="text-danger"><?php echo form_error('city'); ?></span>
-
-                    </div>
-                    </div><br>
-                            <div class="row">
-                             
-                                <div class="col-md-12  ">                             
+                                     <div class="row">                             
+                                <div class="col-md-6  ">                             
                                         <label for="fname">Address</label>
                                         <textarea name="address" id="address" value="" class="form-control" rows="5"></textarea>
-                                        <span class="text-danger" id="pincode_err"></span>                                                          
-                                </div>
-                                </div><br>
-                            
-                            <div class="row">                             
-                                <div class="col-md-6 col-md-6 col-sm-6 col-xs-12">                             
-                                        <label for="fname">Pincode</label>
-                                        <input type="text" name='pincode' value='' id="pincode" placeholder="Pincode" class="form-control">
                                         <span class="text-danger" id="pincode_err"></span>                                                          
                                 </div>
                                 <div class="col-md-6 col-md-6 col-sm-6 col-xs-12">                                   
@@ -1315,6 +1302,51 @@ var edu_name=el.val();
                                         </select>
                                       <span class="text-danger" id="marital_err"></span>                                   
                                          </div>
+                                </div><br>
+                            
+                                     <div class="row">
+                    <div class="col-md-6">
+                        <label class="form-label">Country</label><span style="color: red">*</span>
+                        <select name="country" id="country" class="form-control" required>
+                                    <option value="">-- Select Country --</option>
+                                    <?php if(isset($country)){
+                                        foreach($country as $country)
+                                        { ?>
+                                           <option value="<?php echo $country->countryID; ?>"><?php echo $country->countryName; ?></option>
+                                       <?php }
+                                    }?>
+                                 
+                                    
+                                    <!--<option value="Maharashtra">Maharashtra</option>-->
+                        </select>
+                        <span class="text-danger"><?php echo form_error('state'); ?></span>
+
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">State</label><span style="color: red">*</span>
+                        <select name="state" id="state" class="form-control" required>
+                                    <!--<option value="Maharashtra">Maharashtra</option>-->
+                        </select>
+                        <span class="text-danger"><?php echo form_error('state'); ?></span>
+
+                    </div>
+                    
+                    </div><br>
+                           
+                            <div class="row">
+                              <div class="col-md-6">
+                                    <label class="form-label">City</label><span style="color: red">*</span>
+                                    <select name="city" id="city" class="form-control" required>
+                                           
+                                     </select>
+                                <span class="text-danger"><?php echo form_error('city'); ?></span>
+
+                               </div>                             
+                                <div class="col-md-6 col-md-6 col-sm-6 col-xs-12">                             
+                                        <label for="fname">Pincode</label>
+                                        <input type="text" name='pincode' value='' id="pincode" placeholder="Pincode" class="form-control">
+                                        <span class="text-danger" id="pincode_err"></span>                                                          
+                                </div>
                             </div>
                                     
                         </div>

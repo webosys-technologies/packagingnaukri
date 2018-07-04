@@ -40,6 +40,8 @@ class Companies extends CI_Controller
         $form=$this->input->post();
         $id=$this->session->userdata('recruiter_id');
         $comp=$this->Companies_model->check_company($form['company']);
+            $sys=$this->session->userdata('recruiter_source');
+
         if(!empty($form['company']))
         {        
   if(!empty($form['state']) && $form['state']!="-- Select State --")
@@ -49,20 +51,14 @@ class Companies extends CI_Controller
         $data=array(
                   'recruiter_id'=>$id,
                    'company_name'=>$form['company'],
-                   'company_type'=>$form['type'],
-                   'company_email'=>$form['email'],
-                   'company_contact'=>$form['contact'],
                    'company_website'=>$form['website'],
                    'company_address'=>$form['address'],
                    'company_country'=>$form['country'],
-                   'company_country'=>$form['country'],
                    'company_state'=>$form['state'],
                    'company_city'=>$form['city'],
-                   'company_pincode'=>$form['pincode'],
-                   'company_establish_in'=>$form['established'],
-                   'company_multinational'=>$form['mnc'],
                    'company_created_at'=>date('Y-m-d'),
-                   'company_status'=>$form['status']
+                   'company_status'=>$form['status'],
+                   'company_source' =>$sys,
         );
         
           $res=$this->Companies_model->company_add($data);
@@ -103,20 +99,12 @@ class Companies extends CI_Controller
         
          $data=array(// 'recruiter_id'=>$id,
                    'company_name'=>$form['company'],
-                   'company_type'=>$form['type'],
-                   'company_email'=>$form['email'],
-                   'company_contact'=>$form['contact'],
                    'company_website'=>$form['website'],
                    'company_address'=>$form['address'],
                    'company_country'=>$form['country'],
-//                   'company_country'=>$form['country'],
                    'company_state'=>$form['state'],
                    'company_city'=>$form['city'],
-                   'company_pincode'=>$form['pincode'],
-                   'company_establish_in'=>$form['established'],
-                   'company_multinational'=>$form['mnc'],
-                   'company_created_at'=>date('Y-m-d'),
-                   'company_status'=>$status['status']
+                   'company_status'=>$form['status']
         );
          $result=$this->Companies_model->company_update(array('company_id' => $company_id),$data);
          

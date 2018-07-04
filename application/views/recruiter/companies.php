@@ -92,10 +92,8 @@
            <th>ID</th>
                                             <th>Company Name</th>
                                             <th>Logo</th>
-                                            <th>Email</th>
-                                            <th>Contact</th>
                                             <th>Location</th>
-                                            <th>Established</th>
+                                            <th>Created At</th>
                                              <th>Status</th>
                                             <th>Action</th>
          
@@ -112,8 +110,6 @@
                                         <td><?php echo $comp->company_id?></td>
                                             <td><?php echo $comp->company_name?></td>
                                             <td><img src="<?php echo base_url().$comp->company_logo;?>" width="80px" height="30px"></td>
-                                            <td><?php echo $comp->company_email?></td>
-                                            <td><?php echo $comp->company_contact?></td>
                                             <td><?php echo $comp->company_city?></td>
 				            <td><?php echo $comp->company_created_at?></td>
                                           <td> <?php if($comp->company_status==1)
@@ -169,6 +165,7 @@ $("#logo").change(function() {
   $("#state").change(function() {        
    var el = $(this) ;
               $("#city").html("");
+              $("#city").append('<option value="">--Select City--</option>');
 var state=el.val();
         if(state)
         {            
@@ -247,7 +244,6 @@ var country=el.val();
          $("#company_err").html(""); 
         $("#state_err").html(""); 
         $("#city_err").html(""); 
-         $('[name="city"]').html("");
               $("#state").append('<option value="">--Select State--</option>');
               $("#city").append('<option value="">--Select City--</option>');
          $("#remove_btn").html("");
@@ -324,6 +320,7 @@ var country=el.val();
             $('[name="pincode"]').val(data.company_pincode);
             $('[name="state"]').val(data.company_state);
              $('[name="city"]').append('<option value="'+data.company_city+'">'+data.company_city+'</option>');
+             $('[name="state"]').append('<option value="'+data.stateName+'">'+data.stateName+'</option>');
             $('[name="city"]').val(data.company_city);
             $('[name="country"]').val(data.company_country);
             $('[name="website"]').val(data.company_website);
@@ -475,41 +472,11 @@ var country=el.val();
                                                                        
                                 </div>
                                      </div>
-                                    <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Company Type</label>
-                                       
-                                    <input name="type" class="form-control" placeholder="MNC or Small Scale" value="">
-                                        <span class="text-danger" id="type_err"></span>
-                                      
-                                    </div>
-                                   
-                                </div>
-                         
-                                <div class="col-md-6">                                
-                                    <div class="form-group">
-                                        <label>Company Email</label>
-                                    <input name="email" placeholder="Company Email" class="form-control" value="">
-                                        <span class="text-danger" id="email_err"></span>
-                                        
-                                    </div>
-                                                                       
-                                </div>
-                               </div>
+                                    
                                     
                                 <div class="row">
-                                  <div class="col-md-6">                                
-                                      <div class="form-group">
-                                         <label>Contact</label>
-                                         <input name="contact" placeholder="Company Contact" class="form-control" value="">
-                                          <span class="text-danger" id="contact_err"></span>
-                                          
-                                      </div>
-                                                                        
-                                  </div>
-                               
-                                  <div class="col-md-6">
+                                                                
+                                  <div class="col-md-12">
                                      <label>Website</label>
                                      <input name="website" placeholder="Company Website" class="form-control" value="">
                                       <span class="text-danger" id="website_err"></span>
@@ -576,33 +543,7 @@ var country=el.val();
                                         <span id="city_err" class="text-danger"></span>
 
                                     </div>
-                                    
-                                     <div class="col-md-6">                                
-                                      <div class="form-group">
-                                         <label>Pincode</label>
-                                         <input name="pincode" placeholder="Pincode" class="form-control" value="">
-                                          <span class="text-danger" id="mobile_err"></span>                                        
-                                      </div>                                                                      
-                                     </div>
-                               </div>
-                
-                                    
-                     <div class="row">
-                          <div class="col-md-6">
-                           <label>Company Established</label>
-                                        <input name="established" placeholder="Established Year" class="form-control" value="">
-                            <span class="text-danger" id="gen_err"></span>
-
-                        </div>  
-                        <div class="col-md-6">
-                           <label>Company Multinational</label>
-                                        <input name="mnc" placeholder="Multinational" class="form-control" value="">
-                            <span class="text-danger" id="gen_err"></span>
-
-                        </div>  
-                    </div><br>
-                                 <div class="row"> 
-                                <div class="col-md-6">
+                                    <div class="col-md-6">
                                   <div class="form-group">
                                     <label>Status<span style="color: red">*</span></label>
                                      <select name="status" class="form-control" >
@@ -611,7 +552,8 @@ var country=el.val();
                                         </select>
                                   </div>
                                 </div>
-                                   </div>
+                               </div>
+                
                      </form>         
     			
     			</div>
