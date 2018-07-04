@@ -283,13 +283,13 @@
                                             
                                              if($exp[0]=="0")
                                             {
-                                             $experience=$exp[1]." Month PA";  
+                                             $experience=$exp[1]." Month ";  
                                             }elseif($exp[1]=="0")
                                             {
-                                              $experience=$exp[0]." Year PA";  
+                                              $experience=$exp[0]." Year ";  
                                             }else
                                             {
-                                            $experience=$exp[0]." Year ". $exp[1]." Month PA";  
+                                            $experience=$exp[0]." Year ". $exp[1]." Month ";  
                                             }                                           
                                             
                                             } else{
