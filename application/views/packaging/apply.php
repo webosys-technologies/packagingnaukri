@@ -38,27 +38,27 @@
              
           
           
-          $('#min_salary').change(function() {
-           $("#max_salary").html("");
-         glob=$('#min_salary').val();
-//         $("#max_salary").append('<option value="'+dim+'">'+ dim +'Lac</option>');
-          for(var dim = glob; dim <=99; dim++)
-          {
-
-           $("#max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
-           }
-         
-      });
-      
-       $('#min_exp').change(function() {
-           $("#max_exp").html("");
-           var temp=$('#min_exp').val();
-            for(var dim = temp; dim <=30; dim++)
-          {
-
-           $("#max_exp").append('<option value="'+dim+'">'+ dim +'</option>');
-           }
-       });
+//          $('#min_salary').change(function() {
+//           $("#max_salary").html("");
+//         glob=$('#min_salary').val();
+////         $("#max_salary").append('<option value="'+dim+'">'+ dim +'Lac</option>');
+//          for(var dim = glob; dim <=99; dim++)
+//          {
+//
+//           $("#max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+//           }
+//         
+//      });
+//      
+//       $('#min_exp').change(function() {
+//           $("#max_exp").html("");
+//           var temp=$('#min_exp').val();
+//            for(var dim = temp; dim <=30; dim++)
+//          {
+//
+//           $("#max_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+//           }
+//       });
           
           
              
@@ -527,7 +527,7 @@
                                 var options = "";
                                 for(var dim = exp ; dim <=exp_end; dim++){
 //                                    alert(dim);
-                            $("#min_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+                            $("#min_exp").append('<option value="'+dim+'">'+ dim +' year</option>');
 //                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
                               }
                                </script>
@@ -544,11 +544,11 @@
                                            <option value="0">select month</option>
                                             <script>
                                var exp = 1;
-                               var exp_end = 12;
+                               var exp_end = 11;
                                 var options = "";
                                 for(var dim = exp ; dim <=exp_end; dim++){
 //                                    alert(dim);
-                            $("#max_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+                            $("#max_exp").append('<option value="'+dim+'">'+ dim +' month</option>');
 //                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
                               }
                                </script>
@@ -601,7 +601,7 @@
                                 var options = "";
                                 for(var dim = sal ; dim <=sal_end; dim++){
 
-                            $("#min_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+                            $("#min_salary").append('<option value="'+dim+'">'+ dim +' Lac</option>');
 
                               }
                                </script>
@@ -613,7 +613,16 @@
                         <!--<label class="form-label">MAX Salary</label><span style="font-size:11px;">(per anual)</span>-->
                        <select type="text" id="max_salary" name="max_salary" class="form-control">
                            <option value="0">0 Thousand</option>
-                           <script>
+                           <option value="10">10 Thousand</option>
+                           <option value="20">20 Thousand</option>
+                           <option value="30">30 Thousand</option>
+                           <option value="40">40 Thousand</option>
+                           <option value="50">50 Thousand</option>
+                           <option value="60">60 Thousand</option>
+                           <option value="70">70 Thousand</option>
+                           <option value="80">80 Thousand</option>
+                           <option value="90">90 Thousand</option>
+<!--                           <script>
                                var sal = 1;
                                var sal_end = 99;
                                 var options = "";
@@ -622,12 +631,64 @@
                             $("#max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
 //                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
                               }
-                               </script> 
+                               </script> -->
                         </select>
                         
                     </div> </div>
                                       <span class="text-danger" id="current_err"></span>
                                       </div>
+                                  
+                                  
+                      <div class="col-md-6">
+                                      <div class="row">
+                                      <label>Expected CTC (in Laks)</label>
+                                  <div class="col-md-6">
+                        <!--<label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>-->
+                            <!--<label class="form-label">MIN Salary</label><span style="font-size:11px;">(per anual)</span>-->
+                         <select type="text" name="expected_min_salary" id="expected_min_salary" class="form-control">
+                             <option value="0">0 Lac</option>
+                           <script>
+                               var sal = 1;
+                               var sal_end = 99;
+                                var options = "";
+                                for(var dim = sal ; dim <=sal_end; dim++){
+
+                            $("#expected_min_salary").append('<option value="'+dim+'">'+ dim +' Lac</option>');
+
+                              }
+                               </script>
+                        </select>
+                        <span class="text-danger"></span>
+                    </div>
+                                        
+                    <div class="col-md-6" style="top-padding:15px"> 
+                        <!--<label class="form-label">MAX Salary</label><span style="font-size:11px;">(per anual)</span>-->
+                       <select type="text" id="expected_max_salary" name="expected_max_salary" class="form-control">
+                           <option value="0">0 Thousand</option>
+                           <option value="10">10 Thousand</option>
+                           <option value="20">20 Thousand</option>
+                           <option value="30">30 Thousand</option>
+                           <option value="40">40 Thousand</option>
+                           <option value="50">50 Thousand</option>
+                           <option value="60">60 Thousand</option>
+                           <option value="70">70 Thousand</option>
+                           <option value="80">80 Thousand</option>
+                           <option value="90">90 Thousand</option>
+<!--                           <script>
+                               var sal = 1;
+                               var sal_end = 99;
+                                var options = "";
+                                for(var dim = sal ; dim <=sal_end; dim++){
+//                                    alert(dim);
+                            $("#expected_max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              }
+                               </script> -->
+                        </select>
+                        
+                    </div> </div>
+                                      <span class="text-danger" id="current_err"></span>
+                                      </div>              
 <!--                               <div class="col-md-6">                                
                                     <div class="form-group">
                                         <label for="fname">Current CTC (in Laks)<span style="color:red">*</span></label>

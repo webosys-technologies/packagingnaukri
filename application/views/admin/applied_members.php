@@ -70,12 +70,51 @@
                                         <td style="cursor:pointer;" title="member info" onclick="view_member(<?php echo $res->member_id;?>)"><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
                                         <td><?php echo $res->job_title; ?></td>
                                         <?php $emp=$this->Employments_model->get_employment(array('member_id'=>$res->member_id))?>
-                                        <td><?php echo $emp->employment_organization; ?></td>
-                                        <td><?php echo $emp->employment_designation; ?></td>
-                                        <td><?php if($res->member_experience){echo $res->member_experience." Year";} ?></td>
-                                        <td><?php echo $emp->employment_city; ?></td>
-                                         <?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0' ){$sal=explode(".",$res->member_anual_salary);} ?>
-                                        <td><?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0'){echo $sal[0]." Lac ". $sal[1]." Thousand "; echo "PA";}  ?></td>
+                                        <td><?php if(!empty($emp->employment_organization)){
+                                            echo $emp->employment_organization;
+                                        }; ?></td>
+                                        <td><?php if(!empty($emp->employment_designation)){ echo $emp->employment_designation;} ?></td>
+                                        <?php if(!empty($res->member_experience) && $res->member_experience!='0.0')
+                                            {
+                                            $exp=explode(".",$res->member_experience);
+                                            
+                                             if($exp[0]=="0")
+                                            {
+                                             $experience=$exp[1]." Month PA";  
+                                            }elseif($exp[1]=="0")
+                                            {
+                                              $experience=$exp[0]." Year PA";  
+                                            }else
+                                            {
+                                            $experience=$exp[0]." Year ". $exp[1]." Month PA";  
+                                            }                                           
+                                            
+                                            } else{
+                                            $experience="Not Mentioned";
+                                            }
+                                            ?>
+                                        <td><?php echo $experience; ?></td>
+                                        <td><?php if(!empty($emp->employment_city)){echo $emp->employment_city;} ?></td>
+                                         <?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0' ){
+                                          $sal=explode(".",$res->member_anual_salary);                                         
+                                          if($sal[0]=="0")
+                                            {
+                                             $salary= $sal[1]." Thousand";  
+                                            }elseif($sal[1]=="0")
+                                            {
+                                              $salary= $sal[0]." Lac ";  
+                                            }else
+                                            {
+                                           $salary= $sal[0]." Lac ". $sal[1]."Thousand PA";  
+                                            }
+                                            }
+                                            else
+                                            { $salary= "Not Mentioned";}
+                                         
+                                         ?>
+                                       <td> 
+                                           <?php echo $salary; ?>
+                                        </td>
                                         <td><?php echo $res->member_city;?></td>
                                         <td><?php echo $res->member_email;?></td>
                                         <td><?php echo $res->member_mobile;?></td>
