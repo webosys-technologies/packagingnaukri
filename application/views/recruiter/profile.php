@@ -135,7 +135,7 @@ h3{
               </div>   
               <div class="col-md-6">
                    <span class="form_label">State</span><br>
-                   <span><?php echo $recruiter_data->recruiter_state;?></span>
+                   <span><?php echo $recruiter_data->stateName;?></span>
               </div>   
           </div><br>
 	        <div class="row">

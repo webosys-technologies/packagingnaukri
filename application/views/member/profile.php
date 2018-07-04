@@ -903,7 +903,7 @@ var edu_name=el.val();
            <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <Span class="form_label">State</span><br>
-                    <span><?php echo $member_data->member_state;?></span>
+                    <span><?php echo $member_data->stateName;?></span>
             </div>   
                   <div class="col-md-6 col-sm-6 col-xs-12">
                  <Span class="form_label">City</span><br>
