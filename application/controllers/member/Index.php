@@ -58,12 +58,15 @@ class Index extends CI_Controller
                     
         }
         else
-    {
-                   
+    {                  
             
       list($get_insert,$get_data)=$this->Members_model->register();
       if($get_insert)
       {                        
+                                    $data=array('email'=>$this->input->post('email'),
+                                                'mobile'=>$this->input->post('mobile'),
+                                                'password'=>$this->input->post('password'),);
+                                    $this->login_detail_msg($data);
                                   $this->session->set_flashdata('signup_success','Registration Successfull, Please login!');
                                   redirect('member/index');
                                 
@@ -72,10 +75,7 @@ class Index extends CI_Controller
       else
                             {
                            
-                          //  $cities['cities']=$this->Cities_model->getall_cities("Maharashtra");
-//                                $this->load->view('member/home_header');
-//                                $this->load->view('member/sin');
-//                                $this->load->view('member/home_footer');
+
 
    $state['states']=$this->Cities_model->getall_state(); 
 
@@ -87,9 +87,7 @@ class Index extends CI_Controller
                 $this->load->view($sys.'/home_footer',$result);
 
         
-      }
-
-    
+      }  
                 
              }    
         }
@@ -861,6 +859,94 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
           echo "success";
           }
         }
+        
+        
+        function login_detail_msg($data)
+        {           
+          
+         
+                    
+                      
+                   
+
+$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
+
+//Multiple mobiles numbers separated by comma
+
+$mobileNumber = $data['mobile'];
+//Sender ID,While using route4 sender id should be 6 characters long.
+
+$senderId = "PKGNAU";
+//Your message to send, Add URL encoding here.
+
+$message ='Welcome To \r\n'
+        . 'PACKAGINGNAUKRI.COM \r\n'
+        . ''
+        . 'You can login next time with your registered EMAIL or MOBILE number \r\n'
+        . ''
+        . 'Email: '.$data['email']
+        . '\r\n Password: '.$data['password'];
+
+
+//Define route 
+
+$route = "4";
+//Prepare you post parameters
+
+$postData = array(
+
+    'authkey' => $authKey,
+
+    'mobiles' => $mobileNumber,
+
+    'message' => $message,
+
+    'sender' => $senderId,
+
+    'route' => $route
+
+);
+
+
+//API URL
+
+$url="http://api.msg91.com/api/sendhttp.php";
+
+
+// init the resource
+
+$ch = curl_init();
+curl_setopt_array($ch, array(
+
+    CURLOPT_URL => $url,
+
+    CURLOPT_RETURNTRANSFER => true,
+
+    CURLOPT_POST => true,
+
+    CURLOPT_POSTFIELDS => $postData
+
+    //,CURLOPT_FOLLOWLOCATION => true
+
+));
+//Ignore SSL certificate verification
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+//get response
+
+$output = curl_exec($ch);
+//Print error if any
+if(curl_errno($ch))
+{
+//    echo json_encode(array('error'=> curl_error($ch)));
+}
+curl_close($ch);
+//echo json_encode(array('send'=>'OTP is sent Successfully'));       
+//echo $output;
+            }
+
+ 
 
 		
     
