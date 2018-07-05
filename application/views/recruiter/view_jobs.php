@@ -223,8 +223,12 @@ var user_type=el.val();
 //         $("#max_salary").append('<option value="'+dim+'">'+ dim +'Lac</option>');
           for(var dim = glob; dim <=99; dim++)
           {
-
-           $("#max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+           if(dim==1)
+           {
+           $("#max_salary").append('<option value="'+dim+'">'+ dim +' Lac</option>');
+       }else{
+            $("#max_salary").append('<option value="'+dim+'">'+ dim +' Lacs</option>');
+       }
            }
          
       });
@@ -234,8 +238,12 @@ var user_type=el.val();
            var temp=$('#min_exp').val();
             for(var dim = temp; dim <=30; dim++)
           {
-
-           $("#max_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+           if(dim==1)
+           {
+           $("#max_exp").append('<option value="'+dim+'">'+ dim +' Year</option>');
+       }else{
+           $("#max_exp").append('<option value="'+dim+'">'+ dim +' Years</option>');
+       }
            }
        });
   
