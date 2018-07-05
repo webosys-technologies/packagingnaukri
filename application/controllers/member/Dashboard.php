@@ -39,7 +39,7 @@ class Dashboard extends CI_Controller
           
                 $mem_data=array('member_experience'=>$exp);
                 $mem_where=array('member_id'=>$id);
-               $this->Members_model->member_update($where,$mem_data);
+//               $this->Members_model->member_update($where,$mem_data);
             }
             
             

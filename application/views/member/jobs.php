@@ -230,11 +230,11 @@ a:link, a:visited{
                $("#eligibility").html(data.job_education);
 ////                $("#skills").html();
 //                      alert(data.job_salary);
-                    if(data.job_salary)
-                    {
-                 $("#salary").html(data.job_salary);
-                 $("#salary_field").prop('hidden',false);
-                    }
+//                    if(data.job_salary)
+//                    {
+//                 $("#salary").html(data.job_salary);
+//                 $("#salary_field").prop('hidden',false);
+//                    }
                  $("#salary").html(data.job_salary);
                  $("#experience").html(data.job_experience);
                  $("#location").html(data.job_city);
@@ -358,15 +358,15 @@ a:link, a:visited{
             $interval = $datetime1->diff($datetime2);
             if($interval->format('%y')=='0' && $interval->format('%m')=='0' )
             {
-                $post=$interval->format('%d day'); 
+                $post=$interval->format('%d days'); 
             }
              if($interval->format('%y')=='0' && $interval->format('%m')!='0')
             {
-                $post=$interval->format('%m month %d day'); 
+                $post=$interval->format('%m month %d days'); 
             }
              if($interval->format('%y')!='0')
             {
-                $post=$interval->format('%y yrs %m month %d day'); 
+                $post=$interval->format('%y yrs %m month %d days'); 
             }
            
 ?>
@@ -383,8 +383,21 @@ a:link, a:visited{
                            </div>
                                <div class="col-md-2" id='apply_btn<?php echo $job->job_id;?>'><button type="button" id='apply<?php echo $job->job_id;?>' onclick="apply(<?php echo $job->job_id;?>)" class="btn btn-warning btn-sm"><span id='apply_stat<?php echo $job->job_id;?>'>Apply</span></button></div>
                            </div>
+                           
+                           <?php if(!empty($job->job_experience))
+                                            {
+                                            $exp=explode(".",$member_data->member_experience);
+                                           
+                                                $experience=$exp[0]."-".$exp[1]." Year";
+                                                                                     
+                                            }else{
+                                                $experience="Not Mentioned";
+                                            }
+                                            
+                                            ?>
+                           
                           <div class="row" class="">
-                              <div class="col-md-2 experience"><i class="fa fa-suitcase" aria-hidden="true"></i> <?php echo $job->job_experience;?>
+                              <div class="col-md-2 experience"><i class="fa fa-suitcase" aria-hidden="true"></i> <?php echo $experience;?>
                               </div>
                               <div class="col-md-8 experience"><i class="fa fa-map-marker" aria-hidden="true"></i> <?php echo $job->job_city;?>
                           </div>
@@ -409,14 +422,14 @@ a:link, a:visited{
                               <div class="col-md-3" style="padding-top: 10px;">
                                   <?php if(isset($job->job_salary)){
                                                                $sal=explode('.', $job->job_salary);
-                                                               if(!empty($sal[0]) && $sal[0]!='0')
+                                                               if($sal[0]!="0" && $sal[1]!='0')
                                                                {
-                                                                   $salary=$sal[0]." Lac ".$sal[1]." Thousand ";
+                                                                   $salary=$sal[0]." Laks - ".$sal[1]." Laks ";
                                                                }else{
-                                                                    $salary=$sal[1]." Thousand ";
+                                                                    $salary="Not Mentioned";
                                                                }
                                   }?>
-                                  <span class="fa fa-inr"> <?php if(isset($job->job_salary)){echo $salary;}?></span>  /-
+                                  <span class="fa fa-inr"> <?php echo $salary;?></span>  /-
                               </div>
                               <div class="col-md-5" style="padding-top: 10px;">
                                   <span class="skill">Post By</span> <a href="#"><img src='<?php if(file_exists($job->recruiter_profile_pic)){echo base_url().$job->recruiter_profile_pic;}else{ echo base_url()."profile_pic/avatar.png";}?>' width="20px" height="20px"> <?php echo ucwords(strtolower($job->recruiter_fname))." ".ucwords(strtolower($job->recruiter_lname));?></a>

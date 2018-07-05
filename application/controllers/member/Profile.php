@@ -101,7 +101,7 @@ class Profile extends CI_Controller
         $data=$this->Employments_model->get_employ_by_id($where);
         $data1=(array('model'=>'employment_modal'));
         $result=((object)array_merge((array)$data,(array)$data1));
-      
+       
         echo json_encode($result);
     }
     
@@ -196,10 +196,11 @@ class Profile extends CI_Controller
         $form=$this->input->post();
         $member_data=  get_member_info($id);
         
-        if(!empty ($form['present']))
+      
+        if(!empty ($form['to']))
         {
              $to=$form['to'];
-        }  elseif(!empty($form['to'])) {
+        }  else {
              $to=  date('Y-m-d');
         }
    
@@ -281,6 +282,8 @@ class Profile extends CI_Controller
                                 'member_anual_salary'=>$form['lacsalary'].".".$form['thsalary']);
                 $mem_where=array('member_id'=>$id);
                $this->Members_model->member_update($mem_where,$mem_data);
+                $res=$this->Employments_model->update_employment($where,$data);            
+            echo json_encode(array('success'=>'Employment updated successfully'));
               }else{
                             echo json_encode(array('to_err'=>"Working To date should less than todays date")); 
                          }
@@ -294,8 +297,7 @@ class Profile extends CI_Controller
                 echo json_encode(array('from_err'=>"Select working from"));
             }      
             }
-            $res=$this->Employments_model->update_employment($where,$data);            
-            echo json_encode(array('success'=>'Employment updated successfully'));
+           
            
         }
                

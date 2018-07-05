@@ -234,6 +234,19 @@ for(var year = start ; year <=end; year++){
 document.getElementById("passout").innerHTML = options;
 
 
+        $("#present").click(function(){    
+            var check=$("#present").prop("checked");
+            if(check)
+            {
+                 $("#to").attr('disabled',true);
+             }else{
+                 $("#to").attr('disabled',false); 
+             }
+                 }
+              );
+        
+        
+
 
          $("#add_skill").click(function(){      
                  $('#skill_form')[0].reset();
@@ -812,9 +825,46 @@ var edu_name=el.val();
                      </div>
                          <div class="col-md-3 col-sm-6 col-xs-12">
                              <div class="item-details"><i class="fa fa-map-marker"></i><span class="item"> <?php if(isset($member_data)){echo $member_data->member_city.",".$member_data->member_country;}?></span></div>
-                             <div class="item-details"><i class="fa fa-suitcase"></i><span class="item"> <?php if(isset($member_data->member_experience)){echo $member_data->member_experience." Year"; } ?> </span></div>
-                             <?php if(!empty($org->employment_salary) && $org->employment_salary!='0.0' ){$sal=explode(".",$org->employment_salary);} ?>
-                             <div class="item-details"><i class="fa fa-inr"></i><span class="item"> <?php if(!empty($org->employment_salary) && $org->employment_salary!='0.0'){echo "INR ". $sal[0]."Lac ". $sal[1]."Thousand "; echo "PA";}  ?></span></div>
+                             
+                             <?php if(!empty($member_data->member_experience) && $member_data->member_experience!='0.0')
+                                            {
+                                            $exp=explode(".",$member_data->member_experience);
+                                            
+                                             if($exp[0]=="0")
+                                            {
+                                             $experience=$exp[1]." Month ";  
+                                            }elseif($exp[1]=="0")
+                                            {
+                                              $experience=$exp[0]." Year ";  
+                                            }else
+                                            {
+                                            $experience=$exp[0]." Year ". $exp[1]." Month ";  
+                                            }                                           
+                                            
+                                            } else{
+                                            $experience="Not Mentioned";
+                                            }
+                                            ?>
+                             
+                             <div class="item-details"><i class="fa fa-suitcase"></i><span class="item"> <?php echo $experience; ?> </span></div>
+                             <?php if(!empty($member_data->member_anual_salary) && $member_data->member_anual_salary!='0.0' ){
+                                          $sal=explode(".",$member_data->member_anual_salary);                                         
+                                          if($sal[0]=="0")
+                                            {
+                                             $salary= $sal[1]." Thousand PA";  
+                                            }elseif($sal[1]=="0")
+                                            {
+                                              $salary= $sal[0]." Lac PA";  
+                                            }else
+                                            {
+                                           $salary= $sal[0]." Lac ". $sal[1]."Thousand PA";  
+                                            }
+                                            }
+                                            else
+                                            { $salary= "Not Mentioned";}
+                                         
+                                         ?>
+                             <div class="item-details"><i class="fa fa-inr"></i><span class="item"> <?php echo $salary;  ?></span></div>
 
                          </div>
                          <div class="col-md-3">
@@ -1086,7 +1136,24 @@ var edu_name=el.val();
             </div> 
                <div class="col-md-6 col-md-6 col-sm-6 col-xs-12">
                     <Span class="form_label">Salary</span><br>
-                    <span><?php echo $emp->employment_salary." PA";?></span>
+                    <?php if(!empty($emp->employment_salary) && $emp->employment_salary!='0.0' ){
+                                          $sal=explode(".",$emp->employment_salary);                                         
+                                          if($sal[0]=="0")
+                                            {
+                                             $salary= $sal[1]." Thousand PA";  
+                                            }elseif($sal[1]=="0")
+                                            {
+                                              $salary= $sal[0]." Lac PA";  
+                                            }else
+                                            {
+                                           $salary= $sal[0]." Lac ". $sal[1]."Thousand PA";  
+                                            }
+                                            }
+                                            else
+                                            { $salary= "Not Mentioned";}
+                                         
+                                         ?>
+                    <span><?php echo $salary;?></span>
             </div> 
                 
            </div><hr>
@@ -1524,13 +1591,14 @@ var edu_name=el.val();
                                         <span class="text-danger" id="org_error"></span>                                                          
                                 </div>
                                 <div class="col-md-6 col-md-6 col-sm-6 col-xs-12">                                   
-                                        <label for="lname">City</label>
-                                        <select name="city" id="emp_city" class="form-control">
+                                        <label for="lname">Location</label>
+                                        <input type="text" value="" name="city" id="emp_city" class="form-control">
+<!--                                        <select name="city" id="emp_city" class="form-control">
                                             <option value="">Select City</option>
                                             <?php if(isset($cities)){ foreach($cities as $city){?>
                                             <option value="<?php echo $city->city_name;?>"><?php echo $city->city_name; ?></option>
                                             <?php } }?>
-                                        </select>
+                                        </select>-->
                                       <span class="text-danger" id="city_err"></span>                                   
                                          </div>
                             </div><br>
@@ -1568,7 +1636,7 @@ var edu_name=el.val();
                                              <div class="col-md-6 col-md-6 col-sm-6 col-xs-12">                                   
                                         <label for="lname">Work To</label>
                                         <input type="date" name="to" value="" id="to" class="form-control"><br>
-                                        <input type="checkbox" name="present" value=""> <span> <b>Present</b> </span>
+                                        <input type="checkbox" name="present" id="present" value=""> <span> <b>Present</b> </span>
                                       <span class="text-danger" id="to_err"></span>                                   
                                          </div>
                                 
@@ -1579,14 +1647,19 @@ var edu_name=el.val();
                       <div class="col-md-3">
                         <label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>
                          <select type="text" name="lacsalary" id="lacsalary" class="form-control">
-                             <option value="0">0 Lac</option>
+                             <option value="0">None</option>
                            <script>
                                var sal = 1;
                                var sal_end = 99;
                                 var options = "";
                                 for(var dim = sal ; dim <=sal_end; dim++){
 //                                    alert(dim);
-                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                               if(dim==1)
+                               {
+                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +' Lac</option>');
+                                }else{
+                              $("#lacsalary").append('<option value="'+dim+'">'+ dim +' Laks</option>');       
+                                }
 //                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
                               }
                                </script>
@@ -1597,7 +1670,7 @@ var edu_name=el.val();
                     <div class="col-md-3"> <br>
                         <label class="form-label"></label> <span style="font-size:12px;"></span>
                        <select type="text" id="thsalary" name="thsalary" class="form-control">  
-                            <option value="0">0 Thousands</option>
+                            <option value="0">None</option>
                              <script>
                                var sal = 1;
                                var sal_end = 99;
@@ -1605,7 +1678,12 @@ var edu_name=el.val();
                                 for(var dim = sal ; dim <=sal_end; dim++){
 //                                    alert(dim);
 //                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
-                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                             if(dim==1)
+                               {
+                             $("#thsalary").append('<option value="'+dim+'">'+ dim +' Thousand</option>');
+                                }else{
+                             $("#thsalary").append('<option value="'+dim+'">'+ dim +' Thousand</option>');       
+                                }
                               }
                                </script>
                         </select>
