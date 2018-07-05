@@ -973,23 +973,24 @@ curl_close($ch);
              function email_test($email)
         {
                
-                    $headers = "From: support@Packagingnaukari.in";
-                    $headers .= ". PackagingNaukari-Team" . "\r\n";
-                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    $to = "suraj9195shinde@gmail.com";
-                    $subject = "Welcome To Packaging Naukari";
-
-                    $txt = ' is your OTP for verifying Email Id on packagingnaukri.com.';  
-                                            
                  
-                       $success=  mail($to,$subject,$txt,$headers); 
-                       if($success)
-                       {
-                          return true;
-                       }
+
+$to_email = 'suraj9195shinde@gmail.com';
+$subject = 'Testing PHP Mail'; 
+$message = 'This mail is sent using the PHP mail '; 
+$headers = 'From: noreply @ company. com'; 
+//check if the email address is invalid $secure_check
+sanitize_my_email($to_email);
+if ($secure_check == false) {     
+echo "Invalid input"; 
+} 
+else {//send email     
+mail($to_email, $subject, $message, $headers);    
+echo "Thank you for using our mail form"; 
+
         }
 
-		
+        }	
     
 }
 
