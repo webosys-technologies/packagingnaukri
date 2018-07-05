@@ -79,7 +79,9 @@ class Profile extends CI_Controller
        
         $data=get_member_info($id);
         $data1=(array('model'=>'personal_modal'));
-        $result=((object)array_merge((array)$data,(array)$data1));
+            $data2['state']=$this->show_state($data);
+
+        $result=((object)array_merge((array)$data,(array)$data1,(array)$data2));
       
         echo json_encode($result);
     }
@@ -573,6 +575,16 @@ if (isset($_FILES['photo']['name'])) {
     echo $interval->format('%y.%m');
         }
 
+        function show_state($data)
+        {
+            $country=$data->member_country;
+            $val['states']=$this->Cities_model->getall_states($country);
+            $st=$data->member_state;
+            $val['cities']=$this->Cities_model->getall_cities($st);
+            
+            return $val;
+            // echo json_encode($cities);
+        }
   
 }
 

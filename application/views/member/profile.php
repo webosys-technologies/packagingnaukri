@@ -692,8 +692,8 @@ var edu_name=el.val();
                 $("#gen").val(data.member_gender);
                 }
                 $("#state").val(data.member_state);
-                $("#city").append('<option value="'+data.member_city+'">'+data.member_city+'</option>');
-                $("#state").append('<option value="'+data.stateID+'">'+data.stateName+'</option>');
+                // $("#city").append('<option value="'+data.member_city+'">'+data.member_city+'</option>');
+                // $("#state").append('<option value="'+data.stateID+'">'+data.stateName+'</option>');
                 $("#country").val(data.member_country);
                  if(data.member_marital_status)
                 {
@@ -701,6 +701,27 @@ var edu_name=el.val();
                 }
                 $("#pincode").val(data.member_pincode);
                 $("#address").val(data.member_address);
+
+                $.each(data.state.states, function (i,row){
+
+              if (data.member_state == row.stateID) {
+               $('[name="state"]').append('<option value="'+row.stateID+'" selected>'+row.stateName+'</option>');                
+              }else{
+                $('[name="state"]').append('<option value="'+row.stateID+'">'+row.stateName+'</option>');                
+              }
+
+            });
+
+
+            $.each(data.state.cities, function (i,row){
+
+              if (data.member_city == row.cityName) {
+               $('[name="city"]').append('<option value="'+row.cityName+'" selected>'+row.cityName+'</option>');                
+              }else{
+                $('[name="city"]').append('<option value="'+row.cityName+'">'+row.cityName+'</option>');                
+              }
+
+            });
                 
 //                alert(data.education_degree);
                  $("#edu_title").val(data.education_degree);

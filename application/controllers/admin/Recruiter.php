@@ -228,9 +228,14 @@ if (isset($_FILES['photo']['name'])) {
         
          function ajax_edit($id)
     {
-            $data = $this->Recruiters_model->get_id($id);
-         
-            echo json_encode($data);
+            $res = $this->Recruiters_model->get_id($id);
+            if ($res) {
+              
+            $data['state']=$this->show_state($res);
+
+        $result=((object)array_merge((array)$res,(array)$data));
+            echo json_encode($result);              
+            }
     }
         function delete_pic($id)
         {
@@ -245,12 +250,15 @@ if (isset($_FILES['photo']['name'])) {
         redirect('admin/Recruiter');
         }
         
-     function show_cities($state)
+     function show_state($data)
         {
-            $st=str_replace('%20', " ", $state);  
-            $cities=$this->Cities_model->getall_cities(ltrim($st));
-          
-            echo json_encode($cities);
+            $country=$data->recruiter_country;
+            $val['states']=$this->Cities_model->getall_states($country);
+            $st=$data->recruiter_state;
+            $val['cities']=$this->Cities_model->getall_cities($st);
+            
+            return $val;
+            // echo json_encode($cities);
         }
 
         function recruiter_delete($id)

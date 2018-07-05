@@ -32,8 +32,16 @@ class Profile extends CI_Controller
 
 	function ajax_edit($id)
 	{
-            $result=$this->Recruiters_model->get_id($id);
+            $res=$this->Recruiters_model->get_id($id);
+            if($res)
+        {     
+            $data['state']=$this->show_state($res);
+            // print_r($state);
+
+        $result=((object)array_merge((array)$res,(array)$data));
+        // print_r($result);
             echo json_encode($result);
+        }
 
 	}
 
@@ -59,6 +67,8 @@ class Profile extends CI_Controller
 		$this->Recruiters_model->recruiter_update(array('recruiter_id'=>$form['recruiter_id']),$data);
 
 		$this->pic_upload($data);
+       $this->session->set_flashdata('success','Data Updated Successfully');
+    
 		echo json_encode(array('status'=>true));
 	}
 
@@ -128,6 +138,17 @@ class Profile extends CI_Controller
 
             
     }
+
+      function show_state($data)
+        {
+            $country=$data->recruiter_country;
+            $val['states']=$this->Cities_model->getall_states($country);
+            $st=$data->recruiter_state;
+            $val['cities']=$this->Cities_model->getall_cities($st);
+            
+            return $val;
+            // echo json_encode($cities);
+        }
 }
 
  ?>

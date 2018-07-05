@@ -135,8 +135,13 @@ class Companies extends CI_Controller
     {
         $res=$this->Companies_model->company_by_id($id);
         if($res)
-        {
-            echo json_encode($res);
+        {     
+            $data['state']=$this->show_state($res);
+            // print_r($state);
+
+        $result=((object)array_merge((array)$res,(array)$data));
+        // print_r($result);
+            echo json_encode($result);
         }
     }
     
@@ -227,12 +232,15 @@ if (isset($_FILES['logo']['name'])) {
     
   
     
-     function show_cities($state)
+       function show_state($data)
         {
-           
-            $cities=$this->Cities_model->getall_cities(ltrim(str_replace("%20",' ', $state)));
-          
-            echo json_encode($cities);
+            $country=$data->company_country;
+            $val['states']=$this->Cities_model->getall_states($country);
+            $st=$data->company_state;
+            $val['cities']=$this->Cities_model->getall_cities($st);
+            
+            return $val;
+            // echo json_encode($cities);
         }
     
 }

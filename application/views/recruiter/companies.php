@@ -319,8 +319,8 @@ var country=el.val();
             $('[name="contact"]').val(data.company_contact);
             $('[name="pincode"]').val(data.company_pincode);
             $('[name="state"]').val(data.company_state);
-             $('[name="city"]').append('<option value="'+data.company_city+'">'+data.company_city+'</option>');
-             $('[name="state"]').append('<option value="'+data.stateName+'">'+data.stateName+'</option>');
+             // $('[name="city"]').append('<option value="'+data.company_city+'">'+data.company_city+'</option>');
+             // $('[name="state"]').append('<option value="'+data.stateName+'">'+data.stateName+'</option>');
             $('[name="city"]').val(data.company_city);
             $('[name="country"]').val(data.company_country);
             $('[name="website"]').val(data.company_website);
@@ -334,6 +334,27 @@ var country=el.val();
                 $("#company_logo").prop('hidden',false);
             $("#remove_btn").append(' <a href="<?php echo base_url();?>recruiter/Companies/delete_logo/'+data.company_id+'" id="remove_logo" class="btn btn-danger btn-xs pull-right">Remove Logo</a>');
             }
+            
+            $.each(data.state.states, function (i,row){
+
+              if (data.company_state == row.stateID) {
+               $('[name="state"]').append('<option value="'+row.stateID+'" selected>'+row.stateName+'</option>');                
+              }else{
+                $('[name="state"]').append('<option value="'+row.stateID+'">'+row.stateName+'</option>');                
+              }
+
+            });
+
+
+            $.each(data.state.cities, function (i,row){
+
+              if (data.company_city == row.cityName) {
+               $('[name="city"]').append('<option value="'+row.cityName+'" selected>'+row.cityName+'</option>');                
+              }else{
+                $('[name="city"]').append('<option value="'+row.cityName+'">'+row.cityName+'</option>');                
+              }
+
+            });
 
            
                         
