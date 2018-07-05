@@ -40,6 +40,8 @@ class System_model extends CI_Model
 	function source_name()
 	{
 		 $url=explode('/', base_url());
+                 if($url[2]=="webosys.com" || $url[2]=="acumenpackaging.com" || $url[2]=="localhost" )
+                 {
             if ($url[3] == 'packagingnaukri') {
             
               $page='packaging';
@@ -56,6 +58,30 @@ class System_model extends CI_Model
               	  return $page;
 
             }
+                 }else{
+                     
+                      if ($url[2] == 'packagingnaukri.com') {
+            
+              $page='packaging';
+              return $page;
+            }
+            elseif ($url[2] == 'printingnaukari.com') {
+
+                  $page='printing';  
+             		 return $page;
+
+            }elseif($url[2] == 'plasticnaukari.com'){
+
+                  $page='plastic'; 
+              	  return $page;
+
+            }
+               
+                     
+                 }
+                 
+                 
+                
 	}
 }
 
