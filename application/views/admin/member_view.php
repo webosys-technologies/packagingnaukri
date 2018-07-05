@@ -623,8 +623,8 @@ function view_member(id)
             $('[name="pincode"]').val(data.member_pincode);
             $('[name="country"]').val(data.member_country);
             $('[name="status"]').val(data.member_status);
-              $('.city').append('<option value="'+ data.member_city +'">' + data.member_city +'</option>');
-              $('.state').append('<option value="'+ data.stateName +'">' + data.stateName +'</option>');
+              // $('.city').append('<option value="'+ data.member_city +'">' + data.member_city +'</option>');
+              // $('.state').append('<option value="'+ data.stateName +'">' + data.stateName +'</option>');
             $('[name="source"]').val(data.member_source);
 
               
@@ -634,6 +634,27 @@ function view_member(id)
                 $("#member_pic").prop('hidden',false);
             $("#remove_btn").append(' <a href="<?php echo base_url();?>admin/Members/delete_pic/'+data.member_id+'" id="remove_photo" class="btn btn-danger btn-xs pull-right">Remove Photo</a>');
             }
+
+            $.each(data.state.states, function (i,row){
+
+              if (data.member_state == row.stateID) {
+               $('[name="state"]').append('<option value="'+row.stateID+'" selected>'+row.stateName+'</option>');                
+              }else{
+                $('[name="state"]').append('<option value="'+row.stateID+'">'+row.stateName+'</option>');                
+              }
+
+            });
+
+
+            $.each(data.state.cities, function (i,row){
+
+              if (data.member_city == row.cityName) {
+               $('[name="city"]').append('<option value="'+row.cityName+'" selected>'+row.cityName+'</option>');                
+              }else{
+                $('[name="city"]').append('<option value="'+row.cityName+'">'+row.cityName+'</option>');                
+              }
+
+            });
                         
            $("#title").text("Edit Member");
            $('#myModal').modal('show');

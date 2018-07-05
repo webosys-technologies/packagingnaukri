@@ -366,8 +366,8 @@ function view_recruiter(id)
             $('[name="password"]').val(data.recruiter_password);
             $('[name="address"]').val(data.recruiter_address);
             $('[name="country"]').val(data.recruiter_country);
-            $(".city").append('<option value="'+ data.recruiter_city +'">' + data.recruiter_city+'</option>');
-            $(".state").append('<option value="'+ data.stateName +'">' + data.stateName+'</option>');
+            // $(".city").append('<option value="'+ data.recruiter_city +'">' + data.recruiter_city+'</option>');
+            // $(".state").append('<option value="'+ data.stateName +'">' + data.stateName+'</option>');
             $('[name="pincode"]').val(data.recruiter_pincode);
             $('[name="source"]').val(data.recruiter_source);
             $('[name="status"]').val(data.recruiter_status);
@@ -378,6 +378,28 @@ function view_recruiter(id)
                 $("#recruiter_pic").prop('hidden',false);
             $("#remove_btn").append(' <a href="<?php echo base_url();?>admin/Recruiter/delete_pic/'+data.recruiter_id+'" id="remove_photo" class="btn btn-danger btn-xs pull-right">Remove Photo</a>');
             }
+
+            $.each(data.state.states, function (i,row){
+
+              if (data.recruiter_state == row.stateID) {
+               $('[name="state"]').append('<option value="'+row.stateID+'" selected>'+row.stateName+'</option>');                
+              }else{
+                $('[name="state"]').append('<option value="'+row.stateID+'">'+row.stateName+'</option>');                
+              }
+
+            });
+
+
+            $.each(data.state.cities, function (i,row){
+
+              if (data.recruiter_city == row.cityName) {
+               $('[name="city"]').append('<option value="'+row.cityName+'" selected>'+row.cityName+'</option>');                
+              }else{
+                $('[name="city"]').append('<option value="'+row.cityName+'">'+row.cityName+'</option>');                
+              }
+
+            });
+           
             
             $("#title").text("Edit Recruiter");
            $('#myModal').modal('show');

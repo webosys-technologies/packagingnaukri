@@ -191,9 +191,16 @@ class Members extends CI_Controller
          function ajax_edit($id)
     {
              
-            $data = $this->Members_model->get_id($id);
-         
-            echo json_encode($data);
+            $res = $this->Members_model->get_id($id);
+         if($res)
+        {     
+            $data['state']=$this->show_state($res);
+            // print_r($state);
+
+        $result=((object)array_merge((array)$res,(array)$data));
+        // print_r($result);
+            echo json_encode($result);
+        }
     }
         
          function member_delete($id)
@@ -227,12 +234,15 @@ class Members extends CI_Controller
        
              }
     
-     function show_cities($state)
-        {           
-            $st=str_replace('%20', ' ', $state);
-            $cities=$this->Cities_model->getall_cities(ltrim($st));
-          
-            echo json_encode($cities);
+     function show_state($data)
+        {
+            $country=$data->member_country;
+            $val['states']=$this->Cities_model->getall_states($country);
+            $st=$data->member_state;
+            $val['cities']=$this->Cities_model->getall_cities($st);
+            
+            return $val;
+            // echo json_encode($cities);
         }
         
         function photo_upload($rec_id)

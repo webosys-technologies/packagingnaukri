@@ -75,6 +75,37 @@ h3{
 <hr style="border-top: 1px solid #ccc;">
       <section class="content" >
 
+         <div class="col-md-3">
+    </div>
+    <div class="col-md-7">
+         <?php
+        $this->load->helper('form');
+        $success = $this->session->flashdata('success');
+        if($success)
+        {
+            ?>
+            
+        <div class="alert alert-success alert-dismissible" data-auto-dismiss="5000">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Success!</strong> <?php echo $success; ?> 
+  </div>
+        <?php }?>
+             
+              <?php
+        $this->load->helper('form');
+        $error = $this->session->flashdata('error');
+        if($error)
+        {
+            ?>           
+        <div class="alert alert-danger alert-dismissible" data-auto-dismiss="2000">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Error!</strong> <?php echo $error; ?> 
+  </div>
+        <?php }?>
+             
+             
+       
+        </div>
 <div class="row content">
 	<div class="col-md-3" id="div">
 		<!-- <p>Pic</p> -->
@@ -229,13 +260,32 @@ $("#img").change(function (e) {
             $('#gender').val(data.recruiter_gender);
             $('[name="password"]').val(data.recruiter_password);
             $('[name="address"]').val(data.recruiter_address);
-            $('#state').val(data.recruiter_state);
-            $('#city').append('<option value="'+data.recruiter_city+'">'+data.recruiter_city+'</option>');
-            $('#state').append('<option value="'+data.stateID+'">'+data.stateName+'</option>');
+            // $('#city').append('<option value="'+data.recruiter_city+'">'+data.recruiter_city+'</option>');
+            // $('#state').append('<option value="'+data.stateID+'">'+data.stateName+'</option>');
             $('[name="pincode"]').val(data.recruiter_pincode);
             $('[name="country"]').val(data.recruiter_country);
 
            
+            $.each(data.state.states, function (i,row){
+
+              if (data.recruiter_state == row.stateID) {
+               $('[name="state"]').append('<option value="'+row.stateID+'" selected>'+row.stateName+'</option>');                
+              }else{
+                $('[name="state"]').append('<option value="'+row.stateID+'">'+row.stateName+'</option>');                
+              }
+
+            });
+
+
+            $.each(data.state.cities, function (i,row){
+
+              if (data.recruiter_city == row.cityName) {
+               $('[name="city"]').append('<option value="'+row.cityName+'" selected>'+row.cityName+'</option>');                
+              }else{
+                $('[name="city"]').append('<option value="'+row.cityName+'">'+row.cityName+'</option>');                
+              }
+
+            });
                         
            // $("#title").text("Edit profile");
            $('#profile_modal').modal('show');
@@ -353,7 +403,7 @@ $("#img").change(function (e) {
             dataType: "JSON",
             success: function(json)
             {
-                    alert("Data Save Successfully...!"); 
+                    // alert("Data Save Successfully...!"); 
                //if success close modal and reload ajax table
                $('#modal_form').modal('hide');
               location.reload();// for reload a page
@@ -371,6 +421,8 @@ $("#img").change(function (e) {
                         $("#state").change(function() {
    var el = $(this) ;
               $("#city").html("");
+              $("#city").append('<option value="">--Select City--</option>');
+
 var state=el.val();
         if(state)
         {
