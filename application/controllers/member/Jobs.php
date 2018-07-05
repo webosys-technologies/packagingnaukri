@@ -73,7 +73,7 @@ class Jobs extends CI_Controller
     {
       
               
-        $result=$this->Members_model->search_query();
+        $result=$this->Members_model->search_query($title);
         
         echo json_encode($result);
     }

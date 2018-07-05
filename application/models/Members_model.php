@@ -324,7 +324,7 @@ class Members_model extends CI_Model
         // die();
         }
         
-        function search_query()
+        function search_query($title)
         {
 //            SELECT Customers.CustomerName, Orders.OrderID
 //INTO CustomersOrderBackup2017
@@ -332,20 +332,20 @@ class Members_model extends CI_Model
 //LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
 //            $result=$this->db->query('SELECT members.member_fname, members.member_mobile
 //                                      FROM members ');
-            $this->db->like(array('member_fname'=>'a'));
-            $this->db->select('member_fname');
-            $this->db->from($this->table);
+            $this->db->like(array('job_title'=>$title));
+            $this->db->select('job_title');
+            $this->db->from('jobs');
             $result=$this->db->get();
            $result->result();
-            $this->db->or_like(array('member_lname'=>'a'));
-            $this->db->select('member_lname');
-            $this->db->from($this->table);
+            $this->db->or_like(array('company_name'=>$title));
+            $this->db->select('company_name');
+            $this->db->from('companies');
             $result1=$this->db->get();
             $result1->result();
           
-             $this->db->or_like(array('member_email'=>'a'));
-            $this->db->select('member_email');
-            $this->db->from($this->table);
+             $this->db->or_like(array('job_designation'=>$title));
+            $this->db->select('job_designation');
+            $this->db->from('jobs');
             $result2=$this->db->get();
             $result2->result();
            

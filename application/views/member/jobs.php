@@ -197,8 +197,20 @@ a:link, a:visited{
                
             $.each(data,function(i,row)
            {            
+               if(row.job_title!="undefined" && row.job_title!="unknown")
+               {
+               $("#data_list").append('<option>'+row.job_title+'</option>');
+               }
                
-               $("#data_list").append('<option>'+row.member_email+'</option>');
+                if(row.company_name!="undefined" && row.company_name!="unknown")
+               {
+               $("#data_list").append('<option>'+row.company_name+'</option>');
+               }
+               
+                if(row.job_designation!="undefined" && row.job_designation!="unknown")
+               {
+               $("#data_list").append('<option>'+row.job_designation+'</option>');
+               }
            }
            );
                 
@@ -342,7 +354,7 @@ a:link, a:visited{
     <div class="row">
         <div class="col-md-offset-1">
      <datalist id="data_list">  
-    <option>PHP</option><option>JAVA</option><option>DOT NET</option>  
+    <!--<option>PHP</option><option>JAVA</option><option>DOT NET</option>-->  
      </datalist>
             <input list="data_list" value="<?php echo set_value('title');?>" id="title" onkeyup="search_title()" type="text" placeholder="Skills,Designation,Companies" class="text_design" name="title"><input  type="text" placeholder="Location" name="location" value="<?php echo set_value('location');?>" class="text_design"><input  type="text" placeholder="Experience" id="exp" name="exp" value="<?php echo set_value('exp');?>" class="text_design"><input  type="text" placeholder="Salary" name="salary" value="<?php echo set_value('salary');?>" class="text_design" id="salary"><button type="submit" class="btn btn-info btn-md">Search Job <span class="fa fa-search"></span></button>
        
