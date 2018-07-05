@@ -824,7 +824,7 @@ var edu_name=el.val();
                          
                      </div>
                          <div class="col-md-3 col-sm-6 col-xs-12">
-                             <div class="item-details"><i class="fa fa-map-marker"></i><span class="item"> <?php if(isset($member_data)){echo $member_data->member_city.",".$member_data->member_country;}?></span></div>
+                             <div class="item-details"><i class="fa fa-map-marker"></i><span class="item"> <?php if(isset($member_data)){echo $member_data->member_city.",".$member_data->countryName;}?></span></div>
                              
                              <?php if(!empty($member_data->member_experience) && $member_data->member_experience!='0.0')
                                             {
