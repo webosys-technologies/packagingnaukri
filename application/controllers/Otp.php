@@ -39,7 +39,7 @@ class Otp extends CI_Controller
                 // $this->Members_model->member_update($where,$data);
      //Your authentication key
 
-$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
+$authKey = "217899AjUpTycrXx6K5b0e2283";    //suraj9195shinde for
 
 //Multiple mobiles numbers separated by comma
 $mobileNumber = $email;
@@ -148,7 +148,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                // $this->Members_model->member_update($where,$data);
      //Your authentication key
 
-$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
+$authKey = "217899AjUpTycrXx6K5b0e2283";    //suraj9195shinde for
 
 //Multiple mobiles numbers separated by comma
 

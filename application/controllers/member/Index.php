@@ -156,7 +156,8 @@ class Index extends CI_Controller
                                 'member_LoggedIn' => true,
                                 'member_source'    =>$res->member_source,
                                                 );
-                                  $this->session->unset_userdata('member_otp');              
+                                  $this->session->unset_userdata('member_otp');
+//                                  $this->session->unset_userdata('member_mobile');
                                 $this->session->set_userdata($sessionArray);                      
                                 echo json_encode(array('status'=> 'success')); 
                     }else
@@ -290,9 +291,7 @@ class Index extends CI_Controller
                  $this->session->set_flashdata('success','Job Applied Successfully');
                 }
 
-                } 
-
-                                    
+                }                           
                         
                 
                 
@@ -363,7 +362,7 @@ class Index extends CI_Controller
                 $this->Members_model->member_update($where,$data);
      //Your authentication key
 
-$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
+$authKey = "217899AjUpTycrXx6K5b0e2283";    //suraj9195shinde for
 
 //Multiple mobiles numbers separated by comma
 
@@ -477,63 +476,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                        }
         }
     
-    function signup_email($getdata,$msg)
-    {    
-               
-                 $hash= md5( rand(0,1000) );
-                 $this->center_encrypt($getdata['center_email'],$hash);
-                
-                    $headers = "From: support@Packagingnaukari.in";
-                    $headers .= ". PackagingNaukari-Team" . "\r\n";
-                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    $to = $msg['email'];
-                    $subject = "Welcome To Packaging Naukari";
-
-                    $txt = '<html>
-                        <head>
-                                            <style>
-                                            
-
-                                             .div1 {
-                                           
-                                                   width: 100%;
-                                                   border-radius: 5px;
-                                                   background-color: #3c8dbc;
-                                                   padding: 20px;
-                                               }
-                                                .div2 {
-
-                                                   width: 100%;
-                                                   border-radius: 5px;
-                                                   background-color: #d2d6de;
-                                                   padding: 20px;
-                                               }
-                                               #color{
-                                               color:blue;
-                                               }
-                                            </style>
-                                        </head>
-                                             <body><div class="div1"><h2>'.$msg['title'].'<h2></div><div class="div2">Dear'.$getdata['fname'].' '.$getdata['lname'].',<br>Thank You for sign in with delto.<br><br>You can now login with following login details<br><br>
-                                            
-                                            <b>center Owner Name :</b>'.$getdata['fname']." "
-                                             .$getdata['lname'].
-                                             '<br><b>Member Login URL:</b> <a href="http://delto.in/center/index/login">http://delto.in/center/index/login</a>
-                                             <br><b>Email Id:</b>'.$getdata['center_email'].
-                                              "<br><b>Password :</b>".$getdata['center_password'].
-                                              '<br>Best Regards,<br>Delto Team<br><a href="http://delto.in">http://delto.in</a><br></div></body></html>';
-                              
-                                              
-                                            
-                 
-                       $success=  mail($to,$subject,$txt,$headers); 
-                       if($success)
-                       {
-                          return true;
-                       }
-//                   
-    }
-    
-    
+   
      public function signout()
     {
         
@@ -869,7 +812,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                       
                    
 
-$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
+$authKey = "217899AjUpTycrXx6K5b0e2283";    //suraj9195shinde for
 
 //Multiple mobiles numbers separated by comma
 
@@ -879,13 +822,7 @@ $mobileNumber = $data['mobile'];
 $senderId = "PKGNAU";
 //Your message to send, Add URL encoding here.
 
-$message ='Welcome To \r\n'
-        . 'PACKAGINGNAUKRI.COM \r\n'
-        . ''
-        . 'You can login next time with your registered EMAIL or MOBILE number \r\n'
-        . ''
-        . 'Email: '.$data['email']
-        . '\r\n Password: '.$data['password'];
+$message = "Welcome To\r\nPACKAGINGNAUKRI.COM\r\nYou can login next time with your registered EMAIL or MOBILE number\r\n\r\nEmail: ".$data["email"]."\r\nPassword: ".$data["password"];
 
 
 //Define route 
@@ -947,6 +884,110 @@ curl_close($ch);
             }
 
  
+            
+            
+                    function test_msg()
+        {           
+          
+         
+      $mobile="9075554309";   
+      $email="surajshinde9195@webosys.com";
+              $pass="1232";
+                      
+                   
+
+$authKey = "217899AjUpTycrXx6K5b0e2283";    //suraj9195shinde for
+
+//Multiple mobiles numbers separated by comma
+
+$mobileNumber = $mobile;
+//Sender ID,While using route4 sender id should be 6 characters long.
+
+$senderId = "PKGNAU";
+//Your message to send, Add URL encoding here.
+
+$message = "Welcome To\r\nPACKAGINGNAUKRI.COM\r\nYou can login next time with your registered EMAIL or MOBILE number\r\n\r\nEmail: ".$email."\r\nPassword: ".$pass;
+        
+
+
+//Define route 
+
+$route = "4";
+//Prepare you post parameters
+
+$postData = array(
+
+    'authkey' => $authKey,
+
+    'mobiles' => $mobileNumber,
+
+    'message' => $message,
+
+    'sender' => $senderId,
+
+    'route' => $route
+
+);
+
+
+//API URL
+
+$url="http://api.msg91.com/api/sendhttp.php";
+
+
+// init the resource
+
+$ch = curl_init();
+curl_setopt_array($ch, array(
+
+    CURLOPT_URL => $url,
+
+    CURLOPT_RETURNTRANSFER => true,
+
+    CURLOPT_POST => true,
+
+    CURLOPT_POSTFIELDS => $postData
+
+    //,CURLOPT_FOLLOWLOCATION => true
+
+));
+//Ignore SSL certificate verification
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+//get response
+
+$output = curl_exec($ch);
+//Print error if any
+if(curl_errno($ch))
+{
+//    echo json_encode(array('error'=> curl_error($ch)));
+}
+curl_close($ch);
+//echo json_encode(array('send'=>'OTP is sent Successfully'));       
+//echo $output;
+            }
+            
+            
+            
+             function email_test($email)
+        {
+               
+                    $headers = "From: support@Packagingnaukari.in";
+                    $headers .= ". PackagingNaukari-Team" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $to = "suraj9195shinde@gmail.com";
+                    $subject = "Welcome To Packaging Naukari";
+
+                    $txt = ' is your OTP for verifying Email Id on packagingnaukri.com.';  
+                                            
+                 
+                       $success=  mail($to,$subject,$txt,$headers); 
+                       if($success)
+                       {
+                          return true;
+                       }
+        }
 
 		
     
