@@ -859,7 +859,7 @@ var edu_name=el.val();
                                               $salary= $sal[0]." Lac PA";  
                                             }else
                                             {
-                                           $salary= $sal[0]." Lac ". $sal[1]."Thousand PA";  
+                                           $salary= $sal[0]." Lac ". $sal[1]." Thousand PA";  
                                             }
                                             }
                                             else

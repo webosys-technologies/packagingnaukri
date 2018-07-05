@@ -194,19 +194,38 @@ a:link, a:visited{
                            </div>
                                <div class="col-md-2 pull-right"><button type="button" onclick="delete_job('<?php echo $job->job_id; ?>')" class="btn btn-danger btn-sm">Remove</button></div>
                            </div>
+                           
+                           
+                             <?php if(isset($job->job_salary)){
+                                                               $sal=explode('.', $job->job_salary);
+                                                               if($sal[0]!="0" && $sal[1]!='0')
+                                                               {
+                                                                   $salary=$sal[0]." Laks - ".$sal[1]." Laks ";
+                                                               }else{
+                                                                    $salary="Not Mentioned";
+                                                               }
+                                  }?>
+                           
+                                  <?php if(!empty($job->job_experience))
+                                            {
+                                            $exp=explode(".",$job->job_experience);
+                                           
+                                                $experience=$exp[0]."-".$exp[1]." Year";
+                                                                                     
+                                            }else{
+                                                $experience="Not Mentioned";
+                                            }
+                                            
+                                            ?>
+                           
+                           
                           <div class="row" class="">
-                              <div class="col-md-2 experience"><i class="fa fa-suitcase" aria-hidden="true"></i> <?php echo $job->job_experience;?>
+                              <div class="col-md-2 experience"><i class="fa fa-suitcase" aria-hidden="true"></i> <?php echo $experience;?>
                               </div>
                               <div class="col-md-8 experience"><i class="fa fa-map-marker" aria-hidden="true"></i> <?php echo $job->job_city;?>
                           </div>
-                       </div>
+                       </div>                     
                            
-<!--                          <div class="row" class="">
-                              <div class="col-md-2 skill">key skills:
-                              </div>
-                              <div class="col-md-8 skill"><?php echo  $job->job_skill_name;?>
-                          </div>
-                       </div> -->
                            <div class="row" class="">
                               <div class="col-md-2 description">Job Description:
                               </div>
@@ -214,20 +233,9 @@ a:link, a:visited{
                           </div>
                        </div> 
                           <div class="row experience" >
-<!--                            <div class="col-md-1">
-                                <input class="star" type="checkbox" title="save job" name="save">
-                              </div>  -->
-                              <?php if(isset($job->job_salary)){
-                                                               $sal=explode('.', $job->job_salary);
-                                                               if(!empty($sal[0]) && $sal[0]!='0')
-                                                               {
-                                                                   $salary=$sal[0]." Lac ".$sal[1]." Thousand ";
-                                                               }else{
-                                                                    $salary=$sal[1]." Thousand ";
-                                                               }
-                                  }?>
+
                               <div class="col-md-3" style="padding-top: 10px;">
-                                  <span class="fa fa-inr"></span> <?php if(isset($job->job_salary)){echo $salary;}?>
+                                  <span class="fa fa-inr"></span> <?php echo $salary;?>
                               </div>
                               <div class="col-md-5" style="padding-top: 10px;">
                                   <span class="skill">Post By </span> <a href="#"><img src='<?php if(file_exists($job->recruiter_profile_pic)){echo base_url().$job->recruiter_profile_pic;}else{ echo base_url()."profile_pic/avatar.png";}?>' width="20px" height="20px"> <?php echo ucfirst(strtolower($job->recruiter_fname))." ".ucfirst(strtolower($job->recruiter_lname));?></a>

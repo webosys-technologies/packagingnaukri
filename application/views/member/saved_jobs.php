@@ -146,8 +146,31 @@ a:link, a:visited{
               $("#job_desc").html(data.job_description);
                $("#eligibility").html(data.job_education);
 ////                $("#skills").html();
-                 $("#salary").html(data.job_salary);
-                 $("#experience").html(data.job_experience);
+                if(data.job_experience)
+                                    {
+                                        var exp=data.job_experience.split(".");
+                                        if(exp[0]=="0" && exp[1]=="0")
+                                        {
+                                        $("#experience").html("Not Mentioned");                                       
+                                        }else if(exp[0]==exp[1]){
+                                              $("#experience").html(exp[0]+" Year");
+                                        }else{
+                                             $("#experience").html(exp[0]+"-"+exp[1]+" Year" );
+                                        }
+                                    }
+                                   
+                          if(data.job_salary)
+                                    {
+                                        var sal=data.job_salary.split(".");
+                                        if(sal[0]=="0" && sal[1]=="0")
+                                        {
+                                        $("#salary").html("Not Mentioned");                                       
+                                        }else if(sal[0]==sal[1]){
+                                              $("#salary").html(sal[0]+" Lac PA");
+                                        }else{
+                                             $("#salary").html(sal[0]+" Lac - "+sal[1]+" Lac PA" );
+                                        }
+                                    }
                  $("#location").html(data.job_city);
                  $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
                  $("#email").html(data.company_email);

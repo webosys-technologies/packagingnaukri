@@ -214,7 +214,7 @@ a:link, a:visited{
    
     function job_info(id)
     {
-        $("#salary_field").prop('hidden',true);
+//        $("#salary_field").prop('hidden',true);
               
            $.ajax({
        url : "<?php echo site_url('index.php/member/Jobs/job_info')?>/" + id,        
@@ -251,7 +251,7 @@ a:link, a:visited{
                                         }else if(sal[0]==sal[1]){
                                               $("#job_salary").html(sal[0]+" Lac PA");
                                         }else{
-                                             $("#job_salary").html(sal[0]+" Lac -"+sal[1]+" Lac PA" );
+                                             $("#job_salary").html(sal[0]+" Lac - "+sal[1]+" Lac PA" );
                                         }
                                     }
                   
@@ -263,7 +263,7 @@ a:link, a:visited{
                  $("#email").html(data.company_email);
                  $("#contact").html(data.company_contact);
                  $("#address").html(data.company_address);
-                 alert(data.company_logo);
+                 
                  if(data.company_logo)
                  {
                   $("#cmp_logo").attr("src","<?php echo base_url();?>"+data.company_logo);
@@ -455,6 +455,7 @@ a:link, a:visited{
                                                                     $salary="Not Mentioned";
                                                                }
                                   }?>
+                                  
                                   <span class="fa fa-inr"> <?php echo $salary;?></span>  /-
                               </div>
                               <div class="col-md-5" style="padding-top: 10px;">
