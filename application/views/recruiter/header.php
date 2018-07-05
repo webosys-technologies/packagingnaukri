@@ -148,12 +148,12 @@
                   
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <div class="pull-left">
+<!--                    <div class="pull-left">
                       <button type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#pass"><i class="fa fa-key"></i> Change Password</button>
-                    </div>
-                    <div class="pull-right">
+                    </div>-->
+                    <!--<div class="pull-right">-->
                       <a href="<?php echo base_url(); ?>recruiter/Index/signout" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i> Sign out</a>
-                    </div>
+                    <!--</div>-->
                   </li>                 
                 </ul>
               </li>
@@ -259,5 +259,5 @@
        
         <!-- /.sidebar -->
       </aside>
-      
+   
      

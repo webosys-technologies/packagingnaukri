@@ -128,6 +128,36 @@ class Profile extends CI_Controller
 
             
     }
+    
+    public function change_password()
+        {
+             $recruiter_LoggedIn = $this->session->userdata('recruiter_LoggedIn');
+        
+        if(isset($recruiter_LoggedIn) || $recruiter_LoggedIn == TRUE)
+        {
+            $data=$this->Recruiters_model->get_id($this->session->userdata('recruiter_id'));
+            
+          if($data->recruiter_password==$this->input->post('opassword'))
+          {
+                $this->Recruiters_model->recruiter_update(array('recruiter_id'=>$this->session->userdata('recruiter_id')),
+                                                    array('recruiter_password'=>$this->input->post('newpassword'))
+                                                    );
+        
+                $this->session->set_flashdata('success','password updated successfully');
+                echo json_encode(array('success'=>"password updated successfully"));
+          }else{
+                echo json_encode(array('opassword_err'=>"Old Password Does Not Match"));
+          }
+        }
+        else
+        {
+            $this->load->view('member/login');
+            
+
+        }
+            
+                      
+        }
 }
 
  ?>
