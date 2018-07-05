@@ -155,28 +155,22 @@
   $(document).ready( function () {   
  
  
-  $("#state").change(function() {
-        
+  $("#state").change(function() {        
    var el = $(this) ;
               $("#city").html("");
-
-
-var user_type=el.val();
-
-        if(user_type)
+              $("#city").append('<option value="">--Select City--</option>');              
+var state=el.val();
+        if(state)
         {
             
       $.ajax({
-       url : "<?php echo site_url('index.php/user/Companies/show_cities')?>/" + user_type,        
-       type: "GET",
-              
+       url : "<?php echo site_url('index.php/user/Companies/show_cities')?>/" + state,        
+       type: "GET",              
        dataType: "JSON",
        success: function(data)
-       {
-        
+       {        
           $.each(data,function(i,row)
-          {
-          
+          {          
               $("#city").append('<option value="'+ row.city_name +'">' + row.city_name+'</option>');
           }
           );
@@ -186,9 +180,38 @@ var user_type=el.val();
 //         alert('Error...!');
        }
      });
-     }
-    
+     }    
  });  
+
+  $("#country").change(function() {        
+   var el = $(this) ;
+              $("#state").html("");
+              $("#city").html("");
+              $("#state").append('<option value="">--Select State--</option>');
+              $("#city").append('<option value="">--Select City--</option>');
+
+var country=el.val();
+        if(country)
+        {            
+      $.ajax({
+       url : "<?php echo site_url('index.php/home/show_states')?>/" + country,        
+       type: "GET",              
+       dataType: "JSON",
+       success: function(data)
+       {        
+          $.each(data,function(i,row)
+          {          
+              $("#state").append('<option value="'+ row.stateID +'">' + row.stateName+'</option>');
+          }
+          );
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+     }    
+ });
   
  
  
@@ -242,20 +265,43 @@ var user_type=el.val();
           
             $('[name="company_id"]').val(data.company_id);
             $('[name="company"]').val(data.company_name);
-            $('[name="type"]').val(data.company_type);
-            $('[name="email"]').val(data.company_email);
             $('[name="address"]').val(data.company_address);
-            $('[name="contact"]').val(data.company_contact);
-            $('[name="pincode"]').val(data.company_pincode);
             $('[name="state"]').val(data.company_state);
-             $('[name="city"]').append('<option value="'+data.company_city+'">'+data.company_city+'</option>');
+             // $('[name="city"]').append('<option value="'+data.company_city+'">'+data.company_city+'</option>');
             $('[name="city"]').val(data.company_city);
             $('[name="country"]').val(data.company_country);
             $('[name="website"]').val(data.company_website);
-            $('[name="established"]').val(data.company_establish_in);
-            $('[name="multinational"]').val(data.company_multinational);
             $('[name="status"]').val(data.company_status);
             $('[name="source"]').val(data.company_source);
+
+            if(data.company_logo)
+            {
+                $("#company_logo").attr('src',"<?php echo base_url();?>"+data.company_logo);
+                $("#company_logo").prop('hidden',false);
+            $("#remove_btn").append(' <a href="<?php echo base_url();?>admin/Companies/delete_logo/'+data.company_id+'" id="remove_logo" class="btn btn-danger btn-xs pull-right">Remove Logo</a>');
+            }
+
+            $.each(data.state.states, function (i,row){
+
+              if (data.company_state == row.stateID) {
+               $('[name="state"]').append('<option value="'+row.stateID+'" selected>'+row.stateName+'</option>');                
+              }else{
+                $('[name="state"]').append('<option value="'+row.stateID+'">'+row.stateName+'</option>');                
+              }
+
+            });
+
+
+            $.each(data.state.cities, function (i,row){
+
+              if (data.company_city == row.cityName) {
+               $('[name="city"]').append('<option value="'+row.cityName+'" selected>'+row.cityName+'</option>');                
+              }else{
+                $('[name="city"]').append('<option value="'+row.cityName+'">'+row.cityName+'</option>');                
+              }
+
+            });
+           
 
            
                         
@@ -445,7 +491,7 @@ var user_type=el.val();
                                       </div>
                                     </div>
     				                 <div class="row">
-                                <div class="col-md-6">                                
+                                <div class="col-md-12">                                
                                     <div class="form-group">
                                         <label>Company Name</label><span style="color: red">*</span>
                                     <input name="company" class="form-control" placeholder="Compay Name" value="">
@@ -455,84 +501,36 @@ var user_type=el.val();
                                                                        
                                 </div>
                                     
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Company Type</label><span style="color: red">*</span>
-                                       
-                                    <input name="type" class="form-control" placeholder="MNC or Small Scale" value="">
-                                        <span class="text-danger" id="type_err"></span>
-                                      
-                                    </div>
-                                   
-                                </div>
                             </div>
                                     
-                                    <div class="row">
-                                <div class="col-md-12  ">                                
-                                    <div class="form-group">
-                                        <label>Company Email</label><span style="color: red">*</span>
-                                    <input name="email" placeholder="Company Email" class="form-control" value="">
-                                        <span class="text-danger" id="email_err"></span>
-                                        
-                                    </div>
-                                                                       
-                                </div>
-                               </div>
-                                    
                                 <div class="row">
-                                  <div class="col-md-6">                                
-                                      <div class="form-group">
-                                         <label>Contact</label><span style="color: red">*</span>
-                                         <input name="contact" placeholder="Company Contact" class="form-control" value="">
-                                          <span class="text-danger" id="contact_err"></span>
-                                          
-                                      </div>
-                                                                        
-                                  </div>
-                                
-                                  <div class="col-md-6">
+                                  
+                                  <div class="col-md-12">
                                      <label>Website</label><span style="color: red">*</span>
                                      <input name="website" placeholder="Company Website" class="form-control" value="">
                                       <span class="text-danger" id="website_err"></span>
 
                                   </div>         
                                 </div><br>
-                                    
-                                    <div class="row">
-                                <div class="col-md-12">                                
-                                    <div class="form-group">
-                                       <label>Company Address</label><span style="color: red">*</span>
-                                    <textarea cols="80" id="address" class="form-control" name="address" rows="5"></textarea>
-                                        <span class="text-danger" id="password_err"></span>
-                                        
-                                    </div>
-                                   
-                                    
-                                </div>                                
-                                     </div> 
-
 
                                 <div class="row">
                                   <div class="col-md-6">
                                         <label class="form-label">Country</label><span style="color: red">*</span>
                                         <select name="country" id="country" class="form-control" required>
-                                                    <option value="">-- Select Country --</option>                              
-                                                    <option value="India"> India </option>                                   
+                                                    <option value="">-- Select Country --</option>
+                                                    <?php if(isset($country)){
+                                                      foreach($country as $country)
+                                                      { ?>
+                                                         <option value="<?php echo $country->countryID; ?>"><?php echo $country->countryName; ?></option>
+                                                     <?php }
+                                                  }?>                           
                                              </select>
-                                        <span class="text-danger"><?php echo form_error('city'); ?></span>
+                                        <span class="text-danger" ><?php echo form_error('city'); ?></span>
 
                                     </div>
                                   <div class="col-md-6">
                                       <label class="form-label">State</label><span style="color: red">*</span>
                                       <select name="state" id="state" class="form-control" required>
-                                                  <option value="">-- Select State --</option>
-                                                  <?php if(isset($states)){
-                                                      foreach($states as $state)
-                                                      { ?>
-                                                         <option value="<?php echo $state->city_state; ?>"><?php echo $state->city_state; ?></option>
-                                                     <?php }
-                                                  }?>
-                                               
                                                   
                                                   <!--<option value="Maharashtra">Maharashtra</option>-->
                                       </select>
@@ -543,41 +541,14 @@ var user_type=el.val();
                                 </div><br>
 
 
-                                <div class="row">
-                                    <div class="col-md-6">
+                                 <div class="row"> 
+                                  <div class="col-md-6">
                                         <label class="form-label">City</label><span style="color: red">*</span>
                                         <select name="city" id="city" class="form-control" required>
-                                                    <option value="">-- Select City --</option>                                   
                                              </select>
                                         <span class="text-danger" id="city_err"><?php echo form_error('city'); ?></span>
 
                                     </div>
-                                    
-                                     <div class="col-md-6">                                
-                                      <div class="form-group">
-                                         <label>Pincode</label><span style="color: red">*</span>
-                                         <input name="pincode" placeholder="Pincode" class="form-control" value="">
-                                          <span class="text-danger" id="mobile_err"></span>                                        
-                                      </div>                                                                      
-                                     </div>
-                               </div>
-                
-                                    
-                     <div class="row">
-                          <div class="col-md-6">
-                           <label>Company Established</label><span style="color: red">*</span>
-                                        <input name="established" placeholder="Established Year" class="form-control" value="">
-                            <span class="text-danger" id="gen_err"></span>
-
-                        </div>  
-                        <div class="col-md-6">
-                           <label>Company Multinational</label><span style="color: red">*</span>
-                                        <input name="mnc" placeholder="Multinational" class="form-control" value="">
-                            <span class="text-danger" id="gen_err"></span>
-
-                        </div>  
-                    </div>
-                                 <div class="row"> 
                                 <div class="col-md-6">
                                   <div class="form-group">
                                     <label>Status<span style="color: red">*</span></label>
@@ -651,22 +622,7 @@ var user_type=el.val();
           <label >Source </label>
           </div>: <span id="source" class="job_info"> </span><br>
           </div>
-          <div class="row">
-              <div class="col-md-3">
-          <label >Company Type </label>
-          </div>: <span id="company_type" class="job_info"> </span><br>
-          </div>
-              <div class="row">
-          <div class="col-md-3">        
-          <label >Email </label>
-          </div>: <span id="email" class="job_info"> </span><br>
-                    </div>
 
-          <div class="row">
-              <div class="col-md-3">
-          <label >Contact </label>
-          </div>: <span id="contact" class="job_info"> </span><br>
-                    </div>
 
           <div class="row">
               <div class="col-md-3">
@@ -682,9 +638,9 @@ var user_type=el.val();
 
           <div class="row">
             <div class="col-md-3">
-               <label>Established In</label>
+               <label>Created At</label>
                </div><div class="">
-               : <span id="establish" class="job_info"></span>
+               : <span id="created" class="job_info"></span>
                    </div>
                              </div>
 
