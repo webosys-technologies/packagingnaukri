@@ -22,6 +22,17 @@
 </div>
     <br>
     <br>
+    
+       <?php       
+        $success = $this->session->flashdata('signup_success');
+        if($success)
+        { ?>
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <?php echo $success; ?>                    
+            </div>
+        <?php } ?>
+    
 
     <div class="row" >
     	<div class="col-md-6 col-md-offset-3" >
