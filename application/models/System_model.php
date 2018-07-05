@@ -47,12 +47,12 @@ class System_model extends CI_Model
               $page='packaging';
               return $page;
             }
-            elseif ($url[3] == 'printingnaukari') {
+            elseif ($url[3] == 'printingnaukri') {
 
                   $page='printing';  
              		 return $page;
 
-            }elseif($url[3] == 'plasticnaukari'){
+            }elseif($url[3] == 'plasticnaukri'){
 
                   $page='plastic'; 
               	  return $page;
@@ -65,12 +65,12 @@ class System_model extends CI_Model
               $page='packaging';
               return $page;
             }
-            elseif ($url[2] == 'printingnaukari.com') {
+            elseif ($url[2] == 'printingnaukri.com') {
 
                   $page='printing';  
              		 return $page;
 
-            }elseif($url[2] == 'plasticnaukari.com'){
+            }elseif($url[2] == 'plasticnaukri.com'){
 
                   $page='plastic'; 
               	  return $page;
