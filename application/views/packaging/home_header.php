@@ -381,7 +381,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
        //  centerMode: true,
   centerPadding: '60px',
   slidesToShow: 3,
-    autoplay: false,
+    autoplay: true,
   autoplaySpeed: 2000,
 //  dots: true,
   responsive: [

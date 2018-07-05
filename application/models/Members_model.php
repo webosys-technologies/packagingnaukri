@@ -179,6 +179,7 @@ class Members_model extends CI_Model
          $this->db->join('educations as edu','edu.member_id=mem.member_id','LEFT');
          }
          $this->db->join('states as st','st.stateID=mem.member_state','Left');
+          $this->db->join('countries as ct','ct.countryID=mem.member_country','Left');
          $this->db->where('mem.member_id',$id);
          $query = $this->db->get();
        	return $query->row();
