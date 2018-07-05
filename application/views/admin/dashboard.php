@@ -75,7 +75,7 @@
               <p id="num">Companies</p>
             </div>
             <div class="icon">
-              <i class="fa fa-institution"></i>
+              <i class="fa fa-industry"></i>
             </div>
             <a href="<?php echo base_url(); ?>admin/Companies" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -115,24 +115,50 @@
           </div>
         </div>
          <!--./col--> 
-<!--        <div class="col-lg-3 col-xs-6">
-           small box 
+        <div class="col-lg-3 col-xs-6">
+           <!-- small box  -->
           <div class="small-box" style="background:#FF99CC;">
             <div class="inner">
-              <h3 id="num"><?php if(isset($admins)){echo count($admins);}else{echo "0";}?><sup style="font-size: 20px"></sup></h3>
+              <h3 id="num"><?php if(isset($institute)){echo count($institute);}else{echo "0";}?><sup style="font-size: 20px"></sup></h3>
 
-              <p id="num">Admins</p>
+              <p id="num">University</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-institution"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>admin/Institute" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+         <!--./col--> 
+        <div class="col-lg-3 col-xs-6">
+           <!-- small box  -->
+          <div class="small-box" style="background:#ff6666;">
+            <div class="inner">
+              <h3 id="num"><?php if(isset($education)){echo count($education);}else{echo "0";}?><sup style="font-size: 20px"></sup></h3>
+
+              <p id="num">Education</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-book"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>admin/Education" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+         <!--./col--> 
+        <div class="col-lg-3 col-xs-6">
+           <!-- small box  -->
+          <div class="small-box" style="background:#ffa64d;">
+            <div class="inner">
+              <h3 id="num"><?php if(isset($customer)){echo count($customer);}else{echo "0";}?><sup style="font-size: 20px"></sup></h3>
+
+              <p id="num">Customer</p>
             </div>
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
-            <a href="<?php echo base_url(); ?>admin/Users" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url(); ?>admin/Customer" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
-        </div>-->
-         <!--./col--> 
-       
-         <!--./col--> 
-        
+        </div>
       </div>
       
     </section>
@@ -140,7 +166,6 @@
   </div>
   <!-- /.content-wrapper -->
   
-</div>
 <script>
   
 
