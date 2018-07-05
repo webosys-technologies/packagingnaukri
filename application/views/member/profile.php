@@ -715,6 +715,7 @@ var edu_name=el.val();
                 $("#pincode").val(data.member_pincode);
                 $("#address").val(data.member_address);
 
+                if (data.model == "personal_modal") {
                 $.each(data.state.states, function (i,row){
 
               if (data.member_state == row.stateID) {
@@ -735,6 +736,7 @@ var edu_name=el.val();
               }
 
             });
+          }
                 
 //                alert(data.education_degree);
                  $("#edu_title").val(data.education_degree);

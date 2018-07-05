@@ -48,18 +48,11 @@ class Companies extends CI_Controller
         $data=array(
                   // 'recruiter_id'=>$id,
                    'company_name'=>$form['company'],
-                   'company_type'=>$form['type'],
-                   'company_email'=>$form['email'],
-                   'company_contact'=>$form['contact'],
                    'company_website'=>$form['website'],
                    'company_address'=>$form['address'],
                    'company_country'=>$form['country'],
-//                   'company_country'=>$form['country'],
                    'company_state'=>$form['state'],
                    'company_city'=>$form['city'],
-                   'company_pincode'=>$form['pincode'],
-                   'company_establish_in'=>$form['established'],
-                   'company_multinational'=>$form['mnc'],
                    'company_created_at'=>date('Y-m-d'),
                    'company_status'=>$form['status'],
                    'company_source'  =>$form['source'],
@@ -104,19 +97,11 @@ class Companies extends CI_Controller
        
          $data=array(// 'recruiter_id'=>$id,
                    'company_name'=>$form['company'],
-                   'company_type'=>$form['type'],
-                   'company_email'=>$form['email'],
-                   'company_contact'=>$form['contact'],
                    'company_website'=>$form['website'],
                    'company_address'=>$form['address'],
                    'company_country'=>$form['country'],
-//                   'company_country'=>$form['country'],
                    'company_state'=>$form['state'],
                    'company_city'=>$form['city'],
-                   'company_pincode'=>$form['pincode'],
-                   'company_establish_in'=>$form['established'],
-                   'company_multinational'=>$form['mnc'],
-                   'company_created_at'=>date('Y-m-d'),
                    'company_status'=>$form['status'],
                    'company_source'  =>$form['source'],
                    
@@ -146,8 +131,13 @@ class Companies extends CI_Controller
         $res=$this->Companies_model->company_by_id($id);
         if($res)
         {
-            echo json_encode($res);
-        }
+            $data['state']=$this->show_state($res);
+            // print_r($state);
+
+        $result=((object)array_merge((array)$res,(array)$data));
+        // print_r($result);
+            echo json_encode($result);
+          }
     }
     
     function company_info($id)
@@ -175,12 +165,15 @@ class Companies extends CI_Controller
         }
     }
     
-       function show_cities($state)
+       function show_state($data)
         {
-           
-            $cities=$this->Cities_model->getall_cities(ltrim(str_replace("%20",' ', $state)));
-          
-            echo json_encode($cities);
+            $country=$data->company_country;
+            $val['states']=$this->Cities_model->getall_states($country);
+            $st=$data->company_state;
+            $val['cities']=$this->Cities_model->getall_cities($st);
+            
+            return $val;
+            // echo json_encode($cities);
         }
     
   
