@@ -223,8 +223,12 @@ var user_type=el.val();
 //         $("#max_salary").append('<option value="'+dim+'">'+ dim +'Lac</option>');
           for(var dim = glob; dim <=99; dim++)
           {
-
-           $("#max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+           if(dim==1)
+           {
+           $("#max_salary").append('<option value="'+dim+'">'+ dim +' Lac</option>');
+       }else{
+            $("#max_salary").append('<option value="'+dim+'">'+ dim +' Lacs</option>');
+       }
            }
          
       });
@@ -234,8 +238,12 @@ var user_type=el.val();
            var temp=$('#min_exp').val();
             for(var dim = temp; dim <=30; dim++)
           {
-
-           $("#max_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+           if(dim==1)
+           {
+           $("#max_exp").append('<option value="'+dim+'">'+ dim +' Year</option>');
+       }else{
+           $("#max_exp").append('<option value="'+dim+'">'+ dim +' Years</option>');
+       }
            }
        });
   
@@ -559,15 +567,18 @@ function delete_menu(id)
                                     <div class="form-group">
                                        <label>MIN Experience</label>
                                        <select name="min_exp" id="min_exp" class="form-control">
-                                           <option value="0">0 year</option>
+                                           <option value="0">None</option>
                                             <script>
                                var exp = 1;
                                var exp_end = 30;
                                 var options = "";
                                 for(var dim = exp ; dim <=exp_end; dim++){
-//                                    alert(dim);
-                            $("#min_exp").append('<option value="'+dim+'">'+ dim +'</option>');
-//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                           if(dim==1)
+                             {
+                            $("#min_exp").append('<option value="'+dim+'">'+ dim +' Year</option>');
+                             }else{
+                             $("#min_exp").append('<option value="'+dim+'">'+ dim +' Years</option>');     
+                             }
                               }
                                </script>
                                            </select>
@@ -580,14 +591,19 @@ function delete_menu(id)
                                     <div class="form-group">
                                        <label>MAX Experience</label>
                                        <select name="max_exp" id="max_exp" class="form-control">
-                                           <option value="0">0 year</option>
+                                           <option value="0">None</option>
                                             <script>
                                var exp = 1;
                                var exp_end = 30;
                                 var options = "";
                                 for(var dim = exp ; dim <=exp_end; dim++){
 //                                    alert(dim);
-                            $("#max_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+                             if(dim==1)
+                             {
+                            $("#max_exp").append('<option value="'+dim+'">'+ dim +' Year</option>');
+                             }else{
+                             $("#max_exp").append('<option value="'+dim+'">'+ dim +' Years</option>');     
+                             }
 //                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
                               }
                                </script>
@@ -646,14 +662,18 @@ function delete_menu(id)
                         <!--<label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>-->
                             <label class="form-label">MIN Salary</label><span style="font-size:11px;">(per anual)</span>
                          <select type="text" name="min_salary" id="min_salary" class="form-control">
-                             <option value="0">0 Lac</option>
+                             <option value="0">None</option>
                            <script>
                                var sal = 1;
                                var sal_end = 99;
                                 var options = "";
                                 for(var dim = sal ; dim <=sal_end; dim++){
-
-                            $("#min_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              if(dim==1)
+                                {
+                            $("#min_salary").append('<option value="'+dim+'">'+ dim +' Lac</option>');
+                                }else{
+                            $("#min_salary").append('<option value="'+dim+'">'+ dim +' Laks</option>');
+                                }
 
                               }
                                </script>
@@ -664,13 +684,19 @@ function delete_menu(id)
                     <div class="col-md-3" style="top-padding:15px"> 
                         <label class="form-label">MAX Salary</label><span style="font-size:11px;">(per anual)</span>
                        <select type="text" id="max_salary" name="max_salary" class="form-control">  
+                            <option value="0">None</option>
                            <script>
-                               var sal = 0;
+                               var sal = 1;
                                var sal_end = 99;
                                 var options = "";
                                 for(var dim = sal ; dim <=sal_end; dim++){
 //                                    alert(dim);
-                            $("#max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+                                if(dim==1)
+                                {
+                            $("#max_salary").append('<option value="'+dim+'">'+ dim +' Lac</option>');
+                                }else{
+                             $("#max_salary").append('<option value="'+dim+'">'+ dim +' Laks</option>');        
+                                }
 //                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
                               }
                                </script> 

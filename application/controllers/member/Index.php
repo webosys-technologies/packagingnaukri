@@ -706,8 +706,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
         }
         else
         {
-            $this->load->view('member/login');
-            
+            $this->load->view('member/login');         
 
         }
             
@@ -723,14 +722,19 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
         
         if(isset($member_LoggedIn) || $member_LoggedIn == TRUE)
         {
-            
-        	
+            $data=$this->Members_model->get_id($this->session->userdata('member_id'));
+         
+          if($data->member_password==$this->input->post('opassword'))
+          {
                 $this->Members_model->member_update(array('member_id'=>$this->session->userdata('member_id')),
-                                                    array('member_password'=>$this->input->post('cpassword'))
+                                                    array('member_password'=>$this->input->post('password'))
                                                     );
         
                 $this->session->set_flashdata('success','password updated successfully');
                 echo json_encode(array('success'=>"password updated successfully"));
+          }else{
+                echo json_encode(array('opassword_err'=>"Old Password Does Not Match"));
+          }
         }
         else
         {

@@ -8,7 +8,7 @@
       overflow-y: initial !important
 }
 .modal-body{
-  height: 420px;
+  /*height: 420px;*/
   overflow-y: auto;
 }
 	#div {
@@ -298,6 +298,89 @@ $("#img").change(function (e) {
         }
     });
 	}
+        
+   
+   function open_modal()
+   {
+       $("#profile_modal").modal('hide');
+       $("#password_modal").modal('show');
+   }
+   
+   
+             
+          function change_password()
+          {
+           
+                 var pass_val;
+                 
+                 var pass=$('#newpassword').val();
+                 var cpass=$('#conf_password').val();
+                 alert(pass);
+                 alert(cpass);
+                 var length=pass.length;
+                     if($("#opassword").val()=="")
+                     {
+                     $("#opassword_err").html("Enter Old Password");    
+                     }
+                     else if(length<8)
+                     {
+                     $("#opassword_err").html("");
+                     $("#newpassword_err").html("Enter Password at least 8 character");
+                      pass_val=false;
+                     }else if(pass!=cpass)
+                     {
+                         $("#newpassword_err").html("");
+                          $("#conf_password_err").html("Password does not match");
+                           pass_val=false;
+                     }else{
+                         $("#newpassword_err").html("");
+                         $("#conf_password_err").html("");
+                          pass_val=true;
+                     }
+                         
+                 
+                                            
+                    
+                    
+          
+          
+          
+          
+   if(pass_val)
+   {
+       var data = new FormData(document.getElementById("password_form"));
+       var url = "<?php echo base_url()?>recruiter/Profile/change_password";
+           
+       $.ajax({               
+            url : url,
+            type: "POST",
+            async: false,
+            processData: false,
+            contentType: false,            
+            data: data,
+            dataType: "JSON",
+        success: function(json)
+        {  
+            if(json.opassword_err)
+            {
+                $("#opassword_err").html(json.opassword_err);
+            }
+            
+           if(json.success)
+           {
+               location.reload();
+           }
+          
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {            
+//          alert('Error...!');
+        }
+      }); 
+   }
+   }
+        
+        
 
 	
     function save()
@@ -395,6 +478,67 @@ var country=el.val();
  }); 
  });
 </script>
+
+<div class="modal fade" id="password_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" id="modal_dialog">
+    <div class="modal-content">
+      <div style="background:#3c8dbc" class="modal-header">
+          
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Change Password</strong></h4></center>
+      </div>
+      <div style="background:#F2F3F4" class="modal-body">
+          <form action="" method="post" id="password_form">
+          <div class="row">
+              <div class="col-md-8 col-md-offset-2">
+                   <div class="row">
+                      <div class="col-md-12">
+                      <div class="form-group">
+                          <label>Old Password :</label>
+                      <input type="password" class="form-control" name="opassword" id="opassword">
+                      <span class="text-danger" id="opassword_err"></span>
+                      </div>
+                          
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                      <div class="form-group">
+                          <label>New Password :</label>
+                      <input type="password" class="form-control" name="newpassword" id="newpassword">
+                      <span class="text-danger" id="newpassword_err"></span>
+                      </div>
+                          
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                      <div class="form-group">
+                           <label>Confirm Password :</label>
+                  <input type="password" class="form-control" name="cpassword" id="conf_password">
+                  <span class="text-danger" id="conf_password_err"></span>
+                  </div>
+                          
+                          </div>
+                  </div>
+                 </div>
+              <div class="col-md-2">
+              </div>
+     
+    </div><!-- /.modal-content -->
+    </form>
+  </div><!-- /.modal-dialog -->
+  <div class="modal-footer">
+      <button onclick="change_password()" class="btn btn-primary">Submit</button>
+  </div>
+</div> 
+         </div>
+         </div>
+
+
+
+
+
 
  <div class="modal fade" id="profile_modal" role="dialog">
     <div class="modal-dialog" id="modal_dialog">   
@@ -496,6 +640,7 @@ var country=el.val();
                                           <div class="col-md-6  ">                             
                                               <label for="fname">Password</label>
                                               <input type="text" placeholder="Password" value='' class="form-control required" id="password" name="password"  required>
+                                              <a href="#" onclick="open_modal()"><i class="fa fa-key"></i> Change Password</a>
                                               <span class="text-danger" id="password_err"></span>                                                          
                                       </div>
 
@@ -520,3 +665,6 @@ var country=el.val();
     </div>             
         </div>        
       </div>
+
+
+     

@@ -1648,21 +1648,15 @@ var edu_name=el.val();
                         <label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>
                          <select type="text" name="lacsalary" id="lacsalary" class="form-control">
                              <option value="0">None</option>
-                           <script>
-                               var sal = 1;
-                               var sal_end = 99;
-                                var options = "";
-                                for(var dim = sal ; dim <=sal_end; dim++){
-//                                    alert(dim);
-                               if(dim==1)
-                               {
-                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +' Lac</option>');
-                                }else{
-                              $("#lacsalary").append('<option value="'+dim+'">'+ dim +' Laks</option>');       
-                                }
-//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
-                              }
-                               </script>
+                             <option value="10">10 Thousands</option>
+                             <option value="20">20 Thousands</option>
+                             <option value="30">30 Thousands</option>
+                             <option value="40">40 Thousands</option>
+                             <option value="50">50 Thousands</option>
+                             <option value="60">60 Thousands</option>
+                             <option value="70">70 Thousands</option>
+                             <option value="80">80 Thousands</option>
+                             <option value="90">90 Thousands</option>                           
                         </select>
                         <span class="text-danger"></span>
                     </div   >
