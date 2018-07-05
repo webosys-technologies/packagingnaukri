@@ -228,20 +228,46 @@ a:link, a:visited{
 ////             $("#j_desc").html();
               $("#job_desc").html(data.job_description);
                $("#eligibility").html(data.job_education);
-////                $("#skills").html();
-//                      alert(data.job_salary);
-//                    if(data.job_salary)
-//                    {
+               
+                                    if(data.job_experience)
+                                    {
+                                        var exp=data.job_experience.split(".");
+                                        if(exp[0]=="0" && exp[1]=="0")
+                                        {
+                                        $("#experience").html("Not Mentioned");                                       
+                                        }else if(exp[0]==exp[1]){
+                                              $("#experience").html(exp[0]+" Year");
+                                        }else{
+                                             $("#experience").html(exp[0]+"-"+exp[1]+" Year" );
+                                        }
+                                    }
+                                   
+                          if(data.job_salary)
+                                    {
+                                        var sal=data.job_salary.split(".");
+                                        if(sal[0]=="0" && sal[1]=="0")
+                                        {
+                                        $("#job_salary").html("Not Mentioned");                                       
+                                        }else if(sal[0]==sal[1]){
+                                              $("#job_salary").html(sal[0]+" Lac PA");
+                                        }else{
+                                             $("#job_salary").html(sal[0]+" Lac -"+sal[1]+" Lac PA" );
+                                        }
+                                    }
+                  
+                  
 //                 $("#salary").html(data.job_salary);
-//                 $("#salary_field").prop('hidden',false);
-//                    }
-                 $("#salary").html(data.job_salary);
-                 $("#experience").html(data.job_experience);
+                
                  $("#location").html(data.job_city);
                  $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
                  $("#email").html(data.company_email);
                  $("#contact").html(data.company_contact);
                  $("#address").html(data.company_address);
+                 alert(data.company_logo);
+                 if(data.company_logo)
+                 {
+                  $("#cmp_logo").attr("src","<?php echo base_url();?>"+data.company_logo);
+                 }
                  
              
             
@@ -386,7 +412,7 @@ a:link, a:visited{
                            
                            <?php if(!empty($job->job_experience))
                                             {
-                                            $exp=explode(".",$member_data->member_experience);
+                                            $exp=explode(".",$job->job_experience);
                                            
                                                 $experience=$exp[0]."-".$exp[1]." Year";
                                                                                      
@@ -468,7 +494,7 @@ a:link, a:visited{
     				
     			<div class="panel-body">
     			  <form action="" id="skill_form">  
-            <!--<img src="" height="50px" weight="150px"><br>-->                                   
+            <img id="cmp_logo" src="" height="50px" width="150px"><br>                                   
           <h4 style="color:#5DADE2" id="job_title"></h4>
           <h5 id="company_name" class="job_info"></h5>
           <div class="row">
@@ -491,7 +517,7 @@ a:link, a:visited{
           <div class="row">
               <div class="col-md-3">
           <label >Salary </label>
-          </div>: <span id="salary" class="job_info"> </span><br>
+          </div>: <span id="job_salary" class="job_info"> </span><br>
                     </div>
 
           <div class="row">
