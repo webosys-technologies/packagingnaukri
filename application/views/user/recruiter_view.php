@@ -189,29 +189,22 @@ $("#photo").change(function() {
 }); 
      
      
-        $(".state").change(function() {
-        
+        $(".state").change(function() {        
    var el = $(this) ;
               $(".city").html("");
-
-
+              $(".city").append('<option value="">--Select City--</option>');
 var state=el.val();
-
         if(state)
-        {
-            
+        {            
       $.ajax({
        url : "<?php echo site_url('index.php/Home/show_cities')?>/" + state,        
-       type: "GET",
-              
+       type: "GET",              
        dataType: "JSON",
        success: function(data)
-       {
-        
+       {        
           $.each(data,function(i,row)
-          {
-          
-              $(".city").append('<option value="'+ row.city_name +'">' + row.city_name+'</option>');
+          {          
+              $(".city").append('<option value="'+ row.cityName +'">' + row.cityName+'</option>');
           }
           );
        },
@@ -220,9 +213,37 @@ var state=el.val();
 //         alert('Error...!');
        }
      });
-     }
-    
+     }    
  });  
+        $(".country").change(function() {        
+   var el = $(this) ;
+              $(".state").html("");
+              $(".city").html("");
+              $(".state").append('<option value="">--Select State--</option>');
+              $(".city").append('<option value="">--Select City--</option>');
+
+var country=el.val();
+        if(country)
+        {            
+      $.ajax({
+       url : "<?php echo site_url('index.php/home/show_states')?>/" + country,        
+       type: "GET",              
+       dataType: "JSON",
+       success: function(data)
+       {        
+          $.each(data,function(i,row)
+          {          
+              $(".state").append('<option value="'+ row.stateID +'">' + row.stateName+'</option>');
+          }
+          );
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+     }    
+ }); 
       
       
       
@@ -266,7 +287,8 @@ function view_recruiter(id)
             $('#address').html(data.recruiter_address);
             $('#city').html(data.recruiter_city);
             $('#pincode').html(data.recruiter_pincode);
-            $('#state').html(data.recruiter_state);
+            $('#state').html(data.recruiter_stateName);
+            $('#country').html(data.recruiter_countryName);
 
             if(data.recruiter_profile_pic)
             {
@@ -304,6 +326,8 @@ function view_recruiter(id)
         $("#title").text("Add Recruiter");
         $('#myModal').modal('show');
          $("#pic_err").html("");
+              $("#state").append('<option value="">--Select State--</option>');
+              $("#city").append('<option value="">--Select City--</option>');
                   $("#source_err").html(""); 
                  $("#remove_btn").html("");
                  $("#fname_err").html(""); 
@@ -334,7 +358,6 @@ function view_recruiter(id)
         dataType: "JSON",
         success: function(data)
         {
-
             $('[name="recruiter_id"]').val(data.recruiter_id);
             $('[name="fname"]').val(data.recruiter_fname);
             $('[name="lname"]').val(data.recruiter_lname);
@@ -342,13 +365,12 @@ function view_recruiter(id)
             $('[name="mobile"]').val(data.recruiter_mobile);
             $('[name="password"]').val(data.recruiter_password);
             $('[name="address"]').val(data.recruiter_address);
-            $('[name="state"]').val(data.recruiter_state);
-            $('[name="city"]').val(data.recruiter_city);
-            $('[name="status"]').val(data.recruiter_status);
-//            $("#city").val(data.recruiter_city);
-            $(".city").append('<option value="'+ data.recruiter_city +'">' + data.recruiter_city+'</option>');
-            $('[name="state"]').val(data.recruiter_state);
+            $('[name="country"]').val(data.recruiter_country);
+            // $(".city").append('<option value="'+ data.recruiter_city +'">' + data.recruiter_city+'</option>');
+            // $(".state").append('<option value="'+ data.stateName +'">' + data.stateName+'</option>');
+            $('[name="pincode"]').val(data.recruiter_pincode);
             $('[name="source"]').val(data.recruiter_source);
+            $('[name="status"]').val(data.recruiter_status);
             $('[name="gender"]').val(data.recruiter_gender);
            if(data.recruiter_profile_pic)
             {
@@ -356,6 +378,28 @@ function view_recruiter(id)
                 $("#recruiter_pic").prop('hidden',false);
             $("#remove_btn").append(' <a href="<?php echo base_url();?>user/Recruiter/delete_pic/'+data.recruiter_id+'" id="remove_photo" class="btn btn-danger btn-xs pull-right">Remove Photo</a>');
             }
+
+            $.each(data.state.states, function (i,row){
+
+              if (data.recruiter_state == row.stateID) {
+               $('[name="state"]').append('<option value="'+row.stateID+'" selected>'+row.stateName+'</option>');                
+              }else{
+                $('[name="state"]').append('<option value="'+row.stateID+'">'+row.stateName+'</option>');                
+              }
+
+            });
+
+
+            $.each(data.state.cities, function (i,row){
+
+              if (data.recruiter_city == row.cityName) {
+               $('[name="city"]').append('<option value="'+row.cityName+'" selected>'+row.cityName+'</option>');                
+              }else{
+                $('[name="city"]').append('<option value="'+row.cityName+'">'+row.cityName+'</option>');                
+              }
+
+            });
+           
             
             $("#title").text("Edit Recruiter");
            $('#myModal').modal('show');
@@ -372,6 +416,7 @@ function view_recruiter(id)
     function save()
     {
       $("#save_btn").attr('disabled',true);
+      
       var data=new FormData(document.getElementById("form"));
       var url;
       if(save_method == 'add')
@@ -520,11 +565,11 @@ function view_recruiter(id)
         <div class="modal-body" id="modal_body">
          
             
-          	
-    		<!--<div class="panel panel-default">-->
-    			
-    			<div class="panel-body">
-    				<form method="post" action="" id="form">
+            
+        <!--<div class="panel panel-default">-->
+          
+          <div class="panel-body">
+            <form method="post" action="" id="form">
                                     <input type="hidden" name="recruiter_id" value="">
                             <div class="row">
                               <div class="col-md-6">
@@ -540,7 +585,7 @@ function view_recruiter(id)
                                 </div>
                               </div>
                             </div>
-    				                <div class="row">
+                            <div class="row">
                                 <div class="col-md-6  ">                                
                                     <div class="form-group">
                                         <label for="fname">First Name<span style="color:red">*</span></label>
@@ -619,13 +664,13 @@ function view_recruiter(id)
                            <div class="row">
                           <div class="col-md-6">
                             <div class="form-group">
-                              <label class="form-label">State</label><span style="color: red">*</span>
-                              <select name="state" id="state" class="form-control state" required>
-                                    <option value="">-- Select State --</option>
-                                    <?php if(isset($states)){
-                                        foreach($states as $state)
+                              <label class="form-label">Country</label><span style="color: red">*</span>
+                              <select name="country"  class="form-control country" required>
+                                    <option value="">-- Select Country --</option>
+                                    <?php if(isset($country)){
+                                        foreach($country as $country)
                                         { ?>
-                                           <option value="<?php echo $state->city_state; ?>"><?php echo $state->city_state; ?></option>
+                                           <option value="<?php echo $country->countryID; ?>"><?php echo $country->countryName; ?></option>
                                        <?php }
                                     }?>
                                  
@@ -636,13 +681,29 @@ function view_recruiter(id)
                         </div>
                     </div>
                     <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="form-label">State</label><span style="color: red">*</span>
+                              <select name="state"  class="form-control state" required>
+                                    <!--<option value="Maharashtra">Maharashtra</option>-->
+                        </select>
+                        <span class="text-danger" id="state_err"><?php echo form_error('state'); ?></span>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
                       <div class="form-group">
                         <label class="form-label">City</label><span style="color: red">*</span>
-                        <select name="city"  class="form-control city" required>
-                                    <option value="">-- Select City --</option>                                   
+                        <select name="city"  class="form-control city" required>                                  
                              </select>
                         <span class="text-danger" id="city_err"><?php echo form_error('city'); ?></span>
                         </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Pincode</label>
+                        <input type="text" name="pincode" class="form-control" placeholder="Pincode" required>
+                      </div>
                     </div>
                     </div>
                       <div class="row">
@@ -672,13 +733,13 @@ function view_recruiter(id)
                                 
                             </div>
                           </form>    
-    				
-    			</div>
+            
+          </div>
                    
                             <!--</div>-->
-    			
-    		</div>         
-    	 <div class="modal-footer">
+          
+        </div>         
+       <div class="modal-footer">
              <button type="button" class="btn btn-primary" id="save_btn" onclick="save()">Save</button>
           <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
         </div>
@@ -762,7 +823,7 @@ function view_recruiter(id)
                     </div>
                     <div class="col-md-1"><strong>:</strong></div>                    
                     <div class="col-md-7">
-                      <span id="name" class="text_color"></span>
+                      <span id="gender" class="text_color"></span>
                     </div>
                   </div>
                 </div>

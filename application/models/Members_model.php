@@ -113,7 +113,7 @@ class Members_model extends CI_Model
 
         );
         if (!empty($this->input->post('pincode'))) {
-            $data['pincode']=$this->input->post('pincode');
+            $data['member_pincode']=$this->input->post('pincode');
         }
 
         $this->db->insert('members',$data);
