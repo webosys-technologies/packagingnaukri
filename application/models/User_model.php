@@ -21,6 +21,7 @@ class User_model extends CI_Model
         if($name=="")
         {
              $this->db->where('user_status','1');
+             $this->db->where_not_in('user_id','1');
         }
         $query=$this->db->get();
 
