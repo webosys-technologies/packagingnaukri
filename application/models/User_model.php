@@ -4,7 +4,7 @@ class User_model extends CI_Model
 {
      var $table='users';
 
-     public function getall_user($name)
+     public function getall_user($name,$id)
      {
        
         $this->db->from($this->table);
@@ -18,10 +18,10 @@ class User_model extends CI_Model
              $this->db->where('user_status','1');
             $this->db->where('user_type','admin');
         }
-        if($name=="")
+        if(isset($name))
         {
-             $this->db->where('user_status','1');
-             $this->db->where_not_in('user_id','1');
+             $this->db->where_not_in('user_status','2');
+             $this->db->where_not_in('user_id',$id);
         }
         $query=$this->db->get();
 
@@ -81,10 +81,10 @@ class User_model extends CI_Model
         return $query->row(); 
     }
     
-    public function delete_by_id($id)
+    public function delete_by_id($where,$data)
     {
-        $this->db->where('user_id', $id);
-        $this->db->delete($this->table);
+        // $this->db->where('user_id', $id);
+        $this->db->update($this->table,$data,$where);
         return $this->db->affected_rows();
     }
     
