@@ -3,17 +3,12 @@
   .modal fade{
     display: block !important;
 }
-#modal-dialog,#modal_dialog1{
+.modal-dialog,#modal_dialog1{
      width: 60%;
       overflow-y: initial !important
 }
 .modal-body{
-  height: 390px;
-  overflow-y: auto;
-}
-
-.company_body{
-  height: 350px;
+  height: 420px;
   overflow-y: auto;
 }
 
@@ -34,7 +29,7 @@
      width: 100%;
       overflow-y: initial !important
 }
-}
+}    
 </style>
 <div class="content-wrapper" style="background:white;">
     <!-- Content Header (Page header) -->
@@ -98,13 +93,13 @@
                                             <th>Company Name</th>
                                             <th>Logo</th>
                                             <th>Recruiter</th>
-<!--                                            <th>Email</th>
-                                            <th>Contact</th>-->
+                                            <th>Email</th>
+                                            <th>Contact</th>
                                             <th>Location</th>
-                                            <th>Created At</th>
+                                            <th>Established</th>
                                             <th>Status</th>
                                             <th>Source</th>
-                                            <th style="width:90px">Action</th>
+                                            <th style="width:75px">Action</th>
          
         </tr>
       </thead>
@@ -112,20 +107,21 @@
         <?php
           if (isset($companies)) {
             
+          
          foreach($companies as $comp){
-             ?>
-                                     <tr>  
+          ?>
+             <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->user_id; ?>" class="" ></td> --> 
                                         <td><?php echo $comp->company_id?></td>
                                             <td><?php echo $comp->company_name?></td>
                                              
                                             <td><img src="<?php echo base_url().$comp->company_logo;?>" width="80px" height="30px"></td>
                                            <td><?php echo $comp->recruiter_fname." ".$comp->recruiter_lname;?></td>
-<!--                                            <td><?php echo $comp->company_email?></td>
-                                            <td><?php echo $comp->company_contact?></td>-->
+                                            <td><?php echo $comp->company_email?></td>
+                                            <td><?php echo $comp->company_contact?></td>
                                             <td><?php echo $comp->company_city?></td>
 				            <td><?php echo $comp->company_created_at?></td>
-                                            <td> <?php 
-                                       if($comp->company_status==1)
+                                           
+                                          <td> <?php if($comp->company_status==1)
                                        {
                                            echo "Active";
                                        }
@@ -134,11 +130,11 @@
                                            echo "Not Active";
                                        }
                                        ?></td>
-                                       <td><?php echo $comp->company_source ; ?></td>
+                                       <td><?php echo $comp->company_source; ?></td>
                                            
-                <td>  <button class="btn btn-success btn-xs" onclick="edit_company(<?php echo $comp->company_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Add Company"><i class="glyphicon glyphicon-pencil"></i></button>
-                     <button class="btn btn-info btn-xs" onclick="view_company(<?php echo $comp->company_id; ?>)" id="btn2" data-toggle="tooltip" data-placement="bottom" title="View Company"><i class="fa fa-eye"></i></button>
-                  <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $comp->company_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Company"><i class="glyphicon glyphicon-trash"></i></button>
+                <td>  <button class="btn btn-success btn-xs" onclick="edit_company(<?php echo $comp->company_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
+                  <button class="btn btn-info btn-xs" onclick="view_company(<?php echo $comp->company_id; ?>)" id="btn2" data-toggle="tooltip" data-placement="bottom" title="View Company"><i class="fa fa-eye"></i></button>
+                    <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $comp->company_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
                              </td>
               </tr>
           <?php }}?>
@@ -156,44 +152,26 @@
   </div>
 
   <script type="text/javascript">
-  $(document).ready( function () { 
-      
-      
-      
-      function readURL(input) {
-
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-
-    reader.onload = function(e) {
-      $('#company_logo').attr('src', e.target.result);
-      $('#company_logo').attr('hidden',false);
-    }
-
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-
-$("#logo").change(function() {
-  readURL(this);
-});
-      
+  $(document).ready( function () {   
+ 
  
   $("#state").change(function() {        
    var el = $(this) ;
               $("#city").html("");
+              $("#city").append('<option value="">--Select City--</option>');              
 var state=el.val();
         if(state)
-        {            
+        {
+            
       $.ajax({
-       url : "<?php echo site_url('index.php/home/show_cities')?>/" + state,        
+       url : "<?php echo site_url('index.php/user/Companies/show_cities')?>/" + state,        
        type: "GET",              
        dataType: "JSON",
        success: function(data)
        {        
           $.each(data,function(i,row)
           {          
-              $("#city").append('<option value="'+ row.cityName +'">' + row.cityName+'</option>');
+              $("#city").append('<option value="'+ row.city_name +'">' + row.city_name+'</option>');
           }
           );
        },
@@ -203,9 +181,9 @@ var state=el.val();
        }
      });
      }    
- });
+ });  
 
- $("#country").change(function() {        
+  $("#country").change(function() {        
    var el = $(this) ;
               $("#state").html("");
               $("#city").html("");
@@ -233,7 +211,7 @@ var country=el.val();
        }
      });
      }    
- });  
+ });
   
  
  
@@ -252,31 +230,28 @@ var country=el.val();
     var table;
     var id;
 
+ 
 
-  function add_company()
+    function add_company()
     {  
-        $('[name="city"]').html("");
-       $("#remove_btn").html("");       
-              $("#state").append('<option value="">--Select State--</option>');
-              $("#city").append('<option value="">--Select City--</option>');
-       $("#state_err").html(""); 
-       $("#city_err").html(""); 
-       $("#company_err").html(""); 
-       $("#source_err").html(""); 
-        $("#company_logo").prop('hidden',true);
-        save_method="add";        
-       $('#form')[0].reset();
-        $("#title").text("Add Company");
-        $('#myModal').modal('show');
-    }
-
-    function edit_company(id)
-    { 
+         $("#source_err").html(""); 
+         $('[name="city"]').html("");
+        save_method="add";   
         $("#company_err").html(""); 
         $("#state_err").html(""); 
         $("#city_err").html(""); 
-      $("#remove_btn").html("");
-      $("#source_err").html(""); 
+       $('#form')[0].reset();
+        $("#title").text("Add Company");
+        $('#myModal').modal('show');
+
+    }
+
+    function edit_company(id)
+    {    $("#source_err").html(""); 
+         $("#company_err").html(""); 
+        $("#state_err").html(""); 
+        $("#city_err").html(""); 
+      
       save_method = 'update';
      $('#form')[0].reset(); // reset form on modals
 
@@ -287,22 +262,23 @@ var country=el.val();
         dataType: "JSON",
         success: function(data)
         {     
+          
             $('[name="company_id"]').val(data.company_id);
             $('[name="company"]').val(data.company_name);
-             $('[name="recruiter"]').val(data.recruiter_id);
             $('[name="address"]').val(data.company_address);
-            $('[name="pincode"]').val(data.company_pincode);
-            // $('[name="city"]').append('<option value="'+data.company_city+'">'+data.company_city+'</option>');
+            $('[name="state"]').val(data.company_state);
+             // $('[name="city"]').append('<option value="'+data.company_city+'">'+data.company_city+'</option>');
+            $('[name="city"]').val(data.company_city);
             $('[name="country"]').val(data.company_country);
             $('[name="website"]').val(data.company_website);
             $('[name="status"]').val(data.company_status);
-            $('[name="recruiter"]').val(data.recruiter_id);
-           
+            $('[name="source"]').val(data.company_source);
+
             if(data.company_logo)
             {
                 $("#company_logo").attr('src',"<?php echo base_url();?>"+data.company_logo);
                 $("#company_logo").prop('hidden',false);
-            $("#remove_btn").append(' <a href="<?php echo base_url();?>user/Companies/delete_logo/'+data.company_id+'" id="remove_logo" class="btn btn-danger btn-xs pull-right">Remove Logo</a>');
+            $("#remove_btn").append(' <a href="<?php echo base_url();?>admin/Companies/delete_logo/'+data.company_id+'" id="remove_logo" class="btn btn-danger btn-xs pull-right">Remove Logo</a>');
             }
 
             $.each(data.state.states, function (i,row){
@@ -326,6 +302,8 @@ var country=el.val();
 
             });
            
+
+           
                         
            $("#title").text("Edit Company");
            $('#myModal').modal('show');
@@ -340,16 +318,10 @@ var country=el.val();
     }
 
 
-function delete_logo(id)
-{
-    
-}
-
 
     function save()
     {
         $("#save_btn").attr('disabled',true);
-        
         var data = new FormData(document.getElementById("form"));
       var url;
       if(save_method == 'add')
@@ -372,7 +344,14 @@ function delete_logo(id)
             dataType: "JSON",
             success: function(json)
             {
-               if(json.state_err)
+              if(json.success)
+              {
+                  location.reload();// for reload a page
+              }else{
+                  $("#save_btn").attr('disabled',false);
+              }
+              
+              if(json.state_err)
               {
                    $("#state").focus();
                 $("#state_err").html(json.state_err);
@@ -395,21 +374,14 @@ function delete_logo(id)
                    $("#company_err").html(""); 
               }
               
-               if(json.source_err)
+              if(json.source_err)
               {
                    $('[name=source]').focus();
                $("#source_err").html(json.source_err); 
               }else{
                    $("#source_err").html(""); 
               }
-            
-              if(json.success)
-              {
-              location.reload();// for reload a page
-              }else{
-                  $("#save_btn").attr('disabled',false);
-              }
-                
+               
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
@@ -418,12 +390,14 @@ function delete_logo(id)
         });
     }
     
-    function delete_menu(id)
+    
+     function delete_menu(id)
     {
 
         $("#delete_comp").attr('onclick','delete_company('+id+')');
         $("#delete_modal").modal('show');
     }
+    
 
     function delete_company(id)
     {
@@ -446,7 +420,7 @@ function delete_logo(id)
         });
 
     }
-
+    
     function view_company(id)
     {
               
@@ -458,21 +432,15 @@ function delete_logo(id)
        success: function(data)
        {
 //           alert(data.company_address);
-
                  $("#source").html(data.company_source);
                  $("#company_name").html(data.company_name);
-//                 $("#company_type").html(data.company_type);
-//                  $("#establish").html(data.company_establish_in);
+                 $("#company_type").html(data.company_type);
+                  $("#establish").html(data.company_establish_in);
 //                    
                  $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
-//                 $("#email").html(data.company_email);
-//                 $("#contact").html(data.company_contact);
+                 $("#email").html(data.company_email);
+                 $("#contact").html(data.company_contact);
                  $("#comp_address").html(data.company_address);
-                  if(data.company_logo)
-            {
-                $("#comp_logo").attr('src',"<?php echo base_url();?>"+data.company_logo);
-               
-            }
                  
              
             
@@ -486,6 +454,8 @@ function delete_logo(id)
        
     }
 
+
+
   </script>
 
 <div class="modal fade" id="myModal" role="dialog">
@@ -493,7 +463,7 @@ function delete_logo(id)
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header" style="background:#3c8dbc; color: white">
+        <div class="modal-header" style="background:#3c8dbc; color:white">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <center><h4 id="title" class="modal-title"></h4></center>
         </div>
@@ -511,35 +481,16 @@ function delete_logo(id)
                                         <div class="form-group">
                                           <label>Source<span style="color: red">*</span></label>
                                           <select name="source" class="form-control">
-                                            <!--<option>--Select Source--</option>-->
+                                            <option>--Select Source--</option>
                                             <option value="Packaging">Packaging</option>
                                             <option value="Printing">Printing</option>
                                             <option value="Plastic">Plastic</option>
                                           </select>
-                                          <span id="source_err" class="text-danger"></span>
-                                        </div>
-                                      </div>
-                                        
-                                         <div class="col-md-6">
-                                        <div class="form-group">
-                                          <label>Recruiters<span style="color: red">*</span></label>
-                                          <select name="recruiter" class="form-control">
-                                              <option value="<?php echo $this->session->userdata('recruiter_id');?>">SELF</option>
-                                            <?php 
-                                            if(isset($recruiters))
-                                            {
-                                                foreach ($recruiters as $rec)
-                                                {
-                                                    echo '<option value='.$rec->recruiter_id.'>'.$rec->recruiter_fname." ".$rec->recruiter_lname;'</option>';
-                                                }
-                                            }
-                                            ?>
-                                          </select>
-                                          <span id="source_err" class="text-danger"></span>
+                                          <span class="text-danger" id="source_err"></span>
                                         </div>
                                       </div>
                                     </div>
-    				                <div class="row">
+    				                 <div class="row">
                                 <div class="col-md-12">                                
                                     <div class="form-group">
                                         <label>Company Name</label><span style="color: red">*</span>
@@ -548,63 +499,19 @@ function delete_logo(id)
                                         
                                     </div>
                                                                        
-                                </div>                                    
-                                
+                                </div>
+                                    
                             </div>
                                     
-<!--                                    <div class="row">
-                                <div class="col-md-12  ">                                
-                                    <div class="form-group">
-                                        <label>Company Email</label>
-                                    <input name="email" placeholder="Company Email" class="form-control" value="">
-                                        <span class="text-danger" id="email_err"></span>
-                                        
-                                    </div>
-                                                                       
-                                </div>
-                               </div>-->
-                                    
                                 <div class="row">
-<!--                                  <div class="col-md-6">                                
-                                      <div class="form-group">
-                                         <label>Contact</label>
-                                         <input name="contact" placeholder="Company Contact" class="form-control" value="">
-                                          <span class="text-danger" id="contact_err"></span>
-                                          
-                                      </div>
-                                                                        
-                                  </div>-->
-                                
+                                  
                                   <div class="col-md-12">
-                                     <label>Website</label>
+                                     <label>Website</label><span style="color: red">*</span>
                                      <input name="website" placeholder="Company Website" class="form-control" value="">
                                       <span class="text-danger" id="website_err"></span>
 
                                   </div>         
                                 </div><br>
-                                    
-                                    <div class="row">
-                                <div class="col-md-6">                                
-                                    <div class="form-group">
-                                       <label>Company Address</label>
-                                    <textarea cols="80" id="address" class="form-control" name="address" rows="5"></textarea>
-                                        <span class="text-danger" id="password_err"></span>
-                                        
-                                    </div>                                  
-                                </div>
-                                        <div class="col-md-6">                                
-                                    <div class="form-group">
-                                       <label>Company Logo</label>
-                                       
-                                    <input type="file" name="logo" id="logo" value="">
-                                   <div id="remove_btn"></div>
-                                        <span class="text-danger" id="comp_err"></span>
-                                        
-                                    </div> 
-                                    <img src="" id="company_logo" width="120px" height="60px" hidden>
-                                </div> 
-                                     </div> 
-
 
                                 <div class="row">
                                   <div class="col-md-6">
@@ -624,6 +531,7 @@ function delete_logo(id)
                                   <div class="col-md-6">
                                       <label class="form-label">State</label><span style="color: red">*</span>
                                       <select name="state" id="state" class="form-control" required>
+                                                  
                                                   <!--<option value="Maharashtra">Maharashtra</option>-->
                                       </select>
                                       <span class="text-danger" id="state_err"><?php echo form_error('state'); ?></span>
@@ -633,16 +541,15 @@ function delete_logo(id)
                                 </div><br>
 
 
-                                <div class="row">
-                                    <div class="col-md-6">
+                                 <div class="row"> 
+                                  <div class="col-md-6">
                                         <label class="form-label">City</label><span style="color: red">*</span>
                                         <select name="city" id="city" class="form-control" required>
                                              </select>
                                         <span class="text-danger" id="city_err"><?php echo form_error('city'); ?></span>
 
                                     </div>
-                                    
-                                     <div class="col-md-6">
+                                <div class="col-md-6">
                                   <div class="form-group">
                                     <label>Status<span style="color: red">*</span></label>
                                      <select name="status" class="form-control" >
@@ -651,38 +558,7 @@ function delete_logo(id)
                                         </select>
                                   </div>
                                 </div>
-
-                                    
-<!--                                     <div class="col-md-6">                                
-                                      <div class="form-group">
-                                         <label>Pincode</label>
-                                         <input name="pincode" placeholder="Pincode" class="form-control" value="">
-                                          <span class="text-danger" id="mobile_err"></span>                                        
-                                      </div>                                                                      
-                                     </div>-->
-
-                               </div>
-                
-                                    
-<!--                     <div class="row">
-                          <div class="col-md-6">
-                           <label>Company Established</label>
-                                        <input name="established" placeholder="Established Year" class="form-control" value="">
-                            <span class="text-danger" id="gen_err"></span>
-
-                        </div>  
-                        <div class="col-md-6">
-                           <label>Company Multinational</label>
-                                        <input name="mnc" placeholder="Company Multinational" class="form-control" value="">
-                            <span class="text-danger" id="gen_err"></span>
-
-                        </div>  
-                    </div>-->
-
-                               <div class="row"> 
-                               
                                    </div>
-
                              
     			 </form>	
     			</div>
@@ -699,7 +575,8 @@ function delete_logo(id)
         </div>        
       </div>
    
-  
+
+    
   <div class="modal fade" style="margin-top: 200px" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" >
     <div class="modal-content" >
@@ -722,8 +599,7 @@ function delete_logo(id)
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-
+  
 
 <div class="modal fade"  id="company_modal" role="dialog">
     <div class="modal-dialog" id="modal_dialog1">   
@@ -737,8 +613,9 @@ function delete_logo(id)
     				
     			<div class="panel-body">
     			  <form action="" id="skill_form">  
-           <img src="" width="150px" id="comp_logo" height="50px"><br>                                
+            <!--<img src="" height="50px" weight="150px"><br>-->                                   
           <h4 style="color:#5DADE2" id="company_name"></h4>
+          
           
           <div class="row">
               <div class="col-md-3">
@@ -746,22 +623,6 @@ function delete_logo(id)
           </div>: <span id="source" class="job_info"> </span><br>
           </div>
 
-<!--          <div class="row">
-              <div class="col-md-3">
-          <label >Company Type </label>
-          </div>: <span id="company_type" class="job_info"> </span><br>
-          </div>-->
-<!--              <div class="row">
-          <div class="col-md-3">        
-          <label >Email </label>
-          </div>: <span id="email" class="job_info"> </span><br>
-                    </div>-->
-
-<!--          <div class="row">
-              <div class="col-md-3">
-          <label >Contact </label>
-          </div>: <span id="contact" class="job_info"> </span><br>
-                    </div>-->
 
           <div class="row">
               <div class="col-md-3">
@@ -775,13 +636,13 @@ function delete_logo(id)
           </div>: <span id="website" class="job_info"></span><br>
                     </div>
 
-<!--          <div class="row">
+          <div class="row">
             <div class="col-md-3">
-               <label>Established In</label>
+               <label>Created At</label>
                </div><div class="">
-               : <span id="establish" class="job_info"></span>
+               : <span id="created" class="job_info"></span>
                    </div>
-                             </div>-->
+                             </div>
 
                    
                           </form>
@@ -794,6 +655,8 @@ function delete_logo(id)
     </div>             
         </div>        
       </div>
+
+
 
 
 

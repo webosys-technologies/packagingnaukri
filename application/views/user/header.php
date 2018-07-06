@@ -155,7 +155,7 @@
           </a>
          </li>
         <li>
-          <a href="<?php echo base_url(); ?>user/Jobs/view_jobs">
+          <a href="<?php echo base_url(); ?>user/Jobs">
             <i class="fa fa-folder"></i> <span>Jobs</span>            
           </a>
          </li>
