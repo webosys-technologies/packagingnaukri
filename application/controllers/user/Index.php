@@ -58,8 +58,10 @@ class Index extends CI_Controller
        if($valid_email)  //valid email >0
        {          
             
-            if($result > 0 && $result->user_status==1 && $result->user_type=='user')
+            if(!empty($result) && $result->user_status==1 && $result->user_type=='user')
             {
+               
+                
                $source=$this->System_model->source_name();
                     $sessionArray = array(                        
                          'user_id' => $result->user_id,
@@ -70,8 +72,9 @@ class Index extends CI_Controller
                     'user_source' => $source,
                      'user_recruiter_id'=>$result->recruiter_id,
                                     );
-                                    
+                     
                     $this->session->set_userdata($sessionArray);  
+                    
                     
                     redirect('user/Dashboard');
                   
