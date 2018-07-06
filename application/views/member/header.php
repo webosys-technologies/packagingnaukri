@@ -199,13 +199,9 @@
                  var pass=$('#password').val();
                  var cpass=$('#cpassword').val();
                      var length=pass.length;
-                     if($("#opassword").val()=="")
+                     if(length<8)
                      {
-                     $("#opassword_err").html("Enter Old Password");    
-                     }
-                     else if(length<8)
-                     {
-                     $("#opassword_err").html("");
+                     
                      $("#password_err").html("Enter Password at least 8 character");
                       pass_val=false;
                      }else if(pass!=cpass)
@@ -242,10 +238,7 @@
             dataType: "JSON",
         success: function(json)
         {  
-            if(json.opassword_err)
-            {
-                $("#opassword_err").html(json.opassword_err);
-            }
+
             
            if(json.success)
            {
@@ -275,7 +268,7 @@
           <form action="" method="post" id="password_form">
           <div class="row">
               <div class="col-md-8 col-md-offset-2">
-                   <div class="row">
+<!--                   <div class="row">
                       <div class="col-md-12">
                       <div class="form-group">
                           <label>Old Password :</label>
@@ -284,7 +277,7 @@
                       </div>
                           
                       </div>
-                  </div>
+                  </div>-->
                   <div class="row">
                       <div class="col-md-12">
                       <div class="form-group">

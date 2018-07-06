@@ -476,6 +476,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             if(data.otp_error)
             {
                 $("#otp_err").html(data.otp_error);
+                $("#otp_success").html("");
             }
                    
             
@@ -529,7 +530,7 @@ $("#send_otp").click(function(){
             }
             if(data.send)
             {
-                $("#otp_success").html("OTP is send Successfully");
+                $("#otp_success").html("OTP sent Successfully");
                 
                  $("#validation_error").html("");
                 $("#show_otp_box").hide();

@@ -524,7 +524,7 @@ function delete_logo(id)
                                         <div class="form-group">
                                           <label>Recruiters<span style="color: red">*</span></label>
                                           <select name="recruiter" class="form-control">
-                                              <option value="<?php echo $this->session->userdata('recruiter_id');?>">SELF</option>
+                                              <option value="<?php echo $this->session->userdata('user_recruiter_id');?>">SELF</option>
                                             <?php 
                                             if(isset($recruiters))
                                             {

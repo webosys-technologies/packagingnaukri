@@ -38,7 +38,10 @@ class Companies extends CI_Controller
     
     public function company_add()
     {
+       
         $form=$this->input->post();
+               
+              
          if(!empty($form['source'])&& $form['source']!="--Select Source--")
       {
         if(!empty($form['company']))
@@ -47,6 +50,8 @@ class Companies extends CI_Controller
   {
       if(!empty($form['city']) && $form['city']!="-- Select City --" && $form['city']!="")
       {
+        
+          
         $data=array(
                    'recruiter_id'=>$form['recruiter'],
                    'company_name'=>$form['company'],

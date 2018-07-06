@@ -430,7 +430,7 @@ if(curl_errno($ch))
     echo json_encode(array('error'=> curl_error($ch)));
 }
 curl_close($ch);
-echo json_encode(array('send'=>'OTP is sent Successfully'));       
+echo json_encode(array('send'=>'OTP sent Successfully'));       
 //echo $output;
             }
 
@@ -445,7 +445,7 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
                 $send=$this->email_otp($email);
                 if($send)
                 {
-                echo json_encode(array('send'=>'OTP is Send Successfully '));
+                echo json_encode(array('send'=>'OTP Sent Successfully '));
                 }
             }   
             }
@@ -670,17 +670,17 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
         {
             $data=$this->Members_model->get_id($this->session->userdata('member_id'));
          
-          if($data->member_password==$this->input->post('opassword'))
-          {
+//          if($data->member_password==$this->input->post('opassword'))
+//          {
                 $this->Members_model->member_update(array('member_id'=>$this->session->userdata('member_id')),
                                                     array('member_password'=>$this->input->post('password'))
                                                     );
         
                 $this->session->set_flashdata('success','password updated successfully');
                 echo json_encode(array('success'=>"password updated successfully"));
-          }else{
-                echo json_encode(array('opassword_err'=>"Old Password Does Not Match"));
-          }
+//          }else{
+//                echo json_encode(array('opassword_err'=>"Old Password Does Not Match"));
+//          }
         }
         else
         {
