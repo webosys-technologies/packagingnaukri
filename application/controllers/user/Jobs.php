@@ -36,9 +36,7 @@ class Jobs extends CI_Controller
     
     
     public function job_add()
-    {
-             echo $this->session->userdata('user_recruiter_id');
-             die;
+    {        
                    
         $form=$this->input->post();
        
