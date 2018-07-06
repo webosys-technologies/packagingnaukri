@@ -359,6 +359,7 @@ class Index extends CI_Controller
                       $where=array('member_mobile'=>$email);
                 $data=array('member_otp'=>$rand);
                 $this->session->set_userdata(array('member_otp'=>$rand));
+                $this->session->set_userdata(array('member_username'=>$rand));
                 $this->Members_model->member_update($where,$data);
      //Your authentication key
 
@@ -453,6 +454,10 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
         function email_otp($email)
         {
                 $rand= mt_rand(000000,999999);
+                
+                $this->session->set_userdata(array('member_otp'=>$rand));
+                $this->session->set_userdata(array('member_username'=>$rand));
+                
                 
                 $where=array('member_email'=>$email);
                 $data=array('member_otp'=>$rand);

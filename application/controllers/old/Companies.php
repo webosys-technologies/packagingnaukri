@@ -9,9 +9,9 @@ class Companies extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-     if(!is_user_LoggedIn($this->session->userdata('user_LoggedIn')))
+     if(!is_admin_LoggedIn($this->session->userdata('admin_LoggedIn')))
      {
-         redirect('user/index');
+         redirect('admin/index');
      }
     }
     
@@ -20,18 +20,18 @@ class Companies extends CI_Controller
      */
     public function index()
     {       
-             $id=$this->session->userdata('user_id');
+             $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
             $result['country']=$this->Cities_model->getall_country();
             $result['companies']=$this->Companies_model->getall_companies();
             $result['recruiters']=$this->Recruiters_model->getall();
-            $sys=$this->session->userdata('user_source');
+            $sys=$this->session->userdata('admin_source');
             $result['system']=$this->System_model->get_system_info($sys);
             
            
-             $this->load->view('user/header',$result);
-             $this->load->view('user/companies',$result);
-             $this->load->view('user/footer');
+             $this->load->view('admin/header',$result);
+             $this->load->view('admin/companies',$result);
+             $this->load->view('admin/footer');
     }
     
   
@@ -193,7 +193,7 @@ class Companies extends CI_Controller
         $where=array('company_id'=>$id);
         $data=array('company_logo'=>"");
          $res=$this->Companies_model->company_update($where,$data);
-        redirect('user/Companies');
+        redirect('admin/Companies');
     }
     
     

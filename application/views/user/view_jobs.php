@@ -3,8 +3,8 @@
  .modal fade{
     display: block !important;
 }
-#modal_dialog{
-     width: 60%;
+#modal_dialog,#modal_dialog1{
+     width: 700px;
       overflow-y: initial !important
 }
 #modal_body{
@@ -19,6 +19,10 @@
                
             }
             
+   .job_info{
+    color:#707B7C;
+}
+
 @media (max-width:800px){
     #modal_dialog,#modal_dialog1{
      width: 100%;
@@ -36,7 +40,7 @@
      width: 100%;
       overflow-y: initial !important
 }
-}    
+}
 </style>
 <div class="content-wrapper" style="background:white;">
     <!-- Content Header (Page header) -->
@@ -53,13 +57,9 @@
     <hr style="border-top: 1px solid #ccc;">
     <section class="content">
         <div class="row">
-
-  <!--<button type="button" class="btn btn-primary">Open Modal</button>-->
-
-         <div class="col-md-4">
-    <!--<button class="btn btn-primary"  onclick="add_job()" data-toggle="tooltip" data-placement="bottom" title="Add Job">      <i class="glyphicon glyphicon-plus"></i> Add Job</button>-->
-<button type="button"  id="bt" class="btn btn-primary" onclick="add_job()"><i></i>Add Job</button>
-    </div>
+          <div class="col-md-3">   
+<button type="button"  id="bt" class="btn btn-primary" onclick="add_job()"><i></i>Post Job</button>
+          </div>
     <div class="col-md-6">
          <?php
         $this->load->helper('form');
@@ -90,10 +90,47 @@
        
         </div>
         </div>
-    <br>
-   
+    <!--<br>-->
+<!--   <div class="row">
+         <div class="col-md-offset-1 col-md-2">
+             <div class="form-group">
+         <label>Salary From:</label>
+         <select class="form-control" id="min" name="min">
+               <script>
+                               var sal = 0;
+                               var sal_end = 99;
+                                var options = "";
+                                for(var dim = sal ; dim <=sal_end; dim++){
+//                                    alert(dim);
+//                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                             $("#min").append('<option value="'+dim+' Members">'+ dim +" Members"+'</option>');
+                              }
+                               </script>
+         </select>         
+         </div>
+             </div>
+       <div class="col-md-2">
+             <div class="form-group">
+            <label>Salary To:</label>
+            <select class="form-control" id="max" name="max">
+               <script>
+                               var sal = 0;
+                               var sal_end = 99;
+                                var options = "";
+                                for(var dim = sal ; dim <=sal_end; dim++){
+//                                    alert(dim);
+//                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                             $("#max").append('<option value="'+dim+' Members">'+ dim +" Members"+'</option>');
+                              }
+                               </script>
+         </select>  
+            </div>
+             </div>
+   </div>-->
+<br>
+        
 <div class="table-responsive">
-    <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <table id="table_id" class="table table-bordered table-hover" cellspacing="0" width="100%">
       <thead>
         <tr bgcolor="#338cbf" style="color:#fff">
            <th>ID</th>
@@ -106,7 +143,7 @@
 					                                  <th>Posted Date</th>
                                             <th>Status</th>
                                             <th>Source</th>
-                                            <th>Action</th>
+                                            <th style="width:75px;">Action</th>
          
         </tr>
       </thead>
@@ -116,36 +153,45 @@
             
           
          foreach($jobs as $job){
-          ?>
-             <tr <?php if($job->job_status==0) {?> style="color:#99A3A4; "<?php }?>>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->user_id; ?>" class="" ></td> --> 
+            
+             ?>
+                                                         <tr <?php if($job->job_status==0) {?> style="color:#99A3A4; "<?php }?> >   <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->user_id; ?>" class="" ></td> --> 
                                         <td><?php echo $job->job_id?></td>
                                             <td><?php echo $job->job_title?></td>
                                             <td><?php echo $job->company_name?></td>
                                             <td style="cursor:pointer; :hover{background-color: red;}"  onclick="applicants(<?php echo $job->job_id ?>)">
                                                 <?php echo count($this->Applied_jobs_model->get_by_job_id($job->job_id))." Members";?></td>
-                                            
                                             <td><?php echo $job->job_education?></td>
-                                            <td><?php echo $job->job_experience?></td>
+                                            <?php $exp=explode(".",$job->job_experience);
+                                                     
+                                                    if($exp[0]==$exp[1])
+                                                    {
+                                                      $experience=$exp[0]." Year";  
+                                                    }else{
+                                                       $experience=$exp[0]."-".$exp[1]." Year";  
+                                                    }
+//                                                    
+                                              ?>
+                                            <td><?php if($job->job_experience){echo $experience;}?></td>
                                             <td><?php echo $job->job_city?></td>
 				            <td><?php echo $job->job_created_at?></td>
-                                            <td>
-                              <?php 
+                                            <td><?php 
                                        if($job->job_status==1)
                                        {
                                            echo "Open";
                                        }
                                        else 
                                        {
-                                          echo '<b style="color:red;">Closed</b>';
+                                           echo '<b style="color:red;">Closed</b>';
                                        }
-                                       ?>  
-                            </td>
-                            <td><?php echo $job->job_source ?></td>
+                                       ?></td>
+                                       <td><?php echo $job->job_source ?></td>
                                            
-                <td><button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" id="btn1" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button>
-                
-                 <button class="btn btn-info btn-xs" onclick="job_info(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="View Job"><i class="fa fa-eye"></i></button>
+                <td> <button class="btn btn-success btn-xs" onclick="edit_job(<?php echo $job->job_id; ?>)" data-toggle="tooltip" data-placement="bottom" title="Edit Job"><i class="glyphicon glyphicon-pencil"></i></button> 
+               
+                    <button class="btn btn-info btn-xs" onclick="job_info(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="View Job"><i class="fa fa-eye"></i></button>              
                     <button class="btn btn-danger btn-xs" onclick="delete_menu(<?php echo $job->job_id;?>)" data-toggle="tooltip" data-placement="bottom" title="Delete Job"><i class="glyphicon glyphicon-trash"></i></button>
+                 
                              </td>
               </tr>
           <?php }}?>
@@ -161,10 +207,98 @@
     
 </section>
   </div>
-
-  <script type="text/javascript">
-  $(document).ready( function () {   
  
+  <script type="text/javascript">
+  var glob;
+  $(document).ready( function () {
+      
+      
+      
+      function readURL(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('#company_logo').attr('src', e.target.result);
+      $('#company_logo').attr('hidden',false);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#logo").change(function() {
+  readURL(this);
+});
+      
+      
+      
+      
+      
+      
+      
+       var table = $('#table_id').DataTable();     
+    // Event listener to the two range filtering inputs to redraw on input
+    $('#min ,#max').on('change', function() {
+        $.fn.dataTable.ext.search.push(
+       
+        function( settings, data, dataIndex ) {
+        var min = parseInt( $('#min').val(), 10 );
+        var max = parseInt( $('#max').val(), 10 );
+        var id = parseFloat( data[3] ) || 0; // use data for the age column
+ 
+        if ( ( isNaN( min ) && isNaN( max ) ) ||
+             ( isNaN( min ) && id <= max ) ||
+             ( min <= id   && isNaN( max ) ) ||
+             ( min <= id   && id <= max ) )
+        {
+            return true;
+        }
+        return false;
+        }
+        );
+        table.draw();
+    } );
+//                        if($("#jobdesc").length > 0){
+//                           $("#jobdesc").ckeditor();
+//                                 }
+  $('[name="company"]').change(function() {
+
+    var cm = $(this) ;   
+    var cmp_name=cm.val();
+    if(cmp_name=="Custom")
+    {
+            $("#custom_field").prop('hidden',false);
+    }else{
+            $("#custom_field").prop('hidden',true);
+    }
+      });
+      
+      
+      
+       $('#min_salary').change(function() {
+           $("#max_salary").html("");
+         glob=$('#min_salary').val();
+//         $("#max_salary").append('<option value="'+dim+'">'+ dim +'Lac</option>');
+          for(var dim = glob; dim <=99; dim++)
+          {
+
+           $("#max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+           }
+         
+      });
+      
+       $('#min_exp').change(function() {
+           $("#max_exp").html("");
+           var temp=$('#min_exp').val();
+            for(var dim = temp; dim <=30; dim++)
+          {
+
+           $("#max_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+           }
+       });
+  
  
   $("#user_type").change(function() {
         
@@ -201,11 +335,11 @@ var user_type=el.val();
     
  });  
   
- 
- 
- 
-      $('#table_id').DataTable();
+  $("#jobdesc").ckeditor();
+  
   } );
+
+       
 
     $("#myName").on("keyup", function() {
     var value = $(this).val().toLowerCase();
@@ -220,81 +354,41 @@ var user_type=el.val();
 
 
 
-    
-    function job_info(id)
-    {
-              
-           $.ajax({
-       url : "<?php echo site_url('index.php/user/Jobs/job_info')?>/" + id,        
-       type: "GET",
-              
-       dataType: "JSON",
-       success: function(data)
-       {
-                    $("#source").html(data.job_source);
-                    $("#company_name").html(data.company_name);
-                     $("#job_title").html(data.job_title);
-////             $("#j_desc").html();
-              $("#job_desc").html(data.job_description);
-               $("#eligibility").html(data.job_education);
-             if(data.job_salary){
-                       var s=data.job_salary.split(".");
-                        $("#salary").html(s[0]+" Lac "+s[1]+" Thousand ");                          
-                   }
-                 $("#experience").html(data.job_experience);
-                 $("#location").html(data.job_city);
-                 $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
-                 $("#email").html(data.company_email);
-                 $("#contact").html(data.company_contact);
-                 $("#address").html(data.company_address);
-                 
-             
-            
-          $("#job_modal").modal('show');
-       },
-       error: function (jqXHR, textStatus, errorThrown)
-       {
-//         alert('Error...!');
-       }
-     });
-       
-    }
 
-     function applicants(id)
+   function applicants(id)
 {
     window.location='<?php echo base_url()?>user/Jobs/applied_members/'+id;
 }
-    
 
     function add_job()
     {  
         save_method="add";        
        $('#form')[0].reset();
-        $("#title").text("Add Job");
+        $("#title").text("Post Job");
         $('#myModal').modal('show');
-        
-         $("#source_err").html(""); 
-         $("#loc_err").html("");
+        $("#loc_err").html("");
         $("#exp_err").html("");
         $("#comp_err").html("");
         $("#job_err").html("");
         $("#qua_err").html("");
+        
 
     }
 
     function edit_job(id)
-    {     
-         $("#source_err").html(""); 
-       $("#loc_err").html("");
+    {    
+        $("#loc_err").html("");
         $("#exp_err").html("");
         $("#comp_err").html("");
         $("#job_err").html("");
         $("#qua_err").html("");
-      save_method = 'update';
-     $('#form')[0].reset(); // reset form on modals
-
+       
         CKEDITOR.instances.jobdesc.updateElement();
         CKEDITOR.instances.jobdesc.getData(); 
+        
+      save_method = 'update';
+      $('#form')[0].reset(); // reset form on modals
+     
       //Ajax Load data from ajax
       $.ajax({
         url : "<?php echo site_url('index.php/user/Jobs/ajax_edit/')?>/" + id,
@@ -302,24 +396,32 @@ var user_type=el.val();
         dataType: "JSON",
         success: function(data)
         {     
-          CKEDITOR.instances.jobdesc.setData( data.job_description );
+           CKEDITOR.instances.jobdesc.setData( data.job_description );
+            $('[name="source"]').val(data.job_source);
             $('[name="job_id"]').val(data.job_id);
             $('[name="jobtitle"]').val(data.job_title);
-            $('[name="jobdesc"]').val(data.job_description);
+//            alert(data.job_description);
+//            $('[name="jobdesc"]').val(data.job_description);
             $('[name="joblocation"]').val(data.job_city);
             $('[name="jobtype"]').val(data.job_type);
             if(data.job_salary){
                        var s=data.job_salary.split(".");
-                        $("#lacsalary").val(s[0]);
-                           $("#thsalary").val(s[1]);
-                   } 
-            $("#skills").html(data.job_skill_name);
+//                       alert(s[0]);
+                        $("#min_salary").val(s[0]);
+                           $("#max_salary").val(s[1]);
+                   }
+                   
+                    if(data.job_experience){
+                       var e=data.job_experience.split(".");
+//                       alert(s[0]);
+                        $("#min_exp").val(e[0]);
+                           $("#max_exp").val(e[1]);
+                   }
             $('[name="company"]').val(data.company_id);
             $('[name="qualification"]').val(data.job_education);
-            $('[name="experience"]').val(data.job_experience);
+//            $('[name="experience"]').val(data.job_experience);
             $('[name="status"]').val(data.job_status);
-            $('[name="source"]').val(data.job_source);
-           
+            $('[name="skill"]').val(data.job_skill_name);
            
                         
            $("#title").text("Edit Job");
@@ -337,11 +439,12 @@ var user_type=el.val();
 
 
     function save()
-    {
+    {   
         $("#save_btn").attr('disabled',true);
         
         CKEDITOR.instances.jobdesc.updateElement();
         CKEDITOR.instances.jobdesc.getData(); 
+//        alert( document.getElementById( 'jobdesc' ).html() );
         var data = new FormData(document.getElementById("form"));
       var url;
       if(save_method == 'add')
@@ -363,50 +466,57 @@ var user_type=el.val();
             data: data,
             dataType: "JSON",
             success: function(json)
-            {
-             if(json.loc_err)
+            { 
+                if(json.loc_err)
                 {
                      $("#loc_err").html(json.loc_err);
+                      $('[name="joblocation"]').focus();
                 }else{
+                    
                      $("#loc_err").html("");
                 }
+                
                 if(json.exp_err)
                 {
                      $("#exp_err").html(json.exp_err);
                 }else{
                      $("#exp_err").html("");
                 }
+                
+                if(json.custom_err)
+                {
+                     $("#custom_err").html(json.custom_err);
+                      $('[name="custom"]').focus();
+                }else{
+                     $("#custom_err").html("");
+                }
+                
                 if(json.comp_err)
                 {
                      $("#comp_err").html(json.comp_err);
+                      $('[name="company"]').focus();
                 }else{
                     $("#comp_err").html("");
                 }
                 if(json.qua_err)
                 {
                     $("#qua_err").html(json.qua_err);
+                     $('[name="qualification"]').focus();
                 }else{
                     $("#qua_err").html("");
                 }
                 if(json.job_err)
                 {
                     $("#job_err").html(json.job_err);
+                     $('[name="jobtitle"]').focus();
                 }else{
                     $("#job_err").html("");
                 }
                 
-                if(json.source_err)
-              {
-                   $('[name=source]').focus();
-               $("#source_err").html(json.source_err); 
-              }else{
-                   $("#source_err").html(""); 
-              }
-                
              if(json.success)
              {
               location.reload();// for reload a page
-             }else{
+             }  else{
                  $("#save_btn").attr('disabled',false);
              }
             },
@@ -445,6 +555,53 @@ var user_type=el.val();
     }
 
 
+    function job_info(id)
+    {
+              
+           $.ajax({
+       url : "<?php echo site_url('index.php/user/Jobs/job_info')?>/" + id,        
+       type: "GET",
+              
+       dataType: "JSON",
+       success: function(data)
+       {
+                    $("#source").html(data.job_source);
+                    $("#company_name").html(data.company_name);
+                     $("#job_title").html(data.job_title);
+////             $("#j_desc").html();
+              $("#job_desc").html(data.job_description);
+               $("#eligibility").html(data.job_education);
+               if(data.job_salary){
+                       var s=data.job_salary.split(".");
+                        $("#salary").html(s[0]+" Lac "+s[1]+" Thousand ");                          
+                   }
+                   
+                 $("#skills").html(data.job_skill_name);
+                
+                 $("#experience").html(data.job_experience);
+                 $("#location").html(data.job_city);
+                 $("#website").html('<a target="_blank" href="http://'+data.company_website+'">'+data.company_website+'</a>');
+                 $("#email").html(data.company_email);
+                 $("#contact").html(data.company_contact);
+                 $("#address").html(data.company_address);
+                   if(data.company_logo)
+            {
+                $("#comp_logo").attr('src',"<?php echo base_url();?>"+data.company_logo);
+               
+            }
+                 
+             
+            
+          $("#job_modal").modal('show');
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+//         alert('Error...!');
+       }
+     });
+       
+    }
+
   </script>
 
 <div class="modal fade" id="myModal" role="dialog">
@@ -459,18 +616,18 @@ var user_type=el.val();
         <div class="modal-body" id="modal_body">
          
             
-            
-        <!--<div class="panel panel-default">-->
-          
-          <div class="panel-body">
-            <form method="post" action="" id="form">
+          	
+    		<!--<div class="panel panel-default">-->
+    			
+    			<div class="panel-body">
+    				<form method="post" action="" id="form">
                                     <input type="hidden" value="" name="job_id">
-                              <div class="row">
+    		               <div class="row">
                                 <div class="col-md-8">                                
                                     <div class="form-group">
                                         <label>Source<span style="color: red">*</span></label>
                                         <select name="source" class="form-control">
-                                            <option>--Select Source--</option>
+                                            <!--<option>--Select Source--</option>-->
                                             <option value="Packaging">Packaging</option>
                                             <option value="Printing">Printing</option>
                                             <option value="Plastic">Plastic</option>
@@ -479,8 +636,7 @@ var user_type=el.val();
                                         
                                     </div>
                                                                        
-                                </div>
-                                    
+                                </div>                                    
                               </div>
                               <div class="row">
                                 <div class="col-md-12">                                
@@ -501,6 +657,7 @@ var user_type=el.val();
                                         <label>Company Name<span style="color: red">*</span></label>
                                         <select name="company" class="form-control">
                                             <option>-- Select Company --</option>
+                                            <option value="Custom">Custom</option>
                                             <?php
                                             if(isset($companies))
                                             {
@@ -518,6 +675,29 @@ var user_type=el.val();
                                 </div>
                             </div>
                                     
+                                <div class="row" id="custom_field" hidden>
+                                <div class="col-md-6">                                
+                                    <div class="form-group">
+                                        <!--<label></label>-->
+                                        <input name="custom" placeholder="Enter Company Name" class="form-control" value="">
+                                        <span class="text-danger" id="custom_err"></span>                                                                               
+                                    </div>                                                                       
+                                </div>
+                                    
+                                     <div class="col-md-6">                                
+                                    <div class="form-group">
+                                       <label>Company Logo</label>
+                                       
+                                    <input type="file" name="logo" id="logo" value="">
+                                   <div id="remove_btn"></div>
+                                        <span class="text-danger" id="comp_err"></span>
+                                        
+                                    </div> 
+                                    <img src="" id="company_logo" width="120px" height="60px" hidden>
+                                </div> 
+                                    <br><br>
+                                </div>
+                                    
                                     <div class="row">
                                 <div class="col-md-6">                                
                                     <div class="form-group">
@@ -529,10 +709,43 @@ var user_type=el.val();
                                                                        
                                 </div>
                               
-                                <div class="col-md-6">                                
+                                <div class="col-md-3">                                
                                     <div class="form-group">
-                                       <label>Experience<span style="color: red">*</span></label>
-                                       <input name="experience" placeholder="Experience 0-2 year" class="form-control" value="">
+                                       <label>MIN Experience</label>
+                                       <select name="min_exp" id="min_exp" class="form-control">
+                                           <option value="0">0 year</option>
+                                            <script>
+                               var exp = 1;
+                               var exp_end = 30;
+                                var options = "";
+                                for(var dim = exp ; dim <=exp_end; dim++){
+//                                    alert(dim);
+                            $("#min_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              }
+                               </script>
+                                           </select>
+                                        <span class="text-danger" id="exp_err"></span>
+                                        
+                                    </div>
+                                                                      
+                                </div>
+                                        <div class="col-md-3">                                
+                                    <div class="form-group">
+                                       <label>MAX Experience</label>
+                                       <select name="max_exp" id="max_exp" class="form-control">
+                                           <option value="0">0 year</option>
+                                            <script>
+                               var exp = 1;
+                               var exp_end = 30;
+                                var options = "";
+                                for(var dim = exp ; dim <=exp_end; dim++){
+//                                    alert(dim);
+                            $("#max_exp").append('<option value="'+dim+'">'+ dim +'</option>');
+//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                              }
+                               </script>
+                                           </select>
                                         <span class="text-danger" id="exp_err"></span>
                                         
                                     </div>
@@ -584,17 +797,18 @@ var user_type=el.val();
                                     
                      <div class="row">
                         <div class="col-md-3">
-                        <label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span><span style="color: red">*</span>
-                         <select type="text" name="lacsalary" id="lacsalary" class="form-control">
+                        <!--<label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>-->
+                            <label class="form-label">MIN Salary</label><span style="font-size:11px;">(per anual)</span>
+                         <select type="text" name="min_salary" id="min_salary" class="form-control">
                              <option value="0">0 Lac</option>
                            <script>
                                var sal = 1;
                                var sal_end = 99;
                                 var options = "";
                                 for(var dim = sal ; dim <=sal_end; dim++){
-//                                    alert(dim);
-                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
-//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+
+                            $("#min_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+
                               }
                                </script>
                         </select>
@@ -602,19 +816,18 @@ var user_type=el.val();
                     </div>
                                         
                     <div class="col-md-3" style="top-padding:15px"> 
-                        <label class="form-label"></label> <span style="font-size:12px;"></span>
-                       <select type="text" id="thsalary" name="thsalary" class="form-control">  
-                            <option value="0">0 Thousands</option>
-                             <script>
-                               var sal = 1;
+                        <label class="form-label">MAX Salary</label><span style="font-size:11px;">(per anual)</span>
+                       <select type="text" id="max_salary" name="max_salary" class="form-control">  
+                           <script>
+                               var sal = 0;
                                var sal_end = 99;
                                 var options = "";
                                 for(var dim = sal ; dim <=sal_end; dim++){
 //                                    alert(dim);
-//                            $("#lacsalary").append('<option value="'+dim+'">'+ dim +'</option>');
-                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
+                            $("#max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
+//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
                               }
-                               </script>
+                               </script> 
                         </select>
                         <span class="text-danger" id="salary_error"><?php echo form_error('state'); ?></span>
                     </div> 
@@ -632,43 +845,46 @@ var user_type=el.val();
                     </div>
                      <div class="row">                         
                          <div class="col-md-12">
-                       <label>Job Skills<span style="color: red">*</span></label>
+                       <label>Job Skills</label>
                       <input name="skill" placeholder="Skill Name" id="skill" class="form-control" value="">
                         <span class="text-danger" id="gen_err"></span>
 
                     </div>  
                          </div>
                              
-            
-          </div>
+    				
+    			</div>
                     </form>
                             <!--</div>-->
-          
-        </div>         
-       <div class="modal-footer">
-             <button type="button" class="btn btn-primary"  onclick="save()">Save</button>
+    			
+    		</div>         
+    	 <div class="modal-footer">
+             <button type="button" class="btn btn-primary" id="save_btn"  onclick="save()">Save</button>
           <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
         </div>
     </div>           
            
         </div>        
       </div>
+   
 
 
-<div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+
+<div class="modal fade" style="margin-top: 200px" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
     <div class="modal-content">
       <div style="background:#3c8dbc;" class="modal-header">
           
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <center><h4 style="color:white" class="modal-title" style="" id="myModalLabel"><strong>Job</strong></h4></center>
       </div>
-      <div  style="background:#F2F3F4" class="modal-body">
+      <div style="background:#F2F3F4; height: 90px;" class="modal-body">
           <div class="row">
               <div class="col-md-10 col-md-offset-2">
                   <label style="color:black">Are you sure want to delete this job ?</label> <br>
                   <button class="btn btn-default" id="delete_job">Yes</button>
-                  <button class="btn btn-default" data-dismiss="modal">No</button>          
+                  <button class="btn btn-default" data-dismiss="modal">No</button>
+          
                   </div>              
                  </div>
       </div>
@@ -677,19 +893,19 @@ var user_type=el.val();
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<div class="modal fade" id="job_modal" role="dialog">
-    <div class="modal-dialog" id="modal_dialog">   
+ <div class="modal fade" id="job_modal" role="dialog">
+    <div class="modal-dialog" id="modal_dialog1">   
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header"style="background:#3c8dbc">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <center><h4 style="color:white" id="title" class="modal-title">Company Details</h4></center>
+          <center><h4 style="color:white" id="title" class="modal-title">Job Details</h4></center>
         </div>
         <div class="modal-body" id="skill_body">         	
     				
     			<div class="panel-body">
     			  <form action="" id="skill_form">  
-            <!--<img src="" height="50px" weight="150px"><br>-->                                   
+            <img src="" width="150px" id="comp_logo" height="50px"><br>                             
           <h4 style="color:#5DADE2" id="job_title"></h4>
           <h5 id="company_name" class="job_info"></h5>
           <div class="row">
