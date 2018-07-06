@@ -1059,7 +1059,7 @@ var edu_name=el.val();
         <div class='row'>
             <?php if(isset($member_data)){?>
             <div class="col-md-8"><label><?php if (!empty($member_data->member_resume)){ $resume=explode('/',$member_data->member_resume);echo $resume[1];}?></label><br>
-            <span style="color:#B2BABB;">Uploaded On : <?php if (!empty($member_data->member_resume)){ $resume=explode('_',$member_data->member_resume);echo $resume[2];}?></span></div>
+            <span style="color:#B2BABB;">Uploaded On : <?php if (!empty($member_data->member_resume)){ $resume=explode('_',$member_data->member_resume);echo $resume[1];}?></span></div>
           <div class='col-md-4'> <?php if (!empty($member_data->member_resume)){?> <a href='<?php echo base_url().$member_data->member_resume;?>'><span style='font-size: 18px' class='fa fa-download'></span></a>
            <br><a href='#resume' onclick='delete_resume(<?php echo "$member_data->member_id"; ?>,"resume_delete")'><span class=''> DELETE RESUME</span></a></div><?php } ?>
                                         

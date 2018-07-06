@@ -189,11 +189,20 @@ class Profile extends CI_Controller
         
     }
     
+    function d()
+    {
+        $this->Employments_model->member_experience(array('member_id'=>$this->session->userdata('member_id')));
+    }
+    
     public function employment_update()
     {
         $to="";
         $id=$this->session->userdata('member_id');
         $form=$this->input->post();
+        
+//        print_r($form);
+//        die;
+        
         $member_data=  get_member_info($id);
         
       
@@ -224,7 +233,7 @@ class Profile extends CI_Controller
         $where=array('employment_id'=>$form['employment_id']);
         $where2=array('employment_organization'=>$form['organization']);
      
-              
+        
          
         if(empty($form['employment_id']))
         {
@@ -234,12 +243,19 @@ class Profile extends CI_Controller
               {
                   if(!empty($to) )
                    {
-                      if($to<=date('Y-m-d'))
+                      if($to>=$form['from'] && $to<=date("Y-m-d"))
                          {
-            $datetime1 = new DateTime($to);
-            $datetime2 = new DateTime($form['from']);
-            $interval = $datetime1->diff($datetime2);
-            $exp=$interval->format('%y.%m');
+             
+            $old_exp=$this->Employments_model->member_experience(array('member_id'=>$this->session->userdata('member_id')));              
+
+            $interval = (new DateTime($to))->diff(new DateTime($form['from']));
+            $experience=$interval->format('%y.%m');
+            $exp=$this->count_exp($old_exp,$experience);
+//               $exp=$interval->format('%y.%m');
+               
+//                $year=$year+$exp[0];
+//                $month=$month+$exp[1];
+//                $year+(int)($month/12).".".($month%12);
           
                 $mem_data=array('member_experience'=>$exp,
                                 'member_anual_salary'=>$form['lacsalary'].".".$form['thsalary']);
@@ -248,7 +264,7 @@ class Profile extends CI_Controller
                 $this->Employments_model->insert_employment($data);
             echo json_encode(array('success'=>'Employment Added sucessfully')); 
                          }else{
-                            echo json_encode(array('to_err'=>"Working To date should less than todays date")); 
+                            echo json_encode(array('to_err'=>"date should geater than from date and less than todays date")); 
                          }
                    }else{
                         echo json_encode(array('to_err'=>"Select Working TO"));
@@ -265,18 +281,21 @@ class Profile extends CI_Controller
             $row=$this->Employments_model->get_employment($where3);
             if($row->employment_id==$form['employment_id'])
             {
+               
                   if(!empty($form['from']))
             {
               if($form['from']<=date("Y-m-d"))
               {
                   if(!empty($to) )
                    {
-                      if($to<=date('Y-m-d'))
+                      if($to>=$form['from'] && $to<=date("Y-m-d"))
                          {
-            $datetime1 =  new DateTime($to);
-            $datetime2 = new DateTime($form['from']);
-            $interval = $datetime1->diff($datetime2);
-            $exp=$interval->format('%y.%m');
+              $old_exp=$this->Employments_model->member_experience(array('member_id'=>$this->session->userdata('member_id')));              
+//            $datetime1 =  new DateTime($to);
+//            $datetime2 = new DateTime($form['from']);
+            $interval = (new DateTime($to))->diff(new DateTime($form['from']));
+            $experience=$interval->format('%y.%m');
+            $exp=$this->count_exp($old_exp,$experience);
           
                 $mem_data=array('member_experience'=>$exp,
                                 'member_anual_salary'=>$form['lacsalary'].".".$form['thsalary']);
@@ -306,6 +325,15 @@ class Profile extends CI_Controller
     }
     }
     
+    
+    public function count_exp($old,$new)
+    {
+         $old=explode(".",$old);
+         $new=explode(".",$new);
+         $year=$old[0]+$new[0];
+         
+          return $year+(int)(($old[1]+$new[1])/12).".".(($old[1]+$new[1])%12);
+    }
    
     
     
@@ -378,11 +406,20 @@ class Profile extends CI_Controller
     {
         $where=array('employment_id'=>$id);
         $res=$this->Employments_model->employment_delete($where);
+        
+        
+             $exp=$this->Employments_model->member_experience(array('member_id'=>$this->session->userdata('member_id')));
+            $where=array('member_id'=>$this->session->userdata('member_id'));
+            $data=array('member_experience'=>$exp);
+               $this->Members_model->member_update($where,$data);
+             
         if($res)
         {
             echo json_encode(array('success'=>'Employment Deleted Successfully'));
         }
     }
+    
+    
     
      public function education_delete($id)
     {

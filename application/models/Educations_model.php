@@ -21,7 +21,7 @@ class Educations_model extends CI_Model
     {         
         $this->db->where('member_id',$id);
         $query=$this->db->get($this->table);
-        echo $query->num_rows();
+//        echo $query->num_rows();
        
             return $query->row();
         

@@ -49,6 +49,29 @@ class Employments_model extends CI_Model
          return $query->result();
      }
      
+     function member_experience($where)
+     {         
+             $query1=$this->db->from($this->table)
+                         ->where($where)
+                         ->get();
+         $query=$query1->result();
+         $exp="0.0";
+         $year=0;
+         $month=0;
+         foreach ($query as $q)
+         {
+             
+            $exp=explode(".",(new DateTime($q->employment_from))->diff(new DateTime($q->employment_to))->format('%y.%m'));
+             $year=$year+$exp[0];
+             $month=$month+$exp[1];
+             
+//             $exp=$exp+(new DateTime($q->employment_from))->diff(new DateTime($q->employment_to))->format('%y.%m');
+             
+         }
+                
+         return $year+(int)($month/12).".".($month%12);
+     }
+     
      function check_employment($where)
      {
          $this->db->from($this->table);
@@ -71,7 +94,8 @@ class Employments_model extends CI_Model
      {
          $this->db->from($this->table);
          $this->db->where($where);
-         $query=$this->db->delete();
+         $query=$this->db->delete();        
+         
          return $this->db->affected_rows();
      }
      
