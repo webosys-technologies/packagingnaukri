@@ -109,7 +109,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php if(isset($user_data)){echo base_url(); echo $user_data->user_profile_pic;}else{ echo base_url()."profile_pic/boss.png"; }?>" class="img-circle" alt="User Image">
+          <img src="<?php if(file_exists($user_data->user_profile_pic)){echo base_url(); echo $user_data->user_profile_pic;}else{ echo base_url()."profile_pic/boss.png"; }?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php if(isset($user_data)){echo ucfirst(strtolower($user_data->user_fname))." ".ucfirst(strtolower($user_data->user_lname));}else{echo "NO NAME";}?></p>
