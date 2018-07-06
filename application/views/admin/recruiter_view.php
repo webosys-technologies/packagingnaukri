@@ -287,7 +287,7 @@ function view_recruiter(id)
             $('#address').html(data.recruiter_address);
             $('#city').html(data.recruiter_city);
             $('#pincode').html(data.recruiter_pincode);
-            $('#state').html(data.recruiter_stateName);
+            $('#state').html(data.stateName);
             $('#country').html(data.recruiter_countryName);
 
             if(data.recruiter_profile_pic)
@@ -632,7 +632,7 @@ function view_recruiter(id)
                                 <div class="col-md-6  ">                                
                                     <div class="form-group">
                                         <label for="fname">Gender<span style="color:red">*</span></label>
-                                        <select name="gender" id="gender" class="form-control">
+                                        <select name="gender"  class="form-control">
                                            <option value="Male">Male</option>
                                            <option value="Female">Female</option>
                                        </select>
