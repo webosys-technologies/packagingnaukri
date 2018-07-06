@@ -239,6 +239,7 @@
      
                
                  function apply() { 
+          $("#show_pass_box").hide();   
          $("#job_err").html("");       
        
        var data = new FormData(document.getElementById("apply_job"));
