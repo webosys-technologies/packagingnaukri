@@ -36,7 +36,7 @@ class Dashboard extends CI_Controller
             $result['customer']=$this->Customer_model->getall_customer();
             $result['education']=$this->Master_edu_model->getall();
             $result['institute']=$this->Institute_model->getall();
-            $result['user']=$this->User_model->getall_user($name=" ");
+            $result['user']=$this->User_model->getall_user($name=" ",$id);
             $sys=$this->session->userdata('admin_source');
             $result['system']=$this->System_model->get_system_info($sys);
                   

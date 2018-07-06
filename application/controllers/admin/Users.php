@@ -19,7 +19,7 @@ class Users extends CI_Controller
                  
             $id=$this->session->userdata('admin_id');
             $result['user_data']=get_user_info($id);
-            $result['users']=$this->User_model->getall_user("");
+            $result['users']=$this->User_model->getall_user("",$id);
             $sys=$this->session->userdata('admin_source');
             $result['system']=$this->System_model->get_system_info($sys);
        
@@ -65,7 +65,7 @@ class Users extends CI_Controller
                         'user_type'           => $this->input->post('user_type'),
                         'recruiter_id'        =>$rec_id,
                         'user_created_at'     => date('Y-m-d'),
-                        'user_status'         =>'1'
+                        'user_status'         =>$this->input->post('status'),
                           );
         
       
@@ -157,7 +157,8 @@ class Users extends CI_Controller
                         'user_mobile'         => $this->input->post('mobile'),
                         'user_password'       => $this->input->post('password'),
                         'user_gender'         => $this->input->post('gender'),
-                        'user_type'           => $this->input->post('user_type')
+                        'user_type'           => $this->input->post('user_type'),
+                        'user_status'         =>$this->input->post('status'),
                           );
             
                        
@@ -178,8 +179,9 @@ class Users extends CI_Controller
         
          function user_delete($id)
     {
-
-        $result=$this->User_model->delete_by_id($id);
+        $data=array('user_status'=>'2');
+        $result=$this->User_model->delete_by_id(array('user_id'=>$id),$data);
+        
               if($result)
                 {
                   

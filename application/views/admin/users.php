@@ -112,8 +112,7 @@
           if (isset($users)) {
             
           
-         foreach($users as $res){
-             if($res->user_status=='1'){?>
+         foreach($users as $res){?>
              <tr>    <!--                    <td><input type="checkbox" name="checked[]"  value="<?php echo $res->user_id; ?>" class="" ></td> --> 
                                         <td><?php echo $res->user_id;?></td>
                                         <td><?php echo $res->user_fname.' '. $res->user_lname; ?></td>
@@ -139,7 +138,7 @@
 
                 </td>
               </tr>
-          <?php }}}?>
+          <?php }}?>
 
 
 
@@ -517,6 +516,17 @@ function view_user(id)
 
                     </div>
                    
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label class="form-label">Status</label>
+                        <select name="status" id="status" class="form-control" required>
+                                    <option value="1">Active</option>
+                                    <option value="0">Not Active</option>                                                                   
+                        </select>
+                        <span class="text-danger" id="gen_err"></span>
+
+                    </div>
                     </div>
                              
     				
