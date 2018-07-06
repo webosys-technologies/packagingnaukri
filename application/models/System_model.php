@@ -40,7 +40,7 @@ class System_model extends CI_Model
 	function source_name()
 	{
 		 $url=explode('/', base_url());
-                 if($url[2]=="webosys.com" || $url[2]=="acumenpackaging.com" || $url[2]=="localhost" )
+                 if($url[2]=="webosys.com" || $url[2]=="www.webosys.com" || $url[2]=="www.acumenpackaging.com" || $url[2]=="acumenpackaging.com" || $url[2]=="localhost" )
                  {
             if ($url[3] == 'packagingnaukri') {
             
@@ -60,17 +60,17 @@ class System_model extends CI_Model
             }
                  }else{
                      
-                      if ($url[2] == 'packagingnaukri.com') {
+                      if ($url[2] == 'packagingnaukri.com' || $url[2] == 'www.packagingnaukri.com') {
             
               $page='packaging';
               return $page;
             }
-            elseif ($url[2] == 'printingnaukri.com') {
+            elseif ($url[2] == 'printingnaukri.com' || $url[2] == 'www.printingnaukri.com') {
 
                   $page='printing';  
              		 return $page;
 
-            }elseif($url[2] == 'plasticnaukri.com'){
+            }elseif($url[2] == 'plasticnaukri.com' || $url[2] == 'www.plasticnaukri.com'){
 
                   $page='plastic'; 
               	  return $page;
