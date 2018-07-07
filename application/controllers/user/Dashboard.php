@@ -33,8 +33,8 @@ class Dashboard extends CI_Controller
             $result['posted']=$this->Jobs_model->getall_jobs();
             $result['applied']=$this->Applied_jobs_model->applied_members();
             $result['companies']=$this->Companies_model->getall_companies();
-            $result['admins']=$this->User_model->getall_user($name="Admin");
-            $result['staff']=$this->User_model->getall_user($name="Staff");
+//            $result['admins']=$this->User_model->getall_user($name="Admin",$id="");
+//            $result['staff']=$this->User_model->getall_user($name="Staff",$);
             $sys=$this->session->userdata('user_source');
             $result['system']=$this->System_model->get_system_info($sys);
                   

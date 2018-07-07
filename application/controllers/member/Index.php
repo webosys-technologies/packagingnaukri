@@ -129,7 +129,7 @@ class Index extends CI_Controller
                          'member_otp'=>$member_otp); 
 //                       $res=$this->Members_model->login_with_otp($where);     
                         $res=$this->Members_model->member_info_by_mobile($member_email);
-            if($this->input->post('member_otp')==$this->session->userdata('member_otp'))
+            if($this->session->userdata("member_username")==$member_email && $this->input->post('member_otp')==$this->session->userdata('member_otp'))
             {    
                 $source=$this->source_verification($res);
                     if($source)
@@ -178,7 +178,7 @@ class Index extends CI_Controller
                $res=$this->Members_model->member_info_by_email($member_email);
          
 
-            if($this->input->post('member_otp')==$this->session->userdata('member_otp'))
+            if($this->session->userdata("member_username")==$member_email && $this->input->post('member_otp')==$this->session->userdata('member_otp'))
             {       
                     $source=$this->source_verification($res);
                     if($source)
@@ -359,7 +359,7 @@ class Index extends CI_Controller
                       $where=array('member_mobile'=>$email);
                 $data=array('member_otp'=>$rand);
                 $this->session->set_userdata(array('member_otp'=>$rand));
-                $this->session->set_userdata(array('member_username'=>$rand));
+                $this->session->set_userdata(array('member_username'=>$this->input->post('member_email')));
                 $this->Members_model->member_update($where,$data);
      //Your authentication key
 
@@ -456,7 +456,7 @@ echo json_encode(array('send'=>'OTP sent Successfully'));
                 $rand= mt_rand(000000,999999);
                 
                 $this->session->set_userdata(array('member_otp'=>$rand));
-                $this->session->set_userdata(array('member_username'=>$rand));
+                $this->session->set_userdata(array('member_username'=>$email));
                 
                 
                 $where=array('member_email'=>$email);
