@@ -201,10 +201,11 @@ class Home extends CI_Controller
                       $where=array('member_mobile'=>$mobile);
                 $data=array('member_otp'=>$rand);
                 $this->session->set_userdata(array('apply_mobile_otp'=>$rand));
+                 $this->session->set_userdata(array('apply_member_mobile'=>$mobile));
                 $this->Members_model->member_update($where,$data);
      //Your authentication key
 
-$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
+$authKey = "217899AjUpTycrXx6K5b0e2283";    //suraj9195shinde for
 
 //Multiple mobiles numbers separated by comma
 
@@ -321,7 +322,7 @@ echo json_encode(array('otp_success'=>'OTP sent Successfully'));
             {
           if(!empty($form['otp']))
           {
-            if($form['otp']==$this->session->userdata('apply_mobile_otp'))
+            if($this->session->userdata('apply_member_mobile')==$form['mobile'] && $form['otp']==$this->session->userdata('apply_mobile_otp'))
             {
                 $sys=$this->System_model->source_name();
                 $data=array('member_fname'=>$form['fname'],
@@ -378,9 +379,15 @@ echo json_encode(array('otp_success'=>'OTP sent Successfully'));
                                   'mobile'=>$form['mobile']);
                 $this->login_detail_email($email_data);
                 $this->login_detail_msg($email_data);
-                echo json_encode(array('success'=>'Job Applied Successfully'));
-                $this->session->set_flashdata('success','Job Applied Successfully. check login detail on given email id and mobile Number');  
+                
+                 $this->session->set_flashdata('success','Job Applied Successfully. check login detail on given email id and mobile Number');  
                 $this->session->unset_userdata('email_otp');
+                $this->session->unset_userdata('apply_member_mobile');
+                $this->session->unset_userdata('apply_mobile_otp');
+                
+                
+                echo json_encode(array('success'=>'Job Applied Successfully'));
+               
             }else{
                 echo json_encode(array('apply_otp_err'=>'Wrong OTP'));
             }
@@ -685,7 +692,7 @@ curl_close($ch);
                       
                    
 
-$authKey = "215028AJLvfixOH5af6761a";    //suraj9195shinde for
+$authKey = "217899AjUpTycrXx6K5b0e2283";    //suraj9195shinde for
 
 //Multiple mobiles numbers separated by comma
 
