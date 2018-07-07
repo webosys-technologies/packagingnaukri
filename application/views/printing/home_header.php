@@ -348,7 +348,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   slidesToShow: 4,
     autoplay: true,
   autoplaySpeed: 2000,
-  dots: true,
+//  dots: true,
   responsive: [
     {
       breakpoint: 768,

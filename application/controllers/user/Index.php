@@ -68,6 +68,7 @@ class Index extends CI_Controller
                     'user_fname' => $result->user_fname,
                     'user_lname' => $result->user_lname,
                     'user_email' => $result->user_email,
+                    'user_type'=> $result->user_type,
                     'user_LoggedIn' => true,
                     'user_source' => $source,
                      'user_recruiter_id'=>$result->recruiter_id,
