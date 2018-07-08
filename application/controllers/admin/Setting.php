@@ -12,9 +12,9 @@ class Setting extends CI_Controller
     {
         parent::__construct();
         
-       if(!is_admin_LoggedIn($this->session->userdata('admin_LoggedIn')))
+       if(!is_admin_LoggedIn($this->session->userdata('admin_LoggedIn')) || $this->session->userdata('admin_type')!="admin")
        {
-           redirect('admin/index');
+           redirect('admin/Dashboard');
        }
        
      

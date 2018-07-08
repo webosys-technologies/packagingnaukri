@@ -162,6 +162,7 @@
           </a>
          </li>
          
+         <?php if (isset($user_data)){if($user_data->user_type=="admin"){?>  
           <li>
           <a href="<?php echo base_url(); ?>admin/Users">
             <i class="fa fa-users"></i> <span>Users</span>
@@ -169,6 +170,7 @@
             </span>
           </a>
         </li> 
+         <?php } } ?>
         <li>
           <a href="<?php echo base_url(); ?>admin/Companies">
             <i class="fa fa-folder"></i> <span>Companies</span>            
@@ -183,22 +185,28 @@
           </a>
         </li>
         
-            
+          <?php if (isset($user_data)){if($user_data->user_type=="admin"){?>  
          <li>
           <a href="<?php echo base_url(); ?>admin/Institute">
             <i class="fa fa-folder"></i> <span>Manage University/Institute</span>            
           </a>
          </li>
+          <?php } } ?>
+         
+          <?php if($user_data->user_type=="admin"){?>   
          <li>
           <a href="<?php echo base_url(); ?>admin/Education">
             <i class="fa fa-folder"></i> <span>Manage Education</span>            
           </a>
-         </li>         
+         </li>  
+          <?php } ?>
+         <?php if (isset($user_data)){if($user_data->user_type=="admin"){?>  
          <li>
           <a href="<?php echo base_url(); ?>admin/Customer">
             <i class="fa fa-folder"></i> <span>Manage Customer</span>            
           </a>
          </li>
+          <?php } } ?>
          <li>
           <a href="<?php echo base_url(); ?>admin/Profile">
             <i class="fa fa-users"></i> <span>Profile</span>
@@ -207,7 +215,7 @@
           </a>
         </li>
 
-         
+         <?php if (isset($user_data)){if($user_data->user_type=="admin"){?>  
         <li class=" treeview">
           <a href="<?php echo base_url(); ?>admin/System/index">
             <i class="fa fa-folder"></i> <span>System</span>
@@ -221,7 +229,9 @@
             <li><a href="<?php echo base_url(); ?>admin/System/plastic"><i class="fa fa-circle-o"></i>Plastic</a></li>
              </ul>
         </li>
+         <?php } } ?>
         
+         <?php if (isset($user_data)){if($user_data->user_type=="admin"){?>  
          <li>
           <a href="<?php echo base_url(); ?>admin/Setting">
             <i class="fa fa-users"></i> <span>Setting</span>
@@ -229,7 +239,7 @@
             </span>
           </a>
         </li>
-       
+         <?php } } ?>
 
 
       </ul>

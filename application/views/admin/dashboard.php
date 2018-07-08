@@ -17,7 +17,7 @@
     <!-- Main content -->
     <section class="content">
 
-      
+       <?php if (isset($user_data)){if($user_data->user_type=="admin"){?>  
             <div class="row">
         
          <!--./col--> 
@@ -98,7 +98,9 @@
       </div>
         
         
+       <?php } }?>
         
+         <?php if (isset($user_data)){if($user_data->user_type=="admin"){?>  
         <div class="row">
         <div class="col-lg-3 col-xs-6">
            <!--small box--> 
@@ -160,7 +162,90 @@
           </div>
         </div>
       </div>
-      
+         <?php } } ?>
+        
+        <?php if (isset($user_data)){if($user_data->user_type=="user"){?>  
+         <div class="row">
+        
+         <!--./col--> 
+        <div class="col-lg-3 col-xs-6">
+           <!--small box--> 
+          <div class="small-box" style="background:#FFCC33;">
+            <div class="inner">
+              <h3 id="num"><?php if(isset($members)){echo count($members);}else{echo "0";}?><sup style="font-size: 20px"></sup></h3>
+
+              <p id="num">Member Masters</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>admin/Members" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+         <!--./col--> 
+        <div class="col-lg-3 col-xs-6">
+           <!--small box--> 
+          <div class="small-box" style="background:#7FB3D5">
+            <div class="inner">
+              <h3 id="num"><?php if(isset($posted)){echo count($posted);}else{echo "0";}?></h3>
+
+              <p id="num">Job Posted</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-suitcase"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>admin/Jobs/" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+         
+          <div class="col-lg-3 col-xs-6">
+           <!--small box--> 
+          <div class="small-box bg-red-gradient">
+            <div class="inner">
+              <h3 id="num"><?php if(isset($recruiters)){echo count($recruiters);}else{echo "0";}?></h3>
+
+              <p id="num">Recruiters</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>admin/Recruiter" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+         
+         <div class="col-lg-3 col-xs-6">
+           <!--small box--> 
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3 id="num"><?php if(isset($companies)){echo count($companies);}else{echo "0";}?></h3>
+
+              <p id="num">Companies</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-industry"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>admin/Companies" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+         <!--./col--> 
+<!--        <div class="col-lg-3 col-xs-6">
+           small box 
+          <div class="small-box" style="background:#008080">
+            <div class="inner">
+              <h3 id="num"><?php if(isset($applied)){echo count($applied);}else{echo "0";}?></h3>
+
+              <p id="num">Job Applied</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-suitcase"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>admin/Applicants" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>-->
+      </div>
+        <?php } } ?>
+        
+        
     </section>
     <!-- /.content -->
   </div>

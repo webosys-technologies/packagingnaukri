@@ -10,9 +10,9 @@ class System extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		if(!is_admin_LoggedIn($this->session->userdata('admin_LoggedIn')))
+		if(!is_admin_LoggedIn($this->session->userdata('admin_LoggedIn')) || $this->session->userdata('admin_type')!="admin")
                 {
-                    redirect('admin/index');
+                    redirect('admin/Dashboard');
                 }
                 $this->load->model('System_model');
 

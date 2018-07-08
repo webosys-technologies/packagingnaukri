@@ -58,7 +58,8 @@ class Index extends CI_Controller
        if($valid_email)  //valid email >0
        {          
             
-            if($result > 0 && $result->user_status==1 && $result->user_type == 'admin')
+//            if($result > 0 && $result->user_status==1 && $result->user_type == 'admin')
+             if($result > 0 && $result->user_status==1)    
             {
                $source=$this->System_model->source_name();
 
