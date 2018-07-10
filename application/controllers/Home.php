@@ -102,7 +102,8 @@ class Home extends CI_Controller
              $result['jobs']=$this->Jobs_model->get_recent_job();    
              $sys=$this->System_model->source_name();
             $result['system']=$this->System_model->get_system_info($sys);
-
+     echo $sys;
+     die;
             
               $this->load->view($sys.'/home_header',$result);
              $this->load->view($sys."/".$view,$result);
