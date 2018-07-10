@@ -29,7 +29,7 @@
               
                           
                <div class="row">
-                   <form action="">
+                   <form action="<?php echo base_url()?>Home/send_msg" method="post">
                     <div class="col-md-5 col-md-offset-1">
                                 <h4 style="color:orange">Get a Free Consultation</h4><hr style="border-top: 1px solid #ccc;">
                        
@@ -58,7 +58,8 @@
                                 <div class="form-group">
 					<label for="name">Mobile No:</label><span style="color:red">*</span>
 					<input class="form-control" name="name" id="fname" minlength="2" required="" type="text"  value="<?php echo set_value('recruiter_fname'); ?>" /><span class="text-danger" id="name_err"></span>
-					<span class="text-danger"><?php echo form_error('recruiter_fname'); ?></span>
+          <span class="text-danger" id="mobile_err"></span>
+          <span class="text-success" id="mobile_success"></span>
 				</div>
                         </div>
                   </div>
@@ -71,6 +72,15 @@
                                         </textarea>
 					<span class="text-danger"><?php echo form_error('recruiter_fname'); ?></span>
 				</div>
+                        </div>
+                  </div>
+                    <div class="row" id="otp_div" style="display: none">
+                    <div class="col-md-12">
+                                <div class="form-group">
+          <label for="name">OTP:</label><span style="color:red">*</span>
+                                        <input class="form-control"  name="otp" id="otp" minlength="6" maxlength="11" required="" type="text"  value="<?php echo set_value('recruiter_fname'); ?>" /><span class="text-danger" id="name_err"></span>
+          <span class="text-danger"><?php echo form_error('recruiter_fname'); ?></span>
+        </div>
                         </div>
                   </div>
                                 
@@ -99,7 +109,54 @@
 		
         </div>
         
-        
         <script type="text/javascript">
-          
+          function send_otp()
+          {
+
+    var mobile= $('[name="mobile"]').val();
+//   alert(mobile);
+    var x=mobile.toString().length;
+    //alert(x);
+        if(x == 10 || x == 11)
+        {
+           $.ajax({
+       url : "<?php echo site_url('index.php/Otp/contact_otp')?>/" ,        
+       type: "post",
+        data:{contact_mobile : mobile},
+       dataType: "JSON",
+       success: function(data)
+       {            
+          // alert(data.mobile_error);
+          if (data.send) {
+          $('#mobile_success').html(data.send);
+          $('#mobile_err').html("");
+
+            $('#submit').show();
+            $('#otp_div').show();
+            $('#send_btn').hide();
+        }
+        else{
+          $('#mobile_success').html("");
+          $('#mobile_err').html(data.error);            
+        }
+
+       },
+       error: function (jqXHR, textStatus, errorThrown)
+       {
+         // alert('Error...!');
+         $("#ajax").html("Error While Sending Otp");
+       }
+     });
+        }
+        else
+        {
+         $("#mobile_err").html("Not a valid Phone Number");
+         return false;
+        }
+     
+            $('#submit').show();
+            $('#otp_div').show();
+            $('#send_btn').hide();
+
+          }
         </script>
