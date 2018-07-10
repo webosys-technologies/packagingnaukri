@@ -136,16 +136,15 @@ class Home extends CI_Controller
                        $success=  mail($to,$subject,$txt,$headers); 
                        if ($success) {
                             $this->session->set_flashdata('success','Your Request is successfully reached us');
-                            $page='contact_us';
-                            $this->load_views($page);
+                            redirect('home/contact_us');
+
                            
                        }
 
               }else
               {
                 $this->session->set_flashdata('error','Mobile and OTP missmatch');
-                $page='contact_us';
-                $this->load_views($page);
+                redirect('home/contact_us');
               }         
                       
             

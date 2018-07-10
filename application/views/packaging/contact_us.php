@@ -87,7 +87,7 @@
                                 <div class="form-group">
 					<label for="name">Mobile No:</label><span style="color:red">*</span>
                                         <input class="form-control"  name="mobile" id="mobile" minlength="10" maxlength="11" required="" type="text"  value="<?php echo set_value('recruiter_fname'); ?>" /><span class="text-danger" id="name_err"></span>
-					<span class="text-danger" id="mobile_err"><?php echo form_error('recruiter_fname'); ?></span>
+					<span class="text-danger" id="mobile_err"></span>
           <span class="text-success" id="mobile_success"></span>
 				</div>
                         </div>
