@@ -116,8 +116,13 @@ class Home extends CI_Controller
         
         function send_msg()
         {
-            $form=$this->input->post();
-          
+            $form=$this->input->post();         
+
+            $contact_mobile=$this->session->userdata('contact_mobile');
+            $contact_otp=$this->session->userdata('contact_otp');
+            if ($contact_mobile == $form['mobile'] && $contact_otp  == $form['otp']) {
+            
+            
                 
                     $headers = "From: ".$form['email'];
                     $headers .= ". PackagingNaukari-Team" . "\r\n";
@@ -128,6 +133,19 @@ class Home extends CI_Controller
                                                                
                  
                        $success=  mail($to,$subject,$txt,$headers); 
+                       if ($success) {
+                            $this->session->flashdata('success','Your Request is successfully reached us');
+                            $page='contact_us';
+                            $this->load_views($page);
+                           
+                       }
+
+              }else
+              {
+                $this->session->flashdata('error','Mobile and OTP missmatch');
+                $page='contact_us';
+                $this->load_views($page);
+              }         
                       
             
         }

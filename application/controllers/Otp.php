@@ -236,6 +236,104 @@ echo json_encode(array('send'=>'OTP is sent Successfully'));
             }
  }
 
+    function contact_otp()
+        {          
+            $mobile=$this->input->post('contact_mobile');
+            $val=is_numeric($mobile);
+            
+            if($val)
+            {
+                $sys=$this->System_model->source_name();
+            $system=$this->System_model->get_system_info($sys);
+
+                     $rand=mt_rand(100000,999999);
+                //       $where=array('member_mobile'=>$email);
+                // $data=array('member_otp'=>$rand);
+                $otp_mobile=array('contact_mobile'=>$mobile,
+                                  'contact_otp'=>$rand);
+                $this->session->set_userdata($otp_mobile);
+                // print_r($otp_mobile);
+                // die();
+               // $this->Members_model->member_update($where,$data);
+     //Your authentication key
+
+$authKey = "217899AjUpTycrXx6K5b0e2283";    //suraj9195shinde for
+
+//Multiple mobiles numbers separated by comma
+
+$mobileNumber = $mobile;
+//Sender ID,While using route4 sender id should be 6 characters long.
+
+$senderId = $system->system_nickname."NAU";
+//Your message to send, Add URL encoding here.
+
+$message =$rand.' is your OTP for verifying mobile number on '.$system->system_website;
+
+
+//Define route 
+
+$route = "4";
+//Prepare you post parameters
+
+$postData = array(
+
+    'authkey' => $authKey,
+
+    'mobiles' => $mobileNumber,
+
+    'message' => $message,
+
+    'sender' => $senderId,
+
+    'route' => $route
+
+);
+
+
+//API URL
+
+$url="http://api.msg91.com/api/sendhttp.php";
+
+
+// init the resource
+
+$ch = curl_init();
+curl_setopt_array($ch, array(
+
+    CURLOPT_URL => $url,
+
+    CURLOPT_RETURNTRANSFER => true,
+
+    CURLOPT_POST => true,
+
+    CURLOPT_POSTFIELDS => $postData
+
+    //,CURLOPT_FOLLOWLOCATION => true
+
+));
+//Ignore SSL certificate verification
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+//get response
+
+$output = curl_exec($ch);
+//Print error if any
+if(curl_errno($ch))
+{
+   echo json_encode(array('error'=> curl_error($ch)));
+}
+curl_close($ch);
+echo json_encode(array('send'=>'OTP is sent Successfully'));       
+//echo $output;
+            }
+
+
+
+ }
+
+
+
 }
 
 
