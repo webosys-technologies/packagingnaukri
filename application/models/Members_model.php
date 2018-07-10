@@ -95,7 +95,7 @@ class Members_model extends CI_Model
 
     function register()
     {
-        $source=$this->System_model->source_name();
+        $source=$this->input->post('source');
 
         $data=array(
             'member_fname'          =>$this->input->post('fname'),

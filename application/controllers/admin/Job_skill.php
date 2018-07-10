@@ -9,9 +9,9 @@ class Job_skill extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-     if(!is_admin_LoggedIn($this->session->userdata('admin_LoggedIn')))
+     if(!is_admin_LoggedIn($this->session->userdata('admin_LoggedIn')) || $this->session->userdata('admin_type')!="admin")
      {
-         redirect('admin/index');
+         redirect('admin/Dashboard');
      }
     }
     

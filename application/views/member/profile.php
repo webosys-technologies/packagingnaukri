@@ -1588,7 +1588,7 @@ var edu_name=el.val();
     			<div class="row">
                              <input type='hidden' id='employment_id' name="employment_id" value="">
                                 <div class="col-md-6 col-md-6 col-sm-6 col-xs-12 ">                             
-                                        <label for="fname">Organization</label>
+                                    <label for="fname">Organization</label> <span class="text-danger"> *</span>
                                         <input type="text" placeholder="Company Name" value="" class="form-control required" id="organization" name="organization" maxlength="128" required>
                                         <span class="text-danger" id="org_error"></span>                                                          
                                 </div>
@@ -1623,7 +1623,7 @@ var edu_name=el.val();
                                     	<div class="row">
                              
                                 <div class="col-md-6 col-md-6 col-sm-6 col-xs-12 ">                             
-                                        <label for="fname">Work From</label>
+                                        <label for="fname">Work From</label> <span class="text-danger"> *</span>
                                         <input type="date" value="" name="from" id="from" class="form-control">
 <!--                                        <select class="form-control" name="from" id="from"></select>
                                                                                                  
