@@ -128,7 +128,7 @@ class Home extends CI_Controller
                     $headers .= ". PackagingNaukari-Team" . "\r\n";
                     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                     $headers .= 'Cc: suraj9195shinde@gmail.com' . "\r\n";
-                    $to = 'info@packagingnaukri.com';
+                    $to = 'amrut@acumenpackaging.com';
                     $subject = "Member Query";
                     $txt=$form['comment'];
                                                                

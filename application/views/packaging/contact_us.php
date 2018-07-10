@@ -122,7 +122,7 @@
                                  <b>Contact:</b> Ms. Preeti Singh<br>
                                 <b>Land Line:</b> +91-22-25701724<br>
                                 <b>Address:</b> 1076, Heera Pana Centre, Hiranandani Gardens, Powai, Mumbai - 400076 (INDIA)<br>
-                                <b>Email:</b> preeti@packagingnaukri.com
+                                <b>Email:</b> info@packagingnaukri.com
                         </div>
                 </div>
               
