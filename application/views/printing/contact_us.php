@@ -31,7 +31,7 @@
                <div class="row">
                    <form action="">
                     <div class="col-md-5 col-md-offset-1">
-                                <h4 style="color:orange">Get a Free Consultion</h4><hr style="border-top: 1px solid #ccc;">
+                                <h4 style="color:orange">Get a Free Consultation</h4><hr style="border-top: 1px solid #ccc;">
                        
                     <div class="row">
                     <div class="col-md-8">
@@ -81,8 +81,8 @@
                     <div class="col-md-5 col-md-offset-1" style="color:orange">
 				 <h4 >Contact us for business queries :</h4><hr style="border-top: 1px solid #ccc;">
                                  <b>Contact:</b> ANSHUMAN UPADHYAY<br>
-                                <b>Cell:</b> +91-22-25701724<br>
-                                <b>Address:</b> 1076, Heera Pana Centre, Hiranandani Gardens, Powai, Mumbai - 400078 (INDIA)<br>
+                                <b>Land Line:</b> +91-22-25701724<br>
+                                <b>Address:</b> 1076, Heera Pana Centre, Hiranandani Gardens, Powai, Mumbai - 400076 (INDIA)<br>
                                 <b>Email:</b> info@printingnaukri.com
                         </div>
                 </div>
@@ -100,4 +100,6 @@
         </div>
         
         
-        
+        <script type="text/javascript">
+          
+        </script>
