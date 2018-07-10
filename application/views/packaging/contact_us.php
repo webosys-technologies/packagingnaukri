@@ -145,7 +145,7 @@
           {
 
     var mobile= $('[name="mobile"]').val();
-   alert(mobile);
+//   alert(mobile);
     var x=mobile.toString().length;
     //alert(x);
         if(x == 10 || x == 11)
