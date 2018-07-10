@@ -107,7 +107,7 @@
                     <div class="col-md-12">
                                 <div class="form-group">
           <label for="name">OTP:</label><span style="color:red">*</span>
-                                        <input class="form-control"  name="otp" id="otp" minlength="10" maxlength="11" required="" type="text"  value="<?php echo set_value('recruiter_fname'); ?>" /><span class="text-danger" id="name_err"></span>
+                                        <input class="form-control"  name="otp" id="otp" minlength="6" maxlength="11" required="" type="text"  value="<?php echo set_value('recruiter_fname'); ?>" /><span class="text-danger" id="name_err"></span>
           <span class="text-danger"><?php echo form_error('recruiter_fname'); ?></span>
         </div>
                         </div>
