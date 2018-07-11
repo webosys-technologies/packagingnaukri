@@ -356,7 +356,45 @@ a:link, a:visited{
      <datalist id="data_list">  
     <!--<option>PHP</option><option>JAVA</option><option>DOT NET</option>-->  
      </datalist>
-            <input list="data_list" value="<?php echo set_value('title');?>" id="title" onkeyup="search_title()" type="text" placeholder="Skills,Designation,Companies" class="text_design" name="title"><input  type="text" placeholder="Location" name="location" value="<?php echo set_value('location');?>" class="text_design"><input  type="text" placeholder="Experience" id="exp" name="exp" value="<?php echo set_value('exp');?>" class="text_design"><input  type="text" placeholder="Salary" name="salary" value="<?php echo set_value('salary');?>" class="text_design" id="salary"><button type="submit" class="btn btn-info btn-md">Search Job <span class="fa fa-search"></span></button>
+            <input list="data_list" value="<?php echo set_value('title');?>" id="title" onkeyup="search_title()" type="text" placeholder="Skills,Designation,Companies" class="text_design" name="title"><input  type="text" placeholder="Location" name="location" value="<?php echo set_value('location');?>" class="text_design"><select placeholder="Select Experience" style="height:33px;" id="exp" name="exp" class="text_design">
+                <option value="">Select Experience</option>
+                <script>
+                    var num=1;
+                    var dim;
+                    for(var i=0;i<=30;i++)
+                    {
+                        if(i==0)
+                        {
+                           $("#exp").append('<option value="'+i+'.90">'+i+' Year</option>');  
+                        }else{
+                            $("#exp").append('<option value="'+i+'.90">'+i+' Year</option>');   
+                        }
+                       
+                    }
+                    
+                    </script>
+                
+            </select><select id="salary" name="salary" style="height:33px;" class="text_design">
+                <option value="">Select Salary</option>
+                <script>
+                    var num=1;
+                    var dim;
+                    for(var j=0;j<=99;j++)
+                    {
+                        if(j==0)
+                        {
+                           $("#salary").append('<option value="'+j+'.99">'+j+' Lac</option>');  
+                        }else{
+                            $("#salary").append('<option value="'+j+'.99">'+j+' Lac</option>');   
+                        }
+                       
+                    }
+                    
+                    </script>
+                
+            </select><button type="submit" class="btn btn-info btn-md">Search Job <span class="fa fa-search"></span></button>
+            
+           
        
      </div>
         </div>

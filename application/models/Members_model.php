@@ -15,14 +15,26 @@ class Members_model extends CI_Model
     {
      
         $this->db->from($this->table);
-        $this->db->where($where);
+        if(is_numeric($where['member_email']))
+        {
+        $this->db->where('member_mobile',$where['member_email']);
+        $this->db->where('member_password',$where['member_password']);
+        }else{
+            $this->db->where($where);
+        }
         $query=$this->db->get();
     
         $res=$query->row();
         
-        
-        $this->db->where('member_email',$where['member_email']);
-        $query1=$this->db->get($this->table);
+         if(is_numeric($where['member_email']))
+        {
+          $this->db->where('member_mobile',$where['member_email']);
+              $query1=$this->db->get($this->table);    
+         }else{
+              $this->db->where('member_email',$where['member_email']);
+              $query1=$this->db->get($this->table);
+         }
+       
         $valid=$query1->num_rows();
         if($res)
         {
