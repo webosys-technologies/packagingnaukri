@@ -33,9 +33,10 @@ class Jobs extends CI_Controller
             $result['member_data']=  get_member_info($id);
              $sys=$this->session->userdata('member_source');          
             $result['system']=$this->System_model->get_system_info($sys);
+            $jobs['jobs']=$this->Jobs_model->get_jobs_by_profile($result['member_data']);
                   
              $this->load->view('member/header',$result);
-             $this->load->view('member/jobs');
+             $this->load->view('member/jobs',$jobs);
              $this->load->view('member/footer',$result);
        
     }

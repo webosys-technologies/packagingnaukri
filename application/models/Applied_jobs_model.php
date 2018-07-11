@@ -63,7 +63,7 @@ class Applied_jobs_model extends CI_Model
          return $query->result();
      }
       function delete_by_id($id)
-     {        
+     {       
          $this->db->delete($this->table,array('member_id'=>$id));
          return $this->db->affected_rows();
      }

@@ -64,6 +64,25 @@ class Jobs_model extends CI_Model
          $this->db->delete();
          return $this->db->affected_rows();
      }
+      
+     function get_jobs_by_profile($result)
+     {
+//         print_r($result->employment_designation);
+//         die;
+         if(!empty($result->employment_designation))
+         {
+          $this->db->from('jobs as job');
+          $this->db->like('job.job_title',$result->employment_designation);        
+          $this->join_query();
+          $this->db->where('job.job_status','1');
+          $this->db->where('job.job_source',$result->member_source);
+          $result=$this->db->get();
+          return $result->result();
+         }else{
+             return true;
+         }
+     }
+     
      
      public function search_job($form)
      {
