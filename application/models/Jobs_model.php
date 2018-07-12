@@ -78,8 +78,6 @@ class Jobs_model extends CI_Model
           $this->db->where('job.job_source',$result->member_source);
           $result=$this->db->get();
           return $result->result();
-         }else{
-             return true;
          }
      }
      

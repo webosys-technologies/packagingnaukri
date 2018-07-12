@@ -108,22 +108,29 @@ class Members_model extends CI_Model
     function register()
     {
         $source=$this->input->post('source');
+        if(empty($source))
+        {
+        $source=$this->System_model->source_name();
+        }    
+        
+            
 
         $data=array(
             'member_fname'          =>$this->input->post('fname'),
             'member_lname'          => $this->input->post('lname'),
             'member_email'          => $this->input->post('email'),
             'member_mobile'         => $this->input->post('mobile'),
+            'member_anual_salary'   =>$this->input->post('min_salary').".".$this->input->post('max_salary'),
+            'member_experience'     =>$this->input->post('min_exp').".".$this->input->post('max_exp'),
             'member_password'       => $this->input->post('password'),
-            'member_country'           => $this->input->post('country'),
+            'member_country'        => $this->input->post('country'),
             'member_city'           => $this->input->post('city'),
             'member_state'          => $this->input->post('state'),
             'member_created_at'     => date("Y-m-d "),
-            'member_status'        => '1',
+            'member_status'         => '1',
             'member_source'           =>ucfirst($source),
-
-
-        );
+            );
+        
         if (!empty($this->input->post('pincode'))) {
             $data['member_pincode']=$this->input->post('pincode');
         }

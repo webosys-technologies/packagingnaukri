@@ -326,7 +326,7 @@
                                        <?php $edu=$this->Educations_model->get_by_id($res->member_id);?>
                                        <td><?php if($edu){echo $edu->education_institute_name;}?></td>
                                        <td><?php if($edu){echo $edu->education_name."(".$edu->education_degree.")";}?></td>
-                                       <td><?php if($res->member_resume){?><a href="<?php echo base_url().$res->member_resume;?>" target="_blank">resume</a><?php } ?></td>
+                                       <td><?php if(file_exists($res->member_resume)){?><a href="<?php echo base_url().$res->member_resume;?>" target="_blank">resume</a><?php } ?></td>
                                            
                                        <td><?php echo $res->member_created_at;?></td>
                                        <td>

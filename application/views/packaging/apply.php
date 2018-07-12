@@ -36,31 +36,7 @@
             }
              });
              
-          
-          
-//          $('#min_salary').change(function() {
-//           $("#max_salary").html("");
-//         glob=$('#min_salary').val();
-////         $("#max_salary").append('<option value="'+dim+'">'+ dim +'Lac</option>');
-//          for(var dim = glob; dim <=99; dim++)
-//          {
-//
-//           $("#max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
-//           }
-//         
-//      });
-//      
-//       $('#min_exp').change(function() {
-//           $("#max_exp").html("");
-//           var temp=$('#min_exp').val();
-//            for(var dim = temp; dim <=30; dim++)
-//          {
-//
-//           $("#max_exp").append('<option value="'+dim+'">'+ dim +'</option>');
-//           }
-//       });
-          
-          
+    
              
         });
      
@@ -513,8 +489,7 @@
                    
                              </div>
                           
-                                <div class="row">
-                                    
+                                <div class="row">                                    
                                     <div class="col-md-6">
                                     <label for="fname">Total Work Experience<span style="color:red">*</span></label>
                         <div class="row"><div class="col-md-6">                                
@@ -563,15 +538,7 @@
                             </div>
                             </div>
                                     
-<!--                    <div class="col-md-6">                                
-                                    <div class="form-group">
-                                        <label for="fname">Total Work Experience<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Total Work Experience" class="form-control required"  name="exp" required>
-                                        <span class="text-danger" id="exp_err"></span>
-                                        
-                                    </div>
-                                                     
-                                </div>  -->
+
                     <div class="col-md-6">                                
                                     <div class="form-group">
                                         <label for="fname">Current Location<span style="color:red">*</span></label>
@@ -623,16 +590,7 @@
                            <option value="70">70 Thousand</option>
                            <option value="80">80 Thousand</option>
                            <option value="90">90 Thousand</option>
-<!--                           <script>
-                               var sal = 1;
-                               var sal_end = 99;
-                                var options = "";
-                                for(var dim = sal ; dim <=sal_end; dim++){
-//                                    alert(dim);
-                            $("#max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
-//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
-                              }
-                               </script> -->
+
                         </select>
                         
                     </div> </div>
@@ -675,37 +633,13 @@
                            <option value="70">70 Thousand</option>
                            <option value="80">80 Thousand</option>
                            <option value="90">90 Thousand</option>
-<!--                           <script>
-                               var sal = 1;
-                               var sal_end = 99;
-                                var options = "";
-                                for(var dim = sal ; dim <=sal_end; dim++){
-//                                    alert(dim);
-                            $("#expected_max_salary").append('<option value="'+dim+'">'+ dim +'</option>');
-//                             $("#thsalary").append('<option value="'+dim+'">'+ dim +'</option>');
-                              }
-                               </script> -->
+
                         </select>
                         
                     </div> </div>
                                       <span class="text-danger" id="current_err"></span>
                                       </div>              
-<!--                               <div class="col-md-6">                                
-                                    <div class="form-group">
-                                        <label for="fname">Current CTC (in Laks)<span style="color:red">*</span></label>
-                                        <input type="text" placeholder="Current CTC" class="form-control required" value=""  name="current"  required>
-                                        <span class="text-danger" id="current_err"></span>
-                                        
-                                    </div>                                   
-                                </div>
-                                 <div class="col-md-6">                                
-                                    <div class="form-group">
-                                        <label for="fname">Expected CTC (in Laks)</label>
-                                        <input type="text" placeholder="Expected CTC" class="form-control required"  name="expected"  required>
-                                        <span class="text-danger" id="err"></span>
-                                        
-                                    </div>                                   
-                                </div>-->
+
                                   </div>
                                 <br>
                                 <div class="row">

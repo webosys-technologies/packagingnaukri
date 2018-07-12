@@ -12,7 +12,7 @@ class Home extends CI_Controller
 	
 	function index()
 	{
-	    
+
         $view='home';
         $this->load_views($view);
             
@@ -379,6 +379,8 @@ echo json_encode(array('otp_success'=>'OTP sent Successfully'));
                 
                 $emp=array('employment_notice_period'=>$form['notice'],
                             'employment_current'=>$form['location'],
+                            'employment_status'=>'1',
+                            'member_id'=>$mem_id
                             );
                 $job=$this->Jobs_model->job_by_id($form['apply_job_id']);
                 $this->Employments_model->insert_employment($emp);
@@ -720,13 +722,7 @@ $mobileNumber = $data['mobile'];
 $senderId = "PKGNAU";
 //Your message to send, Add URL encoding here.
 
-$message ='Welcome To \r\n'
-        . 'PACKAGINGNAUKRI.COM \r\n'
-        . ''
-        . 'You can login next time with your registered EMAIL or MOBILE number \r\n'
-        . ''
-        . 'Email: '.$data['email']
-        . '\r\n Password: '.$data['password'];
+$message ="Welcome To\r\nPACKAGINGNAUKRI.COM\r\nYou can login next time with your registered EMAIL or MOBILE number\r\n\r\nEmail: ".$data["email"]."\r\nPassword: ".$data["password"];
 
 
 //Define route 

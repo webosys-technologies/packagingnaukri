@@ -387,7 +387,10 @@ class Profile extends CI_Controller
             echo json_encode(array('success'=>'Resume Deleted Successfully'));
         }
          }  else {
-             
+              $where=array('member_id'=>$id);
+                $data=array('member_resume'=>"");
+                $res=$this->Members_model->member_update($where,$data);
+                echo json_encode(array('success'=>'Resume Deleted Successfully'));
          }
     }
     

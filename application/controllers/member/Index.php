@@ -44,7 +44,6 @@ class Index extends CI_Controller
     //validate form input
     if ($this->form_validation->run() == false)
         {
-
          //  echo  "validate error";
       
    $state['country']=$this->Cities_model->getall_country(); 
@@ -59,10 +58,37 @@ class Index extends CI_Controller
         }
         else
     {                  
-            
+
       list($get_insert,$get_data)=$this->Members_model->register();
       if($get_insert)
-      {                        
+      {              
+                    if (isset($_FILES['resume']['name'])) {
+                    if (0 < $_FILES['resume']['error']) {
+                        echo 'Error during file upload' . $_FILES['resume']['error'];
+                    } else {
+
+//                        $rand=  mt_rand(1111,9999);
+                        $name = $_FILES["resume"]["name"];
+                        $ext = end((explode(".", $name)));
+                        $filename='resume_'.date('Y-m-d_H.i.s').".".$ext;
+                        move_uploaded_file($_FILES['resume']['tmp_name'],'resume/'.$filename);
+
+
+                                $where=array('member_id'=>$get_insert);
+                               $resume=array('member_resume'=>'resume/'.$filename);
+                               $this->Members_model->member_update($where,$resume);                     
+
+                    }
+                       }
+                       
+                  $emp=array('employment_notice_period'=>$this->input->post('notice'),
+                            'employment_current'=>$this->input->post('location'),
+                            'employment_status'=>'1',
+                            'member_id'=>$get_insert
+                            );
+                 $this->Employments_model->insert_employment($emp);     
+                       
+          
                                     $data=array('email'=>$this->input->post('email'),
                                                 'mobile'=>$this->input->post('mobile'),
                                                 'password'=>$this->input->post('password'),);
