@@ -295,7 +295,7 @@
                                             }                                           
                                             
                                             } else{
-                                            $experience="Not Mentioned";
+                                            $experience="Fresher";
                                             }
                                             ?>
                                          <td style="display:none;"><span><?php echo $res->member_experience; ?></span></td>
