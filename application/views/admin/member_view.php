@@ -123,7 +123,7 @@
                             <option>Experience From</option>
                          <script>
                                 var i=1;
-                                for(i; i<21; i++)
+                                for(i; i<30; i++)
                                 {
                                    $('[name="experience_from"]').append('<option value="'+i+'">'+i+ " Year"+'</option>');
                                 }
@@ -145,7 +145,7 @@
                             <option>Experience To</option>
                          <script>
                                 var i=1;
-                                for(i; i<21; i++)
+                                for(i; i<30; i++)
                                 {
                                    $('[name="experience_to"]').append('<option value="'+i+'">'+i+ " Year"+'</option>');
                                 }
@@ -247,9 +247,11 @@
           <th>NAME</th>
           <th>CURRENT COMPANY</th>
           <th>DESIGNATION</th>
-          <th>EXPERIENCE</th>
+          <th >EXPERIENCE</th>
+          <th style="display:none;">EXP</th>
           <th>LOCATION</th>
           <th>SALARY</th>
+          <th style="display:none;">SAL</th>
           <th>EMAIL</th>
           <th>MOBILE</th>
           <th>CITY</th>
@@ -276,8 +278,7 @@
                                         <td><?php echo $res->member_fname.' '. $res->member_lname; ?></td>
                                          <?php $emp=$this->Employments_model->get_employment(array('member_id'=>$res->member_id))?>
                                         <td><?php if(isset($emp->employment_organization)){echo $emp->employment_organization; }?></td>
-                                        <td><?php if(isset($emp->employment_designation)){echo $emp->employment_designation;} ?></td>
-                                        
+                                        <td><?php if(isset($emp->employment_designation)){echo $emp->employment_designation;} ?></td>                                       
                                         <?php if(!empty($res->member_experience) && $res->member_experience!='0.0')
                                             {
                                             $exp=explode(".",$res->member_experience);
@@ -297,8 +298,8 @@
                                             $experience="Not Mentioned";
                                             }
                                             ?>
-                                        
-                                        <td><?php echo $experience; ?></td>
+                                         <td style="display:none;"><span><?php echo $res->member_experience; ?></span></td>
+                                        <td> <?php echo $experience;?></td>
                                         <td><?php if(isset($emp->employment_city)){echo $emp->employment_city;} ?></td>
                                          <?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0' ){
                                           $sal=explode(".",$res->member_anual_salary);                                         
@@ -317,6 +318,9 @@
                                             { $salary= "Not Mentioned";}
                                          
                                          ?>
+                                        <td style="display:none;">
+                                            <span ><?php echo $res->member_anual_salary;?></span>
+                                        </td>
                                         <td>
                                             <?php echo $salary;?>
                                         </td>
@@ -819,7 +823,7 @@ function view_member(id)
                                 <div class="form-group">
                                   <label>Source<span style="color: red">*</span></label>
                                   <select name="source" class="form-control source">
-                                    <option>--Select Source--</option>
+                                    <!--<option>--Select Source--</option>-->
                                     <option value="Packaging">Packaging</option>
                                     <option value="Printing">Printing</option>
                                     <option value="Plastic">Plastic</option>

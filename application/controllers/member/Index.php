@@ -456,7 +456,7 @@ if(curl_errno($ch))
     echo json_encode(array('error'=> curl_error($ch)));
 }
 curl_close($ch);
-echo json_encode(array('send'=>'OTP sent Successfully'));       
+echo json_encode(array('send'=>'OTP has been sent Successfully'));       
 //echo $output;
             }
 
@@ -471,7 +471,7 @@ echo json_encode(array('send'=>'OTP sent Successfully'));
                 $send=$this->email_otp($email);
                 if($send)
                 {
-                echo json_encode(array('send'=>'OTP Sent Successfully '));
+                echo json_encode(array('send'=>'OTP has been sent Successfully'));
                 }
             }   
             }

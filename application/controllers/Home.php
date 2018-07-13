@@ -290,7 +290,7 @@ if(curl_errno($ch))
     echo json_encode(array('error'=> curl_error($ch)));
 }
 curl_close($ch);
-echo json_encode(array('otp_success'=>'OTP sent Successfully'));       
+echo json_encode(array('otp_success'=>'OTP has been sent Successfully'));       
 //echo $output;
             }
 
