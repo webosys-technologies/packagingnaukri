@@ -505,6 +505,7 @@ function view_recruiter(id)
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
+                 $("#save_btn").attr('disabled',false);
 //                alert('Error adding / update data');
             }
         });

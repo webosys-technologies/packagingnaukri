@@ -81,7 +81,8 @@ class Index extends CI_Controller
                     }
                        }
                        
-                  $emp=array('employment_notice_period'=>$this->input->post('notice'),
+                  $emp=array('employment_designation'=>$this->input->post('designation'),
+                            'employment_notice_period'=>$this->input->post('notice'),
                             'employment_current'=>$this->input->post('location'),
                             'employment_status'=>'1',
                             'member_id'=>$get_insert

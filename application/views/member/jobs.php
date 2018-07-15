@@ -426,6 +426,7 @@ a:link, a:visited{
       </div>
       
             <?php if(isset($jobs)){
+                
               
              foreach($jobs as $job)
            {
@@ -524,9 +525,9 @@ a:link, a:visited{
       </div>
            <?php } }?>
 <?php if(isset($error)){?>
-<div id="error" hidden>
-    <center><h2 style="font-family: times; color:">We Could not find jobs matching your Search..</h2></center>    
-</div>
+
+    <center><h1 style="font-family: times; color:#D5DBDB;">Result Not Found</h1></center>    
+
 <?php }?>    
       
           </div>  

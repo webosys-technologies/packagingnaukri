@@ -108,6 +108,7 @@ function applicants(id)
                                             <th>Applicants</th>
                                             <th>Qualification</th>
                                             <th>Experience</th>
+                                            <th style="display:none;">Exp</th>
                                             <th>Location</th>
                                              <th>Posted Date</th>
                                              <th>Status</th>
@@ -140,7 +141,7 @@ function applicants(id)
                                                     }
 //                                                    
                                               ?>
-                                            
+                                             <td style="display:none;"><span><?php echo $job->job_experience; ?></span></td>
                                             <td><?php echo $experience; ?></td>
                                             <td><?php echo $job->job_city?></td>
                             <td><?php echo $job->job_created_at?></td>

@@ -766,7 +766,8 @@ function view_member(id)
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-               alert('Error adding / update data');
+                 $("#save_btn").attr('disabled',false);
+//               alert('Error adding / update data');
             }
         });
     }

@@ -488,6 +488,18 @@
                          </div>                               
                    
                              </div>
+                                
+                                 <div class="row">
+                         <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="email" class="form-label" >Designation</label><span style="color:red">*</span>
+                        <input class="form-control" name="designation" id="designation" required="" placeholder="Job Designation" type="text" value="<?php echo set_value('designation'); ?>" />
+                        <span class="text-danger" id="designation_err"></span>
+                        
+                    </div>
+                             </div>
+                        
+                         </div>
                           
                                 <div class="row">                                    
                                     <div class="col-md-6">
@@ -532,10 +544,11 @@
                                         
                                         
                                     </div>
-                                                                     
+                               
                                 </div> 
-                            <span class="text-danger" id="exp_err"></span> 
+                            
                             </div>
+                                     <span class="text-danger" id="exp_err"></span>                                      
                             </div>
                                     
 
@@ -549,15 +562,18 @@
                                    
                                     
                                 </div>
-                   </div>
+                   </div>                               
+                                
+                                
                                 
                                 
                                 
                                 
                               <div class="row">  
                                   <div class="col-md-6">
+                                        <label>Current CTC (in Laks)<span style="color:red">*</span></label>
                                       <div class="row">
-                                      <label>Current CTC (in Laks)<span style="color:red">*</span></label>
+                                    
                                   <div class="col-md-6">
                         <!--<label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>-->
                             <!--<label class="form-label">MIN Salary</label><span style="font-size:11px;">(per anual)</span>-->
@@ -599,8 +615,9 @@
                                   
                                   
                       <div class="col-md-6">
+                           <label>Expected CTC (in Laks)</label>
                                       <div class="row">
-                                      <label>Expected CTC (in Laks)</label>
+                                     
                                   <div class="col-md-6">
                         <!--<label class="form-label">Salary</label> <span style="font-size:12px;">(per anual)</span>-->
                             <!--<label class="form-label">MIN Salary</label><span style="font-size:11px;">(per anual)</span>-->

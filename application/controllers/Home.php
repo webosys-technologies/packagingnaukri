@@ -377,7 +377,8 @@ echo json_encode(array('otp_success'=>'OTP has been sent Successfully'));
        }
                 }
                 
-                $emp=array('employment_notice_period'=>$form['notice'],
+                $emp=array('employment_designation'=>$form['designation'],
+                            'employment_notice_period'=>$form['notice'],
                             'employment_current'=>$form['location'],
                             'employment_status'=>'1',
                             'member_id'=>$mem_id

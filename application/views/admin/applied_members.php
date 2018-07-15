@@ -45,10 +45,12 @@
           <th>CURRENT COMPANY</th>
           <th>DESIGNATION</th>
           <th>EXPERIENCE</th>
+          <th style="display:none;">EXP</th>
           <th>LOCATION</th>
           <th>SALARY</th>
-           <th>CITY</th>
-           <th>EMAIL</th>
+          <th style="display:none;">SAL</th>
+          <th>CITY</th>
+          <th>EMAIL</th>
           <th>MOBILE</th>
           <th>INSTITUTE</th>
           <th>QUALIFICATION</th>         
@@ -80,29 +82,30 @@
                                             
                                              if($exp[0]=="0")
                                             {
-                                             $experience=$exp[1]." Month PA";  
+                                             $experience=$exp[1]." Month";  
                                             }elseif($exp[1]=="0")
                                             {
-                                              $experience=$exp[0]." Year PA";  
+                                              $experience=$exp[0]." Year";  
                                             }else
                                             {
-                                            $experience=$exp[0]." Year ". $exp[1]." Month PA";  
+                                            $experience=$exp[0]." Year ". $exp[1]." Month";  
                                             }                                           
                                             
                                             } else{
                                             $experience="Not Mentioned";
                                             }
                                             ?>
+                                         <td style="display:none;"><span><?php echo $res->member_experience; ?></span></td>
                                         <td><?php echo $experience; ?></td>
                                         <td><?php if(!empty($emp->employment_city)){echo $emp->employment_city;} ?></td>
                                          <?php if(!empty($res->member_anual_salary) && $res->member_anual_salary!='0.0' ){
                                           $sal=explode(".",$res->member_anual_salary);                                         
                                           if($sal[0]=="0")
                                             {
-                                             $salary= $sal[1]." Thousand";  
+                                             $salary= $sal[1]." Thousand PA";  
                                             }elseif($sal[1]=="0")
                                             {
-                                              $salary= $sal[0]." Lac ";  
+                                              $salary= $sal[0]." Lac PA";  
                                             }else
                                             {
                                            $salary= $sal[0]." Lac ". $sal[1]."Thousand PA";  
@@ -112,7 +115,10 @@
                                             { $salary= "Not Mentioned";}
                                          
                                          ?>
-                                       <td> 
+                                        <td style="display:none;">
+                                            <span><?php echo $res->member_anual_salary;?></span>
+                                        </td>
+                                        <td> 
                                            <?php echo $salary; ?>
                                         </td>
                                         <td><?php echo $res->member_city;?></td>

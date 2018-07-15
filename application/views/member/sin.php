@@ -123,26 +123,38 @@
                          </div>
                     <div class="form-group">                    
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
     					<label for="email" class="form-label" >Mobile</label><span style="color:red">*</span>
     					<input class="form-control" name="mobile" id="mobile" required="" placeholder="Mobile" type="number" value="<?php echo set_value('mobile'); ?>" minlength="10" maxlength="11"  />
                         <span class="text-danger" id="mobile_err"></span>
                         <span class="text-success" id="mobile_success"></span>
     					<span class="text-danger"><?php echo form_error('mobile'); ?></span>
-                        </div>
-                        <div class="col-md-4">
-                            <br>
+                                         <br>
                             <button type="button" class="btn btn-warning" onclick="send_otp()">Send Otp</button>
                         </div>
-                	</div>
-                    </div>
-                                    
+                       <div class="col-md-6">               
                     <div class="form-group">
                         <label for="email" class="form-label" >Enter OTP </label><span style="color:red">*</span>
                         <input class="form-control" name="otp" id="otp" required="required" placeholder="Enter OTP" type="text" value="<?php echo set_value('otp'); ?>"  maxlength="6" />
                         <span class="text-danger" id="otp_err"></span>
                         <span class="text-danger"><?php echo form_error('otp'); ?></span>
                     </div>
+                         </div>
+                	</div>
+                    </div>
+                                    
+                     <div class="row">
+                         <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="email" class="form-label" >Designation</label><span style="color:red">*</span>
+                        <input class="form-control" name="designation" id="designation" required="" placeholder="Job Designation" type="text" value="<?php echo set_value('designation'); ?>" />
+                        <span class="text-danger" id="designation_err"></span>
+                        <span class="text-danger"><?php echo form_error('password'); ?></span>
+                    </div>
+                             </div>
+                        
+                         </div>
+                     
                                     
                             <div class="row">                                    
                                     <div class="col-md-6">

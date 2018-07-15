@@ -139,8 +139,9 @@
                                             <th>Applicants</th>
                                             <th>Qualification</th>
                                             <th>Experience</th>
+                                            <th style="display:none;">Exp</th>
                                             <th>Location</th>
-					                                  <th>Posted Date</th>
+					    <th>Posted Date</th>
                                             <th>Status</th>
                                             <th>Source</th>
                                             <th style="width:75px;">Action</th>
@@ -172,6 +173,7 @@
                                                     }
 //                                                    
                                               ?>
+                                             <td style="display:none;"><span><?php echo $job->job_experience; ?></span></td>
                                             <td><?php if($job->job_experience){echo $experience;}?></td>
                                             <td><?php echo $job->job_city?></td>
 				            <td><?php echo $job->job_created_at?></td>
@@ -522,6 +524,7 @@ var user_type=el.val();
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
+                 $("#save_btn").attr('disabled',false);
 //                alert('Error adding / update data');
             }
         });

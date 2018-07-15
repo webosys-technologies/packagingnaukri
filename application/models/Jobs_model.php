@@ -67,12 +67,14 @@ class Jobs_model extends CI_Model
       
      function get_jobs_by_profile($result)
      {
-//         print_r($result->employment_designation);
+//         print_r($result);
 //         die;
-         if(!empty($result->employment_designation))
+         if(!empty($result->member_anual_salary) && !empty($result->member_experience))
          {
           $this->db->from('jobs as job');
-          $this->db->like('job.job_title',$result->employment_designation);        
+//          $this->db->like('job.job_title',"");    
+           $this->db->where('job.job_experience <=',$result->member_experience);
+           $this->db->or_where('job.job_salary <=',$result->member_anual_salary);
           $this->join_query();
           $this->db->where('job.job_status','1');
           $this->db->where('job.job_source',$result->member_source);

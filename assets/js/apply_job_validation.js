@@ -8,6 +8,7 @@
        var exp;
        var notice;
        var email;
+       var designation;
        
     var number=$("#mobile").val();
       var num_length=number.length;
@@ -70,6 +71,17 @@
               $("#notice_err").html("Please Enter Notice Period.");
           }
           
+          if($('[name="designation"]').val()!="")
+          {
+              designation=true;
+              $("#designation_err").html("");
+          }else{
+              designation=false;
+              $("#designation_err").html("Please Enter Designation.");
+          }
+          
+          
+          
           if($('[name="fname"]').val()!="")
           {
                fname=true;
@@ -120,7 +132,7 @@
              }
              
              
-             if(mobile==true && email==true && fname==true && lname==true && location==true && exp==true && notice==true && current==true && resume==true)
+             if(mobile==true && email==true && fname==true && lname==true && location==true && designation==true && exp==true && notice==true && current==true && resume==true)
              {
                return true;  
              }
