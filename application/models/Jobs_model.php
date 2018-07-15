@@ -82,9 +82,7 @@ class Jobs_model extends CI_Model
           return $result->result();
          }
      }
-     
-     
-     public function search_job($form)
+         public function search_job($form)
      {
           
          if(!empty($form['title']) && !empty($form['location']) && !empty($form['exp']) && !empty($form['salary']))
@@ -119,8 +117,8 @@ class Jobs_model extends CI_Model
          {
             $this->db->from('jobs as job');
            $this->db->like('job.job_title',$form['title']);
-          $this->db->where('job.job_experience<=',$form['exp']);
-           $this->db->where('job.job_salary<=',$form['salary']);
+//          $this->db->where('job.job_experience<=',$form['exp']);
+//           $this->db->where('job.job_salary<=',$form['salary']);
          $this->join_query();
         $this->db->where('job.job_status','1');
         $this->db->where('job.job_source',$form['source']);
@@ -139,28 +137,29 @@ class Jobs_model extends CI_Model
          
          $result=$this->db->get();
          return $result->result(); 
-         }elseif(!empty($form['title']) && !empty($form['salary'])){
-              $this->db->from('jobs as job');
-           $this->db->like('job.job_title',$form['title']);
-//           $this->db->where('job.job_experience<=',$form['exp']);
-           $this->db->where('job.job_salary<=',$form['salary']);
-           $this->join_query();
-        $this->db->where('job.job_status','1');  
-        $this->db->where('job.job_source',$form['source']);
-         $result=$this->db->get();
-         return $result->result(); 
-         }elseif(!empty($form['title']) && !empty($form['exp'])){
-              $this->db->from('jobs as job');
-           $this->db->like('job.job_title',$form['title']);
-           $this->db->where('job.job_experience<=',$form['exp']);
-//           $this->db->where('job.job_salary<=',$form['salary']);
-           $this->join_query();
-        $this->db->where('job.job_status','1');
-        $this->db->where('job.job_source',$form['source']);
-         
-         $result=$this->db->get();
-         return $result->result(); 
          }
+//         }elseif(!empty($form['title']) && !empty($form['salary'])){
+//              $this->db->from('jobs as job');
+//           $this->db->like('job.job_title',$form['title']);
+////           $this->db->where('job.job_experience<=',$form['exp']);
+//           $this->db->where('job.job_salary<=',$form['salary']);
+//           $this->join_query();
+//        $this->db->where('job.job_status','1');  
+//        $this->db->where('job.job_source',$form['source']);
+//         $result=$this->db->get();
+//         return $result->result(); 
+//         }elseif(!empty($form['title']) && !empty($form['exp'])){
+//              $this->db->from('jobs as job');
+//           $this->db->like('job.job_title',$form['title']);
+//           $this->db->where('job.job_experience<=',$form['exp']);
+////           $this->db->where('job.job_salary<=',$form['salary']);
+//           $this->join_query();
+//        $this->db->where('job.job_status','1');
+//        $this->db->where('job.job_source',$form['source']);
+//         
+//         $result=$this->db->get();
+//         return $result->result(); 
+//         }
          elseif(!empty($form['title'])){
               $this->db->from('jobs as job');
            $this->db->like('job.job_title',$form['title']);
@@ -182,6 +181,105 @@ class Jobs_model extends CI_Model
          }
           
      }
+     
+//     public function search_job($form)
+//     {
+//          
+//         if(!empty($form['title']) && !empty($form['location']) && !empty($form['exp']) && !empty($form['salary']))
+//         {
+//          
+//           $this->db->from('jobs as job');
+//           $this->db->like('job.job_title',$form['title']);
+//           $this->db->like('job.job_city',$form['location']);
+//           $this->db->where('job.job_experience<=',$form['exp']);
+//           $this->db->where('job.job_salary<=',$form['salary']);
+//        $this->join_query();
+//        $this->db->where('job.job_status','1');
+//         $this->db->where('job.job_source',$form['source']);
+//         
+//         $result=$this->db->get();
+//         return $result->result();
+//         }elseif(!empty($form['title']) && !empty($form['location']) && !empty($form['exp']))
+//         {
+//           
+//            $this->db->from('jobs as job');
+//           $this->db->like('job.job_title',$form['title']);
+//           $this->db->like('job.job_city',$form['location']);
+//            $this->db->where('job.job_experience <=',$form['exp']);
+//         $this->join_query();
+//         
+//        $this->db->where('job.job_status','1');
+//         $this->db->where('job.job_source',$form['source']);
+//         
+//         $result=$this->db->get();
+//         return $result->result(); 
+//         }elseif(!empty($form['title']) && !empty($form['salary']) && !empty($form['exp']))
+//         {
+//            $this->db->from('jobs as job');
+//           $this->db->like('job.job_title',$form['title']);
+//          $this->db->where('job.job_experience<=',$form['exp']);
+//           $this->db->where('job.job_salary<=',$form['salary']);
+//         $this->join_query();
+//        $this->db->where('job.job_status','1');
+//        $this->db->where('job.job_source',$form['source']);
+//         
+//         $result=$this->db->get();
+//         return $result->result(); 
+//         }
+//         elseif(!empty($form['title']) && !empty($form['location']))
+//         {
+//            $this->db->from('jobs as job');
+//           $this->db->like('job.job_title',$form['title']);
+//           $this->db->like('job.job_city',$form['location']);
+//          $this->join_query();
+//        $this->db->where('job.job_status','1');
+//        $this->db->where('job.job_source',$form['source']);
+//         
+//         $result=$this->db->get();
+//         return $result->result(); 
+//         }elseif(!empty($form['title']) && !empty($form['salary'])){
+//              $this->db->from('jobs as job');
+//           $this->db->like('job.job_title',$form['title']);
+////           $this->db->where('job.job_experience<=',$form['exp']);
+//           $this->db->where('job.job_salary<=',$form['salary']);
+//           $this->join_query();
+//        $this->db->where('job.job_status','1');  
+//        $this->db->where('job.job_source',$form['source']);
+//         $result=$this->db->get();
+//         return $result->result(); 
+//         }elseif(!empty($form['title']) && !empty($form['exp'])){
+//              $this->db->from('jobs as job');
+//           $this->db->like('job.job_title',$form['title']);
+//           $this->db->where('job.job_experience<=',$form['exp']);
+////           $this->db->where('job.job_salary<=',$form['salary']);
+//           $this->join_query();
+//        $this->db->where('job.job_status','1');
+//        $this->db->where('job.job_source',$form['source']);
+//         
+//         $result=$this->db->get();
+//         return $result->result(); 
+//         }
+//         elseif(!empty($form['title'])){
+//              $this->db->from('jobs as job');
+//           $this->db->like('job.job_title',$form['title']);
+//         $this->join_query();
+//        $this->db->where('job.job_status','1');
+//        $this->db->where('job.job_source',$form['source']);
+//         
+//         $result=$this->db->get();
+//         return $result->result(); 
+//         }elseif(!empty($form['location'])){
+//              $this->db->from('jobs as job');
+//           $this->db->like('job.job_city',$form['location']);       
+//           $this->join_query();
+//        $this->db->where('job.job_status','1');
+//        $this->db->where('job.job_source',$form['source']);
+//         
+//         $result=$this->db->get();
+//         return $result->result(); 
+//         }
+//          
+//     }
      
      function join_query()
      {

@@ -356,7 +356,7 @@ a:link, a:visited{
      <datalist id="data_list">  
     <!--<option>PHP</option><option>JAVA</option><option>DOT NET</option>-->  
      </datalist>
-            <input list="data_list" value="<?php echo set_value('title');?>" id="title" onkeyup="search_title()" type="text" placeholder="Skills,Designation,Companies" class="text_design" name="title"><input  type="text" placeholder="Location" name="location" value="<?php echo set_value('location');?>" class="text_design"><select placeholder="Select Experience" style="height:33px;" id="exp" name="exp" class="text_design">
+            <input list="data_list" value="<?php echo set_value('title');?>" id="title" onkeyup="search_title()" type="text" placeholder="Designation,Companies" class="text_design" name="title"><input  type="text" placeholder="Location" name="location" value="<?php echo set_value('location');?>" class="text_design"><select placeholder="Select Experience" style="height:33px;" id="exp" name="exp" class="text_design">
                 <option value="">Select Experience</option>
                 <script>
                     var num=1;
@@ -430,6 +430,8 @@ a:link, a:visited{
               
              foreach($jobs as $job)
            {
+                 if(isset($job->job_title))
+                 {
                  $datetime1 = new DateTime(date("Y-m-d"));
             $datetime2 = new DateTime($job->job_created_at);
             $interval = $datetime1->diff($datetime2);
@@ -523,7 +525,7 @@ a:link, a:visited{
      </div>
                     
       </div>
-           <?php } }?>
+                 <?php } } }?>
 <?php if(isset($error)){?>
 
     <center><h1 style="font-family: times; color:#D5DBDB;">Result Not Found</h1></center>    

@@ -71,7 +71,7 @@ class Jobs extends CI_Controller
               
         if($form['company']=='Custom')
         {   
-            $id=$this->session->userdata('recruiter_id');
+            $id=$this->session->userdata('user_recruiter_id');
          
             $company=array(
                    'recruiter_id'=>$id,

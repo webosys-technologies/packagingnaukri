@@ -93,33 +93,21 @@ class Jobs extends CI_Controller
         
         if($form)
         {
-        $title=$form['title'];
-        $exp=$form['exp'];
-        $salary=$form['salary'];
-        $location=$form['location'];
-        if(!empty($form['full']))
-        {
-        $full=$form['full'];
-        }
-         if(!empty($form['part']))
-        {
-        $part=$form['part'];
-        }
-         if(!empty($form['intern']))
-        {
-        $intern=$form['intern'];
-        }
-         if(!empty($form['temp']))
-        {
-        $part=$form['temp'];
-        }
+            
         $form['source']=$data['system']->source;
-        $result=$this->Jobs_model->search_job($form);
-        if($result){
-            $result['jobs']=$result;
+        $jobs=$this->Jobs_model->search_job($form);
+        if($jobs){
+            $result['jobs']=$jobs;
         }else{
             $result['error']="error";
         }
+        
+        $company_jobs=$this->Companies_model->job_by_company($form);
+        if($company_jobs)
+        {
+            $result['jobs']=  array_merge($jobs,$company_jobs);
+        }
+        
         $this->load->view('member/header',$data);
         $this->load->view('member/jobs',$result);
         $this->load->view('member/footer',$data);      

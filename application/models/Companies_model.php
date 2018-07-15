@@ -24,6 +24,36 @@ class Companies_model extends CI_Model
         return $query->row();
      }
      
+     public function job_by_company($form)
+     {
+          $this->db->from('companies as comp');
+           $this->db->like('comp.company_name',$form['title']);
+         $this->join_query();
+        $this->db->where('comp.company_status','1');
+        $this->db->where('comp.company_source',$form['source']);
+         
+         $result=$this->db->get();
+         if($result->result())
+         {
+         return $result->result(); 
+         }else{
+             return false;
+         }
+     }
+     
+     public function check_company_jobs()
+     {
+         
+     }
+     
+     function join_query()
+     {
+          $this->db->join('jobs as job','job.company_id=comp.company_id','LEFT');
+         $this->db->join('recruiters as rec','rec.recruiter_id=job.recruiter_id','LEFT');
+       
+     }
+     
+     
      public function companies_by_recruiter($id)
      {
         $this->db->where('recruiter_id',$id);
