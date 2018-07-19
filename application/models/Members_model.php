@@ -50,8 +50,9 @@ class Members_model extends CI_Model
     {
        if(!empty($data['salary_from']) && !empty($data['salary_to']) && $data['salary_from']!="Salary From" && $data['salary_to']!="Salary To" && !empty($data['experience_from']) && !empty($data['experience_to']) && $data['experience_from']!="Experience From" && $data['experience_to']!="Experience To")
        {
-           $query=$this->db->query('SELECT * FROM members WHERE member_anual_salary BETWEEN '.$data['salary_from'].' AND '.$data['salary_to'].'AND member_experience BETWEEN '.$data['experience_from'].' AND '.$data['experience_to']);               
-           return $query->result();
+//            $query=$this->db->query('SELECT * FROM members WHERE member_experience BETWEEN '.$data['experience_from'].' AND '.$data['experience_to'].' AND (member_anual_salary BETWEEN '.$data['salary_from'].' AND '.$data['salary_to']).')';               
+            $query=$this->db->query('SELECT * FROM members WHERE member_experience >= '.$data['experience_from'].' AND member_experience <= '.$data['experience_to'].' AND (member_anual_salary >= '.$data['salary_from'].' AND member_anual_salary <= '.$data['salary_to'].')');
+            return $query->result();
        }
        else  
        if(!empty($data['salary_from']) && !empty($data['salary_to']) && $data['salary_from']!="Salary From" && $data['salary_to']!="Salary To")
