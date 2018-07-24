@@ -55,6 +55,7 @@ class Index extends CI_Controller
                             
                                 $result=$this->signup_email($get_data);                              
                                 $user_email=$this->User_model->getall_email();
+                              
                                 foreach ($user_email as $mail)
                                 {
                                     $this->center_registration_mail_to_admin($mail->user_email,$get_data);
@@ -92,7 +93,7 @@ class Index extends CI_Controller
                                             Name: '.$getdata['recruiter_fname']." "
                                              .$getdata['recruiter_lname'].
                                              "<br>Mobile No: ".$getdata['recruiter_mobile'].
-                                             '<br>Center Login URL: <a href="'.base_url().'center/index/login" target="_blank">http://www.packagingnaukri.com/center/index/login</a>
+                                             '<br>Center Login URL: <a href="'.base_url().'recruiter/index/login" target="_blank">http://www.packagingnaukri.com/center/index/login</a>
                                              <br>Email Id: '.$getdata['recruiter_email'].
                                               "<br>Password: ".$getdata['recruiter_password'].
                                               '<br><br>Thanks & Regards,<br>Packaging Naukri Team<br><a href="'.base_url().'" target="_blank">http://www.packagingnaukri.com</a><br></body></html>';
@@ -106,6 +107,15 @@ class Index extends CI_Controller
                           return true;
                        }
 //                   
+    }
+    function test()
+    {
+        $user_email=$this->User_model->getall_email();
+                                foreach($user_email as $r)
+                                {
+                                    echo $r->user_email;
+                                }
+                                die;
     }
     
        function center_registration_mail_to_admin($user_email,$recruiter_data)
