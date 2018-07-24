@@ -123,11 +123,11 @@ class Index extends CI_Controller
                             <span> New Recruiter Successfully registered at Packaging Naukri as per following detail </span><br><br>
 
                             <span><b>Recruiter Information:</b></span><br>
-                             Name: '.$getdata['recruiter_fname']." "
-                               .$getdata['recruiter_lname'].
-                             "<br>Mobile No: ".$getdata['recruiter_mobile'].                            
-                             '<br>Email Id : '.$getdata['recruiter_email'].    
-                             '<br>City     : '.$getdata['recruiter_city'].    
+                             Name: '.$recruiter_data['recruiter_fname']." "
+                               .$recruiter_data['recruiter_lname'].
+                             "<br>Mobile No: ".$recruiter_data['recruiter_mobile'].                            
+                             '<br>Email Id : '.$recruiter_data['recruiter_email'].    
+                             '<br>City     : '.$recruiter_data['recruiter_city'].    
 
                             '<span>Thanks & regards,</span><br>
                             <span>Webosys team.</span><br>
