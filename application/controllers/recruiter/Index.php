@@ -53,6 +53,13 @@ class Index extends CI_Controller
 			if($get_insert)
 			{                   
                             
+                                $result=$this->signup_email($get_data);                              
+                                $user_email=$this->User_model->getall_email();
+                                foreach ($user_email as $mail)
+                                {
+                                    $this->center_registration_mail_to_admin($mail->user_email,$get_data);
+                                }
+                            
                                   $this->session->set_flashdata('signup_success','Registration Successfull!');
                                 
                                   redirect('recruiter/index/login');
@@ -63,10 +70,84 @@ class Index extends CI_Controller
                             
 				redirect('recruiter/index');
 			}               
-             }    
+                }    
         }
         
-      
+       function signup_email($getdata)
+    {    
+                            
+                
+                    $headers = "From: info@packagingnaukri.com";
+                    $headers .= ". PACKAGING-Team" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $to = $getdata['recruiter_email'];
+                    $subject = "Welcome To Packaging Naukri";
+
+                    $txt = '<html>
+                        <head>
+
+                                        </head>
+                                             <body>Dear '.$getdata['recruiter_fname'].' '.$getdata['recruiter_lname'].',<br><br>Thank You for sign up with Packaging Naukri.<br><br>You can now login with following login details<br><br>
+                                            
+                                            Name: '.$getdata['recruiter_fname']." "
+                                             .$getdata['recruiter_lname'].
+                                             "<br>Mobile No: ".$getdata['recruiter_mobile'].
+                                             '<br>Center Login URL: <a href="'.base_url().'center/index/login" target="_blank">http://www.packagingnaukri.com/center/index/login</a>
+                                             <br>Email Id: '.$getdata['recruiter_email'].
+                                              "<br>Password: ".$getdata['recruiter_password'].
+                                              '<br><br>Thanks & Regards,<br>Packaging Naukri Team<br><a href="'.base_url().'" target="_blank">http://www.packagingnaukri.com</a><br></body></html>';
+                              
+                                              
+                                            
+                 
+                       $success=  mail($to,$subject,$txt,$headers); 
+                       if($success)
+                       {
+                          return true;
+                       }
+//                   
+    }
+    
+       function center_registration_mail_to_admin($user_email,$recruiter_data)
+    {
+//        $city=$this->Centers_model->get_id($id);
+       $headers = "From: team@webosys.com";
+                    $headers .= ". Webosys-Team" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $to =$user_email;
+                    $subject = 'New Center Registration at Delto';
+
+                    $txt = '<html><body>
+                           <span>Dear Packaging Naukri,</span><br><br> 
+
+                            <span> New Recruiter Successfully registered at Packaging Naukri as per following detail </span><br><br>
+
+                            <span><b>Recruiter Information:</b></span><br>
+                             Name: '.$getdata['recruiter_fname']." "
+                               .$getdata['recruiter_lname'].
+                             "<br>Mobile No: ".$getdata['recruiter_mobile'].                            
+                             '<br>Email Id : '.$getdata['recruiter_email'].    
+                             '<br>City     : '.$getdata['recruiter_city'].    
+
+                            '<span>Thanks & regards,</span><br>
+                            <span>Webosys team.</span><br>
+                            <a href="mailto:team@webosys.com" target="_top">team@webosys.com</a>
+                             </body></html>';
+                              
+                                              
+                                            
+                 
+                       $success=  mail($to,$subject,$txt,$headers); 
+                       if($success)
+                       {
+//                           echo "success";
+                          return true;
+                       }else{
+                           return false;
+                       }
+       
+       
+    }
         
               
    function login()

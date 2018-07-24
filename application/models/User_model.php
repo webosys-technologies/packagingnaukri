@@ -100,6 +100,14 @@ class User_model extends CI_Model
             return array(false,mysqli_error());
         }
     }
+    
+    public function getall_email()
+    {
+        $this->db->select('user_email');
+        $this->db->from($this->table);
+        $query=$this->db->get();
+        return $query->result();
+    }
 
     public function query()
     {
