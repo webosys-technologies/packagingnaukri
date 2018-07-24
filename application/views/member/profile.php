@@ -256,6 +256,7 @@ document.getElementById("passout").innerHTML = options;
        
        
          $("#add_employment").click(function(){ 
+              $("#period_err").html("");
              $('#employment_form')[0].reset();
               $("#employment_modal").modal('show');
        }
@@ -319,7 +320,22 @@ document.getElementById("passout").innerHTML = options;
         $("#save_employment").click(function(){
                save_method=$("#save_employment").val();
                data=new FormData(document.getElementById("employment_form"));
-                save(data,save_method);
+               
+               var s=$("#present").prop('checked');
+              if(s==true)
+              {
+                  if($("#period").val()=="")
+                  {
+                      $("#period_err").html("Enter Notice Period");
+                  }else{
+                      $("#period_err").html("");
+                      save(data,save_method);
+                  }
+                    
+              }else{
+                  save(data,save_method);
+              }
+             
              }
          );
                      
@@ -604,7 +620,7 @@ var edu_name=el.val();
      }
      
        function edit_employment(id){               
-          
+           $("#period_err").html("");
             method="edit_employment";
             edit_form(id,method);
        }
@@ -1643,7 +1659,7 @@ var edu_name=el.val();
                                          </div>
                                 
                             </div><br>
-                                    
+                           
                                      <div class="row">
                                          
                       <div class="col-md-3">
@@ -1668,8 +1684,22 @@ var edu_name=el.val();
                                                    
                         </select>
                         <span class="text-danger"></span>
-                    </div   >
-                                        
+                      </div>
+                          <script>
+                                $(document).ready(function(){
+                                   $("#present").click(function(){
+                                 var s=$('[name="present"]').prop("checked");
+                                if(s==true)
+                                {
+                                    $("#period_field").prop('hidden',false);
+                                }else{
+                                    $("#period_field").prop('hidden',true);
+                                }
+                            });
+                               
+                                });
+                               
+                                </script>               
                     <div class="col-md-3"> <br>
                         <label class="form-label"></label> <span style="font-size:12px;"></span>
                        <select type="text" id="thsalary" name="thsalary" class="form-control">  
@@ -1686,11 +1716,11 @@ var edu_name=el.val();
                         </select>
                         <span class="text-danger" id="salary_error"><?php echo form_error('state'); ?></span>
                     </div>
-                                        <div class="col-md-6">
+                    
+                    <div id="period_field" class="col-md-6" hidden>
                         <label class="form-label">Notice Period</label>
                         <input type="text" class="form-control" name="period" value="" placeholder="1 year 2 month" id="period">
-                        <span class="text-danger"><?php echo form_error('state'); ?></span>
-
+                        <span class="text-danger" id="period_err"><?php echo form_error('state'); ?></span>
                     </div>
                                          </div>
                             <div class="row">                   

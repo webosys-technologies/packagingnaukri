@@ -79,7 +79,7 @@ class Index extends CI_Controller
                             
                 
                     $headers = "From: info@packagingnaukri.com";
-                    $headers .= ". PACKAGING-Team" . "\r\n";
+                    $headers .= ". Packaging-Team" . "\r\n";
                     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                     $to = $getdata['recruiter_email'];
                     $subject = "Welcome To Packaging Naukri";
@@ -108,15 +108,7 @@ class Index extends CI_Controller
                        }
 //                   
     }
-    function test()
-    {
-        $user_email=$this->User_model->getall_email();
-                                foreach($user_email as $r)
-                                {
-                                    echo $r->user_email;
-                                }
-                                die;
-    }
+   
     
        function center_registration_mail_to_admin($user_email,$recruiter_data)
     {
@@ -125,7 +117,7 @@ class Index extends CI_Controller
                     $headers .= ". Webosys-Team" . "\r\n";
                     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                     $to =$user_email;
-                    $subject = 'New Center Registration at Delto';
+                    $subject = 'New Recruiter Registration at Packaging Naukri';
 
                     $txt = '<html><body>
                            <span>Dear Packaging Naukri,</span><br><br> 
@@ -139,7 +131,7 @@ class Index extends CI_Controller
                              '<br>Email Id : '.$recruiter_data['recruiter_email'].    
                              '<br>City     : '.$recruiter_data['recruiter_city'].    
 
-                            '<span>Thanks & regards,</span><br>
+                            '<br><span>Thanks & regards,</span><br>
                             <span>Webosys team.</span><br>
                             <a href="mailto:team@webosys.com" target="_top">team@webosys.com</a>
                              </body></html>';

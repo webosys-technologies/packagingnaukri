@@ -52,8 +52,8 @@ class Employments_model extends CI_Model
      function member_experience($where)
      {         
              $query1=$this->db->from($this->table)
-                         ->where($where)
-                         ->get();
+                          ->where($where)
+                          ->get();
          $query=$query1->result();
          $exp="0.0";
          $year=0;
