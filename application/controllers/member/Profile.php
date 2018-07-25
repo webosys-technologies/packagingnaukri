@@ -291,8 +291,7 @@ class Profile extends CI_Controller
                       if($to>=$form['from'] && $to<=date("Y-m-d"))
                          {
               $old_exp=$this->Employments_model->member_experience(array('member_id'=>$this->session->userdata('member_id')));              
-//            $datetime1 =  new DateTime($to);
-//            $datetime2 = new DateTime($form['from']);
+            
             $interval = (new DateTime($to))->diff(new DateTime($form['from']));
             $experience=$interval->format('%y.%m');
             $exp=$this->count_exp($old_exp,$experience);

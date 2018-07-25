@@ -92,8 +92,17 @@ class Index extends CI_Controller
           
                                     $data=array('email'=>$this->input->post('email'),
                                                 'mobile'=>$this->input->post('mobile'),
-                                                'password'=>$this->input->post('password'),);
+                                                'password'=>$this->input->post('password'),
+                                                'fname'=>$this->input->post('fname'),
+                                                'lname'=>$this->input->post('lname'));
                                     $this->login_detail_msg($data);
+                                    
+                               $user_email=$this->User_model->getall_email();                              
+                                foreach ($user_email as $mail)
+                                {
+                                    $this->member_registration_mail_to_admin($mail->user_email,$data);
+                                }
+                                    
                                   $this->session->set_flashdata('signup_success','Registration Successfull, Please login!');
                                   redirect('member/index');
                                 
@@ -118,6 +127,46 @@ class Index extends CI_Controller
                 
              }    
         }
+        
+          function member_registration_mail_to_admin($user_email,$member_data)
+    {
+//        $city=$this->Centers_model->get_id($id);
+       $headers = "From: team@webosys.com";
+                    $headers .= ". Webosys-Team" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $to =$user_email;
+                    $subject = 'New Member Registration at Packaging Naukri';
+
+                    $txt = '<html><body>
+                           <span>Dear Packaging Naukri,</span><br><br> 
+
+                            <span> New Member Successfully registered at Packaging Naukri as per following detail </span><br><br>
+
+                            <span><b>Member Information:</b></span><br>
+                             Name: '.$member_data['fname']." "
+                               .$member_data['lname'].
+                             "<br>Mobile No: ".$member_data['mobile'].                            
+                             '<br>Email Id : '.$member_data['email'].    
+                            '<br><span>Thanks & regards,</span><br>
+                            <span>Webosys team.</span><br>
+                            <a href="mailto:team@webosys.com" target="_top">team@webosys.com</a>
+                             </body></html>';
+                              
+                                              
+                                            
+                 
+                       $success=  mail($to,$subject,$txt,$headers); 
+                       if($success)
+                       {
+//                           echo "success";
+                          return true;
+                       }else{
+                           return false;
+                       }
+       
+       
+    }
+        
         
    
    function login()
@@ -918,111 +967,6 @@ curl_close($ch);
  
             
             
-                    function test_msg()
-        {           
-          
          
-      $mobile="9075554309";   
-      $email="surajshinde9195@webosys.com";
-              $pass="1232";
-                      
-                   
-
-$authKey = "217899AjUpTycrXx6K5b0e2283";    //suraj9195shinde for
-
-//Multiple mobiles numbers separated by comma
-
-$mobileNumber = $mobile;
-//Sender ID,While using route4 sender id should be 6 characters long.
-
-$senderId = "PKGNAU";
-//Your message to send, Add URL encoding here.
-
-$message = "Welcome To\r\nPACKAGINGNAUKRI.COM\r\nYou can login next time with your registered EMAIL or MOBILE number\r\n\r\nEmail: ".$email."\r\nPassword: ".$pass;
-        
-
-
-//Define route 
-
-$route = "4";
-//Prepare you post parameters
-
-$postData = array(
-
-    'authkey' => $authKey,
-
-    'mobiles' => $mobileNumber,
-
-    'message' => $message,
-
-    'sender' => $senderId,
-
-    'route' => $route
-
-);
-
-
-//API URL
-
-$url="http://api.msg91.com/api/sendhttp.php";
-
-
-// init the resource
-
-$ch = curl_init();
-curl_setopt_array($ch, array(
-
-    CURLOPT_URL => $url,
-
-    CURLOPT_RETURNTRANSFER => true,
-
-    CURLOPT_POST => true,
-
-    CURLOPT_POSTFIELDS => $postData
-
-    //,CURLOPT_FOLLOWLOCATION => true
-
-));
-//Ignore SSL certificate verification
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-
-//get response
-
-$output = curl_exec($ch);
-//Print error if any
-if(curl_errno($ch))
-{
-//    echo json_encode(array('error'=> curl_error($ch)));
-}
-curl_close($ch);
-//echo json_encode(array('send'=>'OTP is sent Successfully'));       
-//echo $output;
-            }
-            
-            
-            
-             function email_test($email)
-        {
-               
-                 
-
-$to_email = 'suraj9195shinde@gmail.com';
-$subject = 'Testing PHP Mail'; 
-$message = 'This mail is sent using the PHP mail '; 
-$headers = 'From: noreply @ company. com'; 
-//check if the email address is invalid $secure_check
-sanitize_my_email($to_email);
-if ($secure_check == false) {     
-echo "Invalid input"; 
-} 
-else {//send email     
-mail($to_email, $subject, $message, $headers);    
-echo "Thank you for using our mail form"; 
-
-        }
-
-        }	
-    
 }
 

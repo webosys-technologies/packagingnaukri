@@ -397,9 +397,15 @@ echo json_encode(array('otp_success'=>'OTP has been sent Successfully'));
                 $email_data=array('email'=>$form['email'],
                                   'password'=>$pwd,
                                   'fname'=>$form['fname'],
-                                  'mobile'=>$form['mobile']);
+                                  'mobile'=>$form['mobile'],
+                                  'lname'=>$form['lname']);
                 $this->login_detail_email($email_data);
                 $this->login_detail_msg($email_data);
+                 $user_email=$this->User_model->getall_email();                              
+                 foreach ($user_email as $mail)
+                 {
+                 $this->member_registration_mail_to_admin($mail->user_email,$email_data);
+                 }
                 
                  $this->session->set_flashdata('success','Job Applied Successfully. check login detail on given email id and mobile Number');  
                 $this->session->unset_userdata('email_otp');
@@ -421,7 +427,44 @@ echo json_encode(array('otp_success'=>'OTP has been sent Successfully'));
             
            
         }       
-        
+             function member_registration_mail_to_admin($user_email,$member_data)
+    {
+//        $city=$this->Centers_model->get_id($id);
+       $headers = "From: team@webosys.com";
+                    $headers .= ". Webosys-Team" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $to =$user_email;
+                    $subject = 'New Member Registration at Packaging Naukri';
+
+                    $txt = '<html><body>
+                           <span>Dear Packaging Naukri,</span><br><br> 
+
+                            <span> New Member Successfully registered at Packaging Naukri as per following detail </span><br><br>
+
+                            <span><b>Member Information:</b></span><br>
+                             Name: '.$member_data['fname']." "
+                               .$member_data['lname'].
+                             "<br>Mobile No: ".$member_data['mobile'].                            
+                             '<br>Email Id : '.$member_data['email'].    
+                            '<br><span>Thanks & regards,</span><br>
+                            <span>Webosys team.</span><br>
+                            <a href="mailto:team@webosys.com" target="_top">team@webosys.com</a>
+                             </body></html>';
+                              
+                                              
+                                            
+                 
+                       $success=  mail($to,$subject,$txt,$headers); 
+                       if($success)
+                       {
+//                           echo "success";
+                          return true;
+                       }else{
+                           return false;
+                       }
+       
+       
+    }
         
         function apply_job()
         {

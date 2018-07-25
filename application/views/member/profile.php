@@ -256,6 +256,7 @@ document.getElementById("passout").innerHTML = options;
        
        
          $("#add_employment").click(function(){ 
+             $("#to").attr('disabled',false); 
               $("#period_err").html("");
              $('#employment_form')[0].reset();
               $("#employment_modal").modal('show');
@@ -619,7 +620,8 @@ var edu_name=el.val();
          
      }
      
-       function edit_employment(id){               
+       function edit_employment(id){   
+           $("#to").attr('disabled',false); 
            $("#period_err").html("");
             method="edit_employment";
             edit_form(id,method);
@@ -1652,7 +1654,7 @@ var edu_name=el.val();
                                         <span class="text-danger" id="from_err"></span>                                                          
                                 </div>
                                              <div class="col-md-6 col-md-6 col-sm-6 col-xs-12">                                   
-                                        <label for="lname">Work To</label>
+                                        <label for="lname">Work To</label> <span class="text-danger"> *</span>
                                         <input type="date" name="to" value="" id="to" class="form-control"><br>
                                         <input type="checkbox" name="present" id="present" value=""> <span> <b>Present</b> </span>
                                       <span class="text-danger" id="to_err"></span>                                   
@@ -1718,7 +1720,7 @@ var edu_name=el.val();
                     </div>
                     
                     <div id="period_field" class="col-md-6" hidden>
-                        <label class="form-label">Notice Period</label>
+                        <label class="form-label">Notice Period</label> <span class="text-danger"> *</span>
                         <input type="text" class="form-control" name="period" value="" placeholder="1 year 2 month" id="period">
                         <span class="text-danger" id="period_err"><?php echo form_error('state'); ?></span>
                     </div>
