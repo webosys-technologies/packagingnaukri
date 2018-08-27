@@ -656,7 +656,9 @@ echo json_encode(array('otp_success'=>'OTP has been sent Successfully'));
              $result['jobs']=$this->Jobs_model->get_recent_job();    
              $sys="plastic";
             $result['system']=$this->System_model->get_system_info('plastic');
-
+                
+//            echo $sys;
+//            die;
             
               $this->load->view($sys.'/home_header',$result);
              $this->load->view($sys."/".$view,$result);

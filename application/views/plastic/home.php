@@ -103,13 +103,22 @@ To provide the right opportunity to every qualified packaging professional, to a
 				 $result=$this->Jobs_model->get_recent_job();
                             if($result){ $i=1;
                                 foreach($result as $res)
-                                {                                   
+                                {             
+                                    
+                                      $exp=explode(".",$res->job_experience);
+                                                     
+                                                    if($exp[0]==$exp[1])
+                                                    {
+                                                      $experience=$exp[0]." Year";  
+                                                    }else{
+                                                       $experience=$exp[0]."-".$exp[1]." Year";  
+                                                    }
                         ?>
                          <div class="div_style">     
                              <a data-toggle="modal" data-target="#job_modal<?php echo $i;?>"><span class="div_design"><?php echo $res->job_title;?></span></a>
-                            <p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p>
+                            <p class="exp"><b>Experience :</b> <?php echo $experience;?></p>
                             <p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p>
-                            <p class="exp"><b>Company :</b> Webosys Technologies</p>
+                            <p class="exp"><b>Company :</b> <?php echo $res->company_name;?></p>
                             <hr style="border-top: 1px solid #ccc;">
                             <center><a class="btn btn-primary" data-toggle="modal" data-target="#job_modal<?php echo $i;?>">view</a></center>
                            </div>
@@ -140,10 +149,17 @@ To provide the right opportunity to every qualified packaging professional, to a
            
            
            
+           <?php
+           $exp=explode(".",$d->job_experience);
+                                                     
+                                                    if($exp[0]==$exp[1])
+                                                    {
+                                                      $experience=$exp[0]." Year";  
+                                                    }else{
+                                                       $experience=$exp[0]."-".$exp[1]." Year";  
+                                                    }
            
-           
-           
-           
+           ?>
            
            
            
@@ -152,7 +168,7 @@ To provide the right opportunity to every qualified packaging professional, to a
            <div class="row"><div class="col-md-2"><label >Qualification </label></div>
            <div class="col-md-10"> <span > : <?php echo  $d->job_education; ?> </span></div> </div>        
           <div class="row"><div class="col-md-2"><label >Experience </label></div>
-          <div class="col-md-10"><span> : <?php echo $d->job_experience; ?> </span></div></div>
+          <div class="col-md-10"><span> : <?php echo $experience; ?> </span></div></div>
                    
          <?php if(!empty($d->job_salary)){
             $sal=explode(".",$d->job_salary);
