@@ -21,7 +21,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--webfonts-->
   <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,100italic,400italic,700italic|Abril+Fatface|Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 <!--//webfonts-->
-<title>Home | Packaging Naukri</title>
+<title>Home | Plastic Naukri</title>
          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">    
         <!--<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" />-->
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -271,7 +271,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="footer text-center">
 				<div class="container">
 					<div class="copy">
-		              <p> <strong style="color:white">Copyright &copy; 2018 Packaging Naukri. All rights reserved. </strong><span style="color:#5df95a">Developed by <a style="color:#5df95a" href="http://webosys.com/" target="_blank">Webosys Technologies</a></span>	</p>
+		              <p> <strong style="color:white">Copyright &copy; 2018 Plastic Naukri. All rights reserved. </strong><span style="color:#5df95a">Developed by <a style="color:#5df95a" href="http://webosys.com/" target="_blank">Webosys Technologies</a></span>	</p>
 		            </div>
 					
 				</div>

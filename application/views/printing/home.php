@@ -47,13 +47,13 @@
          <div class="row" id="content_body" style="background:white;">        
 		<div class="container">
                     <div class="col-md-9">
-		<h4 style="color:orange;">Welcome to Packaging Naukri</h4><hr style="border-top: 1px solid #ccc;">
+		<h4 style="color:orange;">Welcome to Printing Naukri</h4><hr style="border-top: 1px solid #ccc;">
 			
 <h5 style="color:orange;">Objective</h5>
 <p>
 We intend and aim to place the candidate as per the precise need of the position in terms of experience, expertise, and budget resulting in a symbiotic business relationship between the employee and the employer.<br><br>
 
-Packaging and related industries has seen a phenomenal growth trajectory in the last decade. This momentum is increasing on a daily basis and so is the need for qualified and experienced professionals. Being a vast and diversified field it is difficult to find talent suited to a particular requirement with the required expertise. This is were we step in.<br><br>
+Printing and related industries has seen a phenomenal growth trajectory in the last decade. This momentum is increasing on a daily basis and so is the need for qualified and experienced professionals. Being a vast and diversified field it is difficult to find talent suited to a particular requirement with the required expertise. This is were we step in.<br><br>
 
 To provide the right opportunity to every qualified packaging professional, to achieve his/her career objective. At the same time to provide the suitable candidate as per employers business need and develop a win-win relationship</p>   
                     </div>
@@ -63,18 +63,20 @@ To provide the right opportunity to every qualified packaging professional, to a
 	<div class="container">
 		<center><h3><b>OUR CUSTOMERS </b></h3></center>          
   <section style="padding-top: 100px; padding-bottom: 100px;" class="logoes slider content">
-      <?php $company=$this->Companies_model->get_recent_company();
+       <?php $customer=$this->Customer_model->getall_customer();
              
-      if(isset($company)) 
+      if(isset($customer)) 
     {    $i=0;
-          foreach($company as $comp){
-        
+          foreach($customer as $cust){
+//          if(exists($comp->company_logo))
+//          {
           ?>
            <div>
-        <img src="<?php echo  base_url().$comp->company_logo;?>" height="100px" width="auto">   
+        <img src="<?php echo  base_url().$cust->customer_logo;?>" height="100px" width="auto">   
       </div>
-          <?php 
-          } 
+          <?php
+          }
+//          } 
       }
        
       
@@ -109,13 +111,23 @@ To provide the right opportunity to every qualified packaging professional, to a
 				 $result=$this->Jobs_model->get_recent_job();
                             if($result){ $i=1;
                                 foreach($result as $res)
-                                {                                   
+                                {            
+                                    
+                                     $exp=explode(".",$res->job_experience);
+                                                     
+                                                    if($exp[0]==$exp[1])
+                                                    {
+                                                      $experience=$exp[0]." Year";  
+                                                    }else{
+                                                       $experience=$exp[0]."-".$exp[1]." Year";  
+                                                    }
+                                    
                         ?>
                          <div class="div_style">     
                              <a data-toggle="modal" data-target="#job_modal<?php echo $i;?>"><span class="div_design"><?php echo $res->job_title;?></span></a>
-                            <p class="exp"><b>Experience :</b> <?php echo $res->job_experience;?></p>
+                            <p class="exp"><b>Experience :</b> <?php echo $experience;?></p>
                             <p class="exp"><b>Qualification :</b> <?php echo $res->job_education;?></p>
-                            <p class="exp"><b>Company :</b> Webosys Technologies</p>
+                            <p class="exp"><b>Company :</b> <?php echo $res->company_name; ?></p>
                             <hr style="border-top: 1px solid #ccc;">
                             <center><a class="btn btn-primary" data-toggle="modal" data-target="#job_modal<?php echo $i;?>">view</a></center>
                            </div>
@@ -144,21 +156,23 @@ To provide the right opportunity to every qualified packaging professional, to a
            <h4><b><?php echo $d->job_title; ?></b></h4>
            <h5><?php echo $d->company_name; ?></h5>
            
-           
-           
-           
-           
-           
-           
-           
-           
-           
+           <?php
+            $exp=explode(".",$d->job_experience);
+                                                     
+                                                    if($exp[0]==$exp[1])
+                                                    {
+                                                      $experience=$exp[0]." Year";  
+                                                    }else{
+                                                       $experience=$exp[0]."-".$exp[1]." Year";  
+                                                    }
+                                                    
+            ?>           
            
          
            <div class="row"><div class="col-md-2"><label >Qualification </label></div>
            <div class="col-md-10"> <span > : <?php echo  $d->job_education; ?> </span></div> </div>        
           <div class="row"><div class="col-md-2"><label >Experience </label></div>
-          <div class="col-md-10"><span> : <?php echo $d->job_experience; ?> </span></div></div>
+          <div class="col-md-10"><span> : <?php echo $experience; ?> </span></div></div>
                    
          <?php if(!empty($d->job_salary)){
             $sal=explode(".",$d->job_salary);
@@ -168,8 +182,12 @@ To provide the right opportunity to every qualified packaging professional, to a
             }else{
                  $salary=$sal[1]." Thousand ";
             }
+            
+            
+            
+           
 ?>
-          
+                 
           
            <div class="row"><div class="col-md-2"><label >Salary </label></div>
          <div class="col-md-10"><span> : <?php echo $salary;?> </span></div></div>
