@@ -323,12 +323,15 @@ class Jobs_model extends CI_Model
      
      function get_recent_job()
      {
+         $source=$this->System_model->source_name();
+         
          $this->db->from('jobs as job');
           $this->db->order_by('job_id','desc');
 //          $this->db->limit('5');
          $this->db->join('recruiters as rec','rec.recruiter_id=job.recruiter_id','LEFT');
         $this->db->join('companies as comp','comp.company_id=job.company_id','LEFT');
         $this->db->where('job.job_status','1');
+        $this->db->where('job.job_source',ucfirst($source));
         $res=$this->db->get();
        
          return $res->result();
