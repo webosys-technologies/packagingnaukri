@@ -97,12 +97,12 @@ class Index extends CI_Controller
                                                 'lname'=>$this->input->post('lname'));
                                     $this->login_detail_msg($data);
                                     
-                               $user_email=$this->User_model->getall_email();                              
-                                foreach ($user_email as $mail)
-                                {
-                                    $this->member_registration_mail_to_admin($mail->user_email,$data);
-                                }
-                                    
+//                               $user_email=$this->User_model->getall_email();                              
+//                                foreach ($user_email as $mail)
+//                                {
+//                                    $this->member_registration_mail_to_admin($mail->user_email,$data);
+//                                }
+                               
                                   $this->session->set_flashdata('signup_success','Registration Successfull, Please login!');
                                   redirect('member/index');
                                 
@@ -233,7 +233,6 @@ class Index extends CI_Controller
                                 'member_source'    =>$res->member_source,
                                                 );
                                   $this->session->unset_userdata('member_otp');
-//                                  $this->session->unset_userdata('member_mobile');
                                 $this->session->set_userdata($sessionArray);                      
                                 echo json_encode(array('status'=> 'success')); 
                     }else
@@ -893,7 +892,7 @@ echo json_encode(array('send'=>'OTP has been sent Successfully'));
                       
                    
 
-$authKey = "217899AjUpTycrXx6K5b0e2283";    //suraj9195shinde for
+$authKey = "217899AjUpTycrXx6K5b0e2283";    
 
 //Multiple mobiles numbers separated by comma
 

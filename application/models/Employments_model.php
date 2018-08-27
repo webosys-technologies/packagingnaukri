@@ -58,14 +58,20 @@ class Employments_model extends CI_Model
          $exp="0.0";
          $year=0;
          $month=0;
+         $to="";
          foreach ($query as $q)
          {
-             
-            $exp=explode(".",(new DateTime($q->employment_from))->diff(new DateTime($q->employment_to))->format('%y.%m'));
+//             if($q->employment_to=="3000-01-01")
+//             {
+//                $to=date("Y-m-d"); 
+//             }else{
+                 $to=$q->employment_to;
+//             }
+            $exp=explode(".",(new DateTime($q->employment_from))->diff(new DateTime($to))->format('%y.%m'));
              $year=$year+$exp[0];
              $month=$month+$exp[1];
              
-//             $exp=$exp+(new DateTime($q->employment_from))->diff(new DateTime($q->employment_to))->format('%y.%m');
+
              
          }
                 

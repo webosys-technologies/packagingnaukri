@@ -365,7 +365,7 @@ a:link, a:visited{
                     {
                         if(i==0)
                         {
-                           $("#exp").append('<option value="'+i+'.90">'+i+' Year</option>');  
+                           $("#exp").append('<option value="'+i+'.90"> Fresher</option>');  
                         }else{
                             $("#exp").append('<option value="'+i+'.90">'+i+' Year</option>');   
                         }

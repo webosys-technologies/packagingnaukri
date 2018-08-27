@@ -401,11 +401,11 @@ echo json_encode(array('otp_success'=>'OTP has been sent Successfully'));
                                   'lname'=>$form['lname']);
                 $this->login_detail_email($email_data);
                 $this->login_detail_msg($email_data);
-                 $user_email=$this->User_model->getall_email();                              
-                 foreach ($user_email as $mail)
-                 {
-                 $this->member_registration_mail_to_admin($mail->user_email,$email_data);
-                 }
+//                 $user_email=$this->User_model->getall_email();                              
+//                 foreach ($user_email as $mail)
+//                 {
+//                 $this->member_registration_mail_to_admin($mail->user_email,$email_data);
+//                 }
                 
                  $this->session->set_flashdata('success','Job Applied Successfully. check login detail on given email id and mobile Number');  
                 $this->session->unset_userdata('email_otp');
@@ -484,8 +484,7 @@ echo json_encode(array('otp_success'=>'OTP has been sent Successfully'));
                               'job_id'=>$form['job_id']));
 
        
-            }else{
-                 
+            }else{                 
                  echo json_encode(array('job_err'=>'Already Applied for this job'));
             } 
             }else{

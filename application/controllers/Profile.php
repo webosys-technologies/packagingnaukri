@@ -290,19 +290,17 @@ class Profile extends CI_Controller
                    {
                       if($to>=$form['from'] && $to<=date("Y-m-d"))
                          {
-
-                         
-               $res=$this->Employments_model->update_employment($where,$data);
-                        
+              $old_exp=$this->Employments_model->member_experience(array('member_id'=>$this->session->userdata('member_id')));              
             
-             $exp=$this->Employments_model->member_experience(array('member_id'=>$this->session->userdata('member_id')));              
-
+            $interval = (new DateTime($to))->diff(new DateTime($form['from']));
+            $experience=$interval->format('%y.%m');
+            $exp=$this->count_exp($old_exp,$experience);
           
                 $mem_data=array('member_experience'=>$exp,
                                 'member_anual_salary'=>$form['lacsalary'].".".$form['thsalary']);
                 $mem_where=array('member_id'=>$id);
                $this->Members_model->member_update($mem_where,$mem_data);
-                       
+                $res=$this->Employments_model->update_employment($where,$data);            
             echo json_encode(array('success'=>'Employment updated successfully'));
               }else{
                             echo json_encode(array('to_err'=>"Working To date should less than todays date")); 
